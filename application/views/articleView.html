@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <title>Osboha</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+  <link href="css/animation.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/search.css">
+  <link rel="stylesheet" type="text/css" href="css/rtl.css">
+</head>
+<link rel="stylesheet" type="text/css" href="css/pagination.css">
+<script src="js/pagination.js"></script>
+<style type="text/css">
+  #share{
+    color: #205d67
+  }
+</style>
+<body >
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation" dir="rtl">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbar-collapse-main" aria-expanded="true" aria-label="Toggle navigation">
+          <span class="sr-only">navegation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <img src="img/logo_2.png">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse-main" dir="rtl" style="padding: 0;">
+        <ul class="nav navbar-nav navbar-right ml-auto nav-direct">
+          <li><a class=" nav-item" href="index.html">الرئيسية</a></li>
+          <li><a  class="nav-item" href="bookshelf.html">رف الكتب </a></li>
+          <li><a  class="nav-item" href="booksearch.html">البحث عن الكتب </a></li>
+          <li><a class="nav-item"  href="infographic.html">انفوجرافيك</a></li>
+          <li><a class="nav-item"  href="articles.html">مقالات تثقيفية</a></li>
+          <li><a class="nav-item"  href="accomp.html">آخر الانجازات</a></li>
+          <li><a class="nav-item"  href="join_us.html">انضم إلينا</a></li>
+          <li><a class="nav-item"  href="donate.html"> ادعمنا</a></li>
+        </ul> 
+      </div>
+    </div>
+  </nav>
+  <div id="home">
+    <div class="landing-text">
+      <h1>
+        أصبوحة  180
+      </h1>
+      <h3>
+        لأن القراءة ضرورة وليست هواية 
+      </h3>
+    </div>
+    <div class="arrow">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+  </div>
+
+  <div class="container padding" id="section-one">
+    <h2 style="text-align: center;">عنوان المقال</h2>
+    <div class="heading-underline"></div>
+    <div class=" row direct fade-in" style="text-align: center;">
+      <div class="col-sm-6">
+       <h3>كاتب المقال </h3>
+      </div>
+      <div class="col-sm-6">
+       <h3> تاريخ النشر </h3>
+      </div>
+    </div>
+    <div class="padding"></div>
+    <div class="row direct">
+      <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct" >
+            <div class="col-5 col-md-4 slide-in from-right">  
+              <img  src="img/maqal.jpg" class="bookImg" >
+            </div>    
+
+            <div class="container-fluid text-center col-7 col-md-8 slide-in from-left">
+              <div class="row">
+                <p style="padding: 0 3% 0 3%"> 
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nam aliquam sem et tortor consequat id porta. Eu facilisis sed odio morbi quis commodo odio aenean sed. Facilisis leo vel fringilla est ullamcorper. Maecenas ultricies mi eget mauris pharetra et. Imperdiet sed euismod nisi porta. Arcu dictum varius duis at consectetur lorem donec massa sapien. Sed faucibus turpis in eu. Massa id neque aliquam vestibulum morbi blandit cursus. Diam donec adipiscing tristique risus nec feugiat in fermentum posuere. Eget arcu dictum varius duis at consectetur lorem donec massa. Volutpat odio facilisis mauris sit amet massa vitae.
+
+                  Cursus metus aliquam eleifend mi. Tempor orci dapibus ultrices in. Laoreet sit amet cursus sit amet dictum sit. Vitae suscipit tellus mauris a diam maecenas sed. Purus ut faucibus pulvinar elementum integer. Varius sit amet mattis vulputate enim nulla. Ipsum dolor sit amet consectetur adipiscing elit. Mi quis hendrerit dolor magna eget. Egestas quis ipsum suscipitpendisse ultrices gravida dictum. Scelerisque eu ultrices vitae auctor eu augue ut.
+                </p>
+              </div>
+            </div>
+      </div>
+    </div>
+      <div class="row text-center">
+      <h2 >مشاركة المقال </h2>
+          <hr style="width: 20%">
+          <i onclick="fbShare()" class=" btn fa fa-facebook" id="share"></i>
+          <i onclick="twitterShare()" class=" btn fa fa-twitter" id="share"></i>
+          <i onclick="linkedinShare()" class=" btn fa fa-linkedin" id="share"></i>
+          <i title="copy link" onclick="copyLink()" class=" btn fa fa-copy" id="share"></i>
+    </div>
+  </div>
+
+  <footer class="container-fluid text-center">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="row">
+          حساباتنا على مواقع التواصل الإجتماعي
+        </div>
+        <div class="row">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-twitter"></a>
+          <a href="#" class="fa fa-instagram"></a>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <img src="img/logo_2.png" class="icon">
+      </div>
+      
+      <div class="col-sm-4">
+        <h4> تصميم: سارة اسماعيل </h4>
+        <h4> الخدمة التقنية :فنجان هوست </h4>
+      </div>
+    </div>
+    <hr style="width: 80%">
+    <div class="row">
+      <div id="numbers">
+        <h3>
+          أنت الزائر رقم 
+          <strong  class="count">1000</strong>
+        </h3>
+      </div>
+    </div>
+  </footer>
+
+</body>
+<script type="text/javascript" src="js/shareArcticle.js"></script>
+<script src="js/counter.js"></script>
+<script src="js/animation.js"></script>
+
+</html>

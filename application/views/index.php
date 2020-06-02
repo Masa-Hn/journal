@@ -1,49 +1,3 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <title>Osboha</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-  <link href="css/style.css" rel="stylesheet" />
-  <link href="css/animation.css" rel="stylesheet" />
-
-</head>
-
-<body dir="rtl">
-  <!-- Navbar -->
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbar-collapse-main" aria-expanded="true" aria-label="Toggle navigation">
-          <span class="sr-only">navegation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-          <img src="img/logo_2.png">
-        </a>
-      </div>
-      <div class="collapse navbar-collapse" id="navbar-collapse-main" dir="rtl" style="padding: 0;">
-        <ul class="nav navbar-nav navbar-right ml-auto nav-direct">
-          <li><a class="nav-item" href="index.html">الرئيسية</a></li>
-          <li><a  class="nav-item" href="bookshelf.html">رف الكتب </a></li>
-          <li><a  class="nav-item" href="booksearch.html">البحث عن الكتب </a></li>
-          <li><a class="nav-item"  href="infographic.html">انفوجرافيك</a></li>
-          <li><a class="nav-item"  href="articles.html">مقالات تثقيفية</a></li>
-          <li><a class="nav-item"  href="accomp.html">آخر الانجازات</a></li>
-          <li><a class="nav-item"  href="join_us.html">انضم إلينا</a></li>
-          <li><a class="nav-item"  href="donate.html"> ادعمنا</a></li>
-        </ul> 
-      </div>
-    </div>
-  </nav>
-  <!-- End Navbar -->
   <!-- Home -->
   <div id="home">
     <div class="landing-text">
@@ -72,9 +26,9 @@
           <h2> من نحن؟</h2>
           <div class="heading-underline"></div>
           <p style="font-size: 25px">
-            المشروع الأكبر عربيا لصناعة القراء </br>
-            عن طريق استثمار القراءة المنهجية ونواتجها </br>
-            لصناعة مجتمع واع قادر على الوصول للنهضة </br>
+            المشروع الأكبر عربيا لصناعة القراء <br>
+            عن طريق استثمار القراءة المنهجية ونواتجها <br>
+            لصناعة مجتمع واع قادر على الوصول للنهضة <br>
               وتحقيق التنمية مستعينين بالتكنولوجيا الحديثة
           </p>
         </div>
@@ -218,46 +172,3 @@
     </div>    
   </div>
   <!--End Join Us -->
-
-    
-  <!-- Footer -->
-  <footer class="container-fluid text-center">
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="row">
-          حساباتنا على مواقع التواصل الإجتماعي
-        </div>
-        <div class="row">
-          <a target="_blank" href="https://www.facebook.com/osboha180/" class="fa fa-facebook"></a>
-          <a target="_blank"href="https://twitter.com/osboha180" class="fa fa-twitter"></a>
-          <a target="_blank"href="https://www.instagram.com/osboha180/" class="fa fa-instagram"></a>
-          <a target="_blank" href="https://t.me/osboha180" class="fa  fa-telegram"></a>
-
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <img src="img/logo_2.png" class="icon">
-      </div>
-      
-      <div class="col-sm-4">
-        <h4> تصميم: سارة اسماعيل </h4>
-        <h4> الخدمة التقنية :فنجان هوست </h4>
-      </div>
-    </div>
-    <hr style="width: 80%">
-    <div class="row">
-      <div id="numbers">
-        <h3>
-          أنت الزائر رقم 
-          <strong  class="count">1000</strong>
-        </h3>
-      </div>
-    </div>
-  </footer>
-  <!-- End Footer -->
-
-</body>
-<script src="js/animation.js"></script>
-<script src="js/counter.js"></script>
-
-</html>
