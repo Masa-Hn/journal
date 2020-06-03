@@ -20,10 +20,10 @@
       </div>
     </div>
     <div class="padding"></div>
-    <div class="row direct">
+    <div class="row direct" dir="ltr">
       <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct" >
             <div class="col-5 col-md-4 slide-in from-right">  
-              <img  src="img/maqal.jpg" class="bookImg" >
+              <img  src="<?php echo base_url()?>assets/img/maqal.jpg" class="bookImg" >
             </div>    
 
             <div class="container-fluid text-center col-7 col-md-8 slide-in from-left">

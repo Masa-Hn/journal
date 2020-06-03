@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <img src="img/logo_2.png" class="icon">
+        <img src="<?php echo base_url()?>assets/img/logo_2.png" class="icon">
       </div>
       
       <div class="col-sm-4">

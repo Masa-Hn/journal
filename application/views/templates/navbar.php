@@ -10,7 +10,7 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">
-          <img src="img/logo_2.png">
+          <img src="<?php echo base_url()?>assets/img/logo_2.png">
         </a>
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse-main" dir="rtl" style="padding: 0;">
@@ -28,3 +28,20 @@
     </div>
   </nav>
   <!-- End Navbar -->
+    <!-- Home -->
+  <div id="home">
+    <div class="landing-text">
+      <h1>
+        أصبوحة  180
+      </h1>
+      <h3>
+        لأن القراءة ضرورة وليست هواية 
+      </h3>
+    </div>
+    <div class="arrow">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+  </div>
+  <!-- End Home -->

@@ -8,38 +8,38 @@
 
       <div class="row" id="gallaryRow"> 
         <div class="column" id="gallaryCol">
-          <img src="img/infographic/1.png" class="gallaryImg fade-in " id="1" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/2.png" class="gallaryImg fade-in" id="2" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/3.png" class="gallaryImg fade-in" id="3" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/4.png" class="gallaryImg fade-in" id="4" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/5.png" class="gallaryImg fade-in" id="5" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/6.png" class="gallaryImg fade-in" id="6" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/1.png" class="gallaryImg fade-in" id="7" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/1.png" class="gallaryImg fade-in " id="1" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/2.png" class="gallaryImg fade-in" id="2" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/3.png" class="gallaryImg fade-in" id="3" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/4.png" class="gallaryImg fade-in" id="4" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/5.png" class="gallaryImg fade-in" id="5" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/6.png" class="gallaryImg fade-in" id="6" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/1.png" class="gallaryImg fade-in" id="7" onClick="show(this.id)" style="width:100%">
         </div>
         <div class="column" id="gallaryCol">
-          <img src="img/infographic/1.png" class="gallaryImg fade-in" id="8" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/3.png" class="gallaryImg fade-in" id="9" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/2.png" class="gallaryImg fade-in" id="10" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/6.png" class="gallaryImg fade-in" id="11" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/5.png" class="gallaryImg fade-in" id="12" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/4.png" class="gallaryImg fade-in" id="13" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/1.png" class="gallaryImg fade-in" id="8" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/3.png" class="gallaryImg fade-in" id="9" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/2.png" class="gallaryImg fade-in" id="10" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/6.png" class="gallaryImg fade-in" id="11" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/5.png" class="gallaryImg fade-in" id="12" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/4.png" class="gallaryImg fade-in" id="13" onClick="show(this.id)" style="width:100%">
         </div>  
         <div class="column" id="gallaryCol">
-          <img src="img/infographic/5.png" class="gallaryImg fade-in" id="14" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/1.png" class="gallaryImg fade-in" id="15" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/6.png" class="gallaryImg fade-in" id="16" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/2.png" class="gallaryImg fade-in" id="17" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/4.png" class="gallaryImg fade-in" id="18" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/5.png" class="gallaryImg fade-in" id="19" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/3.png" class="gallaryImg fade-in" id="20" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/5.png" class="gallaryImg fade-in" id="14" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/1.png" class="gallaryImg fade-in" id="15" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/6.png" class="gallaryImg fade-in" id="16" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/2.png" class="gallaryImg fade-in" id="17" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/4.png" class="gallaryImg fade-in" id="18" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/5.png" class="gallaryImg fade-in" id="19" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/3.png" class="gallaryImg fade-in" id="20" onClick="show(this.id)" style="width:100%">
         </div>
         <div class="column" id="gallaryCol">
-          <img src="img/infographic/3.png" class="gallaryImg fade-in" id="21" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/4.png" class="gallaryImg fade-in" id="22" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/2.png" class="gallaryImg fade-in" id="23" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/5.png" class="gallaryImg fade-in" id="24" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/1.png" class="gallaryImg fade-in" id="25" onClick="show(this.id)" style="width:100%">
-          <img src="img/infographic/6.png" class="gallaryImg fade-in" id="26" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/3.png" class="gallaryImg fade-in" id="21" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/4.png" class="gallaryImg fade-in" id="22" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/2.png" class="gallaryImg fade-in" id="23" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/5.png" class="gallaryImg fade-in" id="24" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/1.png" class="gallaryImg fade-in" id="25" onClick="show(this.id)" style="width:100%">
+          <img src="<?php echo base_url()?>assets/img/infographic/6.png" class="gallaryImg fade-in" id="26" onClick="show(this.id)" style="width:100%">
         </div>
         <div id="myModal" class="modal">
           <input type="hidden" name="id" id="shareID">

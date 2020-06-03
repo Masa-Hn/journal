@@ -15,7 +15,7 @@
             <form>
             <div class="box">
               <input class="s-text" dir="rtl" type="text" placeholder="ابحث عن كتابك " name="search2" align="center">
-              <input type="image" class="s-btn" src="img/img_6.png"> 
+              <input type="image" class="s-btn" src="<?php echo base_url()?>assets/img/img_6.png"> 
             </div>
             </form>
           </div>
@@ -38,14 +38,14 @@
       </div>
       <div class="row text-center">
         <div class="col-sm-6 slide-in from-left">
-          <img src="img/most.png" style="padding-bottom: ">
+          <img src="<?php echo base_url()?>assets/img/most.png" style="padding-bottom: ">
         </div>
         <div class="col-sm-6 text-center ">
         <div id="most" class="carousel slide text-center" data-ride="carousel">
             <div class="carousel-inner">
               <div class="item active">
                 <div class="card" style=" text-align: center;">
-                  <img class="card-img-top carousel-img" src="img/1.jpg" alt="Card image cap">
+                  <img class="card-img-top carousel-img" src="<?php echo base_url()?>assets/img/1.jpg" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title"> اسم الكتاب </h5>
                     <p class="card-text"> وصف بسيط للكتاب  </p>
@@ -55,7 +55,7 @@
               </div>
               <div class="item">
                 <div class="card" style="text-align: center;">
-                  <img class="card-img-top" src="img/3.jpg" alt="Card image cap">
+                  <img class="card-img-top" src="<?php echo base_url()?>assets/img/3.jpg" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title"> اسم الكتاب </h5>
                     <p class="card-text"> وصف بسيط للكتاب  </p>
@@ -65,7 +65,7 @@
               </div>
               <div class="item">
                 <div class="card" style="text-align: center;">
-                  <img class="card-img-top" src="img/2.jpg" alt="Card image cap">
+                  <img class="card-img-top" src="<?php echo base_url()?>assets/img/2.jpg" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title"> اسم الكتاب </h5>
                     <p class="card-text"> وصف بسيط للكتاب  </p>
@@ -94,14 +94,14 @@
       </div>
       <div class="row text-center">
         <div class="col-sm-6 slide-in from-left">
-          <img src="img/new_book.png" style="padding-bottom: 3%; width:90%;">
+          <img src="<?php echo base_url()?>assets/mg/new_book.png" style="padding-bottom: 3%; width:90%;">
         </div>
         <div class="col-sm-6 text-center">
         <div id="most" class="carousel slide text-center " data-ride="carousel">
             <div class="carousel-inner">
               <div class="item active">
                 <div class="card" style=" text-align: center;">
-                  <img class="card-img-top carousel-img" src="img/1.jpg" alt="Card image cap">
+                  <img class="card-img-top carousel-img" src="<?php echo base_url()?>assets/img/1.jpg" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title"> اسم الكتاب </h5>
                     <p class="card-text"> وصف بسيط للكتاب  </p>
@@ -111,7 +111,7 @@
               </div>
               <div class="item">
                 <div class="card" style="text-align: center;">
-                  <img class="card-img-top" src="img/3.jpg" alt="Card image cap">
+                  <img class="card-img-top" src="<?php echo base_url()?>assets/img/3.jpg" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title"> اسم الكتاب </h5>
                     <p class="card-text"> وصف بسيط للكتاب  </p>
@@ -121,7 +121,7 @@
               </div>
               <div class="item">
                 <div class="card" style="text-align: center;">
-                  <img class="card-img-top" src="img/2.jpg" alt="Card image cap">
+                  <img class="card-img-top" src="<?php echo base_url()?>assets/img/2.jpg" alt="Card image cap">
                   <div class="card-body">
                     <h5 class="card-title"> اسم الكتاب </h5>
                     <p class="card-text"> وصف بسيط للكتاب  </p>
