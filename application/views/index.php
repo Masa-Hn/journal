@@ -1,26 +1,9 @@
-  <!-- Home -->
-  <div id="home">
-    <div class="landing-text">
-      <h1>
-        أصبوحة  180
-      </h1>
-      <h3>
-        لأن القراءة ضرورة وليست هواية 
-      </h3>
-    </div>
-    <div class="arrow">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-  </div>
-  <!-- End Home -->
   <!-- Who We Are -->
   <div class="padding" id="section-one">
     <div class="container">
       <div class="row">
         <div class="col-sm-6 slide-in from-left">
-          <img src="img/who.png">
+          <img src="<?php echo base_url()?>assets/img/who.png">
         </div>
         <div class="col-sm-6 text-center slide-in from-right ">
           <h2> من نحن؟</h2>
@@ -74,7 +57,7 @@
     <div class="container">
       <div class="row fade-in">
         <div class="container-fluid text-center">
-          <img src="img/video.png" class="video_icon">
+          <img src="<?php echo base_url()?>assets/img/video.png" class="video_icon">
           <br>
           <h2> فيديو تعريفي للمشروع </h2>
           <div class="heading-underline"></div>
@@ -83,8 +66,8 @@
       <div class="row fade-in">
         <div class="video">
             <div class="video-wrap text-center">
-              <video class="video_play" controls="button" poster='img/who.png' playinline>
-                <source src="vedio/Osboha.mp4" type="">
+              <video class="video_play" controls="button" poster='<?php echo base_url()?>assets/img/who.png' playinline>
+                <source src="<?php echo base_url()?>assets/vedio/Osboha.mp4" type="">
               </video>
             </div>
         </div>
@@ -103,7 +86,7 @@
       <div class="col-md-12 owner">
         <div class="row">
           <div class="col-md-3 slide-in from-left">
-            <img src="img/owner.png">
+            <img src="<?php echo base_url()?>assets/img/owner.png">
           </div>      
           <div class="col-md-9 slide-in from-right">
             <p>
@@ -148,7 +131,7 @@
           </div>
         <div class="row fade-in">
           <div class="container-fluid text-center">
-            <img src="img/stat.jpg" style="border: 4px solid #8ac579;width: 50%;">
+            <img src="<?php echo base_url()?>assets/img/stat.jpg" style="border: 4px solid #8ac579;width: 50%;">
           </div>
         </div>
       </div>

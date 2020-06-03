@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6 slide-in from-left">
-          <img src="img/donate.png">
+          <img src="<?php echo base_url()?>assets/img/donate.png">
         </div>
         <div class="col-sm-6 text-center slide-in from-right ">
           <h2> ينقصنا بصمتك أنت</h2>
@@ -45,7 +45,7 @@
           </p>
         </div>
         <div class="col-sm-6 text-center slide-in from-left">
-          <img src="img/donate_2.jpg" style="width: 90%">
+          <img src="<?php echo base_url()?>assets/img/donate_2.jpg" style="width: 90%">
         </div>
       </div>
     </div>

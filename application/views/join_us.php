@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6 slide-in from-left">
-          <img src="img/time.png">
+          <img src="<?php echo base_url()?>assets/img/time.png">
         </div>
         <div class="col-sm-6 text-center slide-in from-right">
           <h2> أصبوحة  180  </h2>
@@ -39,7 +39,7 @@
           <div class="heading-underline"></div>
           <h3> ما عليك القيام به في المشروع هو :  </h3>
           <ul class="role">
-            <li><img src="img/checkMark.png" class="list-img">
+            <li><img src="<?php echo base_url()?>assets/img/checkMark.png" class="list-img">
               أن تقوم بقراءة (٦) صفحات يوميًا ، لخمسة أيام في الأسبوع . أو بشكل مثالي (30) صفحة في الأسبوع تقسمها كما تريد 
             </li>
               

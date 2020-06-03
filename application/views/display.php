@@ -10,7 +10,7 @@
           </div>
         <div class="row">
           <div class="container-fluid text-center">
-            <img src="img/s1.jpg" style="border: 4px solid #205D67;width: 50%;">
+            <img src="<?php echo base_url()?>assets/img/s1.jpg" style="border: 4px solid #205D67;width: 50%;">
           </div>
         </div>
       </div>

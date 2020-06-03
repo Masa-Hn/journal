@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-6 slide-in from-left">
-          <img src="img/special.png" style="width: 90%">
+          <img src="<?php echo base_url()?>assets/img/special.png" style="width: 90%">
         </div>
         <div class="col-sm-6 text-center vertical-center fade-in">
           <h2>
@@ -29,11 +29,11 @@
       </div>
       <div class="row">
         <div class="carousel-container w3-display-container ">
-          <img class="mySlides carousel-slide" src="img/s1.jpg" id="1" onClick="show(this.id)">
-          <img class="mySlides carousel-slide" src="img/s2.jpg" id="2" onClick="show(this.id)">
-          <img class="mySlides carousel-slide" src="img/s3.jpg" id="3" onClick="show(this.id)">
-          <img class="mySlides carousel-slide" src="img/s4.jpg" id="4" onClick="show(this.id)">
-          <img class="mySlides carousel-slide" src="img/6.jpg" id="6" onClick="show(this.id)">
+          <img class="mySlides carousel-slide" src="<?php echo base_url()?>assets/img/s1.jpg" id="1" onClick="show(this.id)">
+          <img class="mySlides carousel-slide" src="<?php echo base_url()?>assets/img/s2.jpg" id="2" onClick="show(this.id)">
+          <img class="mySlides carousel-slide" src="<?php echo base_url()?>assets/img/s3.jpg" id="3" onClick="show(this.id)">
+          <img class="mySlides carousel-slide" src="<?php echo base_url()?>assets/img/s4.jpg" id="4" onClick="show(this.id)">
+          <img class="mySlides carousel-slide" src="<?php echo base_url()?>assets/img/6.jpg" id="6" onClick="show(this.id)">
 
           <button class="btn carousel-btn w3-display-left" onclick="plusDivs(-1)">&#10095;</button>
           <button class="btn carousel-btn w3-display-right" onclick="plusDivs(1)">&#10094;</button>

@@ -18,7 +18,7 @@
             <form>
             <div class="box">
               <input class="s-text" dir="rtl" type="text" placeholder="ابحث عن كتابك " name="search2" align="center">
-              <input type="image" class="s-btn" src="img/img_6.png"> 
+              <input type="image" class="s-btn" src="<?php echo base_url()?>assets/img/img_6.png"> 
             </div>
             </form>
           </div>
@@ -27,7 +27,7 @@
     </div>    
   </div>
 
-  <div class="container">
+  <div class="container" dir="ltr">
     <div class="row direct fade-in">
       <div class="container-fluid text-center col-md-4 col-lg-4 col-sm-12 vl ">
         <h3>تخصيص البحث</h3>
@@ -167,7 +167,7 @@
           <div class="row">
             <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
               <div class="col-4 col-md-3">  
-                <img  src="img/1.jpg" class="bookImg" >
+                <img  src="<?php echo base_url()?>assets/img/1.jpg" class="bookImg" >
               </div> 
               <div class="container-fluid text-center col-8 col-md-9">
                 <h3 >اسم  الكتاب</h3>
@@ -187,7 +187,7 @@
           <div class="row">
             <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
               <div class="col-4 col-md-3">  
-                <img  src="img/1.jpg" class="bookImg" >
+                <img  src="<?php echo base_url()?>assets/img/1.jpg" class="bookImg" >
               </div> 
               <div class="container-fluid text-center col-8 col-md-9">
                 <h3 >اسم  الكتاب</h3>
@@ -207,7 +207,7 @@
           <div class="row">
             <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
               <div class="col-4 col-md-3">  
-                <img  src="img/1.jpg" class="bookImg" >
+                <img  src="<?php echo base_url()?>assets/img/1.jpg" class="bookImg" >
               </div> 
               <div class="container-fluid text-center col-8 col-md-9">
                 <h3 >اسم  الكتاب</h3>
@@ -254,7 +254,7 @@
 
   <div class=" flower">
     <div class="row" style="width: 93%; text-align: right;margin-bottom: 10px" >
-      <img src="img/flower.png" style="width: 15%">
+      <img src="<?php echo base_url()?>assets/img/flower.png" style="width: 15%">
     </div>  
   </div>
 
