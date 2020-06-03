@@ -176,7 +176,7 @@
                 <div class=" row">
                   <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut faucibus facilisis accumsan. Nullam molestie ex lacus. Nullam maximus, neque vitae porta suscipit <a href="bookDesc.html" style="color: #BB6854">MORE</a></p>
                   <button class="btn cusBtn" onclick="downloadAlert()" >تحميل الكتاب </button>
-                  <button class="btn cusBtn" ><a href="bookDesc.html" style="color: #FCFAEF"> المزيد عن الكتاب  </a></button>
+                  <button class="btn cusBtn" ><a href="<?php echo base_url()?>bookDesc" style="color: #FCFAEF"> المزيد عن الكتاب  </a></button>
                   <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من 
                     <a href="telegram.html">هنا </a></h5>
                 </div>
@@ -196,7 +196,7 @@
                 <div class=" row">
                   <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut faucibus facilisis accumsan. Nullam molestie ex lacus. Nullam maximus, neque vitae porta suscipit <a href="bookDesc.html" style="color: #BB6854">MORE</a></p>
                   <button class="btn cusBtn" onclick="downloadAlert()" >تحميل الكتاب </button>
-                  <button class="btn cusBtn" ><a href="bookDesc.html" style="color: #FCFAEF"> المزيد عن الكتاب  </a></button>
+                  <button class="btn cusBtn" ><a href="<?php echo base_url()?>bookDesc" style="color: #FCFAEF"> المزيد عن الكتاب  </a></button>
                   <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من 
                     <a href="telegram.html">هنا </a></h5>
                 </div>
