@@ -94,7 +94,7 @@
       </div>
       <div class="row text-center">
         <div class="col-sm-6 slide-in from-left">
-          <img src="<?php echo base_url()?>assets/mg/new_book.png" style="padding-bottom: 3%; width:90%;">
+          <img src="<?php echo base_url()?>assets/img/new_book.png" style="padding-bottom: 3%; width:90%;">
         </div>
         <div class="col-sm-6 text-center">
         <div id="most" class="carousel slide text-center " data-ride="carousel">
