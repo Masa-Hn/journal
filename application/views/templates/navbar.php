@@ -16,13 +16,13 @@
       <div class="collapse navbar-collapse" id="navbar-collapse-main" dir="rtl" style="padding: 0;">
         <ul class="nav navbar-nav navbar-right ml-auto nav-direct">
           <li><a class="nav-item" href="<?php echo base_url()?>home/index">الرئيسية</a></li>
-          <li><a class="nav-item" href="bookshelf.html">رف الكتب </a></li>
-          <li><a class="nav-item" href="booksearch.html">البحث عن الكتب </a></li>
-          <li><a class="nav-item" href="infographic.html">انفوجرافيك</a></li>
-          <li><a class="nav-item" href="articles.html">مقالات تثقيفية</a></li>
-          <li><a class="nav-item" href="accomp.html">آخر الانجازات</a></li>
-          <li><a class="nav-item" href="join_us.html">انضم إلينا</a></li>
-          <li><a class="nav-item" href="donate.html"> ادعمنا</a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>home/bookshelf">رف الكتب </a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>home/booksearch">البحث عن الكتب </a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>home/infographic">انفوجرافيك</a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>home/articles">مقالات تثقيفية</a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>home/accomp">آخر الانجازات</a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>home/join_us">انضم إلينا</a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>home/donate"> ادعمنا</a></li>
         </ul> 
       </div>
     </div>

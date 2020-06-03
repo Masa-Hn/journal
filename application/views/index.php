@@ -138,6 +138,7 @@
     </div>
   </div>
   <!-- End Evaluation -->
+
   <!-- Join Us -->
   <div class="padding">
     <div class="container">
@@ -149,7 +150,7 @@
       </div>
       <div class="row fade-in">
         <div class="container-fluid text-center">
-            <a href="join_us.html"> <button class="button btn btn-outline-dark "> للانضمام اضغط هنا  </button></a>
+            <a href="<?php echo base_url()?>home/join_us"> <button class="button btn btn-outline-dark "> للانضمام اضغط هنا  </button></a>
         </div>
       </div>    
     </div>    
