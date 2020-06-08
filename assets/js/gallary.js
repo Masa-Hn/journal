@@ -5,7 +5,8 @@ function  show (id){
   document.getElementById("shareID").value= id;
   // Get the image and insert it inside the modal - use its "alt" text as a caption
   var imgSrc = document.getElementById(id).src;
-     console.log(imgSrc);
+    console.log(imgSrc);
+    console.log("k");
 
   var modalImg = document.getElementById("img");
    modal.style.display = "block";
