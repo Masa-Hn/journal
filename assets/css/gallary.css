@@ -1,3 +1,30 @@
+.masonryholder{
+    column-count: 4;
+    column-gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+    }
+
+  .masonryblocks{
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    }
+
+  .masonryblocks img{
+    width: 100%;
+    }
+
+
+.gallaryImg {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}/* gallaryImg */
+/*# sourceMappingURL=style.css.map */
 #gallaryRow{
   display: -ms-flexbox;
   display: flex;
@@ -7,7 +34,7 @@
 }/*gallaryRow*/
 
 /* Create four equal columns that sits next to each other */
-#gallaryCol{
+.gallaryCol{
   -ms-flex: 25%; /* IE10 */
   flex: 25%;
   max-width: 25%;
@@ -109,7 +136,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  #gallaryCol{
+  .gallaryCol{
     -ms-flex: 50%;
     flex: 50%;
     max-width: 50%;
@@ -117,7 +144,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  #gallaryCol {
+  .gallaryCol {
     -ms-flex: 100%;
     flex: 100%;
     max-width: 100%;
@@ -128,3 +155,26 @@
     font-size: 10vw;
   }
 }
+  @media screen and (max-width:768px){
+    .masonryholder{
+      column-count: 1;
+    }
+    }
+
+  @media screen and (min-width:769px){
+    .masonryholder{
+      column-count: 2;
+    }
+    }
+
+  @media screen and (min-width:1080px){
+    .masonryholder{
+      column-count: 3;
+    }
+    }
+
+  @media screen and (min-width:1200px){
+    .masonryholder{
+      column-count: 4;
+    }
+    }
