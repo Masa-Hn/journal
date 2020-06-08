@@ -18,13 +18,13 @@
             <form>
             <div class="box">
               <input class="s-text" dir="rtl" type="text" placeholder="ابحث عن كتابك " name="search2" align="center">
-              <input type="image" class="s-btn" src="<?php echo base_url()?>assets/img/img_6.png"> 
+              <input type="image" class="s-btn" src="<?php echo base_url()?>assets/img/img_6.png">
             </div>
             </form>
           </div>
         </div>
       </div>
-    </div>    
+    </div>
   </div>
 
   <div class="container" dir="ltr">
@@ -42,10 +42,10 @@
                 <span class="no-of-books">52</span>
               </div>
               <div class="col-sm-6">
-                <span> دينية </span>  
+                <span> دينية </span>
               </div>
               <div class="col-sm-3">
-                <input type="checkbox" > 
+                <input type="checkbox" >
               </div>
           </div>
           <div class="row filterRow">
@@ -53,10 +53,10 @@
               <span class="no-of-books">52</span>
                 </div>
                 <div class="col-sm-6">
-                  <span> علوم </span>  
+                  <span> علوم </span>
                 </div>
                 <div class="col-sm-3">
-                  <input type="checkbox" > 
+                  <input type="checkbox" >
                 </div>
           </div>
           <div class="row filterRow">
@@ -64,10 +64,10 @@
               <span class="no-of-books">52</span>
             </div>
             <div class="col-sm-6">
-              <span> تنمية بشرية </span>  
+              <span> تنمية بشرية </span>
             </div>
             <div class="col-sm-3">
-              <input type="checkbox" > 
+              <input type="checkbox" >
             </div>
           </div>
 
@@ -77,36 +77,36 @@
               <span class="no-of-books">52</span>
             </div>
             <div class="col-sm-6">
-              <span> العربية  </span>  
+              <span> العربية  </span>
             </div>
             <div class="col-sm-3">
-              <input type="checkbox" > 
+              <input type="checkbox" >
             </div>
-          </div>  
+          </div>
           <div class="row filterRow">
             <div class="col-sm-3">
               <span class="no-of-books">52</span>
             </div>
             <div class="col-sm-6">
-              <span> الانجليزية </span>  
+              <span> الانجليزية </span>
             </div>
             <div class="col-sm-3">
-              <input type="checkbox" > 
+              <input type="checkbox" >
             </div>
-          </div> 
+          </div>
         </div>
-        
-        <div  id="firstFilters" class=" ais-refinement-list--item custom-control custom-checkbox ">   
+
+        <div  id="firstFilters" class=" ais-refinement-list--item custom-control custom-checkbox ">
           <h3 style="margin-bottom: 10%; text-align: right;"> فئة الكتاب  </h3>
           <div class="row filterRow">
             <div class="col-sm-3">
               <span class="no-of-books">52</span>
             </div>
             <div class="col-sm-6">
-              <span> دينية </span>  
+              <span> دينية </span>
             </div>
             <div class="col-sm-3">
-              <input type="checkbox" > 
+              <input type="checkbox" >
             </div>
           </div>
           <div class="row filterRow">
@@ -114,10 +114,10 @@
               <span class="no-of-books">52</span>
             </div>
             <div class="col-sm-6">
-              <span> علوم </span>  
+              <span> علوم </span>
             </div>
             <div class="col-sm-3">
-              <input type="checkbox" > 
+              <input type="checkbox" >
             </div>
           </div>
           <div class="row filterRow">
@@ -125,10 +125,10 @@
               <span class="no-of-books">52</span>
             </div>
             <div class="col-sm-6">
-              <span> تنمية بشرية </span>  
+              <span> تنمية بشرية </span>
             </div>
             <div class="col-sm-3">
-              <input type="checkbox" > 
+              <input type="checkbox" >
             </div>
           </div>
           <h3 style="margin-bottom: 10%; text-align: right;"> اللغة</h3>
@@ -137,25 +137,25 @@
               <span class="no-of-books">52</span>
             </div>
             <div class="col-sm-6">
-              <span> العربية  </span>  
+              <span> العربية  </span>
             </div>
             <div class="col-sm-3">
-              <input type="checkbox" > 
+              <input type="checkbox" >
             </div>
-          </div>  
+          </div>
           <div class="row filterRow">
             <div class="col-sm-3">
               <span class="no-of-books">52</span>
             </div>
             <div class="col-sm-6">
-              <span> الانجليزية </span>  
+              <span> الانجليزية </span>
             </div>
             <div class="col-sm-3">
-              <input type="checkbox" > 
+              <input type="checkbox" >
             </div>
           </div>
         </div>
-      </div>  
+      </div>
 
       <div class="padding "></div>
       <div class="container">
@@ -163,91 +163,43 @@
            <button class="btn cusBtn" id="displaybtn">   عرض </button>  <input type="text" id="bookDisplay" name="bookDisplay" value="3">
         </div>
         <div class="contents">
-           
-          <div class="row">
-            <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
-              <div class="col-4 col-md-3">  
-                <img  src="<?php echo base_url()?>assets/img/1.jpg" class="bookImg" >
-              </div> 
-              <div class="container-fluid text-center col-8 col-md-9">
-                <h3 >اسم  الكتاب</h3>
-                <div class="heading-underline"></div>
 
-                <div class=" row">
-                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut faucibus facilisis accumsan. Nullam molestie ex lacus. Nullam maximus, neque vitae porta suscipit <a href="bookDesc.html" style="color: #BB6854">MORE</a></p>
-                  <button class="btn cusBtn" onclick="downloadAlert()" >تحميل الكتاب </button>
-                  <button class="btn cusBtn" ><a href="<?php echo base_url()?>bookDesc" style="color: #FCFAEF"> المزيد عن الكتاب  </a></button>
-                  <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من 
-                    <a href="telegram.html">هنا </a></h5>
-                </div>
-              </div>
-            </div>
-            <div class="heading-underline col-sm-12"></div>
-          </div>
-          <div class="row">
-            <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
-              <div class="col-4 col-md-3">  
-                <img  src="<?php echo base_url()?>assets/img/1.jpg" class="bookImg" >
-              </div> 
-              <div class="container-fluid text-center col-8 col-md-9">
-                <h3 >اسم  الكتاب</h3>
-                <div class="heading-underline"></div>
 
-                <div class=" row">
-                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut faucibus facilisis accumsan. Nullam molestie ex lacus. Nullam maximus, neque vitae porta suscipit <a href="bookDesc.html" style="color: #BB6854">MORE</a></p>
-                  <button class="btn cusBtn" onclick="downloadAlert()" >تحميل الكتاب </button>
-                  <button class="btn cusBtn" ><a href="<?php echo base_url()?>bookDesc" style="color: #FCFAEF"> المزيد عن الكتاب  </a></button>
-                  <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من 
-                    <a href="telegram.html">هنا </a></h5>
-                </div>
-              </div>
-            </div>
-            <div class="heading-underline col-sm-12"></div>
-          </div>
-          <div class="row">
-            <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
-              <div class="col-4 col-md-3">  
-                <img  src="<?php echo base_url()?>assets/img/1.jpg" class="bookImg" >
-              </div> 
-              <div class="container-fluid text-center col-8 col-md-9">
-                <h3 >اسم  الكتاب</h3>
-                <div class="heading-underline"></div>
+          <?php
+           foreach($data as $row)
+		       {
+               echo '
+               <div class="row">
+                 <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
+                   <div class="col-4 col-md-3">
+                     <img  src="'.$row->pic.'" class="bookImg" >
+                   </div>
+                   <div class="container-fluid text-center col-8 col-md-9">
+                     <h3 >'.$row->name.'</h3>
+                     <div class="heading-underline"></div>
 
-                <div class=" row">
-                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut faucibus facilisis accumsan. Nullam molestie ex lacus. Nullam maximus, neque vitae porta suscipit <a href="bookDesc.html" style="color: #BB6854">MORE</a></p>
-                  <button class="btn cusBtn" onclick="downloadAlert()" >تحميل الكتاب </button>
-                  <button class="btn cusBtn" ><a href="bookDesc.html" style="color: #FCFAEF"> المزيد عن الكتاب  </a></button>
-                  <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من 
-                    <a href="telegram.html">هنا </a></h5>
-                </div>
-              </div>
-            </div>
-            <div class="heading-underline col-sm-12"></div>
-          </div>
-          <div class="row">
-            <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
-              <div class="col-4 col-md-3">  
-                <img  src="img/1.jpg" class="bookImg" >
-              </div> 
-              <div class="container-fluid text-center col-8 col-md-9">
-                <h3 >اسم  الكتاب</h3>
-                <div class="heading-underline"></div>
+                     <div class=" row">
+                       <p> '.$row->brief.' <a href="'. base_url().'bookDesc?id='.$row->id.'" style="color: #BB6854">MORE</a></p>
+                       <button class="btn cusBtn" onclick="downloadAlert()" >تحميل الكتاب </button>
+                       <button class="btn cusBtn" ><a href="'. base_url().'bookDesc?id='.$row->id.'" style="color: #FCFAEF"> المزيد عن الكتاب  </a></button>
+                       <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من
+                         <a href="telegram.html">هنا </a></h5>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="heading-underline col-sm-12"></div>
+               </div>
+               ';
+               // اطروحات الكتاب $row->post
+               //تحميل الكتاب $row->link
+           }
+         ?>
 
-                <div class=" row">
-                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut faucibus facilisis accumsan. Nullam molestie ex lacus. Nullam maximus, neque vitae porta suscipit <a href="bookDesc.html" style="color: #BB6854">MORE</a></p>
-                  <button class="btn cusBtn" onclick="downloadAlert()" >تحميل الكتاب </button>
-                  <button class="btn cusBtn" ><a href="bookDesc.html" style="color: #FCFAEF"> المزيد عن الكتاب  </a></button>
-                  <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من 
-                    <a href="telegram.html">هنا </a></h5>
-                </div>
-              </div>
-            </div>
-            <div class="heading-underline col-sm-12"></div>
-          </div>
-          
-         
+
+
+
         </div>
-           
+
       </div>
     </div>
   </div>
@@ -255,7 +207,7 @@
   <div class=" flower">
     <div class="row" style="width: 93%; text-align: right;margin-bottom: 10px" >
       <img src="<?php echo base_url()?>assets/img/flower.png" style="width: 15%">
-    </div>  
+    </div>
   </div>
 
 
