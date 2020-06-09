@@ -10,7 +10,17 @@
           </div>
         <div class="row">
           <div class="container-fluid text-center">
-            <img src="<?php echo base_url()?>assets/img/s1.jpg" style="border: 4px solid #205D67;width: 50%;">
+          	<?php
+          		if($exist){
+            		foreach ($infographic as $row) {
+              		echo
+                	'<img src="'. base_url().'assets/img/infographic/'.$row->pic .'" class=" fade-in" style="border: 4px solid #205D67;width: 50%;" id="'.$row->id.'" onClick="show(this.id)"></div>';
+            }//foreach
+          }//if
+          else{
+            echo "<h2 style='text-align: center;'>لا يوجد نتائج </h2>";
+          }//else       
+        ?>
           </div>
         </div>
       </div>

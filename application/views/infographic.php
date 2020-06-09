@@ -66,15 +66,16 @@
                 </div>
         <div id="myModal" class="modal">
           <input type="hidden" name="id" id="shareID">
+          <input type="hidden" name="id" id="base_url" value="<?php echo base_url()?>">
           <span class="close">&times;</span>
           <img class="modal-content" id="img">
           <h2 style="color:#ebe6d5;">مشاركة </h2>
           <hr style="width: 20%">
-          <i onclick="fbShare()" class=" btn fa fa-facebook" id="share"></i>
-          <i onclick="twitterShare()" class=" btn fa fa-twitter" id="share"></i>
-          <i onclick="pin_it()" class=" btn fa fa-pinterest-square" id="share"></i>
-          <i onclick="linkedinShare()" class=" btn fa fa-linkedin" id="share"></i>
-          <i title="copy link" onclick="copyLink()" class=" btn fa fa-copy" id="share"></i>
+          <i onclick="infographic_fbShare()" class=" btn fa fa-facebook" id="share"></i>
+          <i onclick="infographic_twitterShare()" class=" btn fa fa-twitter" id="share"></i>
+          <i onclick="infographic_pin_it()" class=" btn fa fa-pinterest-square" id="share"></i>
+          <i onclick="infographic_linkedinShare()" class=" btn fa fa-linkedin" id="share"></i>
+          <i title="copy link" onclick="infographic_copyLink()" class=" btn fa fa-copy" id="share"></i>
         </div>
       </div>
     </div>

@@ -17,5 +17,12 @@ class InfographicModel extends CI_Model {
 		
   }//getmore 
 
+  	public function getById($id)
+  	{ 
+   	 	$this->db->where('id =',$id);
+		$this->db->limit(1);
+		return $this->db->get('infographic');  
+		
+  	}//getmore 
 }
 ?>
