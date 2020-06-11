@@ -2,7 +2,7 @@
   function infographic_fbShare()
   {
     var fb = 'https://www.facebook.com/sharer/sharer.php?u=';
-    var displayLink =document.getElementById("base_url").value+"infographicDisplay/";
+    var displayLink =document.getElementById("base_url").value+"Infographic/infographicDisplay/";
     var displayID=document.getElementById("shareID").value; 
     var fullLink = fb+displayLink+displayID; 
     console.log(fullLink);
@@ -64,7 +64,7 @@
 function accomp_fbShare()
   {
     var fb = 'https://www.facebook.com/sharer/sharer.php?u=';
-    var displayLink =document.getElementById("base_url").value+"accompDisplay/";
+    var displayLink =document.getElementById("base_url").value+"Accomplishment/accompDisplay/";
     var displayID=document.getElementById("shareID").value; 
     var fullLink = fb+displayLink+displayID; 
     console.log(fullLink);
