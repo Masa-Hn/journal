@@ -1,5 +1,4 @@
-<!-- Slideshow container -->
- <!doctype html>
+<!doctype html>
                         <html>
                             <head>
                                 <meta charset='utf-8'>
@@ -7,8 +6,7 @@
                                 <title>Management Book</title>
                                 <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
                                 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
- <style>
- body {
+ <style>body {
     color: #000;
     overflow-x: hidden;
     height: 100%;
@@ -16,7 +14,7 @@
     background-repeat: no-repeat
 }
 
-h3,h5,p {text-align: right;direction: rtl;}
+h3,h5,p {text-align: right;}
 .card {
     background-color: #FFF;
     border-radius: 25px;
@@ -47,7 +45,7 @@ h3,h5,p {text-align: right;direction: rtl;}
 #progressbar li {
     list-style-type: none;
     font-size: 15px;
-    width: 25%;
+    width: 50%;
     float: right;
     position: relative;
     font-weight: 400
@@ -231,102 +229,6 @@ button {
     float: right;
     margin-top: 4px
 }
-
-{box-sizing:border-box}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-
-}
-
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
 .mybutton {
   display: inline-block;
   padding: 15px 15px;
@@ -341,7 +243,6 @@ button {
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
-  float: left;
 }
 
 
@@ -353,13 +254,43 @@ button {
 </style>
                                 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
                                 <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
-                                <script type="text/javascript">
-                                	function validate1(val) {
-v1 = document.getElementById("activity_name");
-v2 = document.getElementById("date");
+                            <script src="<?php echo base_url()?>assets/js/addbook.js"></script>
+<script type="text/javascript">
+    function validate2(val) {
+v1 = document.getElementById("article");
+
+
+flag1 = true;
+
+if(val>=1 || val==0) {
+if(v1.value == "") {
+v1.style.borderColor = "red";
+flag1 = false;
+}
+else {
+v1.style.borderColor = "green";
+flag1 = true;
+}
+}
+
+
+flag = flag1
+
+return flag;
+}
+
+
+
+
+
+function validate1(val) {
+v1 = document.getElementById("article_name");
+v2 = document.getElementById("writer");
+v3 = document.getElementById("date");
 
 flag1 = true;
 flag2 = true;
+flag3 = true;
 
 if(val>=1 || val==0) {
 if(v1.value == "") {
@@ -383,53 +314,134 @@ flag2 = true;
 }
 }
 
+if(val>=3 || val==0) {
+if(v3.value == "") {
+v3.style.borderColor = "red";
+flag3 = false;
+}
+else {
+v3.style.borderColor = "green";
+flag3 = true;
+}
+}
 
-flag = flag1 && flag2 ;
+flag = flag1 && flag2 && flag3;
 
 return flag;
 }
-function success() {
-  if(validate1(0))
+
+
+
+
+
+
+function next() {
+  if (validate1(0))
   {
-  document.getElementById('success').style.display="block";
   document.getElementById('add1').style.display="none";
+  document.getElementById('add2').style.display="block";
+ document.getElementById('step2').className="step0";
+    document.getElementById('step3').className="active step0";
+}
+}
+
+function previous() {
+  document.getElementById('add2').style.display="none";
+  document.getElementById('add1').style.display="block";
+   document.getElementById('step2').className="active step0";
+    document.getElementById('step3').className="step0";
+}
+
+function success() {
+    if(validate2(0))
+    {
+  document.getElementById('success').style.display="block";
+  document.getElementById('add2').style.display="none";
  }
 }
-                                </script>
+function onFileSelected(event) {
+  var selectedFile = event.target.files[0];
+  var reader = new FileReader();
+
+  var imgtag = document.getElementById("myimage");
+  imgtag.title = selectedFile.name;
+
+  reader.onload = function(event) {
+    imgtag.src = event.target.result;
+  };
+
+  reader.readAsDataURL(selectedFile);  
+  document.getElementById('img2').style.display="block";
 
 
-   </head>
+
+
+}
+</script>
+                            </head>
+
                             <body>
                             <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
         <div class="col-xl-5 col-lg-6 col-md-7">
             <div class="card b-0">
- <h3 class="heading" style="color:#008080;">إضافة نشاط</h3>
-<fieldset class="show" >
-                    <div class="form-card">
-                        <h5 class="sub-heading mb-4">الرجاء إدخال بيانات النشاط(الإنجاز) </h5>
+                <h3 class="heading" style="color:#008080;">إضافة مقال</h3>
+                <ul id="progressbar" class="text-center">
+                    <li class="active step0" id="step2"></li>
+                    <li class="step0" id="step3"></li>
+                </ul>
+               
 
-                         <div><label style="padding-bottom: 4em;" class="text-danger mb-3" >* مطلوب</label></div>
+                <fieldset class="show" id="add1">
+                    <div class="form-card">
+                        <h5 class="sub-heading mb-4">الرجاء إدخال بيانات المقال</h5>
+                         <div><label style="padding-bottom: 4em;" class="text-danger mb-3" >* مطلوب</label>
                            
-                                      
-
-                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم النشاط : * </li></label> <input type="text" id="activity_name" name="activity_name" placeholder="" class="form-control" onblur="validate1(1)"> </div>
-                        
-                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">التاريخ : * </li></label> 
-                          <input type="date" id="date" name="date" placeholder="" class="form-control" onblur="validate1(2)"> </div>
+                 <div class="form-group"> 
+                    
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم المقال : * </li></label> <input type="text" id="article_name" name="article_name" placeholder="" class="form-control" onblur="validate1(1)"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم كاتب المقال : * </li></label> <input type="text" id="writer" name="writer" placeholder="" class="form-control" onblur="validate1(2)"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float:  right;"><li style="direction: rtl;">التاريخ : *</li> </label> <input type="date" id="date" name="date" placeholder="" class="form-control" onblur="validate1(3)" > </div>
                        
-               <button id="save" class="mybutton" onclick="success()" >حفظ</button> 
-</div>
+                        <button id="next" class="mybutton" onclick="next();">التالي</button> 
+                    </div>
                 </fieldset>
-                <fieldset id = "success">
+
+
+
+                <fieldset id="add2">
                     <div class="form-card">
-                        <p class="message" >  تم إضافة نشاط جديد بنجاح  .. </p>
+                         <h5 class="sub-heading mb-4" style="padding-bottom: 4em;">الرجاء إدخال بيانات الكتاب</h5>
+                         <div>
+                       
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">المقال :  </li> </label> <input type="text" id="article" name="article" placeholder="" class="form-control" style="padding-bottom: 200px;" onblur="validate2(1)"> </div>
+                        
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">صورة المقال :  </li> </label>
+
+                        <input type="file" onChange="onFileSelected(event)"><br>
+                        <div id="img2">
+                        <img id="myimage" height="200">
+                            </div>
+ 
+                    
+                     
+                         </div>  
+                      <button id="previous" class="mybutton" onclick="previous()" style="float: right;" >السابق</button> 
+
+                      <button id="save" class="mybutton" onclick="success()" >حفظ</button> 
+
+                </fieldset>
+
+
+<fieldset id = "success">
+                    <div class="form-card">
+                        <p class="message"> ..  تم إضافة مقال جديد بنجاح</p>
                         <div class="check"> <img class="fit-image check-img" src="https://i.imgur.com/QH6Zd6Y.gif"> </div>
                     </div>
                 </fieldset>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-</div>
-</div>
-</body>
-</html>
+                            </body>
+                        </html>

@@ -35,4 +35,14 @@ class management_book extends CI_Controller {
             $this->load->view('management_book/add_activity');
 
         }
+         public function add_article()
+        {
+            $this->load->view('management_book/add_article');
+
+        }
+        public function add_infographic()
+        {
+            $this->load->view('management_book/add_infographic');
+
+        }
 }

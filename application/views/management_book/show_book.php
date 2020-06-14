@@ -350,6 +350,21 @@ button {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+.book {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  width: 100%;
+  color: #008080;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  /*optional*/
+  /*input has OS specific font-family*/
+  text-decoration: none;
+}
+
 </style>
                                 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
                                 <script type='text/javascript' src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
@@ -405,6 +420,19 @@ function type_book() {
   document.getElementById('content').style.display="block";
  
 }
+
+function back() {
+ 
+  document.getElementById('content2').style.display="none";
+  document.getElementById('radio').style.display="block";
+ 
+}
+function show_detailes() {
+ 
+  document.getElementById('content').style.display="none";
+  document.getElementById('content2').style.display="block";
+ 
+}
 function change_pic()
 {
   window.open("<?php base_url() ?>change_pic");
@@ -442,24 +470,70 @@ function change_pic()
             		 	</div>
 
 
- <div id="content" style="display: none;">
+  <div id="content" style="display: none;">
 <div class="slideshow-container">
+  <div class="mySlides"  >
 
   <!-- Full-width images with number and caption text -->
- <?php for ($i=1; $i <=3 ; $i++) { ?>
-  	
-  <div class="mySlides"  style="padding-right: 25%;padding-bottom: 5em;">
-    <div class="numbertext" style="color: black"> <?php echo $i ?> / 3</div>
-    <li style="direction: rtl; float: right;"> اسم الكتاب : إلى الجيل الصاعد <?php echo $i ?> </li><br><br>
-    <li style="direction: rtl; float: right;"> اسم الكاتب : أحمد بن يوسف السيد </li><br><br>
-    <li style="direction: rtl; float: right;"> نوع الكتاب : كتاب منهج </li><br><br>
-    <li style="direction: rtl; float: right;"> صنف الكتاب : فكري ديني </li><br><br>
-    <li style="direction: rtl; float: right;"> رابط منشور الكتاب :  </li><br><br>
+  <table style="width: 100%;" >
+ <?php for ($i=1; $i <=30 ; $i+=4) { ?>
+    
 
-<button style="float: right;" class="mybutton" onclick="change_pic()" > عرض صورة الكتاب </button>
 
+    <tr style="background-color: #f2f2f2;">
+     <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i ?></button></td>
+   <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+1 ?></button></td>
+    </tr>
+    <tr >
+   <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+2 ?></button></td>
+   <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+3 ?></button></td>
+    </tr>
+
+   <?php } ?>
+</table>
 </div>
-<?php } ?>
+
+  <div class="mySlides"  >
+
+<table style="width: 100%;" >
+ <?php for ($i=33; $i <=60 ; $i+=4) { ?>
+    
+
+
+    <tr style="background-color: #f2f2f2;">
+     <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i ?></button></td>
+   <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+1 ?></button></td>
+    </tr>
+    <tr >
+   <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+2 ?></button></td>
+   <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+3 ?></button></td>
+    </tr>
+
+   <?php } ?>
+</table>
+</div>
+
+  <div class="mySlides"  >
+
+<table style="width: 100%;" >
+ <?php for ($i=61; $i <=90 ; $i+=4) { ?>
+    
+
+
+    <tr style="background-color: #f2f2f2;">
+     <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i ?></button></td>
+   <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+1 ?></button></td>
+    </tr>
+    <tr >
+   <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+2 ?></button></td>
+   <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+3 ?></button></td>
+    </tr>
+
+   <?php } ?>
+</table>
+</div>
+
+
   <!-- Next and previous buttons -->
   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
   <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -474,6 +548,18 @@ function change_pic()
 </div>
 </div>
 
+<div id="content2" style="display: none;">
+   <li style="direction: rtl; float: right;"> اسم الكتاب : إلى الجيل الصاعد  </li><br><br>
+    <li style="direction: rtl; float: right;"> اسم الكاتب : أحمد بن يوسف السيد </li><br><br>
+    <li style="direction: rtl; float: right;"> نوع الكتاب : كتاب منهج </li><br><br>
+    <li style="direction: rtl; float: right;"> صنف الكتاب : فكري ديني </li><br><br>
+    <li style="direction: rtl; float: right;"> رابط منشور الكتاب :  </li><br><br>
+
+<button style="float: right;" class="mybutton" onclick="change_pic()" > عرض صورة الكتاب </button>
+<button style="float: left; width: 25%" class="mybutton" onclick="back()" > رجوع </button>
+
+
+</div>
 </div>
 </div>
 </div>
