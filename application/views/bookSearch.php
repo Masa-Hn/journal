@@ -3,6 +3,8 @@
 <link href="<?php echo base_url()?>assets/css/animation.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
 <script src="<?php echo base_url()?>assets/js/pagination.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
 
 <div class="padding" id="section-one">
     <div class="container">
@@ -17,8 +19,14 @@
           <div>
             <form>
             <div class="box">
-              <input class="s-text" dir="rtl" type="text" placeholder="ابحث عن كتابك " name="search2" align="center">
-              <input type="image" class="s-btn" src="<?php echo base_url()?>assets/img/img_6.png">
+              <input type="hidden" name="id" id="base_url" value="<?php echo base_url()?>">
+              <input class="s-text" dir="rtl" type="text" id="bookName" placeholder="ابحث عن كتابك " name="search2" align="center" oninput="search()">
+                <hr style="width: 70%;    border-top: 1px solid #205d67 !important; display: none;" id="hrLine">
+                <ul id="searchList" style="display: none; list-style: none;">
+                  
+                </ul>
+              <input type="image" class="s-btn" id="s-btn" src="<?php echo base_url()?>assets/img/img_6.png" onclick="getBook()" >
+              
             </div>
             </form>
           </div>
@@ -210,7 +218,7 @@
     </div>
   </div>
 
-
+<script src="<?php echo base_url()?>assets/js/search.js"></script>
 <script type="text/javascript">
 
  function downloadAlert(){
@@ -227,4 +235,5 @@
 })
 
  }
+
 </script>

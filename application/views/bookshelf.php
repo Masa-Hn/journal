@@ -13,10 +13,15 @@
         <div class="container-fluid  col-container text-center" >
           <div>
             <form>
-            <div class="box">
-              <input class="s-text" dir="rtl" type="text" placeholder="ابحث عن كتابك " name="search2" align="center">
-              <input type="image" class="s-btn" src="<?php echo base_url()?>assets/img/img_6.png"> 
-            </div>
+              <div class="box">
+                <input type="hidden" name="id" id="base_url" value="<?php echo base_url()?>">
+                <input class="s-text" dir="rtl" type="text" id="bookName" placeholder="ابحث عن كتابك " name="search2" align="center" oninput="search()">
+                  <hr style="width: 70%;    border-top: 1px solid #205d67 !important; display: none;" id="hrLine">
+                  <ul id="searchList" style="display: none; list-style: none;">
+                    
+                  </ul>
+                <input type="image" class="s-btn" id="s-btn" src="<?php echo base_url()?>assets/img/img_6.png" onclick="getBook()" >            
+              </div>
             </form>
           </div>
           <div style="text-align: center; margin-top: 5%">
@@ -139,3 +144,4 @@
   </div>  
   <!--End New Books -->
 
+<script src="<?php echo base_url()?>assets/js/search.js"></script>
