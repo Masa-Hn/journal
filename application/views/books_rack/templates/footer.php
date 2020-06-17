@@ -23,7 +23,6 @@
         <h4> الخدمة التقنية :فنجان هوست </h4>
       </div>
     </div>
-    <hr style="width: 80%">
     <div class="row">
       <div id="numbers">
         <h3>
@@ -32,6 +31,8 @@
         </h3>
       </div>
     </div>
+              <hr style="width: 80%;color: white">
+    
   </footer>
   <!-- End Footer -->
 

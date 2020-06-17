@@ -7,7 +7,7 @@
         <div class="col-xl-5 col-lg-6 col-md-7">
             <div class="card b-0">
  <h3 class="heading" style="color:#008080;">إضافة نشاط</h3>
-<fieldset class="show" >
+<fieldset class="show" id="add1">
                     <div class="form-card">
                         <h5 class="sub-heading mb-4">الرجاء إدخال بيانات النشاط(الإنجاز) </h5>
 
