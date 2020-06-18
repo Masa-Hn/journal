@@ -1,52 +1,9 @@
-    <link href="<?php echo base_url()?>assets/css/management.css" rel="stylesheet" />
 
- <style>
- 
-/* Slideshow container */
-
-.mybutton {
-  display: inline-block;
-  padding: 15px 15px;
-  width: 300px;
-  font-size: 18px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
-  color: #fff;
-  background-color: #008080;
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 9px #999;
+<style type="text/css">
+  .active, .dot:hover {
+  background-color: #717171;
 }
-
-
-.mybutton:active {
-  background-color: #2F4F4F;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-.book {
-  background: none!important;
-  border: none;
-  padding: 0!important;
-  width: 100%;
-  color: #008080;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-  text-align: center;
-  /*optional*/
-  /*input has OS specific font-family*/
-  text-decoration: none;
-}
-
 </style>
-                                
-
-
- 
-                            </head>
                             <body>
                             <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
@@ -59,18 +16,18 @@
                
 
             		 <label style="float: right; direction: rtl;"> 
-            		<button class="mybutton"   onclick="type_book()">كتب المنهج </button><br>
+            		<button class="mybutton" style="width: 300px"  onclick="type_book()">كتب المنهج </button><br>
 
             		 <label style="float: right; direction: rtl;">
-            		 	<button class="mybutton" onclick="type_book()">كتب المرحلة التحضيرية</button><br>
+            		 	<button class="mybutton" style="width: 300px" onclick="type_book()">كتب المرحلة التحضيرية</button><br>
 
             		 <label style="float: right; direction: rtl;">
-            		 	<button class="mybutton" onclick="type_book()">كتب الأطفال</button> <br>
+            		 	<button class="mybutton" style="width: 300px" onclick="type_book()">كتب الأطفال</button> <br>
 
             		 <label style="float: right; direction: rtl;">
-            		 	<button class="mybutton" onclick="type_book()">كتب رمضان</button> <br>
+            		 	<button class="mybutton" style="width: 300px" onclick="type_book()">كتب رمضان</button> <br>
             		 <label style="float: right; direction: rtl;">
-            		 	<button class="mybutton" onclick="type_book()">كتب اليافعين</button> <br>
+            		 	<button class="mybutton" style="width: 300px" onclick="type_book()">كتب اليافعين</button> <br>
             		 	</div>
             		 	</div>
 
@@ -78,7 +35,10 @@
   <div id="content" style="display: none;">
 <div class="slideshow-container">
   <div class="mySlides"  >
-
+<script type="text/javascript">
+  var slideIndex = 1;
+showSlides(slideIndex);
+</script>
   <!-- Full-width images with number and caption text -->
   <table style="width: 100%;" >
  <?php for ($i=1; $i <=30 ; $i+=4) { ?>
@@ -160,8 +120,9 @@
     <li style="direction: rtl; float: right;"> صنف الكتاب : فكري ديني </li><br><br>
     <li style="direction: rtl; float: right;"> رابط منشور الكتاب :  </li><br><br>
 
-<button style="float: right;" class="mybutton" onclick="change_pic()" > عرض صورة الكتاب </button>
-<button style="float: left; width: 25%" class="mybutton" onclick="back()" > رجوع </button>
+  
+<button style="float: right;width: 300px;" class="mybutton" onclick="change_pic()" > عرض صورة الكتاب </button>
+<button style="float: left; width: 100px;" class="mybutton" onclick="back()" > رجوع </button>
 
 
 </div>

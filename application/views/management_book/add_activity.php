@@ -1,5 +1,3 @@
-<!-- Slideshow container -->
-     <link href="<?php echo base_url()?>assets/css/add_activity.css" rel="stylesheet" />
 
                             <body>
                             <div class="container-fluid px-1 py-5 mx-auto">
@@ -7,7 +5,7 @@
         <div class="col-xl-5 col-lg-6 col-md-7">
             <div class="card b-0">
  <h3 class="heading" style="color:#008080;">إضافة نشاط</h3>
-<fieldset class="show" id="add1">
+<fieldset class="show" id="add">
                     <div class="form-card">
                         <h5 class="sub-heading mb-4">الرجاء إدخال بيانات النشاط(الإنجاز) </h5>
 
@@ -15,10 +13,10 @@
                            
                                       
 
-                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم النشاط : * </li></label> <input type="text" id="activity_name" name="activity_name" placeholder="" class="form-control" onblur="validate1(1)"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم النشاط : * </li></label> <input type="text" id="activity_name" name="activity_name" placeholder="" class="form-control" onblur="validate(1,'activity_name')"> </div>
                         
                         <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">التاريخ : * </li></label> 
-                          <input type="date" id="date" name="date" placeholder="" class="form-control" onblur="validate1(2)"> </div>
+                          <input type="date" id="date" name="date" placeholder="" class="form-control" onblur="validate(2,'date')"> </div>
                        
                <button id="save" class="mybutton" onclick="success()" >حفظ</button> 
 </div>

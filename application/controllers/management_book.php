@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Management_book extends CI_Controller {
     
+    public function __construct()
+  {
+    parent::__construct();
+        $this->load->view('management_book/js/management_book');
+  }//end construct()
 	public function index()
 	{
         $data['title'] = 'Management Book';
@@ -17,7 +22,6 @@ class Management_book extends CI_Controller {
 		$this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/add_book');
-        $this->load->view('management_book/js/add_book_js');
         $this->load->view('management_book/templates/footer');
     }
 
@@ -27,7 +31,6 @@ class Management_book extends CI_Controller {
 		$this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/show_book');
-        $this->load->view('management_book/js/show_book_js');
         $this->load->view('management_book/templates/footer');
     }
     
@@ -47,7 +50,6 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/show_article');
-$this->load->view('management_book/js/show_article_js');
         $this->load->view('management_book/templates/footer');
     }
     
@@ -58,7 +60,6 @@ $this->load->view('management_book/js/show_article_js');
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/add_activity');
-        $this->load->view('management_book/js/add_activity_js');
         $this->load->view('management_book/templates/footer');
 
     }
@@ -69,7 +70,6 @@ $this->load->view('management_book/js/show_article_js');
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/add_article');
-        $this->load->view('management_book/js/add_article_js');
         $this->load->view('management_book/templates/footer');
 
     }
@@ -80,7 +80,6 @@ $this->load->view('management_book/js/show_article_js');
 		$this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/add_infographic');
-        $this->load->view('management_book/js/add_infographic_js');
         $this->load->view('management_book/templates/footer');
 
     }

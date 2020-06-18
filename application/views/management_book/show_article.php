@@ -1,5 +1,8 @@
-<!-- Slideshow container -->
-     <link href="<?php echo base_url()?>assets/css/management.css" rel="stylesheet" />
+<style type="text/css">
+  .active, .dot:hover {
+  background-color: #717171;
+}
+</style><!-- Slideshow container -->
 
                             <body>
                             <div class="container-fluid px-1 py-5 mx-auto">
@@ -13,6 +16,11 @@
  <?php for ($i=1; $i <=3 ; $i++) { ?>
     
   <div class="mySlides" style="padding-right: 25%">
+    
+<script type="text/javascript">
+  var slideIndex = 1;
+showSlides(slideIndex);
+</script>
     <div class="numbertext" style="color: black"> <?php echo $i ?> / 3</div>
     <h5 class="heading">اسم المقال :</h5>
       <p>.............</p>

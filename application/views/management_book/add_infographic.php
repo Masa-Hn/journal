@@ -1,6 +1,4 @@
-    <link href="<?php echo base_url()?>assets/css/add_activity.css" rel="stylesheet" />
                                
-                            </head>
 
                             <body>
                             <div class="container-fluid px-1 py-5 mx-auto">
@@ -17,9 +15,9 @@
 
                          <div>
                        
-                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">عنوان الانفوجرافيك : * </li> </label> <input type="text" id="adress_info" name="adress_info" placeholder="" class="form-control" onblur="validate1(1)"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">عنوان الانفوجرافيك : * </li> </label> <input type="text" id="adress_info" name="adress_info" placeholder="" class="form-control" onblur="validate(1,'adress_info')"> </div>
                         
-                        <div class="form-group"> <label class="form-control-label" style="float:  right;"><li style="direction: rtl;">التاريخ : *</li> </label> <input type="date" id="date" name="date" placeholder="" class="form-control" onblur="validate1(2)" > </div>
+                        <div class="form-group"> <label class="form-control-label" style="float:  right;"><li style="direction: rtl;">التاريخ : *</li> </label> <input type="date" id="date" name="date" placeholder="" class="form-control" onblur="validate(2,'date')" > </div>
                        
 
                         <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">الصورة :  </li> </label>

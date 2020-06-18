@@ -1,5 +1,3 @@
-    <link href="<?php echo base_url()?>assets/css/management.css" rel="stylesheet" />
-
 <body>
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
@@ -49,5 +47,4 @@
         </div>
     </div>
 </div>
-                            </body>
-                      
+</body>
