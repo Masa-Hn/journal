@@ -1,4 +1,3 @@
-    <link href="<?php echo base_url()?>assets/css/add_book.css" rel="stylesheet" />
 
 <body>
 <div class="container-fluid px-1 py-5 mx-auto">
@@ -7,9 +6,10 @@
             <div class="card b-0">
                 <h3 class="heading" style="color:#008080;">إضافة كتاب</h3>
                 <ul id="progressbar" class="text-center">
-                    <li class="active step0" id="step2"></li>
-                    <li class="step0" id="step3"></li>
-                    <li class="step0" id="step4"></li>
+    
+                    <li style="width: 33%;" class="active step0" id="step2"></li>
+                    <li style="width: 33%;" class="step0" id="step3"></li>
+                    <li style="width: 33%;" class="step0" id="step4"></li>
                 </ul>
                
 
@@ -20,9 +20,9 @@
                            
                  <div class="form-group"> 
                     
-                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم الكتاب : * </li></label> <input type="text" id="book_name" name="book_name" placeholder="" class="form-control" onblur="validate1(1)"> </div>
-                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم الكاتب : * </li></label> <input type="text" id="writer" name="writer" placeholder="" class="form-control" onblur="validate1(2)"> </div>
-                        <div class="form-group"> <label class="form-control-label" style="float:  right;"><li style="direction: rtl;">نبذة عن الكتاب : *</li> </label> <input type="text" id="story" name="story" placeholder="" class="form-control" onblur="validate1(3)" style="padding-bottom: 200px;"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم الكتاب : * </li></label> <input type="text" id="book_name" name="book_name" placeholder="" class="form-control" onblur="validate(1,'book_name')"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم الكاتب : * </li></label> <input type="text" id="writer" name="writer" placeholder="" class="form-control" onblur="validate(2,'writer')"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float:  right;"><li style="direction: rtl;">نبذة عن الكتاب : *</li> </label> <input type="text" id="story" name="story" placeholder="" class="form-control" onblur="validate(3,'story')" style="padding-bottom: 200px;"> </div>
                        
                         <button id="next2" class="mybutton" onclick="next1();">التالي</button> 
                     </div>
@@ -35,7 +35,7 @@
                         <h5 class="sub-heading mb-4">الرجاء إدخال بيانات الكتاب</h5> <label class="text-danger mb-3">* مطلوب</label>
                         
                         <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">مستوى الكتاب : *</li> </label>
-                            <select style="text-align: right;" name="level" id="level" class="form-control" onblur="validate2(1)">
+                            <select style="text-align: right;" name="level" id="level" class="form-control" onblur="validate(1,'level')">
                         <option value="simple">بسيط</option>
                         <option  value="middle">متوسط</option>
                         <option value="hard">عميق</option>
@@ -43,14 +43,14 @@
                         </div>
                         
                         <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">تصنيف الكتاب : *</li></label>
-                            <select style="text-align: right;" name="class" id="class" class="form-control" onblur="validate2(1)">
+                            <select style="text-align: right;" name="class" id="class" class="form-control" onblur="validate(2,'class')">
                         <option value="history">تاريخي</option>
                         <option  value="islamic">ديني</option>
                       </select>
                         </div>
 
                          <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">نوع الكتاب : *</li></label>
-                            <select style="text-align: right;" name="type" id="type" class="form-control" onblur="validate2(1)">
+                            <select style="text-align: right;" name="type" id="type" class="form-control" onblur="validate(3,'type')">
                         <option value="course">كتاب منهج</option>
                         <option  value="starting">مرحلة تحضيرية</option>
                         <option value="childs">الأطفال</option>
@@ -67,7 +67,7 @@
                 </fieldset >
 
 
-                <fieldset id="add3">
+                <fieldset id="add">
                     <div class="form-card">
                          <h5 class="sub-heading mb-4" style="padding-bottom: 4em;">الرجاء إدخال بيانات الكتاب</h5>
                          <div>

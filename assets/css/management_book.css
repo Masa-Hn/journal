@@ -1,16 +1,47 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Harmattan&display=swap&subset=arabic');
+@import url('https://fonts.googleapis.com/css?family=Harmattan&display=swap&subset=arabic');
 
 body {
     color: #000;
     overflow-x: hidden;
-    height: 100%;
+    
     width: 100%;
     background: linear-gradient(-45deg, #5F9EA0 50%, #EEEEEE 50%);
     background-repeat: no-repeat
 }
 
 
+ .navbar{
+  background: #205d67;
+  padding: 1% 0;
+  font-size: 1.2em;
+  font-family: 'Harmattan', sans-serif;
 
+}
+.nav-direct{
+  display: flex;
+  flex-direction: row;    
+}
+.navbar-brand{
+  margin-left: -60px !important;
+  min-height: 55px;
+  padding:0 15px 5px;
+}
+.navbar-brand img{
+  width: 70%;
+}
+.navbar-default .navbar-nav li a{
+  font-size: 20px;
+  color: #FCFAEF;
+}
+/*.navbar-default .navbar-nav li a::hover, .navbar-default .navbar-nav li a.active{
+  color: red;
+}*/
+.heading-underline{
+  width: 85%;
+  height: .2rem;
+  background-color: #8ac579;
+  margin: 0 auto 2rem;
+}
 
 
 h3,h5,p {text-align: right;}
@@ -45,7 +76,6 @@ h3,h5,p {text-align: right;}
 #progressbar li {
     list-style-type: none;
     font-size: 15px;
-    width: 25%;
     float: right;
     position: relative;
     font-weight: 400
@@ -230,6 +260,146 @@ button {
     margin-top: 4px
 }
 
+.mybutton {
+  display: inline-block;
+  padding: 15px 15px;
+  width: 100px;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #008080;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  float: left;
+}
+
+
+.mybutton:active {
+  background-color: #2F4F4F;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.book {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  width: 100%;
+  color: #008080;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  /*optional*/
+  /*input has OS specific font-family*/
+  text-decoration: none;
+}
+
+  footer{
+  width: 100%;
+  background: #205d67;
+  padding: 5% 5% 1% 5%;
+  color: #FCFAEF;
+  font-family: 'Harmattan', sans-serif;
+
+}
+.fa{
+  padding: 15px;
+  font-size: 25px;
+  color:#FCFAEF ;
+  text-decoration: none;
+}
+.fa:hover{
+  color:#063a76 ;
+  text-decoration: none;
+}
+.fa:visited {
+  color:#FCFAEF ;
+}
+.icon{
+  max-width: 200px; 
+}
+.video_icon{
+  max-width: 10%;
+}
+.video_play{
+  position: relative;
+  width: 100%    !important;
+    height: auto   !important;
+}
+.owner img{
+  width: 100%;
+  border-radius: 50%;
+}
+.articleView{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.articleDiv{
+  margin: 1%;
+  padding: 0; 
+  border: 0.5px solid #205d67;
+}
+.articleDiv a { 
+  color: #205D67;
+}
+.articleDiv img { 
+  object-fit: cover;
+  width: 100%;
+  height: 250px;
+}
+@media (min-width: 768px){
+  .vertical-center {
+    transform: translate(4%, 70%);
+    position: relative;
+    top: 50%;
+    padding: 20px;
+    resize: both;
+  }
+
+}
+@media (max-width: 768px){
+  .navbar-brand img{
+    width: 65%;
+  }
+  .nav-direct{
+      display: flex;
+      flex-direction: column; 
+    }
+  .landing-text h1{
+  font-size: 300%;
+  }
+  .fa{
+    font-size: 20px;
+    padding: 10px;
+  } 
+  .icon{
+    padding-top: 5%;
+    max-width: 100px;
+  }
+  .button{
+    border-radius: 6vw;
+    font-size: 4.5vw;
+  }
+  .role{
+  font-size: 115%;
+
+  }
+  .list-img{
+  max-width: 40px;
+
+  }
+
+}
+
+
 .slideshow-container {
   max-width: 1000px;
   position: relative;
@@ -301,9 +471,7 @@ button {
   transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
-  background-color: #717171;
-}
+
 
 /* Fading animation */
 .fade {
@@ -311,14 +479,4 @@ button {
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
   animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
 }

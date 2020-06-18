@@ -1,5 +1,5 @@
-<body >
-  <!-- Navbar -->
+
+    <!-- Navbar -->
  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
