@@ -15,7 +15,15 @@ class Books extends CI_Model {
      $this->db->from('books');
      return $this->db->get()->result();
    }
-
+  public function getbookByName($name)
+  {
+    // return $name;
+    $this->db->select('id,name');
+    $this->db->like('name',$name);
+    $this->db->from('books');
+    $this->db->limit(20);
+    return $this->db->get()->result();
+  }//getbookByName
 
 }
 ?>

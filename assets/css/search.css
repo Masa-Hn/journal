@@ -15,6 +15,16 @@
   text-align: center;
 
 }
+/*.ul-select{
+  margin-top:  3%;
+  display: none;
+}
+.s-text-select{
+  border-bottom:solid #205d67 2px;
+  background: none;
+  outline: none;
+  text-align: center;
+}*/
 .s-btn{
   float: left;
   width: 13%;
