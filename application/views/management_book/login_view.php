@@ -3,9 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Osboha 180</title>
-        <meta name="description" content="موقع فريق الاستقدام لمشروع اصبوحة 180">
-        <meta name="keywords" content="فريق الإستقدام" />
-        <meta name="author" content="Masa Alhanoun" />
+        <meta name="description" content="إدارة رف الكتب لمشروع اصبوحة 180">
         
             <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
             <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
