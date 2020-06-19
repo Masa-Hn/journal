@@ -18,6 +18,8 @@
               document.getElementById("searchList").style.display='none';
               document.getElementById("s-btn").style.marginLeft ='-3%';
               document.getElementById("s-btn").style.marginTop ='-2.75%';
+            
+
 
             }             
 

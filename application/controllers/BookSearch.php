@@ -23,14 +23,15 @@ class BookSearch extends CI_Controller {
 		if(!empty($_POST['bookName'])){
 			//echo $_POST['bookName'];
 			$arr=$this->books->getbookByName($_POST['bookName']);
-			
-			foreach ($arr as $row){
-				echo "<a href='".base_url()."bookDesc/".$row->id ."'><li id='".$row->id ."'>".$row->name."</li></a>";
-				// array_push($d, ["id" => $row->id , "name"=>$row->name]);
-			}
-
-			// print_r($d);
-	    
+			if(count($arr) == 0){
+				echo "<li> لا يوجد نتائج </li>";
+			}//if
+			else{
+				foreach ($arr as $row){
+				echo "<a href='".base_url()."bookDesc?id=".$row->id ."'><li id='".$row->id ."'>".$row->name."</li></a>";
+			}//for
+			}//else
+				    
 		} 
 		else {
 			$arr['data']="";

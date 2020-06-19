@@ -10,7 +10,7 @@ class Books extends CI_Model {
 
   public function getbook($id)
    {
-   $this->db->select('id,name,link,writer,brief,pic,post,date,uploadname,type,numdownload');
+   $this->db->select('id,name,link,level,section,writer,brief,pic,post,date,uploadname,type,numdownload');
    $this->db->where('id',$id);
      $this->db->from('books');
      return $this->db->get()->result();
