@@ -40,5 +40,11 @@ class BookSearch extends CI_Controller {
 			
 
 	}//searchByName
-
+	public function mostRead(){
+		$arr=$this->books->mostRead();
+		foreach ($arr as $row){
+			print_r( $row->numdownload);
+			echo "---------------------- </br>";
+		}
+	}
 }

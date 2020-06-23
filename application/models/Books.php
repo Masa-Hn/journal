@@ -25,5 +25,22 @@ class Books extends CI_Model {
     return $this->db->get()->result();
   }//getbookByName
 
+   public function mostRead()
+  {
+    $this->db->select('id,name,link,brief,pic,numdownload');
+    $this->db->from('books');
+    $this->db->order_by('numdownload DESC');
+    $this->db->limit(10);
+    return $this->db->get()->result();
+  }//mostRead
+
+   public function newBook()
+  {
+    $this->db->select('id,name,link,brief,pic');
+    $this->db->from('books');
+    $this->db->order_by('id DESC');
+    $this->db->limit(10);
+    return $this->db->get()->result();
+  }//mostRead
 }
 ?>
