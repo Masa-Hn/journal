@@ -9,12 +9,12 @@ class BookSearch extends CI_Controller {
   	}//end construct()
 	public function index()
 	{
-		$this->load->view('templates/header');
-        $this->load->view('templates/navbar');
+		$this->load->view('books_rack/templates/header');
+        $this->load->view('books_rack/templates/navbar');
         $this->load->model('books');
         $arr['data']=$this->books->getbooks(1);
-        $this->load->view('bookSearch',$arr);
-        $this->load->view('templates/footer');
+        $this->load->view('books_rack/bookSearch',$arr);
+        $this->load->view('books_rack/templates/footer');
 	}//index
 
 	public function searchByName(){
