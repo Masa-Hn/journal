@@ -48,36 +48,39 @@
         <div class="col-sm-6 text-center ">
         <div id="most" class="carousel slide text-center" data-ride="carousel">
             <div class="carousel-inner">
-              <div class="item active">
-                <div class="card" style=" text-align: center;">
-                  <img class="card-img-top carousel-img" src="<?php echo base_url()?>assets/img/1.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title"> اسم الكتاب </h5>
-                    <p class="card-text"> وصف بسيط للكتاب  </p>
-                    <a href="#" class="btn book_download">تحميل</a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="card" style="text-align: center;">
-                  <img class="card-img-top" src="<?php echo base_url()?>assets/img/3.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title"> اسم الكتاب </h5>
-                    <p class="card-text"> وصف بسيط للكتاب  </p>
-                    <a href="#" class="btn book_download">تحميل</a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="card" style="text-align: center;">
-                  <img class="card-img-top" src="<?php echo base_url()?>assets/img/2.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title"> اسم الكتاب </h5>
-                    <p class="card-text"> وصف بسيط للكتاب  </p>
-                    <a href="#" class="btn book_download">تحميل</a>
-                  </div>
-                </div>
-              </div>
+              <?php
+              $active =true; 
+              foreach ($mostRead as $row) {
+                if($active){
+                    echo
+                  '<div class="item active">
+                    <div class="card" style="text-align: center;">
+                      <img class="card-img-top" src="'.$row->pic.'" alt="Card image cap">
+                      <div class="card-body">
+                        <h3 class="card-title">'.$row->name.'</h3>
+                        <a href="'. base_url().'bookDesc?id='.$row->id.'" class="btn book_download">المزيد عن الكتاب </a>
+                      </div>
+                    </div>
+                </div>';   
+                $active=false; 
+                }
+                else{
+                    echo
+                  '<div class="item">
+                    <div class="card" style="text-align: center;">
+                      <img class="card-img-top" src="'.$row->pic.'" alt="Card image cap">
+                      <div class="card-body">
+                        <h3 class="card-title">'.$row->name.'</h3>
+                        <a href="'. base_url().'bookDesc?id='.$row->id.'" class="btn book_download">المزيد عن الكتاب </a>
+                      </div>
+                    </div>
+                </div>';
+                }
+              }
+              
+              ?>
+          
+             
             </div>
 
           </div>
@@ -104,37 +107,38 @@
         <div class="col-sm-6 text-center">
         <div id="most" class="carousel slide text-center " data-ride="carousel">
             <div class="carousel-inner">
-              <div class="item active">
-                <div class="card" style=" text-align: center;">
-                  <img class="card-img-top carousel-img" src="<?php echo base_url()?>assets/img/1.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title"> اسم الكتاب </h5>
-                    <p class="card-text"> وصف بسيط للكتاب  </p>
-                    <a href="#" class="btn book_download">تحميل</a>
-                  </div>
-                </div>
-              </div>
-            
-              <div class="item">
-                <div class="card" style="text-align: center;">
-                  <img class="card-img-top" src="<?php echo base_url()?>assets/img/3.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title"> اسم الكتاب </h5>
-                    <p class="card-text"> وصف بسيط للكتاب  </p>
-                    <a href="#" class="btn book_download">تحميل</a>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="card" style="text-align: center;">
-                  <img class="card-img-top" src="<?php echo base_url()?>assets/img/2.jpg" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title"> اسم الكتاب </h5>
-                    <p class="card-text"> وصف بسيط للكتاب  </p>
-                    <a href="#" class="btn book_download">تحميل</a>
-                  </div>
-                </div>
-              </div>
+                <?php
+              $active =true; 
+              foreach ($newBook as $row) {
+                if($active){
+                    echo
+                  '<div class="item active">
+                    <div class="card" style="text-align: center;">
+                      <img class="card-img-top" src="'.$row->pic.'" alt="Card image cap">
+                      <div class="card-body">
+                        <h3 class="card-title">'.$row->name.'</h3>
+                        <a href="'. base_url().'bookDesc?id='.$row->id.'" class="btn book_download">المزيد عن الكتاب </a>
+                      </div>
+                    </div>
+                </div>';   
+                $active=false; 
+                }
+                else{
+                    echo
+                  '<div class="item">
+                    <div class="card" style="text-align: center;">
+                      <img class="card-img-top" src="'.$row->pic.'" alt="Card image cap">
+                      <div class="card-body">
+                        <h3 class="card-title">'.$row->name.'</h3>
+                        <a href="'. base_url().'bookDesc?id='.$row->id.'" class="btn book_download">المزيد عن الكتاب </a>
+                      </div>
+                    </div>
+                </div>';
+                }
+              }
+              
+              ?>
+
             </div>
 
           </div>

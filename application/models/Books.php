@@ -10,7 +10,7 @@ class Books extends CI_Model {
 
   public function getbook($id)
    {
-   $this->db->select('id,name,link,writer,brief,pic,post,date,uploadname,type,numdownload');
+   $this->db->select('id,name,link,level,section,writer,brief,pic,post,date,uploadname,type,numdownload');
    $this->db->where('id',$id);
      $this->db->from('books');
      return $this->db->get()->result();
@@ -25,5 +25,22 @@ class Books extends CI_Model {
     return $this->db->get()->result();
   }//getbookByName
 
+   public function mostRead()
+  {
+    $this->db->select('id,name,link,brief,pic,numdownload');
+    $this->db->from('books');
+    $this->db->order_by('numdownload DESC');
+    $this->db->limit(10);
+    return $this->db->get()->result();
+  }//mostRead
+
+   public function newBook()
+  {
+    $this->db->select('id,name,link,brief,pic');
+    $this->db->from('books');
+    $this->db->order_by('id DESC');
+    $this->db->limit(10);
+    return $this->db->get()->result();
+  }//mostRead
 }
 ?>

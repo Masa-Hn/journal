@@ -6,12 +6,12 @@ class BookDesc extends CI_Controller {
 	public function index()
 	{
         $id=$_GET['id'];
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
+        $this->load->view('books_rack/templates/header');
+        $this->load->view('books_rack/templates/navbar');
         $this->load->model('books');
         $arr['data']=$this->books->getbook($id);
-        $this->load->view('bookDesc',$arr);
-        $this->load->view('templates/footer');
+        $this->load->view('books_rack/bookDesc',$arr);
+        $this->load->view('books_rack/templates/footer');
 	}//index
 
 }
