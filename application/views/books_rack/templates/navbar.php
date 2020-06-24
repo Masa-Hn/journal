@@ -16,9 +16,9 @@
       <div class="collapse navbar-collapse" id="navbar-collapse-main" dir="rtl" style="padding: 0;">
         <ul class="nav navbar-nav navbar-right ml-auto nav-direct">
           <li><a class="nav-item" href="<?php echo base_url()?>home/index">الرئيسية</a></li>
-          <li><a class="nav-item" href="<?php echo base_url()?>home/bookshelf">رف الكتب </a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>bookshelf">رف الكتب </a></li>
           <li><a class="nav-item" href="<?php echo base_url()?>booksearch">البحث عن الكتب </a></li>
-          <li><a class="nav-item" href="<?php echo base_url()?>home/infographic">انفوجرافيك</a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>infographic">انفوجرافيك</a></li>
           <li><a class="nav-item" href="<?php echo base_url()?>home/articles">مقالات تثقيفية</a></li>
           <li><a class="nav-item" href="<?php echo base_url()?>home/accomp">آخر الانجازات</a></li>
           <li><a class="nav-item" href="<?php echo base_url()?>management_book/index">إدارة الكتب</a></li>

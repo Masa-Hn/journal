@@ -19,7 +19,6 @@
       <div class="row fade-in">
         <div class="container-fluid  col-container text-center" >
           <div>
-            <form>
             <div class="box">
               <input type="hidden" name="id" id="base_url" value="<?php echo base_url()?>">
               <input class="s-text" dir="rtl" type="text" id="bookName" placeholder="ابحث عن كتابك " name="search2" align="center" oninput="search()">
@@ -30,7 +29,6 @@
               <input type="image" class="s-btn" id="s-btn" src="<?php echo base_url()?>assets/img/img_6.png" onclick="getBook()" >
               
             </div>
-            </form>
           </div>
         </div>
       </div>
@@ -223,6 +221,17 @@
 
 <script src="<?php echo base_url()?>assets/js/search.js"></script>
 <script type="text/javascript">
+  $(document).ready(function () {
+    $("#bookName").keyup(
+        function (e) {
+            if (e.keyCode === 13) {
+                $("#s-btn").trigger("click");
+            }
+        }
+    );
+})
+</script>
+<script type="text/javascript">
 
  function downloadAlert(id){
 
@@ -239,5 +248,16 @@
 })
 
  }
-//test
+
+  function getBook(){    
+    var bookName= document.getElementById("bookName").value;
+   
+    if(bookName != ""){
+      window.location.href = document.getElementById("base_url").value+"bookSearch/getByName?name="+bookName;
+    }//if
+    else{
+         window.location.href = document.getElementById("base_url").value+"bookSearch";
+    }
+
+  }//getBook
 </script>

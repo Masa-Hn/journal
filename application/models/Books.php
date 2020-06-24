@@ -18,7 +18,7 @@ class Books extends CI_Model {
   public function getbookByName($name)
   {
     // return $name;
-    $this->db->select('id,name');
+    $this->db->select('id,name,pic,numdownload,uploadname,post,brief,link');
     $this->db->like('name',$name);
     $this->db->from('books');
     $this->db->limit(20);
@@ -42,5 +42,15 @@ class Books extends CI_Model {
     $this->db->limit(10);
     return $this->db->get()->result();
   }//mostRead
+
+  public function lastId()
+  {
+    $this->db->select('id');
+    $this->db->from('books');
+    $this->db->order_by('id DESC');
+    $this->db->limit(1);
+    return $this->db->get()->result();
+  }//lastId
 }
+
 ?>
