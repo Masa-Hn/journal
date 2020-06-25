@@ -23,10 +23,13 @@ class BookSearch extends CI_Controller {
 		if(!empty($_POST['bookName'])){
 			//echo $_POST['bookName'];
 			$arr=$this->books->getbookByName($_POST['bookName']);
-			
-			foreach ($arr as $row){
-				echo "<a href='".base_url()."bookDesc/".$row->id ."'><li id='".$row->id ."'>".$row->name."</li></a>";
-				// array_push($d, ["id" => $row->id , "name"=>$row->name]);
+			if (count($arr) != 0 ) {
+				foreach ($arr as $row){
+				echo "<a href='".base_url()."bookDesc?id=".$row->id ."'><li id='".$row->id ."'>".$row->name."</li></a>";
+				}//foreach
+			}//if
+			else{
+				echo "<li> لا يوجد نتائج لعرضها </li>";
 			}
 
 			// print_r($d);
@@ -39,5 +42,12 @@ class BookSearch extends CI_Controller {
 			
 
 	}//searchByName
-
+	public function getByName(){
+		$this->load->view('books_rack/templates/header');
+        $this->load->view('books_rack/templates/navbar');
+        $this->load->model('books');
+		$arr['data']=$this->books->getbookByName($_GET['name']);
+        $this->load->view('books_rack/bookSearch',$arr);
+        $this->load->view('books_rack/templates/footer');
+	}//getByName
 }

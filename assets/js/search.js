@@ -1,4 +1,8 @@
- function search(input) {
+function search(input) {
+  var input = document.getElementById("bookName");
+
+
+
   var bookName= document.getElementById("bookName").value;
     $.ajax({
       type: "POST",
@@ -24,5 +28,5 @@
             //console.log($scope.books);
             }//success
       });
-      
+  
  }//search
