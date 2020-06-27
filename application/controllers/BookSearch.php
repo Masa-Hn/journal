@@ -8,11 +8,16 @@ class BookSearch extends CI_Controller {
     	$this->load->model('books');
   	}//end construct()
 	public function index()
-	{
+	{	
+		if (!isset($_GET['type']) || empty($_GET['type']))
+		{
+			$_GET['type'] = 1;
+		}//if
+		$arr['type']=$_GET['type'];
 		$this->load->view('books_rack/templates/header');
         $this->load->view('books_rack/templates/navbar');
         $this->load->model('books');
-        $arr['data']=$this->books->getbooks(1);
+        $arr['data']=$this->books->getbooks($_GET['type']);
         $this->load->view('books_rack/bookSearch',$arr);
         $this->load->view('books_rack/templates/footer');
 	}//index
@@ -22,7 +27,7 @@ class BookSearch extends CI_Controller {
 		$d=[]; 
 		if(!empty($_POST['bookName'])){
 			//echo $_POST['bookName'];
-			$arr=$this->books->getbookByName($_POST['bookName']);
+			$arr=$this->books->getbookByName($_POST['bookName'],$_POST['type']);
 			if (count($arr) != 0 ) {
 				foreach ($arr as $row){
 				echo "<a href='".base_url()."bookDesc?id=".$row->id ."'><li id='".$row->id ."'>".$row->name."</li></a>";
@@ -46,7 +51,7 @@ class BookSearch extends CI_Controller {
 		$this->load->view('books_rack/templates/header');
         $this->load->view('books_rack/templates/navbar');
         $this->load->model('books');
-		$arr['data']=$this->books->getbookByName($_GET['name']);
+		$arr['data']=$this->books->getbookByName($_GET['name'],$_GET['type']);
         $this->load->view('books_rack/bookSearch',$arr);
         $this->load->view('books_rack/templates/footer');
 	}//getByName

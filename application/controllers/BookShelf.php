@@ -9,8 +9,13 @@ class BookShelf extends CI_Controller {
   	}//end construct()
 	public function index()
 	{
-		$arr['mostRead'] =$this->books->mostRead();
-		$arr['newBook'] =$this->books->newBook();
+		if (!isset($_GET['type']) || empty($_GET['type']))
+		{
+			$_GET['type'] = 1;
+		}//if
+		$arr['type']=$_GET['type'];
+		$arr['mostRead'] =$this->books->mostRead($_GET['type']);
+		$arr['newBook'] =$this->books->newBook($_GET['type']);
 		$this->load->view('books_rack/templates/header');
         $this->load->view('books_rack/templates/navbar');
         $this->load->view('books_rack/bookshelf',$arr);

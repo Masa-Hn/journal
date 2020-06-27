@@ -16,8 +16,32 @@
       <div class="collapse navbar-collapse" id="navbar-collapse-main" dir="rtl" style="padding: 0;">
         <ul class="nav navbar-nav navbar-right ml-auto nav-direct">
           <li><a class="nav-item" href="<?php echo base_url()?>home/index">الرئيسية</a></li>
-          <li><a class="nav-item" href="<?php echo base_url()?>bookshelf">رف الكتب </a></li>
-          <li><a class="nav-item" href="<?php echo base_url()?>booksearch">البحث عن الكتب </a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="<?php echo base_url()?>bookshelf?type=1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              رف الكتب
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background: #205d67; text-align: inherit;padding: 0 7%">
+              <a class="dropdown-item" href="<?php echo base_url()?>bookshelf?type=1">المنهج</a></br>
+              <a class="dropdown-item" href="<?php echo base_url()?>bookshelf?type=3">الأطفال</a></br>
+              <a class="dropdown-item" href="<?php echo base_url()?>bookshelf?type=5">اليافعين</a></br>
+              <a class="dropdown-item" href="<?php echo base_url()?>bookshelf?type=4">كتب رمضان</a></br>
+              <a class="dropdown-item" href="<?php echo base_url()?>bookshelf?type=2">المرحلة التحضيرية</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="<?php echo base_url()?>booksearch?type=1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              البحث عن كتب
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background: #205d67; text-align: inherit;padding: 0 7%">
+              <a class="dropdown-item" href="<?php echo base_url()?>booksearch?type=1">المنهج</a></br>
+              <a class="dropdown-item" href="<?php echo base_url()?>booksearch?type=3">الأطفال</a></br>
+              <a class="dropdown-item" href="<?php echo base_url()?>booksearch?type=5">اليافعين</a></br>
+              <a class="dropdown-item" href="<?php echo base_url()?>booksearch?type=4">كتب رمضان</a></br>
+              <a class="dropdown-item" href="<?php echo base_url()?>booksearch?type=2">المرحلة التحضيرية</a>
+            </div>
+          </li>
+          <!-- <li><a class="nav-item" href="<?php echo base_url()?>bookshelf">رف الكتب </a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>booksearch">البحث عن الكتب </a></li> -->
           <li><a class="nav-item" href="<?php echo base_url()?>infographic">انفوجرافيك</a></li>
           <li><a class="nav-item" href="<?php echo base_url()?>home/articles">مقالات تثقيفية</a></li>
           <li><a class="nav-item" href="<?php echo base_url()?>home/accomp">آخر الانجازات</a></li>
