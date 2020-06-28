@@ -91,6 +91,8 @@ function previous() {
     document.getElementById('step3').className="step0";
 }
 function success() {
+  
+
   document.getElementById('success').style.display="block";
   document.getElementById('add').style.display="none";
  
