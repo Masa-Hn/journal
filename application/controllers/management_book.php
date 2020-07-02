@@ -49,9 +49,13 @@ class Management_book extends CI_Controller {
     public function show_article()
     {
          $data['title'] = 'Show Article';
+         $articles=$this->management->get_articles();
+         $num=$articles->num_rows();
+         $data['num_rows']=$num;
+         $data['articles']=$articles;
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/show_article');
+        $this->load->view('management_book/show_article',$data);
         $this->load->view('management_book/templates/footer');
     }
     
@@ -84,14 +88,14 @@ class Management_book extends CI_Controller {
          
 
          $config['upload_path'] = './assets/article_img';
-        $config['allowed_types']='jpg|jpeg|gif|png';
-        $config['max_size'] = 2000;
-       $config['encrypt_name'] = TRUE;
-      $this->load->helper('form');
+         $config['allowed_types']='jpg|jpeg|gif|png';
+         $config['max_size'] = 2000;
+         $config['encrypt_name'] = TRUE;
+        $this->load->helper('form');
         
         $this->load->library('upload', $config);
      
-           $a=$this->input->post('article');  
+        $a=$this->input->post('article');  
         $n=$this->input->post('article_name');
         $w=$this->input->post('writer');
         $d=$this->input->post('date');
@@ -100,7 +104,8 @@ class Management_book extends CI_Controller {
         $image_data = $this->upload->data();  
         $i=$image_data['file_name'];
         $this->management->savearticle($n,$w,$d,$a,$i);  
-$data['title'] = 'Article Added Successfully';
+        
+        $data['title'] = 'Article Added Successfully';
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/success_article');

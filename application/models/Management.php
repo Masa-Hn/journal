@@ -12,5 +12,12 @@ public function savearticle($n,$w,$d,$a,$i)
 
 		$this->db->insert('article',$data);
 }
+
+public function get_articles()
+{
+	 $query=$this->db->get('article');
+
+   return $query;
+}
 }
 ?>
