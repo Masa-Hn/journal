@@ -47,123 +47,104 @@
         </div>
         <div  id="filters" class=" collapse custom-control custom-checkbox ">
             <h3 class="clear" style="margin-bottom: 10%; text-align: right;"> فئة الكتاب  </h3>
-            <div class="row filterRow">
-              <div class="col-sm-3">
-                <span class="no-of-books">52</span>
-              </div>
-              <div class="col-sm-6">
-                <span> دينية </span>
-              </div>
-              <div class="col-sm-3">
-                <input type="checkbox" >
-              </div>
-          </div>
-          <div class="row filterRow">
-            <div class="col-sm-3">
-              <span class="no-of-books">52</span>
+          <?php
+            foreach ($sections as $section ) {
+               echo'
+               <div class="row filterRow">
+                <div class="col-sm-3">
+                  <span class="no-of-books">'.$section->num_of_books .'</span>
                 </div>
                 <div class="col-sm-6">
-                  <span> علوم </span>
+                  <span> '.$section->section .' </span>
                 </div>
                 <div class="col-sm-3">
-                  <input type="checkbox" >
+                  <input type="checkbox" class="section_checkbox" name="section" value="'.$section->section .'">
                 </div>
-          </div>
-          <div class="row filterRow">
-            <div class="col-sm-3">
-              <span class="no-of-books">52</span>
-            </div>
-            <div class="col-sm-6">
-              <span> تنمية بشرية </span>
-            </div>
-            <div class="col-sm-3">
-              <input type="checkbox" >
-            </div>
-          </div>
+              </div>';
+            }//foreach
+          ?>
+         
 
-          <h3  class="clear" style="margin-bottom: 10%; text-align: right;"> اللغة</h3>
-          <div class="row filterRow">
-            <div class="col-sm-3">
-              <span class="no-of-books">52</span>
-            </div>
-            <div class="col-sm-6">
-              <span> العربية  </span>
-            </div>
-            <div class="col-sm-3">
-              <input type="checkbox" >
-            </div>
-          </div>
-          <div class="row filterRow">
-            <div class="col-sm-3">
-              <span class="no-of-books">52</span>
-            </div>
-            <div class="col-sm-6">
-              <span> الانجليزية </span>
-            </div>
-            <div class="col-sm-3">
-              <input type="checkbox" >
-            </div>
-          </div>
+          <h3  class="clear" style="margin-bottom: 10%; text-align: right;"> مستوى الكتاب</h3> 
+          <?php 
+            foreach ($levels as $level ) {
+              echo '
+                <div class="row filterRow">
+              <div class="col-sm-3">
+                <span class="no-of-books">'. $level->num_of_books.'</span>
+              </div>
+              <div class="col-sm-6">
+                <span>'; 
+                  if($level->level == 1){
+                    echo "بسيط";
+                  }
+                  elseif($level->level == 2){
+                    echo "متوسط";
+                  }
+                  elseif($level->level == 3){
+                    echo "عميق";
+                  }
+                  else{
+                    echo "غير محدد";
+                  }
+                echo'</span>
+              </div>
+              <div class="col-sm-3">
+                <input type="checkbox" class="level_checkbox" name="level" value="'. $level->level.'">
+              </div>
+            </div>';
+            }
+          ?>  
         </div>
 
         <div  id="firstFilters" class=" ais-refinement-list--item custom-control custom-checkbox ">
           <h3 style="margin-bottom: 10%; text-align: right;"> فئة الكتاب  </h3>
-          <div class="row filterRow">
-            <div class="col-sm-3">
-              <span class="no-of-books">52</span>
-            </div>
-            <div class="col-sm-6">
-              <span> دينية </span>
-            </div>
-            <div class="col-sm-3">
-              <input type="checkbox" >
-            </div>
-          </div>
-          <div class="row filterRow">
-            <div class="col-sm-3">
-              <span class="no-of-books">52</span>
-            </div>
-            <div class="col-sm-6">
-              <span> علوم </span>
-            </div>
-            <div class="col-sm-3">
-              <input type="checkbox" >
-            </div>
-          </div>
-          <div class="row filterRow">
-            <div class="col-sm-3">
-              <span class="no-of-books">52</span>
-            </div>
-            <div class="col-sm-6">
-              <span> تنمية بشرية </span>
-            </div>
-            <div class="col-sm-3">
-              <input type="checkbox" >
-            </div>
-          </div>
-          <h3 style="margin-bottom: 10%; text-align: right;"> اللغة</h3>
-          <div class="row filterRow">
-            <div class="col-sm-3">
-              <span class="no-of-books">52</span>
-            </div>
-            <div class="col-sm-6">
-              <span> العربية  </span>
-            </div>
-            <div class="col-sm-3">
-              <input type="checkbox" >
-            </div>
-          </div>
-          <div class="row filterRow">
-            <div class="col-sm-3">
-              <span class="no-of-books">52</span>
-            </div>
-            <div class="col-sm-6">
-              <span> الانجليزية </span>
-            </div>
-            <div class="col-sm-3">
-              <input type="checkbox" >
-            </div>
-          </div>
+          <?php
+              foreach ($sections as $section ) {
+                 echo'
+                 <div class="row filterRow">
+                  <div class="col-sm-3">
+                    <span class="no-of-books">'.$section->num_of_books .'</span>
+                  </div>
+                  <div class="col-sm-6">
+                    <span> '.$section->section .' </span>
+                  </div>
+                  <div class="col-sm-3">
+                    <input type="checkbox" class="section_checkbox" name="section" value="'.$section->section .'">
+                  </div>
+                </div>';
+              }//foreach
+            ?>
+          <h3 style="margin-bottom: 10%; text-align: right;"> مستوى الكتاب</h3>
+          <?php 
+            foreach ($levels as $level ) {
+              echo '
+                <div class="row filterRow">
+              <div class="col-sm-3">
+                <span class="no-of-books">'. $level->num_of_books.'</span>
+              </div>
+              <div class="col-sm-6">
+                <span>'; 
+                  if($level->level == 1){
+                    echo "بسيط";
+                  }
+                  elseif($level->level == 2){
+                    echo "متوسط";
+                  }
+                  elseif($level->level == 3){
+                    echo "عميق";
+                  }
+                  else{
+                    echo "غير محدد";
+                  }
+                echo'</span>
+              </div>
+              <div class="col-sm-3">
+                <input type="checkbox" class="level_checkbox" name="level" value="'. $level->level.'">
+              </div>
+            </div>';
+            }
+          ?> 
         </div>
       </div>
 
@@ -172,7 +153,7 @@
         <div class="row displayDiv section-margin  container-flui" style="text-align: right; margin-right: 3%" >
            <button class="btn cusBtn" id="displaybtn">   عرض </button>  <input type="text" id="bookDisplay" name="bookDisplay" value="3">
         </div>
-        <div class="contents">
+        <div class="contents" id="books_display">
 
 
           <?php
@@ -222,6 +203,8 @@
   </div>
 
 <script src="<?php echo base_url()?>assets/js/search.js"></script>
+<script src="<?php echo base_url()?>assets/js/bookFilter.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function () {
     $("#bookName").keyup(
