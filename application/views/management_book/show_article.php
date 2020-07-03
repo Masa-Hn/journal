@@ -13,7 +13,10 @@
 <div class="slideshow-container">
 
   <!-- Full-width images with number and caption text -->
- <?php for ($i=1; $i <=3 ; $i++) { ?>
+ <?php 
+$n=$num_rows;
+ for ($i=0; $i <=$n ; $i++) {
+  $row=$articles->row($i);   ?>
     
   <div class="mySlides" style="padding-right: 25%">
     
@@ -21,14 +24,14 @@
   var slideIndex = 1;
 showSlides(slideIndex);
 </script>
-    <div class="numbertext" style="color: black"> <?php echo $i ?> / 3</div>
-    <h5 class="heading">اسم المقال :</h5>
-      <p>.............</p>
-     <h5 class="heading">كاتب المقال</h5>
-      <p>.............</p>
+    <div class="numbertext" style="color: black"> <?php echo $i+1 ?> / <?php echo $n+1 ?></div>
+    <h5 class="heading">: اسم المقال </h5>
+      <p><?php echo $row->title ?></p>
+     <h5 class="heading">: كاتب المقال</h5>
+      <p><?php echo $row->writer ?></p>
 
-      <h5 class="heading">تم كتابة المقال بتاريخ :</h5>
-      <p>.............</p>
+      <h5 class="heading"> : تم كتابة المقال بتاريخ</h5>
+      <p><?php echo $row->date ?></p>
 
 
 </div>
