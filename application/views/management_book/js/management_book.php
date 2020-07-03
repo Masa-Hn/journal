@@ -81,7 +81,7 @@ function next() {
   document.getElementById('add1').style.display="none";
   document.getElementById('add').style.display="block";
  document.getElementById('step2').className="step0";
-    document.getElementById('step3').className="active step0";
+ document.getElementById('step3').className="active step0";
 }
 }
 function previous() {
