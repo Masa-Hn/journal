@@ -17,6 +17,8 @@ class BookSearch extends CI_Controller {
 		$this->load->view('books_rack/templates/header');
         $this->load->view('books_rack/templates/navbar');
         $this->load->model('books');
+        $arr['sections']=$this->books->getSections($_GET['type']);
+        $arr['levels']=$this->books->getLevels($_GET['type']);
         $arr['data']=$this->books->getbooks($_GET['type']);
         $this->load->view('books_rack/bookSearch',$arr);
         $this->load->view('books_rack/templates/footer');
@@ -55,4 +57,119 @@ class BookSearch extends CI_Controller {
         $this->load->view('books_rack/bookSearch',$arr);
         $this->load->view('books_rack/templates/footer');
 	}//getByName
-}
+
+	public function sectionFilter(){
+		$arr=[];
+		$arr=$this->books->sectionFilter(implode(",",$_POST['section']),$_POST['type']);
+		if (count($arr) != 0 ) {
+			foreach ($arr as $row){
+	            echo '
+		            <div class="row">
+		                 <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
+		                   <div class="col-4 col-md-3">
+		                     <img  src="'.$row->pic.'" class="bookImg" >
+		                   </div>
+		                   <div class="container-fluid text-center col-8 col-md-9">
+		                     <h3 >'.$row->name.'</h3>
+		                     <div class="heading-underline"></div>
+
+		                     <div class=" row">
+		                       <p> '.$row->brief.' <a href="'. base_url().'bookDesc?id='.$row->id.'" style="color: #BB6854">المزيد</a></p>
+		                       <button class="btn cusBtn" id="'.$row->id.'" onClick="downloadAlert(this.id)">تحميل الكتاب </button>
+		                        <input type="hidden" name="id" id="download_link_'.$row->id.'" value="'.$row->link.'">
+		                       <button class="btn cusBtn" ><a target="_blank" href="'.$row->post.'" style="color: #FCFAEF"> أطروحات الكتاب</a></button>
+		                       <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من
+		                         <a href="telegram.html">هنا </a></h5>
+		                     </div>
+		                   </div>
+		                 </div>
+		                 <div class="heading-underline col-sm-12"></div>
+		            </div>
+	            ';
+            }//foreach
+        }//if
+        else{
+        	echo '
+        	<div class="row" style="text-align:center">
+        		<h2> لا يوجد نتائج </h2>
+        	</div>';
+        }//else
+
+	}//sectionFilter
+
+	public function levelFilter(){
+		$arr=[];
+		$arr=$this->books->levelFilter(implode(",",$_POST['level']),$_POST['type']);
+		if (count($arr) != 0 ) {
+			foreach ($arr as $row){
+	            echo '
+		            <div class="row">
+		                 <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
+		                   <div class="col-4 col-md-3">
+		                     <img  src="'.$row->pic.'" class="bookImg" >
+		                   </div>
+		                   <div class="container-fluid text-center col-8 col-md-9">
+		                     <h3 >'.$row->name.'</h3>
+		                     <div class="heading-underline"></div>
+
+		                     <div class=" row">
+		                       <p> '.$row->brief.' <a href="'. base_url().'bookDesc?id='.$row->id.'" style="color: #BB6854">المزيد</a></p>
+		                       <button class="btn cusBtn" id="'.$row->id.'" onClick="downloadAlert(this.id)">تحميل الكتاب </button>
+		                        <input type="hidden" name="id" id="download_link_'.$row->id.'" value="'.$row->link.'">
+		                       <button class="btn cusBtn" ><a target="_blank" href="'.$row->post.'" style="color: #FCFAEF"> أطروحات الكتاب</a></button>
+		                       <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من
+		                         <a href="telegram.html">هنا </a></h5>
+		                     </div>
+		                   </div>
+		                 </div>
+		                 <div class="heading-underline col-sm-12"></div>
+		            </div>
+	            ';
+            }//foreach
+        }//if
+        else{
+        	echo '
+        	<div class="row" style="text-align:center">
+        		<h2> لا يوجد نتائج </h2>
+        	</div>';
+        }//else
+	}//levelFilter
+	public function levelAndSectionFilter(){
+		$arr=[];
+		$arr=$this->books->levelAndSectionFilter(implode(",",$_POST['section']),implode(",",$_POST['level']),$_POST['type']);
+		if (count($arr) != 0 ) {
+			foreach ($arr as $row){
+	            echo '
+		            <div class="row">
+		                 <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
+		                   <div class="col-4 col-md-3">
+		                     <img  src="'.$row->pic.'" class="bookImg" >
+		                   </div>
+		                   <div class="container-fluid text-center col-8 col-md-9">
+		                     <h3 >'.$row->name.'</h3>
+		                     <div class="heading-underline"></div>
+
+		                     <div class=" row">
+		                       <p> '.$row->brief.' <a href="'. base_url().'bookDesc?id='.$row->id.'" style="color: #BB6854">المزيد</a></p>
+		                       <button class="btn cusBtn" id="'.$row->id.'" onClick="downloadAlert(this.id)">تحميل الكتاب </button>
+		                        <input type="hidden" name="id" id="download_link_'.$row->id.'" value="'.$row->link.'">
+		                       <button class="btn cusBtn" ><a target="_blank" href="'.$row->post.'" style="color: #FCFAEF"> أطروحات الكتاب</a></button>
+		                       <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من
+		                         <a href="telegram.html">هنا </a></h5>
+		                     </div>
+		                   </div>
+		                 </div>
+		                 <div class="heading-underline col-sm-12"></div>
+		            </div>
+	            ';
+            }//foreach
+        }//if
+        else{
+        	echo '
+        	<div class="row" style="text-align:center">
+        		<h2> لا يوجد نتائج </h2>
+        	</div>';
+        }//else
+	}//levelAndSectionFilter
+
+}//class

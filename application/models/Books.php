@@ -54,6 +54,52 @@ class Books extends CI_Model {
     $this->db->limit(1);
     return $this->db->get()->result();
   }//lastId
-}
+
+  //SELECT COUNT(section),section FROM `books` GROUP BY section
+  public function getSections($type)
+  {
+    $this->db->select('section,COUNT(section) As num_of_books');
+    $this->db->from('books');
+    $this->db->where('type',$type);
+    $this->db->group_by('section');
+    return $this->db->get()->result();
+  }//getSections
+
+   public function getLevels($type)
+  {
+    $this->db->select('level,COUNT(level) As num_of_books');
+    $this->db->from('books');
+    $this->db->where('type',$type);
+    $this->db->group_by('level');
+    return $this->db->get()->result();
+  }//getLevels
+
+  public function sectionFilter($section,$type)
+  {
+    $where = "section IN (". $section .") AND type = ".$type;
+    $this->db->select('id,name,link,writer,pic,numdownload,uploadname,post,brief');
+    $this->db->from('books');
+    $this->db->where($where);
+    return $this->db->get()->result();
+  }//sectionFilter
+  public function levelFilter($level,$type)
+  {
+    $where = "level IN (". $level .") AND type = ".$type;
+    $this->db->select('id,name,link,writer,pic,numdownload,uploadname,post,brief');
+    $this->db->from('books');
+    $this->db->where($where);
+    return $this->db->get()->result();
+  }//levelFilters
+
+  public function levelAndSectionFilter($section,$level,$type)
+  {
+    $where = "section IN (". $section .") AND level IN (". $level .") AND type = ".$type;
+    $this->db->select('id,name,link,writer,pic,numdownload,uploadname,post,brief');
+    $this->db->from('books');
+    $this->db->where($where);
+    return $this->db->get()->result();
+  }//sectionFilter
+
+}//class
 
 ?>
