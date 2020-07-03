@@ -21,8 +21,8 @@
       </div>
   </div>
      
- <hr style="width: 80%; background-color: #FCFAEF"">
-  
+ <hr style="width: 80%; background-color: #FCFAEF">
 
 
   </footer>
+  </html>
