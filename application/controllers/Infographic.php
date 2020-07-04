@@ -20,10 +20,10 @@ class Infographic extends CI_Controller {
       $result['exist']=true;
     }//if    
 
-		$this->load->view('templates/header');
-    $this->load->view('templates/navbar');
-    $this->load->view('infographic',$result);
-    $this->load->view('templates/footer');
+		$this->load->view('books_rack/templates/header');
+    $this->load->view('books_rack/templates/navbar');
+    $this->load->view('books_rack/infographic',$result);
+    $this->load->view('books_rack/templates/footer');
 	}//index
   
 
@@ -46,9 +46,9 @@ class Infographic extends CI_Controller {
       $result['exist']=true;
     }//if    
 
-    $this->load->view('templates/header');
-    $this->load->view('templates/navbar');
-    $this->load->view('display',$result);
-    $this->load->view('templates/footer');
+    $this->load->view('books_rack/templates/header');
+    $this->load->view('books_rack/templates/navbar');
+    $this->load->view('books_rack/display',$result);
+    $this->load->view('books_rack/templates/footer');
   }//infographicDisplay
 }

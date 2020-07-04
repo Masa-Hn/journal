@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Management_book extends CI_Controller {
     
     public function __construct()
-  {
-    parent::__construct();
+    {
+        parent::__construct();
         $this->load->view('management_book/js/management_book');
         $this->load->database();
         $this->load->model('management');
-  }//end construct()
+    }//end construct()
 	public function index()
 	{
         $data['title'] = 'Management Book';
@@ -18,23 +18,6 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/management');
         $this->load->view('management_book/templates/footer');
 	}
-	public function add_book()
-	{
-		$data['title'] = 'Add Book';
-		$this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/add_book');
-        $this->load->view('management_book/templates/footer');
-    }
-
-    public function show_book()
-    {
-        $data['title'] = 'Show Book';
-		$this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/show_book');
-        $this->load->view('management_book/templates/footer');
-    }
     
     public function change_pic()
     {
