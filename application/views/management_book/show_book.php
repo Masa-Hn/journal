@@ -11,25 +11,38 @@
                 <!-- ============================================================== -->
                 <!-- Type of books -->
                 <!-- ============================================================== -->
-            	<div id="radio"> 
+
+            	<div id="radio">  
+
                     <h4 class="heading" style="text-align: right;" >نوع الكتب التي تود استعراضها</h4>
                     <div style="padding-right: 20%;padding-bottom: 15em;padding-top: 4em">
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب المنهج</button><br></label> 
+                       <label style="float: right; direction: rtl; padding-bottom: 20px">
+                        <a id="type" name="type" class="mybutton" style="width: 300px" 
+                        href="<?php echo base_url()?>AddBooks/show_book1/1"  >  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب المنهج</label> </a></label>
 
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب المرحلة التحضيرية</button><br></label>
+                        <label style="float: right; direction: rtl;padding-bottom: 20px">
+                        <a id="type" name="type" class="mybutton" style="width: 300px" 
+                        href="<?php echo base_url()?>AddBooks/show_book1/2">  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب المرحلة التحضيرية</label> </a></label>
 
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب الأطفال</button><br></label>
+                        <label style="float: right; direction: rtl;padding-bottom: 20px">
+                         <a id="type" name="type" class="mybutton" style="width: 300px"  
+                         href="<?php echo base_url()?>AddBooks/show_book1/3">  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب الأطفال</label> </a></label>
 
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب رمضان</button><br></label>
+                        <label style="float: right; direction: rtl;padding-bottom: 20px">
+                        <a id="type" name="type" class="mybutton" style="width: 300px"  
+                        href="<?php echo base_url()?>AddBooks/show_book1/4">  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب رمضان</label> </a></label>
                         
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب اليافعين</button><br></label>
+                        <label style="float: right; direction: rtl;padding-bottom: 20px">
+                         <a id="type" name="type" class="mybutton" style="width: 300px"  
+                         href="<?php echo base_url()?>AddBooks/show_book1/5" >  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب اليافعين</label> </a></label>
                     </div>
-                </div>
+                            </div>
+
                 <!-- ============================================================== -->
                 <!-- Table of books -->
                 <!-- ============================================================== -->
@@ -40,6 +53,10 @@
                                 var slideIndex = 1;
                                 showSlides(slideIndex);
                             </script>
+<?php
+$t = $this->input->post('type');
+echo $t;
+?>
                             <!-- Full-width images with number and caption text -->
                             <table style="width: 100%;" >
                             <?php for ($i=1; $i <=30 ; $i+=4) { ?>

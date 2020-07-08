@@ -147,22 +147,38 @@ function type_book() {
   document.getElementById('radio').style.display="none";
   document.getElementById('content').style.display="block";
  
+
 }
 
 function back() {
  
   document.getElementById('content2').style.display="none";
-  document.getElementById('radio').style.display="block";
+  document.getElementById('content').style.display="block";
+
  
 }
-function show_detailes() {
+function show_detailes(id,name,writer,type,section,post,pic) {
  
   document.getElementById('content').style.display="none";
   document.getElementById('content2').style.display="block";
- 
+  document.getElementById('name').value=name;
+  document.getElementById('writer').value=writer;
+
+  if(type==1)  document.getElementById('type').value='كتاب منهج';
+ if(type==2)   document.getElementById('type').value='كتاب مرحلة تحضيرية';
+if(type==3)    document.getElementById('type').value='كتاب أطفال';
+if(type==4)    document.getElementById('type').value='كتاب رمضان';
+if(type==5)    document.getElementById('type').value='كتاب يافعين';
+
+  document.getElementById('section').value=section;
+  document.getElementById('post').value=post;
+
+a = document.getElementById('image');
+a.setAttribute("href", pic);
+
+b = document.getElementById('update');
+b.setAttribute("href", "<?php echo base_url()?>AddBooks/index/"+id);
+  
 }
-function change_pic()
-{
-  window.open("<?php base_url() ?>change_pic");
-}
+
 </script>

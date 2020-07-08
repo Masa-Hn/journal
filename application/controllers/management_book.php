@@ -19,18 +19,17 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/templates/footer');
 	}
     
-    public function change_pic()
-    {
-        $data['title'] = 'Book Image';
-        $this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/change_pic');
-        $this->load->view('management_book/templates/footer');
-
-    }
+   
     
     public function show_article()
     {
+                $this->load->helper('form');
+
+       if(isset($_POST['delete'])){
+            $id=$this->input->post('id');
+           $this->management->delete_article($id);
+        echo "<script language='javascript'>  alert(' تم حذف المقال بنجاح ! ');</script>"; 
+        }
          $data['title'] = 'Show Article';
          $articles=$this->management->get_articles();
          $num=$articles->num_rows();
