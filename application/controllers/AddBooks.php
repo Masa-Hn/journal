@@ -8,20 +8,22 @@ class AddBooks extends CI_Controller {
         parent::__construct();
         $this->load->model('insertbook');
         $this->load->model('books');
+        $this->load->model('ManageBooks');
+
         $this->load->view('management_book/js/management_book');
     }
 
     public function index(){
         
-        if(isset($_GET['id'])){
+        if($this->uri->segment(3)){
             
-            $id = $_GET['id'];
+            $id = $this->uri->segment(3);
             $data['book']  = $this->books->getbook($id);
-        }
+        } 
 		$data['title'] = 'Add Book';
 		$this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/add_book');
+        $this->load->view('management_book/add_book',$data);
         $this->load->view('management_book/templates/footer');
     }
     
@@ -63,7 +65,7 @@ class AddBooks extends CI_Controller {
         $link    = $this->input->post('download_link');
         $pic     = $this->input->post('img_link');
 
-        $id      = $this->input->post('bid');   
+        $id      =  $this->input->post('bid');   
             
         if($this->insertbook->editbook($name,$writer,$brief,$level,$section,$type,$post,$link,$pic,$id)){
 
@@ -78,13 +80,27 @@ class AddBooks extends CI_Controller {
 
     public function show_book(){
         
-        $type = 1;
-        $data['books'] = $this->books->getbooks($type);
+       //$type=$this->uri->segment(3);
+        //$data['books'] = $this->books->getbooks($type);
         $data['title'] = 'Show Book';
 		$this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/show_book');
         $this->load->view('management_book/templates/footer');
     }
+
+     public function show_book1($type=null){
+        
+       $type=$this->uri->segment(3);
+        $data['books'] = $this->ManageBooks->getbooks($type);
+        $data['title'] = 'Show Book';
+        $data['type'] = $type;
+
+        $this->load->view('management_book/templates/header', $data);
+        $this->load->view('management_book/templates/navbar');
+        $this->load->view('management_book/show_book1',$data);
+        $this->load->view('management_book/templates/footer');
+    }
+
 
 }

@@ -290,14 +290,12 @@ button {
   border: none;
   padding: 0!important;
   width: 100%;
-  color: #008080;
-  font-weight: bold;
-  font-size: 14px;
+  color: #205d67;
+  font-size: 1.2em;
   cursor: pointer;
   text-align: center;
-  /*optional*/
-  /*input has OS specific font-family*/
-  text-decoration: none;
+  font-family: 'Harmattan', sans-serif;
+  
 }
 
   footer{
