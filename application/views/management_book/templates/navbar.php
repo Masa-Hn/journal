@@ -24,7 +24,7 @@
           <li style=" padding-right:15px;padding-left:15px;"><a class="nav-item" href="<?php echo base_url()?>management_book/index">إدارة الكتب</a></li>
           <li style=" padding-right:15px;padding-left:15px;"><a class="nav-item" href="<?php echo base_url()?>AddBooks/index">إضافة كتاب</a></li>
           <li style=" padding-right:15px;padding-left:15px;"><a class="nav-item" href="<?php echo base_url()?>AddBooks/show_book">استعراض الكتب</a></li>
-          <li style=" padding-right:15px;padding-left:15px;"><a class="nav-item" href="<?php echo base_url()?>management_book/add_article">إضافة مقال</a></li>
+          <li style=" padding-right:15px;padding-left:15px;"><a class="nav-item" href="<?php echo base_url()?>AddArticle/index">إضافة مقال</a></li>
            <li style=" padding-right:15px;padding-left:15px;"><a class="nav-item" href="<?php echo base_url()?>management_book/show_article">استعراض المقالات</a></li>
           <li style=" padding-right:15px;padding-left:15px;"><a class="nav-item" href="<?php echo base_url()?>management_book/add_activity">إضافة نشاط</a></li>
           <li style=" padding-right:15px;padding-left:15px;"><a class="nav-item" href="<?php echo base_url()?>management_book/add_infographic">إضافة انفوجرافيك</a></li>

@@ -48,6 +48,7 @@ return flag;
 
 
 
+
 function next1() {
   if (validate(0,'book_name','writer','story'))
   {
@@ -59,23 +60,13 @@ function next1() {
 }
 
 
-function next2() {
-  if (validate(0,'level','class','type'))
-  {
-  document.getElementById('add2').style.display="none";
-  document.getElementById('add').style.display="block";
- document.getElementById('step3').className="step0";
- document.getElementById('step4').className="active step0";
-}
-}
-
 function previous2() {
   document.getElementById('add2').style.display="none";
   document.getElementById('add1').style.display="block";
    document.getElementById('step2').className="active step0";
     document.getElementById('step3').className="step0";
 }
-function next() {
+function nextarticle() {
   if (validate(0,'article_name','writer','date'))
   {
   document.getElementById('add1').style.display="none";
@@ -97,7 +88,14 @@ function success() {
   document.getElementById('add').style.display="none";
  
 }
-
+function nextnext() {
+  
+document.getElementById('add2').style.display="none";
+  document.getElementById('add').style.display="block";
+ document.getElementById('step3').className="step0";
+ document.getElementById('step4').className="active step0";
+ 
+}
 
 function onFileSelected(event) {
   var selectedFile = event.target.files[0];
@@ -157,7 +155,7 @@ function back() {
 
  
 }
-function show_detailes(id,name,writer,type,section,post,pic) {
+function show_detailes(id,name,writer,type,level,section,post,pic) {
  
   document.getElementById('content').style.display="none";
   document.getElementById('content2').style.display="block";
@@ -169,9 +167,15 @@ function show_detailes(id,name,writer,type,section,post,pic) {
 if(type==3)    document.getElementById('type').value='كتاب أطفال';
 if(type==4)    document.getElementById('type').value='كتاب رمضان';
 if(type==5)    document.getElementById('type').value='كتاب يافعين';
-
+ 
+ if(level==1)  document.getElementById('level').value='بسيط';
+ if(level==2)   document.getElementById('level').value='متوسط';
+if(level==3)    document.getElementById('level').value='عميق';
+  
   document.getElementById('section').value=section;
-  document.getElementById('post').value=post;
+ 
+  p = document.getElementById('post');
+p.setAttribute("href", post);
 
 a = document.getElementById('image');
 a.setAttribute("href", pic);

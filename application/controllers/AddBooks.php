@@ -80,27 +80,17 @@ class AddBooks extends CI_Controller {
 
     public function show_book(){
         
-       //$type=$this->uri->segment(3);
-        //$data['books'] = $this->books->getbooks($type);
-        $data['title'] = 'Show Book';
-		$this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/show_book');
-        $this->load->view('management_book/templates/footer');
-    }
-
-     public function show_book1($type=null){
-        
-       $type=$this->uri->segment(3);
+      $type=$this->uri->segment(3);
         $data['books'] = $this->ManageBooks->getbooks($type);
         $data['title'] = 'Show Book';
         $data['type'] = $type;
-
-        $this->load->view('management_book/templates/header', $data);
+		$this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/show_book1',$data);
+        $this->load->view('management_book/show_book',$data);
         $this->load->view('management_book/templates/footer');
     }
+
+    
 
 
 }
