@@ -175,7 +175,7 @@
                         <input type="hidden" name="id" id="download_link_'.$row->id.'" value="'.$row->link.'">
                        <button class="btn cusBtn" ><a target="_blank" href="'.$row->post.'" style="color: #FCFAEF"> أطروحات الكتاب</a></button>
                        <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من
-                         <a href="telegram.html">هنا </a></h5>
+                         <a href="'. base_url().'home/telegram">هنا </a></h5>
                      </div>
                    </div>
                  </div>

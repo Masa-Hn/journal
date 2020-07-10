@@ -14,7 +14,7 @@
             <link href="https://fonts.googleapis.com/css?family=El+Messiri:500&display=swap" rel="stylesheet">
             
             <!-- Typed.js -->
-            <script src="<?php echo base_url()?>assets/Js/typed.min.js"></script>
+            <script src="<?php echo base_url()?>assets/js/typed.min.js"></script>
             
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
             
@@ -141,9 +141,8 @@ body{
         <br /><br />
         <div class="text-center">
             <footer style="position:relative; background-color:rgba(229, 229, 190,.1); color:#6b6b83; padding:10px">
-                 &copy; Osboha 180 | Developed By: <span>
-                     <a href="">Programmers Team</a>
-                </span>
+                <h5> تصميم: شذا الأسدي </h5>
+                <h5> الخدمة التقنية :فنجان هوست </h5>
             </footer> 
         </div> 
     </body>
@@ -187,7 +186,7 @@ body{
         
             // Typed Options
             var typed = new Typed('.typed',{
-                strings:['إدارة رف الكتب'], 
+                strings:['إدارة الكتب'], 
                 typeSpeed: 50,
                 backSpeed: 50,
                 loop: false,

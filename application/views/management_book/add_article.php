@@ -34,7 +34,8 @@
                     <fieldset id="add">
                         <div class="form-card">
                             <h5 class="sub-heading mb-4" style="padding-bottom: 4em;">الرجاء إدخال بيانات المقال</h5>
-                               <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">المقال :  </li> </label> <input type="text" id="article" name="article" placeholder="" class="form-control" style="padding-bottom: 200px;" onblur="validate(1,'article')"> </div>
+                            <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">المقال :  </li> </label> 
+                            <textarea id="article" name="article" placeholder="" class="form-control" style="padding-bottom: 200px;" onblur="validate(1,'article')"></textarea></div>
                         
                         <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">صورة المقال :  </li> </label>
 

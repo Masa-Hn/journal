@@ -19,9 +19,9 @@ class LoginModel extends CI_Model{
             foreach($result->result() as $row){
                 $data = array (
 
-                    'user_id'   => $row->UserID,
-                    'username'  => $row->Username,
-                    'email'     => $row->Email,
+                    'user_id'   => $row->id,
+                    'username'  => $row->username,
+                    'email'     => $row->email,
                     'logged_in' => true
                 );
                 $this->session->set_userdata($data);

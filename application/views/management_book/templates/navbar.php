@@ -13,8 +13,8 @@
           <img src="<?php echo base_url()?>assets/img/logo_2.png">
         </a>
 
-        <div class="navbar-brand" style="color: white">
-        <p >|قسم الإدارة</p>
+        <div class="navbar-brand" style="color:white">
+        <a class="nav-item" href="<?php echo base_url()?>login/logout">تسجيل خروج</a>
         </div>
 
       </div>
