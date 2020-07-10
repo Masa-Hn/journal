@@ -11,11 +11,11 @@
                         <h5 class="sub-heading">اختر المهمة التي تود القيام بها</h5>
                         <ul class="row px-1 radio-group">
                             <li class="card-block text-center radio " >
-                                <a class="image-icon"  href="<?php echo base_url()?>management_book/add_book"> <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add.png"> </a>
+                                <a class="image-icon"  href="<?php echo base_url()?>AddBooks/index"> <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">إضافة كتاب</p>
                             </li>
                             <li class="card-block text-center radio " >
-                                <a class="image-icon"  href="<?php echo base_url()?>management_book/show_book"> 
+                                <a class="image-icon"  href="<?php echo base_url()?>AddBooks/show_book"> 
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/show.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">استعراض الكتب</p>
                             </li>
@@ -30,7 +30,7 @@
                                 <p class="sub-desc" style="text-align: center;">إضافة إنجاز جديد(نشاط)</p>
                             </li>
                              <li class="card-block text-center radio " >
-                                <a class="image-icon"  href="<?php echo base_url()?>management_book/add_article"> 
+                                <a class="image-icon"  href="<?php echo base_url()?>AddArticle/index"> 
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_article.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">إضافة مقال</p>
                             </li>

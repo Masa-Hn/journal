@@ -24,6 +24,7 @@ $n=$num_rows;
   var slideIndex = 1;
 showSlides(slideIndex);
 </script>
+ <?php echo $this->session->flashdata('msg')?>  
     <div class="numbertext" style="color: black"> <?php echo $i+1 ?> / <?php echo $n ?></div>
     <h5 class="heading">: اسم المقال </h5>
       <p><?php echo $row->title ?></p>
@@ -32,9 +33,9 @@ showSlides(slideIndex);
 
       <h5 class="heading"> : تم كتابة المقال بتاريخ</h5>
       <p><?php echo $row->date ?></p>
- <form  enctype="multipart/form-data" method="post" style="padding-bottom: 5em;padding-top: 5em" action="<?=base_url()?>Management_book/show_article">   
+ <form  enctype="multipart/form-data" method="post" style="padding-bottom: 5em;padding-top: 5em;padding-left: 47%" action="<?=base_url()?>Management_book/show_article">   
 <input type="number" name="id" id="id" value="<?php echo $row->id ?>" style="display: none;"   >  
-<button  id="delete"  name="delete" class="mybutton" style="width: 200px" >حذف المقال</button>
+<button  id="delete"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A;" >حذف المقال</button>
 </form>
 
 </div>
