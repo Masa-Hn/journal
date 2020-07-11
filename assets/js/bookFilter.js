@@ -15,6 +15,10 @@ $(document).ready(function () {
       var s="'"+$(this).val()+"'";
       section.push(s);
     });
+    console.log("section " +section);
+    console.log("level " +level.length);
+    console.log("level type " +level);
+
     $.ajax({
       type: "POST",
       url:url,
@@ -60,6 +64,10 @@ $(document).ready(function () {
     $.each($("input[name='level']:checked"), function(){
       level.push($(this).val());
     });
+    console.log("section " +section);
+    console.log("level " +level.length);
+    console.log("level type " +level);
+
     $.ajax({
       type: "POST",
       url:url,

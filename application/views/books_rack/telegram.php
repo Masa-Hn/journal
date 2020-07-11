@@ -9,12 +9,12 @@
         <div class="col-sm-6 text-center slide-in from-right">
           <h2 style="text-align: center;">أولًا</h2>
           <div class="heading-underline"></div>
-          <img src="<?php echo base_url()?>assets/img/t1.png" style="width: 90%">
+          <img src="<?php echo base_url()?>assets/img/t1.png" style="width: 70%">
         </div>
         <div class="col-sm-6 text-center slide-in from-left">
           <h2 style="text-align: center;">ثانيًا</h2>
           <div class="heading-underline"></div>
-          <img src="<?php echo base_url()?>assets/img/t2.png" style="width: 90%">
+          <img src="<?php echo base_url()?>assets/img/t2.png" style="width: 70%">
 
         </div>
       </div>
