@@ -166,16 +166,15 @@
                      <img  src="'.$row->pic.'" class="bookImg" >
                    </div>
                    <div class="container-fluid text-center col-8 col-md-9">
-                     <h3 >'.$row->name.'</h3>
-                     <div class="heading-underline"></div>
+                     <h2>'.$row->name.'</h2>
 
                      <div class=" row">
-                       <p> '.$row->brief.' <a href="'. base_url().'bookDesc?id='.$row->id.'" style="color: #BB6854">المزيد</a></p>
+                       <p> '.($row->brief,0,400).' <a href="'. base_url().'bookDesc?id='.$row->id.'" style="color: #BB6854">المزيد</a></p>
                        <button class="btn cusBtn" id="'.$row->id.'" onClick="downloadAlert(this.id)">تحميل الكتاب </button>
                         <input type="hidden" name="id" id="download_link_'.$row->id.'" value="'.$row->link.'">
                        <button class="btn cusBtn" ><a target="_blank" href="'.$row->post.'" style="color: #FCFAEF"> أطروحات الكتاب</a></button>
                        <h5>لمن يعاني من ضعف الانترنت قم بتحميل الكتب من
-                         <a href="'. base_url().'home/telegram">هنا </a></h5>
+                         <a href="'. base_url().'Telegram">هنا </a></h5>
                      </div>
                    </div>
                  </div>
