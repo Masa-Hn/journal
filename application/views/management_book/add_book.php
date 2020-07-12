@@ -100,16 +100,16 @@
                                     <option value="5">اليافعين</option>
                                 </select>
                             </div>
-<!--
-                            <button id="next3" class="mybutton" onclick="next2()" type="button">التالي</button> 
+
+                            <button id="next3" class="mybutton" onclick="nextnext()" type="button">التالي</button> 
                             <button class="mybutton" style="float: right;" onclick="previous2()" type="button">السابق</button>
                         </div>
                     </fieldset>
                     <!-- ============================================================== -->
                     <!-- Section 3 -->
-                    <!-- ============================================================== --
+                    <!-- ============================================================== -->
                     <fieldset id="add">
-                        <div class="form-card">-->
+                        <div class="form-card">
                             <h5 class="sub-heading mb-4" style="padding-bottom: 4em;">الرجاء إدخال بيانات الكتاب</h5>
                             <div>
                                 <div class="form-group"> 
@@ -144,7 +144,7 @@
                                     </div>
                                 </div> -->
 
-                                <button id="save" class="mybutton" onclick="success()" name="insert10">حفظ</button> 
+                                <button id="save" class="mybutton"  name="insert10">حفظ</button> 
                             </div>
                         </div>
                     </fieldset>
@@ -246,16 +246,16 @@
                                     <option value="5" <?php if($row->type == 5) echo 'selected';?>>اليافعين</option>
                                 </select>
                             </div>
-<!--
-                            <button id="next3" class="mybutton" onclick="next2()" type="button">التالي</button> 
+
+                            <button id="next3" class="mybutton" onclick="nextnext()" type="button">التالي</button> 
                             <button class="mybutton" style="float: right;" onclick="previous2()" type="button">السابق</button>
                         </div>
                     </fieldset>
                     <!-- ============================================================== -->
                     <!-- Section 3 -->
-                    <!-- ============================================================== --
+                    <!-- ============================================================== -->
                     <fieldset id="add">
-                        <div class="form-card">-->
+                        <div class="form-card">
                             <h5 class="sub-heading mb-4" style="padding-bottom: 4em;">الرجاء إدخال بيانات الكتاب</h5>
                             <div>
                                 <div class="form-group"> 
@@ -291,7 +291,7 @@
                                 </div> -->
                                 <input type="hidden" name="bid" value="<?php echo $row->id?>">
                                 <input type="hidden" name="update">
-                                <button id="save" class="mybutton" onclick="success()">حفظ</button> 
+                                <button id="save" class="mybutton" >حفظ</button> 
                             </div>
                         </div>
                     </fieldset>

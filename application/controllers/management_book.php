@@ -9,6 +9,10 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/js/management_book');
         $this->load->database();
         $this->load->model('management');
+        
+        if(!$this->session->userdata('logged_in')){
+            redirect(base_url("login"));
+        }
     }//end construct()
 	public function index()
 	{
@@ -19,18 +23,19 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/templates/footer');
 	}
     
-    public function change_pic()
-    {
-        $data['title'] = 'Book Image';
-        $this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/change_pic');
-        $this->load->view('management_book/templates/footer');
-
-    }
+   
     
     public function show_article()
     {
+                $this->load->helper('form');
+
+       if(isset($_POST['delete'])){
+            $id=$this->input->post('id');
+           $this->management->delete_article($id);
+ $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف المقال بنجاح</div>");
+            redirect(base_url().'Management_book/show_article');
+
+                    }
          $data['title'] = 'Show Article';
          $articles=$this->management->get_articles();
          $num=$articles->num_rows();
@@ -53,47 +58,7 @@ class Management_book extends CI_Controller {
 
     }
     
-    public function add_article()
-    {
-       $data['title'] = 'Add Article';
-        $this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/add_article');
-        $this->load->view('management_book/templates/footer');
-       
-       
-    
-
-    }
-    
-    public function add_article2()
-    {
-         
-
-         $config['upload_path'] = './assets/article_img';
-         $config['allowed_types']='jpg|jpeg|gif|png';
-         $config['max_size'] = 2000;
-         $config['encrypt_name'] = TRUE;
-        $this->load->helper('form');
-        
-        $this->load->library('upload', $config);
-     
-        $a=$this->input->post('article');  
-        $n=$this->input->post('article_name');
-        $w=$this->input->post('writer');
-        $d=$this->input->post('date');
-
-        $this->upload->do_upload('article_img');
-        $image_data = $this->upload->data();  
-        $i=$image_data['file_name'];
-        $this->management->savearticle($n,$w,$d,$a,$i);  
-        
-        $data['title'] = 'Article Added Successfully';
-        $this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/success_article');
-        $this->load->view('management_book/templates/footer');
-    }
+   
         public function add_infographic()
     {
         $data['title'] = 'Add Infographic';

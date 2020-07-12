@@ -13,6 +13,12 @@ public function savearticle($n,$w,$d,$a,$i)
 		$this->db->insert('article',$data);
 }
 
+public function delete_article($id)
+{
+	$this->db->where('id',$id);
+	$this->db->delete('article');
+		}
+
 public function get_articles()
 {
 	 $query=$this->db->get('article');

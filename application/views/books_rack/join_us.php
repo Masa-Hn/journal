@@ -43,13 +43,13 @@
               أن تقوم بقراءة (٦) صفحات يوميًا ، لخمسة أيام في الأسبوع . أو بشكل مثالي (30) صفحة في الأسبوع تقسمها كما تريد 
             </li>
               
-            <li> <img src="img/checkMark.png" class="list-img">  أن تقوم بكتابة فائدة ما قرأت ، ولو سطر واحد. </li>
-            <li><img src="img/checkMark.png" class="list-img">  أن تخبر قائدك أنك انهيت ما عليك  في فريق المتابعة .</li>
+            <li> <img src="<?php echo base_url()?>assets/img/checkMark.png" class="list-img">  أن تقوم بكتابة فائدة ما قرأت ، ولو سطر واحد. </li>
+            <li><img src="<?php echo base_url()?>assets/img/checkMark.png" class="list-img">  أن تخبر قائدك أنك انهيت ما عليك  في فريق المتابعة .</li>
             
           </ul>
         </div>
         <div class="col-sm-6 slide-in from-right">
-          <img src="img/role.png">
+          <img src="<?php echo base_url()?>assets/img/role.png">
         </div>
       </div>
     </div>

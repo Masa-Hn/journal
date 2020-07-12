@@ -11,86 +11,125 @@
                 <!-- ============================================================== -->
                 <!-- Type of books -->
                 <!-- ============================================================== -->
-            	<div id="radio"> 
+<?php if (!$this->uri->segment(3)){?>
+            	<div id="radio">  
+
                     <h4 class="heading" style="text-align: right;" >نوع الكتب التي تود استعراضها</h4>
-                    <div style="padding-right: 20%;padding-bottom: 15em;padding-top: 4em">
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب المنهج</button><br></label> 
+                    <div style=";padding-bottom: 15em;padding-top: 4em" class="text-center">
+                       <label style="direction: rtl; padding-bottom: 20px">
+                        <a id="type" name="type" class="mybutton" style="width: 300px" 
+                        href="<?php echo base_url()?>AddBooks/show_book/1"  >  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب المنهج</label> </a></label>
 
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب المرحلة التحضيرية</button><br></label>
+                        <label style="direction: rtl;padding-bottom: 20px">
+                        <a id="type" name="type" class="mybutton" style="width: 300px" 
+                        href="<?php echo base_url()?>AddBooks/show_book/2">  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب المرحلة التحضيرية</label> </a></label>
 
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب الأطفال</button><br></label>
+                        <label style="direction: rtl;padding-bottom: 20px">
+                         <a id="type" name="type" class="mybutton" style="width: 300px"  
+                         href="<?php echo base_url()?>AddBooks/show_book/3">  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب الأطفال</label> </a></label>
 
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب رمضان</button><br></label>
+                        <label style="direction: rtl;padding-bottom: 20px">
+                        <a id="type" name="type" class="mybutton" style="width: 300px"  
+                        href="<?php echo base_url()?>AddBooks/show_book/4">  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب رمضان</label> </a></label>
                         
-                        <label style="float: right; direction: rtl;">
-                        <button class="mybutton" style="width: 300px" onclick="type_book()">كتب اليافعين</button><br></label>
+                        <label style="direction: rtl;padding-bottom: 20px">
+                         <a id="type" name="type" class="mybutton" style="width: 300px"  
+                         href="<?php echo base_url()?>AddBooks/show_book/5" >  
+                         <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب اليافعين</label> </a></label>
                     </div>
-                </div>
+                            </div>
+<?php } ?>
                 <!-- ============================================================== -->
                 <!-- Table of books -->
                 <!-- ============================================================== -->
-                <div id="content" style="display: none;">
+                <?php if ($this->uri->segment(3)){?>
+                  <div id="content" >
+
+<?php 
+ $num=$books->num_rows();
+ $book=$books->result();
+if ($num % 26!=0)
+$slides_num=((int) ($num/26)+1);
+else
+$slides_num=$num/26;
+ $s=26; 
+ $h=0;
+?>  
                     <div class="slideshow-container">
-                        <div class="mySlides">
+                        <?php for ($j=1;$j<=$slides_num;$j++){
+                           
+                            ?>   
+
+                        <div class="mySlides" >
                             <script type="text/javascript">
                                 var slideIndex = 1;
                                 showSlides(slideIndex);
-                            </script>
-                            <!-- Full-width images with number and caption text -->
-                            <table style="width: 100%;" >
-                            <?php for ($i=1; $i <=30 ; $i+=4) { ?>
+                            </script>        
+                      <div class="numbertext" style="color: black; "> <?php echo $j ?> / <?php echo $slides_num ?> </div>
 
+                          <!-- Full-width images with number and caption text -->
+                          <div style="padding-top: 30px;">
+                            <table style="width: 100%;empty-cells: show;" >
+                            <?php for ($i=$h; $i <$s ; $i+=2) { 
+                                 
+                                ?>
                                 <tr style="background-color: #f2f2f2;">
-                                    <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i ?></button></td>
-                                    <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+1 ?></button></td>
+                                    
+                                    <td  ><button class="book" style="text-align: right;" 
+                                        onclick="show_detailes(
+                                           '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->id; ?> ',
+                                           '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->name; ?> ',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->writer; ?>',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->type; ?>',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->level; ?>',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->section; ?>',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->post; ?>',
+                                             '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->pic; ?>'
+                                            )">
+                                   <?php if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->name;?></button></td>
+                                    
+                                    <td ><button class="book"  >&nbsp; </button></td>
+                                    <td ><button class="book"  >&nbsp; </button></td>
+                                    <td ><button class="book"  >&nbsp; </button></td>
+
+                                    <td ><button class="book"  style="text-align: right;" 
+                                        onclick="show_detailes(
+                                        '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->id ?>',
+                                        '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->name ?>',
+                            ' <?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->writer ?>',
+                            '<?php  if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->type ?>',
+                            '<?php  if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->level ?>',
+                            '<?php  if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->section ?>',
+                            '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->post ?>',
+                            '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->pic ?>'
+                            )">      
+                            <?php if (isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->name;  ?></button></td>
+                                    
+
                                 </tr>
                                 <tr>
-                                    <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+2 ?></button></td>
-                                    <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+3 ?></button></td>
+                                   
+                                    <td ><button class="book"  > </button></td>
+                                    <td ><button class="book"  > </button></td> 
+                                    <td ><button class="book" > </button></td> 
+                                    <td ><button class="book" > </button></td> 
+                                    <td ><button class="book" > </button></td>
                                 </tr>
 
                             <?php } ?>
+
                             </table>
+<?php
+    $h=$h+26;
+    $s=$s+26;
+?>
                         </div>
-                        <div class="mySlides">
-
-                            <table style="width: 100%;" >
-                            <?php for ($i=33; $i <=60 ; $i+=4) { ?>
-
-                                <tr style="background-color: #f2f2f2;">
-                                    <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i ?></button></td>
-                                    <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+1 ?></button></td>
-                                </tr>
-                                <tr>
-                                    <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+2 ?></button></td>
-                                    <td ><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+3 ?></button></td>
-                                </tr>
-
-                            <?php } ?>
-                            </table>
-                        </div>
-
-                        <div class="mySlides">
-
-                            <table style="width: 100%;" >
-                            <?php for ($i=61; $i <=90 ; $i+=4) { ?>
-
-                                <tr style="background-color: #f2f2f2;">
-                                    <td><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i ?></button></td>
-                                    <td><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+1 ?></button></td>
-                                </tr>
-                                <tr>
-                                    <td><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+2 ?></button></td>
-                                    <td><button class="book" style="float: right;" onclick="show_detailes()">إلى الجيل الصاعد <?php echo $i+3 ?></button></td>
-                                </tr>
-
-                            <?php } ?>
-                            </table>
-                        </div>
+                    </div>
+                        <?php } ?>
                         <!-- ============================================================== -->
                         <!-- Next and previous buttons -->
                         <!-- ============================================================== -->
@@ -110,18 +149,38 @@
                 <!-- ============================================================== -->
                 <!-- Book details -->
                 <!-- ============================================================== -->
-                <div id="content2" style="display: none;">
-                    <li style="direction: rtl; float: right;"> اسم الكتاب : إلى الجيل الصاعد</li><br><br>
-                    <li style="direction: rtl; float: right;"> اسم الكاتب : أحمد بن يوسف السيد</li><br><br>
-                    <li style="direction: rtl; float: right;"> نوع الكتاب : كتاب منهج</li><br><br>
-                    <li style="direction: rtl; float: right;"> صنف الكتاب : فكري ديني</li><br><br>
-                    <li style="direction: rtl; float: right;"> رابط منشور الكتاب :</li><br><br>
+              
+                <div id="content2" style="display: none; ">
+                   
+
+                   
+                         
+                    <li style="direction: rtl; text-align: right;">اسم الكتاب : <br>
+                        <input   name="name" id="name" readonly style="border: none;background-color: white;"> </li>
+                    
+                    <li style="direction: rtl; text-align: right;"> اسم الكاتب :<br>
+                     <input style="border: none;background-color: white;"  name="writer" id="writer" readonly></li>
+                    <li style="direction: rtl; text-align: right;"> نوع الكتاب : <br>  <input style="border: none;background-color: white;"  name="type" id="type" readonly></li>
+                    <li style="direction: rtl; text-align: right;"> مستوى الكتاب : <br>  <input style="border: none;background-color: white;"  name="level" id="level" readonly></li>
+                    <li style="direction: rtl; text-align: right;"> صنف الكتاب : <br> <input style="border: none;background-color: white;"  name="section" id="section" readonly></li>
+                    
+                    <li style="direction: rtl; text-align: right;"> رابط منشور الكتاب : <br>
+                     <a name="post" id="post" style="padding-right: 2em; color: #A52A2A" > اضغط هنا<a></li>  <br><br>
 
 
-                    <button style="float: right;width: 300px;" class="mybutton" onclick="change_pic()" > عرض صورة الكتاب </button>
+                        <a id="image" name="image" class="mybutton" style="width: 190px;float: right;background-color: #A52A2A" >
+                         <label style="float: right;text-align: center; outline: none; color: #fff;">عرض صورة الكتاب
+                         </label> </a>
+                         
+                         <div style="padding-right: 210px;">
+                         <a id="update" class="mybutton" style="width: 190px;float: right;background-color: #A52A2A" >
+                         <label style=" text-align: center; outline: none; color: #fff;">تعديل بيانات الكتاب
+                         </label> </a></div>
+
                     <button style="float: left; width: 100px;" class="mybutton" onclick="back()" > رجوع </button>
 
                 </div>
+                <?php } ?>
             </div>
         </div>
     </div>

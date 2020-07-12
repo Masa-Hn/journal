@@ -141,7 +141,6 @@ class BookSearch extends CI_Controller {
 		                   </div>
 		                   <div class="container-fluid text-center col-8 col-md-9">
 		                     <h3 >'.$row->name.'</h3>
-
 		                     <div class=" row">
 		                       <p> '. substr($row->brief,0,400).' <a href="'. base_url().'bookDesc?id='.$row->id.'" style="color: #BB6854">المزيد</a></p>
 		                       <button class="btn cusBtn" id="'.$row->id.'" onClick="downloadAlert(this.id)">تحميل الكتاب </button>

@@ -227,6 +227,14 @@
   imageAlt: 'Custom image',
 }).then(function (result) {
     if (result.value) {
+      $.ajax({
+        type: "POST",
+        url:document.getElementById("base_url").value+"bookDesc/updateNumDownload",
+        data: {'id':id},
+        success: function(data){
+           console.log(data);
+        }
+      });
        window.open(document.getElementById("download_link_"+id).value);
     }
 })

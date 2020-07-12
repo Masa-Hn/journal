@@ -48,6 +48,7 @@ return flag;
 
 
 
+
 function next1() {
   if (validate(0,'book_name','writer','story'))
   {
@@ -59,23 +60,13 @@ function next1() {
 }
 
 
-function next2() {
-  if (validate(0,'level','class','type'))
-  {
-  document.getElementById('add2').style.display="none";
-  document.getElementById('add').style.display="block";
- document.getElementById('step3').className="step0";
- document.getElementById('step4').className="active step0";
-}
-}
-
 function previous2() {
   document.getElementById('add2').style.display="none";
   document.getElementById('add1').style.display="block";
    document.getElementById('step2').className="active step0";
     document.getElementById('step3').className="step0";
 }
-function next() {
+function nextarticle() {
   if (validate(0,'article_name','writer','date'))
   {
   document.getElementById('add1').style.display="none";
@@ -97,7 +88,14 @@ function success() {
   document.getElementById('add').style.display="none";
  
 }
-
+function nextnext() {
+  
+document.getElementById('add2').style.display="none";
+  document.getElementById('add').style.display="block";
+ document.getElementById('step3').className="step0";
+ document.getElementById('step4').className="active step0";
+ 
+}
 
 function onFileSelected(event) {
   var selectedFile = event.target.files[0];
@@ -147,22 +145,44 @@ function type_book() {
   document.getElementById('radio').style.display="none";
   document.getElementById('content').style.display="block";
  
+
 }
 
 function back() {
  
   document.getElementById('content2').style.display="none";
-  document.getElementById('radio').style.display="block";
+  document.getElementById('content').style.display="block";
+
  
 }
-function show_detailes() {
+function show_detailes(id,name,writer,type,level,section,post,pic) {
  
   document.getElementById('content').style.display="none";
   document.getElementById('content2').style.display="block";
+  document.getElementById('name').value=name;
+  document.getElementById('writer').value=writer;
+
+  if(type==1)  document.getElementById('type').value='كتاب منهج';
+ if(type==2)   document.getElementById('type').value='كتاب مرحلة تحضيرية';
+if(type==3)    document.getElementById('type').value='كتاب أطفال';
+if(type==4)    document.getElementById('type').value='كتاب رمضان';
+if(type==5)    document.getElementById('type').value='كتاب يافعين';
  
+ if(level==1)  document.getElementById('level').value='بسيط';
+ if(level==2)   document.getElementById('level').value='متوسط';
+if(level==3)    document.getElementById('level').value='عميق';
+  
+  document.getElementById('section').value=section;
+ 
+  p = document.getElementById('post');
+p.setAttribute("href", post);
+
+a = document.getElementById('image');
+a.setAttribute("href", pic);
+
+b = document.getElementById('update');
+b.setAttribute("href", "<?php echo base_url()?>AddBooks/index/"+id);
+  
 }
-function change_pic()
-{
-  window.open("<?php base_url() ?>change_pic");
-}
+
 </script>

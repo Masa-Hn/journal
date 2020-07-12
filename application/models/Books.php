@@ -3,9 +3,9 @@ class Books extends CI_Model {
 
   public function getbooks($type)
   {
-  $query = $this->db->query("SELECT id,name,link,writer,pic,numdownload,uploadname,post,brief,(resofrate/numofrate) as rate from books WHERE  type=$type ORDER BY rate DESC ");
-  return $query->result();
-  }
+    $query = $this->db->query("SELECT id,name,link,writer,pic,numdownload,uploadname,post,brief,(resofrate/numofrate) as rate from books WHERE  type=$type ORDER BY RAND() LIMIT 10");
+    return $query->result();
+  }//getbooks
 
 
   public function getbook($id)
@@ -14,7 +14,15 @@ class Books extends CI_Model {
     $this->db->where('id',$id);
     $this->db->from('books');
     return $this->db->get()->result();
-  }
+  }//getbook BY ID
+
+  public function getRandombook($type)
+  {
+    $query = $this->db->query("SELECT id,name,link,level,section,writer,brief,pic,post,uploadname,type,numdownload from books WHERE  type=$type ORDER BY RAND() LIMIT 1");
+
+    return $query->result();
+  }//getRandombook
+
   public function getbookByName($name , $type)
   {
     // return $name;
@@ -100,6 +108,12 @@ class Books extends CI_Model {
     return $this->db->get()->result();
   }//sectionFilter
 
+  public function updateNumDownload($id)
+  {
+    $this->db->set('numdownload', 'numdownload +1', FALSE);
+    $this->db->where('id', $id);
+    $this->db->update('books'); 
+  }//updateNumDownload
 }//class
 
 ?>

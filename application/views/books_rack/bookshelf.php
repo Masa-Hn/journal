@@ -26,7 +26,7 @@
           </div>
           <div style="text-align: center; margin-top: 5%">
             <span id="choice"> أو </span>
-            <a href="<?php echo base_url()?>bookDesc/randomBook"><button id="button" class="btn btn-outline btn-lg button" style="margin-top: 0;margin-bottom: 2%;"> اختر لي كتابًا </button> </a>
+            <a href="<?php echo base_url()?>bookDesc/randomBook?type=<?php echo $type?>"><button id="button" class="btn btn-outline btn-lg button" style="margin-top: 0;margin-bottom: 2%;"> اختر لي كتابًا </button> </a>
           </div>
         </div>
       </div>
