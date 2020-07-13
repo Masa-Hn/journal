@@ -60,6 +60,8 @@ $slides_num=$num/26;
  $h=0;
 ?>  
                     <div class="slideshow-container">
+                       <?php echo $this->session->flashdata('msg')?>  
+
                         <?php for ($j=1;$j<=$slides_num;$j++){
                            
                             ?>   
@@ -79,7 +81,7 @@ $slides_num=$num/26;
                                 ?>
                                 <tr style="background-color: #f2f2f2;">
                                     
-                                    <td  ><button class="book" style="text-align: right;" 
+                                    <td  ><button class="book" style="text-align: center;" 
                                         onclick="show_detailes(
                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->id; ?> ',
                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->name; ?> ',
@@ -96,7 +98,7 @@ $slides_num=$num/26;
                                     <td ><button class="book"  >&nbsp; </button></td>
                                     <td ><button class="book"  >&nbsp; </button></td>
 
-                                    <td ><button class="book"  style="text-align: right;" 
+                                    <td ><button class="book"  style="text-align: center;" 
                                         onclick="show_detailes(
                                         '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->id ?>',
                                         '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->name ?>',
@@ -168,13 +170,18 @@ $slides_num=$num/26;
                      <a name="post" id="post" style="padding-right: 2em; color: #A52A2A" > اضغط هنا<a></li>  <br><br>
 
 
-                        <a id="image" name="image" class="mybutton" style="width: 190px;float: right;background-color: #A52A2A" >
-                         <label style="float: right;text-align: center; outline: none; color: #fff;">عرض صورة الكتاب
-                         </label> </a>
+                    <li style="direction: rtl; text-align: right;"> رابط صورة الكتاب : <br>
+
+                        <a id="image" name="image" style="padding-right: 2em; color: #A52A2A" > اضغط هنا</a></li><br><br>
                          
-                         <div style="padding-right: 210px;">
+                         <div style="float: right;">
                          <a id="update" class="mybutton" style="width: 190px;float: right;background-color: #A52A2A" >
                          <label style=" text-align: center; outline: none; color: #fff;">تعديل بيانات الكتاب
+                         </label> </a></div>
+
+                          <div style="float: right; padding-right: 10px">
+                         <a id="delete" class="mybutton" style="width: 150px;float: right;background-color: #A52A2A" >
+                         <label style=" text-align: center; outline: none; color: #fff;">حذف الكتاب
                          </label> </a></div>
 
                     <button style="float: left; width: 100px;" class="mybutton" onclick="back()" > رجوع </button>

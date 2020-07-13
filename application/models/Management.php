@@ -25,5 +25,18 @@ public function get_articles()
 
    return $query;
 }
+
+public function getimgs()
+{
+		 $query=$this->db->get('infographic');
+
+   return $query;
+}
+
+public function delete_infographic($id)
+{
+	$this->db->where('id',$id);
+	$this->db->delete('infographic');
+		}
 }
 ?>

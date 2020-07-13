@@ -9,30 +9,29 @@ body {
     background-repeat: no-repeat
 }
 
-
- .navbar{
-  background: #205d67;
+.navbar{
+ 
   padding: 1% 0;
   font-size: 1.2em;
   font-family: 'Harmattan', sans-serif;
+
 
 }
 .nav-direct{
   display: flex;
   flex-direction: row;    
 }
-.navbar-brand{
-  margin-left: -60px !important;
-  min-height: 55px;
-  padding:0 15px 5px;
-}
+
 .navbar-brand img{
   width: 70%;
 }
-.navbar-default .navbar-nav li a{
+ .navbar-nav li a{
   font-size: 20px;
-  color: #FCFAEF;
+ 
+text-align: right;
+float: right;
 }
+
 /*.navbar-default .navbar-nav li a::hover, .navbar-default .navbar-nav li a.active{
   color: red;
 }*/
@@ -42,6 +41,7 @@ body {
   background-color: #8ac579;
   margin: 0 auto 2rem;
 }
+
 
 
 h3,h5,p {text-align: right;}
