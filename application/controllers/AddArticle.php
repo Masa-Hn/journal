@@ -9,6 +9,10 @@ class AddArticle extends CI_Controller {
         $this->load->view('management_book/js/management_book');
         $this->load->database();
         $this->load->model('management');
+        
+        if(!$this->session->userdata('logged_in')){
+            redirect(base_url("login"));
+        }
     }
 
 

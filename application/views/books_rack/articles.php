@@ -7,94 +7,25 @@
             <div class="" >
               <div class="container ">
                 <div class="row text-center articleView ">
-                  <div class="col-md-3 col-sm-12  articleDiv fade-in" >
-                    <a href="articleView.html">
-                      <div class="card">
-                        <img  class="card-img-top" src="<?php echo base_url()?>assets/img/maqal.jpg">
-                        <div class="card-body">
-                          <h1 class="artical-title-small"> Title </h1>
-                          <p class="card-text artical-description">Description</p>
-                        </div>
-                      </div> 
-                    </a>
-                  </div>
-                  <div class="col-md-3 col-sm-12  articleDiv fade-in" >
-                    <a href="articleView.html">
-                      <div class="card">
-                        <img  class="card-img-top" src="<?php echo base_url()?>assets/img/maqal.jpg">
-                        <div class="card-body">
-                          <h1 class="artical-title-small"> Title </h1>
-                          <p class="card-text artical-description">Description</p>
-                        </div>
-                      </div> 
-                    </a>
-                  </div>
-                  <div class="col-md-3 col-sm-12  articleDiv fade-in" >
-                    <a href="articleView.html">
-                      <div class="card">
-                        <img  class="card-img-top" src="<?php echo base_url()?>assets/img/maqal.jpg">
-                        <div class="card-body">
-                          <h1 class="artical-title-small"> Title </h1>
-                          <p class="card-text artical-description">Description</p>
-                        </div>
-                      </div> 
-                    </a>
-                  </div>
-                  <div class="col-md-3 col-sm-12  articleDiv fade-in" >
-                    <a href="articleView.html">
-                      <div class="card">
-                        <img  class="card-img-top" src="<?php echo base_url()?>assets/img/maqal.jpg">
-                        <div class="card-body">
-                          <h1 class="artical-title-small"> Title </h1>
-                          <p class="card-text artical-description">Description</p>
-                        </div>
-                      </div> 
-                    </a>
-                  </div>
-                  <div class="col-md-3 col-sm-12  articleDiv fade-in" >
-                    <a href="articleView.html">
-                      <div class="card">
-                        <img  class="card-img-top" src="<?php echo base_url()?>assets/img/maqal.jpg">
-                        <div class="card-body">
-                          <h1 class="artical-title-small"> Title </h1>
-                          <p class="card-text artical-description">Description</p>
-                        </div>
-                      </div> 
-                    </a>
-                  </div>
-                  <div class="col-md-3 col-sm-12  articleDiv fade-in" >
-                    <a href="articleView.html">
-                      <div class="card">
-                        <img  class="card-img-top" src="<?php echo base_url()?>assets/img/maqal.jpg">
-                        <div class="card-body">
-                          <h1 class="artical-title-small"> Title </h1>
-                          <p class="card-text artical-description">Description</p>
-                        </div>
-                      </div> 
-                    </a>
-                  </div>
-                  <div class="col-md-3 col-sm-12  articleDiv fade-in" >
-                    <a href="articleView.html">
-                      <div class="card">
-                        <img  class="card-img-top" src="<?php echo base_url()?>assets/img/maqal2.jpg">
-                        <div class="card-body">
-                          <h1 class="artical-title-small"> Title </h1>
-                          <p class="card-text artical-description">Description</p>
-                        </div>
-                      </div> 
-                    </a>
-                  </div>
-                  <div class="col-md-3 col-sm-12   articleDiv fade-in" >
-                    <a href="articleView.html">
-                      <div class="card">
-                        <img  class="card-img-top" src="<?php echo base_url()?>assets/img/maqal.jpg">
-                        <div class="card-body">
-                          <h1 class="artical-title-small"> Title </h1>
-                          <p class="card-text artical-description">Description</p>
-                        </div>
-                      </div> 
-                    </a>
-                  </div>
+                  <?php
+                    foreach ($articles as $article) {
+                      echo '
+                      <div class="col-md-3 col-sm-12  articleDiv fade-in" >
+                        <a href="'. base_url().'Article/articleView?id='.$article->id.'" >
+                          <div class="card">
+                            <img  class="card-img-top" src="'. base_url() .'assets/img/'.$article->pic .'">
+                            <div class="card-body">
+                              <h1 class="artical-title-small">'.$article->title .' </h1>
+                              <p class="card-text artical-description">'. substr($article->article,0,80).'</p>
+                            </div>
+                          </div> 
+                        </a>
+                      </div>
+                      '; 
+                    }//foreach
+                    
+                  ?>
+             
                 </div>
               </div>
             </div> 

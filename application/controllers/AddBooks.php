@@ -11,6 +11,10 @@ class AddBooks extends CI_Controller {
         $this->load->model('ManageBooks');
 
         $this->load->view('management_book/js/management_book');
+        
+        if(!$this->session->userdata('logged_in')){
+            redirect(base_url("login"));
+        }
     }
 
     public function index(){
@@ -70,11 +74,11 @@ class AddBooks extends CI_Controller {
         if($this->insertbook->editbook($name,$writer,$brief,$level,$section,$type,$post,$link,$pic,$id)){
 
             $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم تعديل الكتاب بنجاح</div>");
-            redirect(base_url().'AddBooks/index?id='.$id);
+            redirect(base_url().'AddBooks/index/'.$id);
         }else{
 
             $this->session->set_flashdata('msg',"<div class='alert alert-danger' style='text-align:right'>خطأ</div>");
-            redirect(base_url().'AddBooks/index?id='.$id);
+            redirect(base_url().'AddBooks/index/'.$id);
         }
     }
 

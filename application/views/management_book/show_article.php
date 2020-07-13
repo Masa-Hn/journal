@@ -18,7 +18,7 @@ $n=$num_rows;
  for ($i=0; $i <$n ; $i++) {
   $row=$articles->row($i);   ?>
     
-  <div class="mySlides" style="padding-right: 25%">
+  <div class="mySlides" style="padding-right: 10%">
     
 <script type="text/javascript">
   var slideIndex = 1;

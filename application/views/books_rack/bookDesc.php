@@ -7,6 +7,8 @@
  {
    echo '
 <div class="container padding" id="section-one">
+    <input type="hidden" name="id" id="book_id" value="'.$row->id.'">
+
     <h2 style="text-align: center;"> '.$row->name.'</h2>
     <div class="heading-underline"></div>
     <div class=" row direct fade-in" style="text-align: center;">
@@ -73,6 +75,15 @@
   imageAlt: 'Custom image',
 }).then(function (result) {
     if (result.value) {
+      $.ajax({
+        type: "POST",
+        url:document.getElementById("base_url").value+"bookDesc/updateNumDownload",
+        data: {'id':document.getElementById("book_id").value},
+        success: function(data){
+           console.log(data);
+        }
+      });
+     
        window.open(document.getElementById("download_link").value);
     }
 })
