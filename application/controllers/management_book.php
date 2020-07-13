@@ -14,6 +14,8 @@ class Management_book extends CI_Controller {
 	{
         $data['title'] = 'Management Book';
 		$this->load->view('management_book/templates/header', $data);
+        //$this->load->view('books_rack/templates/header');
+
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/management');
         $this->load->view('management_book/templates/footer');
@@ -64,4 +66,21 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/templates/footer');
 
     }
+
+     public function show_infographic(){
+        if ($this->uri->segment(3))
+        {
+              $id=$this->uri->segment(3);
+           $this->management->delete_infographic($id);
+ $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف الانفوجرافيك بنجاح</div>");
+            redirect(base_url().'Management_book/show_infographic');
+        }
+        $data['imgs'] = $this->management->getimgs();
+        $data['title'] = 'Show Infographic';
+        $this->load->view('management_book/templates/header', $data);
+        $this->load->view('management_book/templates/navbar');
+        $this->load->view('management_book/show_infographic',$data);
+        $this->load->view('management_book/templates/footer');
+    }
+
 }

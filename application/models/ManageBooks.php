@@ -7,5 +7,9 @@ class ManageBooks extends CI_Model {
     $this->db->where('type',$type);
     return $this->db->get();
   }
-
+public function delete_book($id)
+{
+	$this->db->where('id',$id);
+	$this->db->delete('books');
+		}
 }

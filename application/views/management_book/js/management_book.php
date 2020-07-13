@@ -182,6 +182,26 @@ a.setAttribute("href", pic);
 
 b = document.getElementById('update');
 b.setAttribute("href", "<?php echo base_url()?>AddBooks/index/"+id);
+
+s = document.getElementById('delete');
+s.setAttribute("href", "<?php echo base_url()?>AddBooks/show_book/"+type+"/"+id);
+  
+}
+
+function show_detailes_graphic(id,pic,date,title) {
+ 
+  document.getElementById('content').style.display="none";
+  document.getElementById('content2').style.display="block";
+  document.getElementById('title').value=title;
+  document.getElementById('date').value=date;
+
+ 
+  a=document.getElementById('pic');
+  a.setAttribute("src","<?php echo base_url()?>assets/img/infographic/"+pic);
+ 
+  
+b = document.getElementById('delete');
+b.setAttribute("href", "<?php echo base_url()?>Management_book/show_infographic/"+id);
   
 }
 
