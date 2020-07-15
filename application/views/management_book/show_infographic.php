@@ -128,8 +128,8 @@ $slides_num=$num/26;
                     <li style="direction: rtl; text-align: right;"> تاريخ الإضافة :<br>
                      <input style="border: none;background-color: white;"  name="date" id="date" readonly></li>
                     <li style="direction: rtl; text-align: right;"> الصورة : <br>                       
-                <img name="pic" id="pic" style=" height: 40%;width: 50%" onclick="window.open(this.src)" > </li>  <br><br>
-</li>
+                <img name="pic" id="pic" style=" height:100px;width: 100px" onclick="window.open(this.src)" > </li>  <br><br>
+
                    
                          
                          <div style="float: right;">

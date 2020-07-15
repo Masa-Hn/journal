@@ -99,6 +99,9 @@ body{
                         <div class="foot-lnk">
                             <label for="tab-2">Not a Member Yet ?</label>
                         </div>
+                    <div class="foot-lnk"><style>l{ }</style>
+                            <label for="tab-2"><a href="<?php echo base_url('home/')?>" style="text-decoration: none">Home Page</a></label>
+                        </div>
                 </form> 
             </div>
                 
@@ -140,7 +143,7 @@ body{
         </div>
         <br /><br />
         <div class="text-center">
-            <footer style="position:relative; background-color:rgba(229, 229, 190,.1); color:#6b6b83; padding:10px">
+            <footer style="position:relative; color:#6b6b83; padding:10px">
                 <h5> تصميم: شذا الأسدي </h5>
                 <h5> الخدمة التقنية :فنجان هوست </h5>
             </footer> 

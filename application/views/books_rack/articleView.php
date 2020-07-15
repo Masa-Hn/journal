@@ -26,7 +26,7 @@
         <div class="row direct" dir="ltr">
           <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct" >
               <div class="col-5 col-md-4 slide-in from-right">  
-                <img  src="'.base_url().'assets/img/'.$article->pic.'" class="bookImg" >
+                <img  src="'.base_url().'assets/img/article/'.$article->pic.'" class="bookImg" >
               </div>    
 
               <div class="container-fluid text-center col-7 col-md-8 slide-in from-left">

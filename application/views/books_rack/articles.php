@@ -13,7 +13,7 @@
                       <div class="col-md-3 col-sm-12  articleDiv fade-in" >
                         <a href="'. base_url().'Article/articleView?id='.$article->id.'" >
                           <div class="card">
-                            <img  class="card-img-top" src="'. base_url() .'assets/img/'.$article->pic .'">
+                            <img  class="card-img-top" src="'. base_url() .'assets/img/article/'.$article->pic .'">
                             <div class="card-body">
                               <h1 class="artical-title-small">'.$article->title .' </h1>
                               <p class="card-text artical-description">'. substr($article->article,0,80).'</p>

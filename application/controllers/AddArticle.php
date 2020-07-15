@@ -34,7 +34,7 @@ class AddArticle extends CI_Controller {
     {
          
 
-         $config['upload_path'] = './assets/article_img';
+         $config['upload_path'] = './assets/img/article';
          $config['allowed_types']='jpg|jpeg|gif|png';
          $config['max_size'] = 2000;
          $config['encrypt_name'] = TRUE;
