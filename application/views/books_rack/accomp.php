@@ -4,7 +4,7 @@
   <div class="padding" id="section-one">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6 slide-in from-left">
+        <div class="col-sm-6 fade-in">
           <img src="<?php echo base_url()?>assets/img/special.png" style="width: 90%">
         </div>
         <div class="col-sm-6 text-center vertical-center fade-in">
@@ -59,14 +59,14 @@
       <div class="padding">
         <div class="container-fluid text-center fade-in">
           <form action="#">
-            <select id="activity" name="activity" class="btn select-btn dropdown-toggle" data-toggle="dropdown">
+            <select id="activity" name="activity" class="btn select-btn dropdown-toggle" data-toggle="dropdown" style="color: #fcfaef;">
               <option value="0" selected=""> اختر النشـاط</option>
               <option value="1"> نشاط 1</option>
               <option value="2">نشاط 2</option>
               <option value="3">نشاط 2</option>
               <option value="4">نشاط 3 </option>
             </select>
-            <select id="version" name="version" class="btn select-btn dropdown-toggle" data-toggle="dropdown">
+            <select id="version" name="version" class="btn select-btn dropdown-toggle" data-toggle="dropdown" style="color: #fcfaef;">
               <option value="0" selected=""> اختر النسخة </option>
               <option value="1">  نسخة  1</option>
               <option value="2"> نسخة  2</option>
