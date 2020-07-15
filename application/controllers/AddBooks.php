@@ -82,6 +82,18 @@ class AddBooks extends CI_Controller {
         }
     }
 
+public function delete()
+{
+          $type=$this->uri->segment(3);
+
+     if ($this->uri->segment(4))
+        {
+            $id=$this->uri->segment(4);
+            $this->ManageBooks->delete_book($id);
+            $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف الكتاب بنجاح</div>");
+            redirect(base_url().'AddBooks/show_book/'.$type);
+        }
+}
     public function show_book(){
         
       $type=$this->uri->segment(3);
@@ -93,13 +105,7 @@ class AddBooks extends CI_Controller {
         $this->load->view('management_book/show_book',$data);
         $this->load->view('management_book/templates/footer');
 
-        if ($this->uri->segment(4))
-        {
-            $id=$this->uri->segment(4);
-            $this->ManageBooks->delete_book($id);
-            $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف الكتاب بنجاح</div>");
-            redirect(base_url().'AddBooks/show_book/'.$type);
-        }
+       
     }
 
     

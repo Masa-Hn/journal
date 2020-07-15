@@ -15,28 +15,32 @@
             	<div id="radio">  
 
                     <h4 class="heading" style="text-align: right;" >نوع الكتب التي تود استعراضها</h4>
-                    <div style=";padding-bottom: 15em;padding-top: 4em" class="text-center">
-                       <label style="direction: rtl; padding-bottom: 20px">
-                        <a id="type" name="type" class="mybutton" style="width: 300px" 
+                   
+                    <div style=" text-align: center;  padding-bottom: 15em;padding-top: 4em">
+
+
+
+                       <label style=" padding-bottom: 20px">                     
+                        <a id="type" name="type" class="mybutton" style="width: 300px"  
                         href="<?php echo base_url()?>AddBooks/show_book/1"  >  
                          <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب المنهج</label> </a></label>
 
-                        <label style="direction: rtl;padding-bottom: 20px">
+                        <label style=" padding-bottom: 20px">
                         <a id="type" name="type" class="mybutton" style="width: 300px" 
                         href="<?php echo base_url()?>AddBooks/show_book/2">  
                          <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب المرحلة التحضيرية</label> </a></label>
 
-                        <label style="direction: rtl;padding-bottom: 20px">
+                        <label style="padding-bottom: 20px">
                          <a id="type" name="type" class="mybutton" style="width: 300px"  
                          href="<?php echo base_url()?>AddBooks/show_book/3">  
                          <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب الأطفال</label> </a></label>
 
-                        <label style="direction: rtl;padding-bottom: 20px">
+                        <label style="padding-bottom: 20px">
                         <a id="type" name="type" class="mybutton" style="width: 300px"  
                         href="<?php echo base_url()?>AddBooks/show_book/4">  
                          <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب رمضان</label> </a></label>
                         
-                        <label style="direction: rtl;padding-bottom: 20px">
+                        <label style="padding-bottom: 20px">
                          <a id="type" name="type" class="mybutton" style="width: 300px"  
                          href="<?php echo base_url()?>AddBooks/show_book/5" >  
                          <label style="text-align: center; text-decoration: none; outline: none; color: #fff;">كتب اليافعين</label> </a></label>

@@ -19,6 +19,8 @@ public function delete_article($id)
 	$this->db->delete('article');
 		}
 
+
+
 public function get_articles()
 {
 	 $query=$this->db->get('article');
@@ -32,6 +34,17 @@ public function getimgs()
 
    return $query;
 }
+
+public function save_infographic($title,$date,$pic)
+{	
+	$data['pic']=$pic;
+	$data['date']=$date;
+	$data['title']=$title;
+		
+
+		$this->db->insert('infographic',$data);
+}
+
 
 public function delete_infographic($id)
 {

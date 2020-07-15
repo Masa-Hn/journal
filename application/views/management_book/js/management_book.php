@@ -184,7 +184,7 @@ b = document.getElementById('update');
 b.setAttribute("href", "<?php echo base_url()?>AddBooks/index/"+id);
 
 s = document.getElementById('delete');
-s.setAttribute("href", "<?php echo base_url()?>AddBooks/show_book/"+type+"/"+id);
+s.setAttribute("href", "<?php echo base_url()?>AddBooks/delete/"+type+"/"+id);
   
 }
 
