@@ -98,6 +98,10 @@ p{
 	position: relative;
 	background-size:cover;
 }
+.padding img #evaluation-img{
+	border: 4px solid #8ac579;
+	width: 50% ;
+}
 .carousel-img{
 	margin: auto;
 	max-width: 470px !important;
@@ -175,16 +179,7 @@ footer{
 	width: 100%;
 	height: 250px;
 }
-@media (min-width: 768px){
-	.vertical-center {
-	  transform: translate(4%, 70%);
-	  position: relative;
-	  top: 50%;
-	  padding: 20px;
-	  resize: both;
-	}
 
-}
 @media (max-width: 768px){
 	.navbar-brand img{
 		width: 65%;
@@ -216,5 +211,37 @@ footer{
 	max-width: 40px;
 
 	}
+	#evaluation-img{
+		width: 50%;
+	}
 
+}
+
+@media only screen and (max-width: 600px) {   
+  #evaluation-img{
+	width: 90%;
+	}
+	.owner-img{
+		width: 60%
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	#evaluation-img{
+		width: 50%;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.vertical-center {
+	  transform: translate(4%, 45%);
+	  position: relative;
+	  top: 50%;
+	  padding: 20px;
+	  resize: both;
+	}
+	#evaluation-img{
+	width: 50%;
+	
 }

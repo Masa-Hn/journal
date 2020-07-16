@@ -4,10 +4,10 @@
   <div class="padding" id="section-one">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6 slide-in from-left">
+        <div class="col-sm-6 slide-in  from-right">
           <img src="<?php echo base_url()?>assets/img/donate.png">
         </div>
-        <div class="col-sm-6 text-center slide-in from-right ">
+        <div class="col-sm-6 text-center slide-in from-left ">
           <h2> ينقصنا بصمتك أنت</h2>
           <div class="heading-underline"></div>
           <p style="font-size: 25px">
@@ -39,7 +39,7 @@
              (من دعا إلى هدى كان له من الأجر مثل أجور من تبعه، لا ينقص ذلك من أجورهم شيئًا.) رواه مسلم.
             <br><br>
             <a target="_blank" href="https://www.patreon.com/osboha180">
-              <button class="button btn btn-outline-dark " style="font-size: 2vw">  ادعمنا من هنا </button>
+              <button class="button btn btn-outline-dark ">  ادعمنا من هنا </button>
             </a>
 
           </p>

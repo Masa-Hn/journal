@@ -85,10 +85,10 @@
     <div class="container">
       <div class="col-md-12 owner">
         <div class="row">
-          <div class="col-md-3 slide-in from-left">
-            <img src="<?php echo base_url()?>assets/img/owner.png">
+          <div class="col-md-3 fade-in">
+            <img class="owner-img" src="<?php echo base_url()?>assets/img/owner.png">
           </div>      
-          <div class="col-md-9 slide-in from-right">
+          <div class="col-md-9 fade-in">
             <p>
             <b> الاسم </b> : أحمد علاء الشمري.
             <br>
@@ -125,13 +125,20 @@
           <div class="container-fluid text-center">
             <h2> احصائيات الأسبوع</h2>
             <div class="heading-underline"></div>
-            <p class="lead">
-              الأسبوع الرابع من مارس 
-            </p>
+            <h3>
+              <?php 
+                echo $evaluation[0]->title;
+
+              ?>  
+            </h3>
           </div>
         <div class="row fade-in">
           <div class="container-fluid text-center">
-            <img src="<?php echo base_url()?>assets/img/stat.jpg" style="border: 4px solid #8ac579;width: 50%;">
+            <?php 
+                echo'
+                <img id="evaluation-img" src="'.base_url().'assets/img/'.$evaluation[0]->pic .'">';
+            ?>
+
           </div>
         </div>
       </div>

@@ -5,9 +5,11 @@ class Home extends CI_Controller {
     
 	public function index()
 	{
+		$this->load->model('EvaluationModel');
+		$arr['evaluation']=$this->EvaluationModel->getEvaluation();
 		$this->load->view('books_rack/templates/header');
         $this->load->view('books_rack/templates/navbar');
-        $this->load->view('books_rack/index');
+        $this->load->view('books_rack/index',$arr);
         $this->load->view('books_rack/templates/footer');
 	}//index
 

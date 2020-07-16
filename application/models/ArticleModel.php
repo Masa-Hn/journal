@@ -3,8 +3,10 @@ class ArticleModel extends CI_Model {
 
   public function getArticles()
   {
-    $this->db->from('article');
-    return $this->db->get()->result();
+    $this->db->order_by('id DESC');
+    $this->db->limit(10);
+    return $this->db->get('article')->result(); 
+
 
   }//getArticles
 
@@ -15,7 +17,14 @@ class ArticleModel extends CI_Model {
     return $this->db->get()->result();
   }//getArticleById
 
-   
+  public function getmore($id)
+  { 
+    $this->db->where('id <',$id);
+    $this->db->order_by('id DESC');
+    $this->db->limit(10);
+    return $this->db->get('article');  
+    
+  }//getmore
 }//class
 
 ?>
