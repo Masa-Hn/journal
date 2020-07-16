@@ -35,7 +35,7 @@
                                 <p class="sub-desc" style="text-align: center;">إضافة مقال</p>
                             </li>
                             <li class="card-block text-center radio " >
-                                <a class="image-icon"  href="<?php echo base_url()?>management_book/add_infographic"> 
+                                <a class="image-icon"  href="<?php echo base_url()?>AddInfographic/index"> 
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_info.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">إضافة انفوجرافيك</p>
                             </li>

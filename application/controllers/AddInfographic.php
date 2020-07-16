@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AddArticle extends CI_Controller {
+class AddInfographic extends CI_Controller {
     
     public function __construct(){
         
@@ -19,10 +19,10 @@ class AddArticle extends CI_Controller {
 
  public function index()
     {
-       $data['title'] = 'Add Article';
+       $data['title'] = 'Add Infographic';
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/add_article');
+        $this->load->view('management_book/add_infographic');
         $this->load->view('management_book/templates/footer');
        
        
@@ -30,11 +30,11 @@ class AddArticle extends CI_Controller {
 
     }
     
-    public function add_article()
+    public function add_infographic()
     {
          
 
-         $config['upload_path'] = './assets/img/article';
+         $config['upload_path'] = './assets/img/infographic';
          $config['allowed_types']='jpg|jpeg|gif|png';
          $config['max_size'] = 2000;
          $config['encrypt_name'] = TRUE;
@@ -42,20 +42,19 @@ class AddArticle extends CI_Controller {
         
         $this->load->library('upload', $config);
      
-        $a=$this->input->post('article');  
-        $n=$this->input->post('article_name');
-        $w=$this->input->post('writer');
+        $a=$this->input->post('adress_info');  
         $d=$this->input->post('date');
-
-        $this->upload->do_upload('article_img');
+        
+        $this->upload->do_upload('info_pic');
         $image_data = $this->upload->data();  
         $i=$image_data['file_name'];
-        $this->management->savearticle($n,$w,$d,$a,$i);  
+        $this->management->save_infographic($a,$d,$i);  
         
-        $data['info'] = 'تم إضافة المقال بنجاح';
+        $data['info'] = 'تم إضافة صورة انفوجرافيك بنجاح';
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/success',$data);
         $this->load->view('management_book/templates/footer');
+        
     }
     }

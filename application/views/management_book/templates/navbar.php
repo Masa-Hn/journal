@@ -30,7 +30,7 @@
           <li><a style=" color: #FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>AddArticle/index">إضافة مقال</a></li>
            <li ><a style=" color: #FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>management_book/show_article">استعراض المقالات</a></li>
           <li ><a style=" color: #FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>management_book/add_activity">إضافة نشاط</a></li>
-          <li ><a style=" color: #FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>management_book/add_infographic">إضافة انفوجرافيك</a></li>
+          <li ><a style=" color: #FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>AddInfographic/index">إضافة انفوجرافيك</a></li>
            <li ><a style=" color: #FCFAEF;" class="nav-item nav-link activ" href="<?php echo base_url()?>management_book/show_infographic">استعراض الانفوجرافيك</a></li>
            
            <li ><a style=" color: #FCFAEF;" class="nav-item nav-link logout" href="<?php echo base_url()?>login/logout">تسجيل خروج</a></li>

@@ -6,7 +6,7 @@
                
 <fieldset id = "success" class="show">
                     <div class="form-card">
-                        <p class="message"> ..  تم إضافة مقال جديد بنجاح</p>
+                        <p class="message"> ..  <?php echo $info ?></p>
                         <div class="check"> <img class="fit-image check-img" src="https://i.imgur.com/QH6Zd6Y.gif"> </div>
                     </div>
                 </fieldset>
