@@ -9,6 +9,7 @@
                 <div class="row text-center articleView " id="articleView">
                   <?php
                     if (!empty($articles)) {
+                      echo '<input type="hidden" id="exist" value="1">';
                       foreach ($articles as $article) {
                         echo '
                         <div class="col-md-3 col-sm-12  articleDiv fade-in" id="'.$article->id .'">  
@@ -29,6 +30,7 @@
                     }//if
                     else{
                       echo '
+                        <input type="hidden" id="exist" value="0">
                         <div class="col-md-3 col-sm-12 fade-in">
                           <h3> لا يوجد مقالات لعرضها  </h3>
                         </div>
@@ -54,8 +56,8 @@
         var url="<?php echo base_url();?>Article/getmore";
         $("body").scroll(function(){
           delay++;
-
-          if(delay == 20){
+          var exist = document.getElementById("exist").value;
+          if(delay == 20 && exist == 1 ){
             var last_id= $('#articleView').children().last().attr('id');
             $.ajax({
               type: "POST",

@@ -52,6 +52,7 @@
     <div class="row" id="gallaryRow"> 
         <?php
           if($exist){
+            echo "<input type='hidden' id='exist' value='1'>";
             echo '<div class="masonryholder" id="masonryholder">';
             foreach ($infographic as $row) {
               echo
@@ -60,8 +61,10 @@
             echo "</div>";
           }//if
           else{
-            echo "<div class='col-md-3 col-sm-12 fade-in' style='margin:0 auto'>
-            <h2 style='text-align: center;'>لا يوجد نتائج </h2> </div>";
+            echo "
+              <input type='hidden' id='exist' value='0'>
+              <div class='col-md-3 col-sm-12 fade-in' style='margin:0 auto'>
+              <h2 style='text-align: center;'>لا يوجد نتائج </h2> </div>";
           }//else       
         ?>
             
@@ -95,8 +98,8 @@
 
         $("body").scroll(function(){
           delay++;
-
-          if(delay == 20){
+          var exist = document.getElementById("exist").value;
+          if(delay == 20 && exist == 1 ){
             var last_id=$('#masonryholder').children().last().children().last().attr('id');
 
               $.post(url,
@@ -105,17 +108,10 @@
               },
               function(data, status){
                 $('#masonryholder').append(data);
-
-                console.log("Data: " + data + "\nStatus: " + status);
               });
 
-            console.log(url)
-            console.log("delay is " + delay)
-
-            console.log('-------------------')
 
             delay=0;
-            console.log("delay is " + delay)
           }
 });
 
