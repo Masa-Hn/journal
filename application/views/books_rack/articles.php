@@ -8,23 +8,33 @@
               <div class="container ">
                 <div class="row text-center articleView " id="articleView">
                   <?php
-                    foreach ($articles as $article) {
-                      echo '
-                      <div class="col-md-3 col-sm-12  articleDiv fade-in" id="'.$article->id .'">  
+                    if (!empty($articles)) {
+                      foreach ($articles as $article) {
+                        echo '
+                        <div class="col-md-3 col-sm-12  articleDiv fade-in" id="'.$article->id .'">  
+                
+                            <a href="'. base_url().'Article/articleView?id='.$article->id.'" >
+                              <div class="card">
+                                <img  class="card-img-top" src="'. base_url() .'assets/img/article/'.$article->pic .'">
+                                <div class="card-body">
+                                  <h1 class="artical-title-small">'.$article->title .' </h1>
+                                  <p class="card-text artical-description">'. substr($article->article,0,80).'</p>
+                                </div>
+                              </div> 
+                            </a>
               
-                          <a href="'. base_url().'Article/articleView?id='.$article->id.'" >
-                            <div class="card">
-                              <img  class="card-img-top" src="'. base_url() .'assets/img/article/'.$article->pic .'">
-                              <div class="card-body">
-                                <h1 class="artical-title-small">'.$article->title .' </h1>
-                                <p class="card-text artical-description">'. substr($article->article,0,80).'</p>
-                              </div>
-                            </div> 
-                          </a>
-            
-                      </div>
-                      '; 
-                    }//foreach
+                        </div>
+                        '; 
+                      }//foreach
+                    }//if
+                    else{
+                      echo '
+                        <div class="col-md-3 col-sm-12 fade-in">
+                          <h3> لا يوجد مقالات لعرضها  </h3>
+                        </div>
+                      ';
+                    }
+                    
                     
                   ?>
              

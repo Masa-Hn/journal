@@ -50,16 +50,18 @@
     <h2 style="text-align: center;"> إنجازات فريق أُطروحتك انفوغرافيك</h2>
     <div class="heading-underline"></div>
     <div class="row" id="gallaryRow"> 
-      <div class="masonryholder" id="masonryholder">
         <?php
           if($exist){
+            echo '<div class="masonryholder" id="masonryholder">';
             foreach ($infographic as $row) {
               echo
                 '<div class="masonryblocks"><img src="'. base_url().'assets/img/infographic/'.$row->pic .'" class="my-masonry-grid-item gallaryImg fade-in" id="'.$row->id.'" onClick="show(this.id)"></div>';
             }//foreach
+            echo "</div>";
           }//if
           else{
-            echo "<h2 style='text-align: center;'>لا يوجد نتائج </h2>";
+            echo "<div class='col-md-3 col-sm-12 fade-in' style='margin:0 auto'>
+            <h2 style='text-align: center;'>لا يوجد نتائج </h2> </div>";
           }//else       
         ?>
             
