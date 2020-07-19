@@ -1,10 +1,10 @@
-﻿@import url('https://fonts.googleapis.com/css?family=Harmattan&display=swap&subset=arabic');
+﻿@import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 
 html,body{
 	height: 100%;
 	width:100%;
 	background: #FCFAEF;
-	font-family: 'Harmattan', sans-serif;
+	font-family: 'Tajawal', sans-serif;
 	color: #205D67;
 	overflow-x: hidden;
 }

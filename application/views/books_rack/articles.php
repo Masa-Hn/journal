@@ -8,7 +8,7 @@
               <div class="container ">
                 <div class="row text-center articleView " id="articleView">
                   <?php
-                    if (!empty($articles)) {
+                    if (empty($articles)) {
                       echo '<input type="hidden" id="exist" value="1">';
                       foreach ($articles as $article) {
                         echo '
