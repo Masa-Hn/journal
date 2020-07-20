@@ -34,7 +34,7 @@ p{
 	width: 70%;
 }
 .navbar-default .navbar-nav li a{
-	font-size: 20px;
+	font-size: 17px;
 	color: #FCFAEF;
 }
 /*.navbar-default .navbar-nav li a::hover, .navbar-default .navbar-nav li a.active{
@@ -74,7 +74,7 @@ p{
 	color: #205D67;
 }
 .landing-text h1{
-	font-size: 600%;
+	font-size: 500%;
 	font-weight: 700;
 }
 .img-resize{
