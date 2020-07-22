@@ -5,7 +5,6 @@
     var displayLink =document.getElementById("base_url").value+"Infographic/infographicDisplay/";
     var displayID=document.getElementById("shareID").value; 
     var fullLink = fb+displayLink+displayID; 
-    console.log(fullLink);
     window.open(fullLink);
   }
 
@@ -14,8 +13,6 @@
     var displayLink =document.getElementById("base_url").value+"Infographic/infographicDisplay/";
     var displayID=document.getElementById("shareID").value; 
     var fullLink = twitter+displayLink+displayID; 
-    console.log(fullLink);
-
     window.open(fullLink);
   }
     function infographic_linkedinShare(){
@@ -23,8 +20,6 @@
     var displayLink =document.getElementById("base_url").value+"Infographic/infographicDisplay/";
     var displayID=document.getElementById("shareID").value; 
     var fullLink = linkedin+displayLink+displayID; 
-    console.log(fullLink);
-
     window.open(fullLink);
   }
   function infographic_pin_it(){
@@ -34,11 +29,10 @@
     var img = document.getElementById(id).src; 
 
     var fullLink = pin_it+displayLink+img; 
-    console.log(fullLink);
     window.open(fullLink);
   }
 
-    function infographic_copyLink(){
+  function infographic_copyLink(){
     var link =document.getElementById("base_url").value+"Infographic/infographicDisplay/"+document.getElementById("shareID").value;
     
     var copyText = document.createElement('textarea');
@@ -59,12 +53,13 @@
     })
     console.log(copyText.value);
   }
+
 //Accomplishments
 
 function accomp_fbShare()
   {
     var fb = 'https://www.facebook.com/sharer/sharer.php?u=';
-    var displayLink =document.getElementById("base_url").value+"Accomplishment/accompDisplay/";
+    var displayLink =document.getElementById("base_url").value+"Activities/certificateDisplay/";
     var displayID=document.getElementById("shareID").value; 
     var fullLink = fb+displayLink+displayID; 
     console.log(fullLink);
@@ -73,7 +68,7 @@ function accomp_fbShare()
 
   function accomp_twitterShare(){
     var twitter = 'http://twitter.com/share?text=Osboha180&url=';
-    var displayLink =document.getElementById("base_url").value+"Accomplishment/accompDisplay/";
+    var displayLink =document.getElementById("base_url").value+"Activities/certificateDisplay/";
     var displayID=document.getElementById("shareID").value; 
     var fullLink = twitter+displayLink+displayID; 
     console.log(fullLink);
@@ -82,7 +77,7 @@ function accomp_fbShare()
   }
     function accomp_linkedinShare(){
     var linkedin = 'https://www.linkedin.com/sharing/share-offsite/?url=';
-    var displayLink =document.getElementById("base_url").value+"Accomplishment/accompDisplay/";
+    var displayLink =document.getElementById("base_url").value+"Activities/certificateDisplay/";
     var displayID=document.getElementById("shareID").value; 
     var fullLink = linkedin+displayLink+displayID; 
     console.log(fullLink);
@@ -101,7 +96,7 @@ function accomp_fbShare()
   }
 
     function accomp_copyLink(){
-    var link =document.getElementById("base_url").value+"Accomplishment/accompDisplay/"+document.getElementById("shareID").value;
+    var link =document.getElementById("base_url").value+"Activities/certificateDisplay/"+document.getElementById("shareID").value;
     
     var copyText = document.createElement('textarea');
     copyText.value=link;
