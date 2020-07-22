@@ -72,7 +72,7 @@ class Evaluation extends CI_Controller {
 
                     }
          $data['title'] = 'Show Article';
-         $Evals=$this->EvaluationModel->getEvaluation();
+         $Evals=$this->EvaluationModel->getEval();
          $num=$Evals->num_rows();
          $data['num_rows']=$num;
          $data['Evals']=$Evals;

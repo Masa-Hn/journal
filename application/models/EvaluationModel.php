@@ -4,6 +4,14 @@ class EvaluationModel extends CI_Model {
   public function getEvaluation()
   {
     $this->db->order_by('id');
+    return $this->db->get('evaluation')->result(); 
+
+
+  }//getEvaluation
+
+  public function getEval()
+  {
+    $this->db->order_by('id');
     return $this->db->get('evaluation'); 
 
 
@@ -14,7 +22,7 @@ public function saveEval($w,$i)
 		$data['title']=$w;
 		$data['pic']=$i;
 		
-$rows=$this->getEvaluation();
+$rows=$this->getEval();
 
 		if ($rows->num_rows()<4)
 		{

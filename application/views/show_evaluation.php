@@ -18,7 +18,7 @@ $n=$num_rows;
  for ($i=0; $i <$n ; $i++) {
   $row=$Evals->row($i);   ?>
     
-  <div class="mySlides" style="padding-right: 10%">
+  <div class="mySlides" style="padding-right: 10%;padding-top: 3em">
     
 <script type="text/javascript">
   var slideIndex = 1;
@@ -26,14 +26,17 @@ showSlides(slideIndex);
 </script>
  <?php echo $this->session->flashdata('msg')?>  
     <div class="numbertext" style="color: black"> <?php echo $i+1 ?> / <?php echo $n ?></div>
-    <h5 class="heading">: اسم لأسبوع </h5>
-      <p><?php echo $row->title ?></p>
+    <li style="direction: rtl; text-align: right;">اسم الأسبوع : <br>
+      <p><?php echo $row->title ?></p></li>
+
+    <li style="direction: rtl; text-align: right;">صورة التقييم : <br>
+    <img style=" height:200px;width: 200px" src="<?php echo base_url()?>assets/img/evaluation/<?php echo $row->pic ?>" onclick="window.open(this.src)" ></li>
      
 
       
- <form  enctype="multipart/form-data" method="post" style="padding-bottom: 5em;padding-top: 5em;padding-left: 47%" action="<?=base_url()?>Evaluation/show_evaluation">   
-<input type="number" name="id" id="id" value="<?php echo $row->id ?>" style="display: none;"   >  
-<button  id="delete"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A;" >حذف التقييم</button>
+ <form  enctype="multipart/form-data" method="post" style="padding-bottom: 5em;padding-top: 5em;padding-left: 40%" action="<?=base_url()?>Evaluation/show_evaluation">   
+  <input type="number" name="id" id="id" value="<?php echo $row->id ?>" style="display: none;"   >  
+<button  id="delete"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A;text-align: center;" >حذف التقييم</button>
 </form>
 
 </div>
