@@ -10,7 +10,7 @@ body {
 }
 
 .navbar{
- 
+ background-color: #205d67;
   padding: 1% 0;
   font-size: 1.2em;
   font-family: 'Harmattan', sans-serif;
@@ -26,7 +26,6 @@ body {
   width: 70%;
 }
  .navbar-nav li a{
-  font-size: 20px;
  
 text-align: right;
 float: right;

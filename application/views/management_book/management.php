@@ -19,21 +19,17 @@
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/show.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">استعراض الكتب</p>
                             </li>
-                            <li class="card-block text-center radio " >
-                                <a class="image-icon"  href="<?php echo base_url()?>management_book/show_article"> 
-                                <img class="icon icon1 " src="<?php echo base_url()?>assets/img/article.png"> </a>
-                                <p class="sub-desc" style="text-align: center;">استعراض المقالات</p>
-                            </li>
-                            <li class="card-block text-center radio " >
-                                <a class="image-icon"  href="<?php echo base_url()?>management_book/add_activity"> 
-                                <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_activity.png"> </a>
-                                <p class="sub-desc" style="text-align: center;">إضافة إنجاز جديد(نشاط)</p>
-                            </li>
                              <li class="card-block text-center radio " >
                                 <a class="image-icon"  href="<?php echo base_url()?>AddArticle/index"> 
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_article.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">إضافة مقال</p>
                             </li>
+                            <li class="card-block text-center radio " >
+                                <a class="image-icon"  href="<?php echo base_url()?>management_book/show_article"> 
+                                <img class="icon icon1 " src="<?php echo base_url()?>assets/img/article.png"> </a>
+                                <p class="sub-desc" style="text-align: center;">استعراض المقالات</p>
+                            </li>
+                           
                             <li class="card-block text-center radio " >
                                 <a class="image-icon"  href="<?php echo base_url()?>AddInfographic/index"> 
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_info.png"> </a>
@@ -44,6 +40,23 @@
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/show_infographic.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">استعراض الانفوجرافيك</p>
                             </li>
+                             <li class="card-block text-center radio " >
+                                <a class="image-icon"  href="<?php echo base_url()?>Evaluation/index"> 
+                                <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_eval.png"> </a>
+                                <p class="sub-desc" style="text-align: center;">إضافة تقييم أسبوعي</p>
+                            </li>
+                              <li class="card-block text-center radio " >
+                                <a class="image-icon"  href="<?php echo base_url()?>Evaluation/show_evaluation"> 
+                                <img class="icon icon1 " src="<?php echo base_url()?>assets/img/show_eval.png"> </a>
+                                <p class="sub-desc" style="text-align: center;">استعراض التقييمات</p>
+                            </li>
+
+                             <li class="card-block text-center radio " >
+                                <a class="image-icon"  href="<?php echo base_url()?>management_book/add_activity"> 
+                                <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_activity.png"> </a>
+                                <p class="sub-desc" style="text-align: center;">إضافة إنجاز جديد(نشاط)</p>
+                            </li>
+                            
                         </ul> 
                     </div>
                 </fieldset>

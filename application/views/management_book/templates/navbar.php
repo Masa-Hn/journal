@@ -12,7 +12,7 @@
 </style>
   <!-- Navbar -->
 
- <nav  class="navbar navbar-expand-lg navbar-light " style="background-color: #205d67;" >
+ <nav  class="navbar navbar-expand-lg navbar-light "  >
  
   <a class="navbar-brand" href="#">
           <img src="<?php echo base_url()?>assets/img/logo_2.png">
