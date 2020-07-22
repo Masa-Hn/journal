@@ -81,9 +81,8 @@ function previous() {
    document.getElementById('step2').className="active step0";
     document.getElementById('step3').className="step0";
 }
-function success() {
-  
-
+function success(val,p1,p2) {
+ 
   document.getElementById('success').style.display="block";
   document.getElementById('add').style.display="none";
  
