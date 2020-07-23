@@ -49,17 +49,7 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/templates/footer');
     }
     
-    public function add_activity()
-    {
-
-        $data['title'] = 'Add Activity';
-        $this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/add_activity');
-        $this->load->view('management_book/templates/footer');
-
-    }
-    
+   
    
         public function add_infographic()
     {

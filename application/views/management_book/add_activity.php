@@ -5,6 +5,7 @@
         <div class="col-xl-5 col-lg-6 col-md-7">
             <div class="card b-0">
  <h3 class="heading" style="color:#008080;">إضافة نشاط</h3>
+                <form enctype="multipart/form-data" method="post" action="<?php echo base_url()?>AddActivity/add_activity">
 <fieldset class="show" id="add">
                     <div class="form-card">
                         <h5 class="sub-heading mb-4">الرجاء إدخال بيانات النشاط(الإنجاز) </h5>
@@ -15,10 +16,14 @@
 
                         <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم النشاط : * </li></label> <input type="text" id="activity_name" name="activity_name" placeholder="" class="form-control" onblur="validate(1,'activity_name')"> </div>
                         
-                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">التاريخ : * </li></label> 
-                          <input type="date" id="date" name="date" placeholder="" class="form-control" onblur="validate(2,'date')"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">رقم نسخة النشاط : * </li></label> 
+                          <input type="number" id="copy" name="copy" placeholder="" class="form-control" onblur="validate(2,'copy')"> </div>
                        
-               <button id="save" class="mybutton" onclick="success()" >حفظ</button> 
+                           <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">صور التكريمات : * </li></label> 
+                        <input type='file' name='files[]' multiple > <br/><br/>
+                    </div>
+
+               <button id="save" class="mybutton" >حفظ</button> 
 </div>
                 </fieldset>
                 <fieldset id = "success">
@@ -27,6 +32,7 @@
                         <div class="check"> <img class="fit-image check-img" src="https://i.imgur.com/QH6Zd6Y.gif"> </div>
                     </div>
                 </fieldset>
+            </form>
 </div>
 </div>
 </div>
