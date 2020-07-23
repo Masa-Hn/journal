@@ -59,7 +59,7 @@ class AddActivity extends CI_Controller {
           $_FILES['file']['size'] = $_FILES['files']['size'][$i];
           
 
-         $config['upload_path'] = './assets/img/activities';
+         $config['upload_path'] = './assets/img/certificate';
          $config['allowed_types']='jpg|jpeg|gif|png';
          $config['max_size'] = 2000;
          $config['encrypt_name'] = TRUE;
