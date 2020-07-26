@@ -42,7 +42,7 @@
         <div class="heading-underline"></div>
       </div>
       <div class="row text-center">
-        <div class="col-sm-6 slide-in from-left">
+        <div class="col-sm-6 fade-in">
           <img src="<?php echo base_url()?>assets/img/most.png" style="padding-bottom: ">
         </div>
         <div class="col-sm-6 text-center ">
@@ -101,7 +101,7 @@
         <div class="heading-underline"></div>
       </div>
       <div class="row text-center">
-        <div class="col-sm-6 slide-in from-left">
+        <div class="col-sm-6 fade-in">
           <img src="<?php echo base_url()?>assets/img/new_book.png" style="padding-bottom: 3%; width:90%;">
         </div>
         <div class="col-sm-6 text-center">

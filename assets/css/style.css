@@ -14,7 +14,7 @@ h2{
 	font-size: 300%;
 }
 p{
-	font-size: 150%;
+	font-size: 20px;
 }
 .navbar{
 	background: #205d67;
@@ -215,6 +215,7 @@ footer{
 		width: 50%;
 	}
 
+
 }
 
 @media only screen and (max-width: 600px) {   
@@ -244,4 +245,7 @@ footer{
 	#evaluation-img{
 	width: 50%;
 	
-}
+	}
+		.owner-img{
+		width: 65%
+	}

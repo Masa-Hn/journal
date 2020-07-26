@@ -197,7 +197,7 @@
 
   <div class=" flower">
     <div class="row" style="width: 93%; text-align: right;margin-bottom: 10px" >
-      <img src="<?php echo base_url()?>assets/img/flower.png" style="width: 15%">
+      <img src="<?php echo base_url()?>assets/img/flower.png" style="width: 15%; margin-right: 4%">
     </div>
   </div>
 

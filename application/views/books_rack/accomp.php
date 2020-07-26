@@ -83,7 +83,7 @@
                   echo
                   '</select>
                   <select id="copy" name="copy" class="btn select-btn dropdown-toggle" data-toggle="dropdown" style="color: #fcfaef;">
-                    <option value="0" selected="">اختر النشاط أولًا  </option>
+                    <option value="0" selected="">عليك اختيار النشاط أولًا </option>
                   </select>
                   </form>
               </div>  
