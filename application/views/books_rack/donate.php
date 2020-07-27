@@ -1,13 +1,13 @@
-<link rel="stylesheet" type="text/css" href="css/search.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/search.css">
 
 <!-- Section 1 -->
   <div class="padding" id="section-one">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6 slide-in  from-right">
+        <div class="col-sm-6 fade-in">
           <img src="<?php echo base_url()?>assets/img/donate.png">
         </div>
-        <div class="col-sm-6 text-center slide-in from-left ">
+        <div class="col-sm-6 text-center fade-in">
           <h2> ينقصنا بصمتك أنت</h2>
           <div class="heading-underline"></div>
           <p style="font-size: 25px">
@@ -30,7 +30,7 @@
   <div class="padding" id="section-one">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6 text-center vertical-center slide-in from-right ">
+        <div class="col-sm-6 text-center fade-in ">
           <p style="font-size: 25px">
             بتبرعك لاستمرار أصبوحة 180 سوف نتمكن من تعليم  <strong>مليون </strong> شخص أسبوعياً 
             <br>
@@ -44,7 +44,7 @@
 
           </p>
         </div>
-        <div class="col-sm-6 text-center slide-in from-left">
+        <div class="col-sm-6 text-center fade-in">
           <img src="<?php echo base_url()?>assets/img/donate_2.jpg" style="width: 90%">
         </div>
       </div>

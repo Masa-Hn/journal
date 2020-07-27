@@ -2,10 +2,10 @@
   <div class="padding" id="section-one">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6 slide-in from-left">
+        <div class="col-sm-6 fade-in ">
           <img src="<?php echo base_url()?>assets/img/time.png">
         </div>
-        <div class="col-sm-6 text-center slide-in from-right">
+        <div class="col-sm-6 text-center fade-in">
           <h2> أصبوحة  180  </h2>
           <div class="heading-underline"></div>
           <p class="lead">
@@ -34,7 +34,7 @@
     <div class="padding">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6 text-center slide-in from-left">
+        <div class="col-sm-6 text-center fade-in">
           <h2> وظيفتك كسفير  </h2>
           <div class="heading-underline"></div>
           <h3> ما عليك القيام به في المشروع هو :  </h3>
@@ -48,7 +48,7 @@
             
           </ul>
         </div>
-        <div class="col-sm-6 slide-in from-right">
+        <div class="col-sm-6 fade-in">
           <img src="<?php echo base_url()?>assets/img/role.png">
         </div>
       </div>
