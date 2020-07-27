@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/carousel.css">
   <!-- Who We Are -->
   <div class="padding" id="section-one">
@@ -65,12 +66,9 @@
         </div>
       </div>
       <div class="row fade-in">
-        <div class="video">
-            <div class="video-wrap text-center">
-              <iframe  width="800" height="450" src="https://www.youtube.com/embed/G7kvdsbt8Fo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <!--<video class="video_play" controls="button" poster='<?php echo base_url()?>assets/img/who.png' playinline>
-                <source src="<?php echo base_url()?>assets/vedio/Osboha.mp4" type="">
-              </video>-->
+        <div class="iframe-container">
+            <div class=" video-wrap text-center">
+              <iframe class="responsive-iframe"  src="https://www.youtube.com/embed/G7kvdsbt8Fo" allowfullscreen></iframe>
             </div>
         </div>
       </div>    
