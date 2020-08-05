@@ -55,5 +55,10 @@ class Activities extends CI_Controller {
     $this->load->view('books_rack/templates/footer');
   
   }//certificateDisplay
-    
+
+  public function deleteActivity(){
+    return $this->ActivitiesModel->deleteActivity($_POST['id']);
+
+  }//deleteActivity
+      
 }//class

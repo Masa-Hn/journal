@@ -42,11 +42,11 @@
     <div class="padding"></div>
     <div class="row direct" dir="ltr">
       <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
-            <div class="col-5 col-md-4 slide-in from-right">
+            <div class="col-5 col-md-4 fade-in">
               <img  src="'.$row->pic.'" class="bookImg" >
             </div>
 
-            <div class="container-fluid text-center col-7 col-md-8 slide-in from-left">
+            <div class="container-fluid text-center col-7 col-md-8 fade-in">
               <h3>وصف الكتب </h3>
               <div class="heading-underline"></div>
               <div class="row">
