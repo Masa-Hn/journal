@@ -1,11 +1,13 @@
+
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/carousel.css">
   <!-- Who We Are -->
   <div class="padding" id="section-one">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6 slide-in from-left">
+        <div class="col-sm-6 fade-in">
           <img src="<?php echo base_url()?>assets/img/who.png">
         </div>
-        <div class="col-sm-6 text-center slide-in from-right ">
+        <div class="col-sm-6 text-center fade-in">
           <h2> من نحن؟</h2>
           <div class="heading-underline"></div>
           <p style="font-size: 25px">
@@ -64,12 +66,9 @@
         </div>
       </div>
       <div class="row fade-in">
-        <div class="video">
-            <div class="video-wrap text-center">
-              <iframe width="800" height="450" src="https://www.youtube.com/embed/G7kvdsbt8Fo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <!--<video class="video_play" controls="button" poster='<?php echo base_url()?>assets/img/who.png' playinline>
-                <source src="<?php echo base_url()?>assets/vedio/Osboha.mp4" type="">
-              </video>-->
+        <div class="iframe-container">
+            <div class=" video-wrap text-center">
+              <iframe class="responsive-iframe"  src="https://www.youtube.com/embed/G7kvdsbt8Fo" allowfullscreen></iframe>
             </div>
         </div>
       </div>    
@@ -86,7 +85,7 @@
     <div class="container">
       <div class="col-md-12 owner">
         <div class="row">
-          <div class="col-md-3 fade-in">
+          <div class="col-md-3 fade-in text-center">
             <img class="owner-img" src="<?php echo base_url()?>assets/img/owner.png">
           </div>      
           <div class="col-md-9 fade-in">
@@ -128,8 +127,14 @@
             <div class="heading-underline"></div>
             <h3>
               <?php 
-                echo $evaluation[0]->title;
-
+                
+                  echo '
+                  <select id="week" name="week" class="btn select-btn dropdown-toggle" data-toggle="dropdown" style="color: #fcfaef;">';
+                  foreach ($evaluation as $evaluation) {
+                    echo '<option value="'.$evaluation->pic .'" selected="">'.$evaluation->title.'</option>';
+                  }//foreach
+                  echo'</select>';
+                
               ?>  
             </h3>
           </div>
@@ -137,7 +142,7 @@
           <div class="container-fluid text-center">
             <?php 
                 echo'
-                <img id="evaluation-img" src="'.base_url().'assets/img/'.$evaluation[0]->pic .'">';
+                <img id="evaluation-img">';
             ?>
 
           </div>
@@ -164,3 +169,17 @@
     </div>    
   </div>
   <!--End Join Us -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+     
+     var src ="<?php echo base_url();?>assets/img/" + $("#week").val();
+     $("#evaluation-img").attr("src",src);
+
+    $("#week").change(function(){
+      src ="<?php echo base_url();?>assets/img/evaluation/" + $("#week").val();
+      $("#evaluation-img").attr("src",src);
+              
+    });
+  });  
+</script>

@@ -1,15 +1,21 @@
+<style type="text/css">
+  .fa-book{
+    font-size: 10px;
+    padding: 5px;
+  }
+</style>
 <body dir="rtl">
   <!-- Navbar -->
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbar-collapse-main" aria-expanded="true" aria-label="Toggle navigation">
+        <button type="button" id="collapse-btn" class="navbar-toggle navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbar-collapse-main" aria-expanded="true" aria-label="Toggle navigation">
           <span class="sr-only">navegation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand"href="<?php echo base_url()?>home/index">
           <img src="<?php echo base_url()?>assets/img/logo_2.png">
         </a>
       </div>
@@ -21,11 +27,11 @@
               رف الكتب
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background: #205d67; text-align: inherit;padding: 0 7%">
-              <a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=1">المنهج</a></br>
-              <a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=3">الأطفال</a></br>
-              <a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=5">اليافعين</a></br>
-              <a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=4">كتب رمضان</a></br>
-              <a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=2">المرحلة التحضيرية</a>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=1">المنهج</a></br>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=3">الأطفال</a></br>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=5">اليافعين</a></br>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=4">كتب رمضان</a></br>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookShelf?type=2">المرحلة التحضيرية</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -33,11 +39,11 @@
               البحث عن كتب
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background: #205d67; text-align: inherit;padding: 0 7%">
-              <a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=1">المنهج</a></br>
-              <a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=3">الأطفال</a></br>
-              <a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=5">اليافعين</a></br>
-              <a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=4">كتب رمضان</a></br>
-              <a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=2">المرحلة التحضيرية</a>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=1">المنهج</a></br>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=3">الأطفال</a></br>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=5">اليافعين</a></br>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=4">كتب رمضان</a></br>
+              <i class="fa fa-book" aria-hidden="true"></i><a class="dropdown-item" href="<?php echo base_url()?>bookSearch?type=2">المرحلة التحضيرية</a>
             </div>
           </li>
           <!-- <li><a class="nav-item" href="<?php echo base_url()?>bookshelf">رف الكتب </a></li>
@@ -53,7 +59,8 @@
     </div>
   </nav>
   <!-- End Navbar -->
-    <!-- Home -->
+  
+  <!-- Home -->
   <div id="home">
     <div class="landing-text">
       <h1>
@@ -70,3 +77,8 @@
     </div>
   </div>
   <!-- End Home -->
+<script>
+$(document).on('click',function(){
+$('.collapse').collapse('hide');
+})
+</script> 

@@ -12,6 +12,7 @@ class EvaluationModel extends CI_Model {
   public function getEval()
   {
     $this->db->order_by('id');
+    $this->db->limit(4);
     return $this->db->get('evaluation'); 
 
 
