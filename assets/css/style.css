@@ -196,7 +196,12 @@ footer{
 	height: 250px;
 }
 
+
 @media (max-width: 768px){
+	
+	.article-padding{
+		display: none;
+	}
 	.navbar-brand img{
 		width: 65%;
 	}
@@ -240,6 +245,9 @@ footer{
 	}
 	.owner-img{
 		width: 60%
+	}
+	.article-padding{
+		display: none;
 	}
 }
 

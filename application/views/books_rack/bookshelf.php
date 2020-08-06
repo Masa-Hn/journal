@@ -43,7 +43,7 @@
       </div>
       <div class="row text-center">
         <div class="col-sm-6 fade-in">
-          <img src="<?php echo base_url()?>assets/img/most.png" style="padding-bottom: ">
+          <img src="<?php echo base_url()?>assets/img/most.png" style="margin-bottom: 3%">
         </div>
         <div class="col-sm-6 text-center ">
         <div id="most" class="carousel slide text-center" data-ride="carousel">

@@ -22,22 +22,28 @@
            <h3>'. date( 'Y-m-d', strtotime($article->date) ).'</h3>
           </div>
         </div>
-        <div class="padding"></div>
+        <div class="padding article-padding"></div>
         <div class="row direct" dir="ltr">
           <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct" >
-              <div class="col-5 col-md-4 slide-in from-right">  
+              <div class="col-5 col-md-4 fade-in>  
                 <img  src="'.base_url().'assets/img/article/'.$article->pic.'" class="bookImg" >
+                <img class="bookImg" src="'. base_url() .'assets/img/article/'.$article->pic .'" style="margin-bottom:5%;">
               </div>    
 
-              <div class="container-fluid text-center col-7 col-md-8 slide-in from-left">
+              <div class="container-fluid text-center col-7 col-md-8 fade-in">
                 <div class="row">
-                  <p style="padding: 0 3% 0 3%"> '.
+                  <p style="padding: 0 3% 0 3%" dir="rtl"> '.
                     $article->article
                   .'</p>
                 </div>
               </div>
           </div>
         </div>
+        <div class="row text-center">
+          <h2 style="color:#BB6854;">تنويه: </h2>
+          <h4>المقال يعبر عن رأي كاتبه فقط، وليس بالضرورة عن رأي المشروع أو الصفحة. </h4>
+        </div>
+        
         <div class="row text-center">
         <h2 >مشاركة المقال </h2>
           <hr style="width: 20%">

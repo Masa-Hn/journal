@@ -56,6 +56,11 @@
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_activity.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">إضافة إنجاز جديد(نشاط)</p>
                             </li>
+                             <li class="card-block text-center radio " >
+                                <a class="image-icon"  href="<?php echo base_url()?>management_book/show_activities"> 
+                                <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_activity.png"> </a>
+                                <p class="sub-desc" style="text-align: center;">مشاهدة الأنشطة</p>
+                            </li>
                             
                         </ul> 
                     </div>

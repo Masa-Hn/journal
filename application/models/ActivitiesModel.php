@@ -1,12 +1,21 @@
 <?php
 class ActivitiesModel extends CI_Model {
 
+  public function getActivities()
+  {
+    $query = $this->db->query("SELECT * from activities ORDER BY id DESC");
+    return $query->result();
+
+  }//getActivities
+
   public function getAllActivities()
   {
   	$query = $this->db->query("SELECT DISTINCT name from activities ORDER BY id DESC");
     return $query->result();
 
   }//getAllActivities
+
+
 
   public function getLastActivity()
   {
@@ -33,7 +42,13 @@ class ActivitiesModel extends CI_Model {
 
   }//getCopies
 
+  public function deleteActivity($id)
+  {
+    $this->db->where('id =',$id);
+    return $this->db->delete('activities'); 
 
+
+  }//deleteActivity
 }//class
 
 ?>

@@ -18,7 +18,13 @@ class CertificateModel extends CI_Model {
 
   }//getCertificateById
 
+   public function deleteCertificate($id)
+  {
+    $this->db->where('id =',$id);
+    return $this->db->delete('certificate');
 
+
+  }//deleteCertificate
 
 }//class
 
