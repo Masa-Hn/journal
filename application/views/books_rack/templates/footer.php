@@ -27,7 +27,14 @@
       <div id="numbers">
         <h3>
           أنت الزائر رقم 
-          <strong  class="count">1000</strong>
+          <strong  class="count">
+            <?php
+            if(isset($_SESSION['counter'])){
+              echo $_SESSION['counter'];
+            }
+            ?>
+              
+          </strong>
         </h3>
       </div>
     </div>

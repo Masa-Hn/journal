@@ -4,7 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends CI_Controller {
     
 	public function index()
-	{
+	{	
+		$this->load->model('VisitorModel');
+		$this->VisitorModel->checkVisitor($_SERVER['REMOTE_ADDR']);
+		$countVisitors=$this->VisitorModel->countVisitors();
+
+		$this->load->library('session');
+		$this->session->set_userdata('counter',$countVisitors[0]->visit_times);
 		$this->load->model('EvaluationModel');
 		$arr['evaluation']=$this->EvaluationModel->getEvaluation();
 		$this->load->view('books_rack/templates/header');
