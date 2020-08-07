@@ -31,8 +31,8 @@
                         <p> نسخة '. $activity->copy .'</p>
                         <div style="padding-bottom: 5em;padding-top: 5em;">   
                           <input type="number" name="id" id="id" value="'.$activity->id .'" style="display: none;"   >  
-                          <button id="delete"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A; margin-right:23px;" onclick="deleteAlert()" >حذف  </button>
-                          <button id="more"  name="more" class="mybutton" style="width: 150px;background-color: #A52A2A;"  onclick="more()">المزيد </button>
+                          <button id="'.$activity->id .'"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A; margin-right:23px;" onclick="deleteAlert(this.id)" >حذف  </button>
+                          <button id="'.$activity->id .'" name="more" class="mybutton more" style="width: 150px;background-color: #A52A2A;"  onclick="more(this.id)">المزيد </button>
                           
                         </div>
                       </div>';
@@ -62,7 +62,7 @@
 </html>
 <script type="text/javascript">
 
- function deleteAlert(){
+ function deleteAlert(id){
     const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
         confirmButton: 'btn btn-success',
@@ -85,7 +85,7 @@
         $.ajax({
             type: "POST",
             url:url,
-            data: {'id':document.getElementById("id").value},
+            data: {'id':id},
             success: function(data){
                 swalWithBootstrapButtons.fire(
                     'تم',
@@ -100,9 +100,8 @@
 
 })
  }//deleteAlert
-function more(){
- var url ="<?php echo base_url();?>Management_book/show_activity?id="+document.getElementById("id").value;
- window.location.replace("<?php echo base_url();?>Management_book/show_activity?id="+document.getElementById("id").value);
+function more(id){
+ window.location.replace("<?php echo base_url();?>Management_book/show_activity?id="+id);
 
 }
 
