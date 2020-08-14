@@ -52,7 +52,9 @@ class BookSearch extends CI_Controller {
 	public function getByName(){
 		$this->load->view('books_rack/templates/header');
         $this->load->view('books_rack/templates/navbar');
-        $this->load->model('books');
+        $arr['type']=$_GET['type'];
+        $arr['sections']=$this->books->getSections($_GET['type']);
+        $arr['levels']=$this->books->getLevels($_GET['type']);
 		$arr['data']=$this->books->getbookByName($_GET['name'],$_GET['type']);
         $this->load->view('books_rack/bookSearch',$arr);
         $this->load->view('books_rack/templates/footer');

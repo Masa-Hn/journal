@@ -58,24 +58,8 @@
               <button id="filtersToggel" class="cusBtn btn" data-toggle="collapse" data-target="#filters">تخصيص العرض</button>
             </div>  
           <div  id="filters" class=" collapse custom-control custom-checkbox ">
-              <h3 style="margin-bottom: 10%; text-align: right;"> سلاسل الانفوجرافيك </h3>
+            <h3 class="clear" style="margin-bottom: 10%; text-align: right;"> فئة الانفوجرافيك</h3>
             <?php
-               foreach ($num_of_series as $num_of_series ) {
-                echo'
-                <div class="row filterRow">
-                  <div class="col-sm-3">
-                    <span class="no-of-books">'.$num_of_series->num_of_series .'</span>
-                  </div>
-                  <div class="col-sm-6">
-                    <span>عرض السلاسل </span>
-                  </div>
-                  <div class="col-sm-3">
-                    <input type="checkbox" class="section_checkbox" id="series_2" value="series">
-                  </div>
-                </div>';
-              }//foreach
-
-              echo '</br><h3 style="margin-bottom: 10%; text-align: right; clear:both"> فئة الانفوجرافيك</h3>';
               foreach ($sections as $section ) {
                 echo'
                   <div class="row filterRow">
@@ -94,24 +78,9 @@
           </div>
 
           <div  id="firstFilters" class=" ais-refinement-list--item custom-control custom-checkbox ">
-            <h3 style="margin-bottom: 10%; text-align: right;"> سلاسل الانفوجرافيك </h3>
+            <h3 style="margin-bottom: 10%; text-align: right;"> فئة الانفوجرافيك</h3>
             <?php
-
-                echo'
-                <div class="row filterRow">
-                  <div class="col-sm-3">
-                    <span class="no-of-books">'.$num_of_series->num_of_series.'</span>
-                  </div>
-                  <div class="col-sm-6">
-                    <span>عرض السلاسل </span>
-                  </div>
-                  <div class="col-sm-3">
-                    <input type="checkbox" class="section_checkbox" id="series" value="series">
-                  </div>
-                </div>';
-       
-              echo '<h3 style="margin-bottom: 10%; text-align: right;"> فئة الانفوجرافيك</h3>';
-               foreach ($sections as $section ) {
+              foreach ($sections as $section ) {
                 echo'
                 <div class="row filterRow">
                   <div class="col-sm-3">
@@ -130,8 +99,8 @@
         </div>
 
         <div class="padding "></div>
-        <div class="container direct">
-          <div class="row" id="gallaryRow"> 
+        <div class="container">
+          <div class="row direct" id="gallaryRow"> 
             <?php
               if($exist){
                 echo "<input type='hidden' id='exist' value='1'>";
@@ -149,19 +118,6 @@
                   <h2 style='text-align: center;'>لا يوجد نتائج </h2> </div>";
               }//else       
             ?>    
-          </div>
-          <div id="myModal" class="modal">
-            <input type="hidden" name="id" id="shareID">
-            <input type="hidden" name="id" id="base_url" value="<?php echo base_url()?>">
-            <span class="close">&times;</span>
-            <img class="modal-content" id="img">
-            <h2 style="color:#ebe6d5;">مشاركة </h2>
-            <hr style="width: 20%">
-            <i onclick="infographic_fbShare()" class=" btn fa fa-facebook" id="share"></i>
-            <i onclick="infographic_twitterShare()" class=" btn fa fa-twitter" id="share"></i>
-            <i onclick="infographic_pin_it()" class=" btn fa fa-pinterest-square" id="share"></i>
-            <i onclick="infographic_linkedinShare()" class=" btn fa fa-linkedin" id="share"></i>
-            <i title="copy link" onclick="infographic_copyLink()" class=" btn fa fa-copy" id="share"></i>
           </div>
         </div>
       </div>

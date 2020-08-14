@@ -19,5 +19,11 @@ function  show (id){
     modal.style.display = "none";
   }
 
-}
+}//show
 
+function showPhotos(id){
+
+  console.log(id);
+
+
+}//showPhotos

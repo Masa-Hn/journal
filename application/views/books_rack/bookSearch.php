@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
 
 <input type="hidden" name="id" id="base_url" value="<?php echo base_url()?>">
-
+<?php echo $type;?>
 <div class="padding" id="section-one">
     <div class="container">
       <div class="row fade-in">
@@ -20,8 +20,8 @@
         <div class="container-fluid  col-container text-center" >
           <div>
             <div class="box">
-              <input type="hidden" name="id" id="base_url" value="<?php echo base_url()?>">
-              <input type="hidden" name="book_type" id="book_type" value="<?php echo $type?>">
+              <input type="hidden" name="id" id="base_url" value="<?php echo base_url();?>">
+              <input type="hidden" name="book_type" id="book_type" value="<?php echo $type;?>">
 
               <input class="s-text" dir="rtl" type="text" id="bookName" placeholder="ابحث عن كتابك " name="search2" align="center" oninput="search()">
                 <hr style="width: 70%;    border-top: 1px solid #205d67 !important; display: none;" id="hrLine">

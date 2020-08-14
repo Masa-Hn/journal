@@ -50,7 +50,7 @@
               <h3>وصف الكتب </h3>
               <div class="heading-underline"></div>
               <div class="row">
-                <p style="padding: 0 3% 0 3%"> '.$row->brief.'  </p>
+                <p style="padding: 0 3% 0 3%" dir="rtl"> '.$row->brief.'  </p>
                 <button class="btn cusBtn" onclick="downloadAlert()">تحميل الكتاب </button>
                 <input type="hidden" name="id" id="download_link" value="'.$row->link.'">
                 <button class="btn cusBtn" value="'.$row->post.'" ><a target="_blank" href="'.$row->post.'" style="color: #FCFAEF"> أطروحات الكتاب</a></button>
