@@ -7,12 +7,15 @@ class Infographic extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('InfographicModel');
+    $this->load->model('SeriesModel');
   }//end construct()
     
 	public function index()
 	{	
     $result['exist']=false;
    	$result['infographic']=$this->InfographicModel->getPhoto()->result();
+    $result['sections']=$this->InfographicModel->getSections();
+    $result['num_of_series']=$this->SeriesModel->countSseries();
     $rowNum=$this->InfographicModel->getPhoto()->num_rows();
 
     
@@ -27,6 +30,15 @@ class Infographic extends CI_Controller {
 	}//index
   
 
+  public function seriesDisplay(){
+    $result['series']=$this->SeriesModel->getSeries();
+
+    $this->load->view('books_rack/templates/header');
+    $this->load->view('books_rack/templates/navbar');
+    $this->load->view('books_rack/seriesDisplay',$result);
+    $this->load->view('books_rack/templates/footer');
+  }//seriesDisplay
+  
   public function getmore()
   { 
     
@@ -51,4 +63,39 @@ class Infographic extends CI_Controller {
     $this->load->view('books_rack/display',$result);
     $this->load->view('books_rack/templates/footer');
   }//infographicDisplay
+
+  public function sectionFilter(){
+    $arr=[];
+    if(!empty($_POST['section'])){
+
+      $infographic=$this->InfographicModel->sectionFilter(implode(",",$_POST['section']));
+      if (count($infographic) != 0 ) {
+        $this->displayInfographics($infographic);
+      }//if
+      else{
+        echo "
+          <input type='hidden' id='exist' value='0'>
+          <div class='col-md-3 col-sm-12 fade-in' style='margin:0 auto'>
+          <h2 style='text-align: center;'>لا يوجد نتائج </h2> </div>";
+        }//else       
+    }//if
+    else{
+      $infographic=$this->InfographicModel->getPhoto()->result();
+      $this->displayInfographics($infographic);
+    }//else
+  }//sectionFilter
+  public function displayInfographics($infographic){
+    echo "<input type='hidden' id='exist' value='1'>";
+    echo '<div class="masonryholder " id="masonryholder">';
+    foreach ($infographic as $row) {
+      echo
+        '<div class="masonryblocks"><img src="'. base_url().'assets/img/infographic/'.$row->pic .'" class="my-masonry-grid-item gallaryImg" id="'.$row->id.'" onClick="show(this.id)"></div>';
+    }//foreach
+    echo "</div>";
+
+  }//displayInfographics 
+
 }
+
+
+
