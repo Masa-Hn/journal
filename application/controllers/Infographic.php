@@ -39,6 +39,21 @@ class Infographic extends CI_Controller {
     $this->load->view('books_rack/templates/footer');
   }//seriesDisplay
   
+  public function seriesPhotos(){
+    if(!empty($_GET['series_id'])){
+      $arr['series_info']=$this->SeriesModel->getById($_GET['series_id']);
+      $arr['photos']=$this->InfographicModel->getBySeries($_GET['series_id']);
+      $arr['series_id']=$_GET['series_id'];
+      $this->load->view('books_rack/templates/header');
+      $this->load->view('books_rack/templates/navbar');
+      $this->load->view('books_rack/displaySeriesPhotos',$arr);
+      $this->load->view('books_rack/templates/footer');
+    }
+    else{
+
+    }//else
+  }//seriesPhotos
+
   public function getmore()
   { 
     

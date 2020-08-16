@@ -1,5 +1,8 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/infographicCarousel.css">
+<input type="hidden" name="id" id="base_url" value="<?php echo base_url(); ?>">
+
 <div class="container padding" id="section-one">
-      <h2 style="text-align: center;"> مقالات تثقيفية</h2>
+      <h2 style="text-align: center;"> سلاسل الانفوجرافك</h2>
       <div class="heading-underline"></div>
       <div class="container">
         <div class="row">
@@ -16,7 +19,7 @@
                 
                             <a href="javascript:showPhotos('.$series->id .')" id="'.$series->id.'" >
                               <div class="card">
-                                <img  class="card-img-top" src="'. base_url() .'assets/img/article/'.$series->pic .'">
+                                <img  class="card-img-top" src="'. base_url() .'assets/img/infographic/'.$series->pic .'">
                                 <div class="card-body">
                                   <h1 class="artical-title-small">'.$series->title .' </h1>
                                   <p class="card-text artical-description">عدد الصور '. $series->num_of_photos.'</p>
@@ -32,7 +35,7 @@
                       echo '
                         <input type="hidden" id="exist" value="0">
                         <div class="col-md-3 col-sm-12 fade-in">
-                          <h3> لا يوجد مقالات لعرضها  </h3>
+                          <h3>لا يوجد نتائج لعرضها </h3>
                         </div>
                       ';
                     }
@@ -48,3 +51,4 @@
       </div> 
 </div>
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/gallary.js"></script>
+

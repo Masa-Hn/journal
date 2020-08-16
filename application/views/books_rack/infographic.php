@@ -47,7 +47,7 @@
 <!-- infografic -->
 <div class="padding" id="section-one">
   <div class="container">
-    <h2 style="text-align: center;"> إنجازات فريق أُطروحتك انفوغرافيك</h2>
+    <h2 style="text-align: center;"> إنجازات فريق أُطروحتك انفوجرافيك </h2>
     <div class="heading-underline"></div>
     <div class="container" dir="ltr">
       <div class="row direct fade-in">
@@ -176,14 +176,18 @@
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/share.js"></script>
 <script>
      jQuery(document).ready(function($) {
-        
+        var section = [];
         var delay=0;
         var url="<?php echo base_url();?>Infographic/getmore";
 
         $("body").scroll(function(){
           delay++;
           var exist = document.getElementById("exist").value;
-          if(delay == 20 && exist == 1 ){
+          $.each($("input[name='section']:checked"), function(){
+            var s="'"+$(this).val()+"'";
+            section.push(s);
+          });
+          if(delay == 20 && exist == 1 && (section.length == 0) ){
             var last_id=$('#masonryholder').children().last().children().last().attr('id');
 
               $.post(url,

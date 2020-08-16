@@ -2,11 +2,8 @@
     <div class="container">
       <div class="row">
           <div class="container-fluid text-center">
-            <h2> اسم النشاط</h2>
+            <h2>إنجازات فريق أُطروحتك انفوجرافيك</h2>
             <div class="heading-underline"></div>
-            <p class="lead">
-              النسخة
-            </p>
           </div>
         <div class="row">
           <div class="container-fluid text-center">
