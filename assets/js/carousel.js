@@ -25,11 +25,14 @@ function carousel() {
   var x = document.getElementsByClassName("mySlides");
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none"; 
+    x[i].classList.remove("active");
   }
   slideIndex++;
   if (slideIndex > x.length) {slideIndex = 1} 
-  x[slideIndex-1].style.display = "block"; 
-  setTimeout(carousel, 5000); // Change image every 5 seconds
+  x[slideIndex-1].style.display = "block";
+  x[slideIndex-1].classList.add("active");
+ 
+  setTimeout(carousel, 7000); // Change image every 5 seconds
 }// end carousel
 
 function  show (id){

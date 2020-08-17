@@ -25,6 +25,13 @@ class InfographicModel extends CI_Model {
 		
   	}//getById 
 
+  	public function getBySeries($id)
+  	{ 
+   	 	$this->db->where('series_id =',$id);
+		return $this->db->get('infographic')->result();  
+		
+  	}//getById 
+
   	public function getSections()
   	{
     	$this->db->select('section,COUNT(section) As num_of_infographics');
