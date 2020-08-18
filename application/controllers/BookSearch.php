@@ -136,7 +136,7 @@ class BookSearch extends CI_Controller {
 	public function displayBooks($arr){
 		foreach ($arr as $row){
 	            echo '
-		            <div class="row">
+		            <div class="row list-item">
 		                 <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
 		                   <div class="col-4 col-md-3">
 		                     <img  src="'.$row->pic.'" class="bookImg" >
