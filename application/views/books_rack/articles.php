@@ -68,7 +68,9 @@
 
               }
             });
-          }
+            delay=0;
+          }//if
+          console.log(delay);
       });
 
     });

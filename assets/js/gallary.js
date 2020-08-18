@@ -13,12 +13,10 @@ function  show (id){
     modalImg.src = imgSrc;
   //var captionText = document.getElementById("caption");
 
-  var span = document.getElementById("return");
-
-  span.onclick = function() { 
+  var spanClose = document.getElementById("close");
+  spanClose.onclick = function() { 
     modal.style.display = "none";
   }
-
 }//show
 
 function showPhotos(id){

@@ -153,7 +153,7 @@
           <div id="myModal" class="modal">
             <input type="hidden" name="id" id="shareID">
             <input type="hidden" name="id" id="base_url" value="<?php echo base_url()?>">
-            <span class="close">&times;</span>
+            <span class="close" id="close">&times;</span>
             <img class="modal-content" id="img">
             <h2 style="color:#ebe6d5;">مشاركة </h2>
             <hr style="width: 20%">

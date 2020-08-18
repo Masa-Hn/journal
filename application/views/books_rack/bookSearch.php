@@ -5,7 +5,7 @@
 <script src="<?php echo base_url()?>assets/js/pagination.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
 <input type="hidden" name="id" id="base_url" value="<?php echo base_url()?>">
 <?php echo $type;?>
 <div class="padding" id="section-one">
@@ -153,14 +153,14 @@
         <div class="row displayDiv section-margin  container-flui" style="text-align: right; margin-right: 3%" >
            <button class="btn cusBtn" id="displaybtn">   عرض </button>  <input type="text" id="bookDisplay" name="bookDisplay" value="3">
         </div>
-        <div class="contents" id="books_display">
+        <div id="pagination-container"></div>   
 
-
+        <div class="contents list-wrapper" id="books_display">
           <?php
            foreach($data as $row)
            {
                echo '
-               <div class="row">
+               <div class="row list-item">
                  <div class=" section-margin container container-fluid text-center col-md-12 col-12 direct">
                    <div class="col-4 col-md-3">
                      <img  src="'.$row->pic.'" class="bookImg" >
@@ -185,10 +185,6 @@
                //تحميل الكتاب $row->link
            }
          ?>
-
-
-
-
         </div>
 
       </div>

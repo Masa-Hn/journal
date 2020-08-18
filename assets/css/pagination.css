@@ -2,42 +2,44 @@
   margin-bottom: 3%;
 }
 
-#page-navi {
-  width:100%;
-  margin:15% ;
-  margin-bottom:10px;
+.list-wrapper {
+  padding: 15px;
   overflow: hidden;
 }
 
-#page-navi li {
+.simple-pagination ul {
+  margin: 0 0 20px;
+  padding: 0;
   list-style: none;
-  display: inline;
+  text-align: center;
 }
 
-#page-navi li a {
-  float: left;
-  display: block;
-  padding: 8px 10px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
+.simple-pagination li {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.simple-pagination li a,
+.simple-pagination li span {
+  font-size: 15px;
+  color: #29646d;
+  padding: 5px 10px;
   text-decoration: none;
-  background: #FCFAEF;
-  -webkit-transition: background 200ms linear;
-  transition: background 200ms linear;
-  border-radius: 3px;
-  color:#205D67;
+  border: 1px solid #EEE;
+  background-color: #FFF;
+  box-shadow: 0px 0px 10px 0px #EEE;
 }
 
-#page-navi li:last-child a {
-  margin-right: 0px;
+.simple-pagination .current {
+  color: #FFF;
+  background-color: #205d67;
+  border-color: #205d67;
 }
 
-#page-navi li a.current,
-#page-navi li a.disable,
-#page-navi li a:hover {
-  background: #205D67;
-  color: #FCFAEF;
-  border-bottom:3px solid #FCFAEF;
+.simple-pagination .prev.current,
+.simple-pagination .next.current {
+  background: #8ac579;
+  border: 1px solid #8ac579;
 }
 
 .cusBtn{
