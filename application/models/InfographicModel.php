@@ -48,6 +48,24 @@ class InfographicModel extends CI_Model {
     return $this->db->get()->result();
   }//sectionFilter
 
+  public function insertBySeries($title,$pic,$section,$series_id)
+  {
+    $data['title']=$title;
+    $data['pic']=$pic;
+    $data['section']=$section;
+    $data['series_id']=$series_id;
+    $this->db->insert('infographic',$data);
+  }//insertBySeries
 
+  public function updateInfographic($id,$title,$section){
+    
+   $data = array(
+        'title' => $title,
+        'section' => $section
+    );
+
+$this->db->where('id', $id);
+$this->db->update('infographic', $data);
+  }//updateInfographic
 }
 ?>

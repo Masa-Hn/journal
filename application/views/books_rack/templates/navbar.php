@@ -21,7 +21,7 @@
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse-main" dir="rtl" style="padding: 0;">
         <ul class="nav navbar-nav navbar-right ml-auto nav-direct">
-          <li><a class="nav-item" href="<?php echo base_url()?>home/index">الرئيسية</a></li>
+          <li><a class="nav-item" href="<?php echo base_url()?>Home/">الرئيسية</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="<?php echo base_url()?>bookshelf?type=1" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               رف الكتب

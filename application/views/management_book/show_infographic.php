@@ -55,6 +55,7 @@ $slides_num=$num/26;
                                            '<?php  if(isset($img[$i]) && $img[$i]!=null) echo $img[$i]->id; ?> ',
                                            '<?php  if(isset($img[$i]) && $img[$i]!=null) echo $img[$i]->pic; ?> ',
                                             '<?php  if(isset($img[$i]) && $img[$i]!=null) echo $img[$i]->date; ?>',
+                                            '<?php   if(isset($img[$i]) && $img[$i]!=null) echo $img[$i]->section?>',
                                             '<?php  if(isset($img[$i]) && $img[$i]!=null) echo $img[$i]->title; ?>'
 
                                            
@@ -70,6 +71,7 @@ $slides_num=$num/26;
                                         '<?php   if(isset($img[$i+1]) && $img[$i+1]!=null) echo $img[$i+1]->id ?>',
                                         '<?php   if(isset($img[$i+1]) && $img[$i+1]!=null) echo $img[$i+1]->pic ?>',
                                        ' <?php   if(isset($img[$i+1]) && $img[$i+1]!=null) echo $img[$i+1]->date ?>',
+                                       '<?php   if(isset($img[$i+1]) && $img[$i+1]!=null) echo $img[$i+1]->section?>',
                                        ' <?php   if(isset($img[$i+1]) && $img[$i+1]!=null) echo $img[$i+1]->title ?>'
 
                             
@@ -123,19 +125,25 @@ $slides_num=$num/26;
                    
                          
                     <li style="direction: rtl; text-align: right;">عنوان الانفوجرافيك : <br>
-                        <input   name="title" id="title" readonly style="border: none;background-color: white;"> </li>
-                    
+                        <input   name="title" id="title"> </li>
+                    <li style="direction: rtl; text-align: right;">فئة الانفوجرافيك: <br>
+                        <input   name="section" id="section"> </li>
                     <li style="direction: rtl; text-align: right;"> تاريخ الإضافة :<br>
                      <input style="border: none;background-color: white;"  name="date" id="date" readonly></li>
                     <li style="direction: rtl; text-align: right;"> الصورة : <br>                       
-                <img name="pic" id="pic" style=" height:100px;width: 100px" onclick="window.open(this.src)" > </li>  <br><br>
-
-                   
-                         
-                         <div style="float: right;">
-                         <a id="delete" class="mybutton" style="width: 190px;float: right;background-color: #A52A2A" >
-                         <label style=" text-align: center; outline: none; color: #fff;">حذف الانفوجرافيك
-                         </label> </a></div>
+                        <img name="pic" id="pic" style=" height:100px;width: 100px" onclick="window.open(this.src)" > 
+                    </li>
+                    <br><br>
+                    <div style="float: right;">
+                        <a id="delete" class="mybutton" style="width: 170px;float: right;background-color: #A52A2A" >
+                        <label style=" text-align: center; outline: none; color: #fff;">حذف الانفوجرافيك
+                        </label> </a>
+                    </div>
+                     <div style="float: right; margin-bottom: 45px">
+                        <input   name="info_id" id="info_id" hidden>
+                        <a id="delete" class="mybutton" style="width: 170px;float: right;background-color: #34944a" >
+                        <label style=" text-align: center; outline: none; color: #fff;" onclick="edit()">تعديل</label> </a>
+                    </div>
 
                     <button style="float: left; width: 100px;" class="mybutton" onclick="back()" > رجوع </button>
 
@@ -145,3 +153,13 @@ $slides_num=$num/26;
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    function edit(){
+ 
+        id=document.getElementById('info_id').value;
+        title=document.getElementById('title').value;
+        section=document.getElementById('section').value;
+
+        window.location.replace("<?php echo base_url();?>Infographic/updateInfograpgic?id="+id+"&title="+title+"&section="+section);
+    }//edit
+</script>

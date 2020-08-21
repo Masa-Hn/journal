@@ -6,7 +6,7 @@ class Home extends CI_Controller {
 	public function index()
 	{	
 		$this->load->model('VisitorModel');
-		$this->VisitorModel->checkVisitor($_SERVER['REMOTE_ADDR']);
+		$this->VisitorModel->incrementVisitors();
 		$countVisitors=$this->VisitorModel->countVisitors();
 
 		$this->load->library('session');

@@ -187,12 +187,14 @@ s.setAttribute("href", "<?php echo base_url()?>AddBooks/delete/"+type+"/"+id);
   
 }
 
-function show_detailes_graphic(id,pic,date,title) {
+function show_detailes_graphic(id,pic,date,section,title) {
  
   document.getElementById('content').style.display="none";
   document.getElementById('content2').style.display="block";
   document.getElementById('title').value=title;
+  document.getElementById('section').value=section;
   document.getElementById('date').value=date;
+  document.getElementById('info_id').value=id;
 
  
   a=document.getElementById('pic');
