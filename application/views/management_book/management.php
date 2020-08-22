@@ -35,12 +35,17 @@
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_info.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">إضافة انفوجرافيك</p>
                             </li>
-                              <li class="card-block text-center radio " >
+                            <li class="card-block text-center radio " >
                                 <a class="image-icon"  href="<?php echo base_url()?>management_book/show_infographic"> 
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/show_infographic.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">استعراض الانفوجرافيك</p>
                             </li>
-                             <li class="card-block text-center radio " >
+                            <li class="card-block text-center radio " >
+                                <a class="image-icon"  href="<?php echo base_url()?>management_book/show_series"> 
+                                <img class="icon icon1 " src="<?php echo base_url()?>assets/img/show_infographic.png"> </a>
+                                <p class="sub-desc" style="text-align: center;">عرض سلاسل الانفوجرافيك</p>
+                            </li>
+                            <li class="card-block text-center radio " >
                                 <a class="image-icon"  href="<?php echo base_url()?>Evaluation/index"> 
                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/add_eval.png"> </a>
                                 <p class="sub-desc" style="text-align: center;">إضافة تقييم أسبوعي</p>

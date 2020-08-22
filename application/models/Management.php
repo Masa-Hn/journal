@@ -55,11 +55,14 @@ public function getimgs()
    return $query;
 }
 
-public function save_infographic($title,$date,$pic)
+public function save_infographic($title,$section,$date,$pic)
 {	
 	$data['pic']=$pic;
+	$data['section']=$section;
 	$data['date']=$date;
 	$data['title']=$title;
+	$data['series_id']=0;
+
 		
 
 		$this->db->insert('infographic',$data);

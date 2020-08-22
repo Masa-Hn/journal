@@ -110,6 +110,22 @@ class Infographic extends CI_Controller {
 
   }//displayInfographics 
 
+  public function updateInfograpgic(){
+    if (!empty($_GET['id']) && !empty($_GET['title']) && !empty($_GET['section'])) {
+      $this->InfographicModel->updateInfographic($_GET['id'],$_GET['title'],$_GET['section']);
+        $data['title'] = 'تم التعديل بنجاح';   
+        $data['info'] = 'تم التعديل بنجاح';
+        $this->load->view('management_book/templates/header', $data);
+        $this->load->view('management_book/templates/navbar');
+        $this->load->view('management_book/success',$data);
+        $this->load->view('management_book/templates/footer');
+    }
+  }//updateInfograpgic
+
+  public function deleteSeries(){
+     return $this->SeriesModel->deleteSeries($_POST['id']);
+   }//deleteSeries
+
 }
 
 

@@ -1,23 +1,13 @@
 <?php
 class VisitorModel extends CI_Model {
 
-  public function checkVisitor($userIP)
+  public function incrementVisitors()
   { 
-    $checkVisitor = $this->db->query("SELECT visit_times,INET_NTOA(user_IP) AS userIP FROM visitors")->result();
-    
-    if(count($checkVisitor) == 0){
-      $insertVisitor=$this->db->query("INSERT visitors VALUES (INET_ATON('".$userIP."'),1)");
+    $this->db->set('visit_times', 'visit_times +1', FALSE);
+    $this->db->where('id=', 1);
+    $this->db->update('visitors');
 
-    }//if
-    else{
-      //update visit_times
-      $this->db->set('visit_times', 'visit_times +1', FALSE);
-      $this->db->where('INET_NTOA(user_IP)', $userIP);
-      $this->db->update('visitors');
-
-    }
-
-  }//insertVisitor
+  }//incrementVisitors
 
   public function countVisitors()
   {
