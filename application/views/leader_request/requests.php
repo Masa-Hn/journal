@@ -102,11 +102,9 @@
 						<?php
 						//to be taken from osboha website
 						$leaderName = "asmaa";
-						$teamName = "11";
 						$teamLink = "http://facebook.com/asmaa.99";
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
-						<input type="hidden" name="teamName" id="teamName" value="<?php echo $teamName ;?>">
 						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
 
 						<div class="form-group">

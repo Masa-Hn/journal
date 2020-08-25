@@ -29,7 +29,6 @@ class Requests extends CI_Controller {
 		if ( $this->form_validation->run() ) {
 			//get data entered by user
 			$data[ 'leader_name' ] = $this->input->post( 'leaderName' );
-			$data[ 'team_name' ] = $this->input->post( 'teamName' );
 			$data[ 'leader_link' ] = $this->input->post( 'leaderLink' );
 			$data[ 'team_link' ] = $this->input->post( 'teamLink' );
 			$data[ 'num_of_members' ] = $this->input->post( 'numOfMembers' );

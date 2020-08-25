@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2020 at 05:49 PM
+-- Generation Time: Aug 25, 2020 at 05:55 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -34,18 +34,17 @@ CREATE TABLE `requests` (
   `team_link` varchar(255) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `num_of_members` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `team_name` varchar(100) NOT NULL
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `requests`
 --
 
-INSERT INTO `requests` (`id`, `leader_name`, `leader_link`, `team_link`, `gender`, `num_of_members`, `date`, `team_name`) VALUES
-(29, 'asmkk', 'asmaa', 'lkdnsvlsn', 'female', 1, '2020-08-20 13:50:20', 'ÙØ±ÙŠÙ‚ Ø§Ù„Ù…ØªØ§Ø¨Ø¹Ø© 11'),
-(30, 'asmkk', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'female', 1, '2020-08-25 14:49:44', 'ÙØ±ÙŠÙ‚ Ø§Ù„Ù…ØªØ§Ø¨Ø¹Ø© 11'),
-(31, 'asmaa', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'female', 1, '2020-08-25 15:10:19', '11');
+INSERT INTO `requests` (`id`, `leader_name`, `leader_link`, `team_link`, `gender`, `num_of_members`, `date`) VALUES
+(29, 'asmkk', 'asmaa', 'lkdnsvlsn', 'female', 1, '2020-08-20 13:50:20'),
+(30, 'asmkk', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'female', 1, '2020-08-25 14:49:44'),
+(31, 'asmaa', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'female', 1, '2020-08-25 15:10:19');
 
 --
 -- Indexes for dumped tables
