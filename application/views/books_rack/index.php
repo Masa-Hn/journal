@@ -129,11 +129,11 @@
               <?php 
                 
                   echo '
-                  <select id="week" name="week" class="btn select-btn dropdown-toggle" data-toggle="dropdown" style="color: #fcfaef;">';
+                  <select id="week" name="week" class="btn select-btn dropdown-toggle" style="color: #fcfaef;">';
                   foreach ($evaluation as $evaluation) {
-                    echo '<option value="'.$evaluation->pic .'" selected="">'.$evaluation->title.'</option>';
+                    echo '<option id="'.$evaluation->id.'" value="'.$evaluation->pic .'" selected="">'.$evaluation->title.'</option>';
                   }//foreach
-                  echo'</select>';
+                  echo'<option value="444"></option></select>';
                 
               ?>  
             </h3>
@@ -173,13 +173,13 @@
 <script type="text/javascript">
   $(document).ready(function(){
      
-     var src ="<?php echo base_url();?>assets/img/" + $("#week").val();
+     var src ="<?php echo base_url();?>assets/img/evaluation/" + $("#week").val();
      $("#evaluation-img").attr("src",src);
 
     $("#week").change(function(){
       src ="<?php echo base_url();?>assets/img/evaluation/" + $("#week").val();
       $("#evaluation-img").attr("src",src);
-              
+      $("#week").blur();  
     });
   });  
 </script>

@@ -154,4 +154,11 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/series_photos',$data);
         $this->load->view('management_book/templates/footer');       
     }//show_detailed_series
+
+    public function mentorshipTeam(){
+        $this->load->view('management_book/templates/header');
+        $this->load->view('management_book/templates/navbar');
+        $this->load->view('management_book/mentorshipTeam');
+        $this->load->view('management_book/templates/footer'); 
+    }//mentorshipTeam
 }
