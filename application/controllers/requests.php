@@ -19,7 +19,6 @@ class Requests extends CI_Controller {
 	public
 	function addRequest() {
 		$msg = ""; //to be printed out
-
 		$this->load->library( 'form_validation' );
 
 		$this->form_validation->set_rules( 'leaderLink', 'رابط صفحة القائد', 'trim|required' );
@@ -27,13 +26,14 @@ class Requests extends CI_Controller {
 
 
 		if ( $this->form_validation->run() ) {
-			//get data entered by user
+			//get data of the user
+			$data[ 'leader_email' ] = $_GET['email'];
 			$data[ 'leader_name' ] = $this->input->post( 'leaderName' );
 			$data[ 'leader_link' ] = $this->input->post( 'leaderLink' );
 			$data[ 'team_link' ] = $this->input->post( 'teamLink' );
 			$data[ 'num_of_members' ] = $this->input->post( 'numOfMembers' );
 			$data[ 'gender' ] = $this->input->post( 'gender' );
-
+			
 			//validate urls
 			if ( !filter_var( $data[ 'leader_link' ], FILTER_VALIDATE_URL ) ) {
 				$msg = "<div class='alert alert-danger'>
@@ -41,7 +41,7 @@ class Requests extends CI_Controller {
             </div>";
 			} else {
 				//get the records related to the leader
-				$getLastRecord = $this->requestsModel->getDate( $data[ 'leader_name' ] );
+				$getLastRecord = $this->requestsModel->getDate( $data[ 'leader_email' ] );
 
 				//check if there are records
 				if ( $getLastRecord->num_rows() > 0 ) {
