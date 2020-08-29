@@ -6,9 +6,9 @@ class RequestsModel extends CI_Model {
 		return $this->db->insert('requests', $data);
 	}
 
-	public function getDate($leaderName)
+	public function getDate($leaderEmail)
 	{
-		$this->db->where('leader_name', $leaderName);
+		$this->db->where('leader_email', $leaderEmail);
 		return $this->db->get('requests');
 	}
 }

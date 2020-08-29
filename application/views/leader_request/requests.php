@@ -103,6 +103,7 @@
 						//to be taken from osboha website
 						$leaderName = "asmaa";
 						$teamLink = "http://facebook.com/asmaa.99";
+						
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
 						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
@@ -153,11 +154,10 @@
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url + "index.php/requests/addRequest",
+					url: base_url + "index.php/requests/addRequest/?email=<?=$_GET['email']?>",
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),
-						teamName: $( "#teamName" ).val(),
 						teamLink: $( "#teamLink" ).val(),
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
