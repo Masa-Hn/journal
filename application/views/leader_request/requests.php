@@ -19,7 +19,7 @@
 			margin: 50px;
 			border: 1px solid #214761;
 		}
-
+		
 		.modal {
 			direction: rtl;
 			color: #214761;
@@ -35,11 +35,11 @@
 		.close {
 			color: #fff;
 		}
-
+		
 		.close:hover {
 			color: #fff;
 		}
-
+		
 		.close-btn {
 			font-size: 2rem;
 			width: 20%;
@@ -65,7 +65,7 @@
 			color: #fff;
 			border: 1px solid #214761;
 		}
-
+		
 		#sub-btn:hover {
 			color: #214761;
 			background-color: #fff;
@@ -102,11 +102,10 @@
 						<?php
 						//to be taken from osboha website
 						$leaderName = "asmaa";
-						$teamName = "11";
 						$teamLink = "http://facebook.com/asmaa.99";
+						
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
-						<input type="hidden" name="teamName" id="teamName" value="<?php echo $teamName ;?>">
 						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
 
 						<div class="form-group">
@@ -155,11 +154,10 @@
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url + "index.php/requests/addRequest",
+					url: base_url + "index.php/requests/addRequest/?email=<?=$_GET['email']?>",
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),
-						teamName: $( "#teamName" ).val(),
 						teamLink: $( "#teamLink" ).val(),
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
@@ -172,8 +170,8 @@
 				return false;
 			} );
 		} );
-
-
+		
+		
 	</script>
 	<script>
 		/*
@@ -185,4 +183,4 @@
 		*/
 	</script>
 </body>
-</html> 
+</html>
