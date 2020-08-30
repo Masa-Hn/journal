@@ -1,8 +1,6 @@
 
-<footer class="container-fluid text-center">
+<footer class="container-fluid text-center" style="font-family: 'Tajawal', sans-serif;">
        
-
-      
   <div class="row">
        <div class="col-sm-4">
           حساباتنا على مواقع التواصل الإجتماعي<br>
@@ -24,5 +22,5 @@
  <hr style="width: 80%; background-color: #FCFAEF">
 
 
-  </footer>
-  </html>
+</footer>
+</html>
