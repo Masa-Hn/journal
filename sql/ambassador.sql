@@ -36,8 +36,8 @@ CREATE TABLE `ambassador` (
   `readBefore` tinyint(1) NOT NULL,
   `nameOfReadBook` varchar(255) NOT NULL,
   `code` int(11) NOT NULL,
-  `isDistributed` tinyint(1) NOT NULL,
-  `leaderGender` varchar(50) NOT NULL
+  `leaderGender` varchar(50) NOT NULL,
+  `requestId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -59,6 +59,12 @@ ALTER TABLE `ambassador`
 --
 ALTER TABLE `ambassador`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
+--
+-- Constraints for table `otrohat`
+--
+ALTER TABLE `ambassador`
+  ADD CONSTRAINT `ambassador_ibfk_1` FOREIGN KEY (`requestId`) REFERENCES `requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

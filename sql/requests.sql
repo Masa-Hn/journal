@@ -35,7 +35,9 @@ CREATE TABLE `requests` (
   `gender` varchar(10) NOT NULL,
   `num_of_members` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `leader_email` varchar(255) NOT NULL
+  `leader_email` varchar(255) NOT NULL,
+  `is_done` tinyint(1) DEFAULT 0 NOT NULL
+  `send_to_leader` tinyint(1) DEFAULT 0 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
