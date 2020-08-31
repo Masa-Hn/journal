@@ -148,13 +148,13 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var base_url = "<?=base_url()?>";
+		var base_url = "<?=base_url();?>index.php/requests/addRequest/?email=<?php echo $_GET['email']?>";
 		$( document ).ready( function () {
 
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url + "index.php/requests/addRequest/?email=<?=$_GET['email']?>",
+					url: base_url,
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),

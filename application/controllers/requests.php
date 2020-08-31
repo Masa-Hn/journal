@@ -13,7 +13,6 @@ class Requests extends CI_Controller {
 	public
 	function index() {
 		$this->load->view( 'leader_request/requests' );
-
 	}
 
 	public
@@ -52,7 +51,6 @@ class Requests extends CI_Controller {
 					//check if the date of the last record exceeds 3 days
 					if ( ( date( 'Y-m-d' ) > date( 'Y-m-d', strtotime( $date . ' + 3 days' ) ) ) ) {
 						$this->requestsModel->addRequest( $data );
-
 						$msg = "<div class='alert alert-success'>
                           تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
                           </div>";
@@ -62,6 +60,7 @@ class Requests extends CI_Controller {
                           </div>";
 					}
 				} else {
+					//$this->requestsModel->addRequest( $data );
 					$this->requestsModel->addRequest( $data );
 
 					$msg = "<div class='alert alert-success'>
