@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2020 at 12:11 AM
+-- Generation Time: Aug 31, 2020 at 05:46 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -36,20 +36,11 @@ CREATE TABLE `requests` (
   `num_of_members` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `leader_email` varchar(255) NOT NULL,
-  `is_done` tinyint(1) DEFAULT 0 NOT NULL
-  `send_to_leader` tinyint(1) DEFAULT 0 NOT NULL
+  `is_done` tinyint(1) NOT NULL DEFAULT 0,
+  `send_to_leader` tinyint(1) NOT NULL DEFAULT 0,
+  `team_name` varchar(255) NOT NULL,
+  `leader_gender` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `requests`
---
-
-INSERT INTO `requests` (`id`, `leader_name`, `leader_link`, `team_link`, `gender`, `num_of_members`, `date`, `leader_email`) VALUES
-(29, 'asmkk', 'asmaa', 'lkdnsvlsn', 'female', 1, '2020-08-20 13:50:20', ''),
-(30, 'asmkk', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'female', 1, '2020-08-25 14:49:44', ''),
-(31, 'asmaa', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'female', 1, '2020-08-25 15:10:19', ''),
-(32, 'asmaa', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'http://facebook.com/asmaa.99', 'female', 1, '2020-08-28 20:46:03', 'asmaa'),
-(33, 'asmaa', 'https://www.osboha180.com/evaluation/users/insertmarks?email=asmaa55hm@gmail.com&name=Asmaa%20Hamid', 'http://facebook.com/asmaa.99', 'female', 1, '2020-08-28 20:47:25', 'asmaahh');
 
 --
 -- Indexes for dumped tables
@@ -69,7 +60,7 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

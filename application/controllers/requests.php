@@ -6,7 +6,8 @@ class Requests extends CI_Controller {
 	public
 	function __construct() {
 		parent::__construct();
-		$this->load->model( 'requestsModel' );
+		
+		$this->load->model( 'GeneralModel' );
 
 	} //end construct()
 
@@ -28,11 +29,13 @@ class Requests extends CI_Controller {
 		if ( $this->form_validation->run() ) {
 			//get data of the user
 			$data[ 'leader_email' ] = $_GET['email'];
-			$data[ 'leader_name' ] = $this->input->post( 'leaderName' );
-			$data[ 'leader_link' ] = $this->input->post( 'leaderLink' );
-			$data[ 'team_link' ] = $this->input->post( 'teamLink' );
-			$data[ 'num_of_members' ] = $this->input->post( 'numOfMembers' );
-			$data[ 'gender' ] = $this->input->post( 'gender' );
+			$data[ 'leader_name' ] = $_POST['leaderName'];
+			$data[ 'team_name' ] = $_POST['teamName'];
+			$data[ 'leader_link' ] = $_POST['leaderLink'];
+			$data[ 'team_link' ] = $_POST['teamLink'];
+			$data[ 'leader_gender' ] = $_POST['leaderGender'];
+			$data[ 'num_of_members' ] = $_POST['numOfMembers'];
+			$data[ 'gender' ] = $_POST['gender'];
 			
 			//validate urls
 			if ( !filter_var( $data[ 'leader_link' ], FILTER_VALIDATE_URL ) ) {
@@ -41,7 +44,7 @@ class Requests extends CI_Controller {
             </div>";
 			} else {
 				//get the records related to the leader
-				$getLastRecord = $this->requestsModel->getDate( $data[ 'leader_email' ] );
+				$getLastRecord = $this->GeneralModel-> get_data( $data[ 'leader_email' ],'leader_email', 'requests', 'date');
 
 				//check if there are records
 				if ( $getLastRecord->num_rows() > 0 ) {
@@ -51,7 +54,7 @@ class Requests extends CI_Controller {
 
 					//check if the date of the last record exceeds 3 days
 					if ( ( date( 'Y-m-d' ) > date( 'Y-m-d', strtotime( $date . ' + 3 days' ) ) ) ) {
-						$this->requestsModel->addRequest( $data );
+						$this->GeneralModel->insert( $data , 'requests');
 
 						$msg = "<div class='alert alert-success'>
                           تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
@@ -62,7 +65,7 @@ class Requests extends CI_Controller {
                           </div>";
 					}
 				} else {
-					$this->requestsModel->addRequest( $data );
+					$this->GeneralModel->insert( $data , 'requests');
 
 					$msg = "<div class='alert alert-success'>
                 تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
