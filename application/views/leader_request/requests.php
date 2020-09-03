@@ -45,7 +45,8 @@
 			width: 20%;
 		}
 		#gender *,
-		#numOfMembers * {
+		#numOfMembers *,
+		#leaderGender *{
 			color: #214761;
 			font-size: 2rem;
 		}
@@ -103,14 +104,23 @@
 						//to be taken from osboha website
 						$leaderName = "asmaa";
 						$teamLink = "http://facebook.com/asmaa.99";
+						$teamName = "11";
 						
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
 						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
+						<input type="hidden" name="teamName" id="teamName" value="<?php echo $teamName ;?>">
 
 						<div class="form-group">
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" placeholder="مثال: https://www.facebook.com/example" class="form-control" required="required">
+						</div>
+						<div class="form-group">
+							<label for="leaderGender" class="form-label"> جنسك: </label>
+							<select name="leaderGender" id="leaderGender" class="form-control">
+								<option value="female">أنثى</option>
+								<option value="male">ذكر</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<label for="numOfMembers">اختر عدد الأعضاء الذي تريده: </label>
@@ -124,7 +134,7 @@
 						</div>
 
 						<div class="form-group">
-							<label for="gender" class="form-label">اختر الجنس: </label>
+							<label for="gender" class="form-label">اختر جنس الأعضاء: </label>
 							<select name="gender" id="gender" class="form-control">
 								<option value="female">إناث</option>
 								<option value="male">ذكور</option>
@@ -148,7 +158,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		var base_url = "<?=base_url()?>";
+		var base_url = "<?php echo base_url()?>";
 		$( document ).ready( function () {
 
 			$( "#sub-btn" ).click( function () {
@@ -158,7 +168,9 @@
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),
+						leaderGender: $( "#leaderGender" ).val(),
 						teamLink: $( "#teamLink" ).val(),
+						teamName: $("#teamName").val(),
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
 

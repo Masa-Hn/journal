@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2020 at 12:11 AM
+-- Generation Time: Aug 31, 2020 at 05:47 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -34,7 +34,7 @@ CREATE TABLE `ambassador` (
   `country` varchar(255) NOT NULL,
   `gender` varchar(50) NOT NULL,
   `readBefore` tinyint(1) NOT NULL,
-  `nameOfReadBook` varchar(255) NOT NULL,
+  `nameOfReadBook` varchar(255) DEFAULT NULL,
   `code` int(11) NOT NULL,
   `leaderGender` varchar(50) NOT NULL,
   `requestId` int(11) DEFAULT NULL
@@ -48,7 +48,8 @@ CREATE TABLE `ambassador` (
 -- Indexes for table `ambassador`
 --
 ALTER TABLE `ambassador`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ambassador_ibfk_1` (`requestId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -59,9 +60,13 @@ ALTER TABLE `ambassador`
 --
 ALTER TABLE `ambassador`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-  
+
 --
--- Constraints for table `otrohat`
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `ambassador`
 --
 ALTER TABLE `ambassador`
   ADD CONSTRAINT `ambassador_ibfk_1` FOREIGN KEY (`requestId`) REFERENCES `requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
