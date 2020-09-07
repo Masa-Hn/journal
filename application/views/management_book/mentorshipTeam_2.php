@@ -26,15 +26,15 @@
 					<div class="slideshow-container">
 						<div class="carousel-container w3-display-container " id="seriesPhotos">
 							<?php
-							$ci = & get_instance();
-							$ci->load->model( 'GeneralModel' );
+							//$ci = & get_instance();
+							//$ci->load->model( 'GeneralModel' );
 							if ( $requests->num_rows() > 0 ) {
 
 								foreach ( $requests->result() as $request ) {
 									$id = $request->id;
 									$leaderEmail = $request->leader_email;
 									$num_of_members = 20; // a query to be run here to get total members (based on leader email) from the official database
-									$query = $ci->GeneralModel->get_data( $request->id, 'requestId', 'ambassador', 'name, gender' );
+									$query = $this->GeneralModel->get_data( $request->id, 'requestId', 'ambassador', 'name, gender' );
 									?>
 							<div class="mySlides carousel-slide">
 								<h4 class="heading" style="text-align:right;">
