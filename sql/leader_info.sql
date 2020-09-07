@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2020 at 05:46 PM
+-- Generation Time: Sep 07, 2020 at 01:56 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -24,20 +24,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `requests`
+-- Table structure for table `leader_info`
 --
 
-CREATE TABLE `requests` (
+CREATE TABLE `leader_info` (
   `id` int(11) NOT NULL,
   `leader_name` varchar(255) NOT NULL,
   `leader_link` varchar(255) NOT NULL,
   `team_link` varchar(255) NOT NULL,
-  `gender` varchar(10) NOT NULL,
-  `num_of_members` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `leader_email` varchar(255) NOT NULL,
-  `is_done` tinyint(1) NOT NULL DEFAULT 0,
-  `send_to_leader` tinyint(1) NOT NULL DEFAULT 0,
   `team_name` varchar(255) NOT NULL,
   `leader_gender` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -47,9 +42,9 @@ CREATE TABLE `requests` (
 --
 
 --
--- Indexes for table `requests`
+-- Indexes for table `leader_info`
 --
-ALTER TABLE `requests`
+ALTER TABLE `leader_info`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -57,10 +52,10 @@ ALTER TABLE `requests`
 --
 
 --
--- AUTO_INCREMENT for table `requests`
+-- AUTO_INCREMENT for table `leader_info`
 --
-ALTER TABLE `requests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `leader_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

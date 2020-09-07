@@ -6,73 +6,12 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/request.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
 
-
-	<style type="text/css">
-		#reqModalBtn {
-			color: #214761;
-			background-color: #fff;
-			margin: 50px;
-			border: 1px solid #214761;
-		}
-		
-		.modal {
-			direction: rtl;
-			color: #214761;
-		}
-		.modal-title {
-			color: #fff;
-			text-align: center;
-		}
-		.modal-header,
-		.modal-footer {
-			background-color: #214761;
-		}
-		.close {
-			color: #fff;
-		}
-		
-		.close:hover {
-			color: #fff;
-		}
-		
-		.close-btn {
-			font-size: 2rem;
-			width: 20%;
-		}
-		#gender *,
-		#numOfMembers *,
-		#leaderGender *{
-			color: #214761;
-			font-size: 2rem;
-		}
-		.form-group> label {
-			font-size: 2rem;
-		}
-		.body-header {
-			font-size: 3rem;
-			text-align: center;
-			margin-bottom: 5%;
-		}
-		#sub-btn {
-			font-size: 2rem;
-			font-weight: bold;
-			margin-top: 5%;
-			background-color: #214761;
-			color: #fff;
-			border: 1px solid #214761;
-		}
-		
-		#sub-btn:hover {
-			color: #214761;
-			background-color: #fff;
-		}
-
-	</style>
 </head>
 
 <body>
@@ -82,6 +21,7 @@
 	<i class="fa fa-user-plus" aria-hidden="true"></i>
      طلب سفراء جدد
 </button>
+
 
 
 	<!-- Modal -->
@@ -105,7 +45,7 @@
 						$leaderName = "asmaa";
 						$teamLink = "http://facebook.com/asmaa.99";
 						$teamName = "11";
-						
+
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
 						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
@@ -164,13 +104,13 @@
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url + "index.php/requests/addRequest/?email=<?=$_GET['email']?>",
+					url: base_url + "index.php/requests/addFullRequest/?email=<?=$_GET['email']?>",
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),
 						leaderGender: $( "#leaderGender" ).val(),
 						teamLink: $( "#teamLink" ).val(),
-						teamName: $("#teamName").val(),
+						teamName: $( "#teamName" ).val(),
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
 
@@ -182,17 +122,6 @@
 				return false;
 			} );
 		} );
-		
-		
-	</script>
-	<script>
-		/*
-		$(document).ready(function(){
-		  $("#reqModalBtn").click(function(){
-		    $("#reqModal").modal();
-		  });
-		});
-		*/
 	</script>
 </body>
 </html>
