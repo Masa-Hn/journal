@@ -82,7 +82,7 @@
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url + "index.php/requests/addRequest/?email=<?=$_GET['email']?>",
+					url: base_url + "requests/addRequest/?email=<?=$_GET['email']?>",
 					data: {
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
