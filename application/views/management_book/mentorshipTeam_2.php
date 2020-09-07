@@ -16,6 +16,16 @@
 	html {
 		height: 100%;
 	}
+	
+	.names {
+		display: inline;
+		text-align: center;
+		font-size: 1.5rem;
+	}
+	
+	.mybutton {
+		width: 100%;
+	}
 
 </style>
 <body>
@@ -26,38 +36,50 @@
 					<div class="slideshow-container">
 						<div class="carousel-container w3-display-container " id="seriesPhotos">
 							<?php
-							//$ci = & get_instance();
-							//$ci->load->model( 'GeneralModel' );
 							if ( $requests->num_rows() > 0 ) {
 
 								foreach ( $requests->result() as $request ) {
-									$id = $request->id;
+									$id = $request->Rid;
 									$leaderEmail = $request->leader_email;
 									$num_of_members = 20; // a query to be run here to get total members (based on leader email) from the official database
-									$query = $this->GeneralModel->get_data( $request->id, 'requestId', 'ambassador', 'name, gender' );
+									$query = $this->GeneralModel->get_data( $id, 'requestId', 'ambassador', 'name, gender' );
 									?>
 							<div class="mySlides carousel-slide">
-								<h4 class="heading" style="text-align:right;">
+								<h4 class="heading" style="text-align:center;">
 									<?php echo "فريق: <a href='$request->team_link' class='link'>" . $request->team_name . "</a> - " . "القائد: <a href='$request->leader_link' class='link'>" . $request->leader_name . "</a>"; ?>
 								</h4>
-								<p style="text-align: center;"><small> 
-								عدد أعضاء الفريق: <?php echo $num_of_members;?> - الأعضاء الجدد: <?php echo $query->num_rows();?>
+								<p style="text-align: center;">
+									<small> 
+								عدد أعضاء الفريق: <?php echo $num_of_members;?> - الأعضاء الجدد: <?php echo $query->num_rows();?> - تاريخ الطلب: <?php echo date('Y-m-d', strtotime($request->date));?>
 								</small>
 								
+
 								</p>
-								<ul style="text-align: center;list-style: none;" id="<?php echo $id;?>">
+								<ul class="list-group list-group-flush" style="text-align: center;list-style: none;" id="<?php echo $id;?>">
 									<?php
 									foreach ( $query->result() as $row ) {
 										?>
-									<li>
-										<?php echo $row->name;?> </li>
+									<li class="list-group-item">
+										<p class="names">
+											<?php echo $row->name." ";?>
+										</p>
+										<small>
+											<?php
+											if ( $row->gender == 'female' || $row->gender == 'Female' ) {
+												echo '(أنثى)';
+											} else if ( $row->gender == 'male' || $row->gender == 'Male' ) {
+												echo 'ذكر';
+											}
+											?>
+										</small>
+									</li>
 									<?php
 									}
 									$leaderName = $request->leader_name;
 									?>
 								</ul>
 
-								<button id="<?php echo $id; ?>" name="done" class="mybutton" style="margin-right: 10px; background-color: #459b6e;" onclick="send_to_leader(<?php echo $id;?>);">تم </button>
+								<button id="<?php echo $id; ?>" name="done" class="mybutton" style="margin-right: 10px; background-color: #459b6e;" onclick="send_to_leader(<?php echo $id;?>);">تم التواصل </button>
 								<button id="<?php echo $id; ?>" name="copy" class="mybutton" style="background-color: #205d67;" onclick="copyMsg('<?php echo $id;?>', '<?php echo $leaderName;?>')">نسخ</button>
 							</div>
 							<?php
@@ -95,7 +117,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
 <script type="text/javascript">
 	function copyMsg( id, leaderName ) {
-		var lst = document.getElementById( id ).querySelectorAll( "li" );
+		var lst = document.getElementById( id ).querySelectorAll( ".names" );
 		var i, x = "";
 		x += "مرحباً قائد " + leaderName + "\n\n";
 		x += "لطفا قم باستقبال الأعضاء التالية اسماؤهم :\n\n";
@@ -160,7 +182,7 @@
 							location.reload();
 						},
 						error: function ( error ) {
-							console.log( "error" );
+							console.log( error );
 						}
 					} );
 				} else {
