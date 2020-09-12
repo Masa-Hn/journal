@@ -1,79 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-	<title>Osboha 180</title>
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
-
-
-	<style type="text/css">
-		#reqModalBtn {
-			color: #214761;
-			background-color: #fff;
-			margin: 50px;
-			border: 1px solid #214761;
-		}
-		
-		.modal {
-			direction: rtl;
-			color: #214761;
-		}
-		.modal-title {
-			color: #fff;
-			text-align: center;
-		}
-		.modal-header,
-		.modal-footer {
-			background-color: #214761;
-		}
-		.close {
-			color: #fff;
-		}
-		
-		.close:hover {
-			color: #fff;
-		}
-		
-		.close-btn {
-			font-size: 2rem;
-			width: 20%;
-		}
-		#gender *,
-		#numOfMembers * {
-			color: #214761;
-			font-size: 2rem;
-		}
-		.form-group> label {
-			font-size: 2rem;
-		}
-		.body-header {
-			font-size: 3rem;
-			text-align: center;
-			margin-bottom: 5%;
-		}
-		#sub-btn {
-			font-size: 2rem;
-			font-weight: bold;
-			margin-top: 5%;
-			background-color: #214761;
-			color: #fff;
-			border: 1px solid #214761;
-		}
-		
-		#sub-btn:hover {
-			color: #214761;
-			background-color: #fff;
-		}
-
-	</style>
-</head>
-
 <body>
 
 	<!-- Trigger the modal with a button -->
@@ -81,6 +5,7 @@
 	<i class="fa fa-user-plus" aria-hidden="true"></i>
      طلب سفراء جدد
 </button>
+
 
 
 	<!-- Modal -->
@@ -91,7 +16,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title"> ﺻﻔﺤﺔ ﻃﻠﺐ ﺳﻔﺮاء ﺟﺪﺩ </h1>
+					<h1 class="modal-title"> طﻠﺐ ﺳﻔﺮاء ﺟﺪﺩ </h1>
 				</div>
 
 				<div class="modal-body">
@@ -103,14 +28,23 @@
 						//to be taken from osboha website
 						$leaderName = "asmaa";
 						$teamLink = "http://facebook.com/asmaa.99";
-						
+						$teamName = "11";
+
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
 						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
+						<input type="hidden" name="teamName" id="teamName" value="<?php echo $teamName ;?>">
 
 						<div class="form-group">
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" placeholder="مثال: https://www.facebook.com/example" class="form-control" required="required">
+						</div>
+						<div class="form-group">
+							<label for="leaderGender" class="form-label"> جنسك: </label>
+							<select name="leaderGender" id="leaderGender" class="form-control">
+								<option value="female">أنثى</option>
+								<option value="male">ذكر</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<label for="numOfMembers">اختر عدد الأعضاء الذي تريده: </label>
@@ -124,7 +58,7 @@
 						</div>
 
 						<div class="form-group">
-							<label for="gender" class="form-label">اختر الجنس: </label>
+							<label for="gender" class="form-label">اختر جنس الأعضاء: </label>
 							<select name="gender" id="gender" class="form-control">
 								<option value="female">إناث</option>
 								<option value="male">ذكور</option>
@@ -141,24 +75,27 @@
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق</button>
-				</div>
+					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق </button>	
+			</div>
 
 			</div>
 		</div>
 	</div>
+
 	<script type="text/javascript">
-		var base_url = "<?=base_url();?>index.php/requests/addRequest/?email=<?php echo $_GET['email']?>";
+		var base_url = "<?php echo base_url()?>";
 		$( document ).ready( function () {
 
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url,
+					url: base_url + "Requests/addFullRequest/?email=<?=$_GET['email']?>",
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),
+						leaderGender: $( "#leaderGender" ).val(),
 						teamLink: $( "#teamLink" ).val(),
+						teamName: $( "#teamName" ).val(),
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
 
@@ -170,17 +107,6 @@
 				return false;
 			} );
 		} );
-		
-		
-	</script>
-	<script>
-		/*
-		$(document).ready(function(){
-		  $("#reqModalBtn").click(function(){
-		    $("#reqModal").modal();
-		  });
-		});
-		*/
 	</script>
 </body>
 </html>
