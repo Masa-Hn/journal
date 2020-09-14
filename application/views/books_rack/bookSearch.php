@@ -43,7 +43,7 @@
         <h3>تخصيص البحث</h3>
         <div class="heading-underline"></div>
         <div class="row" style="text-align: -webkit-center">
-          <button id="filtersToggel" class="cusBtn btn" data-toggle="collapse" data-target="#filters">اضغط لاظهار خيارات التخصيص </button>
+          <button id="filtersToggel" class="cusBtn btn" data-toggle="collapse" data-target="#filters">عرض الكتب حسب الفئات المختلفة</button>
         </div>
         <div  id="filters" class=" collapse custom-control custom-checkbox ">
             <h3 class="clear" style="margin-bottom: 10%; text-align: right;"> فئة الكتاب  </h3>
@@ -151,7 +151,7 @@
       <div class="padding "></div>
       <div class="container">
         <div class="row displayDiv section-margin  container-flui" style="text-align: right; margin-right: 3%" >
-           <button class="btn cusBtn" id="displaybtn">   عرض </button>  <input type="text" id="bookDisplay" name="bookDisplay" value="3">
+           <button class="btn cusBtn" id="displaybtn">اختر عدد الكتب للعرض</button>  <input type="text" id="bookDisplay" name="bookDisplay" value="3">
         </div>
         <div id="pagination-container"></div>   
 
