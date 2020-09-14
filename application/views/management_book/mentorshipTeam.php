@@ -1,6 +1,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
 <script src="<?php echo base_url()?>assets/js/pagination.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/mentorshipTeam.css">
 <body>
@@ -18,110 +19,92 @@
                     <th>الجنس</th>
                     <th>عدد الأعضاء الكلي</th>
                     <th>عدد الأعضاء الجدد</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    foreach ($requests->result() as $request) {
+                      $id = $request->Rid;
+                      $ambassadors = $this->GeneralModel->get_data($request->Rid, 'requestId', 'ambassador', 'name, gender');
+                      $newMembers = $ambassadors->num_rows();
+
+                  ?>
                   <tr class="list-item">
                     <td>
-                      <button type="button" id="btnMSb" aria-expanded="false" onclick="toggle(this.id,'#MS01b,#MS02b,#MS03b');" aria-controls="MS01b MS02b MS03b" aria-label="3 more from" aria-labelledby="btnMSb lblMSb">
+                      <button type="button" id="<?php echo 'btnMSb'.$id;?>" aria-expanded="false" onclick="toggle(this.id,'<?php echo "#MS01b".$id;?>');" aria-controls="<?php echo 'MS01b'.$id;?>" aria-label="3 more from" aria-labelledby="<?php echo 'btnMSb'.$id;?> <?php echo 'lblMSb'.$id;?>">
                         <svg xmlns="\http://www.w3.org/2000/svg&quot;" viewBox="0 0 80 80" focusable="false"><path d="M70.3 13.8L40 66.3 9.7 13.8z"></path></svg>
                       </button>
                     </td>
-                    <td id="lblMSb" class="list-item">A01</td>
-                    <td>Leader01</td>
-                    <td>F</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td><input type="checkbox" class="checkbox" value="1" name="checkbox"> </td>
+                    <td id="lblMSb" ><?php echo $request->team_name; ?></td>
+                    <td><?php echo $request->leader_name; ?></td>
+                    <td><?php
+                      if($request->gender == 'Female' || $request->gender == 'female'){
+                        echo "أنثى";
+                      }else{
+                        echo "ذكر";
+                      }
+                    ?></td>
+                    <td><?php $totalMembers=20; echo $totalMembers;?></td>
+                    <td><?php echo $newMembers;?></td>
                   </tr>
-                  <tr id="MS01b" class="hidden">
+                    <?php
+                      foreach ($ambassadors->result() as $ambassador) {
+                    ?>
+                  <tr id="<?php echo 'MS01b'.$id;?>" class="hidden">
                     <td></td>
                     <td></td>
-                     <td>member00</td>
-                    <td>M</td>
-                    <td rowspan="3" colspan="3" style="text-align: center;vertical-align: middle;">
-                      <input type="button" class="copy btn-lg" value="Copy Members">
+                     <td class="<?php echo 'MS02b'.$id;?>"><?php echo $ambassador->name;?></td>
+                    <td><?php
+                    if($ambassador->gender == 'Female' || $ambassador->gender == 'female'){
+                      echo "أنثى";
+                    }else{
+                      echo "ذكر";
+                    }
+                    ?></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                    <?php
+                    }
+                    ?>
+                  <tr id="<?php echo 'MS01b'.$id;?>" class="hidden">
+                    <td rowspan="" colspan="6" style="text-align: center;vertical-align: middle;">
+                      <input type="button" class="copy btn-lg" onclick="copyNames('<?php echo '.MS02b'.$id;?>')" value="نسخ الأسماء">
                     </td>
                   </tr>
-                  <tr id="MS02b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member02</td>
-                    <td>M</td>
-                  </tr>
-                  <tr id="MS03b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member03</td>
-                    <td>M</td>
-                  </tr>
-                  <tr class="list-item">
-                    <td></td>
-                    <td>A02</td>
-                    <td>Leader02</td>
-                    <td>F</td>
-                    <td>15</td>
-                    <td>0</td>
-                    <td><input type="checkbox" class="checkbox" value="2" name="checkbox"> </td>
-                  </tr>
-                  <tr class="list-item">
-                    <td>
-                      <button type="button" id="btnEDENSb" aria-expanded="false" onclick="toggle(this.id,'#EDENS01b,#EDENS02b,#EDENS03b,#EDENS04b,#EDENS05b');" aria-controls="EDENS01b EDENS02b EDENS03b EDENS04b EDENS05b" aria-label="5 more from" aria-labelledby="btnEDENSb lblEDENSb">
-                        <svg xmlns="\http://www.w3.org/2000/svg&quot;" viewBox="0 0 80 80" focusable="false"><path d="M70.3 13.8L40 66.3 9.7 13.8z"></path></svg>
-                      </button>
-                    </td>
-                    <td id="lblEDENSb" class="list-item">A03</td>
-                    <td>Leader03</td>
-                    <td>F</td>
-                    <td>12</td>
-                    <td>5</td>
-                    <td><input type="checkbox" class="checkbox" value="3" name="checkbox"> </td>
-                  </tr>
-                  <tr id="EDENS01b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member00</td>
-                    <td>M</td>
-                    <td rowspan="5" colspan="3" style="text-align: center;vertical-align: middle;">
-                      <input type="button" class="copy btn-lg" value="Copy Members">
-                    </td>
-                    
-                  </tr>
-                  <tr id="EDENS02b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member00</td>
-                    <td>M</td>
-                  </tr>
-                  <tr id="EDENS03b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member00</td>
-                    <td>F</td>
-                  </tr>
-                  <tr id="EDENS04b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member00</td>
-                    <td>F</td>
-                  </tr>
-                  <tr id="EDENS05b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member03</td>
-                    <td>F</td>
-                  </tr>
-                  <tr>
+                    <?php
+                      }
+                    ?>
                 </tbody>
               </table>
-              <div id="pagination-container"></div>  
-              <div id="submit" style="display: none;text-align: center;">
-                <input type="button" class="copy btn-lg" value="Submit">
-              </div>  
+              <div id="pagination-container">	</div>
             </div>
         </div>
     </div>
 </div>
 </body>
 <script src="<?php echo base_url()?>assets/js/mentorshipTeam.js"></script>
+<script type="text/javascript">
+function copyNames(className) {
+  var lst = document.querySelectorAll( className );
+  var i, x = "";
+  for ( i = 0; i < lst.length; i++ ) {
+    x += lst[ i ].textContent + "\n";
+  }
+  var copyText = document.createElement( 'textarea' );
+  copyText.value = x;
+  document.body.appendChild( copyText );
+  copyText.select();
+  document.execCommand( 'copy' );
+  // Remove temporary textarea
+  document.body.removeChild( copyText );
+  Swal.fire( {
+    icon: 'success',
+    title: 'تم النسخ',
+    text: 'تم نسخ أسماء السفراء',
+    showConfirmButton: false,
+    timer: 3000
+  } );
+  console.log( x );
+}
+</script>

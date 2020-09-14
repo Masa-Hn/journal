@@ -6,23 +6,23 @@
 	.link {
 		color: #205D67;
 	}
-	
+
 	.link:hover {
 		color: #205D67;
 		font-weight: bold;
 	}
-	
+
 	body,
 	html {
 		height: 100%;
 	}
-	
+
 	.names {
 		display: inline;
 		text-align: center;
 		font-size: 1.5rem;
 	}
-	
+
 	.mybutton {
 		width: 100%;
 	}
@@ -49,10 +49,10 @@
 									<?php echo "فريق: <a href='$request->team_link' class='link'>" . $request->team_name . "</a> - " . "القائد: <a href='$request->leader_link' class='link'>" . $request->leader_name . "</a>"; ?>
 								</h4>
 								<p style="text-align: center;">
-									<small> 
+									<small>
 								عدد أعضاء الفريق: <?php echo $num_of_members;?> - الأعضاء الجدد: <?php echo $query->num_rows();?> - تاريخ الطلب: <?php echo date('Y-m-d', strtotime($request->date));?>
 								</small>
-								
+
 
 								</p>
 								<ul class="list-group list-group-flush" style="text-align: center;list-style: none;" id="<?php echo $id;?>">
@@ -112,6 +112,7 @@
 	</div>
 </body>
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/teamCarousel.js"></script>
+<script src="<?php echo base_url()?>assets/js/mentorshipTeam.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
