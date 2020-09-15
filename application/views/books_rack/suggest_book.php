@@ -1,11 +1,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/search.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/rtl.css">
-<link href="<?php echo base_url()?>assets/css/animation.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
-<script src="<?php echo base_url()?>assets/js/pagination.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
+
 <style>
 
 
@@ -15,15 +11,14 @@
 <div class="row">
           <div class="container-fluid text-center">
           <h2 style="text-align: right;"> 
-          	اقترح كتاباً   
-          <input type="image" class="s-btn" style="float: right;"  src="<?php echo base_url()?>assets/img/suggest_book.png" > 
+          	اقترح كتاباً          
+          <input type="image" class="s-btn" style="float: right;width: 100px;height: 100px"  src="<?php echo base_url()?>assets/img/suggest_book.png" > 
       </h2>
-
-          <div class="heading-underline"></div>
-            <div style="text-align: left;"><label  class="text-danger mb-3">* مطلوب</label></div>
-
-      </div>
     </div>
+      </div>
+
+          <div class="heading-underline" style="width: 100%"></div>
+
   </div>
 </div>
 
@@ -33,24 +28,22 @@
     <div class="container">
       <div class="row">
           <div class="container-fluid text-center">
-      		<li style="font-size: 30px; text-align: right;" > اسم الكتاب : *</li>
-              <input class="box" style="text-align: right;font-size: 25px" dir="rtl" type="text" id="bookName" name="bookName"   align="right" onblur="validate(1,'bookName')">
-                <hr style="width: 70%;    border-top: 1px solid #205d67 !important; display: none;" id="hrLine">
+      		
+              <input class="box" style="text-align: center;font-size: 25px" dir="rtl" type="text" id="bookName" name="bookName"   align="right" onblur="validate(1,'bookName')" placeholder="اسم الكتاب ">
                	
-      		<li style="font-size: 30px;text-align: right;" > اسم الكاتب : *</li>
-              <input class="box" style="text-align: right;font-size: 25px" dir="rtl" type="text" id="writer" name="writer"   align="right" onblur="validate(2,'writer')">
-                <hr style="width: 70%;    border-top: 1px solid #205d67 !important; display: none;" id="hrLine">
+<h2></h2>
+              <input class="box" style="text-align: center;font-size: 25px" dir="rtl" type="text" id="writer" name="writer"   align="right" onblur="validate(2,'writer')" placeholder="اسم الكاتب ">
 
-      		<li style="font-size: 30px;text-align: right;" > نبذة عن الكتاب : *</li>
-          
-              <textarea class="box" style="font-size: 25px"  id="brief" name="brief" rows="5" onblur="validate(3,'brief')" ></textarea>
-                <hr style="width: 70%;    border-top: 1px solid #205d67 !important; display: none;" id="hrLine">
+<h2></h2>
+
+              <textarea class="box" style="text-align: center;font-size: 25px"  id="brief" name="brief" rows="5" onblur="validate(3,'brief')" placeholder="نبذة عن الكتاب "></textarea>
 </div>
 </div>
  <div class="row">
           <div class="container-fluid text-center">
-	<li style="font-size: 30px;text-align: right;" > صنف الكتاب : *</li>
-<select  class="box"  type="text" id="type" name="type"  align="right"  style="font-size: 25px"  >
+<h2></h2>
+<select  class="box"  type="text" id="type" name="type"  align="center"  style="text-align: center; font-size: 25px" onblur="validate(4,'type')" >
+          <option  value="" disabled selected hidden>صنف الكتاب</option>
                                     <option value="تاريخي">تاريخي</option>
                                     <option value="ديني">ديني</option>
                                     <option value="إقتصادي">إقتصادي</option>
@@ -67,16 +60,17 @@
                                     <option value="قصص صحابة/ أطفال">قصص صحابة/ أطفال</option>
                                     <option value="انجليزي">انجليزي</option>
                                 </select>
-                <hr style="width: 70%;    border-top: 1px solid #205d67 !important; display: none;" id="hrLine">
-<br>
-  <li style="font-size: 30px;text-align: right;" >متوفر الكترونياً ؟ *</li>
-<select  class="box"  type="text" id="found" name="found"   align="right" style="font-size: 25px"  onchange = "ShowHideDiv()">
+<h2></h2>
+
+
+<select  class="box"  type="text" id="found" name="found"   align="right" style="text-align: center; font-size: 25px"  onchange = "ShowHideDiv()" onblur="validate(5,'found')">
+   <option  value="" disabled selected hidden>متوفر الكترونياً ؟</option>
                                      <option value=0>لا</option>
                                      <option value=1>نعم</option>
                                 </select>
+<h2></h2>
 <div style="display: none;" id="div_link" >
-                                <li style="font-size: 30px;text-align: right;" >رابط تحميل الكتاب : </li>
-              <input class="box" style="text-align: right;font-size: 25px" dir="rtl" type="text" id="link" name="link"   align="right" >
+              <input class="box" style="text-align: center;font-size: 25px" dir="rtl" type="text" id="link" name="link"   align="right" placeholder="رابط تحميل الكتاب " >
                 <hr style="width: 70%;    border-top: 1px solid #205d67 !important; display: none;" id="hrLine">
 </div>
  <script type="text/javascript">
