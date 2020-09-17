@@ -101,3 +101,28 @@ tr.hidden {
 .checkbox{
   width: 20px;
 }
+.link, .fa{
+  color: #205D67;
+}
+.fa{
+  font-size: 1vw;
+}
+.link:hover, .fa:hover{
+  color: #205D67;
+  font-weight: bold;
+}
+.s-form{
+  width: 80%;
+  margin: auto;
+}
+.form-control{
+  /*  border-color: #205D67; */
+border-radius: 5vw;
+}
+#s-btn:hover{
+  background-color: #205D67;
+  color: #fff;
+}
+th, tr, td{
+  text-align: center;
+}

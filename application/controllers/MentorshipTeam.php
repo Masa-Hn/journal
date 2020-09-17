@@ -17,9 +17,11 @@ class MentorshipTeam extends CI_Controller {
 	public
 
 	function index() {
-		$title[ 'title' ] = 'فريق الإدخال';
+		$title[ 'title' ] = 'عرض التوزيع';
 
 		$this->load->view( 'management_book/templates/header', $title );
+		$this->load->view( 'management_book/templates/navbar' );
+
 
 		$whereCondition = array( 'is_done' => 1, 'send_to_leader' => 0 );
 
@@ -27,6 +29,7 @@ class MentorshipTeam extends CI_Controller {
 		$arr[ 'requests' ] = $this->RequestsModel->selectWithJoin( 'leader_info', 'leader_request', 'leader_info.id = leader_request.leader_id', $whereCondition );
 
 		$this->load->view( 'management_book/mentorshipTeam_2', $arr );
+				$this->load->view( 'management_book/templates/footer' );
 	}
 
 	//update the send_to_leader field (set to 1 ) after messaging the leader

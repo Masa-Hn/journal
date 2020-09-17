@@ -8,5 +8,15 @@ class RequestsModel extends CI_Model {
 		$this->db->where($whereCondition);
 		return $this->db->get();
 	}
+
+	public function searchRequest( $whereCondition ) {
+		$this->db->select ( '*' );
+	 $this->db->from ( 'leader_request' );
+	 $this->db->join ( 'leader_info', 'leader_request.leader_id = leader_info.id' );
+	 $this->db->join ( 'ambassador', 'ambassador.requestId = leader_request.Rid' );
+	 $this->db->where($whereCondition);
+	 $query = $this->db->get ();
+	 return $query;
+	}
 }
 ?>
