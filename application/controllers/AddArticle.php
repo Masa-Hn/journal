@@ -46,7 +46,7 @@ class AddArticle extends CI_Controller {
         $n=$this->input->post('article_name');
         $w=$this->input->post('writer');
         $d=$this->input->post('date');
-
+     
         $this->upload->do_upload('article_img');
         $image_data = $this->upload->data();  
         $i=$image_data['file_name'];
