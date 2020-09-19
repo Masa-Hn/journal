@@ -43,7 +43,7 @@
                 <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>evaluation/index">إضافة تقييم</a>
             </li>
             <li>
-                <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>management_book/mentorshipTeam_2">عرض التوزيع</a>
+                <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>mentorshipTeam">عرض التوزيع</a>
             </li>
             <li>
                 <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>management_book/mentorshipTeam">أرشيف التوزيع</a>

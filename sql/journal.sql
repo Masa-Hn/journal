@@ -680,7 +680,26 @@ CREATE TABLE `visitors` (
 INSERT INTO `visitors` (`user_IP`, `visit_times`) VALUES
 (3232235521, 5);
 
+-- --------------------------------------------------------
+
 --
+-- Table structure for table `suggestion_book`
+--
+
+CREATE TABLE IF NOT EXISTS `suggestion_book` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `book_name` tinytext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `writer` tinytext CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `brief` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `type` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `found` int(11) NOT NULL,
+  `link` tinytext CHARACTER SET utf8 COLLATE utf8_bin,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+
 -- Indexes for dumped tables
 --
 
@@ -737,6 +756,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `visitors`
   ADD PRIMARY KEY (`user_IP`);
+
+--
+-- Indexes for table `suggestion_book`
+--
+ALTER TABLE `suggestion_book`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables

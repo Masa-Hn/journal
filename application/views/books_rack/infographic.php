@@ -1,4 +1,5 @@
 <link href="<?php echo base_url()?>assets/css/gallary.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/rtl.css">
 <style>
  

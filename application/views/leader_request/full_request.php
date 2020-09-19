@@ -1,4 +1,3 @@
-
 <body>
 
 	<!-- Trigger the modal with a button -->
@@ -90,7 +89,7 @@
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url + "index.php/requests/addFullRequest/?email=<?=$_GET['email']?>",
+					url: base_url + "Requests/addFullRequest/?email=<?=$_GET['email']?>",
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),
