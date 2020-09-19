@@ -87,6 +87,17 @@ class RequestsModel extends CI_Model {
 		
 	}
 
+	public function searchRequest( $whereCondition ) {
+		$this->db->select ( '*' );
+	 $this->db->from ( 'leader_request' );
+	 $this->db->join ( 'leader_info', 'leader_request.leader_id = leader_info.id' );
+	 $this->db->join ( 'ambassador', 'ambassador.requestId = leader_request.Rid' );
+	 $this->db->where($whereCondition);
+	 $query = $this->db->get ();
+	 return $query;
+	}
+}
+
 	public function updateLeaderInfo($leader){
         $query ="UPDATE leader_info SET leader_name ='".$leader['leader_name']."', leader_link ='". $leader['leader_link']."' WHERE id =".$leader['id'];
 
@@ -107,3 +118,4 @@ class RequestsModel extends CI_Model {
 }//RequestsModel
 
 ?>
+
