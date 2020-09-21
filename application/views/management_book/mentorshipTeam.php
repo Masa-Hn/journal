@@ -8,7 +8,8 @@
     <div class="row d-flex justify-content-center">
         <div class="col-xl-10 col-lg-10 col-md-10">
             <div class="card b-0" style="overflow-x: auto;">
-              <input type="hidden" id="bookDisplay" name="bookDisplay" value="2">
+              <!-- number of row to display -->
+              <input type="hidden" id="bookDisplay" name="bookDisplay" value="15">
               <table id="dataTable" class="cell list-wrapper" dir="rtl">
                 <thead>
                   <tr>
