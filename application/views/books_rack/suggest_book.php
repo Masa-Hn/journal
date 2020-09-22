@@ -23,6 +23,8 @@
 </div>
 
 <?php echo $this->session->flashdata('msg')?>  
+              <?php echo $this->session->flashdata('msg2')?>  
+
       <form enctype="multipart/form-data" method="post" action="<?php echo base_url()?>Suggest_book/add" onsubmit="return validate(5,'bookName','writer','brief','type','found')">
       	<div class="padding" id="section-one">
     <div class="container">
@@ -30,6 +32,7 @@
           <div class="container-fluid text-center">
       		
               <input class="box" style="text-align: center;font-size: 25px" dir="rtl" type="text" id="bookName" name="bookName"   align="right" onblur="validate(1,'bookName')" placeholder="اسم الكتاب ">
+
                	
 <h2></h2>
               <input class="box" style="text-align: center;font-size: 25px" dir="rtl" type="text" id="writer" name="writer"   align="right" onblur="validate(2,'writer')" placeholder="اسم الكاتب ">
