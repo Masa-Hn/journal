@@ -25,7 +25,7 @@
 
               <input class="s-text" dir="rtl" type="text" id="bookName" placeholder="ابحث عن كتابك " name="search2" align="center" oninput="search()">
                 <hr style="width: 70%;    border-top: 1px solid #205d67 !important; display: none;" id="hrLine">
-                <ul id="searchList" style="display: none; list-style: none;">
+                <ul id="searchList" style="display:contents !important;  list-style: none; justify-content: center;">
                   
                 </ul>
               <input type="image" class="s-btn" id="s-btn" src="<?php echo base_url()?>assets/img/img_6.png" onclick="getBook()" >
@@ -151,7 +151,9 @@
       <div class="padding "></div>
       <div class="container">
         <div class="row displayDiv section-margin  container-flui" style="text-align: right; margin-right: 3%" >
-           <button class="btn cusBtn" id="displaybtn">اختر عدد الكتب للعرض</button>  <input type="text" id="bookDisplay" name="bookDisplay" value="3">
+           <button class="btn cusBtn" id="displaybtn">اختر عدد الكتب للعرض</button> 
+            <!-- number of book to display -->
+            <input type="text" id="bookDisplay" name="bookDisplay" value="3">
         </div>
         <div id="pagination-container"></div>   
 
