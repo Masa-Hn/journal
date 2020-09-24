@@ -15,7 +15,7 @@
  <nav class="navbar navbar-expand-lg navbar-light" dir="ltr" style="font-family: 'Tajawal', sans-serif;font-size:1.1em">
  
     <a class="navbar-brand" href="#">
-        <img src="<?php echo base_url()?>assets/img/logo_2.png" height="45">
+        <img src="<?php echo base_url()?>assets/img/logo_2.png" >
     </a>  
 
     <button class="navbar-toggler right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
