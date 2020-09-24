@@ -34,7 +34,14 @@ class Suggest_book extends CI_Controller {
         $data['found']   = $this->input->post('found');
         $data['link']    = $this->input->post('link');
 
-            
+        $like=$this->GeneralModel->get_data_like( $data['book_name'],'book_name','suggestion_book')->result();
+        if ($like)
+        {
+        	 $this->session->set_flashdata('msg2',"<p class='alert alert-warning' style='text-align:right'>اسم الكتاب موجود مسبقاً ... </p>");
+        	 //print_r($like);
+            redirect(base_url().'suggest_book/index');
+        }
+           else{ 
         if($this->GeneralModel->insert($data,'suggestion_book')){
 
             $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم إضافة الكتاب بنجاح</div>");
@@ -44,6 +51,7 @@ class Suggest_book extends CI_Controller {
             $this->session->set_flashdata('msg',"<div class='alert alert-danger' style='text-align:right'>خطأ</div>");
             redirect(base_url().'suggest_book/index');
         }
+    }
     }
 		}
 	

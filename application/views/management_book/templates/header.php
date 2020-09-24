@@ -13,17 +13,16 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 
+        html,body{
+            font-family: 'Tajawal', sans-serif;
+            color: #205D67;
+        }    
+    </style>
 
 </head>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 
-html,body{
-	font-family: 'Tajawal', sans-serif;
-	color: #205D67;
-    direction: rtl
-}    
-</style>
 
