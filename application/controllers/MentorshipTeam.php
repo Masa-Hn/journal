@@ -28,7 +28,6 @@ class MentorshipTeam extends CI_Controller {
 		//get the requests that are done (ambassadors distributed) in which the msg hasn't sent yet
 		$arr[ 'requests' ] = $this->RequestsModel->selectWithJoin( 'leader_info', 'leader_request', 'leader_info.id = leader_request.leader_id', $whereCondition );
 
-        $this->load->view('management_book/templates/navbar');
 		$this->load->view( 'management_book/mentorshipTeam_2', $arr );
 				$this->load->view( 'management_book/templates/footer' );
 	}

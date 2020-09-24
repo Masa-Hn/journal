@@ -24,7 +24,7 @@ class RequestsModel extends CI_Model {
 			$msg= $conn->error;
 		}
 		return $msg;
-		
+
 	}//addRequest
 
 	public function getDate($leaderEmail)
@@ -40,12 +40,12 @@ class RequestsModel extends CI_Model {
 		$done=$conn->query($query);
 		if($done){
 			$conn->close();
-			return$done;	
+			return$done;
 		}
 		else{
 			return $conn->error;
 		}
-		
+
 
 	}//get_data
 
@@ -71,20 +71,20 @@ class RequestsModel extends CI_Model {
 		else{
 			return $conn->error;
 		}
-		
+
 	}//insertLeaderInfo
 	public function leaderLastRequest($id){
-		$query = "SELECT date FROM leader_request WHERE leader_id =".$id." ORDER BY date DESC LIMIT 1;";
+		$query = "SELECT date FROM leader_request WHERE leader_id =".$id." ORDER BY date DESC LIMIT 1";
 		$conn= $this->connectToDB();
 		$done=$conn->query($query);
 		if($done){
 			$conn->close();
-			return$done;	
+			return$done;
 		}
 		else{
 			return $conn->error;
 		}
-		
+
 	}
 
 	public function searchRequest( $whereCondition ) {
@@ -93,10 +93,9 @@ class RequestsModel extends CI_Model {
 	 $this->db->join ( 'leader_info', 'leader_request.leader_id = leader_info.id' );
 	 $this->db->join ( 'ambassador', 'ambassador.requestId = leader_request.Rid' );
 	 $this->db->where($whereCondition);
-	 $query = $this->db->get ();
+	 $query = $this->db->get();
 	 return $query;
 	}
-}
 
 	public function updateLeaderInfo($leader){
         $query ="UPDATE leader_info SET leader_name ='".$leader['leader_name']."', leader_link ='". $leader['leader_link']."' WHERE id =".$leader['id'];
@@ -104,7 +103,7 @@ class RequestsModel extends CI_Model {
 		$conn= $this->connectToDB();
 		$done=$conn->query($query);
 		$conn->close();
-        
+
 	}//updateLeaderInfo
     public function connectToDB(){
 		$servername = "localhost";
@@ -118,4 +117,3 @@ class RequestsModel extends CI_Model {
 }//RequestsModel
 
 ?>
-

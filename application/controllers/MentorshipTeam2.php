@@ -43,12 +43,7 @@ class MentorshipTeam2 extends CI_Controller {
 
 				if(empty($whereCondition) == false){
 					$data['requests'] = $this->RequestsModel->searchRequest($whereCondition);
-
-					$data['sval'] = $searchValue;
-					$data['date'] = $date;
-
 					$this->load->view('management_book/search_requests', $data);
-
 				}
 		}
 		$this->load->view( 'management_book/templates/footer' );

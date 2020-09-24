@@ -3,14 +3,16 @@
 <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/carousel.css"> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
-	.link {
-		color: #205D67;
-	}
-
-	.link:hover {
-		color: #205D67;
-		font-weight: bold;
-	}
+.link, .fa{
+	color: #205D67;
+}
+.fa{
+	font-size: 1vw;
+}
+.link:hover, .fa:hover{
+	color: #205D67;
+	font-weight: bold;
+}
 
 	.names {
 		display: inline;
@@ -41,7 +43,7 @@
 									?>
 							<div class="mySlides carousel-slide">
 								<h4 class="heading" style="text-align:center;">
-									<?php echo "فريق: <a href='$request->team_link' class='link'>" . $request->team_name . "</a> - " . "القائد: <a href='$request->leader_link' class='link'>" . $request->leader_name . "</a>"; ?>
+									<?php echo "فريق: <a href='$request->team_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->team_name . "</a> - " . "القائد: <a href='$request->leader_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->leader_name . "</a>"; ?>
 								</h4>
 								<p style="text-align: center;">
 									<small>
