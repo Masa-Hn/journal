@@ -17,13 +17,5 @@
 
 </head>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 
-html,body{
-	font-family: 'Tajawal', sans-serif;
-	color: #205D67;
-    direction: rtl
-}    
-</style>
 

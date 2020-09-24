@@ -3,26 +3,23 @@
 <!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/carousel.css"> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
-	.link {
-		color: #205D67;
-	}
-	
-	.link:hover {
-		color: #205D67;
-		font-weight: bold;
-	}
-	
-	body,
-	html {
-		height: 100%;
-	}
-	
+.link, .fa{
+	color: #205D67;
+}
+.fa{
+	font-size: 1vw;
+}
+.link:hover, .fa:hover{
+	color: #205D67;
+	font-weight: bold;
+}
+
 	.names {
 		display: inline;
 		text-align: center;
 		font-size: 1.5rem;
 	}
-	
+
 	.mybutton {
 		width: 100%;
 	}
@@ -46,13 +43,13 @@
 									?>
 							<div class="mySlides carousel-slide">
 								<h4 class="heading" style="text-align:center;">
-									<?php echo "فريق: <a href='$request->team_link' class='link'>" . $request->team_name . "</a> - " . "القائد: <a href='$request->leader_link' class='link'>" . $request->leader_name . "</a>"; ?>
+									<?php echo "فريق: <a href='$request->team_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->team_name . "</a> - " . "القائد: <a href='$request->leader_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->leader_name . "</a>"; ?>
 								</h4>
 								<p style="text-align: center;">
-									<small> 
+									<small>
 								عدد أعضاء الفريق: <?php echo $num_of_members;?> - الأعضاء الجدد: <?php echo $query->num_rows();?> - تاريخ الطلب: <?php echo date('Y-m-d', strtotime($request->date));?>
 								</small>
-								
+
 
 								</p>
 								<ul class="list-group list-group-flush" style="text-align: center;list-style: none;" id="<?php echo $id;?>">
@@ -112,82 +109,8 @@
 	</div>
 </body>
 <script type="text/javascript" src="<?php echo base_url()?>assets/js/teamCarousel.js"></script>
+<script src="<?php echo base_url()?>assets/js/mentorshipTeam.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
-<script type="text/javascript">
-	function copyMsg( id, leaderName ) {
-		var lst = document.getElementById( id ).querySelectorAll( ".names" );
-		var i, x = "";
-		x += "مرحباً قائد " + leaderName + "\n\n";
-		x += "لطفا قم باستقبال الأعضاء التالية اسماؤهم :\n\n";
-		for ( i = 0; i < lst.length; i++ ) {
-			x += lst[ i ].textContent + "\n";
-		}
-		x += "\n\nشكراً جداً لحضرتك \n فريق الإدخال";
-		var copyText = document.createElement( 'textarea' );
-		copyText.value = x;
-		document.body.appendChild( copyText );
-		copyText.select();
-		document.execCommand( 'copy' );
-		// Remove temporary textarea
-		document.body.removeChild( copyText );
-		Swal.fire( {
-			icon: 'success',
-			title: 'تم نسخ الأسماء والرسالة',
-			text: 'يمكنك إرسال الرسالة للقائد',
-			showConfirmButton: false,
-			timer: 3000
-		} );
-		console.log( x );
-	}
-
-	function send_to_leader( id ) {
-		swal( {
-				icon: 'warning',
-				title: 'تأكيد الإرسال!',
-				text: ' هل أنت متأكد من أنك راسلت القائد بالأسماء؟',
-				type: "warning",
-				showConfirmButton: true,
-				showCloseButton: true,
-				showCancelButton: true,
-				focusConfirm: false,
-				confirmButtonText: 'نعم',
-				cancelButtonText: 'إلغاء',
-				confirmButtonColor: "#205d67",
-				closeOnConfirm: false,
-				closeOnCancel: true
-			},
-			function ( isConfirm ) {
-				if ( isConfirm ) {
-					var base_url = "<?php echo base_url()?>";
-
-					$.ajax( {
-						url: base_url + 'MentorshipTeam/send_to_leader',
-						type: 'POST',
-						data: {
-							id: id
-						},
-						dataType: 'text',
-						success: function () {
-							/*	swal( {
-						title: 'تم الحفظ',
-						text: 'بوركت جهودك',
-						type: "success",
-						showConfirmButton: true,
-						confirmButtonText: 'حسناً',
-						confirmButtonColor: "#205d67"
-					} );*/
-							window.setTimeout( function () {}, 3000 );
-							location.reload();
-						},
-						error: function ( error ) {
-							console.log( error );
-						}
-					} );
-				} else {
-					console.log( "canceled" );
-				}
-			} );
-	}
-</script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/copy.js"></script>
