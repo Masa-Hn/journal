@@ -13,7 +13,7 @@ function search(input) {
             document.getElementById("hrLine").style.display='block';
             document.getElementById("s-btn").style.marginTop ='-8%';
             document.getElementById("s-btn").style.marginLeft ='-7%';
-            document.getElementById("searchList").style.display='block';
+            document.getElementById("searchList").style.display='contents';
             document.getElementById("searchList").innerHTML =data;
             // console.log(data);
             }

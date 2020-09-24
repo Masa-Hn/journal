@@ -8,6 +8,10 @@
     <div class="row d-flex justify-content-center">
         <div class="col-xl-10 col-lg-10 col-md-10">
             <div class="card b-0" style="overflow-x: auto;">
+
+              <!-- number of row to display -->
+              <input type="hidden" id="bookDisplay" name="bookDisplay" value="15">
+              
               <form class="s-form" enctype="multipart/form-data" method="post" action="<?php echo base_url();?>/MentorshipTeam2/searchRequest">
                 <div class="row">
                   <div class="col-md-7">
@@ -21,7 +25,7 @@
                   </div>
                 </div>
               </form>
-              <input type="hidden" id="bookDisplay" name="bookDisplay" value="2">
+              
               <table id="dataTable" class="cell list-wrapper" dir="rtl">
                 <thead>
                   <tr>
