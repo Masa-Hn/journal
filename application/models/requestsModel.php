@@ -40,7 +40,7 @@ class RequestsModel extends CI_Model {
 		$done=$conn->query($query);
 		if($done){
 			$conn->close();
-			return$done;	
+			return $done;	
 		}
 		else{
 			return $conn->error;
@@ -79,7 +79,7 @@ class RequestsModel extends CI_Model {
 		$done=$conn->query($query);
 		if($done){
 			$conn->close();
-			return$done;	
+			return $done;	
 		}
 		else{
 			return $conn->error;
@@ -96,7 +96,6 @@ class RequestsModel extends CI_Model {
 	 $query = $this->db->get ();
 	 return $query;
 	}
-}
 
 	public function updateLeaderInfo($leader){
         $query ="UPDATE leader_info SET leader_name ='".$leader['leader_name']."', leader_link ='". $leader['leader_link']."' WHERE id =".$leader['id'];
