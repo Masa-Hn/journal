@@ -29,11 +29,13 @@
 						$leaderName = "asmaa";
 						$teamLink = "http://facebook.com/asmaa.99";
 						$teamName = "11";
+						$currentTeamCount = 20;
 
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
 						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
 						<input type="hidden" name="teamName" id="teamName" value="<?php echo $teamName ;?>">
+						<input type="hidden" name="currentTeamCount" id="currentTeamCount" value="<?php echo $currentTeamCount ;?>">
 
 						<div class="form-group">
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
@@ -75,7 +77,7 @@
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق </button>	
+					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق </button>
 			</div>
 
 			</div>
@@ -96,6 +98,7 @@
 						leaderGender: $( "#leaderGender" ).val(),
 						teamLink: $( "#teamLink" ).val(),
 						teamName: $( "#teamName" ).val(),
+						currentTeamCount: $( "#currentTeamCount").val(),
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
 

@@ -25,6 +25,13 @@
 					<p id="msg"></p>
 
 					<form method="post" enctype="multipart/form-data">
+						<?php
+							$currentTeamCount = 20;
+						?>
+
+						<input type="hidden" name="currentTeamCount" id="currentTeamCount" value="<?php echo $currentTeamCount; ?>">
+
+
 						<div class="form-group">
 							<label for="numOfMembers">اختر عدد الأعضاء الذي تريده: </label>
 							<select name="numOfMembers" id="numOfMembers" class="form-control" required="required">
@@ -70,7 +77,8 @@
 					url: base_url + "requests/addRequest/?email=<?=$_GET['email']?>",
 					data: {
 						numOfMembers: $( "#numOfMembers" ).val(),
-						gender: $( "#gender" ).val()
+						gender: $( "#gender" ).val(),
+						currentTeamCount: $( "#currentTeamCount" ).val()
 
 					},
 					success: function ( data ) {
