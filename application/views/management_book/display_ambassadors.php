@@ -19,10 +19,10 @@
     <div class="row d-flex justify-content-center">
         <div class="col-xl-10 col-lg-10 col-md-10">
             <div class="card b-0" style="overflow-x: auto;">
-              <form class="s-form" enctype="multipart/form-data" method="post" action="<?php echo base_url();?>/MentorshipTeam2/searchRequest">
+              <form class="s-form" enctype="multipart/form-data" method="post" action="<?php echo base_url();?>/AmbassadorsJoining/searchAmbassador">
                 <div class="row">
                   <div class="col-md-9">
-                    <input class="form-control" name="s-text" id="s-text" type="text" placeholder="ابحث عن طريق اسم السفير..">
+                    <input class="form-control" name="s-text" id="s-text" type="text" required placeholder="ابحث عن طريق اسم السفير..">
                   </div>
                   <div class="col-md-3">
                     <input class="form-control" name="s-btn" id="s-btn" type="submit" value="بحث">
@@ -112,7 +112,7 @@
               },
               dataType: 'text',
               success: function () {
-        
+
               window.setTimeout( function () {}, 3000 );
               location.reload();
               },
