@@ -1,6 +1,15 @@
 <?php
 class RequestsModel extends CI_Model {
 
+public function get_ambassadors()
+{
+	$this->db->select('*');
+	$this->db->from('ambassador');
+	$this->db->order_by('name', 'DESC');
+	$query = $this->db->get();
+	return $query;
+
+}
 	public function addRequest($data)
 	{
 		$leader_id=$data['leader_id'];
@@ -8,9 +17,10 @@ class RequestsModel extends CI_Model {
 		// $team_link=$data['team_link'];
 		$gender =$data['gender'];
 		$num_of_members=$data['members_num'];
+		$currentTeamCount = $data[ 'current_team_count' ];
 		// $leader_email=$data['leader_email'];
 
-		$query ="INSERT INTO leader_request (`leader_id`,`gender`, `members_num`) VALUES ('".$leader_id."','".$gender."',".$num_of_members.")";
+		$query ="INSERT INTO leader_request (`leader_id`,`gender`, `members_num`, `current_team_count`) VALUES ('".$leader_id."','".$gender."','".$num_of_members."', '".$currentTeamCount."')";
 		$conn= $this->connectToDB();
 		$done=$conn->query($query);
 		if($done){
@@ -45,8 +55,6 @@ class RequestsModel extends CI_Model {
 		else{
 			return $conn->error;
 		}
-
-
 	}//get_data
 
 	public function selectWithJoin( $table1, $table2, $ON, $whereCondition, $select = '*' ) {
@@ -88,7 +96,8 @@ class RequestsModel extends CI_Model {
 	}
 
 	public function searchRequest( $whereCondition ) {
-		$this->db->select ( '*' );
+		$this->db->distinct();
+		$this->db->select ( 'Rid, leader_gender, leader_link, leader_name, team_name, team_link, date' );
 	 $this->db->from ( 'leader_request' );
 	 $this->db->join ( 'leader_info', 'leader_request.leader_id = leader_info.id' );
 	 $this->db->join ( 'ambassador', 'ambassador.requestId = leader_request.Rid' );

@@ -26,10 +26,10 @@
               <table id="dataTable" class="cell list-wrapper" dir="rtl">
                 <thead>
                   <tr>
-                    <th><span class="visually-hidden">Toggle</span></th>
                     <th>الفريق</th>
                     <th>القائد</th>
                     <th>الجنس</th>
+                    <th>السفراء</th>
                     <th>عدد الأعضاء الجدد</th>
                     <th>تاريخ الطلب</th>
                   </tr>
@@ -37,7 +37,6 @@
                 <tbody>
                   <?php
                   if($requests->num_rows()>0){
-
                     foreach ($requests->result() as $request) {
                       $id = $request->Rid;
                       $ambassadors = $this->GeneralModel->get_data($request->Rid, 'requestId', 'ambassador', 'name, gender, profile_link');
@@ -45,54 +44,40 @@
 
                   ?>
                   <tr class="list-item">
-                    <td>
-                      <button type="button" id="<?php echo 'btnMSb'.$id;?>" aria-expanded="false" onclick="toggle(this.id,'<?php echo "#MS01b".$id;?>');" aria-controls="<?php echo 'MS01b'.$id;?>" aria-label="3 more from" aria-labelledby="<?php echo 'btnMSb'.$id;?> <?php echo 'lblMSb'.$id;?>">
-                        <svg xmlns="\http://www.w3.org/2000/svg&quot;" viewBox="0 0 80 80" focusable="false"><path d="M70.3 13.8L40 66.3 9.7 13.8z"></path></svg>
-                      </button>
-                    </td>
-                    <td id="lblMSb" ><a class="link" href="<?php echo $request->team_link;?>"><i class="fa fa-external-link"></i><?php echo $request->team_name; ?></a></td>
-                    <td><a class="link" href="<?php echo $request->leader_link;?>"><i class="fa fa-external-link"></i><?php echo $request->leader_name; ?></a></td>
-                    <td><?php
-                      if($request->gender == 'Female' || $request->gender == 'female'){
+                    <td  id="lblMSb" ><a class="link" href="<?php echo $request->team_link;?>"><i class="fa fa-external-link"></i><?php echo $request->team_name; ?></a></td>
+                    <td ><a class="link" href="<?php echo $request->leader_link;?>"><i class="fa fa-external-link"></i><?php echo $request->leader_name; ?></a></td>
+                    <td ><?php
+                      if($request->leader_gender == 'Female' || $request->leader_gender == 'female'){
                         echo "أنثى";
                       }else{
                         echo "ذكر";
                       }
                     ?></td>
-                    <td><?php echo $newMembers;?></td>
-                    <td><?php echo date('Y-m-d', strtotime($request->date));?></td>
-                  </tr>
-                    <?php
-                      foreach ($ambassadors->result() as $ambassador) {
-                    ?>
-                  <tr id="<?php echo 'MS01b'.$id;?>" class="hidden">
-                    <td></td>
-                    <td></td>
-                     <td class="<?php echo 'MS02b'.$id;?>"><a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link"></i><?php echo $ambassador->name;?></a></td>
-                    <td><?php
-                    if($ambassador->gender == 'Female' || $ambassador->gender == 'female'){
-                      echo "أنثى";
-                    }else{
-                      echo "ذكر";
-                    }
-                    ?></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                    <?php
-                    }
-                    ?>
-                  <tr id="<?php echo 'MS01b'.$id;?>" class="hidden">
-                    <td rowspan="" colspan="6" style="text-align: center;vertical-align: middle;">
-                      <input type="button" class="copy btn-lg" onclick="copyNames('<?php echo '.MS02b'.$id;?>')" value="نسخ الأسماء">
+                    <td>
+                      <?php
+                        foreach ($ambassadors->result() as $ambassador) {
+                      ?>
+                        <p>
+                          <a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link"></i><?php echo $ambassador->name." ";?></a>
+                          <?php
+                        if($ambassador->gender == 'Female' || $ambassador->gender == 'female'){
+                          echo "- " . "أنثى";
+                        }else{
+                          echo "- " . "ذكر";
+                        }
+
+                        ?></p>
+                      <?php } ?>
                     </td>
+                    <td ><?php echo $newMembers;?></td>
+                    <td ><?php echo date('Y-m-d', strtotime($request->date));?></td>
                   </tr>
                     <?php
                       }
                     }else{
                       ?>
                       <tr>
-                        <td rowspan="" colspan="6" style="text-align: center;vertical-align: middle;">
+                        <td colspan="6" style="text-align: center;vertical-align: middle;">
                           لا يوجد نتائج
                         </td>
                       </tr>

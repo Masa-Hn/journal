@@ -54,7 +54,7 @@
                     <td id="lblMSb" ><a class="link" href="<?php echo $request->team_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $request->team_name; ?></a></td>
                     <td><a class="link" href="<?php echo $request->leader_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $request->leader_name; ?></a></td>
                     <td><?php
-                      if($request->gender == 'Female' || $request->gender == 'female'){
+                      if($request->leader_gender == 'Female' || $request->leader_gender == 'female'){
                         echo "أنثى";
                       }else{
                         echo "ذكر";
