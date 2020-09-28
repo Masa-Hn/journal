@@ -23,7 +23,7 @@ class Requests extends CI_Controller {
 	function addFullRequest() {
 		$msg = "";
 
-		
+
 		$this->form_validation->set_rules( 'leaderLink', 'رابط صفحة القائد', 'trim|required' );
 		$this->form_validation->set_message( 'required', 'يجب عليك تعبئة حقل %s' );
 
@@ -38,6 +38,8 @@ class Requests extends CI_Controller {
 			//data of the request
 			$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
 			$request[ 'gender' ] = $_POST[ 'gender' ];
+			$request[ 'current_team_count' ] = $_POST[ 'currentTeamCount' ];
+
 			//validate urls
 			if ( !filter_var( $leader[ 'leader_link' ], FILTER_VALIDATE_URL ) ) {
 				$msg = "<div class='alert alert-danger'>
@@ -53,7 +55,7 @@ class Requests extends CI_Controller {
                           تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
                           </div>";
 
-					 
+
 				} else{
 					$msg = "<div class='alert alert-danger'>لقد تم تسجيل الطلب مسبقاً!</div>";
 				}
@@ -69,6 +71,8 @@ class Requests extends CI_Controller {
 		//data of the request
 		$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
 		$request[ 'gender' ] = $_POST[ 'gender' ];
+		$request[ 'current_team_count' ] = $_POST[ 'currentTeamCount' ];
+
 		$qry = $this->RequestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id' )->fetch_assoc();
 		$request[ 'leader_id' ] = $qry['id'];
 		//get the records related to the leader
@@ -87,7 +91,7 @@ class Requests extends CI_Controller {
 			}
 		} else {
 			$msg=$this->RequestsModel->addRequest($request);
-			
+
 		}
 		echo $msg;
 	}

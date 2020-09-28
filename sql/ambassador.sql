@@ -38,7 +38,8 @@ CREATE TABLE `ambassador` (
   `code` int(11) NOT NULL,
   `leaderGender` varchar(50) NOT NULL,
   `requestId` int(11) DEFAULT NULL,
-  `profile_link` varchar(255) NOT NULL
+  `profile_link` varchar(255) NOT NULL,
+  `is_joined` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
