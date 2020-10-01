@@ -3,7 +3,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/mentorshipTeam.css">
-
 <body>
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
@@ -29,7 +28,7 @@
                     <th>الفريق</th>
                     <th>القائد</th>
                     <th>الجنس</th>
-                    <th>السفراء</th>
+                    <th style="text-align:center;">السفراء</th>
                     <th>عدد الأعضاء الجدد</th>
                     <th>تاريخ الطلب</th>
                   </tr>
@@ -39,38 +38,49 @@
                   if($requests->num_rows()>0){
                     foreach ($requests->result() as $request) {
                       $id = $request->Rid;
-                      $ambassadors = $this->GeneralModel->get_data($request->Rid, 'requestId', 'ambassador', 'name, gender, profile_link');
+                      $ambassadors = $this->GeneralModel->get_data($request->Rid, 'requestId', 'ambassador', 'name, gender, profile_link, is_joined');
                       $newMembers = $ambassadors->num_rows();
 
                   ?>
                   <tr class="list-item">
-                    <td  id="lblMSb" ><a class="link" href="<?php echo $request->team_link;?>"><i class="fa fa-external-link"></i><?php echo $request->team_name; ?></a></td>
-                    <td ><a class="link" href="<?php echo $request->leader_link;?>"><i class="fa fa-external-link"></i><?php echo $request->leader_name; ?></a></td>
-                    <td ><?php
+                    <td rowspan="<?php echo $newMembers;?>" id="lblMSb" ><a class="link" href="<?php echo $request->team_link;?>"><i class="fa fa-external-link"></i><?php echo $request->team_name; ?></a></td>
+                    <td rowspan="<?php echo $newMembers;?>" ><a class="link" href="<?php echo $request->leader_link;?>"><i class="fa fa-external-link"></i><?php echo $request->leader_name; ?></a></td>
+                    <td rowspan="<?php echo $newMembers;?>" ><?php
                       if($request->leader_gender == 'Female' || $request->leader_gender == 'female'){
                         echo "أنثى";
                       }else{
                         echo "ذكر";
                       }
                     ?></td>
+
                     <td>
                       <?php
                         foreach ($ambassadors->result() as $ambassador) {
                       ?>
-                        <p>
-                          <a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link"></i><?php echo $ambassador->name." ";?></a>
+                        <p style="text-align:center;">
+                          <a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link"></i><?php echo $ambassador->name;?></a>
+                          <i class="fa fa-minus"></i>
                           <?php
                         if($ambassador->gender == 'Female' || $ambassador->gender == 'female'){
-                          echo "- " . "أنثى";
+                          echo  "أنثى";
                         }else{
-                          echo "- " . "ذكر";
+                          echo  "ذكر";
                         }
 
-                        ?></p>
+                        ?>
+                      <i class="fa fa-minus"></i>
+                      <?php
+                        if($ambassador->is_joined){
+                          echo "انضم";
+                        }else{
+                          echo "لم ينضم";
+                        }
+                      ?>
+                    </p>
                       <?php } ?>
                     </td>
-                    <td ><?php echo $newMembers;?></td>
-                    <td ><?php echo date('Y-m-d', strtotime($request->date));?></td>
+                    <td rowspan="<?php echo $newMembers;?>"><?php echo $newMembers;?></td>
+                    <td rowspan="<?php echo $newMembers;?>"><?php echo date('Y-m-d', strtotime($request->date));?></td>
                   </tr>
                     <?php
                       }

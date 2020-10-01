@@ -1,12 +1,12 @@
 <?php
 defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 
-class MentorshipTeam2 extends CI_Controller {
+class DistributionArchive extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
 		$this->load->model( 'GeneralModel' );
-		$this->load->model( 'RequestsModel' );
+		$this->load->model( 'requestsModel' );
 
 	} //end construct()
 
@@ -15,9 +15,9 @@ class MentorshipTeam2 extends CI_Controller {
 		$this->load->view( 'management_book/templates/header', $title );
 		$this->load->view( 'management_book/templates/navbar' );
 		$whereCondition = "is_done=1 AND send_to_leader=1 AND date >= DATE_SUB(now(), INTERVAL 2 MONTH)";
-		$data['requests'] = $this->RequestsModel->selectWithJoin('leader_info', 'leader_request', 'id=leader_id', $whereCondition, 'leader_name, leader_link, team_name, team_link, Rid, gender, date');
+		$data['requests'] = $this->requestsModel->selectWithJoin('leader_info', 'leader_request', 'id=leader_id', $whereCondition, 'leader_name, leader_link, team_name, team_link, Rid, gender, date, leader_gender');
 
-		$this->load->view( 'management_book/mentorshipTeam', $data);
+		$this->load->view( 'management_book/DistributionArchive', $data);
 
 		$this->load->view( 'management_book/templates/footer' );
 
@@ -42,7 +42,7 @@ class MentorshipTeam2 extends CI_Controller {
 				}
 
 				if(empty($whereCondition) == false){
-					$data['requests'] = $this->RequestsModel->searchRequest($whereCondition);
+					$data['requests'] = $this->requestsModel->searchRequest($whereCondition);
 					$this->load->view('management_book/search_requests', $data);
 				}
 		}

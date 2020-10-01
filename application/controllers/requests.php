@@ -4,14 +4,14 @@ class Requests extends CI_Controller {
 	public
 	function __construct() {
 		parent::__construct();
-		$this->load->model( 'RequestsModel' );
+		$this->load->model( 'requestsModel' );
 		$this->load->model( 'GeneralModel' );
 		$this->load->library( 'form_validation' );
 	} //end construct()
 	public
 	function index() {
 		$this->load->view('leader_request/header');
-		$regBefore = $this->RequestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info' );
+		$regBefore = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info' );
 		if ( $regBefore->num_rows > 0 ) {
 			$this->load->view( 'leader_request/request' );
 			$this->load->view('leader_request/edit_info');
@@ -46,11 +46,11 @@ class Requests extends CI_Controller {
             يرجى التأكد من رابط صفحتك الشخصية!
             </div>";
 			} else {
-				$check = $this->RequestsModel->get_data( $leader[ 'leader_email' ], 'leader_email', 'leader_info' );
+				$check = $this->requestsModel->get_data( $leader[ 'leader_email' ], 'leader_email', 'leader_info' );
 				if ( $check->num_rows == 0 ) {
-					$id = $this->RequestsModel->insertLeaderInfo($leader);
+					$id = $this->requestsModel->insertLeaderInfo($leader);
 					$request[ 'leader_id' ] = $id;
-					$this->RequestsModel->addRequest( $request);
+					$this->requestsModel->addRequest( $request);
 					$msg = "<div class='alert alert-success'>
                           تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
                           </div>";
@@ -73,24 +73,24 @@ class Requests extends CI_Controller {
 		$request[ 'gender' ] = $_POST[ 'gender' ];
 		$request[ 'current_team_count' ] = $_POST[ 'currentTeamCount' ];
 
-		$qry = $this->RequestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id' )->fetch_assoc();
+		$qry = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id' )->fetch_assoc();
 		$request[ 'leader_id' ] = $qry['id'];
 		//get the records related to the leader
-		$getLastRecord = $this->RequestsModel->leaderLastRequest( $request[ 'leader_id' ]);
+		$getLastRecord = $this->requestsModel->leaderLastRequest( $request[ 'leader_id' ]);
 		//check if there are records
 		if ( $getLastRecord->num_rows > 0 ) {
 			$result=$getLastRecord->fetch_assoc();
 			$date =$result['date'];
 			//check if the date of the last record exceeds 3 days
 			if ( ( date( 'Y-m-d' ) > date( 'Y-m-d', strtotime( $date . ' + 3 days' ) ) ) ) {
-				$msg =$this->RequestsModel->addRequest( $request);
+				$msg =$this->requestsModel->addRequest( $request);
 			} else {
 				$msg = "<div class='alert alert-danger'>
                           لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
                           </div>";
 			}
 		} else {
-			$msg=$this->RequestsModel->addRequest($request);
+			$msg=$this->requestsModel->addRequest($request);
 
 		}
 		echo $msg;
@@ -105,7 +105,7 @@ class Requests extends CI_Controller {
 		$data['id'] = $_POST['id'];
 		$data['leader_name'] = $_POST['leaderName'];
 		$data['leader_link'] = $_POST['leaderLink'];
-		$this->RequestsModel->updateLeaderInfo($data);
+		$this->requestsModel->updateLeaderInfo($data);
 			$msg =  "<div class='alert alert-success'>
                 تم تعديل بياناتك بنجاح
                 </div>";

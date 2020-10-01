@@ -3,12 +3,22 @@ class RequestsModel extends CI_Model {
 
 public function get_ambassadors()
 {
-	$this->db->select('*');
+	$this->db->select('id, name, profile_link, gender, is_joined');
+	$this->db->where('is_joined', 0);
 	$this->db->from('ambassador');
 	$this->db->order_by('name', 'DESC');
 	$query = $this->db->get();
 	return $query;
 
+}
+public function searchAmbassador($whereCondition)
+{
+	$this->db->select('id, name, profile_link, gender, is_joined');
+	$this->db->where($whereCondition);
+	$this->db->from('ambassador');
+	$this->db->order_by('name', 'DESC');
+	$query = $this->db->get();
+	return $query;
 }
 	public function addRequest($data)
 	{
