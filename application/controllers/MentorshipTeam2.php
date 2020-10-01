@@ -15,7 +15,7 @@ class MentorshipTeam2 extends CI_Controller {
 		$this->load->view( 'management_book/templates/header', $title );
 		$this->load->view( 'management_book/templates/navbar' );
 		$whereCondition = "is_done=1 AND send_to_leader=1 AND date >= DATE_SUB(now(), INTERVAL 2 MONTH)";
-		$data['requests'] = $this->RequestsModel->selectWithJoin('leader_info', 'leader_request', 'id=leader_id', $whereCondition, 'leader_name, leader_link, team_name, team_link, Rid, gender, date');
+		$data['requests'] = $this->RequestsModel->selectWithJoin('leader_info', 'leader_request', 'id=leader_id', $whereCondition, 'leader_name, leader_gender, leader_link, team_name, team_link, Rid, gender, date');
 
 		$this->load->view( 'management_book/mentorshipTeam', $data);
 
