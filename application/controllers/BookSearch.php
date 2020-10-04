@@ -32,7 +32,10 @@ class BookSearch extends CI_Controller {
 			$arr=$this->books->getbookByName($_POST['bookName'],$_POST['type']);
 			if (count($arr) != 0 ) {
 				foreach ($arr as $row){
-				echo "<a href='".base_url()."bookDesc?id=".$row->id ."'><li id='".$row->id ."'>".$row->name."</li></a>";
+				echo "<a href='".base_url()."bookDesc?id=".$row->id ."'><li id='".$row->id ."'>".$row->name."</li></a>
+				<hr style='width: 70%;display: block;border-top: 1px solid rgb(32, 93, 103) !important;'>
+				";
+
 				}//foreach
 			}//if
 			else{

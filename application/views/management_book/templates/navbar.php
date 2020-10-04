@@ -3,7 +3,7 @@
 		.logout {
 			margin-right: 70px;
 		}
-		
+
 		@media screen and (max-width: 768px) {
 			.logout {
 				margin-right: 0px;
@@ -19,12 +19,12 @@
 		<a class="navbar-brand" href="#">
         <img src="<?php echo base_url()?>assets/img/logo_2.png" height="45">
     </a>
-	
+
 
 		<button class="navbar-toggler right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-	
+
 
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup" dir="rtl">
 			<div class="navbar-nav">
