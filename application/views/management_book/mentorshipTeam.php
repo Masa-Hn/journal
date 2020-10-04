@@ -112,7 +112,7 @@
                     <td>member03</td>
                     <td>F</td>
                   </tr>
-                  <tr>
+                  <tr>  
                 </tbody>
               </table>
               <div id="pagination-container"></div>  

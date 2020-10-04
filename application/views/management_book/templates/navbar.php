@@ -42,6 +42,9 @@
             <li>
                 <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>evaluation/index">إضافة تقييم</a>
             </li>
+             <li>
+                <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>AddUsers/index">طلبات الإضافة</a>
+            </li>
             <li>
                 <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>mentorshipTeam">عرض التوزيع</a>
             </li>
