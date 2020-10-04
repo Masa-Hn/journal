@@ -59,7 +59,7 @@ $member=$members->result();
                     <td style="width: 50%;">
              <form  enctype="multipart/form-data" method="post" action="<?=base_url()?>AddUsers/Delete">
               <input id="name" name="name" type="text"  style="display:none" value="<?php echo $m->username ?>">
-                      <button  id="delete"  name="delete" class="newbutton1" >تجاهل</button>
+                      <button  id="delete"  name="delete" class="newbutton1" >حذف</button>
                     </form>
 
                       <form  enctype="multipart/form-data" method="post" action="<?=base_url()?>AddUsers/Add">
