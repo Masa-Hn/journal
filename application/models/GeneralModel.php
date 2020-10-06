@@ -88,5 +88,13 @@ class GeneralModel extends CI_Model{
         return $this->db->get($table);
     }
 
+     public function get_data_limit($val, $where, $table , $limit, $start, $select = '*'){
+
+        $this->db->select($select);    
+        $this->db->where($where, $val);
+                        $this->db->limit($limit, $start);
+        return $this->db->get($table);
+    }
+
      
 }

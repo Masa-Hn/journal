@@ -40,7 +40,7 @@ class Suggest_book extends CI_Controller {
         if ($like)
         {
             $id=$like[0]->id;
-        	 $this->session->set_flashdata('msg2',"<p class='alert alert-warning' style='text-align:right'>اسم الكتاب موجود مسبقاً ... <a href='" . base_url()."Suggest_book/ShowBookDetailes/".$id ."'>عرض الكتاب</a> </p>");
+        	 $this->session->set_flashdata('msg2',"<p class='alert alert-warning' style='text-align:right'>اسم الكتاب موجود مسبقاً ... <a href='" . base_url()."bookDesc?id=".$id ."'>عرض الكتاب</a> </p>");
         	// print_r($like);
            // echo $id;
             redirect(base_url().'suggest_book/index');
@@ -58,17 +58,6 @@ class Suggest_book extends CI_Controller {
     }
     }
 
-     public function ShowBookDetailes(){
-        
-      $id=$this->uri->segment(3);
-        $data['book'] = $this->ManageBooks->getbook($id);
-        $data['title'] = 'Show Book Detailes';
-        $this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/BookDetailes',$data);
-        $this->load->view('management_book/templates/footer');
-
-       
-    }
+     
 		}
 	
