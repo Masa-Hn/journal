@@ -1,104 +1,116 @@
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/teamsCarousel.css">
+<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/carousel.css"> -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/mentorshipTeam.css">
+<style>
+.link, .fa{
+	color: #205D67;
+}
+.fa{
+	font-size: 1vw;
+}
+.link:hover, .fa:hover{
+	color: #205D67;
+	font-weight: bold;
+}
+
+	.names {
+		display: inline;
+		text-align: center;
+		font-size: 1.5rem;
+	}
+
+	.mybutton {
+		width: 100%;
+	}
+
+</style>
 <body>
-<div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-xl-10 col-lg-10 col-md-10">
-            <div class="card b-0" style="overflow-x: auto;">
+	<div class="container-fluid px-1 py-5 mx-auto">
+		<div class="row d-flex justify-content-center">
+			<div class="col-xl-5 col-lg-6 col-md-7">
+				<div class="card b-0">
+					<div class="slideshow-container">
+						<div class="carousel-container w3-display-container " id="seriesPhotos">
+							<?php
+							if ( $requests->num_rows() > 0 ) {
 
-              <!-- number of row to display -->
-              <input type="hidden" id="bookDisplay" name="bookDisplay" value="15">
-              
-              <form class="s-form" enctype="multipart/form-data" method="post" action="<?php echo base_url();?>/MentorshipTeam2/searchRequest">
-                <div class="row">
-                  <div class="col-md-7">
-                    <input class="form-control" name="s-text" id="s-text" type="text" placeholder="ابحث عن طريق اسم القائد/السفير أو التاريخ">
-                  </div>
-                  <div class="col-md-3">
-                    <input class="form-control" name="s-date" id="s-date" type="date" placeholder="<?php echo date('Y-m-d');?>">
-                  </div>
-                  <div class="col-md-2">
-                    <input class="form-control" name="s-btn" id="s-btn" type="submit" value="بحث">
-                  </div>
-                </div>
-              </form>
-              
-              <table id="dataTable" class="cell list-wrapper" dir="rtl">
-                <thead>
-                  <tr>
-                    <th><span class="visually-hidden">Toggle</span></th>
-                    <th>الفريق</th>
-                    <th>القائد</th>
-                    <th>الجنس</th>
-                    <th>عدد الأعضاء الجدد</th>
-                    <th>تاريخ الطلب</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                    foreach ($requests->result() as $request) {
-                      $id = $request->Rid;
-                      $ambassadors = $this->GeneralModel->get_data($request->Rid, 'requestId', 'ambassador', 'name, gender,profile_link');
-                      $newMembers = $ambassadors->num_rows();
+								foreach ( $requests->result() as $request ) {
+									$id = $request->Rid;
+									$leaderEmail = $request->leader_email;
+									$num_of_members = 20; // a query to be run here to get total members (based on leader email) from the official database
+									$query = $this->GeneralModel->get_data( $id, 'requestId', 'ambassador', 'name, gender' );
+									?>
+							<div class="mySlides carousel-slide">
+								<h4 class="heading" style="text-align:center;">
+									<?php echo "فريق: <a href='$request->team_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->team_name . "</a> - " . "القائد: <a href='$request->leader_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->leader_name . "</a>"; ?>
+								</h4>
+								<p style="text-align: center;">
+									<small>
+								عدد أعضاء الفريق: <?php echo $num_of_members;?> - الأعضاء الجدد: <?php echo $query->num_rows();?> - تاريخ الطلب: <?php echo date('Y-m-d', strtotime($request->date));?>
+								</small>
 
-                  ?>
-                  <tr class="list-item">
-                    <td>
-                      <button type="button" id="<?php echo 'btnMSb'.$id;?>" aria-expanded="false" onclick="toggle(this.id,'<?php echo "#MS01b".$id;?>');" aria-controls="<?php echo 'MS01b'.$id;?>" aria-label="3 more from" aria-labelledby="<?php echo 'btnMSb'.$id;?> <?php echo 'lblMSb'.$id;?>">
-                        <svg xmlns="\http://www.w3.org/2000/svg&quot;" viewBox="0 0 80 80" focusable="false"><path d="M70.3 13.8L40 66.3 9.7 13.8z"></path></svg>
-                      </button>
-                    </td>
-                    <td id="lblMSb" ><a class="link" href="<?php echo $request->team_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $request->team_name; ?></a></td>
-                    <td><a class="link" href="<?php echo $request->leader_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $request->leader_name; ?></a></td>
-                    <td><?php
-                      if($request->leader_gender == 'Female' || $request->leader_gender == 'female'){
-                        echo "أنثى";
-                      }else{
-                        echo "ذكر";
-                      }
-                    ?></td>
 
-                    <td><?php echo $newMembers;?></td>
-                    <td><?php echo date('Y-m-d', strtotime($request->date));?></td>
-                  </tr>
-                    <?php
-                      foreach ($ambassadors->result() as $ambassador) {
-                    ?>
-                  <tr id="<?php echo 'MS01b'.$id;?>" class="hidden">
-                    <td></td>
-                    <td></td>
-                     <td class="<?php echo 'MS02b'.$id;?>"><a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $ambassador->name;?></a></td>
-                    <td><?php
-                    if($ambassador->gender == 'Female' || $ambassador->gender == 'female'){
-                      echo "أنثى";
-                    }else{
-                      echo "ذكر";
-                    }
-                    ?></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                    <?php
-                    }
-                    ?>
-                  <tr id="<?php echo 'MS01b'.$id;?>" class="hidden">
-                    <td rowspan="" colspan="6" style="text-align: center;vertical-align: middle;">
-                      <input type="button" class="copy btn-lg" onclick="copyNames('<?php echo '.MS02b'.$id;?>')" value="نسخ الأسماء">
-                    </td>
-                  </tr>
-                    <?php
-                      }
-                    ?>
-                </tbody>
-              </table>
-              <div id="pagination-container">	</div>
-            </div>
-        </div>
-    </div>
-</div>
+								</p>
+								<ul class="list-group list-group-flush" style="text-align: center;list-style: none;" id="<?php echo $id;?>">
+									<?php
+									foreach ( $query->result() as $row ) {
+										?>
+									<li class="list-group-item">
+										<p class="names">
+											<?php echo $row->name." ";?>
+										</p>
+										<small>
+											<?php
+											if ( $row->gender == 'female' || $row->gender == 'Female' ) {
+												echo '(أنثى)';
+											} else if ( $row->gender == 'male' || $row->gender == 'Male' ) {
+												echo 'ذكر';
+											}
+											?>
+										</small>
+									</li>
+									<?php
+									}
+									$leaderName = $request->leader_name;
+									?>
+								</ul>
+
+								<button id="<?php echo $id; ?>" name="done" class="mybutton" style="margin-right: 10px; background-color: #459b6e;" onclick="send_to_leader(<?php echo $id;?>);">تم التواصل </button>
+								<button id="<?php echo $id; ?>" name="copy" class="mybutton" style="background-color: #205d67;" onclick="copyMsg('<?php echo $id;?>', '<?php echo $leaderName;?>')">نسخ</button>
+							</div>
+							<?php
+							}
+							} else {
+								?>
+							<div class="card text-center">
+								<h1>لا يوجد طلبات</h1>
+							</div>
+							<?php
+							}
+							?>
+						</div>
+					</div>
+					<div>
+						<a class="prev w3-display-left" onclick="plusDivs(-1)">&#10094;</a>
+						<a class="next w3-display-right" onclick="plusDivs(1)">&#10095;</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container mt-5">
+			<div class="card">
+				<div class="card-header text-center" style="background-color:#205d67; color: #fff; ">
+					العدد الكلي للقادة الذين لم يتم التواصل معهم بعد:
+					<?php echo $requests->num_rows();?>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/teamCarousel.js"></script>
 <script src="<?php echo base_url()?>assets/js/mentorshipTeam.js"></script>
-<script src="<?php echo base_url()?>assets/js/copy.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/copy.js"></script>

@@ -9,6 +9,13 @@
                     <li style="width: 33%;" class="step0" id="step3"></li>
                     <li style="width: 33%;" class="step0" id="step4"></li>
                 </ul>
+
+
+  
+                <div style="text-align: right;">
+                    للحصول على ملف الكتب المقترحة 
+                    <a href="<?php echo base_url()?>/Export/GetSuggestions">اضغط هنا </a>
+                </div>
                 <!-- ============================================================== -->
                 <!-- Start Form Add Book  -->
                 <!-- ============================================================== --><?php if(!isset($book)){ ?>

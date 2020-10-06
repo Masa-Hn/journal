@@ -22,6 +22,13 @@
   </div>
 </div>
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+  function save()
+  {
+    swal("Hello world!");
+  }
+</script>
 <?php echo $this->session->flashdata('msg')?>  
               <?php echo $this->session->flashdata('msg2')?>  
 
@@ -170,8 +177,8 @@ return flag;
  <div class="padding" id="section-one">
   <div class="container">
 <div class="row">
-          <div class="container-fluid text-center" >
- <button class="btn cusBtn " id="save" style="font-size: 25px" >   حفظ الاقتراح </button>  
+          <div class="container-fluid text-center" > 
+ <button class="btn cusBtn " id="save" style="font-size: 25px"  onclick="save()">   حفظ الاقتراح </button>  
   </div>
 </div>
 </div>

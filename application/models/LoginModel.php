@@ -1,20 +1,20 @@
 <?php
 
 class LoginModel extends CI_Model{
-    
+
     public function	__construct(){
 		parent::__construct();
     }
-    
+
     function can_login($email, $password){
-        
+
         $this->db->where(array(
-            'email'     => $email, 
+            'email'     => $email,
             'password'  => $password,
             'regstatus' => 1
         ));
-        $result = $this->db->get('users'); 
-            
+        $result = $this->db->get('users');
+
         if($result->num_rows() == 1){
             foreach($result->result() as $row){
                 $data = array (
@@ -22,28 +22,29 @@ class LoginModel extends CI_Model{
                     'user_id'   => $row->id,
                     'username'  => $row->username,
                     'email'     => $row->email,
+                    'team'      => $row->team,
                     'logged_in' => true
                 );
                 $this->session->set_userdata($data);
             }
             return true;
-        }else{  
-            return false;
-        }
-    }
-    
-    function is_email_available($email){
-        
-        $this->db->where('email', $email);
-        $query = $this->db->get('users'); 
-        
-        if($query->num_rows() > 0){
-            
-            return true; 
         }else{
             return false;
         }
     }
-    
+
+    function is_email_available($email){
+
+        $this->db->where('email', $email);
+        $query = $this->db->get('users');
+
+        if($query->num_rows() > 0){
+
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
 ?>
