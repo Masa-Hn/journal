@@ -3,7 +3,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/mentorshipTeam.css">
-
 <style>
 .confirmbtn{
   width: 1.15em;
