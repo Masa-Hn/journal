@@ -1,6 +1,6 @@
 
 <footer class="container-fluid text-center" style="font-family: 'Tajawal', sans-serif;">
-       
+
   <div class="row">
        <div class="col-sm-4">
           حساباتنا على مواقع التواصل الإجتماعي<br>
@@ -18,7 +18,7 @@
         <h4> الخدمة التقنية :فنجان هوست </h4>
       </div>
   </div>
-     
+
  <hr style="width: 80%; background-color: #FCFAEF">
 
 

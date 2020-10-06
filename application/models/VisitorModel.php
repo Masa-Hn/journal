@@ -2,7 +2,7 @@
 class VisitorModel extends CI_Model {
 
   public function incrementVisitors()
-  { 
+  {
     $this->db->set('visit_times', 'visit_times +1', FALSE);
     $this->db->where('id=', 1);
     $this->db->update('visitors');

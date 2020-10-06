@@ -10,25 +10,26 @@ class MentorshipTeam extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model( 'GeneralModel' );
-		$this->load->model( 'RequestsModel' );
+		$this->load->model( 'requestsModel' );
 
 	} //end construct()
 
 	public
 
 	function index() {
-		$title[ 'title' ] = 'فريق الإدخال';
+		$title[ 'title' ] = 'عرض التوزيع';
 
 		$this->load->view( 'management_book/templates/header', $title );
+		$this->load->view( 'management_book/templates/navbar' );
+
 
 		$whereCondition = array( 'is_done' => 1, 'send_to_leader' => 0 );
 
 		//get the requests that are done (ambassadors distributed) in which the msg hasn't sent yet
-		$arr[ 'requests' ] = $this->RequestsModel->selectWithJoin( 'leader_info', 'leader_request', 'leader_info.id = leader_request.leader_id', $whereCondition );
+		$arr[ 'requests' ] = $this->requestsModel->selectWithJoin( 'leader_info', 'leader_request', 'leader_info.id = leader_request.leader_id', $whereCondition );
 
-        $this->load->view('management_book/templates/navbar');
-		$this->load->view( 'management_book/mentorshipTeam_2', $arr );
-        $this->load->view('management_book/templates/footer');
+		$this->load->view( 'management_book/mentorshipTeam', $arr );
+				$this->load->view( 'management_book/templates/footer' );
 	}
 
 	//update the send_to_leader field (set to 1 ) after messaging the leader

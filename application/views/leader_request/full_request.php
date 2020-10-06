@@ -1,19 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-	<title>Osboha 180</title>
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/request.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
-
-</head>
-
 <body>
 
 	<!-- Trigger the modal with a button -->
@@ -32,7 +16,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title"> ﺻﻔﺤﺔ ﻃﻠﺐ ﺳﻔﺮاء ﺟﺪﺩ </h1>
+					<h1 class="modal-title"> طﻠﺐ ﺳﻔﺮاء ﺟﺪﺩ </h1>
 				</div>
 
 				<div class="modal-body">
@@ -45,11 +29,13 @@
 						$leaderName = "asmaa";
 						$teamLink = "http://facebook.com/asmaa.99";
 						$teamName = "11";
+						$currentTeamCount = 20;
 
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
 						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
 						<input type="hidden" name="teamName" id="teamName" value="<?php echo $teamName ;?>">
+						<input type="hidden" name="currentTeamCount" id="currentTeamCount" value="<?php echo $currentTeamCount ;?>">
 
 						<div class="form-group">
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
@@ -91,12 +77,13 @@
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق</button>
-				</div>
+					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق </button>
+			</div>
 
 			</div>
 		</div>
 	</div>
+
 	<script type="text/javascript">
 		var base_url = "<?php echo base_url()?>";
 		$( document ).ready( function () {
@@ -104,13 +91,14 @@
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url + "requests/addFullRequest/?email=<?=$_GET['email']?>",
+					url: base_url + "Requests/addFullRequest/?email=<?=$_GET['email']?>",
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),
 						leaderGender: $( "#leaderGender" ).val(),
 						teamLink: $( "#teamLink" ).val(),
 						teamName: $( "#teamName" ).val(),
+						currentTeamCount: $( "#currentTeamCount").val(),
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
 
