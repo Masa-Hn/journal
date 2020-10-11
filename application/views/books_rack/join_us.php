@@ -68,7 +68,7 @@
       </div>
       <div class="row fade-in">
         <div class="container-fluid text-center">
-            <a href="https://www.facebook.com/joinosboha/">
+            <a href="<?php echo base_url()?>/SignUp">
               <button class="button btn btn-outline-dark btn-lg"> اضغط هنا ...  </button>
             </a>
         </div>

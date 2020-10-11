@@ -39,7 +39,7 @@ function statusChangeCallback(response) {  // Called with the results from FB.ge
       {"fields":"id,name,email,gender,link"},
       function(response) {
         document.getElementById("information").innerHTML ="Name "+response.name +"</br> Email "+response.email +"</br> Gender  "+response.gender +" </br> Link "+response.link;
-          console.log(response);
+          console.log(response.email);
       }
     );
   }//testAPI
