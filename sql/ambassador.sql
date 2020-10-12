@@ -30,15 +30,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `ambassador` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `age` int(11) NOT NULL,
-  `country` varchar(255) NOT NULL,
   `gender` varchar(50) NOT NULL,
-  `readBefore` tinyint(1) NOT NULL,
-  `nameOfReadBook` varchar(255) DEFAULT NULL,
-  `code` int(11) NOT NULL,
-  `leaderGender` varchar(50) NOT NULL,
-  `requestId` int(11) DEFAULT NULL,
+  `leader_gender` varchar(50) NOT NULL,
+  `request_id` int(11) DEFAULT NULL,
   `profile_link` varchar(255) NOT NULL,
+  `fb_id` varchar(255) NOT NULL,
   `is_joined` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -51,7 +47,7 @@ CREATE TABLE `ambassador` (
 --
 ALTER TABLE `ambassador`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `requestId` (`requestId`);
+  ADD KEY `request_id` (`request_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -71,7 +67,7 @@ ALTER TABLE `ambassador`
 -- Constraints for table `ambassador`
 --
 ALTER TABLE `ambassador`
-  ADD CONSTRAINT `ambassador_ibfk_1` FOREIGN KEY (`requestId`) REFERENCES `leader_request` (`Rid`);
+  ADD CONSTRAINT `ambassador_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `leader_request` (`Rid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

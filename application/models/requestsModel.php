@@ -47,6 +47,14 @@ public function searchAmbassador($whereCondition)
 
 	}//addRequest
 
+	public function updateRequest($id)
+	{
+		$this->db->set('is_done', 1, FALSE);
+    	$this->db->where('Rid', $id);
+    	$this->db->update('leader_request'); 
+  
+	}//updateRequest
+
 	public function getDate($leaderEmail)
 	{
 		$this->db->where('leader_email', $leaderEmail);
