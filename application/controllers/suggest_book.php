@@ -9,6 +9,8 @@ class Suggest_book extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('GeneralModel');
+        $this->load->model('ManageBooks');
+
 	} //end construct()
 
 	public
@@ -34,11 +36,13 @@ class Suggest_book extends CI_Controller {
         $data['found']   = $this->input->post('found');
         $data['link']    = $this->input->post('link');
 
-        $like=$this->GeneralModel->get_data_like( $data['book_name'],'book_name','suggestion_book')->result();
+        $like=$this->GeneralModel->get_data( $data['book_name'],'name','books')->result();
         if ($like)
         {
-        	 $this->session->set_flashdata('msg2',"<p class='alert alert-warning' style='text-align:right'>اسم الكتاب موجود مسبقاً ... </p>");
-        	 //print_r($like);
+            $id=$like[0]->id;
+        	 $this->session->set_flashdata('msg2',"<p class='alert alert-warning' style='text-align:right'>اسم الكتاب موجود مسبقاً ... <a href='" . base_url()."bookDesc?id=".$id ."'>عرض الكتاب</a> </p>");
+        	// print_r($like);
+           // echo $id;
             redirect(base_url().'suggest_book/index');
         }
            else{ 
@@ -53,5 +57,7 @@ class Suggest_book extends CI_Controller {
         }
     }
     }
+
+     
 		}
 	

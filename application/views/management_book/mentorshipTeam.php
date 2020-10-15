@@ -26,46 +26,30 @@
 
 </style>
 <body>
-  
-<div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-xl-10 col-lg-10 col-md-10">
-            <div class="card b-0" style="overflow-x: auto;">
+	<div class="container-fluid px-1 py-5 mx-auto">
+		<div class="row d-flex justify-content-center">
+			<div class="col-xl-5 col-lg-6 col-md-7">
+				<div class="card b-0">
+					<div class="slideshow-container">
+						<div class="carousel-container w3-display-container " id="seriesPhotos">
+							<?php
+							if ( $requests->num_rows() > 0 ) {
 
-              <!-- number of row to display -->
-              <input type="hidden" id="bookDisplay" name="bookDisplay" value="15">
-              
-              <form class="s-form" enctype="multipart/form-data" method="post" action="<?php echo base_url();?>/MentorshipTeam2/searchRequest">
-                <div class="row">
-                  <div class="col-md-7">
-                    <input class="form-control" name="s-text" id="s-text" type="text" placeholder="ابحث عن طريق اسم القائد/السفير أو التاريخ">
-                  </div>
-                  <div class="col-md-3">
-                    <input class="form-control" name="s-date" id="s-date" type="date" placeholder="<?php echo date('Y-m-d');?>">
-                  </div>
-                  <div class="col-md-2">
-                    <input class="form-control" name="s-btn" id="s-btn" type="submit" value="بحث">
-                  </div>
-                </div>
-              </form>
-              
-              <table id="dataTable" class="cell list-wrapper" dir="rtl">
-                <thead>
-                  <tr>
-                    <th><span class="visually-hidden">Toggle</span></th>
-                    <th>الفريق</th>
-                    <th>القائد</th>
-                    <th>الجنس</th>
-                    <th>عدد الأعضاء الجدد</th>
-                    <th>تاريخ الطلب</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                    foreach ($requests->result() as $request) {
-                      $id = $request->Rid;
-                      $ambassadors = $this->GeneralModel->get_data($request->Rid, 'requestId', 'ambassador', 'name, gender,profile_link');
-                      $newMembers = $ambassadors->num_rows();
+								foreach ( $requests->result() as $request ) {
+									$id = $request->Rid;
+									$leaderEmail = $request->leader_email;
+									$num_of_members = 20; // a query to be run here to get total members (based on leader email) from the official database
+									$query = $this->GeneralModel->get_data( $id, 'requestId', 'ambassador', 'name, gender' );
+									?>
+							<div class="mySlides carousel-slide">
+								<h4 class="heading" style="text-align:center;">
+									<?php echo "فريق: <a href='$request->team_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->team_name . "</a> - " . "القائد: <a href='$request->leader_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->leader_name . "</a>"; ?>
+								</h4>
+								<p style="text-align: center;">
+									<small>
+								عدد أعضاء الفريق: <?php echo $num_of_members;?> - الأعضاء الجدد: <?php echo $query->num_rows();?> - تاريخ الطلب: <?php echo date('Y-m-d', strtotime($request->date));?>
+								</small>
+
 
 								</p>
 								<ul class="list-group list-group-flush" style="text-align: center;list-style: none;" id="<?php echo $id;?>">

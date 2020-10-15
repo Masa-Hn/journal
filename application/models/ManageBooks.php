@@ -7,6 +7,20 @@ class ManageBooks extends CI_Model {
     $this->db->where('type',$type);
     return $this->db->get();
   }
+
+   public function getbook($id){
+      $this->db->select('*');
+    $this->db->from('books');
+    $this->db->where('id',$id);
+    return $this->db->get();
+  }
+
+  public function getallbooks(){
+      $this->db->select(array('id','book_name','writer','brief','type','found','link'));
+    $this->db->from('suggestion_book');
+    return $this->db->get()->result_array();
+  }
+  
 public function delete_book($id)
 {
 	$this->db->where('id',$id);
