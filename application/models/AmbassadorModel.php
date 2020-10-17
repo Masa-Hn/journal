@@ -16,6 +16,15 @@ class AmbassadorModel extends CI_Model {
 
 	}//countRequests
 
+	public function getByRequestId($request_id)
+	{
+		$this->db->select('name,profile_link,request_id');
+    	$this->db->from('ambassador');
+    	$this->db->where('request_id =',$request_id);
+    	return $this->db->get()->result();
+
+	}
+
 	public function checkAmbassador($fb_id)
 	{
 		$where = "fb_id = '".$fb_id."'";
