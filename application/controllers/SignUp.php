@@ -161,15 +161,25 @@ class SignUp extends CI_Controller {
         //print_r($leader_info);die();
     
     // 3- Check Leader Requests
-      //1- get all associated requests
+      //1- chekc associated requests
       $numberOfRequests=$this->AmbassadorModel->countRequests($request_id);
       //2- compare to the requested number
         //If match, update is_done to 1
       if ($members_num == $numberOfRequests->totalRequests) {
         //1- update request to DONE 
         $this->RequestsModel->updateRequest($request_id);
-        //2-Inform Leader
-        //$this->informLeader($ambassadors);
+        //2- get all associated requests
+        $allAmbassadors=$this->AmbassadorModel->getByRequestId($request_id);
+        $ambassadors="";
+        $i=1;
+        foreach ($allAmbassadors as $ambassador) {
+          $ambassadors=$ambassadors. "[".$i."] ".$ambassador->name. '\n'.$ambassador->profile_link.'\n';
+          $i++;
+        }
+
+        //3-Inform Leader
+        $leader_messenger_id=$leader_info->messenger_id;
+        $this->informLeader($ambassadors,$leader_messenger_id,$request_id);
       }//if
 
     //4- load view to inform ambassador [FINAL STEP]
@@ -186,10 +196,71 @@ class SignUp extends CI_Controller {
     
   }//informambassador
 
-  public function informLeader($ambassadors)
+  public function informLeader($ambassadors,$leader_messenger_id,$request_id)
   {
-    # code...
+    $recipient="3331775443608686";
+ 
+    $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBAKd0zcvVz5c46Y0lAbNNffOFlNkcM2sYO4EVj8XpfZBD8dRHa7GGZAW41KMvqxLZBRK4PtDYR6ba3gA6FYZAZA09y518DIZCl5YuNybftCOosdfpXXMMo3dq1yBIla1VLccyZCkdFrNl00Hg42ZBAOVgICZCVLaZCSZBsAw2OL5TsjM';
+
+    /*initialize curl*/
+    $ch = curl_init($url);
+    
+
+    $firstMsg="السلام عليكم ورحمة الله وبركاته ".'\n'." كيف  الحال قيادة؟! 🌸 ".'\n'."تم إرسال أعضاء جدد لفريقك؛ نتمنى منك الاهتمام بهم يرجى منك إضافة جميع السفراء (بغض النظر دخل فريق المتابعة أو لا) إلى موقع العلامات وفي نهاية الأسبوع من لم يقرأ فقط قم بعمل انسحاب له (انسحاب وليس حذف من إشارة ❌) وذلك لتجنب الفوضى في مجموعة السفراء  ".'\n'."شكرا لك😍";
+
+    /*prepare response*/
+    $jsonData =  $this->jsonData($recipient,$firstMsg);
+    /* curl setting to send a json post data */
+    $this->curlSetting($ch,$jsonData);
+
+    $secMsg="رقم الطلب : ".$request_id;
+    $jsonData =  $this->jsonData($recipient,$secMsg);
+    /* curl setting to send a json post data */
+    $this->curlSetting($ch,$jsonData);
+
+     /*Ambassadors*/
+    $jsonData =  $this->jsonData($recipient,$ambassadors);
+    /* curl setting to send a json post data */
+    $this->curlSetting($ch,$jsonData);
+
+    $lastMsg="⛔ قائدنا الكريم ⛔ ".'\n'." يصل السفير إليك مترددا ولا يعرف النظام الجميل في مشروعنا، قد يكتفي بطلب الانضمام ويتردد فيما يفعل بعدها.  ".'\n'." رجاءً 'ابدأ انت بمراسلته' وعمل منشن له على أي منشور ليتجاوب معك. أنت أهل لذلك. ".'\n'." ابدأ أنت ❤️";
+    /*prepare response*/
+    $jsonData =  $this->jsonData($recipient,$lastMsg);
+    /* curl setting to send a json post data */
+    $this->curlSetting($ch,$jsonData);    
+
   }//informLeader
+
+ public function jsonData($id,$msg)
+  {
+    $data = '{
+      "recipient":{
+          "id":"' . $id . '"
+          },
+          "message":{
+              "text":"' . $msg . '"
+          }
+      }';
+
+    return $data;
+  }//jsonData
+
+  public function curlSetting($ch,$jsonData)
+  {
+    /* curl setting to send a json post data */
+    //Tell cURL that we want to send a POST request.
+    curl_setopt($ch, CURLOPT_POST, 1);
+
+    //Attach the encoded JSON string to the POST fields.
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+    //Set the content type to application/json
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    
+    //Execute the request if the message is not empty.
+    $result = curl_exec($ch); // user will get the message
+  
+  }//curlSetting
 
   public function formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result)
   {         
