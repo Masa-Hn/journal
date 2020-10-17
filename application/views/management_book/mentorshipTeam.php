@@ -39,7 +39,7 @@
 									$id = $request->Rid;
 									$leaderEmail = $request->leader_email;
 									$num_of_members = 20; // a query to be run here to get total members (based on leader email) from the official database
-									$query = $this->GeneralModel->get_data( $id, 'requestId', 'ambassador', 'name, gender' );
+									$query = $this->GeneralModel->get_data( $id, 'request_id', 'ambassador', 'name, gender' );
 									?>
 							<div class="mySlides carousel-slide">
 								<h4 class="heading" style="text-align:center;">
