@@ -7,7 +7,6 @@
     color: #205d67
   }
 </style>
-
 <div class="container padding" id="section-one">
   <?php
     foreach ($article as $article) {
@@ -31,10 +30,10 @@
               </div>    
 
               <div class="container-fluid text-center col-7 col-md-8 fade-in">
-                <div class="row">
-                  <p style="padding: 0 3% 0 3%" dir="rtl"> '.
-                    $article->article
-                  .'</p>
+                <div class="row" style="text-align:right;">
+                  <p style="padding: 0 3% 0 3%" dir="rtl" id="article">';
+                  echo nl2br($article->article); 
+                  echo '</p>
                 </div>
               </div>
           </div>

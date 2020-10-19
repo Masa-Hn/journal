@@ -1,127 +1,116 @@
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.js"></script>
-<script src="<?php echo base_url()?>assets/js/pagination.js"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/mentorshipTeam.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/teamsCarousel.css">
+<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/carousel.css"> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<style>
+.link, .fa{
+	color: #205D67;
+}
+.fa{
+	font-size: 1vw;
+}
+.link:hover, .fa:hover{
+	color: #205D67;
+	font-weight: bold;
+}
+
+	.names {
+		display: inline;
+		text-align: center;
+		font-size: 1.5rem;
+	}
+
+	.mybutton {
+		width: 100%;
+	}
+
+</style>
 <body>
-<div class="container-fluid px-1 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-xl-10 col-lg-10 col-md-10">
-            <div class="card b-0" style="overflow-x: auto;">
-              <input type="hidden" id="bookDisplay" name="bookDisplay" value="2">
-              <table id="dataTable" class="cell list-wrapper" dir="rtl">
-                <thead>
-                  <tr>
-                    <th><span class="visually-hidden">Toggle</span></th>
-                    <th>الفريق</th>
-                    <th>القائد</th>
-                    <th>الجنس</th>
-                    <th>عدد الأعضاء الكلي</th>
-                    <th>عدد الأعضاء الجدد</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="list-item">
-                    <td>
-                      <button type="button" id="btnMSb" aria-expanded="false" onclick="toggle(this.id,'#MS01b,#MS02b,#MS03b');" aria-controls="MS01b MS02b MS03b" aria-label="3 more from" aria-labelledby="btnMSb lblMSb">
-                        <svg xmlns="\http://www.w3.org/2000/svg&quot;" viewBox="0 0 80 80" focusable="false"><path d="M70.3 13.8L40 66.3 9.7 13.8z"></path></svg>
-                      </button>
-                    </td>
-                    <td id="lblMSb" class="list-item">A01</td>
-                    <td>Leader01</td>
-                    <td>F</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td><input type="checkbox" class="checkbox" value="1" name="checkbox"> </td>
-                  </tr>
-                  <tr id="MS01b" class="hidden">
-                    <td></td>
-                    <td></td>
-                     <td>member00</td>
-                    <td>M</td>
-                    <td rowspan="3" colspan="3" style="text-align: center;vertical-align: middle;">
-                      <input type="button" class="copy btn-lg" value="Copy Members">
-                    </td>
-                  </tr>
-                  <tr id="MS02b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member02</td>
-                    <td>M</td>
-                  </tr>
-                  <tr id="MS03b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member03</td>
-                    <td>M</td>
-                  </tr>
-                  <tr class="list-item">
-                    <td></td>
-                    <td>A02</td>
-                    <td>Leader02</td>
-                    <td>F</td>
-                    <td>15</td>
-                    <td>0</td>
-                    <td><input type="checkbox" class="checkbox" value="2" name="checkbox"> </td>
-                  </tr>
-                  <tr class="list-item">
-                    <td>
-                      <button type="button" id="btnEDENSb" aria-expanded="false" onclick="toggle(this.id,'#EDENS01b,#EDENS02b,#EDENS03b,#EDENS04b,#EDENS05b');" aria-controls="EDENS01b EDENS02b EDENS03b EDENS04b EDENS05b" aria-label="5 more from" aria-labelledby="btnEDENSb lblEDENSb">
-                        <svg xmlns="\http://www.w3.org/2000/svg&quot;" viewBox="0 0 80 80" focusable="false"><path d="M70.3 13.8L40 66.3 9.7 13.8z"></path></svg>
-                      </button>
-                    </td>
-                    <td id="lblEDENSb" class="list-item">A03</td>
-                    <td>Leader03</td>
-                    <td>F</td>
-                    <td>12</td>
-                    <td>5</td>
-                    <td><input type="checkbox" class="checkbox" value="3" name="checkbox"> </td>
-                  </tr>
-                  <tr id="EDENS01b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member00</td>
-                    <td>M</td>
-                    <td rowspan="5" colspan="3" style="text-align: center;vertical-align: middle;">
-                      <input type="button" class="copy btn-lg" value="Copy Members">
-                    </td>
-                    
-                  </tr>
-                  <tr id="EDENS02b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member00</td>
-                    <td>M</td>
-                  </tr>
-                  <tr id="EDENS03b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member00</td>
-                    <td>F</td>
-                  </tr>
-                  <tr id="EDENS04b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member00</td>
-                    <td>F</td>
-                  </tr>
-                  <tr id="EDENS05b" class="hidden">
-                    <td></td>
-                    <td></td>
-                    <td>member03</td>
-                    <td>F</td>
-                  </tr>
-                  <tr>  
-                </tbody>
-              </table>
-              <div id="pagination-container"></div>  
-              <div id="submit" style="display: none;text-align: center;">
-                <input type="button" class="copy btn-lg" value="Submit">
-              </div>  
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="container-fluid px-1 py-5 mx-auto">
+		<div class="row d-flex justify-content-center">
+			<div class="col-xl-5 col-lg-6 col-md-7">
+				<div class="card b-0">
+					<div class="slideshow-container">
+						<div class="carousel-container w3-display-container " id="seriesPhotos">
+							<?php
+							if ( $requests->num_rows() > 0 ) {
+
+								foreach ( $requests->result() as $request ) {
+									$id = $request->Rid;
+									$leaderEmail = $request->leader_email;
+									$num_of_members = 20; // a query to be run here to get total members (based on leader email) from the official database
+									$query = $this->GeneralModel->get_data( $id, 'requestId', 'ambassador', 'name, gender' );
+									?>
+							<div class="mySlides carousel-slide">
+								<h4 class="heading" style="text-align:center;">
+									<?php echo "فريق: <a href='$request->team_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->team_name . "</a> - " . "القائد: <a href='$request->leader_link' class='link'><i class='fa fa-external-link' aria-hidden='true'></i>" . $request->leader_name . "</a>"; ?>
+								</h4>
+								<p style="text-align: center;">
+									<small>
+								عدد أعضاء الفريق: <?php echo $num_of_members;?> - الأعضاء الجدد: <?php echo $query->num_rows();?> - تاريخ الطلب: <?php echo date('Y-m-d', strtotime($request->date));?>
+								</small>
+
+
+								</p>
+								<ul class="list-group list-group-flush" style="text-align: center;list-style: none;" id="<?php echo $id;?>">
+									<?php
+									foreach ( $query->result() as $row ) {
+										?>
+									<li class="list-group-item">
+										<p class="names">
+											<?php echo $row->name." ";?>
+										</p>
+										<small>
+											<?php
+											if ( $row->gender == 'female' || $row->gender == 'Female' ) {
+												echo '(أنثى)';
+											} else if ( $row->gender == 'male' || $row->gender == 'Male' ) {
+												echo 'ذكر';
+											}
+											?>
+										</small>
+									</li>
+									<?php
+									}
+									$leaderName = $request->leader_name;
+									?>
+								</ul>
+
+								<button id="<?php echo $id; ?>" name="done" class="mybutton" style="margin-right: 10px; background-color: #459b6e;" onclick="send_to_leader(<?php echo $id;?>);">تم التواصل </button>
+								<button id="<?php echo $id; ?>" name="copy" class="mybutton" style="background-color: #205d67;" onclick="copyMsg('<?php echo $id;?>', '<?php echo $leaderName;?>')">نسخ</button>
+							</div>
+							<?php
+							}
+							} else {
+								?>
+							<div class="card text-center">
+								<h1>لا يوجد طلبات</h1>
+							</div>
+							<?php
+							}
+							?>
+						</div>
+					</div>
+					<div>
+						<a class="prev w3-display-left" onclick="plusDivs(-1)">&#10094;</a>
+						<a class="next w3-display-right" onclick="plusDivs(1)">&#10095;</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container mt-5">
+			<div class="card">
+				<div class="card-header text-center" style="background-color:#205d67; color: #fff; ">
+					العدد الكلي للقادة الذين لم يتم التواصل معهم بعد:
+					<?php echo $requests->num_rows();?>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/teamCarousel.js"></script>
 <script src="<?php echo base_url()?>assets/js/mentorshipTeam.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/js/copy.js"></script>

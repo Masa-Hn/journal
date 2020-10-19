@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2020 at 05:47 PM
+-- Generation Time: Sep 17, 2020 at 04:23 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -37,7 +37,9 @@ CREATE TABLE `ambassador` (
   `nameOfReadBook` varchar(255) DEFAULT NULL,
   `code` int(11) NOT NULL,
   `leaderGender` varchar(50) NOT NULL,
-  `requestId` int(11) DEFAULT NULL
+  `requestId` int(11) DEFAULT NULL,
+  `profile_link` varchar(255) NOT NULL,
+  `is_joined` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -49,7 +51,7 @@ CREATE TABLE `ambassador` (
 --
 ALTER TABLE `ambassador`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `ambassador_ibfk_1` (`requestId`);
+  ADD KEY `requestId` (`requestId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -69,7 +71,7 @@ ALTER TABLE `ambassador`
 -- Constraints for table `ambassador`
 --
 ALTER TABLE `ambassador`
-  ADD CONSTRAINT `ambassador_ibfk_1` FOREIGN KEY (`requestId`) REFERENCES `requests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `ambassador_ibfk_1` FOREIGN KEY (`requestId`) REFERENCES `leader_request` (`Rid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

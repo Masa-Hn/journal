@@ -1,11 +1,12 @@
 $(document).ready(function()
 {	
-var num =3;
-if(sessionStorage.getItem("bookDisplayNum") != null) {
-      document.getElementById("bookDisplay").value=sessionStorage.getItem("bookDisplayNum");
-       num =sessionStorage.getItem("bookDisplayNum");
-     }//if
-
+  if(sessionStorage.getItem("bookDisplayNum") != null) {
+    document.getElementById("bookDisplay").value=sessionStorage.getItem("bookDisplayNum");
+    num =sessionStorage.getItem("bookDisplayNum");
+  }//if
+  else{
+    num=document.getElementById("bookDisplay").value;
+  }
   var items = $(".list-wrapper .list-item");
   var numItems = items.length;
   var perPage = num;
