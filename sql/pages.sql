@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2020 at 01:56 PM
+-- Generation Time: Oct 04, 2020 at 02:28 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -24,28 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `leader_info`
+-- Table structure for table `pages`
 --
 
-CREATE TABLE `leader_info` (
+CREATE TABLE `pages` (
   `id` int(11) NOT NULL,
-  `leader_name` varchar(255) NOT NULL,
-  `leader_link` varchar(255) NOT NULL,
- `messenger_id` varchar(255) NOT NULL,
-  `team_link` varchar(255) NOT NULL,
-  `leader_email` varchar(255) NOT NULL,
-  `team_name` varchar(255) NOT NULL,
-  `leader_gender` varchar(10) NOT NULL
+  `title` varchar(255) NOT NULL,
+  `viewers` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `title`, `viewers`) VALUES
+(1, 'Mentorship 1', 256),
+(2, 'Mentoship 2', 56),
+(3, 'Mentorship 3', 52),
+(4, 'Mentorship 4', 40),
+(5, 'Mentorship 5', 39),
+(6, 'Mentorship 6', 36);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `leader_info`
+-- Indexes for table `pages`
 --
-ALTER TABLE `leader_info`
+ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -53,9 +60,9 @@ ALTER TABLE `leader_info`
 --
 
 --
--- AUTO_INCREMENT for table `leader_info`
+-- AUTO_INCREMENT for table `pages`
 --
-ALTER TABLE `leader_info`
+ALTER TABLE `pages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2020 at 01:56 PM
+-- Generation Time: Oct 04, 2020 at 02:28 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -24,28 +24,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `leader_info`
+-- Table structure for table `statistics`
 --
 
-CREATE TABLE `leader_info` (
+CREATE TABLE `statistics` (
   `id` int(11) NOT NULL,
-  `leader_name` varchar(255) NOT NULL,
-  `leader_link` varchar(255) NOT NULL,
- `messenger_id` varchar(255) NOT NULL,
-  `team_link` varchar(255) NOT NULL,
-  `leader_email` varchar(255) NOT NULL,
-  `team_name` varchar(255) NOT NULL,
-  `leader_gender` varchar(10) NOT NULL
+  `ip_address` varchar(11) NOT NULL,
+  `page_id` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `statistics`
+--
+
+INSERT INTO `statistics` (`id`, `ip_address`, `page_id`, `date`) VALUES
+(1, '::1', 1, '2020-10-02 12:36:10'),
+(2, '::1', 2, '2020-10-03 12:36:43'),
+(3, '::1', 3, '2020-10-03 12:48:32'),
+(4, '::1', 4, '2020-10-03 12:50:57'),
+(5, '::1', 5, '2020-10-03 12:53:50'),
+(6, '::1', 6, '2020-10-03 12:55:08'),
+(7, '::1', 6, '2020-10-03 11:24:01'),
+(8, '::1', 6, '2020-10-04 11:25:08');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `leader_info`
+-- Indexes for table `statistics`
 --
-ALTER TABLE `leader_info`
+ALTER TABLE `statistics`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -53,10 +63,10 @@ ALTER TABLE `leader_info`
 --
 
 --
--- AUTO_INCREMENT for table `leader_info`
+-- AUTO_INCREMENT for table `statistics`
 --
-ALTER TABLE `leader_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `statistics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

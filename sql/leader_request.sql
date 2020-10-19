@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `leader_request` (
-  `Rid` int(11) NOT NULL,
+  `Rid` int(11) NOT NULL AUTO_INCREMENT = 1000,
   `members_num` int(11) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
