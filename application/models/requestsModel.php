@@ -144,18 +144,18 @@ public function get_info($email){
 		return $this->db->get( 'leader_request' );
 	} //getDate
 
-	public
-	function get_data( $val, $where, $table, $select = '*' ) {
-		$query = "SELECT " . $select . " FROM " . $table . " WHERE " . $where . "='" . $val . "'";
-		$conn = $this->connectToDB();
-		$done = $conn->query( $query );
-		if ( $done ) {
+	public function get_data($val, $where, $table, $select = '*')
+    {
+		$query = "SELECT ".$select." FROM ".$table." WHERE ".$where."='".$val."'";
+		$conn= $this->connectToDB();
+		$done=$conn->query($query);
+		if($done){
 			$conn->close();
 			return $done;
 		} else {
 			return $conn->error;
 		}
-	} //get_data
+	}//get_data
 
 	public
 	function selectWithJoin( $table1, $table2, $ON, $whereCondition, $select = '*' ) {
