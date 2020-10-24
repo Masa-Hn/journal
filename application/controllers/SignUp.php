@@ -75,8 +75,8 @@ class SignUp extends CI_Controller {
     if (!empty($_POST['ambassador'])) {
       $ambassador_info=$_POST['ambassador'];
       $Leader_gender=$_POST['leader_gender'];
-      
-      //Check ambassador gender
+
+      // //Check ambassador gender
         if ($ambassador_info['gender'] != "female" && $ambassador_info['gender']!="male") {
           $ambassador_gender="any"; 
 
@@ -97,7 +97,8 @@ class SignUp extends CI_Controller {
                   //Check Teams With More Than 12 Members
                     $result=$this->SignUpModel->anyLeader($ambassador_gender, ">");
                     if (count((array)$result) == 0 ){
-                      $this->ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$Leader_gender);
+                      $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$Leader_gender);
+                      $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
                       $this->noLeaderFound();
                     }//if
                     else{
@@ -128,7 +129,9 @@ class SignUp extends CI_Controller {
                   //Check Teams With More Than 12 Members
                     $result=$this->SignUpModel->getTeams($Leader_gender,$ambassador_gender, ">");
                     if (count((array)$result) == 0 ){
-                      $this->ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$Leader_gender);
+                      $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$Leader_gender);
+                      $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
+
                       $this->noLeaderFound();
                     }//if
                     else{
@@ -198,14 +201,13 @@ class SignUp extends CI_Controller {
 
   public function informLeader($ambassadors,$leader_messenger_id,$request_id)
   {
-    $recipient="3331775443608686";
+    $recipient=$leader_messenger_id;
  
-    $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBAKd0zcvVz5c46Y0lAbNNffOFlNkcM2sYO4EVj8XpfZBD8dRHa7GGZAW41KMvqxLZBRK4PtDYR6ba3gA6FYZAZA09y518DIZCl5YuNybftCOosdfpXXMMo3dq1yBIla1VLccyZCkdFrNl00Hg42ZBAOVgICZCVLaZCSZBsAw2OL5TsjM';
+    $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBABe9vJc3OdVVrFaKT0EOWR5eZAS9ZAjHjvD97M5zuCH2xWfhoaLK7R2qCQOUAsDuc9yKvgMF5HWeTxa5hk9Lc1hQajU45p9ZCZAlkqAgwTw7ijfG0NEEiEmZAsnaJiPGc82ykaTsZC65kVWY59zT4krNdusVZCSfwZDZD';
 
     /*initialize curl*/
     $ch = curl_init($url);
     
-
     $firstMsg="السلام عليكم ورحمة الله وبركاته ".'\n'." كيف  الحال قيادة؟! 🌸 ".'\n'."تم إرسال أعضاء جدد لفريقك؛ نتمنى منك الاهتمام بهم يرجى منك إضافة جميع السفراء (بغض النظر دخل فريق المتابعة أو لا) إلى موقع العلامات وفي نهاية الأسبوع من لم يقرأ فقط قم بعمل انسحاب له (انسحاب وليس حذف من إشارة ❌) وذلك لتجنب الفوضى في مجموعة السفراء  ".'\n'."شكرا لك😍";
 
     /*prepare response*/
