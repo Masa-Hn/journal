@@ -1,55 +1,93 @@
 <?php
 class RequestsModel extends CI_Model {
 
+//check leader email
+public function get_info($email){
+	$query = "SELECT * FROM leader_info WHERE leader_email='" . $email . "'";
+	$conn = $this->connectToDB();
+	$done = $conn->query( $query );
+	if ( $done ) {
+		$conn->close();
+		return $done;
+	} else {
+		return $conn->error;
+	}
+
+}
 	//distribution process
 
 	//get the none distributed ambassadors
 	public
 	function getNoneDistributedAmbassadors() {
-		$this->db->select( '*' );
-		$this->db->where( 'request_id', NULL );
-		$this->db->from( 'ambassador' );
-
-		return $this->db->get();
+		$query = "SELECT * FROM ambassador WHERE request_id IS NULL";
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$conn->close();
+			return $done;
+		} else {
+			return $conn->error;
+		}
 	}
 
 	//get the destributed ambassadors for certain request
-	public
-	function getDistributedAmbassadors( $request_id ) {
-		$this->db->select( '*' );
-		$this->db->where( 'request_id', $request_id );
-		$this->db->from( 'ambassador' );
-
-		return $this->db->get();
+	public function getDistributedAmbassadors( $request_id ) {
+		$query = "SELECT * FROM ambassador WHERE request_id =".$request_id;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$conn->close();
+			return $done;
+		} else {
+			return $conn->error;
+		}
 	}
 
 	//get leader info of a certain request
 	public
 	function getLeaderInfo( $leader_id ) {
-		$this->db->where( 'id', $leader_id );
-		$this->db->from( 'leader_info' );
-
-		return $this->db->get();
+		$query = "SELECT * FROM leader_info WHERE id =".$leader_id;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$conn->close();
+			return $done;
+		} else {
+			return $conn->error;
+		}
 	}
 
 	//get request info
 	public
 	function getRequest( $rid ) {
-		$this->db->select( '*' );
-		$this->db->where( 'Rid', $rid );
-		$this->db->from( 'leader_request' );
-
-		return $this->db->get();
+		$query = "SELECT * FROM leader_request WHERE Rid =".$rid;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$conn->close();
+			return $done;
+		} else {
+			return $conn->error;
+		}
 	}
 
 	//set the request_id as the request for the proper ambassadors
 	public
 	function updateAmbassador( $ambassador_id, $request_id ) {
-		$this->db->set( 'request_id', $request_id, FALSE );
-		$this->db->where( 'id', $ambassador_id );
-		$this->db->update( 'ambassador' );
+		$query = "UPDATE ambassador SET request_id =" . $request_id . " WHERE id =" . $ambassador_id;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		$conn->close();
 	}
-	//end
+
+	public function updateReq($id){
+		$query = "UPDATE leader_request SET is_done = 1 WHERE Rid = " . $id;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		$conn->close();
+	}
+	//end process
+
 	public
 	function get_ambassadors() {
 		$this->db->select( 'id, name, profile_link, gender, is_joined' );
@@ -89,7 +127,7 @@ class RequestsModel extends CI_Model {
 		} else {
 			return $conn->error;
 		}
-    
+
 	} //addRequest
 
 	public
@@ -113,9 +151,8 @@ class RequestsModel extends CI_Model {
 		$done=$conn->query($query);
 		if($done){
 			$conn->close();
-			return $done;	
-		}
-		else{
+			return $done;
+		} else {
 			return $conn->error;
 		}
 	}//get_data
@@ -130,21 +167,14 @@ class RequestsModel extends CI_Model {
 	} //selectWithJoin
 
 	public
-	function insertLeaderInfo( $leader ) {
+	function updateFullRequest( $leader) {
 
-		$query = "INSERT INTO leader_info (`leader_name`, `leader_link`, `leader_gender`, `team_name`,`team_link`, `leader_email`) VALUES ('" . $leader[ 'leader_name' ] . "','" . $leader[ 'leader_link' ] . "','" . $leader[ 'leader_gender' ] . "','" . $leader[ 'team_name' ] . "','" . $leader[ 'leader_link' ] . "','" . $leader[ 'leader_email' ] . "')";
+		$query = "UPDATE leader_info SET leader_name='".$leader['leader_name']."' , leader_link='".$leader['leader_link']."', leader_gender='".$leader['leader_gender']."',
+		 team_name='".$leader['team_name']."', team_link='".$leader['team_link']."' WHERE id=".$leader['leader_id'];
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
-
-		if ( $done ) {
-			$last_id = $conn->insert_id;
-			$conn->close();
-			return $last_id;
-		} else {
-			return $conn->error;
-		}
-
-	} //insertLeaderInfo
+		$conn->close();
+	} //updatetLeaderInfo
 	public
 	function leaderLastRequest( $id ) {
 		$query = "SELECT date,is_done FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
