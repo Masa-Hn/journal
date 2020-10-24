@@ -15,11 +15,15 @@ class Requests extends CI_Controller {
 		$this->load->view( 'leader_request/header' );
 		$regBefore = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info' );
 		if ( $regBefore->num_rows > 0 ) {
+			$info = $this->requestsModel->get_info($_GET[ 'email' ])->fetch_assoc();
+			if($info['leader_link']==null && $info['leader_gender']==null){
+					$this->load->view( 'leader_request/full_request' );
+			}else {
 			$this->load->view( 'leader_request/request' );
 			$this->load->view( 'leader_request/edit_info' );
-		} else {
-			$this->load->view( 'leader_request/full_request' );
 		}
+
+	}
 	}
 
 	public
@@ -33,7 +37,6 @@ class Requests extends CI_Controller {
 
 		if ( $this->form_validation->run() ) {
 			// data of the leader
-			$leader[ 'leader_email' ] = $_GET[ 'email' ];
 			$leader[ 'leader_name' ] = $_POST[ 'leaderName' ];
 			$leader[ 'team_name' ] = $_POST[ 'teamName' ];
 			$leader[ 'leader_link' ] = $_POST[ 'leaderLink' ];
@@ -50,10 +53,12 @@ class Requests extends CI_Controller {
             يرجى التأكد من رابط صفحتك الشخصية!
             </div>";
 			} else {
-				$check = $this->requestsModel->get_data( $leader[ 'leader_email' ], 'leader_email', 'leader_info' );
-				if ( $check->num_rows == 0 ) {
-					$id = $this->requestsModel->insertLeaderInfo( $leader );
-					$request[ 'leader_id' ] = $id;
+				$info = $this->requestsModel->get_info($_GET[ 'email' ])->fetch_assoc();
+				if($info['leader_link']==null && $info['leader_gender']==null){
+					$request['leader_id'] = $info['id'];
+					$leader['leader_id'] = $info['id'];
+					$this->requestsModel->updateFullRequest( $leader );
+
 					$requestID = $this->requestsModel->addRequest( $request );
 					$this->distributeAmbassadors( $requestID );
 					$msg = "<div class='alert alert-success'>
@@ -132,21 +137,19 @@ class Requests extends CI_Controller {
 	public
 	function distributeAmbassadors( $requestID ) {
 		$noneDistributedAmbassadors = $this->requestsModel->getNoneDistributedAmbassadors();
+		$request = $this->requestsModel->getRequest( $requestID )->fetch_array(MYSQLI_ASSOC);
+		$leader = $this->requestsModel->getLeaderInfo( $request['leader_id'] )->fetch_array(MYSQLI_ASSOC);
 
-		$request = $this->requestsModel->getRequest( $requestID )->row();
+		$num_of_members = $request['members_num'];
 
-		$leader = $this->requestsModel->getLeaderInfo( $request->leader_id )->row();
+	if ( $noneDistributedAmbassadors->num_rows > 0 ) {
 
-		$num_of_members = $request->members_num;
-		if ( $noneDistributedAmbassadors->num_rows() > 0 ) {
-
-			foreach ( $noneDistributedAmbassadors->result() as $amb ) {
-
+			while($amb =  $noneDistributedAmbassadors->fetch_array(MYSQLI_ASSOC)) {
 				if ( $num_of_members != 0 ) {
 
-					if ( ( $request->gender == $amb->gender || $request->gender == 'any' ) && ( $leader->leader_gender == $amb->leader_gender ) ) {
+					if ( ( $request['gender'] == $amb['gender'] || $request['gender'] == 'any' ) && ( $leader['leader_gender'] == $amb['leader_gender'] ) ) {
 
-						$this->requestsModel->updateAmbassador( $amb->id, $requestID );
+						$this->requestsModel->updateAmbassador( $amb['id'], $requestID );
 						$num_of_members--;
 					}
 				}
@@ -154,9 +157,9 @@ class Requests extends CI_Controller {
 			}
 		}
 		$distributedAmbassadors = $this->requestsModel->getDistributedAmbassadors( $requestID );
-
-		if ( $distributedAmbassadors->num_rows() == $request->members_num ) {
-			$this->requestsModel->updateRequest( $requestID );
+echo $distributedAmbassadors->num_rows;
+		if ( $distributedAmbassadors->num_rows == $request['members_num'] ) {
+			$this->requestsModel->updateReq( $requestID );
 		}
 	}
 }
