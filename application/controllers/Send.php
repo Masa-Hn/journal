@@ -1,4 +1,7 @@
 <?php
+require 'vendor/autoload.php'; 
+use Bitly\BitlyClient;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Send extends CI_Controller {
@@ -14,45 +17,43 @@ class Send extends CI_Controller {
 	}//end construct()
 
 
-  public function index()
+  public function index(){
+    $bitlyClient = new BitlyClient('d4528ad236dbe8ff010e571c22880d9d1aec93cf');
+    $options = [
+        'longUrl' => 'https://www.facebook.com/app_scoped_user_id/YXNpZADpBWEdFMUFKUGNnUWlHOU94emV1WEVKRlk4d3RyaUJRbFZAoVXZAmMVpNRVM4alJlZAW5PaWJ4enV2SmZAGaWppVEtRQjZALWjZAadC0tWlV2ZAThMRzN4U084YnZANTGhWRWs2NWg3LVo4blA1ZAnl2QlphbkFhSVEZD/',
+        'format' => 'json' // pass json, xml or txt
+    ];
+    $response = $bitlyClient->shorten($options);
+    print_r($response->data->url);
+}
+
+  public function test()
   {
     $recipient="3197321007062062";
- 
     $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBABe9vJc3OdVVrFaKT0EOWR5eZAS9ZAjHjvD97M5zuCH2xWfhoaLK7R2qCQOUAsDuc9yKvgMF5HWeTxa5hk9Lc1hQajU45p9ZCZAlkqAgwTw7ijfG0NEEiEmZAsnaJiPGc82ykaTsZC65kVWY59zT4krNdusVZCSfwZDZD';
 
-    /*initialize curl*/
+    // /*initialize curl*/
     $ch = curl_init($url);
     
-    $allAmbassadors=$this->AmbassadorModel->getByRequestId(3);
+    $allAmbassadors=$this->AmbassadorModel->getByRequestId(5);
         $ambassadors="";
+        $bitlyClient = new BitlyClient('d4528ad236dbe8ff010e571c22880d9d1aec93cf');
         $i=1;
         foreach ($allAmbassadors as $ambassador) {
-          $ambassadors=$ambassadors. "[".$i."] ".$ambassador->name. '\n'.$ambassador->profile_link.'\n';
+            $options = [
+                'longUrl' => $ambassador->profile_link,
+                'format' => 'json' // pass json, xml or txt
+            ];
+            $response = $bitlyClient->shorten($options);
+            $shortenLink=$response->data->url;
+
+          $ambassadors=$ambassadors. "[".$i."] ".$ambassador->name. '\n'. $shortenLink.'\n';
           $i++;
         }
-
-    // $firstMsg="السلام عليكم ورحمة الله وبركاته ".'\n'." كيف  الحال قيادة؟! 🌸 ".'\n'."تم إرسال أعضاء جدد لفريقك؛ نتمنى منك الاهتمام بهم يرجى منك إضافة جميع السفراء (بغض النظر دخل فريق المتابعة أو لا) إلى موقع العلامات وفي نهاية الأسبوع من لم يقرأ فقط قم بعمل انسحاب له (انسحاب وليس حذف من إشارة ❌) وذلك لتجنب الفوضى في مجموعة السفراء  ".'\n'."شكرا لك😍";
-
-    /*prepare response*/
+    // /*prepare response*/
     $jsonData =  $this->jsonData($recipient,$ambassadors);
     /* curl setting to send a json post data */
-    $this->curlSetting($ch,$jsonData);
-
-    // $secMsg="رقم الطلب : ".$request_id;
-    // $jsonData =  $this->jsonData($recipient,$secMsg);
-    // /* curl setting to send a json post data */
-    // $this->curlSetting($ch,$jsonData);
-
-    //  /*Ambassadors*/
-    // $jsonData =  $this->jsonData($recipient,$ambassadors);
-    // /* curl setting to send a json post data */
-    // $this->curlSetting($ch,$jsonData);
-
-    // $lastMsg="⛔ قائدنا الكريم ⛔ ".'\n'." يصل السفير إليك مترددا ولا يعرف النظام الجميل في مشروعنا، قد يكتفي بطلب الانضمام ويتردد فيما يفعل بعدها.  ".'\n'." رجاءً 'ابدأ انت بمراسلته' وعمل منشن له على أي منشور ليتجاوب معك. أنت أهل لذلك. ".'\n'." ابدأ أنت ❤️";
-    // /*prepare response*/
-    // $jsonData =  $this->jsonData($recipient,$lastMsg);
-    // /* curl setting to send a json post data */
-    // $this->curlSetting($ch,$jsonData);    
+    $this->curlSetting($ch,$jsonData);   
 
   }//informLeader
 
@@ -78,12 +79,13 @@ class Send extends CI_Controller {
 
     //Attach the encoded JSON string to the POST fields.
     curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     //Set the content type to application/json
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     
     //Execute the request if the message is not empty.
-    $result = curl_exec($ch); // user will get the message
+    curl_exec($ch); // user will get the message
   
   }//curlSetting
 

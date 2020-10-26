@@ -1,3 +1,7 @@
+<?php 
+  include 'templates/header.php';
+  include 'templates/navbar.php';
+?>
 <style type="text/css">
   @media (min-width: 576px)
 {
@@ -35,3 +39,4 @@
       </div>
     </section>
     <!-- End Banner Area -->
+<?php include 'templates/footer.php';?>
