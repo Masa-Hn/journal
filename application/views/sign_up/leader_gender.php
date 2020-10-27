@@ -1,3 +1,7 @@
+<?php 
+  include 'templates/header.php';
+  include 'templates/navbar.php';
+?>
  <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
       <div class="container">
@@ -13,14 +17,14 @@
               <div class="" >
                 <div class="container ">
                   <div class="row text-center">
-                    <div class="col-md-3 col-sm-12 book-section"  onclick="allocateAmbassador('female')">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/female.png" class="book-div-img"><br><h1>أنثى</h1> 
+                    <div class="col-md-3 col-sm-12 book-section">
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/female.png" class="book-div-img"  onclick="allocateAmbassador('female')"><br><h1>أنثى</h1> 
                     </div>
-                     <div class="col-md-3 col-sm-12 book-section"  onclick="allocateAmbassador('male')">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/male.png" class="book-div-img"><br><h1>ذكر</h1> 
+                     <div class="col-md-3 col-sm-12 book-section">
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/male.png" class="book-div-img"  onclick="allocateAmbassador('male')"><br><h1>ذكر</h1> 
                     </div>
-                     <div class="col-md-3 col-sm-12 book-section"  onclick="allocateAmbassador('any')">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/not_matter.png" class="book-div-img" style="width: 60%" ><br><h1>لا فرق </h1> 
+                     <div class="col-md-3 col-sm-12 book-section">
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/not_matter.png" class="book-div-img" style="width: 60%"   onclick="allocateAmbassador('any')"><br><h1>لا فرق </h1> 
                     </div>
                   </div>
                 </div>
@@ -34,3 +38,4 @@
       </div>
     </section>
     <!-- End Banner Area -->
+<?php include 'templates/footer.php';?>

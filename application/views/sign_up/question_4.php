@@ -1,3 +1,7 @@
+<?php 
+  include 'templates/header.php';
+  include 'templates/navbar.php';
+?>
     <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
       <div class="container">
@@ -20,10 +24,11 @@
                     <?php
                       foreach ($sections as $section ) {
                         echo'
-                          <div class="col-md-3 col-sm-12 book-section"  onclick="nextWithMsg('
+                          <div class="col-md-3 col-sm-12 book-section">';
+                          echo '<img src="'.base_url().'assets/sign_up_assests/img/book.png" class="book-div-img" onclick="nextWithMsg('
                           ;
-                          echo "'fb_login',".$section->num_of_books.")".'">';
-                          echo '<img src="'.base_url().'assets/sign_up_assests/img/book.png" class="book-div-img"><br><h1>'. $section->section.'</h1> 
+                          echo "'activity',".$section->num_of_books.")".'"
+                          ><br><h1>'. $section->section.'</h1> 
                           </div>
                         ';
                       }//foreach
@@ -40,3 +45,4 @@
       </div>
     </section>
     <!-- End Banner Area -->
+<?php include 'templates/footer.php';?>
