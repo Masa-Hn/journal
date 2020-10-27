@@ -1,3 +1,7 @@
+<?php 
+  include_once 'templates/header.php';
+  include_once 'templates/navbar.php';
+?>
 <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
       <div class="container">
@@ -24,3 +28,4 @@
       </div>
     </section>
     <!-- End Banner Area -->
+<?php include_once 'templates/footer.php';?>

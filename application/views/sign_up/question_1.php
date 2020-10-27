@@ -1,3 +1,7 @@
+<?php 
+  include 'templates/header.php';
+  include 'templates/navbar.php';
+?>
 <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
       <div class="container">
@@ -37,3 +41,4 @@
     }
   });
 </script>
+<?php include 'templates/footer.php';?>

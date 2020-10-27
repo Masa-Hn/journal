@@ -1,3 +1,7 @@
+<?php 
+  include 'templates/header.php';
+  include 'templates/navbar.php';
+?>
 <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
       <div class="container">
@@ -19,8 +23,8 @@
               خلال الاسبوع ؟            
             </h1>
             <br>
-               <a href="javascript:nextWithMsg('page_5','بقرائتها دفعةً واحدة')" class="genric-btn primary circle arrow">دفعة واحدة</a>
-               <a href="javascript:nextWithMsg('page_5','بتقسيمها')" class="genric-btn primary circle arrow">تقسيمها  </a>
+               <a href="javascript:nextWithMsg('page_5',3)" class="genric-btn primary circle arrow">دفعة واحدة</a>
+               <a href="javascript:nextWithMsg('page_5',4)" class="genric-btn primary circle arrow">تقسيمها  </a>
           </div>
           <div class="col-lg-4 col-sm-12">
               <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/wonder.png" alt="" alt="" style="width: 80%">
@@ -29,3 +33,4 @@
       </div>
     </section>
     <!-- End Banner Area -->
+<?php include 'templates/footer.php';?>

@@ -138,11 +138,17 @@ public function get_info($email){
 
 	} //updateRequest
 
-	public
-	function getDate( $leaderEmail ) {
-		$this->db->where( 'leader_email', $leaderEmail );
-		return $this->db->get( 'leader_request' );
-	} //getDate
+	public function getMessID($messenger_id)
+	{
+		$this->db->where('messenger_id', $messenger_id);
+		return $this->db->get('leader_info');
+	}//getDate
+
+	public function getDate($leaderEmail)
+	{
+		$this->db->where('leader_email', $leaderEmail);
+		return $this->db->get('leader_request');
+	}//getDate
 
 	public function get_data($val, $where, $table, $select = '*')
     {
