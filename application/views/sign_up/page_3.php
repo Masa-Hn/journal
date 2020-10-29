@@ -1,6 +1,9 @@
 <?php 
   include 'templates/header.php';
   include 'templates/navbar.php';
+ 
+    $page_id = 3;
+    $this->StatisticsModel->addVisitor($page_id);
 ?>
 <style type="text/css">
   @media (min-width: 576px)

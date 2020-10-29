@@ -38,7 +38,7 @@
                   if($requests->num_rows()>0){
                     foreach ($requests->result() as $request) {
                       $id = $request->Rid;
-                      $ambassadors = $this->GeneralModel->get_data($request->Rid, 'requestId', 'ambassador', 'name, gender, profile_link, is_joined');
+                      $ambassadors = $this->GeneralModel->get_data($request->Rid, 'request_id', 'ambassador', 'name, gender, profile_link, is_joined');
                       $newMembers = $ambassadors->num_rows();
 
                   ?>
