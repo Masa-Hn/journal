@@ -6,9 +6,7 @@
 	<i class="fa fa-user-plus" aria-hidden="true"></i>
      طلب سفراء جدد
 </button>
-
-
-
+<div>
 	<!-- Modal -->
 	<div id="reqModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
