@@ -44,7 +44,6 @@ function nextWithMsg(page,msg){
     imageUrl:document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
     imageWidth: 300,
     imageAlt: 'Custom image',
-    timer: 4000,
     confirmButtonText: "استمرار ",
     confirmButtonColor:'#9ed16f'
   })

@@ -86,11 +86,18 @@ class SignUp extends CI_Controller {
       exit();
     }//if
     else{
-      //stop and go to last page
-      $request=$this->SignUpModel->getRequestInfo($result->request_id);
-      $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
-      $informLeader=false;
-      $this->informambassador($leader_info,$result->request_id,$informLeader,$request->leader_id);
+      //Inform Ambassador
+      if($result->request_id == null){
+        // Still No Leader
+        $this->noLeaderFound();
+      }
+      else{
+        $request=$this->SignUpModel->getRequestInfo($result->request_id);
+        $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
+        $informLeader=false;
+        $this->informambassador($leader_info,$result->request_id,$informLeader,$request->leader_id);  
+      }
+      
     }
   }//checkAmbassador
 
@@ -134,7 +141,7 @@ class SignUp extends CI_Controller {
                 }//if
                 else{
                   $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result);
-                  $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                   $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
                 }//else
             }//if
             else{
@@ -221,17 +228,17 @@ class SignUp extends CI_Controller {
         //2- get all associated requests
         $allAmbassadors=$this->AmbassadorModel->getByRequestId($_POST['request_id']);
         $ambassadors="";
-        // $bitlyClient = new BitlyClient('d4528ad236dbe8ff010e571c22880d9d1aec93cf');
+        $bitlyClient = new BitlyClient('d4528ad236dbe8ff010e571c22880d9d1aec93cf');
         $i=1;
         foreach ($allAmbassadors as $ambassador) {
-            // $options = [
-            //     'longUrl' => $ambassador->profile_link,
-            //     'format' => 'json' // pass json, xml or txt
-            // ];
-            // $response = $bitlyClient->shorten($options);
-            // $shortenLink=$response->data->url;
+            $options = [
+                'longUrl' => $ambassador->profile_link,
+                'format' => 'json' // pass json, xml or txt
+            ];
+            $response = $bitlyClient->shorten($options);
+            $shortenLink=$response->data->url;
 
-          $ambassadors=$ambassadors. "[".$i."] ".$ambassador->name. '\n';
+          $ambassadors=$ambassadors. "[".$i."] ".$ambassador->name. '\n'. $shortenLink.'\n';
           $i++;
         }//foreach
       //3-Inform Leader
@@ -250,7 +257,7 @@ class SignUp extends CI_Controller {
       /* curl setting to send a json post data */
       $this->curlSetting($ch,$jsonData);
 
-      $secMsg="رقم الطلب : ".$_POST['request_id'];
+      $secMsg="رقم الطلب : ".$request_id;
       $jsonData =  $this->jsonData($recipient,$secMsg);
       /* curl setting to send a json post data */
       $this->curlSetting($ch,$jsonData);
