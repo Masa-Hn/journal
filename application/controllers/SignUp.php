@@ -85,10 +85,18 @@ class SignUp extends CI_Controller {
       exit();
     }//if
     else{
-      //stop and go to last page
-      $request=$this->SignUpModel->getRequestInfo($result->request_id);
-      $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
-      $this->informambassador($leader_info,$result->request_id);
+      //Inform Ambassador
+      if($result->request_id == null){
+        // Still No Leader
+        $this->noLeaderFound();
+      }
+      else{
+        $request=$this->SignUpModel->getRequestInfo($result->request_id);
+        $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
+        $informLeader=false;
+        $this->informambassador($leader_info,$result->request_id,$informLeader,$request->leader_id);  
+      }
+      
     }
   }//checkAmbassador
 
@@ -132,7 +140,7 @@ class SignUp extends CI_Controller {
                 }//if
                 else{
                   $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result);
-                  $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                   $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
                 }//else
             }//if
             else{
