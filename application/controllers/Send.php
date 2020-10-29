@@ -18,13 +18,18 @@ class Send extends CI_Controller {
 
 
   public function index(){
-    $bitlyClient = new BitlyClient('d4528ad236dbe8ff010e571c22880d9d1aec93cf');
-    $options = [
-        'longUrl' => 'https://www.facebook.com/app_scoped_user_id/YXNpZADpBWEdFMUFKUGNnUWlHOU94emV1WEVKRlk4d3RyaUJRbFZAoVXZAmMVpNRVM4alJlZAW5PaWJ4enV2SmZAGaWppVEtRQjZALWjZAadC0tWlV2ZAThMRzN4U084YnZANTGhWRWs2NWg3LVo4blA1ZAnl2QlphbkFhSVEZD/',
-        'format' => 'json' // pass json, xml or txt
-    ];
-    $response = $bitlyClient->shorten($options);
-    print_r($response->data->url);
+  require_once('OwlyApi.php');
+  $owly = OwlyApi::factory( array('key' => '{c4pah0tpw68kcwc4sswks4cg03ij385nihn}') );
+  $sourceUrl = 'http://invokemedia.com/';
+  
+  try {
+    $shortenedUrl = $owly->shorten($sourceUrl);
+  } catch(Exception $e) {
+    echo 'Error found in API:' . $e->getMessage() . "<br />/n";
+    $shortenedUrl = "";
+  }
+  echo 'Shortened URL:' . $shortenedUrl . "<br />/n";
+
 }
 
   public function test()

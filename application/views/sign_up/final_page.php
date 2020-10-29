@@ -55,9 +55,9 @@
         </div>
       </div>
     </section>
-    <?php 
+    <?php
+    echo '<input type="hidden" name="inform_leader" id="inform_leader" value="'.$inform_leader.'">';  
       if ($inform_leader) {
-        echo '<input type="hidden" name="inform_leader" id="inform_leader" value="'.$inform_leader.'">'; 
         echo '<input type="hidden" name="leader_id" id="leader_id" value="'.$leader_id.'">'; 
         echo '<input type="hidden" name="request_id" id="request_id" value="'.$request_id.'">'; 
       }
