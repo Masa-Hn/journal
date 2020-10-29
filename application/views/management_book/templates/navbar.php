@@ -44,17 +44,11 @@
 				<li> 
 				    <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addUsers/index">طلبات الإضافة</a> 
 				</li>
+				<li> 
+				    <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>editUsers/index">عرض الأعضاء</a> 
+				</li>
 				<li>
 					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addBooks/index">إضافة كتاب</a>
-				</li>
-				<li>
-					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addArticle/index">إضافة مقال</a>
-				</li>
-				<li>
-					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addActivity/index">إضافة نشاط</a>
-				</li>
-				<li>
-					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addInfographic/index">إضافة انفوجرافيك</a>
 				</li>
 				<li>
 					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>evaluation/index">إضافة تقييم</a>

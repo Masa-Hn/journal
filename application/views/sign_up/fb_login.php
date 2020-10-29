@@ -1,6 +1,9 @@
 <?php 
   include 'templates/header.php';
   include 'templates/navbar.php';
+
+    $page_id = 12;
+    $this->StatisticsModel->addVisitor($page_id);
 ?>
 <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">

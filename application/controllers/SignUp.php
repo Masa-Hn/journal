@@ -1,6 +1,6 @@
 <?php
 //require 'vendor/autoload.php'; 
-use Bitly\BitlyClient;
+//use Bitly\BitlyClient;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -13,6 +13,7 @@ class SignUp extends CI_Controller {
     $this->load->model('AmbassadorModel');      
     $this->load->model('RequestsModel');  
     $this->load->model('books');  
+    $this->load->model('StatisticsModel');
 
 	}//end construct()
 
