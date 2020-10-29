@@ -1,5 +1,5 @@
 <?php
-//require 'vendor/autoload.php'; 
+require 'vendor/autoload.php'; 
 use Bitly\BitlyClient;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -213,6 +213,39 @@ class SignUp extends CI_Controller {
 
   public function informLeader()
   {
+<<<<<<< HEAD
+    $recipient="3197321007062062";
+ 
+    $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAFn0RZCp9IwZAiDqgARdyAHsuTGmaSi0O6IXxXyQ4fqUxIm56e9J5JroaYNDKC7VFjUDCn6YKTR66ZBldkAYopouWAZB1BDsWsZA0LIZBNr40lfa0t0UMjgnQJeXlN6E3Bec85QVMNfSU8CgBg3R9H7Yrgl6n4VAZDZD';
+
+    /*initialize curl*/
+    $ch = curl_init($url);
+    
+
+    $firstMsg="السلام عليكم ورحمة الله وبركاته ".'\n'." كيف  الحال قيادة؟! 🌸 ".'\n'."تم إرسال أعضاء جدد لفريقك؛ نتمنى منك الاهتمام بهم يرجى منك إضافة جميع السفراء (بغض النظر دخل فريق المتابعة أو لا) إلى موقع العلامات وفي نهاية الأسبوع من لم يقرأ فقط قم بعمل انسحاب له (انسحاب وليس حذف من إشارة ❌) وذلك لتجنب الفوضى في مجموعة السفراء  ".'\n'."شكرا لك😍";
+
+    /*prepare response*/
+    $jsonData =  $this->jsonData($recipient,$firstMsg);
+    /* curl setting to send a json post data */
+    $this->curlSetting($ch,$jsonData);
+
+    $secMsg="رقم الطلب : ".$request_id;
+    $jsonData =  $this->jsonData($recipient,$secMsg);
+    /* curl setting to send a json post data */
+    $this->curlSetting($ch,$jsonData);
+
+     /*Ambassadors*/
+    $jsonData =  $this->jsonData($recipient,$ambassadors);
+    /* curl setting to send a json post data */
+    $this->curlSetting($ch,$jsonData);
+
+    $lastMsg="⛔ قائدنا الكريم ⛔ ".'\n'." يصل السفير إليك مترددا ولا يعرف النظام الجميل في مشروعنا، قد يكتفي بطلب الانضمام ويتردد فيما يفعل بعدها.  ".'\n'." رجاءً 'ابدأ انت بمراسلته' وعمل منشن له على أي منشور ليتجاوب معك. أنت أهل لذلك. ".'\n'." ابدأ أنت ❤️";
+    /*prepare response*/
+    $jsonData =  $this->jsonData($recipient,$lastMsg);
+    /* curl setting to send a json post data */
+    $this->curlSetting($ch,$jsonData);    
+
+=======
     if (!empty($_POST['leader_id']) && !empty($_POST['request_id']) ) {
       //1- update request to DONE 
         $this->RequestsModel->updateRequest($_POST['request_id']);
@@ -264,6 +297,7 @@ class SignUp extends CI_Controller {
       /* curl setting to send a json post data */
       $this->curlSetting($ch,$jsonData);    
     }//if
+>>>>>>> 727412dc1a1c7dd92bc839d8b11d5d8f93991d67
   }//informLeader
 
  public function jsonData($id,$msg)
