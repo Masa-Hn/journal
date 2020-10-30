@@ -1,3 +1,7 @@
+<?php 
+    $page_id = 1;
+    $this->StatisticsModel->addVisitor($page_id);
+?>
     <!-- Start Banner Area -->
     <section class="banner-area relative bgImg">
       <div class="container">

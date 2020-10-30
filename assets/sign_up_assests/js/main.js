@@ -1,39 +1,63 @@
 var count=0;
-var base_url=document.getElementById("base_url").value+"SignUp/nextPage?next=";
+//var base_url=document.getElementById("base_url").value+"SignUp/nextPage?next=";
 
 function next(page) {
-	window.location.replace(base_url+page);
+	$.ajax({
+        type: "POST",
+        url:document.getElementById("base_url").value+"SignUp/nextPage",
+        data: {'next':page},
+        success: function(data){
+          $("body").html(data);
+          $("body").css('overflow-y',' auto');
+          $('html, body').animate({ scrollTop: 0 }, 'slow');
+
+
+        }//success
+  });
+  //window.location.replace(base_url+page);
 
 }//next
 
 function nextWithMsg(page,msg){
   var fullMsg;
-  if(page =="fb_login"){
-    fullMsg="هذه الفئة تحتوي على" +  msg + " كتابًا، يمكنك تصفحها لاحقًا واختيار ما يناسبك منها";
 
+  if(page =="activity"){
+    fullMsg="هذه الفئة تحتوي على" +  msg + " كتابًا، يمكنك تصفحها لاحقًا واختيار ما يناسبك منها";
   }
+
   else if (msg==0) {
     fullMsg="اختيار موفق  "
   }
   else if (msg==2) {
     fullMsg="اختيار موفق، يُمكنك سؤال قائدك عنها فور انضمامك"
   }
-  else if(page =="page_5"){
-    fullMsg= "حتى أنا أقوم  "+msg;
+  else if(msg == 3){
+    fullMsg=" حتى أنا أقوم بقرائتها دفعةً واحدة ";
   } 
+  else if(msg == 4){
+    fullMsg= " حتى أنا أقوم بتقسيمها ";
+  }
+  
   Swal.fire({
     title: 'رائـــع',
     text:fullMsg,
     imageUrl:document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
     imageWidth: 300,
     imageAlt: 'Custom image',
-    timer: 4000,
     confirmButtonText: "استمرار ",
     confirmButtonColor:'#9ed16f'
-  }).then(function(){
-    window.location.replace(base_url+page);
-  });  
-}
+  })
+  .then((result) => {
+  if (result.isConfirmed) {
+    next(page);
+  } 
+  else {
+    next(page);
+  }
+});
+
+}//nextWithMsg
+
   function copyCode() {
     var Code =document.getElementById('code');
     var copyText = document.createElement('textarea');
@@ -71,7 +95,7 @@ function checkAnswer() {
         confirmButtonText: "استمرار ",
         confirmButtonColor:'#9ed16f'
       }).then(function(){
-        window.location.replace(base_url+"question_2"); 
+          next('question_2');
       });
     }//if
     else if(document.getElementById('answer').value == "ثلاثين" || document.getElementById('answer').value == "ثلاثون"){
@@ -85,7 +109,7 @@ function checkAnswer() {
         confirmButtonText: "استمرار ",
         confirmButtonColor:'#9ed16f'
       }).then(function(){
-        window.location.replace(base_url+"question_2"); 
+        next('question_2');
       });
     }//elseif
     else{
@@ -114,7 +138,7 @@ function checkAnswer() {
           confirmButtonText: "لنُراجع هذا الجزء معًا ",
           confirmButtonColor:'#9ed16f'
         }).then(function(){
-          window.location.replace(base_url+"page_4"); 
+          next('page_4');
         });
       }
        
@@ -122,17 +146,36 @@ function checkAnswer() {
 
   }//checkAnswer
 
-  function allocateAmbassador(leader_gender){
-    leader_gender =leader_gender;
-    ambassador = JSON.parse(sessionStorage.getItem("ambassador_info"));
 
-    $.ajax({
-      type: "POST",
-      url:document.getElementById("base_url").value+"SignUp/allocateAmbassador",
-      data: {'ambassador':ambassador,'leader_gender': leader_gender},
-      success: function(data){
-        $("body").html(data);
+function question2(msg) {
+  if(msg == 3){
+    fullMsg=" حتى أنا أقوم بقرائتها دفعةً واحدة ";
+  } 
+  else{
+    fullMsg= " حتى أنا أقوم بتقسيمها ";
+  }
+ 
+}
+function allocateAmbassador(leader_gender){
+  leader_gender =leader_gender;
+  ambassador = JSON.parse(sessionStorage.getItem("ambassador_info"));
 
-      }//success
-    });
-  }//allocateAmbassador
+  $.ajax({
+    type: "POST",
+    url:document.getElementById("base_url").value+"SignUp/allocateAmbassador",
+    data: {'ambassador':ambassador,'leader_gender': leader_gender},
+    success: function(data){
+      $("body").html(data);
+
+    }//success
+  });
+}//allocateAmbassador
+
+function informLeader(leader_id,request_id){
+
+  $.ajax({
+    type: "POST",
+    url:document.getElementById("base_url").value+"SignUp/informLeader",
+    data: {'leader_id':leader_id,'request_id': request_id}
+  });
+}//allocateAmbassador
