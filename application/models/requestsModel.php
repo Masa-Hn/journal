@@ -17,6 +17,7 @@ class RequestsModel extends CI_Model {
 
 	//get the none distributed ambassadors
 	public function getNoneDistributedAmbassadors() {
+    
 		$query = "SELECT * FROM ambassador WHERE request_id IS NULL";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
@@ -30,7 +31,7 @@ class RequestsModel extends CI_Model {
 
 	//get the destributed ambassadors for certain request
 	public function getDistributedAmbassadors( $request_id ) {
-		$query = "SELECT * FROM ambassador WHERE request_id =".$request_id;
+		$query = "SELECT * FROM ambassador WHERE request_id =" . $request_id;
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {
@@ -43,6 +44,7 @@ class RequestsModel extends CI_Model {
 
 	//get leader info of a certain request
 	public function getLeaderInfo( $leader_id ) {
+    
 		$query = "SELECT * FROM leader_info WHERE id =".$leader_id;
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
@@ -75,7 +77,7 @@ class RequestsModel extends CI_Model {
 		$conn->close();
 	}
 
-	public function updateReq($id){
+	public function updateReq( $id ) {
 		$query = "UPDATE leader_request SET is_done = 1 WHERE Rid = " . $id;
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
@@ -84,16 +86,17 @@ class RequestsModel extends CI_Model {
 	//end process
 
 	public function get_ambassadors() {
+    
 		$this->db->select( 'id, name, profile_link, gender, is_joined' );
 		$this->db->where( 'is_joined', 0 );
 		$this->db->from( 'ambassador' );
 		$this->db->order_by( 'name', 'DESC' );
 		$query = $this->db->get();
 		return $query;
-
 	}
     
 	public function searchAmbassador( $whereCondition ) {
+    
 		$this->db->select( 'id, name, profile_link, gender, is_joined' );
 		$this->db->where( $whereCondition );
 		$this->db->from( 'ambassador' );
@@ -103,6 +106,7 @@ class RequestsModel extends CI_Model {
 	}
     
 	public function addRequest( $data ) {
+
 		$leader_id = $data[ 'leader_id' ];
 		// $leader_link=$data['leader_link'];
 		// $team_link=$data['team_link'];
@@ -124,14 +128,14 @@ class RequestsModel extends CI_Model {
 	} //addRequest
 
 	public function updateRequest( $id ) {
-        
+
 		$this->db->set( 'is_done', 1, FALSE );
 		$this->db->where( 'Rid', $id );
 		$this->db->update( 'leader_request' );
 	} //updateRequest
 
-	public function getMessID($messenger_id)
-	{
+	public function getMessID($messenger_id) {
+    
 		$this->db->where('messenger_id', $messenger_id);
 		return $this->db->get('leader_info');
 	}//getDate
@@ -152,9 +156,18 @@ class RequestsModel extends CI_Model {
 		} else {
 			return $conn->error;
 		}
-	}//get_data
+	} //get_data
+
+
+	public function update_data( $val, $id ) {
+		$query = "UPDATE ambassador SET join_following_team = " . $val . " WHERE id = " . $id;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		$conn->close();
+	} //update data
 
 	public function selectWithJoin( $table1, $table2, $ON, $whereCondition, $select = '*' ) {
+
 		$this->db->select( $select );
 		$this->db->from( $table1 );
 		$this->db->join( $table2, $ON );
@@ -162,7 +175,8 @@ class RequestsModel extends CI_Model {
 		return $this->db->get();
 	} //selectWithJoin
 
-    public function insertLeaderInfo($leader){
+
+   public function insertLeaderInfo($leader){
 
         $query ="INSERT INTO leader_info (`leader_name`, `leader_link`, `leader_gender`, `team_name`,`team_link`, `leader_email`, `messenger_id`) VALUES ('".$leader[ 'leader_name' ]."','".$leader[ 'leader_link' ]."','".$leader[ 'leader_gender' ]."','".$leader[ 'team_name' ]."','".$leader[ 'team_link' ]."','".$leader[ 'leader_email' ]."','".$leader[ 'messenger_id' ]."')";
 		$conn= $this->connectToDB();
@@ -178,16 +192,17 @@ class RequestsModel extends CI_Model {
 		}
 	}//insertLeaderInfo
     
-	public function updateFullRequest( $leader) {
+	public function updateFullRequest($leader) {
 
-		$query = "UPDATE leader_info SET leader_name='".$leader['leader_name']."' , leader_link='".$leader['leader_link']."', leader_gender='".$leader['leader_gender']."',
-		 team_name='".$leader['team_name']."', team_link='".$leader['team_link']."' WHERE id=".$leader['leader_id'];
+		$query = "UPDATE leader_info SET leader_name='" . $leader[ 'leader_name' ] . "' , leader_link='" . $leader[ 'leader_link' ] . "', leader_gender='" . $leader[ 'leader_gender' ] . "',
+		 team_name='" . $leader[ 'team_name' ] . "', team_link='" . $leader[ 'team_link' ] . "' WHERE id=" . $leader[ 'leader_id' ];
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		$conn->close();
 	} //updatetLeaderInfo
     
 	public function leaderLastRequest( $id ) {
+
 		$query = "SELECT date,is_done FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
@@ -200,6 +215,7 @@ class RequestsModel extends CI_Model {
 	}
 
 	public function searchRequest( $whereCondition ) {
+    
 		$this->db->distinct();
 		$this->db->select( 'Rid, leader_info.leader_gender, leader_link, leader_name, team_name, team_link, date' );
 		$this->db->from( 'leader_request' );
@@ -220,6 +236,7 @@ class RequestsModel extends CI_Model {
 	} //updateLeaderInfo
     
 	public function connectToDB() {
+    
 		$servername = "localhost";
 		$username = "root";
 		$password = "";
