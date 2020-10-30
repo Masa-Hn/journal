@@ -44,31 +44,30 @@ $member=$members->result();
               <div class="slideshow-container" style="width:100%"">
               <table   dir="rtl" style="width:100%;empty-cells: show;">
                 <thead >
-                  <tr >
-                    <th>اسم المستخدم</th>
-                    <th></th>
-                   
-
-                  </tr>
+                      <tr>
+                        <th>اسم المستخدم</th>
+                        <th></th>
+                      </tr>
                 </thead>
+                
                 <tbody >
                   <?php foreach ($member as $m) { ?>
                   
                   <tr  style="background-color: #f2f2f2;">
                     <td  style="width: 50%; vertical-align: top;"><?php echo $m->username ?></td>
                     <td style="width: 50%;">
-             <form  enctype="multipart/form-data" method="post" action="<?=base_url()?>AddUsers/Delete">
-              <input id="name" name="name" type="text"  style="display:none" value="<?php echo $m->username ?>">
-                      <button  id="delete"  name="delete" class="newbutton1" >حذف</button>
-                    </form>
+                         <form  enctype="multipart/form-data" method="post" action="<?=base_url()?>AddUsers/delete">
+                            <input id="name" name="name" type="text"  style="display:none" value="<?php echo $m->username ?>">
+                            <input id="id" name="id" type="text"  style="display:none" value="<?php echo $m->id ?>">
+                            <button  id="delete"  name="delete" class="newbutton1" >حذف</button>
+                         </form>
 
-                      <form  enctype="multipart/form-data" method="post" action="<?=base_url()?>AddUsers/Add">
-                        <input id="name" name="name" type="text"  style="display:none" value="<?php echo $m->username ?>">
-                    <button  id="add"  name="add" class="newbutton" >إضافة</button>
-                  </form>
-                </td>
+                         <form  enctype="multipart/form-data" method="post" action="<?=base_url()?>AddUsers/add">
+                            <input id="name" name="name" type="text"  style="display:none" value="<?php echo $m->username ?>">
+                            <button  id="add"  name="add" class="newbutton" >إضافة</button>
+                         </form>
+                    </td>
                   </tr>
-
                   <tr> 
                     <td></td>
                     <td></td>
@@ -77,6 +76,7 @@ $member=$members->result();
                  
                 </tbody>
               </table>
+
               <p><?php echo $links; ?></p>
               </div>
             </div>

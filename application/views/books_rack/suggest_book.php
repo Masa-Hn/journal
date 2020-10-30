@@ -177,7 +177,7 @@ return flag;
  <div class="padding" id="section-one">
   <div class="container">
 <div class="row">
-          <div class="container-fluid text-center" "> 
+          <div class="container-fluid text-center" > 
  <button class="btn cusBtn " id="save" style="font-size: 25px"  onclick="save()">   حفظ الاقتراح </button>  
   </div>
 </div>

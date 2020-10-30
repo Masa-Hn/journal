@@ -1,3 +1,10 @@
+<?php 
+  include 'templates/header.php';
+  include 'templates/navbar.php';
+
+    $page_id = 11;
+    $this->StatisticsModel->addVisitor($page_id);
+?>
     <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
       <div class="container">
@@ -14,27 +21,27 @@
               <div class="" >
                 <div class="container ">
                   <div class="row text-center">
-                    <div class="col-md-4 col-sm-12 activity-div" onclick="nextWithMsg('fb-login.html',1)">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_1.png" class="activity-div-img"><br>
-                      <h5 class="question" onclick="nextWithMsg('index.html',2)">
+                    <div class="col-md-4 col-sm-12 activity-div">
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_1.png" class="activity-div-img" onclick="nextWithMsg('fb_login',2)"><br>
+                      <h5 class="question">
                         التثقيف بالفيديو  
                       </h5>
                     </div>
-                    <div class="col-md-4 col-sm-12 activity-div" onclick="nextWithMsg('fb-login.html',1)">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_2.png" class="activity-div-img"><br>
-                      <h5 class="question" onclick="nextWithMsg('index.html',2)">
+                    <div class="col-md-4 col-sm-12 activity-div">
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_2.png" class="activity-div-img" onclick="nextWithMsg('fb_login',2)"><br>
+                      <h5 class="question">
                         النقاش المنهجي
                       </h5>
                     </div>
-                    <div class="col-md-4 col-sm-12 activity-div" onclick="nextWithMsg('fb-login.html',1)">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_3.png" class="activity-div-img"><br>
-                      <h5 class="question" onclick="nextWithMsg('index.html',2)">
+                    <div class="col-md-4 col-sm-12 activity-div">
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_3.png" class="activity-div-img" onclick="nextWithMsg('fb_login',2)"><br>
+                      <h5 class="question">
                         كتابة المقالات
                       </h5>
                     </div>
-                    <div class="col-md-4 col-sm-12 activity-div" onclick="nextWithMsg('fb-login.html',1)">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_4.png" class="activity-div-img"><br>
-                      <h5 class="question" onclick="nextWithMsg('index.html',2)">
+                    <div class="col-md-4 col-sm-12 activity-div">
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_4.png" class="activity-div-img" onclick="nextWithMsg('fb_login',2)"><br>
+                      <h5 class="question">
                         الانفوجرافيك والتصميم
                       </h5>
                     </div>
@@ -50,3 +57,4 @@
       </div>
     </section>
     <!-- End Banner Area -->
+<?php include 'templates/footer.php';?>
