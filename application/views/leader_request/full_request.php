@@ -40,6 +40,7 @@
 						<div class="form-group">
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" placeholder="مثال: https://www.facebook.com/example" class="form-control" required="required">
+							
 						</div>
 						<div class="form-group">
 							<label for="leaderGender" class="form-label"> جنسك: </label>
@@ -69,11 +70,32 @@
 						</div>
 
 						<div class="form-group">
-							<button type="submit" name="submit" class="btn btn-block" id="sub-btn">رفع الطلب</button>
+							<button type="submit" name="submit" class="btn btn-block" id="sub-btn" style="display: none;">رفع الطلب</button>
 						</div>
 
 					</form>
-
+<button name="check" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
+<script type="text/javascript">
+function doesFileExist(urlToFile) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', urlToFile);
+    xhr.send();
+     
+    if (xhr.status == "404") {
+        return false;
+    } else {
+        return true;
+    }
+}
+	function check()
+		{
+var URL = document.getElementById( 'leaderLink' ).value;
+var win = window.open(URL);
+ var result = doesFileExist(URL);
+    if (result)
+		document.getElementById('sub-btn').style.display="block";
+		}
+</script>
 				</div>
 
 				<div class="modal-footer">
@@ -110,6 +132,8 @@
 				return false;
 			} );
 		} );
+
+
 	</script>
 </body>
 </html>

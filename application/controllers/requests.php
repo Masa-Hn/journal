@@ -18,7 +18,7 @@ class Requests extends CI_Controller {
 			$this->load->view( 'leader_request/request' );
 			$this->load->view( 'leader_request/edit_info' );
 		} else {
-			$this->load->view( 'leader_request/full_request' );
+ 			$this->load->view( 'leader_request/full_request' );
 		}
 	}
 
