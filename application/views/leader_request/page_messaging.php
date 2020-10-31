@@ -1,12 +1,13 @@
 <body>
 
-	<!-- Trigger the modal with a button -->
+	<!-- Trigger the modal with a button --
 	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#reqModal" id="reqModalBtn">
 	<i class="fa fa-user-plus" aria-hidden="true"></i>
      طلب سفراء جدد
-</button>
+</button>-->
 
-
+<a href="#"  data-toggle="modal" data-target="#reqModal" id="reqModalBtn"><img src="<?php echo base_url() ?>admin/img/refillicon.png" width="30px"> 
+تأكيد حساب المسنجر للتواصل</a>
 
 	<!-- Modal -->
 	<div id="reqModal" class="modal fade" role="dialog">
@@ -16,27 +17,27 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title"> مراسلة صفحة القادة</h1>
+					<h4 class="modal-title"> مراسلة صفحة القادة</h4>
 				</div>
 
 				<div class="modal-body">
-					<h3 class="body-header">
+					<h5 class="body-header">
 						قم بنسخ بريدك الألكتروني التالي
-					</h3>
-					<h3>
+					</h5>
+					<h5>
 						<?php echo $_GET['email'];?>
-					</h3>
-					<h3>
+					</h5>
+					<h5>
 						وأرسله للصفحة من خلال أيقونة الماسنجر أسفل يسار الصفحة
 
-					</h3>
+					</h5>
 					
 					<div id="fb-root"></div>
 
 				    <!-- Chat Plugin code -->
 				    <div class="fb-customerchat"
 				        attribution=setup_tool
-				        page_id="1401900829940429"
+				        page_id="103862297776303"
 				      theme_color="#0A7CFF"
 				      logged_in_greeting="Welcome to Osboha 180"
 				      logged_out_greeting="Welcome to Osboha 180">

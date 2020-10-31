@@ -29,7 +29,7 @@
 </style>
 <body>
 
-	<div class="container-fluid px-1 py-5 mx-auto">
+	<div class="container-fluid px-1 py-5 mx-auto" dir="rtl">
 		<div class="row d-flex justify-content-center">
 			
 				<?php

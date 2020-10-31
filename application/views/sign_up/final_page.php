@@ -1,37 +1,11 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <title>Osboha 180</title>
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/bootstrap.css">
-  <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/main.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<?php 
+  include 'templates/header.php';
+  include 'templates/navbar.php';
 
-</head>
-<style type="text/css">
-  .final-page{
-    margin: 2%;
-  }
-</style>
-<body>
-<input type="hidden" name="base_url" id="base_url" value="<?php echo base_url()?>">
-  <div class="oz-body-wrap">
-    <!-- Start Header Area -->
-    <header class="default-header">
-      <div class="container-fluid">
-        <div class="header-wrap">
-          <div class="header-top d-flex justify-content-between align-items-center">
-            <div class="logo">
-              <a href="<?php echo base_url()?>SignUp"><img src="<?php echo base_url()?>assets/sign_up_assests/img/logo.png" alt=""></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <!-- End Header Area -->
+    $page_id = 13;
+    $this->StatisticsModel->addVisitor($page_id);
+?>
+
 <!--Start Banner Area -->
     <section class="banner-area relative bgImg2">
       <div class="container">
@@ -84,8 +58,23 @@
         </div>
       </div>
     </section>
+    <?php
+    echo '<input type="hidden" name="inform_leader" id="inform_leader" value="'.$inform_leader.'">';  
+      if ($inform_leader) {
+        echo '<input type="hidden" name="leader_id" id="leader_id" value="'.$leader_id.'">'; 
+        echo '<input type="hidden" name="request_id" id="request_id" value="'.$request_id.'">'; 
+      }
+    ?>
 <!-- End Banner Area  -->
- </div>
-</body>
-<script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/main.js"></script>
-</html>
+
+<?php include 'templates/footer.php';?>
+<script type="text/javascript">
+  $(document).ready(function(){
+    if(document.getElementById('inform_leader').value){
+      leader_id=document.getElementById('leader_id').value;
+      request_id=document.getElementById('request_id').value;
+      informLeader(leader_id,request_id);
+    }
+  });
+
+</script>

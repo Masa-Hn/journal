@@ -1,3 +1,10 @@
+<?php 
+  include 'templates/header.php';
+  include 'templates/navbar.php';
+ 
+    $page_id = 8;
+    $this->StatisticsModel->addVisitor($page_id);
+?>
 <style type="text/css">
   ul{
     cursor:pointer;
@@ -43,3 +50,4 @@
       </div>
     </section>
     <!-- End Banner Area -->
+<?php include 'templates/footer.php';?>
