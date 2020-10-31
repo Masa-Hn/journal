@@ -70,9 +70,7 @@
 								<td>
 									<?php echo ($amb['gender'] == 'female' || $amb['gender'] == 'Female') ? "أنثى" :  "ذكر"; ?>
 								</td>
-								<td><input type="checkbox" name="join" <?php if ($amb[ 'join_following_team']==1 ) echo "checked";?> id="
-									<?php echo $id;?>" onchange="cTrig('
-									<?php echo $id;?>');"></td>
+								<td><input type="checkbox" name="join" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="<?php echo $id;?>" onchange="cTrig('<?php echo $id;?>');"></td>
 							</tr>
 							<?php
 
@@ -96,66 +94,34 @@
 	<script>
 		function cTrig( id ) {
 			if ( document.getElementById( id ).checked == true ) {
-				swal( {
-						icon: 'warning',
-						title: 'تأكيد الانضمام',
-						text: ' هل أنت متأكد من أن السفير انضم لمجموعة المتابعة؟',
-						type: "warning",
-						showConfirmButton: true,
-						showCloseButton: true,
-						showCancelButton: true,
-						focusConfirm: false,
-						confirmButtonText: 'نعم',
-						cancelButtonText: 'إلغاء',
-						confirmButtonColor: "#205d67",
-						closeOnConfirm: false,
-						closeOnCancel: true
-					},
-					function ( isConfirm ) {
-
-						if ( isConfirm ) {
-							var base_url = "<?php echo base_url()?>";
-
-							$.ajax( {
+				var success = confirm("هل أنت متأكد من أن السفير انضم لمجموعة المتابعة؟");
+				var base_url = "<?php echo base_url()?>";
+				
+				if(success == true){
+					$.ajax( {
 								url: base_url + 'newMembersList/joined_ambassador',
 								type: 'POST',
 								data: {
-									checked: id
+									Checked: id
 								},
 								dataType: 'text',
 								success: function () {
 
-									window.setTimeout( function () {}, 3000 );
-									location.reload();
+								/*	window.setTimeout( function () {}, 3000 );
+									location.reload();*/
 								},
 								error: function ( error ) {
 									console.log( error );
 								}
 							} );
-						} else {
-							console.log( "canceled" );
-						}
-					} );
+				}else{
+					console.log( "canceled" );
+				}
 			} else {
-				swal( {
-						icon: 'warning',
-						title: 'تأكيد الانضمام',
-						text: ' هل أنت متأكد من أن السفير ليس موجود في مجموعة المتابعة؟',
-						type: "warning",
-						showConfirmButton: true,
-						showCloseButton: true,
-						showCancelButton: true,
-						focusConfirm: false,
-						confirmButtonText: 'نعم',
-						cancelButtonText: 'إلغاء',
-						confirmButtonColor: "#205d67",
-						closeOnConfirm: false,
-						closeOnCancel: true
-					},
-					function ( isConfirm ) {
-
-						if ( isConfirm ) {
-							var base_url = "<?php echo base_url()?>";
+				var success = confirm("هل أنت متأكد من أن السفير ليس موجود في مجموعة المتابعة؟");
+				
+				if(success == true){
+					var base_url = "<?php echo base_url()?>";
 
 							$.ajax( {
 								url: base_url + 'newMembersList/joined_ambassador',
@@ -166,17 +132,16 @@
 								dataType: 'text',
 								success: function () {
 
-									window.setTimeout( function () {}, 3000 );
-									location.reload();
+								/*	window.setTimeout( function () {}, 3000 );
+									location.reload();*/
 								},
 								error: function ( error ) {
 									console.log( error );
 								}
 							} );
-						} else {
+				} else {
 							console.log( "canceled" );
 						}
-					} );
 			}
 		}
 	</script>

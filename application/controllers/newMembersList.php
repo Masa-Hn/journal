@@ -25,8 +25,8 @@ class NewMembersList extends CI_Controller {
 	}
 
 	function joined_ambassador() {
-		if ( isset( $_POST[ 'checked' ] ) ) {
-			$id = $_POST[ 'checked' ];
+		if ( isset( $_POST[ 'Checked' ] ) ) {
+			$id = $_POST[ 'Checked' ];
 			$this->requestsModel->update_data( 1, $id );
 
 		} else if ( isset( $_POST[ 'notChecked' ] ) ) {
