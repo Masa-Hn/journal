@@ -49,6 +49,9 @@
 
 				<div class="modal-body">
 
+					<?php
+					if ( $ambassadors->num_rows > 0 ) {
+						?>
 					<table class="table">
 						<thead>
 							<th>اسم السفير</th>
@@ -57,10 +60,9 @@
 						</thead>
 						<tbody>
 							<?php
-							if ( $ambassadors->num_rows > 0 ) {
-								while ( $amb = $ambassadors->fetch_array( MYSQLI_ASSOC ) ) {
-									$id = $amb[ 'id' ];
-									?>
+							while ( $amb = $ambassadors->fetch_array( MYSQLI_ASSOC ) ) {
+								$id = $amb[ 'id' ];
+								?>
 							<tr>
 								<td><i class="fa fa-external-link" aria-hidden="true"></i>
 									<a class="link" href="<?php echo $amb['profile_link'];?>">
@@ -70,15 +72,22 @@
 								<td>
 									<?php echo ($amb['gender'] == 'female' || $amb['gender'] == 'Female') ? "أنثى" :  "ذكر"; ?>
 								</td>
-								<td><input type="checkbox" name="join" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="<?php echo $id;?>" onchange="cTrig('<?php echo $id;?>');"></td>
+								<td><input type="checkbox" name="join" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="
+									<?php echo $id;?>" onchange="cTrig('
+									<?php echo $id;?>');"></td>
 							</tr>
 							<?php
 
 							}
-							}
+
 							?>
 						</tbody>
 					</table>
+					<?php
+					} else {
+						echo "<div class='alert alert-danger' style='font-size:2vw; font-weight:bold; text-align:center;'>" . "لا يوجد أعضاء جدد لديك" . "</div>";
+					}
+					?>
 				</div>
 
 				<div class="modal-footer">
