@@ -56,23 +56,21 @@ public function index() {
 function edit(){
 		  $teams = $_POST['team'];
 		  $str="";
-		$id=$this->input->post('id');
+		  $id=$this->input->post('id');
 		 if(!empty($teams)) 
 		  {
-		    $N = count($teams);
-		    for($i=0; $i < $N; $i++)
-		    {
-		    	if ($i!=$N-1)
-		      $str=$str.$teams[$i]."+";
-		  if ($i==$N-1)
-		      $str=$str.$teams[$i];
-
-		    }
+			    $N = count($teams);
+			    for($i=0; $i < $N; $i++)
+			    {
+			    	if ($i!=$N-1)
+			      $str=$str.$teams[$i]."+";
+			  		if ($i==$N-1)
+			      $str=$str.$teams[$i];
+		   		 }
 			mb_substr($str ,0, -1);		
 		  }
 		  $data['team']=$str;
 		  $this->GeneralModel->update($data,$id,'users');
-
 		redirect(base_url().'EditUsers/index');
 				}
 

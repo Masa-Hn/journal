@@ -40,8 +40,10 @@
 						<div class="form-group">
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" placeholder="مثال: https://www.facebook.com/example" class="form-control" required="required">
-							
-						</div>
+
+						</div>						
+						 <label name="msg-ch" id="msg-ch"  style="display: none; color: red" > الرجاء كتابة الرابط </label>
+
 						<div class="form-group">
 							<label for="leaderGender" class="form-label"> جنسك: </label>
 							<select name="leaderGender" id="leaderGender" class="form-control">
@@ -74,26 +76,27 @@
 						</div>
 
 					</form>
-<button name="check" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
+<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
+ <input type="checkbox" id="check" name="check"  onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label>
 <script type="text/javascript">
-function doesFileExist(urlToFile) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', urlToFile);
-    xhr.send();
-     
-    if (xhr.status == "404") {
-        return false;
-    } else {
-        return true;
-    }
-}
+
 	function check()
 		{
 var URL = document.getElementById( 'leaderLink' ).value;
+if (URL=="")
+	document.getElementById('msg-ch').style.display="block";
+else
 var win = window.open(URL);
- var result = doesFileExist(URL);
-    if (result)
-		document.getElementById('sub-btn').style.display="block";
+    		}
+		function change_check()
+		{
+			ch= document.getElementById('check');
+			sb=document.getElementById('sub-btn');
+			if (ch.checked==true)
+				document.getElementById('sub-btn').style.display="block";
+			else
+				document.getElementById('sub-btn').style.display="none";
+
 		}
 </script>
 				</div>
