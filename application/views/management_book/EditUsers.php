@@ -13,7 +13,8 @@
   text-decoration: none;
   outline: none;
   color: #fff;
-background-color: #A52A2A;
+  border: solid 3px #A52A2A;
+  background-color: #A52A2A;
   border-radius: 15px;
   float: right;
 }
@@ -42,8 +43,8 @@ $member=$members->result();
     <div class="row d-flex justify-content-center">
         <div class="col-xl-5 col-lg-6 col-md-7">
             <div class="card b-0" >
-              <div class="slideshow-container" style="width:100%"">
-              <table   dir="rtl" style="width:100%;empty-cells: show;">
+              <div class="slideshow-container" style="width:100%">
+              <table dir="rtl" style="width:100%;empty-cells: show;">
                 <thead >
                       <tr>
                         <th>اسم المستخدم</th>
@@ -51,22 +52,22 @@ $member=$members->result();
                       </tr>
                 </thead>
                 
-                <tbody >
-                  <?php foreach ($member as $m) { ?>
-                  
-                  <tr   style="background-color: #f2f2f2;">
-                    <td  style="width: 30%;vertical-align: top;"><?php echo $m->username ?></td>
-                    <td style="width: 70%; ">
-                        
-                          <button  id="edit"  name="edit" class="newbutton" onclick="edit(<?php echo $m->id ?>)">تعديل الصلاحية</button>
-                         
-                            <form  enctype="multipart/form-data"  method="post" action="<?=base_url()?>EditUsers/delete" >
-                            <input id="name" name="name" type="text"  style="display:none" value="<?php echo $m->username ?>">
-                            <input id="id" name="id" type="text"  style="display:none" value="<?php echo $m->id ?>">
-                            <button  id="delete"  name="delete" class="newbutton1"  >حذف العضو</button>
-                         </form>
-                    </td>
-                  </tr>
+                <tbody>
+                    <?php foreach ($member as $m) { ?>
+
+                    <tr style="background-color: #f2f2f2;">
+                        <td  style="width: 30%;vertical-align: top;"><?php echo $m->username ?></td>
+                        <td style="width: 70%; ">
+
+                            <button id="edit" name="edit" class="newbutton" onclick="edit(<?php echo $m->id ?>)">تعديل</button>
+
+                            <form enctype="multipart/form-data"  method="post" action="<?=base_url()?>EditUsers/delete" >
+                                <input id="name" name="name" type="text" style="display:none" value="<?php echo $m->username ?>">
+                                <input id="id" name="id" type="text" style="display:none" value="<?php echo $m->id ?>">
+                                <button  id="delete" name="delete" class="newbutton1"  >حذف العضو</button>
+                            </form>
+                        </td>
+                    </tr>
                 
                   <tr style="background-color: #FFFACD; ">
                     <td> </td>

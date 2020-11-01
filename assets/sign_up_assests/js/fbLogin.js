@@ -46,7 +46,7 @@
 
 window.fbAsyncInit = function() {
     FB.init({
-      appId      : '1186653575034058',
+      appId      : '423417075295764',
       cookie     : true,                     // Enable cookies to allow the server to access the session.
       xfbml      : true,                     // Parse social plugins on this webpage.
       version    : 'v8.0' 
@@ -80,7 +80,7 @@ function fb_login(){
 
         }
     }, {
-        scope: 'public_profile,email'
+        scope: 'public_profile,email,user_gender,user_link'
     });
 }
 (function() {

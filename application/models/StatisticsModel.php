@@ -12,7 +12,7 @@ public function incrementVisitors($page_id)
 public function retrieveVisitor($ip_add, $page_id){
 	$this->db->select('*');
 	$this->db->from('statistics');
-	$where = 'ip_address = "'.$ip_add.'" AND page_id = '.$page_id. ' AND date > CURDATE()';
+	$where = 'ip_address = "'.$ip_add.'" AND page_id = '.$page_id. ' AND date >= CURDATE()';
     $this->db->where($where);
 	
 	return $this->db->get();
@@ -46,7 +46,7 @@ function addVisitor($page_id){
 		
 	$visitor_ip = $_SERVER['REMOTE_ADDR'];
 	$qry = $this->retrieveVisitor($visitor_ip, $page_id);
-
+	$res = $qry->row();
 	if($qry->num_rows() == 0){
 		$visitor['ip_address'] = $visitor_ip;
 		$visitor['page_id'] = $page_id;

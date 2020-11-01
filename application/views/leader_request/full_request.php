@@ -26,8 +26,8 @@
 					<form method="post" enctype="multipart/form-data">
 						<?php
 						//to be taken from osboha website
-						$leaderName = "asmaa";
-						$teamLink = "http://facebook.com/asmaa.99";
+						$leaderName = $_GET['name'];
+						$teamLink = "http://facebook.com/group/";
 						$teamName = "11";
 						$currentTeamCount = 20;
 

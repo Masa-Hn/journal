@@ -17,13 +17,13 @@
 	<nav class="navbar navbar-expand-lg navbar-light" dir="ltr" style="font-family: 'Tajawal', sans-serif;font-size:1.1em">
 
 		<a class="navbar-brand" href="#">
-        <img src="<?php echo base_url()?>assets/img/logo_2.png" height="45">
-    </a>
+            <img src="<?php echo base_url()?>assets/img/logo_2.png" height="45">
+        </a>
 
 
 		<button class="navbar-toggler right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
 
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup" dir="rtl">
@@ -41,17 +41,14 @@
 
 					if ( in_array( "1", $teamSplitted ) ) {
 						?>
+				<li> 
+				    <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addUsers/index">طلبات الإضافة</a> 
+				</li>
+				<li> 
+				    <a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>editUsers/index">عرض الأعضاء</a> 
+				</li>
 				<li>
 					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addBooks/index">إضافة كتاب</a>
-				</li>
-				<li>
-					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addArticle/index">إضافة مقال</a>
-				</li>
-				<li>
-					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addActivity/index">إضافة نشاط</a>
-				</li>
-				<li>
-					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>addInfographic/index">إضافة انفوجرافيك</a>
 				</li>
 				<li>
 					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>evaluation/index">إضافة تقييم</a>
