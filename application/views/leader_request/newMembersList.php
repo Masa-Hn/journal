@@ -36,6 +36,8 @@
 </button>
 
 
+
+
 	<!-- Modal -->
 	<div id="reqModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -48,10 +50,10 @@
 				</div>
 
 				<div class="modal-body">
-
 					<?php
-					if ( $ambassadors->num_rows > 0 ) {
-						?>
+					if ( empty( $info ) == true ) {
+						if ( $ambassadors->num_rows > 0 ) {
+							?>
 					<table class="table">
 						<thead>
 							<th>اسم السفير</th>
@@ -73,8 +75,7 @@
 									<?php echo ($amb['gender'] == 'female' || $amb['gender'] == 'Female') ? "أنثى" :  "ذكر"; ?>
 								</td>
 								<td><input type="checkbox" name="join" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="
-									<?php echo $id;?>" onchange="cTrig('
-									<?php echo $id;?>');"></td>
+									<?php echo $id;?>" onchange="cTrig('<?php echo $id;?>');"></td>
 							</tr>
 							<?php
 
@@ -87,6 +88,9 @@
 					} else {
 						echo "<div class='alert alert-danger' style='font-size:2vw; font-weight:bold; text-align:center;'>" . "لا يوجد أعضاء جدد لديك" . "</div>";
 					}
+					} else {
+						echo "<div class='alert alert-danger' style='font-size:2vw; font-weight:bold; text-align:center;'>" . $info . "</div>";
+					}
 					?>
 				</div>
 
@@ -97,60 +101,57 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet"/>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.min.js"></script>
-	<script>
-		function cTrig( id ) {
-			if ( document.getElementById( id ).checked == true ) {
-				var success = confirm("هل أنت متأكد من أن السفير انضم لمجموعة المتابعة؟");
+	<script type="text/javascript">
+		function cTrig(id) {
+			if ( document.getElementById(id).checked == true ) {
+				var success = confirm( "هل أنت متأكد من أن السفير انضم لمجموعة المتابعة؟" );
 				var base_url = "<?php echo base_url()?>";
-				
-				if(success == true){
-					$.ajax( {
-								url: base_url + 'newMembersList/joined_ambassador',
-								type: 'POST',
-								data: {
-									Checked: id
-								},
-								dataType: 'text',
-								success: function () {
 
-								/*	window.setTimeout( function () {}, 3000 );
-									location.reload();*/
-								},
-								error: function ( error ) {
-									console.log( error );
-								}
-							} );
-				}else{
+				if ( success == true ) {
+					$.ajax( {
+						url: base_url + 'newMembersList/joined_ambassador',
+						type: 'POST',
+						data: {
+							Checked: id
+						},
+						dataType: 'text',
+						success: function () {
+
+							/*	window.setTimeout( function () {}, 3000 );
+								location.reload();*/
+						},
+						error: function ( error ) {
+							console.log( error );
+						}
+					} );
+				} else {
 					console.log( "canceled" );
 				}
 			} else {
-				var success = confirm("هل أنت متأكد من أن السفير ليس موجود في مجموعة المتابعة؟");
-				
-				if(success == true){
+				var success = confirm( "هل أنت متأكد من أن السفير ليس موجود في مجموعة المتابعة؟" );
+
+				if ( success == true ) {
 					var base_url = "<?php echo base_url()?>";
 
-							$.ajax( {
-								url: base_url + 'newMembersList/joined_ambassador',
-								type: 'POST',
-								data: {
-									notChecked: id
-								},
-								dataType: 'text',
-								success: function () {
+					$.ajax( {
+						url: base_url + 'newMembersList/joined_ambassador',
+						type: 'POST',
+						data: {
+							notChecked: id
+						},
+						dataType: 'text',
+						success: function () {
 
-								/*	window.setTimeout( function () {}, 3000 );
-									location.reload();*/
-								},
-								error: function ( error ) {
-									console.log( error );
-								}
-							} );
-				} else {
-							console.log( "canceled" );
+							/*	window.setTimeout( function () {}, 3000 );
+								location.reload();*/
+						},
+						error: function ( error ) {
+							console.log( error );
 						}
+					} );
+				} else {
+					console.log( "canceled" );
+				}
 			}
 		}
 	</script>
