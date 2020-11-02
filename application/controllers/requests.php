@@ -13,6 +13,7 @@ class Requests extends CI_Controller {
         
 		$this->load->view( 'leader_request/header' );
 		$regBefore = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info' );
+
 		if($regBefore->num_rows > 0){
 			$info = $this->requestsModel->get_info($_GET[ 'email' ])->fetch_assoc();
             
