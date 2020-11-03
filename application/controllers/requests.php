@@ -146,7 +146,7 @@ class Requests extends CI_Controller {
 			while($amb =  $noneDistributedAmbassadors->fetch_array(MYSQLI_ASSOC)) {
 				if ( $num_of_members != 0 ) {
 
-					if ( ( $request['gender'] == $amb['gender'] || $request['gender'] == 'any' ) && ( $leader['leader_gender'] == $amb['leader_gender'] ) ) {
+					if ( ( $request['gender'] == $amb['gender'] || $request['gender'] == 'any' ) && ( $leader['leader_gender'] == $amb['leader_gender'] || $leader['leader_gender'] == 'any') ) {
 
 						$this->requestsModel->updateAmbassador( $amb['id'], $requestID );
 						$num_of_members--;
