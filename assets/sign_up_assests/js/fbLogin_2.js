@@ -69,14 +69,15 @@ function fb_login(){
               {"fields":"id,name,email,gender,link"},
               function(response) {
                 ambassador = {name:response.name, email:response.email,gender:response.gender,profile_link:response.link,fb_id:response.id};
-                
-                document.getElementById("fbLink").setAttribute('href',response.link);
-                document.getElementById("name").innerHTML =response.name;
-                document.getElementById("email").innerHTML ="Your email:  " +response.email;
-                document.getElementById("gender").innerHTML ="Your gender: " +response.gender;
-                document.getElementById("userfbLink").setAttribute('href',response.link);
-                document.getElementById("1").style.display='none';
-                document.getElementById("2").style.display='block';
+                $.ajax({
+                  type: "POST",
+                  url:document.getElementById("base_url").value+"SignUp/allocateAmbassador",
+                  data: {'ambassador':ambassador,'leader_gender': 'any'},
+                  success: function(data){
+                    $("body").html(data);
+
+                  }//success
+                });
                 // sessionStorage.setItem("ambassador_info", JSON.stringify(ambassador));
                 // window.location.replace(document.getElementById("base_url").value+"SignUp/checkAmbassador?fb_id="+response.id);
               }
