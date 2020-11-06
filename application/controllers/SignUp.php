@@ -95,7 +95,8 @@ class SignUp extends CI_Controller {
         $request=$this->SignUpModel->getRequestInfo($result->request_id);
         $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
         $informLeader=false;
-        $this->informambassador($leader_info,$result->request_id,$informLeader,$request->leader_id);  
+        $ambassador=$this->AmbassadorModel->getByRequestId($result->request_id);
+        $this->informambassador($ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);  
       }
       
     }
@@ -205,16 +206,18 @@ class SignUp extends CI_Controller {
       }//if
 
     //4- load view to inform ambassador [FINAL STEP]
-      $this->informambassador($leader_info,$request_id,$informLeader,$leader_id);   
+      $ambassadorForTest=$this->AmbassadorModel->getByRequestId($request_id);
+      $this->informambassador($ambassadorForTest,$leader_info,$request_id,$informLeader,$leader_id);   
   }//checkout
 
-  public function informambassador($leader_info,$request_id,$informLeader,$leader_id)
+  public function informambassador($ambassador,$leader_info,$request_id,$informLeader,$leader_id)
   {
     $team_info['leader_info']=$leader_info;
     $team_info['request_id']=$request_id;
     $team_info['inform_leader']=$informLeader;
     $team_info['leader_id']=$leader_id;
-    $data = $this->load->view('sign_up/final_page',$team_info);
+    $team_info['ambassador']=$ambassador;
+    $data = $this->load->view('sign_up/final_page_info',$team_info);
 
     return $data;
     
