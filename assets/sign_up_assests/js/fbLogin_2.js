@@ -69,7 +69,15 @@ function fb_login(){
               {"fields":"id,name,email,gender,link"},
               function(response) {
                 ambassador = {name:response.name, email:response.email,gender:response.gender,profile_link:response.link,fb_id:response.id};
-              
+                $.ajax({
+                  type: "POST",
+                  url:document.getElementById("base_url").value+"SignUp/allocateAmbassador",
+                  data: {'ambassador':ambassador,'leader_gender': 'any'},
+                  success: function(data){
+                    $("body").html(data);
+
+                  }//success
+                });
                 // sessionStorage.setItem("ambassador_info", JSON.stringify(ambassador));
                 // window.location.replace(document.getElementById("base_url").value+"SignUp/checkAmbassador?fb_id="+response.id);
               }
