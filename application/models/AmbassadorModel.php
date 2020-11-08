@@ -18,7 +18,7 @@ class AmbassadorModel extends CI_Model {
 
 	public function getByRequestId($request_id)
 	{
-		$this->db->select('name,profile_link,request_id');
+		$this->db->select('name,profile_link,request_id,gender');
     	$this->db->from('ambassador');
     	$this->db->where('request_id =',$request_id);
     	return $this->db->get()->result();
