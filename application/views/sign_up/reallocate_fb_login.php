@@ -1,9 +1,6 @@
 <?php 
   include 'templates/header.php';
   include 'templates/navbar.php';
-
-    $page_id = 12;
-    $this->StatisticsModel->addVisitor($page_id);
 ?>
 
 
@@ -84,5 +81,5 @@
 <!-- Load the JS SDK asynchronously -->
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </body>
-<script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/fbLogin.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/reallocateLogin.js"></script>
 <?php include 'templates/footer.php';?>
