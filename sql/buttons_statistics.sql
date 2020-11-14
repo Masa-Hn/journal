@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2020 at 10:18 PM
+-- Generation Time: Nov 14, 2020 at 10:17 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -24,12 +24,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pages`
+-- Table structure for table `buttons_statistics`
 --
 
-CREATE TABLE `pages` (
+CREATE TABLE `buttons_statistics` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL
+  `ip_address` varchar(255) NOT NULL,
+  `code_button` tinyint(1) NOT NULL DEFAULT 0,
+  `team_link_button` tinyint(1) NOT NULL DEFAULT 0,
+  `leader_link_button` tinyint(1) NOT NULL DEFAULT 0,
+  `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -37,9 +41,9 @@ CREATE TABLE `pages` (
 --
 
 --
--- Indexes for table `pages`
+-- Indexes for table `buttons_statistics`
 --
-ALTER TABLE `pages`
+ALTER TABLE `buttons_statistics`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -47,9 +51,9 @@ ALTER TABLE `pages`
 --
 
 --
--- AUTO_INCREMENT for table `pages`
+-- AUTO_INCREMENT for table `buttons_statistics`
 --
-ALTER TABLE `pages`
+ALTER TABLE `buttons_statistics`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
