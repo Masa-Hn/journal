@@ -8,6 +8,7 @@
 
 
 
+
 	<!-- Modal -->
 	<div id="reqModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -26,7 +27,7 @@
 					<form method="post" enctype="multipart/form-data">
 						<?php
 						//to be taken from osboha website
-						$leaderName = $_GET['name'];
+						$leaderName = $_GET[ 'name' ];
 						$teamLink = "http://facebook.com/group/";
 						$teamName = "11";
 						$currentTeamCount = 20;
@@ -40,7 +41,7 @@
 						<div class="form-group">
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" placeholder="مثال: https://www.facebook.com/example" class="form-control" required="required">
-							
+
 						</div>
 						<div class="form-group">
 							<label for="leaderGender" class="form-label"> جنسك: </label>
@@ -74,33 +75,33 @@
 						</div>
 
 					</form>
-<button name="check" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
-<script type="text/javascript">
-function doesFileExist(urlToFile) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', urlToFile);
-    xhr.send();
-     
-    if (xhr.status == "404") {
-        return false;
-    } else {
-        return true;
-    }
-}
-	function check()
-		{
-var URL = document.getElementById( 'leaderLink' ).value;
-var win = window.open(URL);
- var result = doesFileExist(URL);
-    if (result)
-		document.getElementById('sub-btn').style.display="block";
-		}
-</script>
+					<button name="check" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
+					<script type="text/javascript">
+						function doesFileExist( urlToFile ) {
+							var xhr = new XMLHttpRequest();
+							xhr.open( 'HEAD', urlToFile );
+							xhr.send();
+
+							if ( xhr.status == "404" ) {
+								return false;
+							} else {
+								return true;
+							}
+						}
+
+						function check() {
+							var URL = document.getElementById( 'leaderLink' ).value;
+							var win = window.open( URL );
+							var result = doesFileExist( URL );
+							if ( result )
+								document.getElementById( 'sub-btn' ).style.display = "block";
+						}
+					</script>
 				</div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق </button>
-			</div>
+				</div>
 
 			</div>
 		</div>
@@ -120,7 +121,7 @@ var win = window.open(URL);
 						leaderGender: $( "#leaderGender" ).val(),
 						teamLink: $( "#teamLink" ).val(),
 						teamName: $( "#teamName" ).val(),
-						currentTeamCount: $( "#currentTeamCount").val(),
+						currentTeamCount: $( "#currentTeamCount" ).val(),
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
 
@@ -132,8 +133,6 @@ var win = window.open(URL);
 				return false;
 			} );
 		} );
-
-
 	</script>
 </body>
 </html>
