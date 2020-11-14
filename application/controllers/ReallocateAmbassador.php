@@ -25,7 +25,9 @@ class ReallocateAmbassador extends CI_Controller {
     $reallocate=false;
     $result=$this->AmbassadorModel->checkAmbassador($_GET['fb_id']);
     if (count((array)$result) == 0 ){
-        //not registered
+      $url=base_url()."SignUp/";
+      header('Location: '.$url);
+      exit();
 
     }//if
     else{

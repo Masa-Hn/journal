@@ -1,5 +1,5 @@
 <style type="text/css">
-  #code{
+  #join{
     margin-bottom: 2%;
   }
   @media (min-width: 576px)
@@ -23,7 +23,7 @@
               <h1>
                  نظرا لزيادة عدد الانضمام اليومي للقراء فقد نفذت الأفرقة المخصصة للقراء.
               </h1>
-              <a href="<?php echo base_url()?>" class="genric-btn primary circle arrow" id="code">
+              <a href="https://www.facebook.com/taheelofosboha/" class="genric-btn primary circle arrow" id="join" target="_blank">
                 طلب الانضمام اليدوي
               </a>
               <p style="color: red">

@@ -2,7 +2,7 @@
 <input type="hidden" name="base_url" id="base_url" value="<?php echo base_url()?>">
   <div class="oz-body-wrap">
     <!-- Start Header Area -->
-    <header class="default-header">
+    <header class="default-header" id="header">
       <div class="container-fluid">
         <div class="header-wrap">
           <div class="header-top d-flex justify-content-between align-items-center">

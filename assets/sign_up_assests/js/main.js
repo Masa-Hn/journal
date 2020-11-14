@@ -204,17 +204,20 @@ function informLeader(leader_id,request_id){
   });
 }//allocateAmbassador
 
-function  show (id){
+function  show (id,close){
   var modal = document.getElementById(id);
-  //var captionText = document.getElementById("caption");
- 
+  //var captionText = document.getElementById("caption"); 
   modal.style.display = "block";
- 
-  var span = document.getElementsByClassName("close")[0];
+  header=document.getElementById('header');
+  header.style.display = "none";
+  var span =document.getElementById(close);
 
-  function closeModel() { 
+  span.onclick = function() { 
+    header.style.display = "block";
     modal.style.display = "none";
-  }//end span.onclick
+
+  }
+
 
 }//end show()
 
