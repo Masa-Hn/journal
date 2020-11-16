@@ -61,6 +61,7 @@ if (URL=="")
 	document.getElementById('msg-ch').style.display="block";
 else
 {
+document.getElementById('msg-ch').style.display="none";
 var win = window.open(URL);
 document.getElementById('check_div').style.display="block";
 
