@@ -10,11 +10,7 @@
         <div class="row fullscreen align-items-center justify-content-center">
           <div class="banner-left col-lg-8 col-sm-12 story-content left-text" dir="rtl">
             <h1>
-              مشروع صناعة القُراء أصبوحة 180، ينشط حاليًا عبر منصة الفيسبوك فقط.
-            </h1>  
-            <br>
-            <h1>
-              من أجل ذلك سوف يستوجب منك تأكيد تسجيل الدخول عبر الفيسبوك لتأكيد دخولك إلى مجموعة المتابعة الخاصة بك.
+              لاتمام هذه العملية يجب عليك تسجيل الدخول
             </h1>
             <a class="genric-btn primary circle arrow" style="background:#45258f;    color: white;" onclick="fb_login();">
              تسجيل  الدخول

@@ -7,42 +7,6 @@
 ?>
 
 <style type="text/css">
-.FBmsg{
-  width: 5%
-}
-.point{
-  width: 8%;
-}
-.container {
-  position: relative;
-  text-align: center;
-}
-.centered {
-  position: absolute;
-  top: 38%;
-  left: 45%;
-  transform: translate(-50%, -50%);
-}
-.centered_help {
-  position: absolute;
-  top: 53%;
-  left: 12%;
-  transform: translate(-50%, -50%);
-
-}
-.float{
-  float: left;
-}
-.clear{
-  clear: both;
-}
-.modalDiv{
-  margin-top: 3%;
-}
-.modal{
-  overflow-y: auto;
-  overflow-x: hidden;
-}
 a{
   color: #1d509f;
 }
@@ -50,42 +14,6 @@ a{
 
     width: 35%;
   }
-  .direct{
-  display: flex;
-  flex-direction: row-reverse;   
-}
-.copyimg{
-  width: 35%;
-}
-.helpimg{
-  width: 25%;
-}
-#help{
-  margin-top: 3%;
-  margin-bottom: 3%;
-}
-@media (max-width: 768px){
-  .direct{
-    display: flex;
-    flex-direction: column;   
-  }
-  .copyimg{
-    width: 80%
-  }
-  .helpimg{
-    width: 75%;
-  }
-  .centered {
-    top: 38%;
-    left: 38%;
-  }
-
-   .centered_help {
-    top: 48%;
-    left: 44%;
-  }
-  #help{ text-align: center !important ; }
-}
 </style>
 <!--Start Banner Area -->
     <section class="banner-area relative bgImg2">
@@ -153,7 +81,7 @@ a{
               <?php 
                 if ($reallocate) {
                   echo '
-                  <a href="'.base_url().'ReallocateAmbassador/checkAmbassador?fb_id='.$ambassador[0]->fb_id.'" class="final-page genric-btn primary circle arrow" style=" margin: 1.5%; background:darkred">
+                  <a href="'.base_url().'ReallocateAmbassador" class="final-page genric-btn primary circle arrow" style=" margin: 1.5%; background:darkred">
                       اختر لي قائدًا أخر
                   </a>';
                 }
@@ -198,7 +126,7 @@ a{
           <div class="container" style="text-align: left; margin-left: 0" id="help">
               <img class="helpimg" src="<?php echo base_url()?>assets/sign_up_assests/img/point4.png" alt="">
               <div class="centered_help">
-                <a href="https://www.facebook.com/taheelofosboha/" style=" color: white; font-size: 18px;"  target="_blank">
+                <a href="https://www.facebook.com/taheelofosboha/" class="helpTxt" target="_blank">
                 راسلنا من هنا لمُساعدتك      
                 </a>
               </div>
