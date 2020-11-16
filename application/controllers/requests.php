@@ -172,5 +172,30 @@ class Requests extends CI_Controller {
 			$this->requestsModel->updateReq( $requestID );
 		}
 	}
+
+	public function deleteLeaderRequest()
+	{
+		$data['info']=array();
+		$reqs=$this->GeneralModel->get_data(0,'is_done', 'leader_request')->result();
+		for ($i=0; $i <count($reqs) ; $i++) { 
+		 	
+			if($this->GeneralModel->get_data($reqs[$i]->Rid, 'request_id', 'ambassador')->result()==NULL)
+			{
+				array_push($data['info'],$reqs[$i]);	
+			}
+		}	
+		$data['title'] = 'Delete Leader Request';
+		$this->load->view('management_book/templates/header',$data);
+		$this->load->view('management_book/templates/navbar');
+		$this->load->view('leader_request/DeleteRequest',$data);
+		$this->load->view('management_book/templates/footer');
+	}
+
+	public function deleteRequest()
+	{
+		$id=$this->input->post('id');
+		$this->GeneralModel->remove($id,'leader_request','Rid');
+		redirect(base_url().'requests/deleteLeaderRequest');
+	}
 }
 ?>

@@ -30,7 +30,6 @@
 						$id = $info->id;
 						$leaderName = $info->leader_name;
 						$leaderLink = $info->leader_link;
-
 						?>
 
 						<div class="form-group">
@@ -41,17 +40,44 @@
 							<label for="leaderLink">رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" value="<?php echo $leaderLink;?>" class="form-control" required="required">
 						</div>
-
+ <label name="msg-ch" id="msg-ch"  style="display: none; color: red" > الرجاء كتابة الرابط </label>
 						<?php
 						$msg = "هل أنت متأكد من أنك تريد تعديل بياناتك الشخصية؟";
 						?>
 
 						<div class="form-group">
-							<button type="submit" name="submit" class="btn btn-block" id="subBtn">تعديل</button>
+							<button type="submit" name="submit" class="btn btn-block" id="subBtn" style="display: none;">تعديل</button>
 						</div>
 
 					</form>
+<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
+ <div id="check_div" style="display: none;"><input type="checkbox" id="check"  onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label></div>
+<script type="text/javascript">
 
+	function check()
+		{
+var URL = document.getElementById( 'leaderLink' ).value;
+if (URL=="")
+	document.getElementById('msg-ch').style.display="block";
+else
+{
+document.getElementById('msg-ch').style.display="none";
+var win = window.open(URL);
+document.getElementById('check_div').style.display="block";
+
+}
+    		}
+		function change_check()
+		{
+			ch= document.getElementById('check');
+			sb=document.getElementById('sub-btn');
+			if (ch.checked==true)
+				document.getElementById('subBtn').style.display="block";
+			else
+				document.getElementById('sub-btn').style.display="none";
+
+		}
+</script>
 				</div>
 
 				<div class="modal-footer">
