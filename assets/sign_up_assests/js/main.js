@@ -173,11 +173,39 @@ function allocateAmbassador(){
     });
   }//if
   else{
-    alert("no")
+    if(leader_gender == ""){
+      msg= "يجب اختيار جنس القائد";
+    }
+    else{
+      msg="يجب اختيار بلد الاقامة";
+    }
+    Swal.fire({
+      title: 'انتبه',
+      text:msg,
+      imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/error_msg.png',
+      imageWidth: 300,
+      imageAlt: 'Custom image',
+      timer: 4000,
+      confirmButtonText: "حسنًا ",
+      confirmButtonColor:'#9ed16f'
+    });
   }
 }//allocateAmbassador
 
+
+function checkLogin(id) {
+   if (! sessionStorage['ambassador_info']) {
+      urlReallocate=document.getElementById("base_url").value+"ReallocateAmbassador",
+      window.location.replace(urlReallocate);
+  }
+  else{
+    urlReallocate=document.getElementById("base_url").value+"ReallocateAmbassador/checkAmbassador?fb_id="+id;
+    window.location.replace(urlReallocate); 
+  }
+}//checkLogin
+
 function reallocateAmbassador(leader_gender) {
+ 
   leader_gender =leader_gender;
   leader_id=document.getElementById('leader_id').value;
   request_id=document.getElementById('request_id').value;

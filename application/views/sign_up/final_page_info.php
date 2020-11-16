@@ -81,7 +81,7 @@ a{
               <?php 
                 if ($reallocate) {
                   echo '
-                  <a href="'.base_url().'ReallocateAmbassador" class="final-page genric-btn primary circle arrow" style=" margin: 1.5%; background:darkred">
+                  <a href="javascript:checkLogin('.$ambassador[0]->fb_id.')" class="final-page genric-btn primary circle arrow" style=" margin: 1.5%; background:darkred">
                       اختر لي قائدًا أخر
                   </a>';
                 }

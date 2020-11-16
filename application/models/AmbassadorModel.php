@@ -36,10 +36,11 @@ class AmbassadorModel extends CI_Model {
 
 	}//checkAmbassador
 
-	public function updateAmbassador($fb_id,$leader_gender, $request_id){
+	public function updateAmbassador($fb_id,$leader_gender, $request_id,$date_update){
 		$data = array(
         'leader_gender' => $leader_gender,
-        'request_id' => $request_id
+        'request_id' => $request_id,
+        'created_at'=>$date_update
     	);
 
 		$this->db->where('fb_id', $fb_id);

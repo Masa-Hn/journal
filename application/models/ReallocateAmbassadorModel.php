@@ -18,7 +18,7 @@ class ReallocateAmbassadorModel extends CI_Model {
 
 
 	//ANY LEADER
-	public function newTeamsAnyLeader($ambassador_gende,$leader_id)
+	public function newTeamsAnyLeader($ambassador_gender,$leader_id)
 	{
 		$sql = "SELECT leader_request.Rid,leader_request.members_num, leader_request.date, leader_request.is_done, leader_request.leader_id, leader_request.gender, leader_info.leader_gender FROM leader_request INNER JOIN leader_info ON leader_request.leader_id = leader_info.id WHERE leader_request.is_done = 0 AND leader_request.current_team_count = 0 AND ( leader_request.gender = '".$ambassador_gender."' OR leader_request.gender = 'any') AND (leader_info.leader_gender = 'female' OR leader_info.leader_gender = 'male') AND leader_id != ".$leader_id." ORDER BY leader_request.date ASC LIMIT 1";
 		$query = $this->db->query($sql);

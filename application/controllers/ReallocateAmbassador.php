@@ -37,7 +37,6 @@ class ReallocateAmbassador extends CI_Controller {
       $created_at=date_create($created_at->format("Y-m-d"));
       $current=date_create(date("Y-m-d",time()));
       $diff=date_diff($created_at,$current);
-
       if($diff->format("%a") > 2){ 
         if($result->request_id == null){
         // Still No Leader
@@ -67,6 +66,8 @@ class ReallocateAmbassador extends CI_Controller {
       $Leader_gender=$_POST['leader_gender'];
       $leader_id=$_POST['leader_id'];
       $request_id=$_POST['request_id'];
+      $currentTime=time();
+      $date_update=date("Y-m-d",$currentTime);
       
       // //Check ambassador gender
         if ($ambassador_info['gender'] != "female" && $ambassador_info['gender']!="male") {
@@ -89,7 +90,7 @@ class ReallocateAmbassador extends CI_Controller {
                   //Check Teams With More Than 12 Members
                     $result=$this->ReallocateAmbassadorModel->anyLeader($ambassador_gender, ">",$leader_id);
                     if (count((array)$result) == 0 ){
-                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$Leader_gender,null);
+                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$Leader_gender,null,$date_update);
                       $this->noLeaderFound();
                     }//if
                     else{
@@ -117,7 +118,7 @@ class ReallocateAmbassador extends CI_Controller {
                   //Check Teams With More Than 12 Members
                     $result=$this->ReallocateAmbassadorModel->getTeams($Leader_gender,$ambassador_gender, ">",$leader_id);
                     if (count((array)$result) == 0 ){
-                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$Leader_gender,null);
+                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$Leader_gender,null,$date_update);
                       $this->noLeaderFound();
                     }//if
                     else{
@@ -140,7 +141,11 @@ class ReallocateAmbassador extends CI_Controller {
   public function checkout($fb_id,$leader_gender,$request_id,$leader_id,$members_num){
     $informLeader=false;
     // 1- UPDATE Ambassador
-    $this->AmbassadorModel->updateAmbassador($fb_id,$leader_gender,$request_id);
+    $currentTime=time();
+    $date_update=date("Y-m-d",$currentTime);
+
+
+    $this->AmbassadorModel->updateAmbassador($fb_id,$leader_gender,$request_id,$date_update);
 
     
     // 2- Inform Ambassador
