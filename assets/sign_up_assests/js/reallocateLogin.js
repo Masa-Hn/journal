@@ -24,7 +24,7 @@ function fb_login(){
               function(response) {
                 ambassador = {name:response.name, email:response.email,gender:response.gender,profile_link:response.link,fb_id:response.id};
                 sessionStorage.setItem("ambassador_info", JSON.stringify(ambassador));
-                window.location.replace(document.getElementById("base_url").value+"SignUp/checkAmbassador?fb_id="+response.id);
+                window.location.replace(document.getElementById("base_url").value+"ReallocateAmbassador/checkAmbassador?fb_id="+response.id);
               }
             );
 

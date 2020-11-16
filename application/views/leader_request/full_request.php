@@ -42,7 +42,9 @@
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" placeholder="مثال: https://www.facebook.com/example" class="form-control" required="required">
 
-						</div>
+						</div>						
+						 <label name="msg-ch" id="msg-ch"  style="display: none; color: red" > الرجاء كتابة الرابط </label>
+            
 						<div class="form-group">
 							<label for="leaderGender" class="form-label"> جنسك: </label>
 							<select name="leaderGender" id="leaderGender" class="form-control">
@@ -75,8 +77,23 @@
 						</div>
 
 					</form>
+
 					<button name="check" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
-					<script type="text/javascript">
+          <input type="checkbox" id="check" name="check"  onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label>
+          
+<script type="text/javascript">
+
+		function change_check()
+		{
+			ch= document.getElementById('check');
+			sb=document.getElementById('sub-btn');
+			if (ch.checked==true)
+				document.getElementById('sub-btn').style.display="block";
+			else
+				document.getElementById('sub-btn').style.display="none";
+
+		}
+              
 						function doesFileExist( urlToFile ) {
 							var xhr = new XMLHttpRequest();
 							xhr.open( 'HEAD', urlToFile );
@@ -97,6 +114,7 @@
 								document.getElementById( 'sub-btn' ).style.display = "block";
 						}
 					</script>
+          
 				</div>
 
 				<div class="modal-footer">
