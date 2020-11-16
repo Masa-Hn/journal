@@ -18,7 +18,7 @@ class AmbassadorModel extends CI_Model {
 
 	public function getByRequestId($request_id)
 	{
-		$this->db->select('name,profile_link,request_id,gender');
+		$this->db->select('name,profile_link,request_id,gender,fb_id');
     	$this->db->from('ambassador');
     	$this->db->where('request_id =',$request_id);
     	return $this->db->get()->result();
@@ -28,13 +28,23 @@ class AmbassadorModel extends CI_Model {
 	public function checkAmbassador($fb_id)
 	{
 		$where = "fb_id = '".$fb_id."'";
-		$this->db->select('request_id');
+		$this->db->select('request_id, created_at');
 		$this->db->where($where);
     	$this->db->from('ambassador');
 	    $this->db->limit(1);
     	return $this->db->get()->row();
 
 	}//checkAmbassador
+
+	public function updateAmbassador($fb_id,$leader_gender, $request_id){
+		$data = array(
+        'leader_gender' => $leader_gender,
+        'request_id' => $request_id
+    	);
+
+		$this->db->where('fb_id', $fb_id);
+		$this->db->update('ambassador', $data);
+	}//updateAmbassador
 
 }//SignUpModel
 

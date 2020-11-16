@@ -2,6 +2,9 @@
   include 'templates/header.php';
   include 'templates/navbar.php';
 ?>
+<input type="hidden" name="leader_id" id="leader_id" value="<?php echo $leader_id;?>">
+<input type="hidden" name="request_id" id="request_id" value="<?php echo $request_id; ?>">
+
  <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
       <div class="container">
@@ -18,13 +21,13 @@
                 <div class="container ">
                   <div class="row text-center">
                     <div class="col-md-3 col-sm-12 book-section">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/female.png" class="book-div-img"  onclick="allocateAmbassador('female')"><br><h1>أنثى</h1> 
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/female.png" class="book-div-img"  onclick="reallocateAmbassador('female')"><br><h1>أنثى</h1> 
                     </div>
                      <div class="col-md-3 col-sm-12 book-section">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/male.png" class="book-div-img"  onclick="allocateAmbassador('male')"><br><h1>ذكر</h1> 
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/male.png" class="book-div-img"  onclick="reallocateAmbassador('male')"><br><h1>ذكر</h1> 
                     </div>
                      <div class="col-md-3 col-sm-12 book-section">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/not_matter.png" class="book-div-img" style="width: 60%"   onclick="allocateAmbassador('any')"><br><h1>لا فرق </h1> 
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/any.png" class="book-div-img" style="width: 60%"   onclick="reallocateAmbassador('any')"><br><h1>لا فرق </h1> 
                     </div>
                   </div>
                 </div>

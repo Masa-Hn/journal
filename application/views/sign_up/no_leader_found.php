@@ -1,4 +1,7 @@
 <style type="text/css">
+  #join{
+    margin-bottom: 2%;
+  }
   @media (min-width: 576px)
 {
   .story-content{
@@ -14,13 +17,18 @@
           <div class=" banner-left left-text col-lg-12 col-sm-12">
             <div class="story-content" dir="rtl" style="text-align: center;">
               <h1><span class="sp-1" style="font-size: 30px">
-                لا يتوفر قادة حاليًا حسب طلبك 
+                نعتذر!
               </span>
               </h1>
               <h1>
-                 سيتم التواصل معك قريبًا 
+                 نظرا لزيادة عدد الانضمام اليومي للقراء فقد نفذت الأفرقة المخصصة للقراء.
               </h1>
-              <a href="<?php echo base_url()?>" class="genric-btn primary circle arrow" id="code">عودة إلى رف الكتب </a>
+              <a href="https://www.facebook.com/taheelofosboha/" class="genric-btn primary circle arrow" id="join" target="_blank">
+                طلب الانضمام اليدوي
+              </a>
+              <p style="color: red">
+                سيتم تجهيز فريق قراءة جديد لك خصيصًا خلال ٢٤ ساعة.
+              </p>
             </div>
           </div>
         </div>
