@@ -77,7 +77,7 @@
 
 					</form>
 <button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
- <input type="checkbox" id="check" name="check"  onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label>
+ <div id="check_div" style="display: none;"><input type="checkbox" id="check"  onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label></div>
 <script type="text/javascript">
 
 	function check()
@@ -86,7 +86,11 @@ var URL = document.getElementById( 'leaderLink' ).value;
 if (URL=="")
 	document.getElementById('msg-ch').style.display="block";
 else
+{
 var win = window.open(URL);
+document.getElementById('check_div').style.display="block";
+
+}
     		}
 		function change_check()
 		{
