@@ -19,7 +19,7 @@
             <h1>
               سيكون    
               <span class="sp-2">
-                <?php echo '<a href="'. $leader_info->leader_link.'" style="color:#9ed16f;">'. $leader_info->leader_name .'</a>'?> 
+                <?php echo '<a href="'. $leader_info->leader_link.'" style="color:#9ed16f;" id="leader">'. $leader_info->leader_name .'</a>'?> 
               </span> 
                 قائد فريقك
             </h1>
@@ -47,7 +47,7 @@
                انضم لفريقك من هنا 
              
             </h5>
-            <a href="<?php echo $leader_info->team_link; ?>" class="final-page genric-btn primary circle arrow" target="_blank">
+            <a href="<?php echo $leader_info->team_link; ?>" class="final-page genric-btn primary circle arrow" target="_blank" id="team">
               انضم للفريق
             </a>
           </div>
@@ -78,3 +78,4 @@
   });
 
 </script>
+

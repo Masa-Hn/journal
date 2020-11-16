@@ -18,6 +18,12 @@ class Send extends CI_Controller {
 
 
   public function index(){
+     $this->load->view('sign_up/templates/header');
+    $this->load->view('sign_up/templates/navbar' );
+    $this->load->view('sign_up/no_leader_found');
+    $this->load->view('sign_up/templates/footer');
+  }
+  public function OwlyApi(){
   require_once('OwlyApi.php');
   $owly = OwlyApi::factory( array('key' => '{c4pah0tpw68kcwc4sswks4cg03ij385nihn}') );
   $sourceUrl = 'http://invokemedia.com/';

@@ -24,7 +24,7 @@
                     <div class="col-md-4 col-sm-12 activity-div">
                       <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_1.png" class="activity-div-img" onclick="nextWithMsg('fb_login',2)"><br>
                       <h5 class="question">
-                        التثقيف بالفيديو  
+                        التثقيف بالفيديو  (ورش تعليمية)
                       </h5>
                     </div>
                     <div class="col-md-4 col-sm-12 activity-div">

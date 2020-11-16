@@ -7,66 +7,204 @@
 ?>
 
 <style type="text/css">
+.FBmsg{
+  width: 5%
+}
+.point{
+  width: 8%;
+}
+.container {
+  position: relative;
+  text-align: center;
+}
+.centered {
+  position: absolute;
+  top: 38%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+.centered_help {
+  position: absolute;
+  top: 53%;
+  left: 12%;
+  transform: translate(-50%, -50%);
+
+}
+.float{
+  float: left;
+}
+.clear{
+  clear: both;
+}
+.modalDiv{
+  margin-top: 3%;
+}
+.modal{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+a{
+  color: #1d509f;
+}
   hr{
+
     width: 35%;
   }
+  .direct{
+  display: flex;
+  flex-direction: row-reverse;   
+}
+.copyimg{
+  width: 35%;
+}
+.helpimg{
+  width: 25%;
+}
+#help{
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+@media (max-width: 768px){
+  .direct{
+    display: flex;
+    flex-direction: column;   
+  }
+  .copyimg{
+    width: 80%
+  }
+  .helpimg{
+    width: 75%;
+  }
+  .centered {
+    top: 38%;
+    left: 38%;
+  }
+
+   .centered_help {
+    top: 48%;
+    left: 44%;
+  }
+  #help{ text-align: center !important ; }
+}
 </style>
 <!--Start Banner Area -->
-    <section class="banner-area relative bgImg1">
+    <section class="banner-area relative bgImg2">
       <div class="container">
         <div class="row fullscreen align-items-center justify-content-center">
-          <div class="banner-left col-lg-12 col-sm-12 story-content right-text" dir="rtl">
-
-
+            <div class="banner-left col-lg-12 col-sm-12 story-content text-center page-img" dir="rtl">
             <h1>
               <span class="sp-1" style="font-size: 50px">
                 مرحبًا 
                 <?php  echo $ambassador[0]->name; ?>
               </span>
             </h1>
-            <br>
-            <h1>
-              معلوماتك
-            </h1>
-            <hr>
-            <h6>
-              اسمك : <?php  echo $ambassador[0]->name; ?>
-              <br>
-              رقم طلبك: <?php  echo $ambassador[0]->request_id; ?>
-              <br>
-              جنسك: <?php  echo $ambassador[0]->gender; ?>
-              <br>
-              حساب الفيسبوك الخاص بك:: <a href="<?php  echo $ambassador[0]->profile_link; ?>">مشاهدة حسابي</a>
-
-            </h6>
-            <br>
-             <h1>
-              معلومات قائدك          
-            </h1>
-            <hr>
-            <h6>
-               اسم قائدك : <?php echo $leader_info->leader_name; ?>
-              <br>
-              حساب الفيسبوك الخاص بقائدك : <a href="<?php echo $leader_info->leader_link; ?>" id="leader">مشاهدة حساب قائدي</a>
-            </h6>
-            <br>   
-
-            <h1>
-               فريق القراءة الخاص بك
-            </h1>
-            <hr>
-            <br>
-            <h6>
-              للانضمام لفريق القراءة الخاص بك : <a href="<?php echo $leader_info->team_link; ?>" id="team"> اضغط هنا </a>
-            </h6>
-            <br>           
-           <h1 class="sp-1">
-              أهلًا بك معنا            
-            </h1>
           </div>
+        </div>
+        <div class="row fullscreen align-items-center justify-content-center">
+          <div class="banner-left col-lg-6 col-sm-12 story-content  text-center" dir="rtl">
+            <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/leaderInfo.png" alt="">
+            <a href="javascript:show('leaderInfo','closeLeaderInfo')" class="final-page genric-btn primary circle arrow">
+              مشاهدة معلومات قائدي
+            </a>
+          </div>
+          <div class="banner-left col-lg-6 col-sm-12 story-content  text-center" dir="rtl">
+            <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/teamInfo.png" alt="">
+            <a href="javascript:show('teamInfo','closeTeamInfo')" class="final-page genric-btn primary circle arrow">
+              مشاهدة معلومات فريقي
+                
+            </a>         
+          </div>
+          <div class="row fullscreen align-items-center justify-content-center">
+            <div class="col-lg-12 col-sm-12 text-center">
+              <br>
+              <h4 style="margin-bottom: 5%; margin-top: 0">
+              بينما تنتظر الدخول لمجموعة القراءة ما رايك أن تاخذ جولة بين رف مكتبة كتب منهج أصبوحة ١٨٠ من  <a href="<?php echo base_url()?>" target="_blank">هنا</a>
+              </h4>
+            </div>  
+          </div>
+          
         </div>
       </div>
     </section>
+
+    <div id="leaderInfo" class="modal bgImg2" dir="rtl">
+      <div class="row fullscreen align-items-center justify-content-center">
+        <span class="close" id="closeLeaderInfo" onClick="closeModel()">&times;</span>
+
+      </div>
+      <div class="row fullscreen align-items-center justify-content-center">
+          <div class="banner-left col-lg-12 col-sm-12 text-center" dir="rtl">
+            <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/leaderInfo_2.png" alt="">
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="modalDiv" dir="rtl" style="text-align: center;">
+              <h2>
+                اسم قائدك : <?php echo $leader_info->leader_name; ?>
+                <br>
+              ستصلك رسالة من قائد فريقك، لطفًا تفقد طلبات المراسلة على الفيسبوك
+                <br><br>
+
+                إن كنت متحمسًا جدًا، اضغط هنا لِتَقوم بمراسلة قائدك : 
+                <br>
+                <a href="<?php echo $leader_info->leader_link; ?>" class="final-page genric-btn primary circle arrow" id="code" style="margin: 1.5%; font-size: inherit;" target="_blank">
+                  مراسلة قائدي
+                </a>
+              </h2>
+              <?php 
+                if ($reallocate) {
+                  echo '
+                  <a href="'.base_url().'ReallocateAmbassador/checkAmbassador?fb_id='.$ambassador[0]->fb_id.'" class="final-page genric-btn primary circle arrow" style=" margin: 1.5%; background:darkred">
+                      اختر لي قائدًا أخر
+                  </a>';
+                }
+              ?>
+            
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="teamInfo" class="modal bgImg2" dir="rtl">
+      <div class="row fullscreen align-items-center justify-content-center">
+        <span class="close" id="closeTeamInfo" onClick="closeModel()">&times;</span>
+      </div>
+      <div class="row fullscreen align-items-center justify-content-center">
+          <div class="banner-left col-lg-12 col-sm-12 text-center" dir="rtl">
+            <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/teamInfo_1.png" alt="">
+          </div>
+          <div class="banner-left col-lg-12 col-sm-12">
+            <div class="modalDiv" dir="rtl" style="text-align: center;">
+            <h3>
+              قم بالضغط على الكود أدناه لنسخه، سوف يطلب منك إدخاله لقبولك ضمن مجموعة القراءة الخاصة بك.
+
+            </h3>
+            <div class="container">
+              <img class="copyimg" src="<?php echo base_url()?>assets/sign_up_assests/img/point3.png" alt="">
+              <div class="centered">
+                <a href="javascript:copyCode()" class="final-page genric-btn primary circle arrow" id="code" style="margin-top: 15%; background-color: #8cb99c;"  target="_blank">
+                  <?php echo $leader_info->uniqid .$leader_info->id ; ?>    
+                </a>
+              </div>
+            </div>
+            <h2 class="clear artical-title-small" style="margin-bottom: 1.5%">
+              اضغط هنا للانضمام لفريق القراءة الخاص بك
+            </h2>
+            <a href="<?php echo $leader_info->team_link; ?>" class="final-page genric-btn primary circle arrow" id="code" style="margin: 1.5%;"  target="_blank">
+              اضغط هنا للدخول لفريقك
+            </a>
+          </div>
+        </div>
+        <div class="banner-left col-lg-12 col-sm-12 text-left">
+          <div class="container" style="text-align: left; margin-left: 0" id="help">
+              <img class="helpimg" src="<?php echo base_url()?>assets/sign_up_assests/img/point4.png" alt="">
+              <div class="centered_help">
+                <a href="https://www.facebook.com/taheelofosboha/" style=" color: white; font-size: 18px;"  target="_blank">
+                راسلنا من هنا لمُساعدتك      
+                </a>
+              </div>
+            </div>  
+      </div>  
+    </div>
     <?php
     echo '<input type="hidden" name="inform_leader" id="inform_leader" value="'.$inform_leader.'">';  
       if ($inform_leader) {
@@ -87,67 +225,3 @@
   });
 
 </script>
-<script type="text/javascript">
-	 $(document).ready(function () {
-	 var base_url = "<?php echo base_url()?>";
-	 var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
-	 
- 	$('#code').click(function () {
-		
- 		$.ajax({
- 			type: "POST",
- 			url: base_url + "Statistics/code_button",
- 			data: {
- 				ip_address: ip_address
- 			}, // multiple data sent using ajax
- 			success: function (data) {
-
- 				console.log(data);
- 			},
- 			error: function (error) {
- 				console.log(error);
- 			}
- 		});
- 		return false;
- 	});
-
- 	$('#leader').click(function () {
- 		
- 		$.ajax({
- 			type: "POST",
- 			url: base_url + "Statistics/leader_link_button",
- 			data: {
- 				ip_address: ip_address
- 			}, 
- 			success: function (data) {
-
- 				console.log(data);
- 			},
- 			error: function (error) {
- 				console.log(error);
- 			}
- 		});
- 		return false;
- 	});
-
- 	$('#team').click(function () {
-
- 		$.ajax({
- 			type: "POST",
- 			url: base_url + "Statistics/team_link_button",
- 			data: {
- 				ip_address: ip_address
- 			}, 
- 			success: function (data) {
-
- 				console.log(data);
- 			},
- 			error: function (error) {
- 				console.log(error);
- 			}
- 		});
- 		return false;
- 	});
- });
-
-	</script>

@@ -1,5 +1,5 @@
 <style>
-	th,
+	.th,
 	tr,
 	td {
 		text-align: center;
@@ -27,17 +27,10 @@
 	}
 
 </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <body>
-
-	<!-- Trigger the modal with a button -->
-	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#reqModal" id="reqModalBtn">
-	<i class="fa fa-user-plus" aria-hidden="true"></i>
-    قائمة الأعضاء الجدد
-</button>
-
-
-
-
 	<!-- Modal -->
 	<div id="reqModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -50,15 +43,22 @@
 				</div>
 
 				<div class="modal-body">
+					
 					<?php
 					if ( empty( $info ) == true ) {
 						if ( $ambassadors->num_rows > 0 ) {
 							?>
+					<div style="text-align: center; margin-bottom: 5%;">
+					<h3 >كلمة السر الخاصة (كود) بدخول فريق المتابعة: </h3>
+					<h1><?php echo $uniqid.$leader_id; ?></h1>
+						</div>
+					
 					<table class="table">
 						<thead>
-							<th>اسم السفير</th>
-							<th>الجنس</th>
-							<th>الاستقبال</th>
+							<th class="th">اسم السفير</th>
+							<th class="th">الجنس</th>
+							<th class="th">تم الاستقبال</th>
+							<th class="th">لم يتم الاستقبال</th>
 						</thead>
 						<tbody>
 							<?php
@@ -74,8 +74,9 @@
 								<td>
 									<?php echo ($amb['gender'] == 'female' || $amb['gender'] == 'Female') ? "أنثى" :  "ذكر"; ?>
 								</td>
-								<td><input type="checkbox" name="join" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="
-									<?php echo $id;?>" onchange="cTrig('<?php echo $id;?>');"></td>
+								<td><input type="checkbox" name="joined" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="<?php echo "joined".$id;?>" onclick="joined('<?php echo $id;?>');"></td>
+								<td><input type="checkbox" name="notJoined" <?php if ($amb[ 'join_following_team']==2) echo "checked";?> id="<?php echo "notJoined".$id;?>" onclick="notJoined('<?php echo $id;?>');"></td>
+								
 							</tr>
 							<?php
 
@@ -102,12 +103,19 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		function cTrig(id) {
-			if ( document.getElementById(id).checked == true ) {
-				var success = confirm( "هل أنت متأكد من أن السفير انضم لمجموعة المتابعة؟" );
+		$(document).ready(function(){
+  // Show the Modal on load
+  $("#reqModal").modal("show");
+  
+});
+		
+		function joined(id) {
+			if ( document.getElementById("joined" + id).checked == true ) {
+				var success = confirm( "هل أنت متأكد من أن العضو تم استقباله؟" );
 				var base_url = "<?php echo base_url()?>";
 
 				if ( success == true ) {
+					document.getElementById("notJoined" + id).checked = false;
 					$.ajax( {
 						url: base_url + 'newMembersList/joined_ambassador',
 						type: 'POST',
@@ -128,13 +136,69 @@
 					console.log( "canceled" );
 				}
 			} else {
-				var success = confirm( "هل أنت متأكد من أن السفير ليس موجود في مجموعة المتابعة؟" );
+				var success = confirm( "هل أنت متأكد من أن العضو جديد؟" );
 
 				if ( success == true ) {
+					document.getElementById("notJoined" + id).checked = false;
 					var base_url = "<?php echo base_url()?>";
 
 					$.ajax( {
 						url: base_url + 'newMembersList/joined_ambassador',
+						type: 'POST',
+						data: {
+							notChecked: id
+						},
+						dataType: 'text',
+						success: function () {
+
+							/*	window.setTimeout( function () {}, 3000 );
+								location.reload();*/
+						},
+						error: function ( error ) {
+							console.log( error );
+						}
+					} );
+				} else {
+					console.log( "canceled" );
+				}
+			}
+		}
+		
+		function notJoined(id) {
+			if ( document.getElementById("notJoined" + id).checked == true ) {
+				var success = confirm( "هل أنت متأكد من أن العضو لم يتم استقباله؟" );
+				var base_url = "<?php echo base_url()?>";
+
+				if ( success == true ) {
+					document.getElementById("joined" + id).checked = false;
+					$.ajax( {
+						url: base_url + 'newMembersList/notJoined_ambassador',
+						type: 'POST',
+						data: {
+							Checked: id
+						},
+						dataType: 'text',
+						success: function () {
+
+							/*	window.setTimeout( function () {}, 3000 );
+								location.reload();*/
+						},
+						error: function ( error ) {
+							console.log( error );
+						}
+					} );
+				} else {
+					console.log( "canceled" );
+				}
+			} else {
+				var success = confirm( "هل أنت متأكد من أن العضو جديد؟" );
+
+				if ( success == true ) {
+					document.getElementById("joined" + id).checked = false;
+					var base_url = "<?php echo base_url()?>";
+
+					$.ajax( {
+						url: base_url + 'newMembersList/notJoined_ambassador',
 						type: 'POST',
 						data: {
 							notChecked: id
