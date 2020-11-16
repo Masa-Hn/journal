@@ -8,6 +8,7 @@
 
 
 
+
 	<!-- Modal -->
 	<div id="reqModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -26,7 +27,7 @@
 					<form method="post" enctype="multipart/form-data">
 						<?php
 						//to be taken from osboha website
-						$leaderName = $_GET['name'];
+						$leaderName = $_GET[ 'name' ];
 						$teamLink = "http://facebook.com/group/";
 						$teamName = "11";
 						$currentTeamCount = 20;
@@ -43,7 +44,7 @@
 
 						</div>						
 						 <label name="msg-ch" id="msg-ch"  style="display: none; color: red" > الرجاء كتابة الرابط </label>
-
+            
 						<div class="form-group">
 							<label for="leaderGender" class="form-label"> جنسك: </label>
 							<select name="leaderGender" id="leaderGender" class="form-control">
@@ -76,18 +77,12 @@
 						</div>
 
 					</form>
-<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
- <input type="checkbox" id="check" name="check"  onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label>
+
+					<button name="check" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
+          <input type="checkbox" id="check" name="check"  onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label>
+          
 <script type="text/javascript">
 
-	function check()
-		{
-var URL = document.getElementById( 'leaderLink' ).value;
-if (URL=="")
-	document.getElementById('msg-ch').style.display="block";
-else
-var win = window.open(URL);
-    		}
 		function change_check()
 		{
 			ch= document.getElementById('check');
@@ -98,12 +93,33 @@ var win = window.open(URL);
 				document.getElementById('sub-btn').style.display="none";
 
 		}
-</script>
+              
+						function doesFileExist( urlToFile ) {
+							var xhr = new XMLHttpRequest();
+							xhr.open( 'HEAD', urlToFile );
+							xhr.send();
+
+							if ( xhr.status == "404" ) {
+								return false;
+							} else {
+								return true;
+							}
+						}
+
+						function check() {
+							var URL = document.getElementById( 'leaderLink' ).value;
+							var win = window.open( URL );
+							var result = doesFileExist( URL );
+							if ( result )
+								document.getElementById( 'sub-btn' ).style.display = "block";
+						}
+					</script>
+          
 				</div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق </button>
-			</div>
+				</div>
 
 			</div>
 		</div>
@@ -123,7 +139,7 @@ var win = window.open(URL);
 						leaderGender: $( "#leaderGender" ).val(),
 						teamLink: $( "#teamLink" ).val(),
 						teamName: $( "#teamName" ).val(),
-						currentTeamCount: $( "#currentTeamCount").val(),
+						currentTeamCount: $( "#currentTeamCount" ).val(),
 						numOfMembers: $( "#numOfMembers" ).val(),
 						gender: $( "#gender" ).val()
 
@@ -135,8 +151,6 @@ var win = window.open(URL);
 				return false;
 			} );
 		} );
-
-
 	</script>
 </body>
 </html>

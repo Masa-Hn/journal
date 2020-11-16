@@ -21,7 +21,8 @@ class NewMembersList extends CI_Controller {
 			$id = $leader_info[ 'id' ];
 			$request_info = $this->requestsModel->get_data( $id, 'leader_id', 'leader_request', 'Rid' )->fetch_array( MYSQLI_ASSOC );
 			$Rid = $request_info[ 'Rid' ];
-
+			$arr['leader_id'] = $id;
+			$arr['uniqid'] = $leader_info['uniqid'];
 			$arr[ 'ambassadors' ] = $this->requestsModel->get_data( $Rid, 'request_id', 'ambassador', '*' );
 		} else {
 			$arr[ 'info' ] = "لم تطلب أعضاء مسبقاً...بياناتك غير مكتملة!!";
@@ -34,6 +35,16 @@ class NewMembersList extends CI_Controller {
 		if ( isset( $_POST[ 'Checked' ] ) ) {
 			$id = $_POST[ 'Checked' ];
 			$this->requestsModel->update_data( 1, $id );
+
+		} else if ( isset( $_POST[ 'notChecked' ] ) ) {
+			$id = $_POST[ 'notChecked' ];
+			$this->requestsModel->update_data( 0, $id );
+		}
+	}
+	function notJoined_ambassador() {
+		if ( isset( $_POST[ 'Checked' ] ) ) {
+			$id = $_POST[ 'Checked' ];
+			$this->requestsModel->update_data( 2, $id );
 
 		} else if ( isset( $_POST[ 'notChecked' ] ) ) {
 			$id = $_POST[ 'notChecked' ];
