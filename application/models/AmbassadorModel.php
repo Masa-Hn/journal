@@ -2,7 +2,7 @@
 class AmbassadorModel extends CI_Model {
 
 	public function insertAmbassador($ambassador)
-	{	
+	{
 		return $this->db->insert('ambassador',$ambassador);
 
 	}//checkAvailableRequests

@@ -10,7 +10,7 @@ $this->StatisticsModel->addVisitor( $page_id );
 	a {
 		color: #1d509f;
 	}
-	
+
 	hr {
 		width: 35%;
 	}
@@ -23,11 +23,11 @@ $this->StatisticsModel->addVisitor( $page_id );
 			<div class="banner-left col-lg-12 col-sm-12 story-content text-center page-img" dir="rtl">
 				<h1>
               <span class="sp-1" style="font-size: 50px">
-                مرحبًا 
+                مرحبًا
                 <?php  echo $ambassador[0]->name; ?>
               </span>
             </h1>
-			
+
 			</div>
 		</div>
 		<div class="row fullscreen align-items-center justify-content-center">
@@ -36,15 +36,15 @@ $this->StatisticsModel->addVisitor( $page_id );
 				<a href="javascript:show('leaderInfo','closeLeaderInfo')" class="final-page genric-btn primary circle arrow">
               مشاهدة معلومات قائدي
             </a>
-			
+
 			</div>
 			<div class="banner-left col-lg-6 col-sm-12 story-content  text-center" dir="rtl">
 				<img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/teamInfo.png" alt="">
 				<a href="javascript:show('teamInfo','closeTeamInfo')" class="final-page genric-btn primary circle arrow">
               مشاهدة معلومات فريقي
-                
+
             </a>
-			
+
 			</div>
 			<div class="row fullscreen align-items-center justify-content-center">
 				<div class="col-lg-12 col-sm-12 text-center">
@@ -52,7 +52,7 @@ $this->StatisticsModel->addVisitor( $page_id );
 					<h4 style="margin-bottom: 5%; margin-top: 0">
               بينما تنتظر الدخول لمجموعة القراءة ما رايك أن تاخذ جولة بين رف مكتبة كتب منهج أصبوحة ١٨٠ من  <a href="<?php echo base_url()?>" target="_blank">هنا</a>
               </h4>
-				
+
 				</div>
 			</div>
 
@@ -77,14 +77,14 @@ $this->StatisticsModel->addVisitor( $page_id );
               ستصلك رسالة من قائد فريقك، لطفًا تفقد طلبات المراسلة على الفيسبوك
                 <br><br>
 
-                إن كنت متحمسًا جدًا، اضغط هنا لِتَقوم بمراسلة قائدك : 
+                إن كنت متحمسًا جدًا، اضغط هنا لِتَقوم بمراسلة قائدك :
                 <br>
                 <a href="<?php echo $leader_info->leader_link; ?>" class="final-page genric-btn primary circle arrow" id="leader" style="margin: 1.5%; font-size: inherit;" target="_blank">
                   مراسلة قائدي
                 </a>
               </h2>
-			
-				<?php 
+
+				<?php
                 if ($reallocate) {
                   echo '
                   <a href="javascript:checkLogin('.$ambassador[0]->fb_id.')" class="final-page genric-btn primary circle arrow" style=" margin: 1.5%; background:darkred">
@@ -112,7 +112,7 @@ $this->StatisticsModel->addVisitor( $page_id );
               قم بالضغط على الكود أدناه لنسخه، سوف يطلب منك إدخاله لقبولك ضمن مجموعة القراءة الخاصة بك.
 
             </h3>
-			
+
 				<div class="container">
 					<img class="copyimg" src="<?php echo base_url()?>assets/sign_up_assests/img/point3.png" alt="">
 					<div class="centered">
@@ -124,11 +124,11 @@ $this->StatisticsModel->addVisitor( $page_id );
 				<h2 class="clear artical-title-small" style="margin-bottom: 1.5%">
               اضغط هنا للانضمام لفريق القراءة الخاص بك
             </h2>
-			
+
 				<a href="<?php echo $leader_info->team_link; ?>" class="final-page genric-btn primary circle arrow" id="team" style="margin: 1.5%;" target="_blank">
               اضغط هنا للدخول لفريقك
             </a>
-			
+
 			</div>
 		</div>
 		<div class="banner-left col-lg-12 col-sm-12 text-left">
@@ -136,9 +136,9 @@ $this->StatisticsModel->addVisitor( $page_id );
 				<img class="helpimg" src="<?php echo base_url()?>assets/sign_up_assests/img/point4.png" alt="">
 				<div class="centered_help">
 					<a href="https://www.facebook.com/taheelofosboha/" class="helpTxt" target="_blank">
-                راسلنا من هنا لمُساعدتك      
+                راسلنا من هنا لمُساعدتك
                 </a>
-				
+
 				</div>
 			</div>
 		</div>

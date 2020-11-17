@@ -6,10 +6,10 @@ class ReallocateAmbassador extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-    $this->load->model('SignUpModel');    	
-    $this->load->model('AmbassadorModel');      
-    $this->load->model('RequestsModel');  
-    $this->load->model('ReallocateAmbassadorModel');  
+    $this->load->model('SignUpModel');
+    $this->load->model('AmbassadorModel');
+    $this->load->model('RequestsModel');
+    $this->load->model('ReallocateAmbassadorModel');
     $this->load->model('StatisticsModel');
 
 	}//end construct()
@@ -31,13 +31,13 @@ class ReallocateAmbassador extends CI_Controller {
 
     }//if
     else{
-      //check time 
+      //check time
       $request=$this->SignUpModel->getRequestInfo($result->request_id);
       $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
       $created_at=date_create($created_at->format("Y-m-d"));
       $current=date_create(date("Y-m-d",time()));
       $diff=date_diff($created_at,$current);
-      if($diff->format("%a") > 2){ 
+      if($diff->format("%a") > 2){
         if($result->request_id == null){
         // Still No Leader
         $this->noLeaderFound();
@@ -52,11 +52,11 @@ class ReallocateAmbassador extends CI_Controller {
         $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
         $informLeader=false;
         $ambassador=$this->AmbassadorModel->getByRequestId($result->request_id);
-        $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);  
-     
+        $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
+
       }//else
-  
-      
+
+
     }//else
   }//checkAmbassador
 
@@ -68,14 +68,14 @@ class ReallocateAmbassador extends CI_Controller {
       $request_id=$_POST['request_id'];
       $currentTime=time();
       $date_update=date("Y-m-d",$currentTime);
-      
+
       // //Check ambassador gender
         if ($ambassador_info['gender'] != "female" && $ambassador_info['gender']!="male") {
-          $ambassador_gender="any"; 
+          $ambassador_gender="any";
 
         }
         else{
-          $ambassador_gender=$ambassador_info['gender']; 
+          $ambassador_gender=$ambassador_info['gender'];
         }
 
       //check leader gender
@@ -83,9 +83,9 @@ class ReallocateAmbassador extends CI_Controller {
           //Check New Teams
             $result=$this->ReallocateAmbassadorModel->newTeamsAnyLeader($ambassador_gender,$leader_id);
             if (count((array)$result) == 0 ){
-              
+
               //Check Teams With Less Than 12 Members
-                $result=$this->ReallocateAmbassadorModel->anyLeader($ambassador_gender, "<=",$leader_id);  
+                $result=$this->ReallocateAmbassadorModel->anyLeader($ambassador_gender, "<=",$leader_id);
                 if (count((array)$result) == 0 ){
                   //Check Teams With More Than 12 Members
                     $result=$this->ReallocateAmbassadorModel->anyLeader($ambassador_gender, ">",$leader_id);
@@ -111,9 +111,9 @@ class ReallocateAmbassador extends CI_Controller {
           //Check New Teams
             $result=$this->ReallocateAmbassadorModel->getNewTeams($Leader_gender,$ambassador_gender,$leader_id);
             if (count((array)$result) == 0 ){
-              
+
               //Check Teams With Less Than 12 Members
-                $result=$this->ReallocateAmbassadorModel->getTeams($Leader_gender,$ambassador_gender, "<=",$leader_id);  
+                $result=$this->ReallocateAmbassadorModel->getTeams($Leader_gender,$ambassador_gender, "<=",$leader_id);
                 if (count((array)$result) == 0 ){
                   //Check Teams With More Than 12 Members
                     $result=$this->ReallocateAmbassadorModel->getTeams($Leader_gender,$ambassador_gender, ">",$leader_id);
@@ -133,7 +133,7 @@ class ReallocateAmbassador extends CI_Controller {
               $this->checkout($ambassador_info['fb_id'],$Leader_gender, $result->Rid,$result->leader_id,$result->members_num);
             }//else
         }//else
-        
+
     }//if
 
   }//allocateAmbassador
@@ -147,11 +147,11 @@ class ReallocateAmbassador extends CI_Controller {
 
     $this->AmbassadorModel->updateAmbassador($fb_id,$leader_gender,$request_id,$date_update);
 
-    
+
     // 2- Inform Ambassador
       //1- get leader Information
         $leader_info=$this->SignUpModel->getLeaderInfo($leader_id);
-    
+
     // 3- Check Leader Requests
       //1- chekc associated requests
       $numberOfRequests=$this->AmbassadorModel->countRequests($request_id);
@@ -164,7 +164,7 @@ class ReallocateAmbassador extends CI_Controller {
     //4- load view to inform ambassador [FINAL STEP]
       $ambassadorInfo=$this->AmbassadorModel->getByRequestId($request_id);
       $reallocate=false;
-      $this->informambassador($reallocate,$ambassadorInfo,$leader_info,$request_id,$informLeader,$leader_id);   
+      $this->informambassador($reallocate,$ambassadorInfo,$leader_info,$request_id,$informLeader,$leader_id);
   }//checkout
 
   public function informambassador($reallocate,$ambassador,$leader_info,$request_id,$informLeader,$leader_id)
@@ -178,13 +178,13 @@ class ReallocateAmbassador extends CI_Controller {
     $data = $this->load->view('sign_up/final_page_info',$team_info);
 
     return $data;
-    
+
   }//informambassador
 
   public function informLeader()
   {
     if (!empty($_POST['leader_id']) && !empty($_POST['request_id']) ) {
-      //1- update request to DONE 
+      //1- update request to DONE
         $this->RequestsModel->updateRequest($_POST['request_id']);
         //2- get all associated requests
         $allAmbassadors=$this->AmbassadorModel->getByRequestId($_POST['request_id']);
@@ -202,7 +202,7 @@ class ReallocateAmbassador extends CI_Controller {
 
       /*initialize curl*/
       $ch = curl_init($url);
-      
+
       $firstMsg="السلام عليكم ورحمة الله وبركاته ".'\n'." كيف  الحال قيادة؟! 🌸 ".'\n'."تم إرسال أعضاء جدد لفريقك؛ نتمنى منك الاهتمام بهم يرجى منك إضافة جميع السفراء (بغض النظر دخل فريق المتابعة أو لا) إلى موقع العلامات وفي نهاية الأسبوع من لم يقرأ فقط قم بعمل انسحاب له (انسحاب وليس حذف من إشارة ❌) وذلك لتجنب الفوضى في مجموعة السفراء  ".'\n'."شكرا لك😍";
 
       /*prepare response*/
@@ -224,7 +224,7 @@ class ReallocateAmbassador extends CI_Controller {
       /*prepare response*/
       $jsonData =  $this->jsonData($recipient,$lastMsg);
       /* curl setting to send a json post data */
-      $this->curlSetting($ch,$jsonData);    
+      $this->curlSetting($ch,$jsonData);
     }//if
   }//informLeader
 
@@ -254,14 +254,14 @@ class ReallocateAmbassador extends CI_Controller {
 
     //Set the content type to application/json
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    
+
     //Execute the request.
     curl_exec($ch); // user will get the message
-  
+
   }//curlSetting
 
   public function noLeaderFound()
-  {  
+  {
     $this->load->view('sign_up/templates/header');
     $this->load->view('sign_up/templates/navbar' );
     $this->load->view('sign_up/no_leader_found');

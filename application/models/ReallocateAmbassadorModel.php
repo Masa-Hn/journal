@@ -2,7 +2,7 @@
 class ReallocateAmbassadorModel extends CI_Model {
 
 	public function checkAvailableRequests()
-	{	
+	{
 		$query = $this->db->query("SELECT COUNT(IF(`is_done`=0,1, NULL)) FROM `leader_request`");
 	    return $query->result();
 	}//checkAvailableRequests
