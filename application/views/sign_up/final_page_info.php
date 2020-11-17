@@ -61,7 +61,7 @@ a{
 
       </div>
       <div class="row fullscreen align-items-center justify-content-center">
-          <div class="banner-left col-lg-12 col-sm-12 text-center" dir="rtl">
+          <div class=" col-lg-12 col-sm-12 text-center" dir="rtl">
             <img class="d-flex mx-auto img-fluid infoImg" src="<?php echo base_url()?>assets/sign_up_assests/img/leaderInfo_2.png" alt="">
           </div>
           <div class="col-lg-12 col-sm-12">

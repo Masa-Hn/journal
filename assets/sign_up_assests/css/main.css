@@ -313,10 +313,10 @@ hr{
     width: 65%;
   }
   .helpTxt{
-    font-size: 15px;
+    font-size: 17px;
   }
   .centered {
-    top: 38%;
+    top: 43%;
     left: 38%;
   }
 
@@ -333,6 +333,9 @@ hr{
 @media only screen and (max-width: 700px){
   .modal-content {
     width: 100%;
+  }
+  .copyimg{
+    width: 95%;
   }
   .close{
     top: 10%;
@@ -353,8 +356,17 @@ hr{
   .activity-div-img{
     width: 100%
   }
+
 }
 @media only screen and (min-width: 992px) {
+  .copyimg{
+    width: 40%;
+  }
+  .centered {
+    top: 42%;
+    left: 43%;
+  }
+
     .story-content h3 br{display:none}
     .story-content h5 br{display:none}
     .bgImg{
@@ -380,8 +392,22 @@ hr{
     #join-btn-3{
       display: none;
     }
+    .infoImg{
+      width: 25%
+    }
 }
 @media only screen and (max-width: 992px) {
+  
+.copyimg{
+    width: 45%;
+  }
+  .centered {
+    top: 42%;
+    left: 43%;
+  }
+  .infoImg{
+      width: 35%
+  }
   .left-text{
       margin-top: 25%;
     }
@@ -393,6 +419,13 @@ hr{
     }
 }
 @media only screen and (max-width: 450px) {
+  .copyimg{
+    width: 95%;
+  }
+  .centered {
+    top: 47%;
+    left: 34%;
+  }
   .sp-1{
     font-size: 30px !important;
   }
@@ -403,4 +436,8 @@ hr{
   .book-div-img{
     width: 50%;
   }
+  .infoImg{
+    width: 60%
+  }
 }
+
