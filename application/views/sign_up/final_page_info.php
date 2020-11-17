@@ -46,7 +46,7 @@ a{
             <div class="col-lg-12 col-sm-12 text-center">
               <br>
               <h4 style="margin-bottom: 5%; margin-top: 0">
-              بينما تنتظر الدخول لمجموعة القراءة ما رايك أن تاخذ جولة بين رف مكتبة كتب منهج أصبوحة ١٨٠ من  <a href="<?php echo base_url()?>" target="_blank">هنا</a>
+              بينما تنتظر الدخول لمجموعة القراءة ما رايك أن تاخذ جولة بين رف مكتبة كتب منهج أصبوحة ١٨٠ من  <a href="<?php echo base_url()?>" target="_blank"><span class="sp-3">هنــا</span></a>
               </h4>
             </div>  
           </div>
@@ -61,8 +61,8 @@ a{
 
       </div>
       <div class="row fullscreen align-items-center justify-content-center">
-          <div class="banner-left col-lg-12 col-sm-12 text-center" dir="rtl">
-            <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/leaderInfo_2.png" alt="">
+          <div class=" col-lg-12 col-sm-12 text-center" dir="rtl">
+            <img class="d-flex mx-auto img-fluid infoImg" src="<?php echo base_url()?>assets/sign_up_assests/img/leaderInfo_2.png" alt="">
           </div>
           <div class="col-lg-12 col-sm-12">
             <div class="modalDiv" dir="rtl" style="text-align: center;">
@@ -74,7 +74,7 @@ a{
 
                 إن كنت متحمسًا جدًا، اضغط هنا لِتَقوم بمراسلة قائدك : 
                 <br>
-                <a href="<?php echo $leader_info->leader_link; ?>" class="final-page genric-btn primary circle arrow" id="code" style="margin: 1.5%; font-size: inherit;" target="_blank">
+                <a href="<?php echo $leader_info->leader_link; ?>" class="final-page genric-btn primary circle arrow" id="leader" style="margin: 1.5%; font-size: inherit;" target="_blank">
                   مراسلة قائدي
                 </a>
               </h2>
@@ -98,18 +98,18 @@ a{
       </div>
       <div class="row fullscreen align-items-center justify-content-center">
           <div class="banner-left col-lg-12 col-sm-12 text-center" dir="rtl">
-            <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/teamInfo_1.png" alt="">
+            <img class="d-flex mx-auto img-fluid infoImg" src="<?php echo base_url()?>assets/sign_up_assests/img/teamInfo_1.png" alt="">
           </div>
-          <div class="banner-left col-lg-12 col-sm-12">
+          <div class=" col-lg-12 col-sm-12">
             <div class="modalDiv" dir="rtl" style="text-align: center;">
             <h3>
               قم بالضغط على الكود أدناه لنسخه، سوف يطلب منك إدخاله لقبولك ضمن مجموعة القراءة الخاصة بك.
 
             </h3>
-            <div class="container">
+            <div class="container_centered">
               <img class="copyimg" src="<?php echo base_url()?>assets/sign_up_assests/img/point3.png" alt="">
               <div class="centered">
-                <a href="javascript:copyCode()" class="final-page genric-btn primary circle arrow" id="code" style="margin-top: 15%; background-color: #8cb99c;"  target="_blank">
+                <a href="javascript:copyCode()" class="final-page genric-btn primary circle arrow" id="code" style="margin-top: 15%; background-color: #8cb99c;">
                   <?php echo $leader_info->uniqid .$leader_info->id ; ?>    
                 </a>
               </div>
@@ -117,13 +117,13 @@ a{
             <h2 class="clear artical-title-small" style="margin-bottom: 1.5%">
               اضغط هنا للانضمام لفريق القراءة الخاص بك
             </h2>
-            <a href="<?php echo $leader_info->team_link; ?>" class="final-page genric-btn primary circle arrow" id="code" style="margin: 1.5%;"  target="_blank">
+            <a href="<?php echo $leader_info->team_link; ?>" class="final-page genric-btn primary circle arrow" id="team" style="margin: 1.5%;"  target="_blank">
               اضغط هنا للدخول لفريقك
             </a>
           </div>
         </div>
-        <div class="banner-left col-lg-12 col-sm-12 text-left">
-          <div class="container" style="text-align: left; margin-left: 0" id="help">
+        <div class="col-lg-12 col-sm-12 text-left">
+          <div class="container_centered" style="text-align: left; margin-left: 0" id="help">
               <img class="helpimg" src="<?php echo base_url()?>assets/sign_up_assests/img/point4.png" alt="">
               <div class="centered_help">
                 <a href="https://www.facebook.com/taheelofosboha/" class="helpTxt" target="_blank">
