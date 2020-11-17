@@ -198,8 +198,10 @@ hr{
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: #ffffff;
+  
 }
 /* Modal Content (Image) */
 .modal-content {
@@ -246,6 +248,86 @@ hr{
   .form-control{
     width: 70%
   }
+
+
+.FBmsg{
+  width: 5%
+}
+.point{
+  width: 8%;
+}
+.container {
+  position: relative;
+  text-align: center;
+}
+.centered {
+  position: absolute;
+  top: 38%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+.centered_help {
+  position: absolute;
+  top: 53%;
+  left: 9%;
+  transform: translate(-50%, -50%);
+
+}
+.float{
+  float: left;
+}
+.clear{
+  clear: both;
+}
+.modalDiv{
+  margin-top: 3%;
+}
+
+.direct{
+  display: flex;
+  flex-direction: row-reverse;   
+}
+.copyimg{
+  width: 35%;
+}
+.helpimg{
+  width: 19%;
+} 
+.helpTxt{
+ color: white;
+ font-size: 12px;
+}
+#help{
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+@media (max-width: 768px){
+  .direct{
+    display: flex;
+    flex-direction: column;   
+  }
+  .copyimg{
+    width: 80%
+  }
+  .helpimg{
+    width: 65%;
+  }
+  .helpTxt{
+    font-size: 15px;
+  }
+  .centered {
+    top: 38%;
+    left: 38%;
+  }
+
+   .centered_help {
+    top: 48%;
+    left: 44%;
+  }
+  #help{ text-align: center !important ; }
+}
+
+
 
 /* 100% Image Width on Smaller Screens */
 @media only screen and (max-width: 700px){

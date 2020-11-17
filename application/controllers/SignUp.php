@@ -100,7 +100,6 @@ class SignUp extends CI_Controller {
         $diff=date_diff($created_at,$current);
 
         if($diff->format("%a") > 2){ 
-      
           $reallocate=true;
         }//if
         $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
