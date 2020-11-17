@@ -1,10 +1,7 @@
 <?php
-//require 'vendor/autoload.php'; 
-//use Bitly\BitlyClient;
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class SignUp extends CI_Controller {
+class ReallocateAmbassador extends CI_Controller {
 
 	public function __construct()
 	{
@@ -12,112 +9,65 @@ class SignUp extends CI_Controller {
     $this->load->model('SignUpModel');    	
     $this->load->model('AmbassadorModel');      
     $this->load->model('RequestsModel');  
-    $this->load->model('books');  
+    $this->load->model('ReallocateAmbassadorModel');  
     $this->load->model('StatisticsModel');
 
 	}//end construct()
 
  	public function index()
   {
-    
-    if (!empty($_SESSION['question_5'])) {
-      session_destroy(); 
-      $this->load->view('sign_up/question_5');
-    }
-    else{
-      $this->load->view( 'sign_up/templates/header');
-      $this->load->view( 'sign_up/templates/navbar' );
-      //Load Main Page
-      $this->load->view('sign_up/index');
-      $this->load->view( 'sign_up/templates/footer');
-
-    }
-    
+    //Load Main Page
+      $this->load->view('sign_up/reallocate_fb_login');
   }//index
-
- public function nextPage()
-  {
-    if(! empty($_POST['next'])){
-      $page="sign_up/".$_POST['next'];
-
-      if($_POST['next'] == "question_4"){
-        $sections['sections']=$this->books->getSections(1);
-          
-          $data = $this->load->view($page,$sections);
-          return $data;
-
-      }//if
-      else{
-        $file=APPPATH.'views/'.$page.'.php';
-        if(file_exists($file)){
-          $data =$this->load->view($page);
-          return $data;
-        }//if
-        else{
-          $data = $this->load->view('sign_up/404');
-          return $data;
-
-
-        }//else
-
-      }//else
-    }//if
-    else{
-      $data = $this->load->view('sign_up/404');
-      return $data;
-
-    }
-
-  }//nextPage
-
-  // public function leaderGender(){
-  //   $this->load->view('sign_up/leader_gender');
-  // }
 
   public function checkAmbassador()
   {
     $reallocate=false;
     $result=$this->AmbassadorModel->checkAmbassador($_GET['fb_id']);
     if (count((array)$result) == 0 ){
-      //if not exist
-      // $this->load->view('sign_up/leader_gender');
-      $_SESSION['question_5']='question_5';
       $url=base_url()."SignUp/";
       header('Location: '.$url);
       exit();
+
     }//if
     else{
-      //Inform Ambassador
-      if($result->request_id == null){
+      //check time 
+      $request=$this->SignUpModel->getRequestInfo($result->request_id);
+      $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
+      $created_at=date_create($created_at->format("Y-m-d"));
+      $current=date_create(date("Y-m-d",time()));
+      $diff=date_diff($created_at,$current);
+      if($diff->format("%a") > 2){ 
+        if($result->request_id == null){
         // Still No Leader
         $this->noLeaderFound();
       }
       else{
-        $request=$this->SignUpModel->getRequestInfo($result->request_id);
-        $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
-        $created_at=date_create($created_at->format("Y-m-d"));
-        $current=date_create(date("Y-m-d",time()));
-        $diff=date_diff($created_at,$current);
-
-        if($diff->format("%a") > 2){ 
-          $reallocate=true;
-        }//if
+        $data['leader_id']=$request->leader_id;
+        $data['request_id']=$result->request_id;
+        $this->load->view('sign_up/leader_gender',$data);
+      }
+      }//if
+      else{
         $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
         $informLeader=false;
         $ambassador=$this->AmbassadorModel->getByRequestId($result->request_id);
         $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);  
-      }
+     
+      }//else
+  
       
-    }
+    }//else
   }//checkAmbassador
-
-
 
   public function allocateAmbassador(){
     if (!empty($_POST['ambassador'])) {
       $ambassador_info=$_POST['ambassador'];
       $Leader_gender=$_POST['leader_gender'];
-      $country=$_POST['country'];
+      $leader_id=$_POST['leader_id'];
+      $request_id=$_POST['request_id'];
+      $currentTime=time();
+      $date_update=date("Y-m-d",$currentTime);
       
       // //Check ambassador gender
         if ($ambassador_info['gender'] != "female" && $ambassador_info['gender']!="male") {
@@ -131,65 +81,56 @@ class SignUp extends CI_Controller {
       //check leader gender
         if ($Leader_gender == "any") {
           //Check New Teams
-            $result=$this->SignUpModel->newTeamsAnyLeader($ambassador_gender);
+            $result=$this->ReallocateAmbassadorModel->newTeamsAnyLeader($ambassador_gender,$leader_id);
             if (count((array)$result) == 0 ){
               
               //Check Teams With Less Than 12 Members
-                $result=$this->SignUpModel->anyLeader($ambassador_gender, "<=");  
+                $result=$this->ReallocateAmbassadorModel->anyLeader($ambassador_gender, "<=",$leader_id);  
                 if (count((array)$result) == 0 ){
                   //Check Teams With More Than 12 Members
-                    $result=$this->SignUpModel->anyLeader($ambassador_gender, ">");
+                    $result=$this->ReallocateAmbassadorModel->anyLeader($ambassador_gender, ">",$leader_id);
                     if (count((array)$result) == 0 ){
-                      $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$Leader_gender,$country);
-                      $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
+                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$Leader_gender,null,$date_update);
                       $this->noLeaderFound();
                     }//if
                     else{
-                      $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result,$country);
-                      $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                      $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
                     }//else
 
                 }//if
                 else{
-                  $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result,$country);
-                   $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                   $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
                 }//else
             }//if
             else{
-              $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result,$country);
-              $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+              $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
             }//else
         }//if
         else{
           //for specific leader gender
           //Check New Teams
-            $result=$this->SignUpModel->getNewTeams($Leader_gender,$ambassador_gender);
+            $result=$this->ReallocateAmbassadorModel->getNewTeams($Leader_gender,$ambassador_gender,$leader_id);
             if (count((array)$result) == 0 ){
               
               //Check Teams With Less Than 12 Members
-                $result=$this->SignUpModel->getTeams($Leader_gender,$ambassador_gender, "<=");  
+                $result=$this->ReallocateAmbassadorModel->getTeams($Leader_gender,$ambassador_gender, "<=",$leader_id);  
                 if (count((array)$result) == 0 ){
                   //Check Teams With More Than 12 Members
-                    $result=$this->SignUpModel->getTeams($Leader_gender,$ambassador_gender, ">");
+                    $result=$this->ReallocateAmbassadorModel->getTeams($Leader_gender,$ambassador_gender, ">",$leader_id);
                     if (count((array)$result) == 0 ){
-                      $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$Leader_gender,$country);
-                      $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
-
+                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$Leader_gender,null,$date_update);
                       $this->noLeaderFound();
                     }//if
                     else{
-                      $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result,$country);
-                      $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                      $this->checkout($ambassador_info['fb_id'],$Leader_gender, $result->Rid,$result->leader_id,$result->members_num);
                     }//else
                 }//if
                 else{
-                  $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result,$country);
-                  $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                  $this->checkout($ambassador_info['fb_id'],$Leader_gender, $result->Rid,$result->leader_id,$result->members_num);
                 }//else
             }//if
             else{
-              $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result,$country);
-              $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+              $this->checkout($ambassador_info['fb_id'],$Leader_gender, $result->Rid,$result->leader_id,$result->members_num);
             }//else
         }//else
         
@@ -197,10 +138,15 @@ class SignUp extends CI_Controller {
 
   }//allocateAmbassador
 
-  public function checkout($ambassador,$request_id,$leader_id,$members_num){
+  public function checkout($fb_id,$leader_gender,$request_id,$leader_id,$members_num){
     $informLeader=false;
-    // 1- Insert Ambassador
-    $this->AmbassadorModel->insertAmbassador($ambassador);
+    // 1- UPDATE Ambassador
+    $currentTime=time();
+    $date_update=date("Y-m-d",$currentTime);
+
+
+    $this->AmbassadorModel->updateAmbassador($fb_id,$leader_gender,$request_id,$date_update);
+
     
     // 2- Inform Ambassador
       //1- get leader Information
@@ -232,6 +178,7 @@ class SignUp extends CI_Controller {
     $data = $this->load->view('sign_up/final_page_info',$team_info);
 
     return $data;
+    
   }//informambassador
 
   public function informLeader()
@@ -312,33 +259,6 @@ class SignUp extends CI_Controller {
     curl_exec($ch); // user will get the message
   
   }//curlSetting
-
-  public function formatAmbassador($ambassador_info,$ambassador_gender,$Leader_gender,$result,$country)
-  {         
-    $ambassador = array(
-                'name' => $ambassador_info['name'],
-                'country'=>$country,
-                'gender'=>$ambassador_gender,
-                'leader_gender'=>$Leader_gender,
-                'request_id'=>$result->Rid,
-                'profile_link'=>$ambassador_info['profile_link'],
-                'fb_id'=>$ambassador_info['fb_id']
-                );
-    return $ambassador; 
-  }//formatAmbassador
-
-  public function ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$Leader_gender,$country)
-  {
-    $ambassador = array(
-                'name' => $ambassador_info['name'],
-                'country'=>$country,
-                'gender'=>$ambassador_gender,
-                'leader_gender'=>$Leader_gender,
-                'profile_link'=>$ambassador_info['profile_link'],
-                'fb_id'=>$ambassador_info['fb_id']
-                );
-    return $ambassador;
-  }//ambassadorWithoutLeader
 
   public function noLeaderFound()
   {  

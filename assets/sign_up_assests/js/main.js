@@ -156,20 +156,72 @@ function question2(msg) {
   }
  
 }
-function allocateAmbassador(leader_gender){
+function allocateAmbassador(){
+  leader_gender =document.getElementById('leader_gender').value;
+  country =document.getElementById('country').value;
+  ambassador = JSON.parse(sessionStorage.getItem("ambassador_info"));
+  if (leader_gender != "" &&  country !="") {
+
+    $.ajax({
+      type: "POST",
+      url:document.getElementById("base_url").value+"SignUp/allocateAmbassador",
+      data: {'ambassador':ambassador,'leader_gender': leader_gender,'country': country },
+      success: function(data){
+        $("body").html(data);
+
+      }//success
+    });
+  }//if
+  else{
+    if(leader_gender == ""){
+      msg= "يجب اختيار جنس القائد";
+    }
+    else{
+      msg="يجب اختيار بلد الاقامة";
+    }
+    Swal.fire({
+      title: 'انتبه',
+      text:msg,
+      imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/error_msg.png',
+      imageWidth: 300,
+      imageAlt: 'Custom image',
+      timer: 4000,
+      confirmButtonText: "حسنًا ",
+      confirmButtonColor:'#9ed16f'
+    });
+  }
+}//allocateAmbassador
+
+
+function checkLogin(id) {
+   if (! sessionStorage['ambassador_info']) {
+      urlReallocate=document.getElementById("base_url").value+"ReallocateAmbassador",
+      window.location.replace(urlReallocate);
+  }
+  else{
+    urlReallocate=document.getElementById("base_url").value+"ReallocateAmbassador/checkAmbassador?fb_id="+id;
+    window.location.replace(urlReallocate); 
+  }
+}//checkLogin
+
+function reallocateAmbassador(leader_gender) {
+ 
   leader_gender =leader_gender;
+  leader_id=document.getElementById('leader_id').value;
+  request_id=document.getElementById('request_id').value;
   ambassador = JSON.parse(sessionStorage.getItem("ambassador_info"));
 
   $.ajax({
     type: "POST",
-    url:document.getElementById("base_url").value+"SignUp/allocateAmbassador",
-    data: {'ambassador':ambassador,'leader_gender': leader_gender},
+    url:document.getElementById("base_url").value+"ReallocateAmbassador/allocateAmbassador",
+    data: {'ambassador':ambassador,'leader_gender': leader_gender,'leader_id':leader_id,'request_id':request_id},
     success: function(data){
       $("body").html(data);
 
     }//success
   });
-}//allocateAmbassador
+}
+
 
 function informLeader(leader_id,request_id){
 
@@ -179,3 +231,21 @@ function informLeader(leader_id,request_id){
     data: {'leader_id':leader_id,'request_id': request_id}
   });
 }//allocateAmbassador
+
+function  show (id,close){
+  var modal = document.getElementById(id);
+  //var captionText = document.getElementById("caption"); 
+  modal.style.display = "block";
+  header=document.getElementById('header');
+  header.style.display = "none";
+  var span =document.getElementById(close);
+
+  span.onclick = function() { 
+    header.style.display = "block";
+    modal.style.display = "none";
+
+  }
+
+
+}//end show()
+

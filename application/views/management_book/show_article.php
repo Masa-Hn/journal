@@ -35,7 +35,37 @@ showSlides(slideIndex);
       <p><?php echo $row->date ?></p>
 
       <h5 class="heading"> : المقال</h5>
-      <p><?php echo $row->article ?></p>
+      <script type="text/javascript">
+$(function(){ /* to make sure the script runs after page load */
+
+  $('.item').each(function(event){ /* select all divs with the item class */
+  
+    var max_length = 150; /* set the max content length before a read more link will be added */
+    
+    if($(this).html().length > max_length){ /* check for content length */
+      
+      var short_content   = $(this).html().substr(0,max_length); /* split the content in two parts */
+      var long_content  = $(this).html().substr(max_length);
+      
+      $(this).html(short_content+
+             '<a href="#" id="rm" class="read_more"><br/>قراءة المزيد</a>'+
+             '<span class="more_text" style="display:none;">'+long_content+'</span>'); /* Alter the html to allow the read more functionality */
+             
+      $(this).find('a.read_more').click(function(event){ /* find the a.read_more element within the new html and bind the following code to it */
+ 
+        event.preventDefault(); /* prevent the a from changing the url */
+        $('.read_more').hide(); /* hide the read more button */
+
+
+        $(this).parents('.item').find('.more_text').show(); /* show the .more_text span */
+      });
+    }
+  });
+});
+
+</script>
+
+      <p class="item"> <?php echo $row->article ?></p>
  <form  enctype="multipart/form-data" method="post" style="padding-bottom: 5em;padding-top: 5em;padding-left: 47%" action="<?=base_url()?>Management_book/show_article">   
 <input type="number" name="id" id="id" value="<?php echo $row->id ?>" style="display: none;"   >  
 <button  id="delete"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A;" >حذف المقال</button>

@@ -2,37 +2,27 @@
 defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 class Requests extends CI_Controller {
 
-	public
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 		$this->load->model( 'requestsModel' );
 		$this->load->model( 'GeneralModel' );
 		$this->load->library( 'form_validation' );
 	} //end construct()
 
-	public
-	function index() {
+	public function index() {
 
 		$this->load->view( 'leader_request/header' );
-		$regBefore = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info' );
+		$regBefore = $this->requestsModel->check_email( $_GET[ 'email' ] );
 
 		if ( $regBefore->num_rows > 0 ) {
-			$info = $this->requestsModel->get_info( $_GET[ 'email' ] )->fetch_assoc();
-
-			if ( $info[ 'leader_link' ] == null && $info[ 'leader_gender' ] == null ) {
-				$this->load->view( 'leader_request/full_request' );
-			} else {
-				$this->load->view( 'leader_request/request' );
-				$this->load->view( 'leader_request/edit_info' );
-			}
-
+			$this->load->view( 'leader_request/request' );
+			$this->load->view( 'leader_request/edit_info' );
 		} else {
-			$this->load->view( 'leader_request/page_messaging' );
+			$this->load->view( 'leader_request/full_request' );
 		}
 	}
 
-	public
-	function addFullRequest() {
+	public function addFullRequest() {
 
 		$msg = "";
 
@@ -41,7 +31,8 @@ class Requests extends CI_Controller {
 
 		if ( $this->form_validation->run() ) {
 			// data of the leader
-			$leader[ 'leader_name' ] = $_POST[ 'leaderName' ];
+			$leader[ 'leader_name' ] = $_GET[ 'name' ];
+			$leader[ 'leader_email' ] = $_GET[ 'email' ];
 			$leader[ 'team_name' ] = $_POST[ 'teamName' ];
 			$leader[ 'leader_link' ] = $_POST[ 'leaderLink' ];
 			$leader[ 'team_link' ] = $_POST[ 'teamLink' ];
@@ -57,27 +48,21 @@ class Requests extends CI_Controller {
                     يرجى التأكد من رابط صفحتك الشخصية!
                 </div>";
 			} else {
-				$info = $this->requestsModel->get_info( $_GET[ 'email' ] )->fetch_assoc();
-				if ( $info[ 'leader_link' ] == null && $info[ 'leader_gender' ] == null ) {
-					$request[ 'leader_id' ] = $info[ 'id' ];
-					$leader[ 'leader_id' ] = $info[ 'id' ];
+				//generate code
+				$desired_length = 6;
+				$unique = uniqid();
+				$uniqid = "Osb180" . substr( $unique, strlen( $unique ) - $desired_length, $desired_length );
+				$leader[ 'uniqid' ] = $uniqid;
 
-					//generate code
-					$desired_length = 6;
-					$unique = uniqid();
-					$leader[ 'random_word' ] = "Osb180" . substr( $unique, strlen( $unique ) - $desired_length, $desired_length );
+				$leader_id = $this->requestsModel->insertLeaderInfo( $leader );
+				$request[ 'leader_id' ] = $leader_id;
+				$requestID = $this->requestsModel->addRequest( $request );
 
-					$this->requestsModel->updateFullRequest( $leader );
+				$this->distributeAmbassadors( $requestID );
 
-					$requestID = $this->requestsModel->addRequest( $request );
-					$this->distributeAmbassadors( $requestID );
-					$msg = "<div class='alert alert-success'>
+				$msg = "<div class='alert alert-success'>
                           تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
                           </div>";
-
-				} else {
-					$msg = "<div class='alert alert-danger'>لقد تم تسجيل الطلب مسبقاً!</div>";
-				}
 			}
 		} else {
 			$msg = "<div class='alert alert-danger'>" . validation_errors() . "</div>";
@@ -85,8 +70,7 @@ class Requests extends CI_Controller {
 		echo $msg;
 	}
 
-	public
-	function addRequest() {
+	public function addRequest() {
 		$msg = "";
 		//data of the request
 		$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
@@ -118,22 +102,24 @@ class Requests extends CI_Controller {
 			$rid = $this->requestsModel->addRequest( $request );
 			$this->distributeAmbassadors( $rid );
 			$msg = "<div class='alert alert-success'>
-											تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
-											</div>";
+					تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
+					</div>";
 		}
 		echo $msg;
 	}
 
-	public
-	function edit() {
+	public function edit() {
 		$msg = "";
 		$this->form_validation->set_rules( 'leaderName', 'اسم القائد', 'required' );
 		$this->form_validation->set_rules( 'leaderLink', 'رابط صفحة القائد', 'trim|required' );
+		$this->form_validation->set_rules( 'teamLink', 'رابط فريق المتابعة', 'trim|required' );
 		$this->form_validation->set_message( 'required', 'يجب عليك تعبئة حقل %s' );
+
 		if ( $this->form_validation->run() ) {
 			$data[ 'id' ] = $_POST[ 'id' ];
 			$data[ 'leader_name' ] = $_POST[ 'leaderName' ];
 			$data[ 'leader_link' ] = $_POST[ 'leaderLink' ];
+			$data[ 'team_link' ] = $_POST[ 'teamLink' ];
 			$this->requestsModel->updateLeaderInfo( $data );
 			$msg = "<div class='alert alert-success'>
                 تم تعديل بياناتك بنجاح
@@ -144,8 +130,7 @@ class Requests extends CI_Controller {
 		echo $msg;
 	}
 
-	public
-	function distributeAmbassadors( $requestID ) {
+	public function distributeAmbassadors( $requestID ) {
 
 		$noneDistributedAmbassadors = $this->requestsModel->getNoneDistributedAmbassadors();
 		$request = $this->requestsModel->getRequest( $requestID )->fetch_array( MYSQLI_ASSOC );
@@ -167,10 +152,31 @@ class Requests extends CI_Controller {
 			}
 		}
 		$distributedAmbassadors = $this->requestsModel->getDistributedAmbassadors( $requestID );
-		echo $distributedAmbassadors->num_rows;
 		if ( $distributedAmbassadors->num_rows == $request[ 'members_num' ] ) {
 			$this->requestsModel->updateReq( $requestID );
 		}
+	}
+
+	public function deleteLeaderRequest() {
+		$data[ 'info' ] = array();
+		$reqs = $this->GeneralModel->get_data( 0, 'is_done', 'leader_request' )->result();
+		for ( $i = 0; $i < count( $reqs ); $i++ ) {
+
+			if ( $this->GeneralModel->get_data( $reqs[ $i ]->Rid, 'request_id', 'ambassador' )->result() == NULL ) {
+				array_push( $data[ 'info' ], $reqs[ $i ] );
+			}
+		}
+		$data[ 'title' ] = 'Delete Leader Request';
+		$this->load->view( 'management_book/templates/header', $data );
+		$this->load->view( 'management_book/templates/navbar' );
+		$this->load->view( 'leader_request/DeleteRequest', $data );
+		$this->load->view( 'management_book/templates/footer' );
+	}
+
+	public function deleteRequest() {
+		$id = $this->input->post( 'id' );
+		$this->GeneralModel->remove( $id, 'leader_request', 'Rid' );
+		redirect( base_url() . 'requests/deleteLeaderRequest' );
 	}
 }
 ?>

@@ -1,5 +1,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" type="text/javascript"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 	.card {
 		text-align: center;
@@ -23,7 +23,7 @@
 	
 	.fa,
 	.list-group-item {
-		font-size: 1.3vw;
+		font-size: 1.3rem;
 	}
 	
 	.viewers,
@@ -48,9 +48,13 @@
 	.fa-code,
 	.fa-user,
 	.fa-users,
+	.fa-user-plus,
+	.fa-user-tie,
 	.fa-code:hover,
 	.fa-user:hover,
-	.fa-users:hover{
+	.fa-users:hover,
+	.fa-user-plus:hover,
+	.fa-user-tie:hover {
 		color: #205d67;
 	}
 
@@ -127,12 +131,17 @@
 					</tbody>
 
 				</table>
-				<div class="card ">
-					<h2 class="card-title">إحصائيات الأزرار</h2>
+				<div class="card">
+
+					<h2 class="card-title"> إحصائيات الأزرار والأعضاء الجدد</h2>
 					<?php
 					$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND  date = DATE(CURDATE())' )->num_rows();
 					$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND  date = DATE(CURDATE())' )->num_rows();
 					$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND  date = DATE(CURDATE())' )->num_rows();
+
+					//get new members
+					$daily = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'is_done = 0 and date = DATE(CURDATE())' )->row();
+					$sum_daily = $daily->members_num;
 					?>
 					<ul class="list-group">
 
@@ -143,8 +152,13 @@
 						<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
 							<?php echo $team_link_clicks; ?>
 						</li>
+						<li class="list-group-item"><i class="fa fa-user-plus"></i>عدد الأعضاء الجدد:
+							<?php echo $sum_daily; ?>
+						</li>
 
 					</ul>
+
+
 				</div>
 			</div>
 
@@ -199,11 +213,15 @@
 				</table>
 
 				<div class="card ">
-					<h2 class="card-title">إحصائيات الأزرار</h2>
+					<h2 class="card-title">إحصائيات الأزرار والأعضاء الجدد</h2>
 					<?php
 					$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
 					$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
 					$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
+
+					//get new members
+					$weekly = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'is_done = 0 and YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)' )->row();
+					$sum_weekly = $weekly->members_num;
 					?>
 					<ul class="list-group">
 
@@ -213,6 +231,9 @@
 							<?php echo $leader_link_clicks; ?> </li>
 						<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
 							<?php echo $team_link_clicks; ?>
+						</li>
+						<li class="list-group-item"><i class="fa fa-user-plus"></i>عدد الأعضاء الجدد:
+							<?php echo $sum_weekly; ?>
 						</li>
 
 					</ul>
@@ -268,15 +289,18 @@
 						}
 						}
 						?>
-
 					</tbody>
 				</table>
 				<div class="card ">
-					<h2 class="card-title">إحصائيات الأزرار</h2>
+					<h2 class="card-title">إحصائيات الأزرار والأعضاء الجدد</h2>
 					<?php
 					$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE())' )->num_rows();
 					$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE())' )->num_rows();
 					$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE())' )->num_rows();
+
+					//get new members
+					$monthly = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'is_done = 0 and YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE())' )->row();
+					$sum_monthly = $monthly->members_num;
 					?>
 					<ul class="list-group">
 
@@ -286,6 +310,9 @@
 							<?php echo $leader_link_clicks; ?> </li>
 						<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
 							<?php echo $team_link_clicks; ?>
+						</li>
+						<li class="list-group-item"><i class="fa fa-user-plus"></i>عدد الأعضاء الجدد:
+							<?php echo $sum_monthly; ?>
 						</li>
 
 					</ul>

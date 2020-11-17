@@ -26,9 +26,15 @@
                   <div class="row text-center">
                     <?php
                       foreach ($sections as $section ) {
+                        if ($section->section == "سير الصحابة") {
+                          $img = "24";
+                        }
+                        else{
+                          $img=$section->section;
+                        }
                         echo'
                           <div class="col-md-3 col-sm-12 book-section">';
-                          echo '<img src="'.base_url().'assets/sign_up_assests/img/book.png" class="book-div-img" onclick="nextWithMsg('
+                          echo '<img src="'.base_url().'assets/sign_up_assests/img/'. $img.'.png" class="book-div-img" onclick="nextWithMsg('
                           ;
                           echo "'activity',".$section->num_of_books.")".'"
                           ><br><h1>'. $section->section.'</h1> 

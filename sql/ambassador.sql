@@ -30,12 +30,14 @@ SET time_zone = "+00:00";
 CREATE TABLE `ambassador` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+`country` varchar(255) NOT NULL,
   `gender` varchar(50) NOT NULL,
   `leader_gender` varchar(50) NOT NULL,
   `request_id` int(11) DEFAULT NULL,
   `profile_link` varchar(255) NOT NULL,
   `fb_id` varchar(255) NOT NULL,
-  `is_joined` tinyint(1) NOT NULL DEFAULT 0
+  `is_joined` tinyint(1) NOT NULL DEFAULT 0,
+`created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

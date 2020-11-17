@@ -1,9 +1,6 @@
 <?php 
   include 'templates/header.php';
   include 'templates/navbar.php';
-
-    $page_id = 12;
-    $this->StatisticsModel->addVisitor($page_id);
 ?>
 
 
@@ -13,11 +10,7 @@
         <div class="row fullscreen align-items-center justify-content-center">
           <div class="banner-left col-lg-8 col-sm-12 story-content left-text" dir="rtl">
             <h1>
-              مشروع صناعة القُراء أصبوحة 180، ينشط حاليًا عبر منصة الفيسبوك فقط.
-            </h1>  
-            <br>
-            <h1>
-              من أجل ذلك سوف يستوجب منك تأكيد تسجيل الدخول عبر الفيسبوك لتأكيد دخولك إلى مجموعة المتابعة الخاصة بك.
+              لاتمام هذه العملية يجب عليك تسجيل الدخول
             </h1>
             <a class="genric-btn primary circle arrow" style="background:#45258f;    color: white;" onclick="fb_login();">
              تسجيل  الدخول
@@ -84,5 +77,5 @@
 <!-- Load the JS SDK asynchronously -->
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </body>
-<script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/fbLogin.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/reallocateLogin.js"></script>
 <?php include 'templates/footer.php';?>
