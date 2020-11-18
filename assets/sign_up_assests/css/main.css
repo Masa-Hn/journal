@@ -55,6 +55,11 @@ nav{
 /*@media (max-width: 767px){.banner-area .fullscreen{height:1000px !important}}
 */
 @media (max-width: 1199px){.banner-left{margin-top:60px}}
+
+.banner-center{
+  margin-top: 5%;
+}
+
 .story-content h1{font-size:30px;font-weight:100;line-height:1.2em;}
 @media (max-width: 767px){.story-content h1{font-size:25px}}
 @media (max-width: 991px){.story-content h1 br{display:none}}
@@ -249,10 +254,6 @@ hr{
     width: 70%
   }
 
-
-.FBmsg{
-  width: 5%
-}
 .point{
   width: 8%;
 }
@@ -273,23 +274,12 @@ hr{
   transform: translate(-50%, -50%);
 
 }
-.float{
-  float: left;
-}
-.clear{
-  clear: both;
-}
-.modalDiv{
-  margin-top: 3%;
-}
 
 .direct{
   display: flex;
   flex-direction: row-reverse;   
 }
-.copyimg{
-  width: 35%;
-}
+
 .helpimg{
   width: 19%;
 } 
@@ -306,9 +296,7 @@ hr{
     display: flex;
     flex-direction: column;   
   }
-  .copyimg{
-    width: 80%
-  }
+
   .helpimg{
     width: 65%;
   }
@@ -324,7 +312,6 @@ hr{
     top: 48%;
     left: 44%;
   }
-  #help{ text-align: center !important ; }
 }
 
 
@@ -334,9 +321,7 @@ hr{
   .modal-content {
     width: 100%;
   }
-  .copyimg{
-    width: 95%;
-  }
+
   .close{
     top: 10%;
     right: 20px;
@@ -359,9 +344,6 @@ hr{
 
 }
 @media only screen and (min-width: 992px) {
-  .copyimg{
-    width: 40%;
-  }
   .centered {
     top: 42%;
     left: 43%;
@@ -396,11 +378,10 @@ hr{
       width: 25%
     }
 }
+
+
 @media only screen and (max-width: 992px) {
   
-.copyimg{
-    width: 45%;
-  }
   .centered {
     top: 42%;
     left: 43%;
@@ -419,9 +400,6 @@ hr{
     }
 }
 @media only screen and (max-width: 450px) {
-  .copyimg{
-    width: 95%;
-  }
   .centered {
     top: 47%;
     left: 34%;
@@ -440,4 +418,3 @@ hr{
     width: 60%
   }
 }
-
