@@ -15,14 +15,15 @@ class NewMembersList extends CI_Controller {
 		//	$arr['info'] = "";
 
 		$this->load->view( 'leader_request/header' );
-		$leader_info = $this->requestsModel->get_info( $_GET[ 'email' ] )->fetch_array( MYSQLI_ASSOC );
+		$leader_info = $this->requestsModel->check_email( $_GET[ 'email' ] );
 
-		if ( $leader_info[ 'leader_link' ] != null && $leader_info[ 'leader_gender' ] != null ) {
-			$id = $leader_info[ 'id' ];
+		if ( $leader_info->num_rows > 0) {
+			$res = $leader_info->fetch_array( MYSQLI_ASSOC );
+			$id = $res[ 'id' ];
 			$request_info = $this->requestsModel->get_data( $id, 'leader_id', 'leader_request', 'Rid' )->fetch_array( MYSQLI_ASSOC );
 			$Rid = $request_info[ 'Rid' ];
 			$arr['leader_id'] = $id;
-			$arr['uniqid'] = $leader_info['uniqid'];
+			$arr['uniqid'] = $res['uniqid'];
 			$arr[ 'ambassadors' ] = $this->requestsModel->get_data( $Rid, 'request_id', 'ambassador', '*' );
 		} else {
 			$arr[ 'info' ] = "لم تطلب أعضاء مسبقاً...بياناتك غير مكتملة!!";

@@ -50,7 +50,7 @@
 							?>
 					<div style="text-align: center; margin-bottom: 5%;">
 					<h3 >كلمة السر الخاصة (كود) بدخول فريق المتابعة: </h3>
-					<h1><?php echo $uniqid.$leader_id; ?></h1>
+					<h1 style="color: #C50407;"><?php echo $uniqid.$leader_id; ?></h1>
 						</div>
 					
 					<table class="table">
@@ -87,10 +87,10 @@
 					</table>
 					<?php
 					} else {
-						echo "<div class='alert alert-danger' style='font-size:2vw; font-weight:bold; text-align:center;'>" . "لا يوجد أعضاء جدد لديك" . "</div>";
+						echo "<div class='alert alert-danger' style='font-size:1.7rem; font-weight:bold; text-align:center;'>" . "لا يوجد أعضاء جدد لديك" . "</div>";
 					}
 					} else {
-						echo "<div class='alert alert-danger' style='font-size:2vw; font-weight:bold; text-align:center;'>" . $info . "</div>";
+						echo "<div class='alert alert-danger' style='font-size:1.7rem; font-weight:bold; text-align:center;'>" . $info . "</div>";
 					}
 					?>
 				</div>
