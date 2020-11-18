@@ -14,6 +14,7 @@ class SignUp extends CI_Controller {
     $this->load->model('RequestsModel');  
     $this->load->model('books');  
     $this->load->model('StatisticsModel');
+    $this->load->library('session');
 
 	}//end construct()
 
@@ -236,14 +237,25 @@ class SignUp extends CI_Controller {
 
   public function informambassador($reallocate,$ambassador,$leader_info,$request_id,$informLeader,$leader_id)
   {
-    $team_info['leader_info']=$leader_info;
-    $team_info['request_id']=$request_id;
-    $team_info['inform_leader']=$informLeader;
-    $team_info['leader_id']=$leader_id;
-    $team_info['ambassador']=$ambassador;
-    $team_info['reallocate']=$reallocate;
-    $data = $this->load->view('sign_up/final_page_info',$team_info);
+    // $team_info['leader_info']=$leader_info;
+    // $team_info['request_id']=$request_id;
+    // $team_info['inform_leader']=$informLeader;
+    // $team_info['leader_id']=$leader_id;
+    // $team_info['ambassador']=$ambassador;
+    // $team_info['reallocate']=$reallocate;
+    $team_info = array(
+        'leader_info'  => $leader_info,
+        'request_id'     => $request_id,
+        'inform_leader' => $informLeader,
+        'leader_id' => $leader_id,
+        'ambassador' =>$ambassador,
+        'reallocate'=> $reallocate
+    );
 
+    $_SESSION['team_info']=$team_info;
+
+
+    $data = $this->load->view('sign_up/team_info');
     return $data;
   }//informambassador
 
