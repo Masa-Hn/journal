@@ -1,17 +1,31 @@
 <?php
 class StatisticsModel extends CI_Model {
 
-	/*
-public function incrementVisitors($page_id)
+	//add records
+	public function addRecords($data)
+	{
+		$this->db->insert('statistics', $data);
+	}
+	
+	public function getRecords(){
+		$this->db->from('statistics');
+		$this->db->order_by('date', 'DESC');
+		$this->db->limit(1);
+		$this->db->where('page_id', 1);
+		return $this->db->get();
+	}
+	
+public function incrementVisitors($page_id, $date)
   {
-    $this->db->set('viewers', 'viewers +1', FALSE);
-    $this->db->where('id', $page_id);
-    $this->db->update('pages');
+    $this->db->set('visitors', 'visitors +1', FALSE);
+	$where = "page_id = " . $page_id . " AND date = '" . $date . "'";
+    $this->db->where($where);
+    $this->db->update('statistics');
 
   }
-*/
 
-	public
+
+	/*public
 	function retrieveVisitor( $ip_add, $page_id ) {
 		$this->db->select( '*' );
 		$this->db->from( 'statistics' );
@@ -19,13 +33,13 @@ public function incrementVisitors($page_id)
 		$this->db->where( $where );
 
 		return $this->db->get();
-	}
+	}*/
 
-	public
+	/*public
 	function insertVisitor( $data ) {
 		$this->db->insert( 'statistics', $data );
-	}
-
+	}*/
+	
 	/*public function countVisitors($page_id)
 	  {
 		  $this->db->select('viewers');
@@ -37,12 +51,13 @@ public function incrementVisitors($page_id)
 	function selectPages() {
 		$this->db->select( '*' );
 		$this->db->from( 'pages' );
+		$this->db->order_by('id', 'ASC');
 		return $this->db->get();
 	}
 
 	public
 	function selectStatisticsPerDay( $id ) {
-		$this->db->select( 'id' );
+		$this->db->select( 'visitors' );
 		$this->db->from( 'statistics' );
 		$where = 'page_id = "' . $id . '" AND date = DATE(CURDATE())';
 		$this->db->where( $where );
@@ -51,7 +66,7 @@ public function incrementVisitors($page_id)
 
 	public
 	function selectStatisticsPerWeek( $id ) {
-		$this->db->select( 'id' );
+		$this->db->select( 'visitors' );
 		$this->db->from( 'statistics' );
 		$where = 'page_id = "' . $id . '" AND YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)';
 		$this->db->where( $where );
@@ -59,14 +74,14 @@ public function incrementVisitors($page_id)
 	}
 	public
 	function selectStatisticsPerMonth( $id ) {
-		$this->db->select( 'id' );
+		$this->db->select( 'visitors' );
 		$this->db->from( 'statistics' );
 		$where = 'page_id = "' . $id . '" AND YEAR( date ) = YEAR( CURDATE() )AND MONTH( date ) = MONTH( CURDATE() )';
 		$this->db->where( $where );
 		return $this->db->get();
 	}
 
-	function addVisitor( $page_id ) {
+	/*function addVisitor( $page_id ) {
 
 		$visitor_ip = $_SERVER[ 'REMOTE_ADDR' ];
 		$qry = $this->retrieveVisitor( $visitor_ip, $page_id );
@@ -77,7 +92,7 @@ public function incrementVisitors($page_id)
 			$this->insertVisitor( $visitor );
 			//$this->incrementVisitors($page_id);
 		}
-	}
+	}*/
 	public
 	function button_clicks( $ip_address, $table_name, $cond ) {
 		$this->db->select( '*' );

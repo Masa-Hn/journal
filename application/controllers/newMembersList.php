@@ -24,6 +24,8 @@ class NewMembersList extends CI_Controller {
 			$Rid = $request_info[ 'Rid' ];
 			$arr['leader_id'] = $id;
 			$arr['uniqid'] = $res['uniqid'];
+			$arr['leader_name'] = $res['leader_name'];
+			$arr['team_link'] = $res['team_link'];
 			$arr[ 'ambassadors' ] = $this->requestsModel->get_data( $Rid, 'request_id', 'ambassador', '*' );
 		} else {
 			$arr[ 'info' ] = "لم تطلب أعضاء مسبقاً...بياناتك غير مكتملة!!";

@@ -99,14 +99,14 @@
 							foreach ( $ids->result() as $id ) {
 								$page_id = $id->id;
 
-								$query = $this->StatisticsModel->selectStatisticsPerDay( $page_id );
-								$viewers = $query->num_rows();
+								$query = $this->StatisticsModel->selectStatisticsPerDay( $page_id )->row();
+								$viewers = $query->visitors;
 
-								$query2 = $this->StatisticsModel->selectStatisticsPerDay( $page_id + 1 );
+								$query2 = $this->StatisticsModel->selectStatisticsPerDay( $page_id + 1 )->row();
 								$query3 = $ids->last_row();
 
 								if ( $page_id < $query3->id )
-									$leavers = abs( $viewers - $query2->num_rows() );
+									$leavers = abs( $viewers - $query2->visitors );
 								else
 									$leavers = $viewers;
 
@@ -182,14 +182,14 @@
 							foreach ( $ids->result() as $id ) {
 								$page_id = $id->id;
 
-								$query = $this->StatisticsModel->selectStatisticsPerWeek( $page_id );
-								$viewers = $query->num_rows();
+								$query = $this->StatisticsModel->selectStatisticsPerWeek( $page_id )->row();
+								$viewers = $query->visitors;
 
-								$query2 = $this->StatisticsModel->selectStatisticsPerWeek( $page_id + 1 );
+								$query2 = $this->StatisticsModel->selectStatisticsPerWeek( $page_id + 1 )->row();
 								$query3 = $ids->last_row();
 
 								if ( $page_id < $query3->id )
-									$leavers = abs( $viewers - $query2->num_rows() );
+									$leavers = abs( $viewers - $query2->visitors);
 								else
 									$leavers = $viewers;
 								?>
@@ -262,14 +262,14 @@
 							foreach ( $ids->result() as $id ) {
 								$page_id = $id->id;
 
-								$query = $this->StatisticsModel->selectStatisticsPerMonth( $page_id );
-								$viewers = $query->num_rows();
+								$query = $this->StatisticsModel->selectStatisticsPerMonth( $page_id )->row();
+								$viewers = $query->visitors;
 
-								$query2 = $this->StatisticsModel->selectStatisticsPerMonth( $page_id + 1 );
+								$query2 = $this->StatisticsModel->selectStatisticsPerMonth( $page_id + 1 )->row();
 								$query3 = $ids->last_row();
 
 								if ( $page_id < $query3->id )
-									$leavers = abs( $viewers - $query2->num_rows() );
+									$leavers = abs( $viewers - $query2->visitors );
 								else
 									$leavers = $viewers;
 

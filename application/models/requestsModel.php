@@ -2,9 +2,7 @@
 class RequestsModel extends CI_Model {
 
 	//check leader email
-	public
-
-	function check_email( $email ) {
+	public function check_email( $email ) {
 		$query = "SELECT * FROM leader_info WHERE leader_email='" . $email . "'";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
@@ -18,9 +16,7 @@ class RequestsModel extends CI_Model {
 	//distribution process
 
 	//get the none distributed ambassadors
-	public
-
-	function getNoneDistributedAmbassadors() {
+	public function getNoneDistributedAmbassadors() {
 
 		$query = "SELECT * FROM ambassador WHERE request_id IS NULL";
 		$conn = $this->connectToDB();
@@ -34,9 +30,7 @@ class RequestsModel extends CI_Model {
 	}
 
 	//get the destributed ambassadors for certain request
-	public
-
-	function getDistributedAmbassadors( $request_id ) {
+	public function getDistributedAmbassadors( $request_id ) {
 		$query = "SELECT * FROM ambassador WHERE request_id =" . $request_id;
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
