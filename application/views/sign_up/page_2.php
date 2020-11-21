@@ -17,8 +17,8 @@
             </h1>
             <br>
             <h1>
-            تاليا سأشرح لك الأمور الأساسية التي يوفرها
-            المشروع وستكتشف البقية بعد انضمامك
+              تالياً سأشرح لك الأمور الأساسية التي يوفرها
+              المشروع وستكتشف البقية بعد انضمامك
             </h1>
                <a href="javascript:next('page_3')" class="genric-btn primary circle arrow">التالي <span class="lnr lnr-arrow-right"></span></a>
           </div>
