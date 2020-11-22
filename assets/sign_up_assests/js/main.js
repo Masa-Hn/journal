@@ -87,7 +87,7 @@ function checkAnswer() {
     if (answer == 30){
       Swal.fire({
         title: 'رائـــع',
-        text:"أحسنت الاجابة",
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
         imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
         imageWidth: 300,
         imageAlt: 'Custom image',
@@ -101,7 +101,7 @@ function checkAnswer() {
     else if(answer == "30 صفحة" ){
       Swal.fire({
         title: 'رائـــع',
-        text:"أحسنت الاجابة",
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
         imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
         imageWidth: 300,
         imageAlt: 'Custom image',
@@ -120,7 +120,7 @@ function checkAnswer() {
       ){
       Swal.fire({
         title: 'رائـــع',
-        text:"أحسنت الاجابة",
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
         imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
         imageWidth: 300,
         imageAlt: 'Custom image',

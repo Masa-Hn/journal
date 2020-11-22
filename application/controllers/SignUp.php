@@ -38,11 +38,12 @@ class SignUp extends CI_Controller {
 
   public function trial()
   {
-      $this->load->view( 'sign_up/templates/header');
-      $this->load->view( 'sign_up/templates/navbar' );
-      //Load Main Page
-      $this->load->view('sign_up/trial');
-      $this->load->view( 'sign_up/templates/footer');
+    $this->load->view('sign_up/404');
+      // $this->load->view( 'sign_up/templates/header');
+      // $this->load->view( 'sign_up/templates/navbar' );
+      // //Load Main Page
+      // $this->load->view('sign_up/trial');
+      // $this->load->view( 'sign_up/templates/footer');
 
   }//trial
 
