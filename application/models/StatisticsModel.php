@@ -15,10 +15,10 @@ class StatisticsModel extends CI_Model {
 		return $this->db->get();
 	}
 	
-public function incrementVisitors($page_id, $date)
+public function incrementVisitors($page_id)
   {
     $this->db->set('visitors', 'visitors +1', FALSE);
-	$where = "page_id = " . $page_id . " AND date = '" . $date . "'";
+	$where = "page_id = " . $page_id . " AND date = CURDATE()";
     $this->db->where($where);
     $this->db->update('statistics');
 

@@ -13,7 +13,7 @@ class AutoRecords extends CI_Controller {
 
 	function index() {
 		//to be added in each page belongs to statistics
-		$this->StatisticsModel->incrementVisitors(1 , date('y-m-d'));
+		$this->StatisticsModel->incrementVisitors(1);
 
 		$this->load->view( 'management_book/triggerAutoRecords' );
 	}
