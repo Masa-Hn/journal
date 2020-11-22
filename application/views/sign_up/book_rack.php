@@ -36,7 +36,7 @@
         </div>        
         <div class="row banner-center align-items-center justify-content-center">
           <div class="col-lg-12 col-sm-12 text-center" style="margin-bottom: 5%">
-            <a href="<?php echo base_url()?>" target="_blank" class="final-page genric-btn primary circle arrow" style="margin-top: auto;" >
+            <a href="<?php echo base_url()?>bookSearch" target="_blank" class="final-page genric-btn primary circle arrow" style="margin-top: auto;" >
               اختيار الكتاب 
             </a>
 
