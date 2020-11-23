@@ -19,7 +19,8 @@ class NewMembersList extends CI_Controller {
 
 		if ( $leader_info->num_rows > 0) {
 			$res = $leader_info->fetch_array( MYSQLI_ASSOC );
-			$id = $res[ 'id' ];
+			if($res['leader_link'] != null && $res['leader_gender'] != null){
+				$id = $res[ 'id' ];
 			$request_info = $this->requestsModel->get_data( $id, 'leader_id', 'leader_request', 'Rid' )->fetch_array( MYSQLI_ASSOC );
 			$Rid = $request_info[ 'Rid' ];
 			$arr['leader_id'] = $id;
@@ -27,6 +28,10 @@ class NewMembersList extends CI_Controller {
 			$arr['leader_name'] = $res['leader_name'];
 			$arr['team_link'] = $res['team_link'];
 			$arr[ 'ambassadors' ] = $this->requestsModel->get_data( $Rid, 'request_id', 'ambassador', '*' );
+			}else{
+				$arr[ 'info' ] = "لم تطلب أعضاء مسبقاً...بياناتك غير مكتملة!!";
+			}
+			
 		} else {
 			$arr[ 'info' ] = "لم تطلب أعضاء مسبقاً...بياناتك غير مكتملة!!";
 		}

@@ -15,10 +15,16 @@ class Requests extends CI_Controller {
 		$regBefore = $this->requestsModel->check_email( $_GET[ 'email' ] );
 
 		if ( $regBefore->num_rows > 0 ) {
-			$this->load->view( 'leader_request/request' );
+			$info = $this->requestsModel->check_email($_GET[ 'email' ])->fetch_array( MYSQLI_ASSOC );
+			if($info['leader_link'] == null && $info['leader_gender'] == null){
+				$this->load->view( 'leader_request/full_request' );
+			}else{
+				$this->load->view( 'leader_request/request' );
 			$this->load->view( 'leader_request/edit_info' );
-		} else {
-			$this->load->view( 'leader_request/full_request' );
+			}	
+		}else{
+			//echo "<div class='alert alert-warning' style='text-align:center'>معلوماتك غير مسجلة</div>";
+			$this->load->view( 'leader_request/page_messaging' );
 		}
 	}
 
