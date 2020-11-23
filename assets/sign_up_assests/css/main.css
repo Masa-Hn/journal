@@ -55,6 +55,11 @@ nav{
 /*@media (max-width: 767px){.banner-area .fullscreen{height:1000px !important}}
 */
 @media (max-width: 1199px){.banner-left{margin-top:60px}}
+
+.banner-center{
+  margin-top: 5%;
+}
+
 .story-content h1{font-size:30px;font-weight:100;line-height:1.2em;}
 @media (max-width: 767px){.story-content h1{font-size:25px}}
 @media (max-width: 991px){.story-content h1 br{display:none}}
@@ -201,7 +206,6 @@ hr{
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #ffffff;
-
 }
 /* Modal Content (Image) */
 .modal-content {
@@ -249,10 +253,10 @@ hr{
     width: 70%
   }
 
-
 .FBmsg{
   width: 5%
 }
+
 .point{
   width: 8%;
 }
@@ -273,6 +277,7 @@ hr{
   transform: translate(-50%, -50%);
 
 }
+
 .float{
   float: left;
 }
@@ -293,6 +298,7 @@ hr{
 .helpimg{
   width: 19%;
 }
+
 .helpTxt{
  color: white;
  font-size: 12px;
@@ -304,6 +310,7 @@ hr{
 @media (max-width: 768px){
   .direct{
     display: flex;
+
     flex-direction: column;
   }
   .copyimg{
@@ -313,10 +320,11 @@ hr{
     width: 65%;
   }
   .helpTxt{
-    font-size: 15px;
+    font-size: 17px;
   }
   .centered {
-    top: 38%;
+    top: 43%;
+
     left: 38%;
   }
 
@@ -324,6 +332,7 @@ hr{
     top: 48%;
     left: 44%;
   }
+
   #help{ text-align: center !important ; }
 }
 
@@ -334,6 +343,7 @@ hr{
   .modal-content {
     width: 100%;
   }
+
   .close{
     top: 10%;
     right: 20px;
@@ -353,8 +363,14 @@ hr{
   .activity-div-img{
     width: 100%
   }
+
 }
 @media only screen and (min-width: 992px) {
+  .centered {
+    top: 42%;
+    left: 43%;
+  }
+
     .story-content h3 br{display:none}
     .story-content h5 br{display:none}
     .bgImg{
@@ -380,8 +396,21 @@ hr{
     #join-btn-3{
       display: none;
     }
+    .infoImg{
+      width: 25%
+    }
 }
+
+
 @media only screen and (max-width: 992px) {
+  
+  .centered {
+    top: 42%;
+    left: 43%;
+  }
+  .infoImg{
+      width: 35%
+  }
   .left-text{
       margin-top: 25%;
     }
@@ -393,6 +422,10 @@ hr{
     }
 }
 @media only screen and (max-width: 450px) {
+  .centered {
+    top: 47%;
+    left: 34%;
+  }
   .sp-1{
     font-size: 30px !important;
   }
@@ -402,5 +435,8 @@ hr{
     }
   .book-div-img{
     width: 50%;
+  }
+  .infoImg{
+    width: 60%
   }
 }

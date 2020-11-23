@@ -33,6 +33,7 @@
 						$leaderName = $info->leader_name;
 						$leaderLink = $info->leader_link;
 						$teamLink = $info->team_link;
+
 						?>
 
 						<div class="form-group">
@@ -43,13 +44,22 @@
 							<label for="leaderLink">رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" value="<?php echo $leaderLink;?>" class="form-control" required="required">
 						</div>
+
 						<label name="msg-ch1" id="msg-ch1" style="display: none; color: red"> الرجاء كتابة رابط صفحتك! </label>
 						<div class="form-group">
 							<label for="teamLink">رابط فريق المتابعة الخاص بك: </label>
 							<input type="text" name="teamLink" id="teamLink" value="<?php echo $teamLink;?>" class="form-control" required="required">
+						<?php
+						$msg = "هل أنت متأكد من أنك تريد تعديل بياناتك الشخصية؟";
+						?>
+
+						<div class="form-group">
+							<button type="submit" name="submit" class="btn btn-block" id="subBtn" style="display: none;">تعديل</button>
+
 						</div>
 						<label name="msg-ch2" id="msg-ch2" style="display: none; color: red"> الرجاء كتابة رابط فريقك </label>
 					</form>
+
 
 					<button name="check-btn1" class="btn btn-block" id="check-btn1" onclick="check1()" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار رابط صفحتك</button>
 					
@@ -66,8 +76,7 @@
 					</div>
 
 					<button type="submit" name="submit" class="btn btn-block" id="subBtn" style="display: none;background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">تعديل</button>
-
-
+            
 				</div>
 
 				<div class="modal-footer">

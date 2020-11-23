@@ -200,7 +200,7 @@ function checkLogin(id) {
   }
   else{
     urlReallocate=document.getElementById("base_url").value+"ReallocateAmbassador/checkAmbassador?fb_id="+id;
-    window.location.replace(urlReallocate);
+    window.location.replace(urlReallocate); 
   }
 }//checkLogin
 
