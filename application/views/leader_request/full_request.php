@@ -73,7 +73,7 @@
 						</div>
 					</form>
 
-					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7vw;font-weight: bold;">اختبار الرابط</button>
+					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار الرابط</button>
 					<div id="check_div" style="display: none;margin-top: 3%; margin-bottom: 3%;">
 						<input type="checkbox" id="check" onclick="change_check()">
 						<label>  تم التأكد من صحة الرابط</label>

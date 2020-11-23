@@ -36,9 +36,11 @@ class Requests extends CI_Controller {
 		$this->form_validation->set_message( 'required', 'يجب عليك تعبئة حقل %s' );
 
 		if ( $this->form_validation->run() ) {
+			$info = $this->requestsModel->check_email($_GET[ 'email' ])->fetch_array( MYSQLI_ASSOC );
+			$leader['leader_id'] = $info['id'];
 			// data of the leader
 			$leader[ 'leader_name' ] = $_GET[ 'name' ];
-			$leader[ 'leader_email' ] = $_GET[ 'email' ];
+			
 			$leader[ 'team_name' ] = $_POST[ 'teamName' ];
 			$leader[ 'leader_link' ] = $_POST[ 'leaderLink' ];
 			$leader[ 'team_link' ] = $_POST[ 'teamLink' ];
@@ -47,7 +49,7 @@ class Requests extends CI_Controller {
 			$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
 			$request[ 'gender' ] = $_POST[ 'gender' ];
 			$request[ 'current_team_count' ] = $_POST[ 'currentTeamCount' ];
-
+			$request[ 'leader_id' ] = $info['id'];
 			//validate urls
 			if ( !filter_var( $leader[ 'leader_link' ], FILTER_VALIDATE_URL ) ) {
 				$msg = "<div class='alert alert-danger'>
@@ -60,8 +62,8 @@ class Requests extends CI_Controller {
 				$uniqid = "Osb180" . substr( $unique, strlen( $unique ) - $desired_length, $desired_length );
 				$leader[ 'uniqid' ] = $uniqid;
 
-				$leader_id = $this->requestsModel->insertLeaderInfo( $leader );
-				$request[ 'leader_id' ] = $leader_id;
+				$this->requestsModel->updateFullRequest( $leader );
+				
 				$requestID = $this->requestsModel->addRequest( $request );
 
 				$this->distributeAmbassadors( $requestID );
