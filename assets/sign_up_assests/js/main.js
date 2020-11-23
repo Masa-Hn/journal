@@ -87,7 +87,7 @@ function checkAnswer() {
     if (answer == 30){
       Swal.fire({
         title: 'رائـــع',
-        text:"أحسنت الاجابة",
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
         imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
         imageWidth: 300,
         imageAlt: 'Custom image',
@@ -98,10 +98,29 @@ function checkAnswer() {
           next('question_2');
       });
     }//if
-    else if(document.getElementById('answer').value == "ثلاثين" || document.getElementById('answer').value == "ثلاثون"){
+    else if(answer == "30 صفحة" ){
       Swal.fire({
         title: 'رائـــع',
-        text:"أحسنت الاجابة",
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
+        imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
+        imageWidth: 300,
+        imageAlt: 'Custom image',
+        timer: 4000,
+        confirmButtonText: "استمرار ",
+        confirmButtonColor:'#9ed16f'
+      }).then(function(){
+          next('question_2');
+      });
+    }
+    else if(
+      document.getElementById('answer').value == "ثلاثين" 
+      || document.getElementById('answer').value == "ثلاثون" 
+      || document.getElementById('answer').value == "ثلاثون صفحة" 
+      || document.getElementById('answer').value == "ثلاثين صفحة" 
+      ){
+      Swal.fire({
+        title: 'رائـــع',
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
         imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
         imageWidth: 300,
         imageAlt: 'Custom image',
