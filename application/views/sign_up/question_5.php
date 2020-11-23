@@ -11,9 +11,7 @@ include 'templates/navbar.php';
 				<h4>
               ماذا تفضل أن يكون جنس قائدك؟
             </h4>
-			
-
-
+        
 				<div class="form-group">
 					<select class="form-control" id="leader_gender" required>
 						<option value="">اختر جنس القائد </option>

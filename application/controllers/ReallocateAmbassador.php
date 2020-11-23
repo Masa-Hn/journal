@@ -16,8 +16,7 @@ class ReallocateAmbassador extends CI_Controller {
 
  	public function index()
   {
-    //Load Main Page
-      $this->load->view('sign_up/reallocate_fb_login');
+    $this->load->view('sign_up/reallocate_fb_login');
   }//index
 
   public function checkAmbassador()
@@ -37,7 +36,9 @@ class ReallocateAmbassador extends CI_Controller {
       $created_at=date_create($created_at->format("Y-m-d"));
       $current=date_create(date("Y-m-d",time()));
       $diff=date_diff($created_at,$current);
-      if($diff->format("%a") > 2){
+
+      if($diff->format("%a") > 2){ 
+
         if($result->request_id == null){
         // Still No Leader
         $this->noLeaderFound();
@@ -61,14 +62,16 @@ class ReallocateAmbassador extends CI_Controller {
   }//checkAmbassador
 
   public function allocateAmbassador(){
+
     if (!empty($_POST['ambassador'])) {
       $ambassador_info=$_POST['ambassador'];
-      $Leader_gender=$_POST['leader_gender'];
+      $leader_gender=$_POST['leader_gender'];
       $leader_id=$_POST['leader_id'];
       $request_id=$_POST['request_id'];
       $currentTime=time();
       $date_update=date("Y-m-d",$currentTime);
 
+      
       // //Check ambassador gender
         if ($ambassador_info['gender'] != "female" && $ambassador_info['gender']!="male") {
           $ambassador_gender="any";
@@ -79,8 +82,9 @@ class ReallocateAmbassador extends CI_Controller {
         }
 
       //check leader gender
-        if ($Leader_gender == "any") {
+        if ($leader_gender == "any") {
           //Check New Teams
+
             $result=$this->ReallocateAmbassadorModel->newTeamsAnyLeader($ambassador_gender,$leader_id);
             if (count((array)$result) == 0 ){
 
@@ -90,7 +94,9 @@ class ReallocateAmbassador extends CI_Controller {
                   //Check Teams With More Than 12 Members
                     $result=$this->ReallocateAmbassadorModel->anyLeader($ambassador_gender, ">",$leader_id);
                     if (count((array)$result) == 0 ){
-                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$Leader_gender,null,$date_update);
+
+                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$leader_gender,null,$date_update);
+
                       $this->noLeaderFound();
                     }//if
                     else{
@@ -109,32 +115,38 @@ class ReallocateAmbassador extends CI_Controller {
         else{
           //for specific leader gender
           //Check New Teams
-            $result=$this->ReallocateAmbassadorModel->getNewTeams($Leader_gender,$ambassador_gender,$leader_id);
+            $result=$this->ReallocateAmbassadorModel->getNewTeams($leader_gender,$ambassador_gender,$leader_id);
             if (count((array)$result) == 0 ){
 
               //Check Teams With Less Than 12 Members
-                $result=$this->ReallocateAmbassadorModel->getTeams($Leader_gender,$ambassador_gender, "<=",$leader_id);
+
+                $result=$this->ReallocateAmbassadorModel->getTeams($leader_gender,$ambassador_gender, "<=",$leader_id);  
+
                 if (count((array)$result) == 0 ){
                   //Check Teams With More Than 12 Members
-                    $result=$this->ReallocateAmbassadorModel->getTeams($Leader_gender,$ambassador_gender, ">",$leader_id);
+                    $result=$this->ReallocateAmbassadorModel->getTeams($leader_gender,$ambassador_gender, ">",$leader_id);
                     if (count((array)$result) == 0 ){
-                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$Leader_gender,null,$date_update);
+
+                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$leader_gender,null,$date_update);
                       $this->noLeaderFound();
                     }//if
                     else{
-                      $this->checkout($ambassador_info['fb_id'],$Leader_gender, $result->Rid,$result->leader_id,$result->members_num);
+                      $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
                     }//else
                 }//if
                 else{
-                  $this->checkout($ambassador_info['fb_id'],$Leader_gender, $result->Rid,$result->leader_id,$result->members_num);
+                  $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
                 }//else
             }//if
             else{
-              $this->checkout($ambassador_info['fb_id'],$Leader_gender, $result->Rid,$result->leader_id,$result->members_num);
+              $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
             }//else
         }//else
 
     }//if
+    else{
+      $this->load->view('sign_up/reallocate_fb_login');
+    }
 
   }//allocateAmbassador
 
@@ -169,14 +181,17 @@ class ReallocateAmbassador extends CI_Controller {
 
   public function informambassador($reallocate,$ambassador,$leader_info,$request_id,$informLeader,$leader_id)
   {
-    $team_info['leader_info']=$leader_info;
-    $team_info['request_id']=$request_id;
-    $team_info['inform_leader']=$informLeader;
-    $team_info['leader_id']=$leader_id;
-    $team_info['ambassador']=$ambassador;
-    $team_info['reallocate']=$reallocate;
-    $data = $this->load->view('sign_up/final_page_info',$team_info);
+    $team_info = array(
+        'leader_info'  => $leader_info,
+        'request_id'     => $request_id,
+        'inform_leader' => $informLeader,
+        'leader_id' => $leader_id,
+        'ambassador' =>$ambassador,
+        'reallocate'=> $reallocate
+    );
 
+    $_SESSION['team_info']=$team_info;
+    $data = $this->load->view('sign_up/team_info');
     return $data;
 
   }//informambassador
