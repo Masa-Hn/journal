@@ -76,7 +76,7 @@ nav{
 @media (min-width: 576px)
 {
   .story-content{
-    margin-top:10%; 
+    margin-top:10%;
   }
 }
 .generic-banner{background:#6cbb23}
@@ -145,7 +145,7 @@ ul img{
   border-radius: 10px;
 }
 .question{
-  cursor: pointer;  
+  cursor: pointer;
 }
 .book-div{
   margin-bottom: 10%;
@@ -153,7 +153,7 @@ ul img{
 .book-section{
   cursor:pointer;
   margin: 1%;
-  padding: 0; 
+  padding: 0;
 }
 .book-div-img{
   width: 35%;
@@ -187,7 +187,7 @@ hr{
   cursor:pointer;
   margin: 1%;
   padding: 0;
-  border:1px solid #b9d5c3;  
+  border:1px solid #b9d5c3;
   border-radius: 15px;
 
 }
@@ -206,7 +206,6 @@ hr{
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #ffffff;
-  
 }
 /* Modal Content (Image) */
 .modal-content {
@@ -217,13 +216,13 @@ hr{
   max-width: 500px;
 }
 /* Add Animation - Zoom in the Modal */
-.modal-content, #caption { 
+.modal-content, #caption {
   animation-name: zoom;
   animation-duration: 0.6s;
 }
 
 @keyframes zoom {
-  from {transform:scale(0)} 
+  from {transform:scale(0)}
   to {transform:scale(1)}
 }
 
@@ -254,6 +253,10 @@ hr{
     width: 70%
   }
 
+.FBmsg{
+  width: 5%
+}
+
 .point{
   width: 8%;
 }
@@ -275,14 +278,27 @@ hr{
 
 }
 
-.direct{
-  display: flex;
-  flex-direction: row-reverse;   
+.float{
+  float: left;
+}
+.clear{
+  clear: both;
+}
+.modalDiv{
+  margin-top: 3%;
 }
 
+.direct{
+  display: flex;
+  flex-direction: row-reverse;
+}
+.copyimg{
+  width: 35%;
+}
 .helpimg{
   width: 19%;
-} 
+}
+
 .helpTxt{
  color: white;
  font-size: 12px;
@@ -294,9 +310,12 @@ hr{
 @media (max-width: 768px){
   .direct{
     display: flex;
-    flex-direction: column;   
-  }
 
+    flex-direction: column;
+  }
+  .copyimg{
+    width: 80%
+  }
   .helpimg{
     width: 65%;
   }
@@ -305,6 +324,7 @@ hr{
   }
   .centered {
     top: 43%;
+
     left: 38%;
   }
 
@@ -312,6 +332,8 @@ hr{
     top: 48%;
     left: 44%;
   }
+
+  #help{ text-align: center !important ; }
 }
 
 

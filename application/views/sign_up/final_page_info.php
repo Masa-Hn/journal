@@ -1,43 +1,45 @@
-<?php 
-  include 'templates/header.php';
-  include 'templates/navbar.php';
+<?php
+include 'templates/header.php';
+include 'templates/navbar.php';
 
-    $page_id = 13;
-    $this->StatisticsModel->addVisitor($page_id);
+$page_id = 13;
+$this->StatisticsModel->incrementVisitors( $page_id );
 ?>
 
 <style type="text/css">
-a{
-  color: #1d509f;
-}
-  hr{
+	a {
+		color: #1d509f;
+	}
 
-    width: 35%;
-  }
+	hr {
+		width: 35%;
+	}
 </style>
 <!--Start Banner Area -->
-    <section class="banner-area relative bgImg2">
-      <div class="container">
-        <div class="row fullscreen align-items-center justify-content-center">
-            <div class="banner-left col-lg-12 col-sm-12 story-content text-center page-img" dir="rtl">
-            <h1>
+<section class="banner-area relative bgImg2">
+	<div class="container">
+		<div class="row fullscreen align-items-center justify-content-center">
+			<div class="banner-left col-lg-12 col-sm-12 story-content text-center page-img" dir="rtl">
+				<h1>
               <span class="sp-1" style="font-size: 50px">
-                مرحبًا 
+                مرحبًا
                 <?php  echo $ambassador[0]->name; ?>
               </span>
             </h1>
-          </div>
-        </div>
-        <div class="row fullscreen align-items-center justify-content-center">
-          <div class="banner-left col-lg-6 col-sm-12 story-content  text-center" dir="rtl">
-            <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/leaderInfo.png" alt="">
-            <a href="javascript:show('leaderInfo','closeLeaderInfo')" class="final-page genric-btn primary circle arrow">
+
+			</div>
+		</div>
+		<div class="row fullscreen align-items-center justify-content-center">
+			<div class="banner-left col-lg-6 col-sm-12 story-content  text-center" dir="rtl">
+				<img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/leaderInfo.png" alt="">
+				<a href="javascript:show('leaderInfo','closeLeaderInfo')" class="final-page genric-btn primary circle arrow">
               مشاهدة معلومات قائدي
             </a>
-          </div>
-          <div class="banner-left col-lg-6 col-sm-12 story-content  text-center" dir="rtl">
-            <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/teamInfo.png" alt="">
-            <a href="javascript:show('teamInfo','closeTeamInfo')" class="final-page genric-btn primary circle arrow">
+
+			</div>
+			<div class="banner-left col-lg-6 col-sm-12 story-content  text-center" dir="rtl">
+				<img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/teamInfo.png" alt="">
+				<a href="javascript:show('teamInfo','closeTeamInfo')" class="final-page genric-btn primary circle arrow">
               مشاهدة معلومات فريقي
                 
             </a>         
@@ -72,13 +74,14 @@ a{
               ستصلك رسالة من قائد فريقك، لطفًا تفقد طلبات المراسلة على الفيسبوك
                 <br><br>
 
-                إن كنت متحمسًا جدًا، اضغط هنا لِتَقوم بمراسلة قائدك : 
+                إن كنت متحمسًا جدًا، اضغط هنا لِتَقوم بمراسلة قائدك :
                 <br>
                 <a href="<?php echo $leader_info->leader_link; ?>" class="final-page genric-btn primary circle arrow" id="leader" style="margin: 1.5%; font-size: inherit;" target="_blank">
                   مراسلة قائدي
                 </a>
               </h2>
-              <?php 
+
+				<?php
                 if ($reallocate) {
                   echo '
                   <a href="javascript:checkLogin('.$ambassador[0]->fb_id.')" class="final-page genric-btn primary circle arrow" style=" margin: 1.5%; background:darkred">
@@ -129,27 +132,90 @@ a{
                 <a href="https://www.facebook.com/taheelofosboha/" class="helpTxt" target="_blank">
                 راسلنا من هنا لمُساعدتك      
                 </a>
-              </div>
-            </div>  
-      </div>  
-    </div>
-    <?php
-    echo '<input type="hidden" name="inform_leader" id="inform_leader" value="'.$inform_leader.'">';  
-      if ($inform_leader) {
-        echo '<input type="hidden" name="leader_id" id="leader_id" value="'.$leader_id.'">'; 
-        echo '<input type="hidden" name="request_id" id="request_id" value="'.$request_id.'">'; 
-      }
-    ?>
-<!-- End Banner Area  -->
 
-<?php include 'templates/footer.php';?>
-<script type="text/javascript">
-  $(document).ready(function(){
-    if(document.getElementById('inform_leader').value){
-      leader_id=document.getElementById('leader_id').value;
-      request_id=document.getElementById('request_id').value;
-      informLeader(leader_id,request_id);
-    }
-  });
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+	echo '<input type="hidden" name="inform_leader" id="inform_leader" value="' . $inform_leader . '">';
+	if ( $inform_leader ) {
+		echo '<input type="hidden" name="leader_id" id="leader_id" value="' . $leader_id . '">';
+		echo '<input type="hidden" name="request_id" id="request_id" value="' . $request_id . '">';
+	}
+	?>
+	<!-- End Banner Area  -->
 
-</script>
+	<?php include 'templates/footer.php';?>
+	<script type="text/javascript">
+		$( document ).ready( function () {
+			if ( document.getElementById( 'inform_leader' ).value ) {
+				leader_id = document.getElementById( 'leader_id' ).value;
+				request_id = document.getElementById( 'request_id' ).value;
+				informLeader( leader_id, request_id );
+			}
+		} );
+	</script>
+	<script type="text/javascript">
+		$( document ).ready( function () {
+			var base_url = "<?php echo base_url()?>";
+			var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
+
+			$( '#code' ).click( function () {
+
+				$.ajax( {
+					type: "POST",
+					url: base_url + "Statistics/code_button",
+					data: {
+						ip_address: ip_address
+					},
+					success: function ( data ) {
+
+						console.log( data );
+					},
+					error: function ( error ) {
+						console.log( error );
+					}
+				} );
+				return false;
+			} );
+
+			$( '#leader' ).click( function () {
+
+				$.ajax( {
+					type: "POST",
+					url: base_url + "Statistics/leader_link_button",
+					data: {
+						ip_address: ip_address
+					},
+					success: function ( data ) {
+
+						console.log( data );
+					},
+					error: function ( error ) {
+						console.log( error );
+					}
+				} );
+				return false;
+			} );
+
+			$( '#team' ).click( function () {
+
+				$.ajax( {
+					type: "POST",
+					url: base_url + "Statistics/team_link_button",
+					data: {
+						ip_address: ip_address
+					},
+					success: function ( data ) {
+
+						console.log( data );
+					},
+					error: function ( error ) {
+						console.log( error );
+					}
+				} );
+				return false;
+			} );
+		} );
+	</script>
