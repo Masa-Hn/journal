@@ -78,55 +78,9 @@
 
 					</form>
 
-<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
- <div id="check_div" style="display: none;"><input type="checkbox" id="check"  onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label></div>
-<script type="text/javascript">
+                    <button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
+                    <div id="check_div" style="display: none;"><input type="checkbox" id="check" onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label></div>
 
-	function check()
-		{
-var URL = document.getElementById( 'leaderLink' ).value;
-if (URL=="")
-	document.getElementById('msg-ch').style.display="block";
-else
-{
-document.getElementById('msg-ch').style.display="none";
-var win = window.open(URL);
-document.getElementById('check_div').style.display="block";
-
-}
-    		}
-
-		function change_check()
-		{
-			ch= document.getElementById('check');
-			sb=document.getElementById('sub-btn');
-			if (ch.checked==true)
-				document.getElementById('sub-btn').style.display="block";
-			else
-				document.getElementById('sub-btn').style.display="none";
-
-		}
-              
-						function doesFileExist( urlToFile ) {
-							var xhr = new XMLHttpRequest();
-							xhr.open( 'HEAD', urlToFile );
-							xhr.send();
-
-							if ( xhr.status == "404" ) {
-								return false;
-							} else {
-								return true;
-							}
-						}
-
-						function check() {
-							var URL = document.getElementById( 'leaderLink' ).value;
-							var win = window.open( URL );
-							var result = doesFileExist( URL );
-							if ( result )
-								document.getElementById( 'sub-btn' ).style.display = "block";
-						}
-					</script>
           
 				</div>
 
@@ -164,6 +118,42 @@ document.getElementById('check_div').style.display="block";
 				return false;
 			} );
 		} );
+        
+
+	function check(){
+        
+        var URL = document.getElementById('leaderLink').value;
+        if (URL==""){
+            document.getElementById('msg-ch').style.display="block";
+        }else{
+            document.getElementById('msg-ch').style.display="none";
+            var win = window.open(URL);
+            document.getElementById('check_div').style.display="block";
+        }
+    }
+
+    function change_check(){
+        
+        ch = document.getElementById('check');
+        sb = document.getElementById('sub-btn');
+        if (ch.checked==true)
+            document.getElementById('sub-btn').style.display="block";
+        else
+            document.getElementById('sub-btn').style.display="none";
+    }
+              
+    function doesFileExist(urlToFile){
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open( 'HEAD', urlToFile );
+        xhr.send();
+
+        if( xhr.status == "404" ){
+            return false;
+        }else{
+            return true;
+        }
+    }		
 	</script>
 </body>
 </html>

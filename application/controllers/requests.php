@@ -2,16 +2,14 @@
 defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 class Requests extends CI_Controller {
 
-	public
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 		$this->load->model( 'requestsModel' );
 		$this->load->model( 'GeneralModel' );
 		$this->load->library( 'form_validation' );
 	} //end construct()
 
-	public
-	function index() {
+	public function index() {
 
 		$this->load->view( 'leader_request/header' );
 		$regBefore = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info' );
@@ -31,8 +29,7 @@ class Requests extends CI_Controller {
 		}
 	}
 
-	public
-	function addFullRequest() {
+	public function addFullRequest() {
 
 		$msg = "";
 
@@ -41,15 +38,15 @@ class Requests extends CI_Controller {
 
 		if ( $this->form_validation->run() ) {
 			// data of the leader
-			$leader[ 'leader_name' ] = $_POST[ 'leaderName' ];
-			$leader[ 'team_name' ] = $_POST[ 'teamName' ];
-			$leader[ 'leader_link' ] = $_POST[ 'leaderLink' ];
-			$leader[ 'team_link' ] = $_POST[ 'teamLink' ];
-			$leader[ 'leader_gender' ] = $_POST[ 'leaderGender' ];
+			$leader['leader_name']   = $_POST['leaderName'];
+			$leader['team_name']     = $_POST['teamName'];
+			$leader['leader_link']   = $_POST['leaderLink'];
+			$leader['team_link']     = $_POST['teamLink'];
+			$leader['leader_gender'] = $_POST['leaderGender'];
 			//data of the request
-			$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
-			$request[ 'gender' ] = $_POST[ 'gender' ];
-			$request[ 'current_team_count' ] = $_POST[ 'currentTeamCount' ];
+			$request['members_num']        = $_POST['numOfMembers'];
+			$request['gender']             = $_POST['gender'];
+			$request['current_team_count'] = $_POST['currentTeamCount'];
 
 			//validate urls
 			if ( !filter_var( $leader[ 'leader_link' ], FILTER_VALIDATE_URL ) ) {
@@ -57,15 +54,15 @@ class Requests extends CI_Controller {
                     يرجى التأكد من رابط صفحتك الشخصية!
                 </div>";
 			} else {
-				$info = $this->requestsModel->get_info( $_GET[ 'email' ] )->fetch_assoc();
-				if ( $info[ 'leader_link' ] == null && $info[ 'leader_gender' ] == null ) {
-					$request[ 'leader_id' ] = $info[ 'id' ];
-					$leader[ 'leader_id' ] = $info[ 'id' ];
+				$info = $this->requestsModel->get_info( $_GET['email'] )->fetch_assoc();
+				if ( $info['leader_link'] == null && $info['leader_gender'] == null ) {
+					$request['leader_id'] = $info['id'];
+					$leader['leader_id'] = $info['id'];
 
 					//generate code
 					$desired_length = 6;
 					$unique = uniqid();
-					$leader[ 'random_word' ] = "Osb180" . substr( $unique, strlen( $unique ) - $desired_length, $desired_length );
+					$leader['random_word'] = "Osb180" . substr( $unique, strlen( $unique ) - $desired_length, $desired_length );
 
 					$this->requestsModel->updateFullRequest( $leader );
 
@@ -85,8 +82,7 @@ class Requests extends CI_Controller {
 		echo $msg;
 	}
 
-	public
-	function addRequest() {
+	public function addRequest() {
 		$msg = "";
 		//data of the request
 		$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
@@ -124,8 +120,7 @@ class Requests extends CI_Controller {
 		echo $msg;
 	}
 
-	public
-	function edit() {
+	public function edit() {
 		$msg = "";
 		$this->form_validation->set_rules( 'leaderName', 'اسم القائد', 'required' );
 		$this->form_validation->set_rules( 'leaderLink', 'رابط صفحة القائد', 'trim|required' );
@@ -144,8 +139,7 @@ class Requests extends CI_Controller {
 		echo $msg;
 	}
 
-	public
-	function distributeAmbassadors( $requestID ) {
+	public function distributeAmbassadors( $requestID ) {
 
 		$noneDistributedAmbassadors = $this->requestsModel->getNoneDistributedAmbassadors();
 		$request = $this->requestsModel->getRequest( $requestID )->fetch_array( MYSQLI_ASSOC );

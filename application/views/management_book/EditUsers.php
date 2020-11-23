@@ -64,7 +64,7 @@ $member=$members->result();
                             <form enctype="multipart/form-data"  method="post" action="<?=base_url()?>EditUsers/delete" >
                                 <input id="name" name="name" type="text" style="display:none" value="<?php echo $m->username ?>">
                                 <input id="id" name="id" type="text" style="display:none" value="<?php echo $m->id ?>">
-                                <button  id="delete" name="delete" class="newbutton1"  >حذف العضو</button>
+                                <button  id="delete" name="delete" class="newbutton1"  >حذف </button>
                             </form>
                         </td>
                     </tr>

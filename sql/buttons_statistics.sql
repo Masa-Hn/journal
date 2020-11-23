@@ -33,7 +33,7 @@ CREATE TABLE `buttons_statistics` (
   `code_button` tinyint(1) NOT NULL DEFAULT 0,
   `team_link_button` tinyint(1) NOT NULL DEFAULT 0,
   `leader_link_button` tinyint(1) NOT NULL DEFAULT 0,
-  `date` date NOT NULL DEFAULT current_timestamp()
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
