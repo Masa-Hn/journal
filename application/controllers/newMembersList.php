@@ -7,34 +7,33 @@ class NewMembersList extends CI_Controller {
 		parent::__construct();
 		$this->load->model( 'requestsModel' );
 	} //end construct()
-    
-	public function index() {
-		//	$arr['ambassadors'] = "";
-		//	$arr['info'] = "";
 
+	public function index(){
 		$this->load->view( 'leader_request/header' );
-		$leader_info = $this->requests_model->check_email( $_GET[ 'email' ] );
+		$leader_info = $this->requestsModel->check_email( $_GET[ 'email' ] );
         $arr = null;
-        
-		if ( $leader_info->num_rows > 0) {
+    
+		if ( $leader_info->num_rows > 0 ) {
 			$res = $leader_info->fetch_array( MYSQLI_ASSOC );
-			if($res != null){
-    			$id = $res[ 'id' ];
-    			$request_info = $this->requests_model->get_data( $id, 'leader_id', 'leader_request', 'Rid' )->fetch_array( MYSQLI_ASSOC );
-    			if($request_info != null){
-        			$Rid = $request_info[ 'Rid' ];
-        			$arr['leader_id'] = $id;
-        			$arr['uniqid'] = $res['uniqid'];
-        			$arr['leader_name'] = $res['leader_name'];
-        			$arr['team_link'] = $res['team_link'];
-        			$arr[ 'ambassadors' ] = $this->requests_model->get_data( $Rid, 'request_id', 'ambassador', '*' );
-    			}
-			}
-		} else {
-			$arr[ 'info' ] = "لم تطلب أعضاء مسبقاً...بياناتك غير مكتملة!!";
+            
+            if($res != null){
+                $id = $res[ 'id' ];
+                $request = $this->requestsModel->get_data( $id, 'leader_id', 'leader_request', 'Rid' );
+                if ( $request->num_rows > 0 ) {
+                    $request_info = $request->fetch_array( MYSQLI_ASSOC );
+                    
+                    if($request_info != null){
+                        $Rid = $request_info[ 'Rid' ];
+                        $arr[ 'leader_id' ] = $id;
+                        $arr[ 'uniqid' ] = $res[ 'uniqid' ];
+                        $arr[ 'leader_name' ] = $res[ 'leader_name' ];
+                        $arr[ 'team_link' ] = $res[ 'team_link' ];
+                        $arr[ 'ambassadors' ] = $this->requestsModel->get_data( $Rid, 'request_id', 'ambassador', '*' );
+                    }
+                    $this->load->view( 'leader_request/new_members_list', $arr );
+                }
+            }
 		}
-		$this->load->view( 'leader_request/newMembersList', $arr );
-
 	}
 
 	function joined_ambassador() {
@@ -47,6 +46,7 @@ class NewMembersList extends CI_Controller {
 			$this->requestsModel->update_data( 0, $id );
 		}
 	}
+
 	function notJoined_ambassador() {
 		if ( isset( $_POST[ 'Checked' ] ) ) {
 			$id = $_POST[ 'Checked' ];

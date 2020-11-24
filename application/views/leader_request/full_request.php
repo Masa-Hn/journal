@@ -17,11 +17,11 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title"> طﻠﺐ ﺳﻔﺮاء ﺟﺪﺩ </h1>
+					<h3 class="modal-title"> طﻠﺐ ﺳﻔﺮاء ﺟﺪﺩ </h3>
 				</div>
 
 				<div class="modal-body">
-					<h3 class="body-header">قم بتعبئة الطلب التالي</h3>
+					<h4 class="body-header">قم بتعبئة الطلب التالي</h4>
 					<p id="msg"></p>
 
 					<form method="post" enctype="multipart/form-data">
@@ -73,7 +73,7 @@
 						</div>
 					</form>
 
-					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7vw;font-weight: bold;">اختبار الرابط</button>
+					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار الرابط</button>
 					<div id="check_div" style="display: none;margin-top: 3%; margin-bottom: 3%;">
 						<input type="checkbox" id="check" onclick="change_check()">
 						<label>  تم التأكد من صحة الرابط</label>
@@ -97,7 +97,7 @@
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url + "requests/addFullRequest/?email=<?php echo $_GET['email'];?>&name=<?php echo $_GET['name'];?>",
+					url: base_url + "Requests/addFullRequest/?email=<?php echo $_GET['email'];?>&name=<?php echo $_GET['name'];?>",
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),

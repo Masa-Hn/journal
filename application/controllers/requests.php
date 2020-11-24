@@ -15,10 +15,16 @@ class Requests extends CI_Controller {
 		$regBefore = $this->requestsModel->check_email( $_GET[ 'email' ] );
 
 		if ( $regBefore->num_rows > 0 ) {
-			$this->load->view( 'leader_request/request' );
+			$info = $this->requestsModel->check_email($_GET[ 'email' ])->fetch_array( MYSQLI_ASSOC );
+			if($info['leader_link'] == null && $info['leader_gender'] == null){
+				$this->load->view( 'leader_request/full_request' );
+			}else{
+				$this->load->view( 'leader_request/request' );
 			$this->load->view( 'leader_request/edit_info' );
-		} else {
-			$this->load->view( 'leader_request/full_request' );
+			}	
+		}else{
+			//echo "<div class='alert alert-warning' style='text-align:center'>معلوماتك غير مسجلة</div>";
+			$this->load->view( 'leader_request/page_messaging' );
 		}
 	}
 
@@ -30,19 +36,21 @@ class Requests extends CI_Controller {
 		$this->form_validation->set_message( 'required', 'يجب عليك تعبئة حقل %s' );
 
 		if ( $this->form_validation->run() ) {
+			$info = $this->requestsModel->check_email($_GET[ 'email' ])->fetch_array( MYSQLI_ASSOC );
+			$leader['leader_id'] = $info['id'];
 			// data of the leader
-			$leader[ 'leader_name' ]   = $_GET[ 'name' ];
-			$leader[ 'leader_email' ]  = $_GET[ 'email' ];
-			$leader[ 'team_name' ]     = $_POST[ 'teamName' ];
-			$leader[ 'leader_link' ]   = $_POST[ 'leaderLink' ];
-			$leader[ 'team_link' ]     = $_POST[ 'teamLink' ];
-			$leader[ 'leader_gender' ] = $_POST[ 'leaderGender' ];
+
+			$leader['leader_name']   = $_GET[ 'name' ];
+			$leader['team_name']     = $_POST[ 'teamName' ];
+			$leader['leader_link']   = $_POST[ 'leaderLink' ];
+			$leader['team_link']     = $_POST[ 'teamLink' ];
+			$leader['leader_gender'] = $_POST[ 'leaderGender' ];
 
 			//data of the request
 			$request['members_num']        = $_POST['numOfMembers'];
 			$request['gender']             = $_POST['gender'];
 			$request['current_team_count'] = $_POST['currentTeamCount'];
-
+			$request['leader_id']          = $info['id'];
 			//validate urls
 			if ( !filter_var( $leader[ 'leader_link' ], FILTER_VALIDATE_URL ) ) {
 				$msg = "<div class='alert alert-danger'>
@@ -54,17 +62,18 @@ class Requests extends CI_Controller {
 				$desired_length = 6;
 				$unique = uniqid();
 				$uniqid = "Osb180" . substr( $unique, strlen( $unique ) - $desired_length, $desired_length );
-				$leader[ 'random_word' ] = $uniqid;
+				$leader[ 'uniqid' ] = $uniqid;
 
-				$leader_id = $this->requestsModel->insertLeaderInfo( $leader );
-				$request[ 'leader_id' ] = $leader_id;
+				$this->requestsModel->updateFullRequest( $leader );
+				
+                $msg = "<div class='alert alert-success'>
+                              تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
+                              </div>";
+                echo $msg;  
+                
 				$requestID = $this->requestsModel->addRequest( $request );
 
 				$this->distributeAmbassadors( $requestID );
-
-				$msg = "<div class='alert alert-success'>
-                          تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
-                          </div>";
 			}
 		} else {
 			$msg = "<div class='alert alert-danger'>" . validation_errors() . "</div>";
@@ -89,23 +98,27 @@ class Requests extends CI_Controller {
 			$date = $result[ 'date' ];
 			//check if the date of the last record exceeds 3 days
 			if ( ( date( 'Y-m-d' ) > date( 'Y-m-d', strtotime( $date . ' + 3 days' ) ) ) ) {
-				$rid = $this->requestsModel->addRequest( $request );
-				$this->distributeAmbassadors( $rid );
-				$msg = "<div class='alert alert-success'>
+                
+                $msg = "<div class='alert alert-success'>
 												تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
 												</div>";
+				echo $msg;
+                
+				$rid = $this->requestsModel->addRequest( $request );
+				$this->distributeAmbassadors( $rid );
 			} else {
 				$msg = "<div class='alert alert-danger'>
                           لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
                           </div>";
 			}
 		} else {
-
-			$rid = $this->requestsModel->addRequest( $request );
-			$this->distributeAmbassadors( $rid );
-			$msg = "<div class='alert alert-success'>
+            $msg = "<div class='alert alert-success'>
 					تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
 					</div>";
+            echo $msg;
+			$rid = $this->requestsModel->addRequest( $request );
+			$this->distributeAmbassadors( $rid );
+			
 		}
 		echo $msg;
 	}

@@ -191,7 +191,7 @@ class RequestsModel extends CI_Model {
 	public function updateFullRequest( $leader ) {
 
 		$query = "UPDATE leader_info SET leader_name='" . $leader[ 'leader_name' ] . "' , leader_link='" . $leader[ 'leader_link' ] . "', leader_gender='" . $leader[ 'leader_gender' ] . "',
-		 team_name='" . $leader[ 'team_name' ] . "', team_link='" . $leader[ 'team_link' ] . "', uniqid='" . $leader[ 'random_word' ] . "' WHERE id=" . $leader[ 'leader_id' ];
+		 team_name='" . $leader[ 'team_name' ] . "', team_link='" . $leader[ 'team_link' ] . "', uniqid='" . $leader[ 'uniqid' ] . "' WHERE id=" . $leader[ 'leader_id' ];
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		$conn->close();
