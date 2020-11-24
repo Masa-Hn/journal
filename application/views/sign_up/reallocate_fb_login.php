@@ -29,10 +29,10 @@
         <div class="row fullscreen align-items-center justify-content-center">
           <div class="banner-left col-lg-12 col-sm-12 story-content left-text text-center " dir="rtl">
             <h1>
-              مرحبًا بك  
+              مرحبًا بك
               <a id='fbLink'>
                 <span class="sp-2" id="name" >
-                
+
                 </span>
               </a>
               <br/>
@@ -59,7 +59,7 @@
 
             <br>
             <h1 class="sp-1">
-              أهلًا بك معنا            
+              أهلًا بك معنا
             </h1>
 
             <a href="https://www.facebook.com/groups/1518939228167551/" class="final-page genric-btn primary circle arrow" target="_blank">

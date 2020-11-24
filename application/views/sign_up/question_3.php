@@ -3,7 +3,7 @@
   include 'templates/navbar.php';
  
     $page_id = 8;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <style type="text/css">
   ul{
@@ -21,25 +21,25 @@
               </span>
             <br>
             <h1>
-              أي من الطرق السابقة تفضل
+              كيف تفضل كتابة ما استفدته من قراءتك؟
             </h1>
             <br>
             <h3 class="question" onclick="nextWithMsg('page_6',0)">
               <img src="<?php echo base_url()?>assets/sign_up_assests/img/creative.png">
               <br>
-              تعبير عن رأيك فيما قرأت (أطروحة) 
+                أن تكتب رأيك الشخصي فيما قرأت (أطروحة)
             </h3>
             <hr>
             <h3 class="question" onclick="nextWithMsg('page_6',0)">
               <img src="<?php echo base_url()?>assets/sign_up_assests/img/quotes.png">
               <br>
-              كتابة اقتباس أعجبك من الكتاب
+                أن تكتب اقتباس أعجبك مما قرأت (اقتباس)
             </h3>
             <hr>
             <h3 class="question" onclick="nextWithMsg('page_6',0)">
               <img src="<?php echo base_url()?>assets/sign_up_assests/img/screenshot.png">
               <br>
-              سكرين شوت لاقتباسات أثارت اهتمامك
+              أن تقوم بعمل سكرين شوت للاقتباسات التي أعجبتك (سكرين شوت)
             </h3>
             
           </div>

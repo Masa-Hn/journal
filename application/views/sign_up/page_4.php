@@ -3,7 +3,7 @@
   include_once 'templates/navbar.php';
  
     $page_id = 4;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
@@ -20,8 +20,8 @@
               <br>
               <h1>
                 بكل بساطة تقرأ <span class="sp-2">30</span>
-                صفحة أسبوعيا
-              بإمكانك قراءتها كاملة خلال يوم واحد
+                صفحة أسبوعياً   
+                 بإمكانك قراءتها كاملة خلال يوم واحد
                 أو تقوم بتقسيمها على أيام الأسبوع
               </h1>
               <a href="javascript:next('question_1')" class="genric-btn primary circle arrow">التالي </a>

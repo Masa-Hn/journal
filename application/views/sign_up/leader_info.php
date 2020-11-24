@@ -9,7 +9,7 @@
   }
 
     $page_id = 13;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">
 

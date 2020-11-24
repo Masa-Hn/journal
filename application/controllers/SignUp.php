@@ -1,5 +1,5 @@
 <?php
-//require 'vendor/autoload.php'; 
+//require 'vendor/autoload.php';
 //use Bitly\BitlyClient;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -9,10 +9,10 @@ class SignUp extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-    $this->load->model('SignUpModel');    	
-    $this->load->model('AmbassadorModel');      
-    $this->load->model('RequestsModel');  
-    $this->load->model('books');  
+    $this->load->model('SignUpModel');
+    $this->load->model('AmbassadorModel');
+    $this->load->model('RequestsModel');
+    $this->load->model('books');
     $this->load->model('StatisticsModel');
     $this->load->library('session');
 
@@ -20,9 +20,9 @@ class SignUp extends CI_Controller {
 
  	public function index()
   {
-    
+
     if (!empty($_SESSION['question_5'])) {
-      session_destroy(); 
+      session_destroy();
       $this->load->view('sign_up/question_5');
     }
     else{
@@ -33,16 +33,17 @@ class SignUp extends CI_Controller {
       $this->load->view( 'sign_up/templates/footer');
 
     }
-    
+
   }//index
 
   public function trial()
   {
-      $this->load->view( 'sign_up/templates/header');
-      $this->load->view( 'sign_up/templates/navbar' );
-      //Load Main Page
-      $this->load->view('sign_up/trial');
-      $this->load->view( 'sign_up/templates/footer');
+    $this->load->view('sign_up/404');
+      // $this->load->view( 'sign_up/templates/header');
+      // $this->load->view( 'sign_up/templates/navbar' );
+      // //Load Main Page
+      // $this->load->view('sign_up/trial');
+      // $this->load->view( 'sign_up/templates/footer');
 
   }//trial
 
@@ -53,7 +54,7 @@ class SignUp extends CI_Controller {
 
       if($_POST['next'] == "question_4"){
         $sections['sections']=$this->books->getSections(1);
-          
+
           $data = $this->load->view($page,$sections);
           return $data;
 
@@ -116,9 +117,9 @@ class SignUp extends CI_Controller {
         $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
         $informLeader=false;
         $ambassador=$this->AmbassadorModel->getByRequestId($result->request_id);
-        $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);  
+        $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
       }
-      
+
     }
   }//checkAmbassador
 
@@ -129,14 +130,14 @@ class SignUp extends CI_Controller {
       $ambassador_info=$_POST['ambassador'];
       $leader_gender=$_POST['leader_gender'];
       $country=$_POST['country'];
-      
+
       // //Check ambassador gender
         if ($ambassador_info['gender'] != "female" && $ambassador_info['gender']!="male") {
-          $ambassador_gender="any"; 
+          $ambassador_gender="any";
 
         }
         else{
-          $ambassador_gender=$ambassador_info['gender']; 
+          $ambassador_gender=$ambassador_info['gender'];
         }
 
       //check leader gender
@@ -144,9 +145,9 @@ class SignUp extends CI_Controller {
           //Check New Teams
             $result=$this->SignUpModel->newTeamsAnyLeader($ambassador_gender);
             if (count((array)$result) == 0 ){
-              
+
               //Check Teams With Less Than 12 Members
-                $result=$this->SignUpModel->anyLeader($ambassador_gender, "<=");  
+                $result=$this->SignUpModel->anyLeader($ambassador_gender, "<=");
                 if (count((array)$result) == 0 ){
                   //Check Teams With More Than 12 Members
                     $result=$this->SignUpModel->anyLeader($ambassador_gender, ">");
@@ -176,9 +177,11 @@ class SignUp extends CI_Controller {
           //Check New Teams
             $result=$this->SignUpModel->getNewTeams($leader_gender,$ambassador_gender);
             if (count((array)$result) == 0 ){
-              
+
               //Check Teams With Less Than 12 Members
+
                 $result=$this->SignUpModel->getTeams($leader_gender,$ambassador_gender, "<=");  
+
                 if (count((array)$result) == 0 ){
                   //Check Teams With More Than 12 Members
                     $result=$this->SignUpModel->getTeams($leader_gender,$ambassador_gender, ">");
@@ -203,7 +206,7 @@ class SignUp extends CI_Controller {
               $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
             }//else
         }//else
-        
+
     }//if
     else{
       $this->load->view('sign_up/fb_login');
@@ -215,11 +218,11 @@ class SignUp extends CI_Controller {
     $informLeader=false;
     // 1- Insert Ambassador
     $this->AmbassadorModel->insertAmbassador($ambassador);
-    
+
     // 2- Inform Ambassador
       //1- get leader Information
         $leader_info=$this->SignUpModel->getLeaderInfo($leader_id);
-    
+
     // 3- Check Leader Requests
       //1- chekc associated requests
       $numberOfRequests=$this->AmbassadorModel->countRequests($request_id);
@@ -232,7 +235,7 @@ class SignUp extends CI_Controller {
     //4- load view to inform ambassador [FINAL STEP]
       $ambassadorInfo=$this->AmbassadorModel->getByRequestId($request_id);
       $reallocate=false;
-      $this->informambassador($reallocate,$ambassadorInfo,$leader_info,$request_id,$informLeader,$leader_id);   
+      $this->informambassador($reallocate,$ambassadorInfo,$leader_info,$request_id,$informLeader,$leader_id);
   }//checkout
 
   public function informambassador($reallocate,$ambassador,$leader_info,$request_id,$informLeader,$leader_id)
@@ -262,7 +265,7 @@ class SignUp extends CI_Controller {
   public function informLeader()
   {
     if (!empty($_POST['leader_id']) && !empty($_POST['request_id']) ) {
-      //1- update request to DONE 
+      //1- update request to DONE
         $this->RequestsModel->updateRequest($_POST['request_id']);
         //2- get all associated requests
         $allAmbassadors=$this->AmbassadorModel->getByRequestId($_POST['request_id']);
@@ -280,7 +283,7 @@ class SignUp extends CI_Controller {
 
       /*initialize curl*/
       $ch = curl_init($url);
-      
+
       $firstMsg="السلام عليكم ورحمة الله وبركاته ".'\n'." كيف  الحال قيادة؟! 🌸 ".'\n'."تم إرسال أعضاء جدد لفريقك؛ نتمنى منك الاهتمام بهم يرجى منك إضافة جميع السفراء (بغض النظر دخل فريق المتابعة أو لا) إلى موقع العلامات وفي نهاية الأسبوع من لم يقرأ فقط قم بعمل انسحاب له (انسحاب وليس حذف من إشارة ❌) وذلك لتجنب الفوضى في مجموعة السفراء  ".'\n'."شكرا لك😍";
 
       /*prepare response*/
@@ -302,7 +305,7 @@ class SignUp extends CI_Controller {
       /*prepare response*/
       $jsonData =  $this->jsonData($recipient,$lastMsg);
       /* curl setting to send a json post data */
-      $this->curlSetting($ch,$jsonData);    
+      $this->curlSetting($ch,$jsonData);
     }//if
   }//informLeader
 
@@ -332,11 +335,12 @@ class SignUp extends CI_Controller {
 
     //Set the content type to application/json
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    
+
     //Execute the request.
     curl_exec($ch); // user will get the message
-  
+
   }//curlSetting
+
 
   public function formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country)
   {         
@@ -349,7 +353,7 @@ class SignUp extends CI_Controller {
                 'profile_link'=>$ambassador_info['profile_link'],
                 'fb_id'=>$ambassador_info['fb_id']
                 );
-    return $ambassador; 
+    return $ambassador;
   }//formatAmbassador
 
   public function ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$leader_gender,$country)
@@ -366,7 +370,7 @@ class SignUp extends CI_Controller {
   }//ambassadorWithoutLeader
 
   public function noLeaderFound()
-  {  
+  {
     $this->load->view('sign_up/templates/header');
     $this->load->view('sign_up/templates/navbar' );
     $this->load->view('sign_up/no_leader_found');

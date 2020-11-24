@@ -3,7 +3,7 @@
   include 'templates/navbar.php';
  
     $page_id = 3;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <style type="text/css">
   @media (min-width: 576px)
@@ -31,9 +31,9 @@
               </span>
               </h1>
               <h1>
-                لا تعتمد على قراءتك اكبر عدد من الصفحات إنما عن استمراريتك بالتعلم
+                لا تعتمد قراءتك على أكبر عدد من الصفحات إنما عن استمراريتك بالتعلم
                 <br>
-				وقد قمنا بتجهيز قائد لك تم تدريبه لمتابعتك وتشجيعك وهناك أنشطة و تكريمات
+                وقد قمنا بتجهيز قائد لك تم تدريبه لمتابعتك وتشجيعك وهناك أنشطة وتكريمات
               </h1>
               <a href="javascript:next('page_4')" class="genric-btn primary circle arrow">التالي <span class="lnr lnr-arrow-right"></span></a>
             </div>

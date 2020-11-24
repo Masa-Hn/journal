@@ -33,11 +33,11 @@ function nextWithMsg(page,msg){
   }
   else if(msg == 3){
     fullMsg=" حتى أنا أقوم بقرائتها دفعةً واحدة ";
-  } 
+  }
   else if(msg == 4){
     fullMsg= " حتى أنا أقوم بتقسيمها ";
   }
-  
+
   Swal.fire({
     title: 'رائـــع',
     text:fullMsg,
@@ -50,7 +50,7 @@ function nextWithMsg(page,msg){
   .then((result) => {
   if (result.isConfirmed) {
     next(page);
-  } 
+  }
   else {
     next(page);
   }
@@ -79,15 +79,15 @@ function nextWithMsg(page,msg){
       confirmButtonText: "استمرار ",
       confirmButtonColor:'#9ed16f'
     });
-         
+
   }
 function checkAnswer() {
-    answer=document.getElementById('answer').value; 
+    answer=document.getElementById('answer').value;
     answer = answer.replace(/[٠١٢٣٤٥٦٧٨٩]/g, function (d) { return d.charCodeAt(0) - 1632; }).replace(/[۰۱۲۳۴۵۶۷۸۹]/g, function (d) { return d.charCodeAt(0) - 1776; });
     if (answer == 30){
       Swal.fire({
         title: 'رائـــع',
-        text:"أحسنت الاجابة",
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
         imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
         imageWidth: 300,
         imageAlt: 'Custom image',
@@ -98,10 +98,29 @@ function checkAnswer() {
           next('question_2');
       });
     }//if
-    else if(document.getElementById('answer').value == "ثلاثين" || document.getElementById('answer').value == "ثلاثون"){
+    else if(answer == "30 صفحة" ){
       Swal.fire({
         title: 'رائـــع',
-        text:"أحسنت الاجابة",
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
+        imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
+        imageWidth: 300,
+        imageAlt: 'Custom image',
+        timer: 4000,
+        confirmButtonText: "استمرار ",
+        confirmButtonColor:'#9ed16f'
+      }).then(function(){
+          next('question_2');
+      });
+    }
+    else if(
+      document.getElementById('answer').value == "ثلاثين" 
+      || document.getElementById('answer').value == "ثلاثون" 
+      || document.getElementById('answer').value == "ثلاثون صفحة" 
+      || document.getElementById('answer').value == "ثلاثين صفحة" 
+      ){
+      Swal.fire({
+        title: 'رائـــع',
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
         imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
         imageWidth: 300,
         imageAlt: 'Custom image',
@@ -141,7 +160,7 @@ function checkAnswer() {
           next('page_4');
         });
       }
-       
+
     }//else
 
   }//checkAnswer
@@ -150,11 +169,11 @@ function checkAnswer() {
 function question2(msg) {
   if(msg == 3){
     fullMsg=" حتى أنا أقوم بقرائتها دفعةً واحدة ";
-  } 
+  }
   else{
     fullMsg= " حتى أنا أقوم بتقسيمها ";
   }
- 
+
 }
 function allocateAmbassador(){
   leader_gender =document.getElementById('leader_gender').value;
@@ -205,7 +224,7 @@ function checkLogin(id) {
 }//checkLogin
 
 function reallocateAmbassador(leader_gender) {
- 
+
   leader_gender =leader_gender;
   leader_id=document.getElementById('leader_id').value;
   request_id=document.getElementById('request_id').value;
@@ -234,13 +253,13 @@ function informLeader(leader_id,request_id){
 
 function  show (id,close){
   var modal = document.getElementById(id);
-  //var captionText = document.getElementById("caption"); 
+  //var captionText = document.getElementById("caption");
   modal.style.display = "block";
   header=document.getElementById('header');
   header.style.display = "none";
   var span =document.getElementById(close);
 
-  span.onclick = function() { 
+  span.onclick = function() {
     header.style.display = "block";
     modal.style.display = "none";
 
@@ -248,4 +267,3 @@ function  show (id,close){
 
 
 }//end show()
-

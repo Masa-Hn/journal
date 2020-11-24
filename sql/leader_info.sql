@@ -32,7 +32,7 @@ CREATE TABLE `leader_info` (
   `id` int(11) NOT NULL,
   `leader_name` varchar(255) NOT NULL,
   `leader_link` varchar(255) NOT NULL,
-  `messenger_id` varchar(255) NOT NULL,
+  `messenger_id` varchar(255) NOT NULL DEFAULT '0',
   `team_link` varchar(255) NOT NULL,
   `leader_email` varchar(255) NOT NULL,
   `team_name` varchar(255) NOT NULL,

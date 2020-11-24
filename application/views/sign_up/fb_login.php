@@ -3,7 +3,7 @@
   include 'templates/navbar.php';
 
     $page_id = 12;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 
 

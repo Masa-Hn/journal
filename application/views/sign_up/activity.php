@@ -3,7 +3,7 @@
   include 'templates/navbar.php';
 
     $page_id = 11;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
     <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
@@ -13,8 +13,8 @@
             <h3>
               في مشروعنا هناك العديد من الفعاليات والدورات الغير المنهجية منها التصميم والانفوجرافيك والنقاشات الفكرية،
               المشاركة بها
-                <span class="sp-2"> اختيارية </span>
-              ، أيها ستحب أن تجرب أولاً؟
+                <span class="sp-2"> اختيارية،</span>
+               أيها ستحب أن تجرب أولاً؟
             </h3>
             <br>
             <div class="col-lg-12 book-div">
