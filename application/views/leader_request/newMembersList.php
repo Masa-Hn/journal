@@ -77,12 +77,8 @@
 								<td>
 									<?php echo ($amb['gender'] == 'female' || $amb['gender'] == 'Female') ? "أنثى" :  "ذكر"; ?>
 								</td>
-								<td><input type="checkbox" name="joined" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="
-									<?php echo "joined".$id;?>" onclick="joined('
-									<?php echo $id;?>');"></td>
-								<td><input type="checkbox" name="notJoined" <?php if ($amb[ 'join_following_team']==2) echo "checked";?> id="
-									<?php echo "notJoined".$id;?>" onclick="notJoined('
-									<?php echo $id;?>');"></td>
+								<td><input type="checkbox" name="joined" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="<?php echo "joined".$id;?>" onclick="joined('<?php echo $id;?>');"></td>
+								<td><input type="checkbox" name="notJoined" <?php if ($amb[ 'join_following_team']==2) echo "checked";?> id="<?php echo "notJoined".$id;?>" onclick="notJoined('<?php echo $id;?>');"></td>
 								<td>
 									<button class="btn" name="copyMsg" id="<?php echo $id; ?>" onClick="copyMsg('<?php echo $amb['name']; ?>' , '<?php echo $leader_name; ?>', '<?php echo $uniqid.$leader_id;?>')" style="background-color:#214761; color: #fff; ">نسخ الرسالة</button>
 								</td>
@@ -141,6 +137,7 @@
 						error: function ( error ) {
 							console.log( error );
 						}
+						
 					} );
 				} else {
 					console.log( "canceled" );
@@ -229,14 +226,14 @@
 			}
 		}
 
-		function copyMsg( ambName, leaderName, uniqid) {
+		function copyMsg( ambName, leaderName, uniqid ) {
 
 			var x = "";
 			x += "مرحباً " + ambName + "\n.\n";
 			x += "أنا " + "( " + leaderName + ")" + "\n.\n";
 			x += "سأكون مشرف القراءة الخاص بك داخل أصبوحة ١٨٠." + "\n.\n.\n";
 			x += "سعيد جدا بانضمامك معنا ك قارئ جديد في مشروع صناعة القُراء.\n\n";
-			x += "بداية ما رايك أن تعرفني بنفسك اكثر؟" + " 🌸🌸" + "\n.\n" ;
+			x += "بداية ما رايك أن تعرفني بنفسك اكثر؟" + " 🌸🌸" + "\n.\n";
 			x += "وأرجو منك الدخول هنا للمجموعة العامة لكل القراء (مهمة جداً)\n.\n";
 			x += "https://www.facebook.com/groups/667884100014005" + "\n.\n";
 			x += "رمزالدخول للمجموعة, بها كل الأنشطة الأسبوعية لكل القرّاء:\n.\n" + uniqid + "\n\n";
