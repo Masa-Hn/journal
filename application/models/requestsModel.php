@@ -91,7 +91,6 @@ class RequestsModel extends CI_Model {
 		$done = $conn->query( $query );
 		$conn->close();
 	}
-	//end process
 
 	public
 

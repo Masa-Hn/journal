@@ -94,10 +94,9 @@ public function incrementVisitors($page_id)
 		}
 	}*/
 	public
-	function button_clicks( $ip_address, $table_name, $cond ) {
+	function button_clicks($table_name, $where ) {
 		$this->db->select( '*' );
 		$this->db->from( $table_name );
-		$where = "ip_address = '" . $ip_address . "' AND " . $cond . "= 0";
 		$this->db->where( $where );
 		return $this->db->get();
 

@@ -28,54 +28,66 @@ class Statistics extends CI_Controller {
 	function code_button() {
 		$ip_address = $_POST[ 'ip_address' ];
 
-		$clicks = $this->StatisticsModel->button_clicks( $ip_address, 'buttons_statistics', 'code_button' );
+		$clicks = $this->StatisticsModel->button_clicks('buttons_statistics', 'code_button=0 AND ip_address = "' . $ip_address .'"' );
 
 		if ( $clicks->num_rows() > 0 ) {
 			$res = $clicks->row();
 			$id = $res->id;
 			$this->StatisticsModel->update_data( $id, 'code_button', 1, 'buttons_statistics' );
 		} else {
-			$data[ 'ip_address' ] = $ip_address;
+			$clicks_n = $this->StatisticsModel->button_clicks('buttons_statistics', 'code_button=1 AND ip_address = "' . $ip_address .'"' )->num_rows();
+			
+			if($clicks_n == 0){
+				$data[ 'ip_address' ] = $ip_address;
 			$data[ 'code_button' ] = 1;
 			$this->StatisticsModel->insert_data( $data, 'buttons_statistics' );
-
+			}		
 		}
+		echo $ip_address;
 	}
 
 	public
 	function team_link_button() {
 		$ip_address = $_POST[ 'ip_address' ];
 
-		$clicks = $this->StatisticsModel->button_clicks( $ip_address, 'buttons_statistics', 'team_link_button' );
+		$clicks = $this->StatisticsModel->button_clicks('buttons_statistics', 'team_link_button=0 AND ip_address = "' . $ip_address .'"' );
 
 		if ( $clicks->num_rows() > 0 ) {
 			$res = $clicks->row();
 			$id = $res->id;
 			$this->StatisticsModel->update_data( $id, 'team_link_button', 1, 'buttons_statistics' );
 		} else {
-			$data[ 'ip_address' ] = $ip_address;
+			$clicks_n = $this->StatisticsModel->button_clicks('buttons_statistics', 'team_link_button=1 AND ip_address = "' . $ip_address .'"' )->num_rows();
+			
+			if($clicks_n == 0){
+				$data[ 'ip_address' ] = $ip_address;
 			$data[ 'team_link_button' ] = 1;
 			$this->StatisticsModel->insert_data( $data, 'buttons_statistics' );
-
+			}
 		}
+		echo $ip_address;
 	}
 
 	public
 	function leader_link_button() {
 		$ip_address = $_POST[ 'ip_address' ];
-
-		$clicks = $this->StatisticsModel->button_clicks( $ip_address, 'buttons_statistics', 'leader_link_button' );
+		
+		$clicks = $this->StatisticsModel->button_clicks('buttons_statistics', 'leader_link_button=0 AND ip_address = "' . $ip_address .'"' );
 
 		if ( $clicks->num_rows() > 0 ) {
 			$res = $clicks->row();
 			$id = $res->id;
 			$this->StatisticsModel->update_data( $id, 'leader_link_button', 1, 'buttons_statistics' );
 		} else {
-			$data[ 'ip_address' ] = $ip_address;
+			$clicks_n = $this->StatisticsModel->button_clicks('buttons_statistics', 'leader_link_button=1 AND ip_address = "' . $ip_address .'"' )->num_rows();
+
+			if($clicks_n == 0){
+				$data[ 'ip_address' ] = $ip_address;
 			$data[ 'leader_link_button' ] = 1;
 			$this->StatisticsModel->insert_data( $data, 'buttons_statistics' );
-
+			}
 		}
+		echo $ip_address;
 	}
 }
 
