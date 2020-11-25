@@ -30,7 +30,7 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
             $leader[ 'messenger_id' ] = $sender;
             $newLeader->insertLeaderInfo($leader);
 
-            $response="شكرًا لتواصلك معنا، سنقوم بالرد قريبًا";
+            $response=" تم تأكيد حسابك." .'\n'." . ".'\n'. "سوف يصلك قارئ جديد قريبًا، نوصيك أن تعتني به فهو خطوةٌ في مستقبلنا جميعا ♥️";
             
             $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAFn0RZCp9IwZAiDqgARdyAHsuTGmaSi0O6IXxXyQ4fqUxIm56e9J5JroaYNDKC7VFjUDCn6YKTR66ZBldkAYopouWAZB1BDsWsZA0LIZBNr40lfa0t0UMjgnQJeXlN6E3Bec85QVMNfSU8CgBg3R9H7Yrgl6n4VAZDZD';
 
