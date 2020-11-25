@@ -1,4 +1,4 @@
-<?php
+1<?php
 defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 class Requests extends CI_Controller {
 
@@ -48,7 +48,7 @@ class Requests extends CI_Controller {
 			return 3;
 		}
 	}
-	
+
 	public
 	function addFullRequest() {
 
@@ -164,7 +164,7 @@ class Requests extends CI_Controller {
 		$leader = $this->requestsModel->getLeaderInfo( $request[ 'leader_id' ] )->fetch_array( MYSQLI_ASSOC );
 
 		$num_of_members = $request[ 'members_num' ];
-		
+
 		if ( $noneDistributedAmbassadors->num_rows > 0 ) {
 
 			while ( $amb = $noneDistributedAmbassadors->fetch_array( MYSQLI_ASSOC ) ) {
@@ -195,11 +195,11 @@ class Requests extends CI_Controller {
 				array_push( $data[ 'info' ], $reqs[ $i ] );
 			}
 		}
-		$data[ 'title' ] = 'Delete Leader Request';
-		$this->load->view( 'management_book/templates/header', $data );
-		$this->load->view( 'management_book/templates/navbar' );
-		$this->load->view( 'leader_request/DeleteRequest', $data );
-		$this->load->view( 'management_book/templates/footer' );
+		$data['title'] = 'Delete Leader Request';
+		$this->load->view('management_book/templates/header',$data);
+		$this->load->view('management_book/templates/navbar');
+		$this->load->view('leader_request/DeleteRequest',$data);
+		$this->load->view('management_book/templates/footer');
 	}
 
 	public
