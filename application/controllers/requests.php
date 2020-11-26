@@ -178,7 +178,7 @@ class Requests extends CI_Controller {
 				}
 			}
 		}
-		echo $num_of_members;
+		//echo $num_of_members;
 		$distributedAmbassadors = $this->requestsModel->getDistributedAmbassadors( $requestID );
 		if ( $distributedAmbassadors->num_rows == $request[ 'members_num' ] ) {
 			$this->requestsModel->updateReq( $requestID );

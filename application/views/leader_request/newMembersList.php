@@ -1,19 +1,36 @@
-<style>
-	.link,
-	.fa {
-		margin-left: 1%;
-	}
-	
-	.link:hover,
-	.fa:hover {
-		color: #214761;
-		font-weight: bold;
-	}
-
-</style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+		$( document ).ready( function () {
+		
+			
+			var lst = document.querySelectorAll( ".joined" );
+			var flag = false;
+			var i;
+			var info = "<?php echo (empty($info) == false)? $info : '';?>";
+			for ( i = 0; i < lst.length; i += 2 ) {
+				if ( lst[ i ].checked == true || lst[ i + 1 ].checked == true ) {
+					flag = true;
+				} else {
+					flag = false;
+					break;
+				}	
+			}
+			if(info == ""){
+				if ( !flag ) {
+				$( "#newReqModal" ).modal( "show" );
+					
+			}else{
+				$( "#newReqModal" ).modal( "hide" );
+			}
+			}else{
+				$( "#newReqModal" ).modal( "hide" );
+			}
+			
+			console.log( flag );
+		} );
+	</script>
 <body>
 
 	<a href="#" data-toggle="modal" data-target="#newReqModal" id="reqModalBtn"><img src="<?php echo base_url() ?>admin/img/newmembers.png" width="30px">  قائمة الأعضاء الجدد</a>
@@ -26,8 +43,7 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title">الأعضاء الجدد </h3>
+					<h3 class="modal-title" style="text-align: center">الأعضاء الجدد </h3>
 				</div>
 
 				<div class="modal-body">
@@ -58,7 +74,7 @@
 								$id = $amb[ 'id' ];
 								?>
 							<tr style="text-align: center; color:#214761 ">
-								<td><i class="fa fa-external-link" aria-hidden="true"></i>
+								<td><i class="fa fa-external-link" aria-hidden="true" style="color: #214761;"></i>
 									<a class="link" href="<?php echo $amb['profile_link'];?>" style="color: #214761;">
 										<?php echo $amb['name']; ?>
 									</a>
@@ -69,7 +85,7 @@
 								<td><input type="checkbox" name="joined" class="joined" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="<?php echo "joined".$id;?>" onclick="joined('<?php echo $id;?>');"></td>
 								<td><input type="checkbox" name="notJoined" class="joined" <?php if ($amb[ 'join_following_team']==2) echo "checked";?> id="<?php echo "notJoined".$id;?>" onclick="notJoined('<?php echo $id;?>');"></td>
 								<td>
-									<a class="link" name="copyMsg" id="<?php echo $id; ?>" onClick="copyMsg('<?php echo $amb['name']; ?>' , '<?php echo $leader_name; ?>', '<?php echo $uniqid.$leader_id;?>')" style="color: #214761;"><i class="fas fa-copy"></i></a>
+									<a class="link" name="copyMsg" id="<?php echo $id; ?>" onClick="copyMsg('<?php echo $amb['name']; ?>' , '<?php echo $leader_name; ?>', '<?php echo $uniqid.$leader_id;?>')" style="color: #214761;"><i class="fas fa-copy" style="color: #214761;"></i></a>
 								</td>
 
 							</tr>
@@ -98,37 +114,6 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$( document ).ready( function () {
-			$('#newReqModal').modal({
-    backdrop: 'static',
-    keyboard: false
-})
-			var lst = document.querySelectorAll( ".joined" );
-			var flag = false;
-			var i;
-			var info = "<?php echo (empty($info) == false)? $info : '';?>";
-			for ( i = 0; i < lst.length; i += 2 ) {
-				if ( lst[ i ].checked == true || lst[ i + 1 ].checked == true ) {
-					flag = true;
-					console.log(flag);
-				} else {
-					flag = false;
-					break;
-				}	
-			}
-			if(info == ""){
-				if ( !flag ) {
-				$( "#newReqModal" ).modal( "show" );
-			}else{
-				$( "#newReqModal" ).modal( "hide" );
-			}
-			}else{
-				$( "#newReqModal" ).modal( "hide" );
-			}
-			
-			console.log( flag );
-		} );
-
 		function joined( id ) {
 			if ( document.getElementById( "joined" + id ).checked == true ) {
 				var success = confirm( "هل أنت متأكد من أن العضو تم استقباله؟" );

@@ -17,24 +17,23 @@ class NewMembersList extends CI_Controller {
 		if ( $leader_info->num_rows > 0 ) {
 			$res = $leader_info->fetch_array( MYSQLI_ASSOC );
 			$id = $res[ 'id' ];
-			$request = $this->requestsModel->get_data( $id, 'leader_id', 'leader_request', '*' );
+			$request = $this->requestsModel->leaderLastRequest( $id, 'leader_id', 'leader_request', '*' );
 			if ( $request->num_rows > 0 ) {
 				$request_info = $request->fetch_array( MYSQLI_ASSOC );
-				if ( $request_info[ 'is_done' ] == 1 ) {
-						$Rid = $request_info[ 'Rid' ];
-						$arr[ 'leader_id' ] = $id;
-						$arr[ 'uniqid' ] = $res[ 'uniqid' ];
-						$arr[ 'leader_name' ] = $res[ 'leader_name' ];
-						$arr[ 'team_link' ] = $res[ 'team_link' ];
-						$arr[ 'ambassadors' ] = $this->requestsModel->get_data( $Rid, 'request_id', 'ambassador', '*' );
+				$Rid = $request_info[ 'Rid' ];
+				$arr[ 'leader_id' ] = $id;
+				$arr[ 'uniqid' ] = $res[ 'uniqid' ];
+				$arr[ 'leader_name' ] = $res[ 'leader_name' ];
+				$arr[ 'team_link' ] = $res[ 'team_link' ];
+				$arr[ 'ambassadors' ] = $this->requestsModel->get_data( $Rid, 'request_id', 'ambassador', '*' );
 
-						$this->load->view( 'leader_request/newMembersList', $arr );
-					
-
-				} else {
-					$arr[ 'info' ] = "لم يتم توزيع أعضاء لك بعد!";
-					$this->load->view( 'leader_request/newMembersList', $arr );
+				if ( $arr[ 'ambassadors' ]->num_rows == 0 ) {
+					$arr[ 'info' ] = 'لم يتم التوزيع لك بعد!';
 				}
+				$this->load->view( 'leader_request/newMembersList', $arr );
+			} else {
+				$arr[ 'info' ] = "لا يوجد لديك طلبات!";
+				$this->load->view( 'leader_request/newMembersList', $arr );
 			}
 		}
 	}

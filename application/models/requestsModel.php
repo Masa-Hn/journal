@@ -230,7 +230,7 @@ class RequestsModel extends CI_Model {
 
 	function leaderLastRequest( $id ) {
 
-		$query = "SELECT date,is_done FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
+		$query = "SELECT date,is_done,Rid FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {

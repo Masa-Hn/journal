@@ -7,10 +7,6 @@
 </button>
 
 
-
-
-
-
 	<!-- Modal -->
 	<div id="editModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -40,49 +36,47 @@
 							<label for="leaderLink">اسمك كما هو على الفيسبوك:</label>
 							<input type="text" name="leaderName" id="leaderName" value="<?php echo $leaderName;?>" class="form-control" required="required">
 						</div>
+						<label name="msg-name" id="msg-name" style="display: none; color: red"> الرجاء كتابة اسمك! </label>
+						<hr/>
 						<div class="form-group">
 							<label for="leaderLink">رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" value="<?php echo $leaderLink;?>" class="form-control" required="required">
 						</div>
-
 						<label name="msg-ch1" id="msg-ch1" style="display: none; color: red"> الرجاء كتابة رابط صفحتك! </label>
 						<div class="form-group">
 							<label for="teamLink">رابط فريق المتابعة الخاص بك: </label>
 							<input type="text" name="teamLink" id="teamLink" value="<?php echo $teamLink;?>" class="form-control" required="required">
-						<?php
-						$msg = "هل أنت متأكد من أنك تريد تعديل بياناتك الشخصية؟";
-						?>
-
-						<div class="form-group">
-							<button type="submit" name="submit" class="btn btn-block" id="subBtn" style="display: none;">تعديل</button>
-
 						</div>
 						<label name="msg-ch2" id="msg-ch2" style="display: none; color: red"> الرجاء كتابة رابط فريقك </label>
+
+
 					</form>
+					<div class="form-group ">
+						<button class="btn btn-block" name="check-btn1" id="check-btn1" onClick="check1()" style=" background-color: #214761;color: #fff; font-size: 1.7rem;font-weight: bold;"><i class="fa fa-external-link" aria-hidden="true"></i> اختبار رابط صفحتك</button>
 
-
-					<button name="check-btn1" class="btn btn-block" id="check-btn1" onclick="check1()" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار رابط صفحتك</button>
-					
-					<div id="check_div1" style="display: none;margin-top: 3%; margin-bottom: 3%;">
-						<input type="checkbox" id="check1" onclick="change_check1()">
-						<label>  تم التأكد من صحة رابط صفحتك</label>
+						<div id="check_div1" style=" margin-top: 3%; margin-bottom: 3%;">
+							<input type="checkbox" id="check1">
+							<label>  تم التأكد من صحة رابط صفحتك</label>
+						</div>
 					</div>
-					
-					<button name="check-btn2" class="btn btn-block" id="check-btn2" onclick="check2()" style="display: none;background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار رابط فريقك</button>
-					
-					<div id="check_div2" style="display: none;margin-top: 3%; margin-bottom: 3%;">
-						<input type="checkbox" id="check2" onclick="change_check2()">
-						<label>  تم التأكد من صحة رابط فريقك</label>
+					<div class="form-group">
+						<button name="check-btn2" id="check-btn2" class="btn btn-block" onclick="check2()" style=" background-color:#214761; color: #fff; font-size: 1.7rem;font-weight: bold;"><i class="fa fa-external-link" aria-hidden="true"></i>اختبار رابط فريقك</button>
+
+						<div id="check_div2" style="margin-top: 3%; margin-bottom: 3%;">
+							<input type="checkbox" id="check2">
+							<label>  تم التأكد من صحة رابط فريقك</label>
+						</div>
+
+					</div>
+					<label name="check-msg" id="check-msg" style="display: none; color: red"> الرجاء تأكيد اختبار الروابط! </label>
+					<div class="form-group">
+						<button type="submit" name="submit" class="btn btn-block" id="subBtn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">تعديل</button>
 					</div>
 
-					<button type="submit" name="submit" class="btn btn-block" id="subBtn" style="display: none;background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">تعديل</button>
-            
 				</div>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق </button>
-				</div>
-
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق </button>
 			</div>
 		</div>
 	</div>
@@ -91,17 +85,9 @@
 			var URL = document.getElementById( 'leaderLink' ).value;
 			if ( URL == "" ) {
 				document.getElementById( 'msg-ch1' ).style.display = "block";
-				document.getElementById( 'check_div1' ).style.display = "none";
-				document.getElementById( 'check_div2' ).style.display = "none";
-				document.getElementById( 'check-btn2' ).style.display = "none";
-				document.getElementById( 'subBtn' ).style.display = "none";
-				document.getElementById( 'check1' ).checked = false;
-				document.getElementById( 'check2' ).checked = false;
 			} else {
 				document.getElementById( 'msg-ch1' ).style.display = "none";
-				var win = window.open( URL );
-				document.getElementById( 'check_div1' ).style.display = "block";
-
+				window.open( URL );
 			}
 		}
 
@@ -109,18 +95,13 @@
 			var teamURL = document.getElementById( 'teamLink' ).value;
 			if ( teamURL == "" ) {
 				document.getElementById( 'msg-ch2' ).style.display = "block";
-				document.getElementById( 'check_div2' ).style.display = "none";
-				document.getElementById( 'subBtn' ).style.display = "none";
-				document.getElementById( 'check2' ).checked = false;
 			} else {
 				document.getElementById( 'msg-ch2' ).style.display = "none";
-				var win = window.open( teamURL );
-				document.getElementById( 'check_div2' ).style.display = "block";
-
+				window.open( teamURL );
 			}
 		}
 
-		function change_check1() {
+		/*function change_check1() {
 			ch = document.getElementById( 'check1' );
 			if ( ch.checked == true ) {
 				document.getElementById( 'check-btn2' ).style.display = "block";
@@ -130,17 +111,7 @@
 				document.getElementById( 'subBtn' ).style.display = "none";
 			}
 
-		}
-
-		function change_check2() {
-			ch = document.getElementById( 'check2' );
-			if ( ch.checked == true ) {
-				document.getElementById( 'subBtn' ).style.display = "block";
-			} else {
-				document.getElementById( 'subBtn' ).style.display = "none";
-			}
-
-		}
+		}*/
 	</script>
 	<script type="text/javascript">
 		var base_url = "<?php echo base_url()?>";
@@ -149,24 +120,31 @@
 		$( document ).ready( function () {
 
 			$( "#subBtn" ).click( function () {
-				$.ajax( {
-					type: "POST",
-					url: base_url + "index.php/requests/edit/?email=<?php echo $_GET['email']?>",
-					data: {
-						id: id,
-						leaderLink: $( "#leaderLink" ).val(),
-						leaderName: $( "#leaderName" ).val(),
-						teamLink: $( "#teamLink" ).val()
+				if ( document.getElementById( 'check1' ).checked == true && document.getElementById( 'check2' ).checked == true ) {
+					document.getElementById( 'check-msg' ).style.display = "none";
+					$.ajax( {
+						type: "POST",
+						url: base_url + "index.php/requests/edit/?email=<?php echo $_GET['email']?>",
+						data: {
+							id: id,
+							leaderLink: $( "#leaderLink" ).val(),
+							leaderName: $( "#leaderName" ).val(),
+							teamLink: $( "#teamLink" ).val()
 
-					},
-					beforeSend: function () {
-						return confirm( "هل أنت متأكد من أنك تريد تعديل بياناتك؟" );
-					},
-					success: function ( data ) {
-						$( '#msgg' ).html( data );
-					}
-				} );
-				return false;
+						},
+						beforeSend: function () {
+							return confirm( "هل أنت متأكد من أنك تريد تعديل بياناتك؟" );
+						},
+						success: function ( data ) {
+
+							$( '#msgg' ).html( data );
+						}
+					} );
+				} else {
+					document.getElementById( 'check-msg' ).style.display = "block";
+				}
+
+
 			} );
 		} );
 	</script>

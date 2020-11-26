@@ -73,12 +73,12 @@
 
 					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار الرابط</button>
 
-					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7vw;font-weight: bold;">اختبار الرابط</button>
-					<div id="check_div" style="display: none;margin-top: 3%; margin-bottom: 3%;">
-						<input type="checkbox" id="check" onclick="change_check()">
+					<div id="check_div" style="margin-top: 3%; margin-bottom: 3%;">
+						<input type="checkbox" id="check">
 						<label>  تم التأكد من صحة الرابط</label>
 					</div>
-					<button type="submit" name="submit" class="btn btn-block" id="sub-btn" style="display: none;background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">رفع الطلب</button>
+					<label name="check-msg" id="check-msg" style="display: none; color: red"> الرجاء تأكيد اختبار الرابط! </label>
+					<button type="submit" name="submit" class="btn btn-block" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">رفع الطلب</button>
         
 				</div>
 
@@ -94,22 +94,10 @@
 			var URL = document.getElementById( 'leaderLink' ).value;
 			if ( URL == "" ) {
 				document.getElementById( 'msg-ch' ).style.display = "block";
-				document.getElementById( 'check' ).checked = false;
 			} else {
 				document.getElementById( 'msg-ch' ).style.display = "none";
-				var win = window.open( URL );
-				document.getElementById( 'check_div' ).style.display = "block";
-
+				window.open( URL );
 			}
-		}
-
-		function change_check() {
-			ch = document.getElementById( 'check' );
-			if ( ch.checked == true )
-				document.getElementById( 'sub-btn' ).style.display = "block";
-			else
-				document.getElementById( 'sub-btn' ).style.display = "none";
-
 		}
 	</script>
 	<script type="text/javascript">
@@ -117,6 +105,7 @@
 		$( document ).ready( function () {
 
 			$( "#sub-btn" ).click( function () {
+				if ( document.getElementById( 'check' ).checked == true) {
 				$.ajax( {
 					type: "POST",
 					url: base_url + "requests/addFullRequest/?email=<?php echo $_GET['email'];?>&name=<?php echo $_GET['name'];?>",
@@ -135,7 +124,9 @@
 						$( '#msg' ).html( data );
 					}
 				} );
-				return false;
+				}else{
+					document.getElementById( 'check-msg' ).style.display = "block";
+				}
 			} );
 		} );
 	</script>
