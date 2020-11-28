@@ -9,7 +9,7 @@
   }
 
     $page_id = 13;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">
 
@@ -22,7 +22,7 @@
                 تبقى ثلاث خطوات لتصبح فردًا معنا
               </h3>
               <h1>
-                <span class="sp-#45258f">
+                <span class="sp-3">
                   أولًا : 
                 </span>
                 الانضمام لمجموعة القراءة الخاصة بك

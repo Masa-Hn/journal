@@ -2,37 +2,33 @@
 defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 class Requests extends CI_Controller {
 
-	public
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 		$this->load->model( 'requestsModel' );
 		$this->load->model( 'GeneralModel' );
 		$this->load->library( 'form_validation' );
 	} //end construct()
 
-	public
-	function index() {
+	public function index() {
 
 		$this->load->view( 'leader_request/header' );
-		$regBefore = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info' );
+		$regBefore = $this->requestsModel->check_email( $_GET[ 'email' ] );
 
 		if ( $regBefore->num_rows > 0 ) {
-			$info = $this->requestsModel->get_info( $_GET[ 'email' ] )->fetch_assoc();
-
-			if ( $info[ 'leader_link' ] == null && $info[ 'leader_gender' ] == null ) {
+			$info = $this->requestsModel->check_email($_GET[ 'email' ])->fetch_array( MYSQLI_ASSOC );
+			if($info['leader_link'] == null && $info['leader_gender'] == null){
 				$this->load->view( 'leader_request/full_request' );
-			} else {
+			}else{
 				$this->load->view( 'leader_request/request' );
-				$this->load->view( 'leader_request/edit_info' );
-			}
-
-		} else {
+			$this->load->view( 'leader_request/edit_info' );
+			}	
+		}else{
+			//echo "<div class='alert alert-warning' style='text-align:center'>معلوماتك غير مسجلة</div>";
 			$this->load->view( 'leader_request/page_messaging' );
 		}
 	}
 
-	public
-	function addFullRequest() {
+	public function addFullRequest() {
 
 		$msg = "";
 
@@ -40,44 +36,44 @@ class Requests extends CI_Controller {
 		$this->form_validation->set_message( 'required', 'يجب عليك تعبئة حقل %s' );
 
 		if ( $this->form_validation->run() ) {
+			$info = $this->requestsModel->check_email($_GET[ 'email' ])->fetch_array( MYSQLI_ASSOC );
+			$leader['leader_id'] = $info['id'];
 			// data of the leader
-			$leader[ 'leader_name' ] = $_POST[ 'leaderName' ];
-			$leader[ 'team_name' ] = $_POST[ 'teamName' ];
-			$leader[ 'leader_link' ] = $_POST[ 'leaderLink' ];
-			$leader[ 'team_link' ] = $_POST[ 'teamLink' ];
-			$leader[ 'leader_gender' ] = $_POST[ 'leaderGender' ];
-			//data of the request
-			$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
-			$request[ 'gender' ] = $_POST[ 'gender' ];
-			$request[ 'current_team_count' ] = $_POST[ 'currentTeamCount' ];
 
+			$leader['leader_name']   = $_GET[ 'name' ];
+			$leader['team_name']     = $_POST[ 'teamName' ];
+			$leader['leader_link']   = $_POST[ 'leaderLink' ];
+			$leader['team_link']     = $_POST[ 'teamLink' ];
+			$leader['leader_gender'] = $_POST[ 'leaderGender' ];
+
+			//data of the request
+			$request['members_num']        = $_POST['numOfMembers'];
+			$request['gender']             = $_POST['gender'];
+			$request['current_team_count'] = $_POST['currentTeamCount'];
+			$request['leader_id']          = $info['id'];
 			//validate urls
 			if ( !filter_var( $leader[ 'leader_link' ], FILTER_VALIDATE_URL ) ) {
 				$msg = "<div class='alert alert-danger'>
                     يرجى التأكد من رابط صفحتك الشخصية!
                 </div>";
 			} else {
-				$info = $this->requestsModel->get_info( $_GET[ 'email' ] )->fetch_assoc();
-				if ( $info[ 'leader_link' ] == null && $info[ 'leader_gender' ] == null ) {
-					$request[ 'leader_id' ] = $info[ 'id' ];
-					$leader[ 'leader_id' ] = $info[ 'id' ];
 
-					//generate code
-					$desired_length = 6;
-					$unique = uniqid();
-					$leader[ 'random_word' ] = "Osb180" . substr( $unique, strlen( $unique ) - $desired_length, $desired_length );
+				//generate code
+				$desired_length = 6;
+				$unique = uniqid();
+				$uniqid = "Osb180" . substr( $unique, strlen( $unique ) - $desired_length, $desired_length );
+				$leader[ 'uniqid' ] = $uniqid;
 
-					$this->requestsModel->updateFullRequest( $leader );
+				$this->requestsModel->updateFullRequest( $leader );
+				
+                $msg = "<div class='alert alert-success'>
+                              تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
+                              </div>";
+                echo $msg;  
+                
+				$requestID = $this->requestsModel->addRequest( $request );
 
-					$requestID = $this->requestsModel->addRequest( $request );
-					$this->distributeAmbassadors( $requestID );
-					$msg = "<div class='alert alert-success'>
-                          تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
-                          </div>";
-
-				} else {
-					$msg = "<div class='alert alert-danger'>لقد تم تسجيل الطلب مسبقاً!</div>";
-				}
+				$this->distributeAmbassadors( $requestID );
 			}
 		} else {
 			$msg = "<div class='alert alert-danger'>" . validation_errors() . "</div>";
@@ -85,8 +81,7 @@ class Requests extends CI_Controller {
 		echo $msg;
 	}
 
-	public
-	function addRequest() {
+	public function addRequest() {
 		$msg = "";
 		//data of the request
 		$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
@@ -126,11 +121,14 @@ class Requests extends CI_Controller {
 				{
 			//check if the date of the last record exceeds 3 days
 			if ( ( date( 'Y-m-d' ) > date( 'Y-m-d', strtotime( $date . ' + 3 days' ) ) ) ) {
-				$rid = $this->requestsModel->addRequest( $request );
-				$this->distributeAmbassadors( $rid );
-				$msg = "<div class='alert alert-success'>
+                
+                $msg = "<div class='alert alert-success'>
 												تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
 												</div>";
+				echo $msg;
+                
+				$rid = $this->requestsModel->addRequest( $request );
+				$this->distributeAmbassadors( $rid );
 			} else {
 				$msg = "<div class='alert alert-danger'>
                           لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
@@ -138,26 +136,29 @@ class Requests extends CI_Controller {
 			}
 		}
 		} else {
-
+            $msg = "<div class='alert alert-success'>
+					تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
+					</div>";
+            echo $msg;
 			$rid = $this->requestsModel->addRequest( $request );
 			$this->distributeAmbassadors( $rid );
-			$msg = "<div class='alert alert-success'>
-											تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
-											</div>";
+			
 		}
 		echo $msg;
 	}
 
-	public
-	function edit() {
+	public function edit() {
 		$msg = "";
 		$this->form_validation->set_rules( 'leaderName', 'اسم القائد', 'required' );
 		$this->form_validation->set_rules( 'leaderLink', 'رابط صفحة القائد', 'trim|required' );
+		$this->form_validation->set_rules( 'teamLink', 'رابط فريق المتابعة', 'trim|required' );
 		$this->form_validation->set_message( 'required', 'يجب عليك تعبئة حقل %s' );
+
 		if ( $this->form_validation->run() ) {
 			$data[ 'id' ] = $_POST[ 'id' ];
 			$data[ 'leader_name' ] = $_POST[ 'leaderName' ];
 			$data[ 'leader_link' ] = $_POST[ 'leaderLink' ];
+			$data[ 'team_link' ] = $_POST[ 'teamLink' ];
 			$this->requestsModel->updateLeaderInfo( $data );
 			$msg = "<div class='alert alert-success'>
                 تم تعديل بياناتك بنجاح
@@ -168,8 +169,7 @@ class Requests extends CI_Controller {
 		echo $msg;
 	}
 
-	public
-	function distributeAmbassadors( $requestID ) {
+	public function distributeAmbassadors( $requestID ) {
 
 		$noneDistributedAmbassadors = $this->requestsModel->getNoneDistributedAmbassadors();
 		$request = $this->requestsModel->getRequest( $requestID )->fetch_array( MYSQLI_ASSOC );
@@ -191,7 +191,6 @@ class Requests extends CI_Controller {
 			}
 		}
 		$distributedAmbassadors = $this->requestsModel->getDistributedAmbassadors( $requestID );
-		echo $distributedAmbassadors->num_rows;
 		if ( $distributedAmbassadors->num_rows == $request[ 'members_num' ] ) {
 			$this->requestsModel->updateReq( $requestID );
 		}

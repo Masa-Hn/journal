@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2020 at 04:23 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.8
+-- Generation Time: Nov 17, 2020 at 11:11 PM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 5.6.36
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,14 +31,15 @@ SET time_zone = "+00:00";
 CREATE TABLE `ambassador` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-`country` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
   `gender` varchar(50) NOT NULL,
   `leader_gender` varchar(50) NOT NULL,
   `request_id` int(11) DEFAULT NULL,
   `profile_link` varchar(255) NOT NULL,
   `fb_id` varchar(255) NOT NULL,
-  `is_joined` tinyint(1) NOT NULL DEFAULT 0,
-`created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `is_joined` tinyint(1) NOT NULL DEFAULT '0',
+  `join_following_team` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -59,7 +61,7 @@ ALTER TABLE `ambassador`
 -- AUTO_INCREMENT for table `ambassador`
 --
 ALTER TABLE `ambassador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

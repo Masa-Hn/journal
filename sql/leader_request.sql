@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `leader_request` (
-  `Rid` int(11) NOT NULL AUTO_INCREMENT = 1000,
+  `Rid` int(11) NOT NULL,
   `members_num` int(11) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -57,7 +57,7 @@ ALTER TABLE `leader_request`
 -- AUTO_INCREMENT for table `leader_request`
 --
 ALTER TABLE `leader_request`
-  MODIFY `Rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
 
 --
 -- Constraints for dumped tables

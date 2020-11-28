@@ -3,7 +3,7 @@
   include 'templates/navbar.php';
 
     $page_id = 11;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
     <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
@@ -13,8 +13,8 @@
             <h3>
               في مشروعنا هناك العديد من الفعاليات والدورات الغير المنهجية منها التصميم والانفوجرافيك والنقاشات الفكرية،
               المشاركة بها
-                <span class="sp-2"> اختيارية </span>
-              ، أيها ستحب أن تجرب أولاً؟
+                <span class="sp-2"> اختيارية،</span>
+               أيها ستحب أن تجرب أولاً؟
             </h3>
             <br>
             <div class="col-lg-12 book-div">
@@ -22,25 +22,25 @@
                 <div class="container ">
                   <div class="row text-center">
                     <div class="col-md-4 col-sm-12 activity-div">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_1.png" class="activity-div-img" onclick="nextWithMsg('fb_login',2)"><br>
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_1.png" class="activity-div-img" onclick="nextWithMsg('registration_form',2)"><br>
                       <h5 class="question">
                         التثقيف بالفيديو  (ورش تعليمية)
                       </h5>
                     </div>
                     <div class="col-md-4 col-sm-12 activity-div">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_2.png" class="activity-div-img" onclick="nextWithMsg('fb_login',2)"><br>
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_2.png" class="activity-div-img" onclick="nextWithMsg('registration_form',2)"><br>
                       <h5 class="question">
                         النقاش المنهجي
                       </h5>
                     </div>
                     <div class="col-md-4 col-sm-12 activity-div">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_3.png" class="activity-div-img" onclick="nextWithMsg('fb_login',2)"><br>
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_3.png" class="activity-div-img" onclick="nextWithMsg('registration_form',2)"><br>
                       <h5 class="question">
                         كتابة المقالات
                       </h5>
                     </div>
                     <div class="col-md-4 col-sm-12 activity-div">
-                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_4.png" class="activity-div-img" onclick="nextWithMsg('fb_login',2)"><br>
+                      <img src="<?php echo base_url()?>assets/sign_up_assests/img/activity_4.png" class="activity-div-img" onclick="nextWithMsg('registration_form',2)"><br>
                       <h5 class="question">
                         الانفوجرافيك والتصميم
                       </h5>

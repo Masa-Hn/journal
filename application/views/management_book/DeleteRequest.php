@@ -39,7 +39,7 @@ background-color: #A52A2A;
     <div class="row d-flex justify-content-center">
         <div class="col-xl-5 col-lg-6 col-md-7">
             <div class="card b-0" >
-              <div class="slideshow-container" style="width:100%"">
+              <div class="slideshow-container" style="width:100%">
                 <h5 style="color:  #A52A2A" >طلبات قادة ليس لديهم أي سفير</h5>
               <table   dir="rtl" style="width:100%;empty-cells: show;">
                 <thead >

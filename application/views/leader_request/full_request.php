@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous"/>
+
 <body>
 
 	<!-- Trigger the modal with a button -->
@@ -5,8 +7,6 @@
 	<i class="fa fa-user-plus" aria-hidden="true"></i>
      طلب سفراء جدد
 </button>
-
-
 
 
 	<!-- Modal -->
@@ -17,20 +17,20 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title"> طﻠﺐ ﺳﻔﺮاء ﺟﺪﺩ </h1>
+					<h3 class="modal-title"> طﻠﺐ ﺳﻔﺮاء ﺟﺪﺩ </h3>
 				</div>
 
 				<div class="modal-body">
-					<h3 class="body-header">قم بتعبئة الطلب التالي</h3>
+					<h4 class="body-header">قم بتعبئة الطلب التالي</h4>
 					<p id="msg"></p>
 
 					<form method="post" enctype="multipart/form-data">
 						<?php
 						//to be taken from osboha website
-						$leaderName = $_GET[ 'name' ];
-						$teamLink = "http://facebook.com/group/";
-						$teamName = "11";
-						$currentTeamCount = 20;
+						$leaderName = $_GET['name'];
+						$teamLink = "https://www.facebook.com/groups/".$teamLink;
+						$teamName = $teamName;
+						$currentTeamCount = $teamCount;
 
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
@@ -42,9 +42,9 @@
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
 							<input type="text" name="leaderLink" id="leaderLink" placeholder="مثال: https://www.facebook.com/example" class="form-control" required="required">
 
-						</div>						
-						 <label name="msg-ch" id="msg-ch"  style="display: none; color: red" > الرجاء كتابة الرابط </label>
-            
+						</div>
+						<label name="msg-ch" id="msg-ch" style="display: none; color: red"> الرجاء كتابة الرابط </label>
+
 						<div class="form-group">
 							<label for="leaderGender" class="form-label"> جنسك: </label>
 							<select name="leaderGender" id="leaderGender" class="form-control">
@@ -71,67 +71,19 @@
 								<option value="any">لا فرق</option>
 							</select>
 						</div>
-
-						<div class="form-group">
-							<button type="submit" name="submit" class="btn btn-block" id="sub-btn" style="display: none;">رفع الطلب</button>
-						</div>
-
 					</form>
 
-<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()">اختبار الرابط</button>
- <div id="check_div" style="display: none;"><input type="checkbox" id="check"  onclick="change_check()" ><label>  تم التأكد من صحة الرابط</label></div>
-<script type="text/javascript">
-
-	function check()
-		{
-var URL = document.getElementById( 'leaderLink' ).value;
-if (URL=="")
-	document.getElementById('msg-ch').style.display="block";
-else
-{
-document.getElementById('msg-ch').style.display="none";
-var win = window.open(URL);
-document.getElementById('check_div').style.display="block";
-
-}
-    		}
-
-		function change_check()
-		{
-			ch= document.getElementById('check');
-			sb=document.getElementById('sub-btn');
-			if (ch.checked==true)
-				document.getElementById('sub-btn').style.display="block";
-			else
-				document.getElementById('sub-btn').style.display="none";
-
-		}
-              
-						function doesFileExist( urlToFile ) {
-							var xhr = new XMLHttpRequest();
-							xhr.open( 'HEAD', urlToFile );
-							xhr.send();
-
-							if ( xhr.status == "404" ) {
-								return false;
-							} else {
-								return true;
-							}
-						}
-
-						function check() {
-							var URL = document.getElementById( 'leaderLink' ).value;
-							var win = window.open( URL );
-							var result = doesFileExist( URL );
-							if ( result )
-								document.getElementById( 'sub-btn' ).style.display = "block";
-						}
-					</script>
-          
+					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار الرابط</button>
+					<div id="check_div" style="display: none;margin-top: 3%; margin-bottom: 3%;">
+						<input type="checkbox" id="check" onclick="change_check()">
+						<label>  تم التأكد من صحة الرابط</label>
+					</div>
+					<button type="submit" name="submit" class="btn btn-block" id="sub-btn" style="display: none;background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">رفع الطلب</button>
+        
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق </button>
+					<a type="button" class="btn btn-default" target="_blank" href="https://www.facebook.com/messages/t/Intoosboha" style="font-weight: bold; color: #214761; font-size: 1.7rem;"><i class="fab fa-facebook-messenger"></i> للتواصل مع الإدخال</a>
 				</div>
 
 			</div>
@@ -145,7 +97,7 @@ document.getElementById('check_div').style.display="block";
 			$( "#sub-btn" ).click( function () {
 				$.ajax( {
 					type: "POST",
-					url: base_url + "Requests/addFullRequest/?email=<?=$_GET['email']?>",
+					url: base_url + "Requests/addFullRequest/?email=<?php echo $_GET['email'];?>&name=<?php echo $_GET['name'];?>",
 					data: {
 						leaderName: $( "#leaderName" ).val(),
 						leaderLink: $( "#leaderLink" ).val(),
@@ -164,6 +116,42 @@ document.getElementById('check_div').style.display="block";
 				return false;
 			} );
 		} );
+        
+
+	function check(){
+        
+        var URL = document.getElementById('leaderLink').value;
+        if (URL==""){
+            document.getElementById('msg-ch').style.display="block";
+        }else{
+            document.getElementById('msg-ch').style.display="none";
+            var win = window.open(URL);
+            document.getElementById('check_div').style.display="block";
+        }
+    }
+
+    function change_check(){
+        
+        ch = document.getElementById('check');
+        sb = document.getElementById('sub-btn');
+        if (ch.checked==true)
+            document.getElementById('sub-btn').style.display="block";
+        else
+            document.getElementById('sub-btn').style.display="none";
+    }
+              
+    function doesFileExist(urlToFile){
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open( 'HEAD', urlToFile );
+        xhr.send();
+
+        if( xhr.status == "404" ){
+            return false;
+        }else{
+            return true;
+        }
+    }		
 	</script>
 </body>
 </html>

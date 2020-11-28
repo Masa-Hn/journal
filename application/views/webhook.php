@@ -30,7 +30,37 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
             $leader[ 'messenger_id' ] = $sender;
             $newLeader->insertLeaderInfo($leader);
 
-            $response="شكرًا لتواصلك معنا، سنقوم بالرد قريبًا";     
+            $response=" تم تأكيد حسابك." .'\n'." . ".'\n'. "سوف يصلك قارئ جديد قريبًا، نوصيك أن تعتني به فهو خطوةٌ في مستقبلنا جميعا ♥️";
+            
+            $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAFn0RZCp9IwZAiDqgARdyAHsuTGmaSi0O6IXxXyQ4fqUxIm56e9J5JroaYNDKC7VFjUDCn6YKTR66ZBldkAYopouWAZB1BDsWsZA0LIZBNr40lfa0t0UMjgnQJeXlN6E3Bec85QVMNfSU8CgBg3R9H7Yrgl6n4VAZDZD';
+
+            /*initialize curl*/
+            $ch = curl_init($url);
+            /*prepare response*/
+            $jsonData = '{
+            "recipient":{
+                "id":"' . $sender . '"
+                },
+                "message":{
+                    "text":"' . $response . '"
+                }
+            }';
+            /* curl setting to send a json post data */
+            //Tell cURL that we want to send a POST request.
+            curl_setopt($ch, CURLOPT_POST, 1);
+
+            //Attach the encoded JSON string to the POST fields.
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            //Set the content type to application/json
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            
+            //Execute the request if the message is not empty.
+            if (!empty($message)) {
+                $result = curl_exec($ch); // user will get the message
+            }     
         }
         else{
             $response = "هذه الصفحة مخصصة لقادة أصبوحة 180، إن كنت قائدًا وتواجه مشكلة أرسل سكرين شوت لمراقبك لنُساعدك في حلها ".'\n'."طبت وطابت أوقاتك";
@@ -41,35 +71,6 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
   
     }
 
-    $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAFn0RZCp9IwZAiDqgARdyAHsuTGmaSi0O6IXxXyQ4fqUxIm56e9J5JroaYNDKC7VFjUDCn6YKTR66ZBldkAYopouWAZB1BDsWsZA0LIZBNr40lfa0t0UMjgnQJeXlN6E3Bec85QVMNfSU8CgBg3R9H7Yrgl6n4VAZDZD';
-
-    /*initialize curl*/
-    $ch = curl_init($url);
-    /*prepare response*/
-    $jsonData = '{
-    "recipient":{
-        "id":"' . $sender . '"
-        },
-        "message":{
-            "text":"' . $response . '"
-        }
-    }';
-    /* curl setting to send a json post data */
-    //Tell cURL that we want to send a POST request.
-    curl_setopt($ch, CURLOPT_POST, 1);
-
-    //Attach the encoded JSON string to the POST fields.
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    //Set the content type to application/json
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    
-    //Execute the request if the message is not empty.
-    if (!empty($message)) {
-        $result = curl_exec($ch); // user will get the message
-    }
 }
 
 function test_input($data) {

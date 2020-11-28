@@ -3,7 +3,7 @@
   include 'templates/navbar.php';
 
     $page_id = 5;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
@@ -21,7 +21,7 @@
               التي
               عليك قراءتها للحصول على العلامة الكاملة
 
-              في القراءة ؟
+              في القراءة؟
             </h1>
             <span style="color: red; display: none;" id="error_msg">حاول مُجددًا</span>
             <br>

@@ -9,7 +9,7 @@
   }
 
     $page_id = 13;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">
 
@@ -36,7 +36,7 @@
         </div>        
         <div class="row banner-center align-items-center justify-content-center">
           <div class="col-lg-12 col-sm-12 text-center" style="margin-bottom: 5%">
-            <a href="<?php echo base_url()?>" target="_blank" class="final-page genric-btn primary circle arrow" style="margin-top: auto;" >
+            <a href="<?php echo base_url()?>bookSearch" target="_blank" class="final-page genric-btn primary circle arrow" style="margin-top: auto;" >
               اختيار الكتاب 
             </a>
 

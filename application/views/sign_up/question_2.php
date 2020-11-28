@@ -3,7 +3,7 @@
   include 'templates/navbar.php';
  
     $page_id = 6;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <!-- Start Banner Area -->
     <section class="banner-area relative bgImg2">
@@ -17,13 +17,13 @@
             <br>
             <br>
             <h1>
-              اخبرتك سابقا بشأن تقسيم القراءة خلال الأسبوع 
+              أخبرتك سابقاً بشأن تقسيم القراءة خلال الأسبوع 
               <br>
               فهل ستقوم بقراءة الـ <span class="sp-2">(30)</span>صفحة على دفعة واحدة
               <br>
-              في يوم واحد أم تفضل تقسيمها حسب اوقات فراغك
+              في يوم واحد أم تفضل تقسيمها حسب أوقات فراغك
               <br>
-              خلال الاسبوع ؟            
+              خلال الأسبوع؟            
             </h1>
             <br>
                <a href="javascript:nextWithMsg('page_5',3)" class="genric-btn primary circle arrow">دفعة واحدة</a>

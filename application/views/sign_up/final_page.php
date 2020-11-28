@@ -3,7 +3,7 @@
   include 'templates/navbar.php';
 
     $page_id = 13;
-    $this->StatisticsModel->addVisitor($page_id);
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 
 <!--Start Banner Area -->
