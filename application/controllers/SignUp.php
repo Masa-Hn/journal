@@ -15,6 +15,8 @@ class SignUp extends CI_Controller {
     $this->load->model('books');
     $this->load->model('StatisticsModel');
     $this->load->library('session');
+    $this->load->library('form_validation');
+
 
 	}//end construct()
 
@@ -86,14 +88,29 @@ class SignUp extends CI_Controller {
     $reallocate=false;
     if(!empty($_POST['email'])){
       $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);
+      
       if (count((array)$result) == 0 ){
-        if(!empty($_POST['ambassador_name'])){
-          $this->allocateAmbassador($_POST['ambassador_name'],$_POST['ambassador_gender'],$_POST['leader_gender'],$_POST['email']);  
-        }
+      //New Ambassador
+
+        if(!empty($_POST['ambassador_name']) && !empty($_POST['ambassador_gender']) && !empty($_POST['leader_gender']) )
+        {
+          
+          if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $errorMsg = "أدخل بريدًا صحيحًا"; 
+            $this->load->view('sign_up/registration_form',$errorMsg);
+          }// if for email validation
+          else{
+            $this->allocateAmbassador($_POST['ambassador_name'],$_POST['ambassador_gender'],$_POST['leader_gender'],$_POST['email']);  
+          }//allocateAmbassador
+
+        }//if for required field
         else{
-            $this->load->view('sign_up/registration_form');
-        }
-      }//if
+          $errorMsg = "أدخل الحقول المطلوبة"; 
+          $this->load->view('sign_up/registration_form',$errorMsg);
+
+        }//else for required field
+      }//if for not exist
+
       else{
         //Inform Ambassador
         if($result->request_id == null){
@@ -176,7 +193,7 @@ class SignUp extends CI_Controller {
             //Check Teams With More Than 12 Members
             $result=$this->SignUpModel->getTeams($leader_gender,$ambassador_gender, ">");
             if (count((array)$result) == 0 ){
-              $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$leader_gender,$country,$ambassador_email);
+              $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_name,$ambassador_gender,$leader_gender,$country,$ambassador_email);
               $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
               $this->noLeaderFound();
             }//if
@@ -322,7 +339,7 @@ class SignUp extends CI_Controller {
                 'gender'=>$ambassador_gender,
                 'leader_gender'=>$leader_gender,
                 'request_id'=>$result->Rid,
-                'profile_link'=>'none',
+                'profile_link'=>'https://www.facebook.com/',
                 'fb_id'=>$ambassador_email
                 );
     return $ambassador;
@@ -335,7 +352,7 @@ class SignUp extends CI_Controller {
                 'country'=>$country,
                 'gender'=>$ambassador_gender,
                 'leader_gender'=>$leader_gender,
-                'profile_link'=>'none',
+                'profile_link'=>'https://www.facebook.com/',
                 'fb_id'=>$ambassador_email
                 );
     return $ambassador;

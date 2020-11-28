@@ -66,7 +66,7 @@ function checkData(){
         ambassadorGender=document.getElementsByName('amb_gender');
         leaderGender=document.getElementsByName('leader_gender');
         var valid=true;
-        var req ="";
+        var req ='لطفًا أدخل المعلومات التالية ';
   if (!(ambassadorGender[0].checked || ambassadorGender[1].checked)) {
     req= req+"," + "جنسك";
     valid=false;
@@ -86,18 +86,7 @@ function checkData(){
   }
   
   if(! valid){
-    document.getElementById('leftDiv').style.zIndex =200; 
-    Swal.fire({
-      icon: 'warning',
-      title: 'لطفًا أدخل المعلومات التالية ',
-      text:req,
-      type: "warning",
-      confirmButtonText: "حسنًا ",
-      confirmButtonColor:'#9ed16f'
-      }).then(function(){
-        document.getElementById('leftDiv').style.zIndex =9999; 
-
-    });
+    document.getElementById('errorMsgP').innerHTML=req; 
   }
   else{
     ambassadorGender=$('input[name="amb_gender"]:checked').val();

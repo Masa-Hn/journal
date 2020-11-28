@@ -1,4 +1,16 @@
-  
+.reg-btn{
+  font-size: 13px;
+  font-weight: 400;
+  color: #ffff;
+  transition: all 0.3s;  
+}
+#errorMsg{
+  margin-top: 5%;
+  margin-bottom: 0%;
+  font-size: 1vw;
+  color: darkred;
+
+}  
 
 .container {
   max-width: 900px;
@@ -158,7 +170,8 @@ section#formHolder {
   transform: translate(-50%, -50%);
 }
 .form form .form-group {
-  margin-bottom: 5px;
+  margin-bottom: -5px;
+  text-align: right;
 }
 .form form .form-group.hasError input {
   border-color: #9ed16f !important;
@@ -243,8 +256,12 @@ footer p a:hover, footer p a:focus:hover {
 }
 
 @media (max-width: 768px) {
+  
   .container {
     overflow: hidden;
+  }
+  #errorMsg{
+    font-size: 3vw;
   }
 
   section#formHolder {
