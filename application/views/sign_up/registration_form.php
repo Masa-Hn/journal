@@ -26,7 +26,7 @@
           <div class="login form-peice switched" dir="rtl">
             <form class="login-form" action="#" method="post">
               <div style="text-align: center;">
-                <a href="index.html"><img src="<?php echo base_url()?>assets/sign_up_assests/img/logo.png" alt=""></a>
+                <a href="index.html"><img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/reg_img.png" alt=""></a>
               </div>
               <div class="form-group">
                 <label for="loginemail">أدخل بريدك الالكتروني</label>
@@ -36,7 +36,9 @@
 
               </div>
               <div class="CTA">
-                <input type="button" value="تسجيل الدخول" onclick="checkLoginEmail()">
+                <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkLoginEmail()" style="color: #ffff;">
+                  تسجيل الدخول
+                </a>
                 <a href="#" class="switch">قارئ جديد</a>
               </div>
             </form>
@@ -45,6 +47,16 @@
           <!-- Signup Form -->
           <div class="signup form-peice" dir="rtl">
             <form class="signup-form" >
+              <div class="form-group" id="errorMsg">
+                <span id="errorMsgP">
+                  <?php 
+                    if(!empty($errorMsg)){
+                      echo $errorMsg; 
+                    }
+
+                  ?>
+                </span>
+              </div>
               <div class="form-group">
                 <input type="text" name="username" id="username" class="name" placeholder="اسمك الكامل " onblur="checkUserName(this.value)">
                 <span class="error" id="usernameError"> لطفًا أدخل اسمك الكامل</span>
@@ -93,7 +105,9 @@
               </div>
                   
               <div class="CTA" style="margin-top: 55px;">
-                <input type="button" value="تسجيل" id="submit" onclick="checkData()">
+                <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkData()" style="color: #ffff;">
+                  تسجيل
+                </a>
                 <a href="#" class="switch"> قارئ سابق </a>
               </div>
             </form>
