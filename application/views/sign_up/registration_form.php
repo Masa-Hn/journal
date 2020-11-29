@@ -1,6 +1,9 @@
 <?php 
   include 'templates/header.php';
   include 'templates/navbar.php';
+  $page_id = 12;
+  $this->StatisticsModel->incrementVisitors($page_id);
+
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/registtration.css">
 <!-- Start Banner Area -->
