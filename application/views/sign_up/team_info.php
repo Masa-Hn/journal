@@ -8,7 +8,7 @@
       exit();
   }
 
-    $page_id = 13;
+    $page_id = 14;
     $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">
@@ -95,4 +95,46 @@
     }
   });
 
-</script>
+		$( document ).ready( function () {
+			var base_url = "<?php echo base_url()?>";
+			var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
+
+			$( '#code' ).click( function () {
+
+				$.ajax( {
+					type: "POST",
+					url: base_url + "Statistics/code_button",
+					data: {
+						ip_address: ip_address
+					},
+					success: function ( data ) {
+
+						console.log( data );
+					},
+					error: function ( error ) {
+						console.log( error );
+					}
+				} );
+				return false;
+			} );
+
+			$( '#team' ).click( function () {
+
+				$.ajax( {
+					type: "POST",
+					url: base_url + "Statistics/team_link_button",
+					data: {
+						ip_address: ip_address
+					},
+					success: function ( data ) {
+
+						console.log( data );
+					},
+					error: function ( error ) {
+						console.log( error );
+					}
+				} );
+				return false;
+			} );
+		} );
+	</script>

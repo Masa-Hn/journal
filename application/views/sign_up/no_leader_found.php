@@ -1,3 +1,7 @@
+<?php 
+    $page_id = 17;
+    $this->StatisticsModel->incrementVisitors($page_id);
+?>
 <style type="text/css">
   #join{
     margin-bottom: 2%;

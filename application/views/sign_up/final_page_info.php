@@ -2,8 +2,8 @@
 include 'templates/header.php';
 include 'templates/navbar.php';
 
-$page_id = 13;
-$this->StatisticsModel->incrementVisitors( $page_id );
+//$page_id = 13;
+//$this->StatisticsModel->incrementVisitors( $page_id );
 ?>
 <style type="text/css">
 	a {

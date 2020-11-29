@@ -20,7 +20,7 @@ class AutoRecords extends CI_Controller {
 
 	public
 	function addRecords() {
-		$page_ids = 15;
+		$page_ids = 17;
 		$days = 7;
 		$records = $this->StatisticsModel->getRecords();
 		if($records->num_rows() == 0)
