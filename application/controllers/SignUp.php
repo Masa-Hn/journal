@@ -87,11 +87,11 @@ class SignUp extends CI_Controller {
   {
     $reallocate=false;
     if(!empty($_POST['email'])){
+      //print_r($_POST['email']);die();
       $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);
       
       if (count((array)$result) == 0 ){
       //New Ambassador
-
         if(!empty($_POST['ambassador_name']) && !empty($_POST['ambassador_gender']) && !empty($_POST['leader_gender']) )
         {
           
@@ -118,6 +118,7 @@ class SignUp extends CI_Controller {
           $this->noLeaderFound();
         }
         else{
+          
           $request=$this->SignUpModel->getRequestInfo($result->request_id);
           $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
           $created_at=date_create($created_at->format("Y-m-d"));
@@ -129,7 +130,7 @@ class SignUp extends CI_Controller {
           }//if
           $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
           $informLeader=false;
-          $ambassador=$this->AmbassadorModel->getByRequestId($result->request_id);
+          $ambassador=$this->AmbassadorModel->getByFBId($_POST['email']);
           $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
         }
       }

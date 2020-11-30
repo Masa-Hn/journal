@@ -37,6 +37,7 @@ CREATE TABLE `ambassador` (
   `request_id` int(11) DEFAULT NULL,
   `profile_link` varchar(255) NOT NULL,
   `fb_id` varchar(255) NOT NULL,
+`messenger_id` varchar(255) NOT NULL DEFAULT '0',
   `is_joined` tinyint(1) NOT NULL DEFAULT '0',
   `join_following_team` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
