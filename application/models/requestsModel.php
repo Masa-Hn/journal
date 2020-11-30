@@ -125,6 +125,27 @@ class RequestsModel extends CI_Model {
 		}
 	} //addRequest
 
+	public function addRequestExc( $data ) {
+
+		$leader_id = $data[ 'leader_id' ];
+		$gender = $data[ 'gender' ];
+		$num_of_members = $data[ 'members_num' ];
+		$currentTeamCount = $data[ 'current_team_count' ];
+		$date = $data['date'];
+		$is_accepted = 0;
+		$is_done = $data['is_done'];
+
+		$query = "INSERT INTO leader_request (`leader_id`,`gender`, `members_num`, `current_team_count`, `date`, `is_accepted`, `is_done`) VALUES ('" . $leader_id . "','" . $gender . "','" . $num_of_members . "', '" . $currentTeamCount . "', '".$date."', '".$is_accepted."', '".$is_done."')";
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$last_id = $conn->insert_id;
+			$conn->close();
+			return $last_id;
+		} else {
+			return $conn->error;
+		}
+	} 
 	public function updateRequest( $id ) {
 
 		$this->db->set( 'is_done', 1, FALSE );
@@ -197,9 +218,10 @@ class RequestsModel extends CI_Model {
 		$conn->close();
 	} //updatetLeaderInfo
 
+	
 	public function leaderLastRequest( $id ) {
 
-		$query = "SELECT date,is_done FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
+		$query = "SELECT date,is_done, Rid FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {
