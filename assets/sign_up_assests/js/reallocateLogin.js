@@ -1,3 +1,35 @@
+function reallocateLogin(){
+  let email = document.getElementById("loginemail").value;
+  let getDataUrl=document.getElementById("base_url").value+"ReallocateAmbassador/getAmbassadorData";
+  $.ajax( {
+            type: "POST",
+            url:getDataUrl,
+            data: {
+                email: email
+            },
+            success: function ( data ) {
+              console.log(data)
+              if (data === 'unregistered') {
+                //window.location.replace(document.getElementById("base_url").value+"SignUp");
+              }
+              else{
+                response = JSON.parse(data);
+                ambassador = {name:response[0].name,gender:response[0].gender,profile_link:response[0].link,fb_id:response[0].fb_id};
+                sessionStorage.setItem("ambassador_info", JSON.stringify(ambassador));  
+                window.location.replace(document.getElementById("base_url").value+"ReallocateAmbassador/checkAmbassador?fb_id="+response[0].fb_id);
+
+              }
+              
+            },
+            error: function ( error ) {
+                console.log( error );
+            }
+        } );
+
+ // window.location.replace(document.getElementById("base_url").value+"ReallocateAmbassador/checkAmbassador?fb_id="+response.id);
+
+}
+
 window.fbAsyncInit = function() {
     FB.init({
       appId      : '423417075295764',

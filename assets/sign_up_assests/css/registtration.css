@@ -2,7 +2,8 @@
   font-size: 13px;
   font-weight: 400;
   color: #ffff;
-  transition: all 0.3s;  
+  transition: all 0.3s;
+  padding: 0px 10px;  
 }
 #errorMsg{
   margin-top: 5%;

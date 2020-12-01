@@ -29,22 +29,12 @@ function checkLoginEmail(){
   var msg="";
   var valid=true;
   if (loginEmailValidation(email)) {
-        msg= "بريدك الالكتروني";
+        msg= "لطفًا أدخل بريدك الالكتروني بشكل صحيح";
         valid=false;
   } 
   if(! valid){
-    document.getElementById('leftDiv').style.zIndex =200; 
-    Swal.fire({
-      icon: 'warning',
-      title: 'لطفًا أدخل المعلومات التالية ',
-      text:msg,
-      type: "warning",
-      confirmButtonText: "حسنًا ",
-      confirmButtonColor:'#9ed16f'
-      }).then(function(){
-        document.getElementById('leftDiv').style.zIndex =9999; 
+    document.getElementById('errorMsgLogin').innerHTML=msg; 
 
-    });
   }
   else{
     $.ajax({

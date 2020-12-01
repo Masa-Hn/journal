@@ -1,6 +1,9 @@
 <?php 
   include 'templates/header.php';
   include 'templates/navbar.php';
+  $page_id = 12;
+  $this->StatisticsModel->incrementVisitors($page_id);
+
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/registtration.css">
 <!-- Start Banner Area -->
@@ -24,9 +27,14 @@
         <div class="col-sm-6 form">
           <!-- Login Form -->
           <div class="login form-peice switched" dir="rtl">
-            <form class="login-form" action="#" method="post">
+            <form class="login-form">
               <div style="text-align: center;">
-                <a href="index.html"><img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/reg_img.png" alt=""></a>
+               <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/reg_img.png" alt="">
+              </div>
+              <div class="form-group" id="errorMsg">
+                <span id="errorMsgLogin">
+                
+                </span>
               </div>
               <div class="form-group">
                 <label for="loginemail">أدخل بريدك الالكتروني</label>
@@ -39,6 +47,10 @@
                 <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkLoginEmail()" style="color: #ffff;">
                   تسجيل الدخول
                 </a>
+                <a  class="genric-btn primary circle arrow reg-btn"style="background:#45258f;    color: white;" onclick="fb_login();">
+                  دخول باستخدام الفيسبوك
+                </a>
+
                 <a href="#" class="switch">قارئ جديد</a>
               </div>
             </form>
@@ -104,10 +116,14 @@
                 </div>
               </div>
                   
-              <div class="CTA" style="margin-top: 55px;">
+              <div class="CTA" style="margin-top: 55px; text-align: center;">
                 <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkData()" style="color: #ffff;">
                   تسجيل
                 </a>
+                <a  class="genric-btn primary circle arrow reg-btn"style="background:#45258f;    color: white;" onclick="fb_login();">
+                  تسجيل باستخدام الفيسبوك
+                </a>
+
                 <a href="#" class="switch"> قارئ سابق </a>
               </div>
             </form>
@@ -123,4 +139,7 @@
 </section>
 <!-- End Banner Area -->
 <script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/registration.js"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/fbLogin.js"></script>
+
 <?php include 'templates/footer.php';?>

@@ -40,12 +40,12 @@
             <h3>
               أرسل له رسالة تلقي بها التحية
 
-              <a href="<?php echo $_SESSION['team_info']['leader_info']->leader_link; ?>" target="_blank"><span class="sp-green" id="leader">من هنا </span></a>
+              <a href="<?php echo $_SESSION['team_info']['leader_info']->leader_link; ?>" target="_blank" id="leader"><span class="sp-green">من هنا </span></a>
             </h3>
             <?php 
                 if ($_SESSION['team_info']['reallocate']) {
                   echo '
-                  <a href="javascript:checkLogin('.$_SESSION['team_info']['ambassador'][0]->fb_id.')" class="final-page genric-btn primary circle arrow" style=" margin: 1.5%; background:darkred">
+                  <a href="javascript:checkLogin('."'" .$_SESSION['team_info']['ambassador'][0]->fb_id."'" .')" class="final-page genric-btn primary circle arrow" style=" margin: 1.5%; background:darkred">
                       اختر لي قائدًا أخر
                   </a>';
                 }
@@ -93,6 +93,8 @@
                     console.log( error );
                 }
             } );
+
+            window.open(document.getElementById('leader').getAttribute("href"), "_blank");
             return false;
         } );
     } );
