@@ -192,6 +192,21 @@ class Requests extends CI_Controller {
 			$this->informLeader($request[ 'leader_id' ],$requestID);
 			$this->requestsModel->updateReq( $requestID );
 		}
+		if ($request[ 'members_num' ] < $distributedAmbassadors->num_rows) {
+        //1- update request to DONE
+       	$this->requestsModel->updateReq( $requestID );
+        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAEeKZAAP0WHt88FNmvkwD0d6vlbCNPxbRuKa4rLUDRhEZCzecSomSJ08KaJzSQRghUyxorJlwYK6YcziiZAO5LEbQVMfqpkk0KzGK47AqoLfP5NFT5Uja2eeWV4pVpRYL2LcmbGIFUnQaYDehlirsZA4gzhMaQZDZD';
+
+        /*initialize curl*/
+        $ch = curl_init($url);
+        $recipient="3197321007062062";
+        $allocationError=" خطأ من التوزيع بعد الطلب";
+         $jsonData =  $this->jsonData($recipient,$allocationError);
+        /* curl setting to send a json post data */
+        $this->curlSetting($ch,$jsonData);
+
+
+      }//if
 	}
 
 	public function deleteLeaderRequest()
@@ -281,7 +296,7 @@ class Requests extends CI_Controller {
 
 	    //Attach the encoded JSON string to the POST fields.
 	    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-	    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 	    //Set the content type to application/json
 	    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
