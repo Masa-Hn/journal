@@ -8,7 +8,7 @@
       exit();
   }
 
-    $page_id = 13;
+    $page_id = 15;
     $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">
@@ -40,7 +40,7 @@
             <h3>
               أرسل له رسالة تلقي بها التحية
 
-              <a href="<?php echo $_SESSION['team_info']['leader_info']->leader_link; ?>" target="_blank"><span class="sp-green">من هنا </span></a>
+              <a href="<?php echo $_SESSION['team_info']['leader_info']->leader_link; ?>" target="_blank"><span class="sp-green" id="leader">من هنا </span></a>
             </h3>
             <?php 
                 if ($_SESSION['team_info']['reallocate']) {
@@ -70,3 +70,30 @@
 <!-- End Banner Area  -->
 
 <?php include 'templates/footer.php';?>
+
+<script type="text/javascript">
+    
+    $( document ).ready( function () {
+        var base_url = "<?php echo base_url()?>";
+        var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
+
+        $( '#leader' ).click( function () {
+
+            $.ajax( {
+                type: "POST",
+                url: base_url + "Statistics/leader_link_button",
+                data: {
+                    ip_address: ip_address
+                },
+                success: function ( data ) {
+
+                    console.log( data );
+                },
+                error: function ( error ) {
+                    console.log( error );
+                }
+            } );
+            return false;
+        } );
+    } );
+</script>
