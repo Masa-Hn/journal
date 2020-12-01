@@ -17,13 +17,7 @@
     </ul>
   </div>
 
- <div class="floatleft" style="margin-left: 20px;">
-    <ul class="list logList">
-      <li ng-repeat="entry in sortingLog track by $index" class="logItem">
-        {{entry}}
-      </li>
-    </ul>
-  </div>
+ 
 </div>
  <div style="display: none;padding-top: 15%" id="add_div">
                   <form  enctype="multipart/form-data" method="post" action="<?=base_url()?>Pages/add">
