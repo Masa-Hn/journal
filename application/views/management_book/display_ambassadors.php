@@ -4,14 +4,13 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/mentorshipTeam.css">
 <style>
-.confirmbtn{
-  width: 1.15em;
-  height: 1.15em;
-}
-.copy{
-  width: 25%;
-  margin-right: 3%;
-}
+
+	.fa{
+		margin: 0;
+		padding: 0;
+		font-size: 1rem;
+		margin-left: 2%;
+	}	
 </style>
 <body>
 <div class="container-fluid px-1 py-5 mx-auto">
@@ -29,13 +28,13 @@
                 </div>
               </form>
               <input type="hidden" id="bookDisplay" name="bookDisplay" value="2">
-              <table id="dataTable" class="cell list-wrapper" dir="rtl">
+              <table id="dataTable" class="table cell list-wrapper" dir="rtl">
                 <thead>
                   <tr>
-                    <th>السفير</th>
-                    <th>الجنس</th>
-                    <th>رابط صفحته</th>
-                    <th style="text-align:center;">تأكيد الانضمام</th>
+                    <th style="text-align: center;">السفير</th>
+                    <th style="text-align: center;">الجنس</th>
+                    <th style="text-align: center;">رابط الصفحة</th>
+                    <th style="text-align: center;">تأكيد الانضمام</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -50,7 +49,7 @@
                     <td id="lblMSb" ><a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $ambassador->name; ?></a></td>
                     <td><?php echo "أنثى";?></td>
                     <td>
-                      <a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $ambassador->profile_link; ?></a>
+                      <a class="link" href="<?php echo $ambassador->profile_link;?>" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
                     </td>
                     <td style="text-align:center;"><input type="checkbox" class="confirmbtn" name="confirm" <?php if ($ambassador->is_joined == 1) echo "checked='checked'"; ?>  id="<?php echo $id;?>" onchange="cTrig('<?php echo $id;?>');"></td>
                   </tr>
@@ -120,6 +119,7 @@
               }
             } );
           } else {
+			  document.getElementById(id).checked = false;
             console.log( "canceled" );
           }
         } );
@@ -161,6 +161,7 @@
                 }
               } );
             } else {
+				document.getElementById(id).checked = true;
               console.log( "canceled" );
             }
           } );
