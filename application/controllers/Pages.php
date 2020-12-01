@@ -12,15 +12,22 @@ class Pages extends CI_Controller {
 	public
 	function index() {
 		$pages=$this->GeneralModel->get_all('pages');
+		$arr1= Array();
+		 foreach ($pages->result() as $m) { 
+        array_push($arr1,$m->id);
+           }
 		$data['pages']=$pages->result();
 		$data['title']="Rearrange Pages";
 		if (isset($_POST["page_id_array"]))
+
 		{
 		for($i=0; $i<count($_POST["page_id_array"]); $i++)
 			{
 				$arr['page_order']=$i;
 				$this->GeneralModel->update($arr,$_POST["page_id_array"][$i],'pages');
-			}
+
+			}				
+
 		}
 		$this->load->view('management_book/templates/header',$data);
 		$this->load->view('management_book/templates/navbar');

@@ -97,16 +97,16 @@ class Requests extends CI_Controller {
 			$result = $getLastRecord->fetch_assoc();
 			$date = $result[ 'date' ];
 
-			 $requests=$this->GeneralModel->get_data($request['leader_id'],'leader_id','leader_request')->result();
+			 $requests=$this->GeneralModel->get_data($request['leader_id'],'leader_id','leader_info')->result();
 		    $mem=0;
 			if ($requests!=null)
 				foreach ($requests as $r) {
 					if ($r->is_done==1)
 					{
-						$ambs=$this->GeneralModel->get_data($r->Rid,'request_id','ambassador')->result();
+						$ambs=$r->current_team_count;
 						if ($ambs!=null)
 						{
-							$mem=$mem+count($ambs);
+							$mem=$mem+$ambs;
 						}
 					}
 				}
