@@ -30,18 +30,6 @@
 							<input type="hidden" name="currentTeamCount" id="currentTeamCount" value="<?php echo $currentTeamCount; ?>">
 
 
-<<<<<<< HEAD
-						<div class="form-group">
-							<label for="numOfMembers">اختر عدد الأعضاء الذي تريده: </label>
-							<select name="numOfMembers" id="numOfMembers" class="form-control" required="required">
-								<?php
-								for ( $i = 1; $i <= 30; $i++ ) {
-									echo "<option value='$i'>$i</option>";
-								}
-								?>
-							</select>
-						</div>
-=======
 							<div class="form-group">
 								<label for="numOfMembers">اختر عدد الأعضاء الذي تريده: </label>
 								<select name="numOfMembers" id="numOfMembers" class="form-control" required="required">
@@ -52,7 +40,6 @@
 									?>
 								</select>
 							</div>
->>>>>>> 1da5bd3ff4d25e545d346967b8b1972ab3acc3d7
 
 							<div class="form-group">
 								<label for="gender" class="form-label">اختر جنس الأعضاء: </label>

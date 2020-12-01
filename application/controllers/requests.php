@@ -97,7 +97,7 @@ class Requests extends CI_Controller {
 			$result = $getLastRecord->fetch_assoc();
 			$date = $result[ 'date' ];
 
-			 $requests=$this->GeneralModel->get_data($request['leader_id'],'leader_id','leader_info')->result();
+			 $requests=$this->GeneralModel->get_data($request['leader_id'],'leader_id','leader_request')->result();
 		    $mem=0;
 			if ($requests!=null)
 				foreach ($requests as $r) {
