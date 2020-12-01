@@ -97,20 +97,8 @@ class Requests extends CI_Controller {
 			$result = $getLastRecord->fetch_assoc();
 			$date = $result[ 'date' ];
 
-			 $requests=$this->GeneralModel->get_data($request['leader_id'],'leader_id','leader_request')->result();
-		    $mem=0;
-			if ($requests!=null)
-				foreach ($requests as $r) {
-					if ($r->is_done==1)
-					{
-						$ambs=$r->current_team_count;
-						if ($ambs!=null)
-						{
-							$mem=$mem+$ambs;
-						}
-					}
-				}
-				if ($mem+$request['members_num']>30)
+			
+				if ($request[ 'current_team_count' ]+$request['members_num']>30)
 				{
 					echo "<script type='text/javascript'>
 				    alert('لا يمكنك الحصول على أكثر من 30 سفير !');
