@@ -183,7 +183,7 @@ function allocateAmbassador(){
 
     $.ajax({
       type: "POST",
-      url:document.getElementById("base_url").value+"SignUp/allocateAmbassador",
+      url:document.getElementById("base_url").value+"SignUpWithFB/allocateAmbassador",
       data: {'ambassador':ambassador,'leader_gender': leader_gender,'country': country },
       success: function(data){
         $("body").html(data);

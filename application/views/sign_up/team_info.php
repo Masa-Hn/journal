@@ -100,7 +100,26 @@
 			var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
 
 			$( '#code' ).click( function () {
+        var Code =document.getElementById('code');
+        var copyText = document.createElement('textarea');
+        copyText.value=code.innerHTML;
+        copyText.setAttribute('readonly', '');
+        copyText.style = {position: 'absolute', left: '-9999px'};
+        document.body.appendChild(copyText);
+        copyText.select();
+        document.execCommand('copy');
+        // Remove temporary textarea
+        document.body.removeChild(copyText);
 
+        Swal.fire({
+          icon: 'success',
+          title: 'تم  النسخ ',
+          text:'لطفًا قم بارسال هذا الكود لقائد الفريق الخاص بك',
+          type: "success",
+          timer: 3000,
+          confirmButtonText: "استمرار ",
+          confirmButtonColor:'#9ed16f'
+        });
 				$.ajax( {
 					type: "POST",
 					url: base_url + "Statistics/code_button",
@@ -134,6 +153,7 @@
 						console.log( error );
 					}
 				} );
+        window.open(document.getElementById('team').getAttribute("href"), "_blank");
 				return false;
 			} );
 		} );

@@ -19,6 +19,21 @@ class ReallocateAmbassador extends CI_Controller {
     $this->load->view('sign_up/reallocate_fb_login');
   }//index
 
+  public function getAmbassadorData(){
+    if (! empty($_POST['email'])) {
+      $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);
+      if (count((array)$result) != 0 ){
+        echo json_encode($this->AmbassadorModel->getByFBId($_POST['email']));
+      }
+      else{
+        echo "unregistered";
+      }
+    }
+    else{
+      $this->load->view('sign_up/reallocate_fb_login');
+    }
+  }
+
   public function checkAmbassador()
   {
     $reallocate=false;
@@ -31,33 +46,30 @@ class ReallocateAmbassador extends CI_Controller {
     }//if
     else{
       //check time
-      $request=$this->SignUpModel->getRequestInfo($result->request_id);
-      $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
-      $created_at=date_create($created_at->format("Y-m-d"));
-      $current=date_create(date("Y-m-d",time()));
-      $diff=date_diff($created_at,$current);
-
-      if($diff->format("%a") > 2){ 
-
-        if($result->request_id == null){
+      if(is_null($result->request_id)){
         // Still No Leader
         $this->noLeaderFound();
-      }
-      else{
-        $data['leader_id']=$request->leader_id;
-        $data['request_id']=$result->request_id;
-        $this->load->view('sign_up/leader_gender',$data);
-      }
       }//if
       else{
-        $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
-        $informLeader=false;
-        $ambassador=$this->AmbassadorModel->getByRequestId($result->request_id);
-        $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
+        $request=$this->SignUpModel->getRequestInfo($result->request_id);
+        $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
+        $created_at=date_create($created_at->format("Y-m-d"));
+        $current=date_create(date("Y-m-d",time()));
+        $diff=date_diff($created_at,$current);
 
+        if($diff->format("%a") > 2){ 
+          $data['leader_id']=$request->leader_id;
+          $data['request_id']=$result->request_id;
+          $this->load->view('sign_up/leader_gender',$data);
+        }//if
+        else{
+          $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
+          $informLeader=false;
+          $ambassador=$this->AmbassadorModel->getByFBId($_GET['fb_id']);
+          $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
+
+        }//else
       }//else
-
-
     }//else
   }//checkAmbassador
 
