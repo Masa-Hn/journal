@@ -97,6 +97,29 @@ class Requests extends CI_Controller {
 		if ( $getLastRecord->num_rows > 0 ) {
 			$result = $getLastRecord->fetch_assoc();
 			$date = $result[ 'date' ];
+
+			 $requests=$this->GeneralModel->get_data($request['leader_id'],'leader_id','leader_request')->result();
+		    $mem=0;
+			if ($requests!=null)
+				foreach ($requests as $r) {
+					if ($r->is_done==1)
+					{
+						$ambs=$r->current_team_count;
+						if ($ambs!=null)
+						{
+							$mem=$mem+$ambs;
+						}
+					}
+				}
+				if ($mem+$request['members_num']>30)
+				{
+					echo "<script type='text/javascript'>
+				    alert('لا يمكنك الحصول على أكثر من 30 سفير !');
+					</script>";
+					echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
+				}
+				else
+				{
 			//check if the date of the last record exceeds 3 days
 			if ( ( date( 'Y-m-d' ) > date( 'Y-m-d', strtotime( $date . ' + 3 days' ) ) ) ) {
                 
@@ -112,6 +135,7 @@ class Requests extends CI_Controller {
                           لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
                           </div>";
 			}
+		}
 		} else {
             $msg = "<div class='alert alert-success'>
 					تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
