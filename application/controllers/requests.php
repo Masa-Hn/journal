@@ -97,7 +97,14 @@ class Requests extends CI_Controller {
 			$result = $getLastRecord->fetch_assoc();
 			$date = $result[ 'date' ];
 
-			
+				if ($request[ 'current_team_count' ]>=30)
+				{
+					echo "<script type='text/javascript'>
+				    alert('عدد الفريق مكتمل لديك !');
+					</script>";
+					echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
+				}
+				else
 				if ($request[ 'current_team_count' ]+$request['members_num']>30)
 				{
 					echo "<script type='text/javascript'>
