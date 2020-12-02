@@ -226,6 +226,7 @@ class SignUp extends CI_Controller {
     // 3- Check Leader Requests
       //1- chekc associated requests
       $numberOfRequests=$this->AmbassadorModel->countRequests($request_id);
+
       //2- compare to the requested number
         //If match, update is_done to 1
       if ($members_num < $numberOfRequests->totalRequests) {
@@ -246,6 +247,7 @@ class SignUp extends CI_Controller {
       if ($members_num == $numberOfRequests->totalRequests) {
         $informLeader = true;
       }//if
+
 
     //4- load view to inform ambassador [FINAL STEP]
       $ambassadorInfo=$this->AmbassadorModel->getByRequestId($request_id);
