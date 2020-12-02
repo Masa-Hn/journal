@@ -194,6 +194,21 @@ class Requests extends CI_Controller {
 		if ( $distributedAmbassadors->num_rows == $request[ 'members_num' ] ) {
 			$this->requests_model->updateReq( $requestID );
 		}
+		if ($request[ 'members_num' ] < $distributedAmbassadors->num_rows) {
+        //1- update request to DONE
+       	$this->requestsModel->updateReq( $requestID );
+        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAEeKZAAP0WHt88FNmvkwD0d6vlbCNPxbRuKa4rLUDRhEZCzecSomSJ08KaJzSQRghUyxorJlwYK6YcziiZAO5LEbQVMfqpkk0KzGK47AqoLfP5NFT5Uja2eeWV4pVpRYL2LcmbGIFUnQaYDehlirsZA4gzhMaQZDZD';
+
+        /*initialize curl*/
+        $ch = curl_init($url);
+        $recipient="3197321007062062";
+        $allocationError=" خطأ من التوزيع بعد الطلب";
+         $jsonData =  $this->jsonData($recipient,$allocationError);
+        /* curl setting to send a json post data */
+        $this->curlSetting($ch,$jsonData);
+
+
+      }//if
 	}
 
 	public function deleteLeaderRequest() {
@@ -217,5 +232,76 @@ class Requests extends CI_Controller {
 		$this->GeneralModel->remove( $id, 'leader_request', 'Rid' );
 		redirect( base_url() . 'requests/deleteLeaderRequest' );
 	}
+
+	  public function informLeader($leader_id,$request_id){
+      //1- update request to DONE
+        $this->RequestsModel->updateRequest($request_id);
+        //2- get all associated requests
+        $allAmbassadors=$this->AmbassadorModel->getByRequestId($request_id);
+        $ambassadors="";
+        $i=1;
+        foreach ($allAmbassadors as $ambassador) {
+          $ambassadors=$ambassadors. "[".$i."] ".$ambassador->name. '\n';
+          $i++;
+        }//foreach
+      //3-Inform Leader
+        $leader_info=$this->SignUpModel->getLeaderInfo($leader_id);
+      //SEND TO MESSENGER
+      $recipient=$leader_info->messenger_id;
+      $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAEeKZAAP0WHt88FNmvkwD0d6vlbCNPxbRuKa4rLUDRhEZCzecSomSJ08KaJzSQRghUyxorJlwYK6YcziiZAO5LEbQVMfqpkk0KzGK47AqoLfP5NFT5Uja2eeWV4pVpRYL2LcmbGIFUnQaYDehlirsZA4gzhMaQZDZD';
+
+      /*initialize curl*/
+      $ch = curl_init($url);
+
+      $firstMsg="السلام عليكم ورحمة الله ".'\n'." كيف الحال قيادة؟! 🌸 ".'\n'." . ".'\n'."  تم إرسال أعضاء جدد لفريقك؛ نتمنى منك الاهتمام بهم.".'\n'." . ".'\n'." . ".'\n'." يرجى منك إضافة جميع السفراء (بغض النظر دخل فريق المتابعة أو لا) إلى موقع العلامات. ".'\n'." . ".'\n'." ".'\n'." وفي نهاية الأسبوع من لم يقرأ فقط قم بعمل انسحاب له ((انسحاب وليس حذف من إشارة ❌)) وذلك لتجنب الفوضى في مجموعة السفراء. ".'\n'." ".'\n'." شكرا لك 😍".'\n'." ".'\n'."اسم السفير الجديد يظهر لك في الرسالة القادمة";
+      /*prepare response*/
+      $jsonData =  $this->jsonData($recipient,$firstMsg);
+      /* curl setting to send a json post data */
+      $this->curlSetting($ch,$jsonData);
+
+       /*Ambassadors*/
+      $jsonData =  $this->jsonData($recipient,$ambassadors);
+      /* curl setting to send a json post data */
+      $this->curlSetting($ch,$jsonData);
+
+      $lastMsg="⛔ قائدنا الكريم ⛔".'\n'." ".'\n'."يصل السفير إليك مترددًا ولا يعرف النظام الجميل في مشروعنا، قد يكتفي بطلب الانضمام ويتردد فيما يفعل بعدها. ".'\n'.".".'\n'."رجاءً «ابدأ انت بمراسلته» وعمل منشن له على أي منشور ليتجاوب معك، أنت أهل لذلك. ".'\n'."ابدأ أنت ❤️";
+      /*prepare response*/
+      $jsonData =  $this->jsonData($recipient,$lastMsg);
+      /* curl setting to send a json post data */
+      $this->curlSetting($ch,$jsonData);
+
+  }//informLeader
+
+ 	public function jsonData($id,$msg)
+	{
+	    $data = '{
+	      "recipient":{
+	          "id":"' . $id . '"
+	          },
+	          "message":{
+	              "text":"' . $msg . '"
+	          }
+	      }';
+
+	    return $data;
+	}//jsonData
+
+	public function curlSetting($ch,$jsonData)
+  	{
+	    /* curl setting to send a json post data */
+	    //Tell cURL that we want to send a POST request.
+	    curl_setopt($ch, CURLOPT_POST, 1);
+
+	    //Attach the encoded JSON string to the POST fields.
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+	    //Set the content type to application/json
+	    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+	    //Execute the request.
+	    curl_exec($ch); // user will get the message
+
+  	}//curlSetting
 }
 ?>

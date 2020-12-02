@@ -87,11 +87,11 @@ class SignUp extends CI_Controller {
   {
     $reallocate=false;
     if(!empty($_POST['email'])){
-      //print_r($_POST['email']);die();
       $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);
       
       if (count((array)$result) == 0 ){
       //New Ambassador
+
         if(!empty($_POST['ambassador_name']) && !empty($_POST['ambassador_gender']) && !empty($_POST['leader_gender']) )
         {
           
@@ -118,7 +118,6 @@ class SignUp extends CI_Controller {
           $this->noLeaderFound();
         }
         else{
-          
           $request=$this->SignUpModel->getRequestInfo($result->request_id);
           $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
           $created_at=date_create($created_at->format("Y-m-d"));
@@ -130,7 +129,7 @@ class SignUp extends CI_Controller {
           }//if
           $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
           $informLeader=false;
-          $ambassador=$this->AmbassadorModel->getByFBId($_POST['email']);
+          $ambassador=$this->AmbassadorModel->getByRequestId($result->request_id);
           $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
         }
       }
@@ -229,6 +228,21 @@ class SignUp extends CI_Controller {
       $numberOfRequests=$this->AmbassadorModel->countRequests($request_id);
       //2- compare to the requested number
         //If match, update is_done to 1
+      if ($members_num < $numberOfRequests->totalRequests) {
+        //1- update request to DONE
+        $this->RequestsModel->updateRequest($request_id);
+        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAEeKZAAP0WHt88FNmvkwD0d6vlbCNPxbRuKa4rLUDRhEZCzecSomSJ08KaJzSQRghUyxorJlwYK6YcziiZAO5LEbQVMfqpkk0KzGK47AqoLfP5NFT5Uja2eeWV4pVpRYL2LcmbGIFUnQaYDehlirsZA4gzhMaQZDZD';
+
+        /*initialize curl*/
+        $ch = curl_init($url);
+        $recipient="3197321007062062";
+        $allocationError="حدث خطأ";
+         $jsonData =  $this->jsonData($recipient,$allocationError);
+        /* curl setting to send a json post data */
+        $this->curlSetting($ch,$jsonData);
+
+
+      }//if
       if ($members_num == $numberOfRequests->totalRequests) {
         $informLeader = true;
       }//if
@@ -321,7 +335,7 @@ class SignUp extends CI_Controller {
 
     //Attach the encoded JSON string to the POST fields.
     curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     //Set the content type to application/json
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
