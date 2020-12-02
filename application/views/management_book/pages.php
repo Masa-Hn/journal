@@ -2,7 +2,7 @@
     <div class="row d-flex justify-content-center">
         <div class="col-xl-5 col-lg-6 col-md-7">
             <div class="card b-0" >
-              <div class="slideshow-container" style="width:100%"">
+              <div class="slideshow-container" style="width:100%">
                 <button id="sort" class="newbutton" onclick="sort()" >ترتيب أسماء الصفحات</button>
                 <button id="add" class="newbutton" onclick="add()">إضافة صفحة جديدة</button>
 
