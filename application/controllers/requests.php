@@ -104,26 +104,34 @@ class Requests extends CI_Controller {
 					</script>";
 					echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
 				}
-				else
-				if ($request[ 'current_team_count' ]+$request['members_num']>30)
-				{
-					echo "<script type='text/javascript'>
-				    alert('لا يمكنك الحصول على أكثر من 30 سفير !');
-					</script>";
-					echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
-				}
+				
 				else
 				{
 			//check if the date of the last record exceeds 3 days
 			if ( ( date( 'Y-m-d' ) > date( 'Y-m-d', strtotime( $date . ' + 3 days' ) ) ) ) {
                 
+                 if ($request[ 'current_team_count' ]+$request['members_num']>30)
+				{
+					$request['members_num']=30-$request['current_team_count'];
+					$r="لا يمكنك الحصول على أكثر من 30 سفير ! سيتم رفع طلبك ب ".$request['members_num']." عضو فقط ... ";
+				   echo '<script type="text/javascript">
+				   alert("'.$r.'");
+				   </script>';
+					echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
+					$rid = $this->requestsModel->addRequest( $request );
+					$this->distributeAmbassadors( $rid );
+				}
+				else
+				{
                 $msg = "<div class='alert alert-success'>
 												تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
 												</div>";
 				echo $msg;
+
                 
 				$rid = $this->requestsModel->addRequest( $request );
 				$this->distributeAmbassadors( $rid );
+			}
 			} else {
 				$msg = "<div class='alert alert-danger'>
                           لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
