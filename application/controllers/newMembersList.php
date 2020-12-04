@@ -28,7 +28,7 @@ class NewMembersList extends CI_Controller {
                         $arr[ 'uniqid' ] = $res[ 'uniqid' ];
                         $arr[ 'leader_name' ] = $res[ 'leader_name' ];
                         $arr[ 'team_link' ] = $res[ 'team_link' ];
-                        $arr[ 'ambassadors' ] = $this->requestsModel->get_data( $Rid, 'request_id', 'ambassador', '*' );
+                        $arr[ 'ambassadors' ] = $this->requestsModel->get_data($Rid, 'request_id', 'ambassador', '*', 'AND display = 1');
                     }
                     $this->load->view( 'leader_request/new_members_list', $arr );
                 }

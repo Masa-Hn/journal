@@ -143,8 +143,8 @@ class RequestsModel extends CI_Model {
 		return $this->db->get( 'leader_request' );
 	} //getDate
 
-	public function get_data( $val, $where, $table, $select = '*' ) {
-		$query = "SELECT " . $select . " FROM " . $table . " WHERE " . $where . "='" . $val . "'";
+	public function get_data( $val, $where, $table, $select = '*', $where_2 = '') {
+		$query = "SELECT " . $select . " FROM " . $table . " WHERE " . $where . "='" . $val . "'" . $where_2;
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {
@@ -157,7 +157,7 @@ class RequestsModel extends CI_Model {
 
 
 	public function update_data( $val, $id ) {
-		$query = "UPDATE ambassador SET join_following_team = " . $val . " WHERE id = " . $id;
+		$query = "UPDATE ambassador SET join_following_team = " . $val . ", display = 0 WHERE id = " . $id;
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		$conn->close();

@@ -90,7 +90,8 @@ class GeneralModel extends CI_Model{
 
     public function get_all( $table, $select = '*'){
         
-        $this->db->select($select);    
+        $this->db->select($select); 
+        $this->db->order_by('page_order');
         return $this->db->get($table);
     }    
 

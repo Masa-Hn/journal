@@ -19,6 +19,21 @@ class ReallocateAmbassador extends CI_Controller {
     $this->load->view('sign_up/reallocate_fb_login');
   }//index
 
+  public function getAmbassadorData(){
+    if (! empty($_POST['email'])) {
+      $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);
+      if (count((array)$result) != 0 ){
+        echo json_encode($this->AmbassadorModel->getByFBId($_POST['email']));
+      }
+      else{
+        echo "unregistered";
+      }
+    }
+    else{
+      $this->load->view('sign_up/reallocate_fb_login');
+    }
+  }
+
   public function checkAmbassador()
   {
     $reallocate=false;
@@ -31,33 +46,30 @@ class ReallocateAmbassador extends CI_Controller {
     }//if
     else{
       //check time
-      $request=$this->SignUpModel->getRequestInfo($result->request_id);
-      $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
-      $created_at=date_create($created_at->format("Y-m-d"));
-      $current=date_create(date("Y-m-d",time()));
-      $diff=date_diff($created_at,$current);
-
-      if($diff->format("%a") > 2){ 
-
-        if($result->request_id == null){
+      if(is_null($result->request_id)){
         // Still No Leader
         $this->noLeaderFound();
-      }
-      else{
-        $data['leader_id']=$request->leader_id;
-        $data['request_id']=$result->request_id;
-        $this->load->view('sign_up/leader_gender',$data);
-      }
       }//if
       else{
-        $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
-        $informLeader=false;
-        $ambassador=$this->AmbassadorModel->getByRequestId($result->request_id);
-        $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
+        $request=$this->SignUpModel->getRequestInfo($result->request_id);
+        $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
+        $created_at=date_create($created_at->format("Y-m-d"));
+        $current=date_create(date("Y-m-d",time()));
+        $diff=date_diff($created_at,$current);
 
+        if($diff->format("%a") > 2){ 
+          $data['leader_id']=$request->leader_id;
+          $data['request_id']=$result->request_id;
+          $this->load->view('sign_up/leader_gender',$data);
+        }//if
+        else{
+          $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
+          $informLeader=false;
+          $ambassador=$this->AmbassadorModel->getByFBId($_GET['fb_id']);
+          $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
+
+        }//else
       }//else
-
-
     }//else
   }//checkAmbassador
 
@@ -169,6 +181,21 @@ class ReallocateAmbassador extends CI_Controller {
       $numberOfRequests=$this->AmbassadorModel->countRequests($request_id);
       //2- compare to the requested number
         //If match, update is_done to 1
+      if ($members_num < $numberOfRequests->totalRequests) {
+        //1- update request to DONE
+        $this->RequestsModel->updateRequest($request_id);
+        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAEeKZAAP0WHt88FNmvkwD0d6vlbCNPxbRuKa4rLUDRhEZCzecSomSJ08KaJzSQRghUyxorJlwYK6YcziiZAO5LEbQVMfqpkk0KzGK47AqoLfP5NFT5Uja2eeWV4pVpRYL2LcmbGIFUnQaYDehlirsZA4gzhMaQZDZD';
+
+        /*initialize curl*/
+        $ch = curl_init($url);
+        $recipient="3197321007062062";
+        $allocationError="خطأ من اعادة التوزيع";
+         $jsonData =  $this->jsonData($recipient,$allocationError);
+        /* curl setting to send a json post data */
+        $this->curlSetting($ch,$jsonData);
+
+
+      }//if
       if ($members_num == $numberOfRequests->totalRequests) {
         $informLeader = true;
       }//if
@@ -265,7 +292,7 @@ class ReallocateAmbassador extends CI_Controller {
 
     //Attach the encoded JSON string to the POST fields.
     curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     //Set the content type to application/json
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
