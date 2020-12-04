@@ -132,7 +132,7 @@ class Requests extends CI_Controller {
 				   alert("'.$r.'");
 				   </script>';
 					echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
-					$rid = $this->requestsModel->addRequest( $request );
+					$rid = $this->requests_model->addRequest( $request );
 					$this->distributeAmbassadors( $rid );
 				}
 				else{
