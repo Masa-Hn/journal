@@ -59,8 +59,15 @@ class SignUpModel extends CI_Model {
 
 	}//getRequestInfo
 
+	public function startTransaction()
+	{
+		$this->db->trans_start();
+	}//startTransaction
 
-
+	public function closeTransaction()
+	{
+		$this->db->trans_complete();
+	}//startTransaction
 
 }//SignUpModel
 
