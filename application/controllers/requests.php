@@ -145,8 +145,7 @@ class Requests extends CI_Controller {
     			
     			$this->distributeAmbassadors( $rid );
 			}
-			
-		}
+		}	
 		} else if ( $val == 2 ) {
 			$msg = "<div class='alert alert-danger'>
                      لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
