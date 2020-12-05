@@ -124,7 +124,7 @@ class RequestsModel extends CI_Model {
 			return $conn->error;
 		}
 	} //addRequest
-
+	
 	public function updateRequest( $id ) {
 
 		$this->db->set( 'is_done', 1, FALSE );
@@ -191,7 +191,7 @@ class RequestsModel extends CI_Model {
 	public function updateFullRequest( $leader ) {
 
 		$query = "UPDATE leader_info SET leader_name='" . $leader[ 'leader_name' ] . "' , leader_link='" . $leader[ 'leader_link' ] . "', leader_gender='" . $leader[ 'leader_gender' ] . "',
-		 team_name='" . $leader[ 'team_name' ] . "', team_link='" . $leader[ 'team_link' ] . "', uniqid='" . $leader[ 'uniqid' ] . "' WHERE id=" . $leader[ 'leader_id' ];
+		 team_name='" . $leader[ 'team_name' ] . "', team_link='" . $leader[ 'team_link' ] . "', uniqid='" . $leader[ 'uniqid' ] . "', leaders_team_name = '".$leader['leaders_team_name']."', leader_rank = '".$leader['leader_rank']."' WHERE id=" . $leader[ 'leader_id' ];
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		$conn->close();
@@ -199,7 +199,7 @@ class RequestsModel extends CI_Model {
 
 	public function leaderLastRequest( $id ) {
 
-		$query = "SELECT date,is_done FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
+		$query = "SELECT date,is_done, Rid FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {
