@@ -281,6 +281,11 @@
 
 				if ( success == true ) {
 					document.getElementById( "notJoined" + id ).checked = false;
+					var v=document.getElementById('profile_link_save');
+						v.style.display="block";
+							var elem = v.clone();
+
+    						alert(elem.html());
 					$.ajax( {
 						url: base_url + 'NewMembersList/joined_ambassador',
 						type: 'POST',
@@ -289,11 +294,7 @@
 						},
 						dataType: 'text',
 						success: function () {
-							var v=document.getElementById('profile_link_save');
-						v.style.display="block";
-							var elem = v.clone();
-
-    						alert(elem.html());
+							
 							/*	window.setTimeout( function () {}, 3000 );
 								location.reload();*/
 						},
