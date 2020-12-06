@@ -73,10 +73,10 @@
 							while ( $amb = $ambassadors->fetch_array( MYSQLI_ASSOC ) ) {
 								$id = $amb[ 'id' ];
 								?>
-							<tr style="text-align: center; color:#214761 ">
-								<td><i class="fa fa-external-link" aria-hidden="true" style="color: #214761;"></i>
-									<a class="link" href="<?php echo $amb['profile_link'];?>" style="color: #214761;">
-										<?php echo $amb['name']; ?>
+							<tr>
+								<td><i class="fa fa-external-link" aria-hidden="true"></i>
+									<a class="link" href="<?php echo $amb['profile_link'];?>">
+										<span id="ambassador_<?php echo $id;?>"><?php echo $amb['name']; ?></span>
 									</a>
 								</td>
 								<td>
@@ -138,6 +138,19 @@
 						}
 
 					} );
+                    
+                    // add ambassador to marks 
+                    var name = document.getElementById("ambassador_"+id).textContent;
+                    $.ajax({
+                        type: "POST",
+                        url: base_url+"users/addmem",
+                        data:"email=<?php echo $_GET['email'] ?>"+"&name="+name,
+                        success: function(msg){
+                            //alert("تم إضافة السفير");
+                            location.reload();
+                        }
+                    });
+                    
 				} else {
 					console.log( "canceled" );
 				}
@@ -193,6 +206,31 @@
 							console.log( error );
 						}
 					} );
+                    
+                    // add & edit ambassador status
+                    var name = document.getElementById("ambassador_"+id).textContent;
+                    //var msg  = 'هل انت متأكد من ان '+name+' لم ينضم للفريق؟';
+
+                    //if (confirm(msg)){
+                         // add ambassador to marks 
+                         $.ajax({
+                            type: "POST",
+                            url: base_url+"users/addambassador",
+                            data:"email=<?php echo $_GET['email'] ?>"+"&name="+name,
+                            success: function(inserted_id){
+                                // edit ambassador status
+                                $.ajax({
+                                    type: "POST",
+                                    url: base_url+"users/leaving",
+                                    data: "id=" + inserted_id + "&num=" + 2 ,
+                                    success: function(msg){
+                                        //alert("تم إضافة السفير لقائمة المنسحبين");
+                                        location.reload();
+                                    }
+                                });
+                            }
+                        });
+                    //}
 				} else {
 					console.log( "canceled" );
 				}
@@ -247,6 +285,53 @@
 			confirm( 'لقد تم نسخ الرسالة, بإمكانك إرسالها إلى السفير!' )
 			console.log( x );
 		}
+        
+        // add ambassador to marks 
+        function addmem(){
+            
+            var name = document.getElementById("ambassador").textContent;
+            var base_url = "<?php echo base_url()?>";
+            
+            if(name == '' || name == ' '){
+                alert("اسم السفير مطلوب...");
+            }else{
+                $.ajax({
+                    type: "POST",
+                    url: base_url+"users/addmem",
+                    data:"email=<?php echo $_GET['email'] ?>"+"&name="+name,
+                    success: function(msg){
+                        alert("تم إضافة السفير");
+                        //location.reload();
+                    }
+                });
+            }
+        }
+        
+        function out(){
+        
+            var name = document.getElementById("ambassador_").textContent;
+            var msg  = 'هل انت متأكد من ان '+name+' لم يتضم للفريق؟';
+            
+            if (confirm(msg)){
+                 // add ambassador to marks 
+                 $.ajax({
+                    type: "POST",
+                    url: base_url+"users/addambassador",
+                    data:"email=<?php echo $_GET['email'] ?>"+"&name="+name,
+                    success: function(inserted_id){
+                        // edit ambassador status
+                        $.ajax({
+                            type: "POST",
+                            url: base_url+"users/leaving",
+                            data: "id=" + inserted_id + "&num=" + 2 ,
+                            success: function(msg){
+                                alert("تم إضافة السفير لقائمة المنسحبين");
+                            }
+                        });//location.reload();
+                    }
+                });
+            }
+        }
 	</script>
 </body>
 </html>
