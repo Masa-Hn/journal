@@ -25,6 +25,131 @@
 		width: 1.25em;
 		height: 1.25em;
 	}
+	.container-contact100 {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+
+.wrap-contact100 {
+  width: 500px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 42px 55px 45px 55px;
+  background-color: #FFF;
+    border-radius: 25px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    z-index: 0
+}
+.contact100-form-title {
+  display: block;
+  font-family: Poppins-Bold;
+  font-size: 25px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: center;
+  padding-bottom: 44px;
+}
+.wrap-input100 {
+  width: 100%;
+  position: relative;
+  padding-bottom: 13px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+
+.input100 {
+  margin-top: 300px;
+	outline: none;
+	border: none;
+  display: block;
+  width: 100%;
+  background: transparent;
+  font-size: 18px;
+  color: #333333;
+  line-height: 1.2;
+  padding: 0 5px;
+  text-align: center;
+}
+
+.contact100-form-btn {
+  text-align: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+}
+.container-contact100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 13px;
+}
+
+.wrap-contact100-form-btn {
+  width: 100%;
+  display: block;
+  position: relative;
+  z-index: 1;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.contact100-form-bgbtn {
+  position: absolute;
+  z-index: -1;
+  width: 300%;
+  height: 100%;
+  background: #a64bf4;
+  background: -webkit-linear-gradient(left, #00dbde, #fc00ff, #00dbde, #fc00ff);
+  background: -o-linear-gradient(left, #00dbde, #fc00ff, #00dbde, #fc00ff);
+  background: -moz-linear-gradient(left, #00dbde, #fc00ff, #00dbde, #fc00ff);
+  background: linear-gradient(left, #00dbde, #fc00ff, #00dbde, #fc00ff);
+  top: 0;
+  left: -100%;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.contact100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+
+  font-family: Poppins-Medium;
+  font-size: 20px;
+  color: red;
+  line-height: 1.2;
+}
 
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -36,7 +161,7 @@
     <br>
 
 	<!-- Modal -->
-	<div id="newReqModal" class="modal fade" role="dialog">
+	<div id="newReqModal" class="modal fade" role="dialog" style="display: none;">
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -113,6 +238,35 @@
 			</div>
 		</div>
 	</div>
+		<div class="container-contact100" id="profile_link_save" style="display: none;">
+		<div class="wrap-contact100">
+		<form class="contact100-form validate-form" enctype="multipart/form-data" method="post" action="<?php echo base_url()?>newMembersList/saveProfileLink">
+			<span class="contact100-form-title">
+					قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة180, ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
+				</span>
+	         <div class="wrap-input100">
+
+				<img style="float: right;padding-right: 15%" src="<?php echo base_url()?>/assets/img/profile_link.jpg">
+			</div>
+	         
+	         <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;" data-validate = "Valid email is required: ex@abc.xyz">
+				<input class="input100" type="text" id="profile_link" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
+				<input style="display: none;" type="text" id="amb_id" name="amb_id" value="<?php echo $id; ?>">
+						<span class="focus-input100"></span>
+			 </div>           	
+			 <div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn">
+							<span>
+								حفظ
+							</span>
+						</button>
+					</div>
+				</div>
+		</form>
+</div>
+</div>
 	<script type="text/javascript">
 		$( document ).ready( function () {
 			// Show the Modal on load
@@ -135,7 +289,11 @@
 						},
 						dataType: 'text',
 						success: function () {
+							var v=document.getElementById('profile_link_save');
+						v.style.display="block";
+							var elem = v.clone();
 
+    						alert(elem.html());
 							/*	window.setTimeout( function () {}, 3000 );
 								location.reload();*/
 						},
