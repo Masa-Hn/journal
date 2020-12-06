@@ -120,84 +120,97 @@ class SignUpWithFB extends CI_Controller {
   public function allocateAmbassador(){
     if (!empty($_POST['ambassador'])) {
       $ambassador_info=$_POST['ambassador'];
-      $leader_gender=$_POST['leader_gender'];
+      $ambassadorGender=$ambassador_info['gender'];
+      $leaderGender=$_POST['leader_gender'];
       $country=$_POST['country'];
 
-      // //Check ambassador gender
-        if ($ambassador_info['gender'] != "female" && $ambassador_info['gender']!="male") {
-          $ambassador_gender="any";
+      if ($ambassadorGender == 'any') {
+      $ambassador_condition="leader_request.gender = '" .$ambassadorGender . "'";
+      }
+      else{
+        $ambassador_condition="(leader_request.gender = '". $ambassadorGender ."' OR leader_request.gender = 'any')";
+      }
 
-        }
-        else{
-          $ambassador_gender=$ambassador_info['gender'];
-        }
+      if ($leaderGender == "any") {
+        $leader_condition=" (leader_info.leader_gender = 'female' OR leader_info.leader_gender = 'male')";
+      }
+      else{
+        $leader_condition="leader_info.leader_gender = '".$leaderGender."'";
+      }
 
-      //check leader gender
-        if ($leader_gender == "any") {
-          //Check New Teams
-            $result=$this->SignUpModel->newTeamsAnyLeader($ambassador_gender);
+      $exit=false;
+      while (! $exit ) {
+        //Check New Teams
+        $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition);
+        if (count((array)$result) == 0 ){
+          //Check Teams With Less Than 12 Members
+          $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition,"BETWEEN  1 AND 12");
             if (count((array)$result) == 0 ){
-
-              //Check Teams With Less Than 12 Members
-                $result=$this->SignUpModel->anyLeader($ambassador_gender, "<=");
+              //Check Teams With More Than 12 Members
+              $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition," > 12");
                 if (count((array)$result) == 0 ){
-                  //Check Teams With More Than 12 Members
-                    $result=$this->SignUpModel->anyLeader($ambassador_gender, ">");
-                    if (count((array)$result) == 0 ){
-                      $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$leader_gender,$country);
-                      $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
-                      $this->noLeaderFound();
-                    }//if
-                    else{
-                      $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country);
-                      $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
-                    }//else
-
+                  $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_name,$ambassadorGender,$leaderGender,$country,$ambassador_email);
+                  $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
+                  $this->noLeaderFound();
+                  $exit=true;
                 }//if
                 else{
-                  $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country);
-                   $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                  $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+                    // Check Leader Request
+                    //1- chekc associated requests
+                    $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                    //2- compare to the requested number
+                      //If available, insert   
+                      if ($result->members_num > $numberOfRequests->totalRequests) {
+                        $this->AmbassadorModel->insertAmbassador($ambassador);
+                        $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                        $exit=true;
+                      }//if
+                      //Else update request to done
+                      else{
+                        $this->RequestsModel->updateRequest( $result->Rid);
+                        continue;
+                      }//else      
                 }//else
             }//if
             else{
-              $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country);
-              $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+              $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+              // Check Leader Request
+                    //1- chekc associated requests
+                    $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                    //2- compare to the requested number
+                      //If available, insert   
+                      if ($result->members_num > $numberOfRequests->totalRequests) {
+                        $this->AmbassadorModel->insertAmbassador($ambassador);
+                        $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                        $exit=true;
+                      }//if
+                      //Else update request to done
+                      else{
+                        $this->RequestsModel->updateRequest( $result->Rid);
+                        continue;
+                      }//else      
             }//else
         }//if
         else{
-          //for specific leader gender
-          //Check New Teams
-            $result=$this->SignUpModel->getNewTeams($leader_gender,$ambassador_gender);
-            if (count((array)$result) == 0 ){
-
-              //Check Teams With Less Than 12 Members
-
-                $result=$this->SignUpModel->getTeams($leader_gender,$ambassador_gender, "<=");  
-
-                if (count((array)$result) == 0 ){
-                  //Check Teams With More Than 12 Members
-                    $result=$this->SignUpModel->getTeams($leader_gender,$ambassador_gender, ">");
-                    if (count((array)$result) == 0 ){
-                      $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$leader_gender,$country);
-                      $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
-
-                      $this->noLeaderFound();
-                    }//if
-                    else{
-                      $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country);
-                      $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
-                    }//else
-                }//if
-                else{
-                  $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country);
-                  $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
-                }//else
-            }//if
-            else{
-              $ambassador=$this->formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country);
-              $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
-            }//else
-        }//else
+          $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+          // Check Leader Request
+                    //1- chekc associated requests
+                    $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                    //2- compare to the requested number
+                      //If available, insert   
+                      if ($result->members_num > $numberOfRequests->totalRequests) {
+                        $this->AmbassadorModel->insertAmbassador($ambassador);
+                        $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                        $exit=true;
+                      }//if
+                      //Else update request to done
+                      else{
+                        $this->RequestsModel->updateRequest( $result->Rid);
+                        continue;
+                      }//else             
+          }//else
+      }//while
 
     }//if
     else{
@@ -208,10 +221,7 @@ class SignUpWithFB extends CI_Controller {
 
   public function checkout($ambassador,$request_id,$leader_id,$members_num){
     $informLeader=false;
-    // 1- Insert Ambassador
-    $this->AmbassadorModel->insertAmbassador($ambassador);
-
-    // 2- Inform Ambassador
+    // 1- Inform Ambassador
       //1- get leader Information
         $leader_info=$this->SignUpModel->getLeaderInfo($leader_id);
 
@@ -228,11 +238,10 @@ class SignUpWithFB extends CI_Controller {
         /*initialize curl*/
         $ch = curl_init($url);
         $recipient="3197321007062062";
-        $allocationError="حدث خطأ";
+        $allocationError="Request ID , " . $request_id;
          $jsonData =  $this->jsonData($recipient,$allocationError);
         /* curl setting to send a json post data */
         $this->curlSetting($ch,$jsonData);
-
 
       }//if
       if ($members_num == $numberOfRequests->totalRequests) {

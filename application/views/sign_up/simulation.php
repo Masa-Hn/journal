@@ -8,30 +8,15 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-   x=1000;
+   
+    const gender=['female','male','any'];
+   x=5000;
     //setInterval(reg(30000), 3000);
 var myVar;
 
 myVar=setInterval(function () {
-     if((x%2) == 0){
-        ambassadorGender="female"
-      }
-      else if((x%3) == 0){
-        ambassadorGender="male"
-      }
-      else{
-        ambassadorGender="any"
-      }
-
-      if((x%2) == 0){
-        leaderGender="male"
-      }
-      else if((x%3) == 0){
-        leaderGender="any"
-      }
-      else{
-        leaderGender="female"
-      }
+      ambassadorGender=gender[Math.floor(Math.random() * gender.length)];
+      leaderGender=gender[Math.floor(Math.random() * gender.length)];
       var username = "name"+x;
       var email = "email"+x+"@g.com";
 
@@ -41,11 +26,18 @@ myVar=setInterval(function () {
       data: {'ambassador_name':username,'ambassador_gender':ambassadorGender,'leader_gender': leaderGender,'email': email },
       success: function(data){
         document.getElementById("result").innerHTML =data;
-        console.log(x);
+        console.log(ambassadorGender + "  ..  " + leaderGender + " >>>RQ  " +x);
+        //console.log(data);
       }//success
     });
-      return x--;
-    }, 3000);
+      if (x<0) {
+         clearInterval(myVar); 
+      }
+      else{
+        return x--;  
+      }
+      
+    }, 5000);
 
 $('#val').click(function(){
   clearInterval(myVar);
@@ -80,4 +72,6 @@ function stopCount() {
 </script>
 
 </html>
+
+
 
