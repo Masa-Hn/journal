@@ -161,7 +161,7 @@
     <br>
 
 	<!-- Modal -->
-	<div id="newReqModal" class="modal fade" role="dialog" style="display: none;">
+	<div id="newReqModal" class="modal fade" role="dialog" >
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
