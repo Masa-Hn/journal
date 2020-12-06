@@ -149,13 +149,13 @@ class SignUpWithFB extends CI_Controller {
               //Check Teams With More Than 12 Members
               $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition," > 12");
                 if (count((array)$result) == 0 ){
-                  $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_name,$ambassadorGender,$leaderGender,$country,$ambassador_email);
+                  $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_info,$ambassadorGender,$leaderGender,$result,$country);
                   $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
                   $this->noLeaderFound();
                   $exit=true;
                 }//if
                 else{
-                  $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+                  $ambassador=$this->formatAmbassador($ambassador_info,$ambassadorGender,$leaderGender,$result,$country);
                     // Check Leader Request
                     //1- chekc associated requests
                     $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
@@ -174,7 +174,7 @@ class SignUpWithFB extends CI_Controller {
                 }//else
             }//if
             else{
-              $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+              $ambassador=$this->formatAmbassador($ambassador_info,$ambassadorGender,$leaderGender,$result,$country);
               // Check Leader Request
                     //1- chekc associated requests
                     $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
@@ -193,7 +193,7 @@ class SignUpWithFB extends CI_Controller {
             }//else
         }//if
         else{
-          $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+          $ambassador=$this->formatAmbassador($ambassador_info,$ambassadorGender,$leaderGender,$result,$country);
           // Check Leader Request
                     //1- chekc associated requests
                     $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
@@ -286,20 +286,13 @@ class SignUpWithFB extends CI_Controller {
   public function formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country)
   {         
     
-    if(is_null($ambassador_info['profile_link'])){
-      $profile_link="https://www.facebook.com/";
-    }
-    else{
-      $profile_link=$ambassador_info['profile_link'];
-    }
-    
     $ambassador = array(
                 'name' => $ambassador_info['name'],
                 'country'=>$country,
                 'gender'=>$ambassador_gender,
                 'leader_gender'=>$leader_gender,
                 'request_id'=>$result->Rid,
-                'profile_link'=>$profile_link,
+                'profile_link'=>"https://www.facebook.com/",
                 'fb_id'=>$ambassador_info['fb_id']
                 );
     return $ambassador;
@@ -307,18 +300,12 @@ class SignUpWithFB extends CI_Controller {
 
   public function ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$leader_gender,$country)
   {
-    if(is_null($ambassador_info['profile_link'])){
-      $profile_link="https://www.facebook.com/";
-    }
-    else{
-      $profile_link=$ambassador_info['profile_link'];
-    }
     $ambassador = array(
                 'name' => $ambassador_info['name'],
                 'country'=>$country,
                 'gender'=>$ambassador_gender,
                 'leader_gender'=>$leader_gender,
-                'profile_link'=>$profile_link,
+                'profile_link'=>"https://www.facebook.com/",
                 'fb_id'=>$ambassador_info['fb_id']
                 );
     return $ambassador;
