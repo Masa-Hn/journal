@@ -1,15 +1,10 @@
 <body>
 
-	<!-- Trigger the modal with a button 
+	<!-- Trigger the modal with a button -->
 	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#editModal" id="editModalBtn">
 		<i class="fa fa-edit"></i>
-		
-</button>-->
-
-
-<a href="#"  data-toggle="modal" data-target="#editModal" id="editModalBtn"><img src="<?php echo base_url() ?>admin/img/editpesonalinfo.png" width="26px">  تعديل البيانات الشخصية</a>
-<br>
-
+		تعديل البيانات الشخصية
+</button>
 
 
 	<!-- Modal -->
@@ -20,7 +15,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title"> تعديل البيانات الشخصية</h3>
+					<h1 class="modal-title"> تعديل البيانات الشخصية</h1>
 				</div>
 
 				<div class="modal-body">
@@ -28,13 +23,12 @@
 
 					<form method="post" enctype="multipart/form-data">
 						<?php
-						//print_r($_GET[ 'email' ]);die();
-						$info = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id, leader_name, leader_link, team_link' )->fetch_assoc();
+						$info = $this->GeneralModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id, leader_name, leader_link, team_link' )->row();
 
-						$id = $info['id'];
-						$leaderName = $info['leader_name'];
-						$leaderLink = $info['leader_link'];
-						$teamLink = $info['team_link'];
+						$id = $info->id;
+						$leaderName = $info->leader_name;
+						$leaderLink = $info->leader_link;
+						$teamLink = $info->team_link;
 
 						?>
 
@@ -116,6 +110,7 @@
 				document.getElementById( 'check-btn2' ).style.display = "none";
 				document.getElementById( 'subBtn' ).style.display = "none";
 			}
+
 		}*/
 	</script>
 	<script type="text/javascript">
@@ -129,7 +124,7 @@
 					document.getElementById( 'check-msg' ).style.display = "none";
 					$.ajax( {
 						type: "POST",
-						url: base_url + "Requests/edit/?email=<?php echo $_GET['email']?>",
+						url: base_url + "index.php/requests/edit/?email=<?php echo $_GET['email']?>",
 						data: {
 							id: id,
 							leaderLink: $( "#leaderLink" ).val(),
