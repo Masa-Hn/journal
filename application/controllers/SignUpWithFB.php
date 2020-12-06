@@ -237,8 +237,17 @@ class SignUpWithFB extends CI_Controller {
 
         /*initialize curl*/
         $ch = curl_init($url);
-        $recipient="3197321007062062";
+        
         $allocationError="Request ID , " . $request_id;
+
+        //MASA
+        $recipient="3031661570267952";
+         $jsonData =  $this->jsonData($recipient,$allocationError);
+        /* curl setting to send a json post data */
+        $this->curlSetting($ch,$jsonData);
+
+        //AHMAD
+        $recipient="4876332469074757";
          $jsonData =  $this->jsonData($recipient,$allocationError);
         /* curl setting to send a json post data */
         $this->curlSetting($ch,$jsonData);
