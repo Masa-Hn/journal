@@ -6,8 +6,6 @@ class NewMembersList extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model( 'requestsModel' );
-		$this->load->model( 'GeneralModel' );
-
 	} //end construct()
 
 	public function index(){
@@ -67,7 +65,7 @@ class NewMembersList extends CI_Controller {
 			$data['profile_link']=$profile;
 			if ($profile!=null)
 			{
-				$this->GeneralModel->update($data,$id,'ambassador');
+				$this->requestsModel->updateAmbassadorLink($id,$profile);
 			}
 			redirect(base_url().'newMembersList/index');
 		}
