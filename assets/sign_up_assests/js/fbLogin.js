@@ -30,6 +30,7 @@ function fb_login(){
 
         } else {
             //user hit cancel button
+            document.getElementById('errorMsgP').innerHTML='إذا واجهتك مشكلة بالتسجيل بواسطة الفيسبوك، قم بتسجيل معلوماتك من هُنا';
             console.log('User cancelled login or did not fully authorize.');
 
         }
