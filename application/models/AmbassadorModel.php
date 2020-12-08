@@ -1,6 +1,16 @@
 <?php
 class AmbassadorModel extends CI_Model {
 
+	public function getById($ambassador_id)
+	{
+		$this->db->select('*');
+    	$this->db->from('ambassador');
+    	$this->db->where('id =',$ambassador_id);
+    	return $this->db->get()->row();
+
+	}
+
+
 	public function insertAmbassador($ambassador)
 	{
 		return $this->db->insert('ambassador',$ambassador);
@@ -55,6 +65,13 @@ class AmbassadorModel extends CI_Model {
 		$this->db->where('fb_id', $fb_id);
 		$this->db->update('ambassador', $data);
 	}//updateAmbassador
+
+	public function updateMessengerId($requestNo,$messengerId){
+		$this->db->set('messenger_id', $messengerId);
+		$this->db->where('id', $requestNo);
+		$this->db->update('ambassador');
+	}//updateMessengerId
+
 
 }//SignUpModel
 
