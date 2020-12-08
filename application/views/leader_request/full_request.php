@@ -1,14 +1,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous"/>
-
+<script type="text/javascript">
+</script>
 <body>
-
-	<!-- Trigger the modal with a button -->
 	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#reqModal" id="reqModalBtn">
 	<i class="fa fa-user-plus" aria-hidden="true"></i>
      طلب سفراء جدد
 </button>
-
-
 	<!-- Modal -->
 	<div id="reqModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -26,17 +23,22 @@
 
 					<form method="post" enctype="multipart/form-data">
 						<?php
-						//to be taken from osboha website
-						$leaderName = $_GET['name'];
-						$teamLink = "https://www.facebook.com/groups/".$teamLink;
+						$teamLink = "";
+						$teamName = "";
+						$teamCount = 20;
+						$leaderName = $_GET[ 'name' ];
+						$teamLink = "https://www.facebook.com/groups/" . $teamLink;
 						$teamName = $teamName;
 						$currentTeamCount = $teamCount;
-
+						$leaders_team_name = "leaders of osboha 1";
+						$leader_rank = 5;
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
 						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
 						<input type="hidden" name="teamName" id="teamName" value="<?php echo $teamName ;?>">
 						<input type="hidden" name="currentTeamCount" id="currentTeamCount" value="<?php echo $currentTeamCount ;?>">
+						<input type="hidden" name="leaders_team_name" id="leaders_team_name" value="<?php echo $leaders_team_name ;?>">
+						<input type="hidden" name="leader_rank" id="leader_rank" value="<?php echo $leader_rank ;?>">
 
 						<div class="form-group">
 							<label for="leaderLink">ضع رابط صفحتك الشخصية: </label>
@@ -57,7 +59,7 @@
 							<select name="numOfMembers" id="numOfMembers" class="form-control" required="required">
 								<?php
 								for ( $i = 1; $i <= 10; $i++ ) {
-									echo "<option value='$i'>$i</option>";
+									echo "<option value='$i' class='num'>$i</option>";
 								}
 								?>
 							</select>
@@ -66,24 +68,24 @@
 						<div class="form-group">
 							<label for="gender" class="form-label">اختر جنس الأعضاء: </label>
 							<select name="gender" id="gender" class="form-control">
-								<option value="female">إناث</option>
-								<option value="male">ذكور</option>
-								<option value="any">لا فرق</option>
+								<option value="female" class="gender">إناث</option>
+								<option value="male" class="gender">ذكور</option>
+								<option value="any" class="gender">لا فرق</option>
 							</select>
 						</div>
 					</form>
-
 					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار الرابط</button>
-					<div id="check_div" style="display: none;margin-top: 3%; margin-bottom: 3%;">
-						<input type="checkbox" id="check" onclick="change_check()">
+
+					<div id="check_div" style="margin-top: 3%; margin-bottom: 3%;">
+						<input type="checkbox" id="check">
 						<label>  تم التأكد من صحة الرابط</label>
 					</div>
-					<button type="submit" name="submit" class="btn btn-block" id="sub-btn" style="display: none;background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">رفع الطلب</button>
-        
+					<label name="check-msg" id="check-msg" style="display: none; color: red"> الرجاء تأكيد اختبار الرابط! </label>
+					<button type="submit" name="submit" class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">رفع الطلب</button>
 				</div>
 
 				<div class="modal-footer">
-					<a type="button" class="btn btn-default" target="_blank" href="https://www.facebook.com/messages/t/Intoosboha" style="font-weight: bold; color: #214761; font-size: 1.7rem;"><i class="fab fa-facebook-messenger"></i> للتواصل مع الإدخال</a>
+					<a type="button" class="btn btn-default" target="_blank" href="https://www.facebook.com/Intoosboha/" style="font-weight: bold; color: #214761; font-size: 1.7rem;"><i class="fab fa-facebook-messenger"></i> للتواصل مع الإدخال</a>
 				</div>
 
 			</div>
@@ -91,67 +93,72 @@
 	</div>
 
 	<script type="text/javascript">
+		function check() {
+
+			var URL = document.getElementById( 'leaderLink' ).value;
+			if ( URL == "" ) {
+				document.getElementById( 'msg-ch' ).style.display = "block";
+			} else {
+				document.getElementById( 'msg-ch' ).style.display = "none";
+				window.open( URL );
+
+			}
+		}
 		var base_url = "<?php echo base_url()?>";
 		$( document ).ready( function () {
-
 			$( "#sub-btn" ).click( function () {
-				$.ajax( {
-					type: "POST",
-					url: base_url + "Requests/addFullRequest/?email=<?php echo $_GET['email'];?>&name=<?php echo $_GET['name'];?>",
-					data: {
-						leaderName: $( "#leaderName" ).val(),
-						leaderLink: $( "#leaderLink" ).val(),
-						leaderGender: $( "#leaderGender" ).val(),
-						teamLink: $( "#teamLink" ).val(),
-						teamName: $( "#teamName" ).val(),
-						currentTeamCount: $( "#currentTeamCount" ).val(),
-						numOfMembers: $( "#numOfMembers" ).val(),
-						gender: $( "#gender" ).val()
+				if ( document.getElementById( 'check' ).checked == true ) {
+					$.ajax( {
+						type: "POST",
+						url: base_url + "Requests/addFullRequest/?email=<?php echo $_GET['email'];?>&name=<?php echo $_GET['name'];?>",
+						data: {
+							leaderName: $( "#leaderName" ).val(),
+							leaderLink: $( "#leaderLink" ).val(),
+							leaderGender: $( "#leaderGender" ).val(),
+							teamLink: $( "#teamLink" ).val(),
+							teamName: $( "#teamName" ).val(),
+							currentTeamCount: $( "#currentTeamCount" ).val(),
+							numOfMembers: $( "#numOfMembers" ).val(),
+							gender: $( "#gender" ).val(),
+							leadersTeamName: $( "#leaders_team_name" ).val(),
+							leaderRank: $( "#leader_rank" ).val()
 
-					},
-					success: function ( data ) {
-						$( '#msg' ).html( data );
-					}
-				} );
-				return false;
+						},
+						success: function ( data ) {
+							$( '#msg' ).html( data );
+						}
+					} );
+				} else {
+					document.getElementById( 'check-msg' ).style.display = "block";
+				}
+			} );
+
+			//exceptional leader
+			$( "#sub-btn-e" ).click( function () {
+				if ( document.getElementById( 'check' ).checked == true ) {
+					$.ajax( {
+						type: "POST",
+						url: base_url + "Requests/addExceptionalRequest/?email=<?php echo $_GET['email'];?>&name=<?php echo $_GET['name'];?>",
+						data: {
+							leaderName: $( "#leaderName" ).val(),
+							leaderLink: $( "#leaderLink" ).val(),
+							leaderGender: $( "#leaderGender" ).val(),
+							teamLink: $( "#teamLink" ).val(),
+							teamName: $( "#teamName" ).val(),
+							currentTeamCount: $( "#currentTeamCount" ).val(),
+							numOfMembers: $( "#numOfMembers" ).val(),
+							gender: $( "#gender" ).val()
+
+						},
+						success: function ( data ) {
+							$( '#msg' ).html( data );
+						}
+					} );
+				} else {
+					document.getElementById( 'check-msg' ).style.display = "block";
+				}
 			} );
 		} );
-        
-
-	function check(){
-        
-        var URL = document.getElementById('leaderLink').value;
-        if (URL==""){
-            document.getElementById('msg-ch').style.display="block";
-        }else{
-            document.getElementById('msg-ch').style.display="none";
-            var win = window.open(URL);
-            document.getElementById('check_div').style.display="block";
-        }
-    }
-
-    function change_check(){
-        
-        ch = document.getElementById('check');
-        sb = document.getElementById('sub-btn');
-        if (ch.checked==true)
-            document.getElementById('sub-btn').style.display="block";
-        else
-            document.getElementById('sub-btn').style.display="none";
-    }
-              
-    function doesFileExist(urlToFile){
-        
-        var xhr = new XMLHttpRequest();
-        xhr.open( 'HEAD', urlToFile );
-        xhr.send();
-
-        if( xhr.status == "404" ){
-            return false;
-        }else{
-            return true;
-        }
-    }		
 	</script>
 </body>
 </html>

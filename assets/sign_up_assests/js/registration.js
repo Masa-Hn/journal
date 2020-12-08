@@ -81,15 +81,19 @@ function checkData(){
   else{
     ambassadorGender=$('input[name="amb_gender"]:checked').val();
     leaderGender=$('input[name="leader_gender"]:checked').val();
-    $.ajax({
+    
+    setTimeout(function () {
+      $.ajax({
       type: "POST",
       url:document.getElementById("base_url").value+"SignUp/checkAmbassador",
       data: {'ambassador_name':username,'ambassador_gender':ambassadorGender,'leader_gender': leaderGender,'email': email },
       success: function(data){
         $("body").html(data);
-
+        console.log('hello');
       }//success
     });
+      
+    }, 5000);
   }
 }
 

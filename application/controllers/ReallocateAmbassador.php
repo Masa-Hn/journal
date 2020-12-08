@@ -77,83 +77,100 @@ class ReallocateAmbassador extends CI_Controller {
 
     if (!empty($_POST['ambassador'])) {
       $ambassador_info=$_POST['ambassador'];
-      $leader_gender=$_POST['leader_gender'];
+      $ambassadorGender=$ambassador_info['gender'];
+      $leaderGender=$_POST['leader_gender'];
       $leader_id=$_POST['leader_id'];
       $request_id=$_POST['request_id'];
       $currentTime=time();
       $date_update=date("Y-m-d",$currentTime);
 
-      
-      // //Check ambassador gender
-        if ($ambassador_info['gender'] != "female" && $ambassador_info['gender']!="male") {
-          $ambassador_gender="any";
+      if ($ambassadorGender == 'any') {
+      $ambassador_condition="leader_request.gender = '" .$ambassadorGender . "'";
+      }
+      else{
+        $ambassador_condition="(leader_request.gender = '". $ambassadorGender ."' OR leader_request.gender = 'any')";
+      }
 
-        }
-        else{
-          $ambassador_gender=$ambassador_info['gender'];
-        }
+      if ($leaderGender == "any") {
+        $leader_condition=" (leader_info.leader_gender = 'female' OR leader_info.leader_gender = 'male')";
+      }
+      else{
+        $leader_condition="leader_info.leader_gender = '".$leaderGender."'";
+      }
 
-      //check leader gender
-        if ($leader_gender == "any") {
-          //Check New Teams
-
-            $result=$this->ReallocateAmbassadorModel->newTeamsAnyLeader($ambassador_gender,$leader_id);
+      $exit=false;
+      while (! $exit ) {
+        //Check New Teams
+        $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition,$leader_id);
+        if (count((array)$result) == 0 ){
+          //Check Teams With Less Than 12 Members
+          $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition,"BETWEEN  1 AND 12",$leader_id);
             if (count((array)$result) == 0 ){
-
-              //Check Teams With Less Than 12 Members
-                $result=$this->ReallocateAmbassadorModel->anyLeader($ambassador_gender, "<=",$leader_id);
+              //Check Teams With More Than 12 Members
+              $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition," > 12",$leader_id);
                 if (count((array)$result) == 0 ){
-                  //Check Teams With More Than 12 Members
-                    $result=$this->ReallocateAmbassadorModel->anyLeader($ambassador_gender, ">",$leader_id);
-                    if (count((array)$result) == 0 ){
-
-                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$leader_gender,null,$date_update);
-
-                      $this->noLeaderFound();
-                    }//if
-                    else{
-                      $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
-                    }//else
-
+                  $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_name,$ambassadorGender,$leaderGender,$country,$ambassador_email);
+                  $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
+                  $this->noLeaderFound();
+                  $exit=true;
                 }//if
                 else{
-                   $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
+                  $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+                    // Check Leader Request
+                    //1- chekc associated requests
+                    $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                    //2- compare to the requested number
+                      //If available, insert   
+                      if ($result->members_num > $numberOfRequests->totalRequests) {
+                        $this->AmbassadorModel->insertAmbassador($ambassador);
+                        $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                        $exit=true;
+                      }//if
+                      //Else update request to done
+                      else{
+                        $this->RequestsModel->updateRequest( $result->Rid);
+                        continue;
+                      }//else      
                 }//else
             }//if
             else{
-              $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
+              $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+              // Check Leader Request
+                    //1- chekc associated requests
+                    $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                    //2- compare to the requested number
+                      //If available, insert   
+                      if ($result->members_num > $numberOfRequests->totalRequests) {
+                        $this->AmbassadorModel->insertAmbassador($ambassador);
+                        $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                        $exit=true;
+                      }//if
+                      //Else update request to done
+                      else{
+                        $this->RequestsModel->updateRequest( $result->Rid);
+                        continue;
+                      }//else      
             }//else
         }//if
         else{
-          //for specific leader gender
-          //Check New Teams
-            $result=$this->ReallocateAmbassadorModel->getNewTeams($leader_gender,$ambassador_gender,$leader_id);
-            if (count((array)$result) == 0 ){
-
-              //Check Teams With Less Than 12 Members
-
-                $result=$this->ReallocateAmbassadorModel->getTeams($leader_gender,$ambassador_gender, "<=",$leader_id);  
-
-                if (count((array)$result) == 0 ){
-                  //Check Teams With More Than 12 Members
-                    $result=$this->ReallocateAmbassadorModel->getTeams($leader_gender,$ambassador_gender, ">",$leader_id);
-                    if (count((array)$result) == 0 ){
-
-                      $this->AmbassadorModel->updateAmbassador($ambassador_info['fb_id'],$leader_gender,null,$date_update);
-                      $this->noLeaderFound();
-                    }//if
-                    else{
-                      $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
-                    }//else
-                }//if
-                else{
-                  $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
-                }//else
-            }//if
-            else{
-              $this->checkout($ambassador_info['fb_id'],$leader_gender, $result->Rid,$result->leader_id,$result->members_num);
-            }//else
-        }//else
+          $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+          // Check Leader Request
+                    //1- chekc associated requests
+                    $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                    //2- compare to the requested number
+                      //If available, insert   
+                      if ($result->members_num > $numberOfRequests->totalRequests) {
+                        $this->AmbassadorModel->insertAmbassador($ambassador);
+                        $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                        $exit=true;
+                      }//if
+                      //Else update request to done
+                      else{
+                        $this->RequestsModel->updateRequest( $result->Rid);
+                        continue;
+                      }//else             
+          }//else
+      }//while
 
     }//if
     else{

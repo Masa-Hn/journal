@@ -10,7 +10,7 @@ td {
   padding: 0.25em 0.5em 0.25em 1em;
   vertical-align: text-top;
   text-align: right;
-  text-indent: -0.5em;
+ /* text-indent: -0.5em;*/
 }
 
 th {
@@ -98,14 +98,8 @@ tr.hidden {
   height: 1px;
   white-space: nowrap;
 }
-.checkbox{
-  width: 20px;
-}
 .link, .fa{
   color: #205D67;
-}
-.fa{
-  font-size: 12px;;
 }
 .link:hover, .fa:hover{
   color: #205D67;

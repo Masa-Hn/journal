@@ -2,20 +2,22 @@
 
 defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 class NewMembersList extends CI_Controller {
-    
-	public function __construct() {
+
+	public
+	function __construct() {
 		parent::__construct();
 		$this->load->model( 'requestsModel' );
 	} //end construct()
 
-	public function index(){
-		$this->load->view( 'leader_request/header' );
+	public
+	function index() {
+		$title['title'] = "الأعضاء الجدد";
+		$this->load->view( 'leader_request/header' , $title);
 		$leader_info = $this->requestsModel->check_email( $_GET[ 'email' ] );
-        $arr = null;
-    
+		$arr = null;
+
 		if ( $leader_info->num_rows > 0 ) {
-			$res = $leader_info->fetch_array( MYSQLI_ASSOC );
-            
+			$res = $leader_info->fetch_array( MYSQLI_ASSOC ); 
             if($res != null){
                 $id = $res[ 'id' ];
                 $request = $this->requestsModel->get_data( $id, 'leader_id', 'leader_request', 'Rid' );
@@ -35,6 +37,7 @@ class NewMembersList extends CI_Controller {
             }
 		}
 	}
+
 
 	function joined_ambassador() {
 		if ( isset( $_POST[ 'Checked' ] ) ) {
