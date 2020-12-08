@@ -47,7 +47,7 @@
                         ?>
                   <tr class="list-item">
                     <td id="lblMSb" ><a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $ambassador->name; ?></a></td>
-                    <td><?php echo "أنثى";?></td>
+                    <td><?php echo ($ambassador->gender == 'Male' || $ambassador->gender == 'male')? 'ذكر':'أنثى';?></td>
                     <td>
                       <a class="link" href="<?php echo $ambassador->profile_link;?>" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
                     </td>

@@ -19,8 +19,7 @@ class Send extends CI_Controller {
 
   public function index(){
      $this->load->view('sign_up/templates/header');
-    $this->load->view('sign_up/templates/navbar' );
-    $this->load->view('sign_up/no_leader_found');
+    $this->load->view('sign_up/simulation');
     $this->load->view('sign_up/templates/footer');
   }
   public function OwlyApi(){
