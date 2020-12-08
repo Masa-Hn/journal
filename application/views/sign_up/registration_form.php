@@ -60,6 +60,9 @@
           <div class="signup form-peice" dir="rtl">
             <form class="signup-form" >
               <div class="form-group" id="errorMsg">
+                <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
+                <span id="loadingMsg" style="color: #197439;">
+                </span>
                 <span id="errorMsgP">
                   <?php 
                     if(!empty($errorMsg)){

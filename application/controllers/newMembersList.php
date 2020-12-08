@@ -60,5 +60,17 @@ class NewMembersList extends CI_Controller {
 			$this->requestsModel->update_data( 0, $id );
 		}
 	}
+
+	function saveProfileLink()
+		{
+			$profile=$this->input->post('profile_link');
+			$id=$this->input->post('amb_id');
+			$data['profile_link']=$profile;
+			if ($profile!=null)
+			{
+				$this->requestsModel->updateAmbassadorLink($id,$profile);
+			}
+			redirect(base_url().'newMembersList/index');
+		}
 }
 ?>

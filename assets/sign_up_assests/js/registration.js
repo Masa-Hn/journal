@@ -81,8 +81,21 @@ function checkData(){
   else{
     ambassadorGender=$('input[name="amb_gender"]:checked').val();
     leaderGender=$('input[name="leader_gender"]:checked').val();
-    
+    var x=10;
+    var counter = setInterval(function(){
+                    $("#loading").show();
+                    document.getElementById('loadingMsg').innerHTML=
+                    "   "+
+                    ' يتم الأن تجهيز طلبك' +
+                    " "+ x; 
+                    x--;
+                    if (x<0) {
+                      clearInterval(counter); 
+                    }
+                  },1000);
+
     setTimeout(function () {
+      clearInterval(counter);
       $.ajax({
       type: "POST",
       url:document.getElementById("base_url").value+"SignUp/checkAmbassador",
