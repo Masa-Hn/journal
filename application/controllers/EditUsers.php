@@ -9,7 +9,9 @@ class EditUsers extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('GeneralModel');
-
+		if(!$this->session->userdata('logged_in')){
+            redirect(base_url("login"));
+        }
 	} //end construct()
 
 public function index() {

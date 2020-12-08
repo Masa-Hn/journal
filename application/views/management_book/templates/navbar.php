@@ -65,6 +65,9 @@
 				<li>
 					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>Statistics">عرض الإحصائيات</a>
 				</li>
+				<li>
+					<a style="color:#FCFAEF;" class="nav-item nav-link" href="<?php echo base_url()?>Pages">ترتيب الصفحات</a>
+				</li>
 				<?php
 				}
 				if ( in_array( "2", $teamSplitted ) ) {

@@ -77,6 +77,13 @@ class RequestsModel extends CI_Model {
 		$conn->close();
 	}
 
+	public function updateAmbassadorLink( $ambassador_id, $profile_link ) {
+		$query = "UPDATE ambassador SET profile_link =" . $profile_link . " WHERE id =" . $ambassador_id;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		$conn->close();
+	}
+
 	public function updateReq( $id ) {
 		$query = "UPDATE leader_request SET is_done = 1 WHERE Rid = " . $id;
 		$conn = $this->connectToDB();
@@ -143,8 +150,8 @@ class RequestsModel extends CI_Model {
 		return $this->db->get( 'leader_request' );
 	} //getDate
 
-	public function get_data( $val, $where, $table, $select = '*', $where_2 = '') {
-		$query = "SELECT " . $select . " FROM " . $table . " WHERE " . $where . "='" . $val . "'" . $where_2;
+	public function get_data( $val, $where, $table, $select = '*' ) {
+		$query = "SELECT " . $select . " FROM " . $table . " WHERE " . $where . "='" . $val . "'";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {
@@ -157,7 +164,7 @@ class RequestsModel extends CI_Model {
 
 
 	public function update_data( $val, $id ) {
-		$query = "UPDATE ambassador SET join_following_team = " . $val . ", display = 0 WHERE id = " . $id;
+		$query = "UPDATE ambassador SET join_following_team = " . $val . " WHERE id = " . $id;
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		$conn->close();

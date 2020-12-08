@@ -37,7 +37,7 @@
 	<br>
 
 	<!-- Modal -->
-	<div id="newReqModal" class="modal fade" role="dialog">
+	<div id="newReqModal" class="modal fade" role="dialog" >
 		<div class="modal-dialog">
 
 			<!-- Modal content-->
@@ -113,6 +113,35 @@
 			</div>
 		</div>
 	</div>
+		<div class="container-contact100" id="profile_link_save" style="display: none;">
+		<div class="wrap-contact100">
+		<form class="contact100-form validate-form" enctype="multipart/form-data" method="post" action="<?php echo base_url()?>newMembersList/saveProfileLink">
+			<span class="contact100-form-title">
+					قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة180, ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
+				</span>
+	         <div class="wrap-input100">
+
+				<img style="float: right;padding-right: 15%" src="<?php echo base_url()?>/assets/img/profile_link.jpg">
+			</div>
+	         
+	         <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;" data-validate = "Valid email is required: ex@abc.xyz">
+				<input class="input100" type="text" id="profile_link" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
+				<input style="display: none;" type="text" id="amb_id" name="amb_id" value="<?php echo $id; ?>">
+						<span class="focus-input100"></span>
+			 </div>           	
+			 <div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button class="contact100-form-btn">
+							<span>
+								حفظ
+							</span>
+						</button>
+					</div>
+				</div>
+		</form>
+</div>
+</div>
 	<script type="text/javascript">
 		function joined( id ) {
 			if ( document.getElementById( "joined" + id ).checked == true ) {
@@ -121,6 +150,11 @@
 
 				if ( success == true ) {
 					document.getElementById( "notJoined" + id ).checked = false;
+					var v=document.getElementById('profile_link_save');
+						v.style.display="block";
+							var elem = v.clone();
+
+    						alert(elem.html());
 					$.ajax( {
 						url: base_url + 'NewMembersList/joined_ambassador',
 						type: 'POST',
@@ -129,7 +163,7 @@
 						},
 						dataType: 'text',
 						success: function () {
-
+							
 							/*	window.setTimeout( function () {}, 3000 );
 								location.reload();*/
 						},
