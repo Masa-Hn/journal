@@ -1,7 +1,5 @@
-<body>
-
-	<!-- Trigger the modal with a button 
-	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#editModal" id="editModalBtn">
+<!-- Trigger the modal with a button 
+<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#editModal" id="editModalBtn">
 		<i class="fa fa-edit"></i>
 		
 </button>-->
@@ -28,8 +26,7 @@
 
 					<form method="post" enctype="multipart/form-data">
 						<?php
-						//print_r($_GET[ 'email' ]);die();
-						$info = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id, leader_name, leader_link, team_link' )->fetch_assoc();
+						$info = $this->requests_model->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id, leader_name, leader_link, team_link' )->fetch_assoc();
 
 						$id = $info['id'];
 						$leaderName = $info['leader_name'];
@@ -153,5 +150,3 @@
 			} );
 		} );
 	</script>
-</body>
-</html>

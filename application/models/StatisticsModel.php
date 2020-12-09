@@ -66,7 +66,7 @@ public function incrementVisitors($page_id)
 
 	public
 	function selectStatisticsPerWeek( $id ) {
-		$this->db->select( 'visitors' );
+		$this->db->select_sum( 'visitors' );
 		$this->db->from( 'statistics' );
 		$where = 'page_id = "' . $id . '" AND YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)';
 		$this->db->where( $where );
@@ -74,7 +74,7 @@ public function incrementVisitors($page_id)
 	}
 	public
 	function selectStatisticsPerMonth( $id ) {
-		$this->db->select( 'visitors' );
+		$this->db->select_sum( 'visitors' );
 		$this->db->from( 'statistics' );
 		$where = 'page_id = "' . $id . '" AND YEAR( date ) = YEAR( CURDATE() )AND MONTH( date ) = MONTH( CURDATE() )';
 		$this->db->where( $where );

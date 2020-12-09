@@ -8,7 +8,7 @@
       exit();
   }
 
-    $page_id = 16;
+    $page_id = 15;
     $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">

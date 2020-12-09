@@ -2,8 +2,7 @@
 defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 class Pages extends CI_Controller {
 
-	public
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 		$this->load->model( 'GeneralModel' );
 		$this->load->library( 'form_validation' );
@@ -12,8 +11,7 @@ class Pages extends CI_Controller {
         }
 	} //end construct()
 
-	public
-	function index() {
+	public function index() {
 		$pages=$this->GeneralModel->get_all('pages');
 		$arr1= Array();
 		 foreach ($pages->result() as $m) { 
@@ -39,8 +37,8 @@ class Pages extends CI_Controller {
 
 	}
 
-	public function add()
-	{
+	public function add() {
+        
 		$title=$this->input->post('title');
 		$data['title']=$title;
 		$this->GeneralModel->insert($data,'pages');

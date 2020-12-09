@@ -10,7 +10,7 @@ class NewMembersList extends CI_Controller {
 
 	public function index(){
 		$this->load->view( 'leader_request/header' );
-		/*$leader_info = $this->requestsModel->check_email( "shatha.ite@gmail.com" );
+		$leader_info = $this->requestsModel->check_email( $_GET['email'] );
         $arr = null;
     
 		if ( $leader_info->num_rows > 0 ) {
@@ -33,8 +33,7 @@ class NewMembersList extends CI_Controller {
                     $this->load->view( 'leader_request/new_members_list', $arr );
                 }
             }
-		}*/
-		$this->load->view( 'leader_request/test');
+		}
 	}
 
 	function joined_ambassador() {

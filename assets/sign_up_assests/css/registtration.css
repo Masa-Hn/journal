@@ -310,6 +310,15 @@ footer p a:hover, footer p a:focus:hover {
   }
 }
 @media (max-width: 480px) {
+  section#formHolder .form .form-peice > form {
+    padding: 0px;
+  }
+  .brand .heading {
+    top: 20%;
+    left: 3%;
+    transform: translate(0,0);
+  }
+  
   section#formHolder .form {
     width: 100vw;
     margin-left: 0;
@@ -320,5 +329,32 @@ footer p a:hover, footer p a:focus:hover {
   }
   h3{
     font-weight: 600;
+    font-size: 1rem;
+  }
+}
+
+
+@media (min-width: 300px){
+   section#formHolder .form .form-peice > form {
+    padding: 15px;
+  }
+  h3{
+    font-size: 1rem;
+  }
+}
+@media (max-width: 200px){
+  section#formHolder .form .form-peice > form {
+    padding: 0px !important;
+  }
+  .brand .heading {
+    top: 0%;
+    left: 3%;
+    transform: translate(0,0);
+  }
+  h3{
+    font-size: 1rem;
+  }
+  .reg-btn {
+    font-size: 10px;
   }
 }

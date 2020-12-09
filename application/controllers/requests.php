@@ -122,20 +122,18 @@ class Requests extends CI_Controller {
 				            عدد الفريق مكتمل لديك !
 					       </div>";
 					//echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
-			}
-			else
-			{  if ($request[ 'current_team_count' ]+$request['members_num']>30)
-				{
-					$request['members_num']=30-$request['current_team_count'];
-					$r="لا يمكنك الحصول على أكثر من 30 سفير ! سيتم رفع طلبك ب ".$request['members_num']." عضو فقط ... ";
-				   echo '<script type="text/javascript">
-				   alert("'.$r.'");
-				   </script>';
-					echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
-					$rid = $this->requests_model->addRequest( $request );
-					$this->distributeAmbassadors( $rid );
-				}
-				else{
+			}elseif($request['current_team_count']+$request['members_num'] > 30){
+                
+                $request['members_num'] = 30 - $request['current_team_count'];
+				$r="لا يمكنك الحصول على أكثر من 30 سفير ! سيتم رفع طلبك ب ".$request['members_num']." عضو فقط ... ";
+                
+				echo "<div class='alert alert-danger'>
+				           $r
+					       </div>";
+				//echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
+                $rid = $this->requests_model->addRequest( $request );
+				$this->distributeAmbassadors( $rid );
+			}else{
     			$rid = $this->requests_model->addRequest( $request );
     			
     			$msg = "<div class='alert alert-success'>
@@ -145,7 +143,7 @@ class Requests extends CI_Controller {
     			
     			$this->distributeAmbassadors( $rid );
 			}
-		}	
+			
 		} else if ( $val == 2 ) {
 			$msg = "<div class='alert alert-danger'>
                      لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
@@ -202,21 +200,6 @@ class Requests extends CI_Controller {
 		if ( $distributedAmbassadors->num_rows == $request[ 'members_num' ] ) {
 			$this->requests_model->updateReq( $requestID );
 		}
-		if ($request[ 'members_num' ] < $distributedAmbassadors->num_rows) {
-        //1- update request to DONE
-       	$this->requestsModel->updateReq( $requestID );
-        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAEeKZAAP0WHt88FNmvkwD0d6vlbCNPxbRuKa4rLUDRhEZCzecSomSJ08KaJzSQRghUyxorJlwYK6YcziiZAO5LEbQVMfqpkk0KzGK47AqoLfP5NFT5Uja2eeWV4pVpRYL2LcmbGIFUnQaYDehlirsZA4gzhMaQZDZD';
-
-        /*initialize curl*/
-        $ch = curl_init($url);
-        $recipient="3197321007062062";
-        $allocationError=" خطأ من التوزيع بعد الطلب";
-         $jsonData =  $this->jsonData($recipient,$allocationError);
-        /* curl setting to send a json post data */
-        $this->curlSetting($ch,$jsonData);
-
-
-      }//if
 	}
 
 	public function deleteLeaderRequest() {
@@ -240,8 +223,8 @@ class Requests extends CI_Controller {
 		$this->GeneralModel->remove( $id, 'leader_request', 'Rid' );
 		redirect( base_url() . 'requests/deleteLeaderRequest' );
 	}
-
-	  public function informLeader($leader_id,$request_id){
+	
+	public function informLeader($leader_id,$request_id){
       //1- update request to DONE
         $this->RequestsModel->updateRequest($request_id);
         //2- get all associated requests
@@ -311,5 +294,19 @@ class Requests extends CI_Controller {
 	    curl_exec($ch); // user will get the message
 
   	}//curlSetting
+    
+    public function display_requests_e() {
+		$req = $this->requests_model->get_data( 0, 'is_accepted', 'leader_request' );
+		$data = array();
+		if ( $req->num_rows > 0 ) {
+			$data[ 'requests' ] = $req;
+		} else {
+			$data[ 'empty' ] = '<div class="alert alert-danger" style="text-align:center"> ?? ???? ????? </div>';
+		}
+		$this->load->view( 'leader_request/header' );
+
+		$this->load->view( 'leader_request/exceptional_requests', $data );
+
+	}
 }
 ?>
