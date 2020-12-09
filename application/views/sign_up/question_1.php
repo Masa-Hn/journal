@@ -25,9 +25,14 @@
             </h1>
             <span style="color: red; display: none;" id="error_msg">حاول مُجددًا</span>
             <br>
-            <input type="text" name="" placeholder="أدخل عدد الصفحات " id="answer">
+            <select class="form-control" id="answer" required>
+                <option value="">اختر عدد الصفحات </option>
+                <option value="30">ثلاثون صفحة أسبوعيًا</option>
+                <option value="60 ">ستون صفحة أسبوعيًا</option>
+                <option value="50 ">خمسون صفحة أسبوعيًا</option>
+              </select>
             <br>
-               <a href="javascript:checkAnswer()" class="genric-btn primary circle ">التالي <span class="lnr lnr-arrow-right"></span></a>
+            <a href="javascript:checkAnswer()" class="genric-btn primary circle ">التالي <span class="lnr lnr-arrow-right"></span></a>
           </div>
           <div class="col-lg-4 col-sm-12">
               <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/wonder.png" alt="" alt="" style="width: 80%">
