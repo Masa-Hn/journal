@@ -1,5 +1,4 @@
 <?php
-
 defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 class ExceptionalExcutiveTeams extends CI_Controller {
 
@@ -8,20 +7,34 @@ class ExceptionalExcutiveTeams extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model( 'ExceptionalExcutiveModel' );
+        $this->load->library('form_validation');
 	} //end construct()
 
+    public
+	function excutive() {
+		$exc[ 'title' ] = 'طلبات القادة التنفيذين';
+		$this->load->view( 'exceptional_excutive/header', $exc );
+        
+		$pri = '+1+21'
+        $p = explode('+', $pri); 
+
+        if(in_array(21, $p)){
+            // طلبات القادة التنفيذين
+            $this->load->view('exceptional_excutive/excutive');
+        }
+	}
+    
 	public
 	function exceptional() {
 		$exc[ 'title' ] = 'طلبات القادة الاستثنائيين';
 		$this->load->view( 'exceptional_excutive/header', $exc );
-		$this->load->view( 'exceptional_excutive/exceptional' );
-	}
+		$pri = '+1+23'
+        $p = explode('+', $pri); 
 
-	public
-	function excutive() {
-		$exc[ 'title' ] = 'طلبات القادة التنفيذين';
-		$this->load->view( 'exceptional_excutive/header', $exc );
-		$this->load->view( 'exceptional_excutive/excutive' );
+        if(in_array(23, $p)){
+            // طلبات القادة التنفيذين
+            $this->load->view('exceptional_excutive/exceptional');
+        }
 	}
 
 	public

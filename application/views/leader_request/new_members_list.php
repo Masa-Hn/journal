@@ -74,10 +74,8 @@
 								$id = $amb[ 'id' ];
 								?>
 							<tr>
-								<td><i class="fa fa-external-link" aria-hidden="true"></i>
-									<a class="link" href="<?php echo $amb['profile_link'];?>">
-										<span id="ambassador_<?php echo $id;?>"><?php echo $amb['name']; ?></span>
-									</a>
+								<td>
+									<span class="link" id="ambassador_<?php echo $id;?>"><?php echo $amb['name']; ?></span>
 								</td>
 								<td>
 									<?php echo ($amb['gender'] == 'female' || $amb['gender'] == 'Female') ? "أنثى" :  "ذكر"; ?>
@@ -98,7 +96,7 @@
 					</table>
 					<?php }
 					} else {
-						echo "<div class='alert alert-danger' style='font-size:1.7rem; font-weight:bold; text-align:center;'>" . "?? ???? ????? ??? ????" . "</div>";
+						echo "<div class='alert alert-danger' style='font-size:1.7rem; font-weight:bold; text-align:center;'>" . "لا يوجد أعضاء جدد لديك" . "</div>";
 					}
 					} else {
 						echo "<div class='alert alert-danger' style='font-size:1.7rem; font-weight:bold; text-align:center;'>" . $info . "</div>";

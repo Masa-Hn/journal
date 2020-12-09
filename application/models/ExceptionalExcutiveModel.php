@@ -29,7 +29,7 @@ class ExceptionalExcutiveModel extends CI_Model {
 
 	public
 	function retrieve_leaders_exc( $supervisor, $rank ) {
-		$query = "SELECT * FROM leader_info WHERE leaders_team_name='" . $supervisor . "' AND leader_rank = '" . $rank . "'";
+		$query = "SELECT * FROM leader_info WHERE leaders_team_name='" . $supervisor . "' AND leader_rank LIKE '%" . $rank . "%'";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {
