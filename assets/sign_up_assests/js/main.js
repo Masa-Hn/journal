@@ -86,7 +86,7 @@ function checkAnswer() {
     if (answer == 30){
       Swal.fire({
         title: 'رائـــع',
-        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية، وتذكر  بإمكانك دوما قراءة ما يناسبك ❤️",
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية، وتذكر  بإمكانك دوما قراءة ما يناسبك ",
         imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
         imageWidth: 300,
         imageAlt: 'Custom image',
