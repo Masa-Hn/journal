@@ -238,8 +238,11 @@
 			</div>
 		</div>
 	</div>
-		<div class="container-contact100" id="profile_link_save" style="display: none;">
-		<div class="wrap-contact100">
+		<div class="modal fade" role="dialog" id="profile_link_save" >
+		<div class="modal-dialog">
+		<div class="modal-content">
+				
+			<div class="modal-body">
 		<form class="contact100-form validate-form" enctype="multipart/form-data" method="post" action="<?php echo base_url()?>newMembersList/saveProfileLink">
 			<span class="contact100-form-title">
 					قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة180, ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
@@ -249,8 +252,8 @@
 				<img style="float: right;padding-right: 15%" src="<?php echo base_url()?>/assets/img/profile_link.jpg">
 			</div>
 	         
-	         <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;" data-validate = "Valid email is required: ex@abc.xyz">
-				<input class="input100" type="text" id="profile_link" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
+	         <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;">
+				<input class="input100" type="url" id="profile_link" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
 				<input style="display: none;" type="text" id="amb_id" name="amb_id" value="<?php echo $id; ?>">
 						<span class="focus-input100"></span>
 			 </div>           	
@@ -267,6 +270,8 @@
 		</form>
 </div>
 </div>
+</div>
+</div>
 	<script type="text/javascript">
 		$( document ).ready( function () {
 			// Show the Modal on load
@@ -281,11 +286,7 @@
 
 				if ( success == true ) {
 					document.getElementById( "notJoined" + id ).checked = false;
-					var v=document.getElementById('profile_link_save');
-						v.style.display="block";
-							var elem = v.clone();
-
-    						alert(elem.html());
+					$("#profile_link_save").modal("show");
 					$.ajax( {
 						url: base_url + 'NewMembersList/joined_ambassador',
 						type: 'POST',

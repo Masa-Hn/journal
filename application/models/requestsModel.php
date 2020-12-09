@@ -78,7 +78,7 @@ class RequestsModel extends CI_Model {
 	}
 
 	public function updateAmbassadorLink( $ambassador_id, $profile_link ) {
-		$query = "UPDATE ambassador SET profile_link =" . $profile_link . " WHERE id =" . $ambassador_id;
+		$query = "UPDATE ambassador SET profile_link='" . $profile_link  . "' WHERE id=" . $ambassador_id;
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		$conn->close();
