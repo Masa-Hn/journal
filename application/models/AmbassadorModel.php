@@ -6,6 +6,7 @@ class AmbassadorModel extends CI_Model {
 		$this->db->select('*');
     	$this->db->from('ambassador');
     	$this->db->where('id =',$ambassador_id);
+    	$this->db->limit(1);
     	return $this->db->get()->row();
 
 	}
