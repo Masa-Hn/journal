@@ -118,7 +118,12 @@
                   </label>
                 </div>
               </div>
-                  
+    
+ <form action="?" method="POST">
+      <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+      <br/>
+      <input type="submit" value="Submit">
+    
               <div class="CTA" style="margin-top: 55px; text-align: center;">
                 <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkData()" style="color: #ffff;">
                   تسجيل
@@ -144,5 +149,5 @@
 <script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/registration.js"></script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/fbLogin.js"></script>
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php include 'templates/footer.php';?>
