@@ -1,5 +1,4 @@
-<body>
-	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#reqModal" id="reqModalBtn">
+<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#reqModal" id="reqModalBtn">
 	<i class="fa fa-user-plus" aria-hidden="true"></i>
      طلب سفراء جدد
 </button>
@@ -66,7 +65,7 @@
 				$( "#sub-btn" ).click( function () {
 					$.ajax( {
 						type: "POST",
-						url: base_url + "requests/addRequest/?email=<?=$_GET['email']?>",
+						url: base_url + "Requests/addRequest/?email=<?=$_GET['email']?>",
 						data: {
 							numOfMembers: $( "#numOfMembers" ).val(),
 							gender: $( "#gender" ).val(),
@@ -83,7 +82,7 @@
 				$( "#sub-btn-e" ).click( function () {
 					$.ajax( {
 						type: "POST",
-						url: base_url + "requests/addRequestExc/?email=<?=$_GET['email']?>",
+						url: base_url + "Requests/addRequestExc/?email=<?=$_GET['email']?>",
 						data: {
 							numOfMembers: $( "#numOfMembers" ).val(),
 							gender: $( "#gender" ).val(),
@@ -98,5 +97,3 @@
 				} );
 			} );
 		</script>
-</body>
-</html>

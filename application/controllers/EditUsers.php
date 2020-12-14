@@ -3,16 +3,16 @@ defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 
 class EditUsers extends CI_Controller {
 
-	public
-
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('GeneralModel');
-
+		if(!$this->session->userdata('logged_in')){
+            redirect(base_url("login"));
+        }
 	} //end construct()
 
-public function index() {
+    public function index() {
 		$this->load->helper('url');
 		$this->load->library("pagination");
 
@@ -51,32 +51,32 @@ public function index() {
 		$this->load->view('management_book/templates/navbar');
 		$this->load->view( 'management_book/EditUsers',$data );
 		$this->load->view('management_book/templates/footer');
-				}
+    }
 
-function edit(){
-		  $teams = $_POST['team'];
-		  $str="";
-		  $id=$this->input->post('id');
-		 if(!empty($teams)) 
-		  {
-			    $N = count($teams);
-			    for($i=0; $i < $N; $i++)
-			    {
-			    	if ($i!=$N-1)
-			      $str=$str.$teams[$i]."+";
-			  		if ($i==$N-1)
-			      $str=$str.$teams[$i];
-		   		 }
-			mb_substr($str ,0, -1);		
-		  }
-		  $data['team']=$str;
-		  $this->GeneralModel->update($data,$id,'users');
-		redirect(base_url().'EditUsers/index');
-				}
+    function edit(){
+        $teams = $_POST['team'];
+        $str="";
+        $id=$this->input->post('id');
+        if(!empty($teams)) 
+        {
+            $N = count($teams);
+            for($i=0; $i < $N; $i++)
+            {
+                if ($i!=$N-1)
+                    $str=$str.$teams[$i]."+";
+                if ($i==$N-1)
+                    $str=$str.$teams[$i];
+            }
+            mb_substr($str ,0, -1);		
+        }
+        $data['team']=$str;
+        $this->GeneralModel->update($data,$id,'users');
+        redirect(base_url().'EditUsers/index');
+    }
 
-function delete(){
+    function delete(){
 		$id=$this->input->post('id');
 		$this->GeneralModel->remove($id,'users','id');
 		redirect(base_url().'EditUsers/index');
-				}
+    }
 } 

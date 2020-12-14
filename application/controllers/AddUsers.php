@@ -3,16 +3,16 @@ defined( 'BASEPATH' )OR exit( 'No direct script access allowed' );
 
 class AddUsers extends CI_Controller {
 
-	public
-
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 
 		$this->load->model('GeneralModel');
-
+		if(!$this->session->userdata('logged_in')){
+            redirect(base_url("login"));
+        }
 	} //end construct()
 
-public function index() {
+    public function index() {
 		$this->load->helper('url');
 		$this->load->library("pagination");
 
@@ -50,18 +50,18 @@ public function index() {
 		$this->load->view('management_book/templates/navbar');
 		$this->load->view( 'management_book/AddUsers',$data );
 		$this->load->view('management_book/templates/footer');
-		}
+    }
 
-function add(){
+    function add(){
 		$username=$this->input->post('name');
 		$data['regstatus']=1;
 		$this->GeneralModel->update($data,$username,'users','username');
 		redirect(base_url().'AddUsers/index');
-		}
+    }
 
-function delete(){	
+    function delete(){	
 		$id=$this->input->post('id');
 		$this->GeneralModel->remove($id,'users','id');
 		redirect(base_url().'AddUsers/index');
-		}
+    }
 }

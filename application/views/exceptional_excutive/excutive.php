@@ -2,6 +2,7 @@
 $supervisor = "leaders of osboha 1";
 $rank = 20;
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 	* {
 		direction: rtl;
@@ -27,7 +28,7 @@ $rank = 20;
 
 </style>
 <body>
-	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#excModal" id="excModalBtn">
+	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#excModal" id="excModalBtn" style="margin-right:-0px; margin-top:-0px;">
 		<i class="fa fa-user"></i>
 		عرض القادة التنفيذيين
 </button>
@@ -37,11 +38,11 @@ $rank = 20;
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title"> القادة التنفيذيين وطلباتهم</h1>
+					<h3 class="modal-title"> القادة التنفيذيين وطلباتهم</h3>
 				</div>
 				<div class="modal-body">
 					<?php
-					$leaders = $this->ExceptionalExcutiveModel->retrieve_leaders_exc( $supervisor, $rank );
+					$leaders = $this->exceptionalexcutivemodel->retrieve_leaders_exc( $supervisor, $rank );
 					?>
 					<table class="table">
 						<thead>
@@ -248,7 +249,7 @@ $rank = 20;
 					document.getElementById( 'check-msg' + id ).style.display = "none";
 					$.ajax( {
 						type: "POST",
-						url: base_url + "index.php/exceptionalExcutiveTeams/editExc",
+						url: base_url + "exceptionalExcutiveTeams/editExc",
 						data: {
 							id: id,
 							leaderLink: $( "#leaderLink" + id ).val(),
@@ -288,7 +289,7 @@ $rank = 20;
 				if ( document.getElementById( 'leaderLink' + id ).value != "" && document.getElementById( 'teamLink' + id ).value != "" ) {
 					$.ajax( {
 						type: "POST",
-						url: base_url + "index.php/exceptionalExcutiveTeams/addExcFull",
+						url: base_url + "exceptionalExcutiveTeams/addExcFull",
 						data: {
 							id: id,
 							leaderLink: $( "#leaderLink" + id ).val(),
@@ -314,7 +315,7 @@ $rank = 20;
 
 				$.ajax( {
 					type: "POST",
-					url: base_url + "index.php/exceptionalExcutiveTeams/addExc",
+					url: base_url + "exceptionalExcutiveTeams/addExc",
 					data: {
 						id: id,
 						currCount: $( "#currCount" + id ).val(),

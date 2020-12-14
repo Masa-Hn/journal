@@ -37,11 +37,11 @@ $rank = 22;
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title"> القادة الاستثنائيين وطلباتهم</h1>
+					<h3 class="modal-title"> القادة الاستثنائيين وطلباتهم</h3>
 				</div>
 				<div class="modal-body">
 					<?php
-					$leaders = $this->ExceptionalExcutiveModel->retrieve_leaders_exc( $supervisor, $rank );
+					$leaders = $this->Exceptionalexcutivemodel->retrieve_leaders_exc( $supervisor, $rank );
 					?>
 					<table class="table">
 						<thead>
@@ -248,7 +248,7 @@ $rank = 22;
 					document.getElementById( 'check-msg' + id ).style.display = "none";
 					$.ajax( {
 						type: "POST",
-						url: base_url + "index.php/exceptionalExcutiveTeams/editExc",
+						url: base_url + "exceptionalExcutiveTeams/editExc",
 						data: {
 							id: id,
 							leaderLink: $( "#leaderLink" + id ).val(),
@@ -288,7 +288,7 @@ $rank = 22;
 				if ( document.getElementById( 'leaderLink' + id ).value != "" && document.getElementById( 'teamLink' + id ).value != "" ) {
 					$.ajax( {
 						type: "POST",
-						url: base_url + "index.php/exceptionalExcutiveTeams/addExcFull",
+						url: base_url + "exceptionalExcutiveTeams/addExcFull",
 						data: {
 							id: id,
 							leaderLink: $( "#leaderLink" + id ).val(),
@@ -314,7 +314,7 @@ $rank = 22;
 
 				$.ajax( {
 					type: "POST",
-					url: base_url + "index.php/exceptionalExcutiveTeams/addExc",
+					url: base_url + "exceptionalExcutiveTeams/addExc",
 					data: {
 						id: id,
 						currCount: $( "#currCount" + id ).val(),

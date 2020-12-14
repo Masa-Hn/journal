@@ -321,7 +321,7 @@
 								$a_q_2_res = "";
 								$a_q_res = "";
 
-								$query = $this->StatisticsModel->get__sum_data( 'statistics', 'visitors', 'page_id = "' . $page_id . '"' );
+								$query = $this->StatisticsModel->get_sum_data( 'statistics', 'visitors', 'page_id = "' . $page_id . '"' );
 								if ( $query->num_rows() > 0 ) {
 									$a_q_res = $query->row();
 									$a_viewers = $a_q_res->visitors;
@@ -329,7 +329,7 @@
 
 								$next_page_id = $page_id + 1;
 
-								$query2 = $this->StatisticsModel->get__sum_data( 'statistics', 'visitors', 'page_id = "' . $next_page_id . '"' );
+								$query2 = $this->StatisticsModel->get_sum_data( 'statistics', 'visitors', 'page_id = "' . $next_page_id . '"' );
 								if ( $query2->num_rows() > 0 ) {
 									$a_q_2_res = $query2->row();
 									$a_2_viewers = $a_q_2_res->visitors;

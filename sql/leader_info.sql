@@ -38,7 +38,7 @@ CREATE TABLE `leader_info` (
   `uniqid` varchar(100) NOT NULL,
   `messenger_id` varchar(255) NOT NULL DEFAULT '0',
   `leaders_team_name` varchar(100) DEFAULT NULL,
-  `leader_rank` int(11) DEFAULT 5
+  `leader_rank` varchar(100) DEFAULT 5
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

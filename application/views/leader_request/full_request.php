@@ -26,6 +26,7 @@
 						$teamLink = "";
 						$teamName = "";
 						$teamCount = 20;
+                        
 						$leaderName = $_GET[ 'name' ];
 						$teamLink = "https://www.facebook.com/groups/" . $teamLink;
 						$teamName = $teamName;
