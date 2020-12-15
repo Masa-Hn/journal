@@ -20,7 +20,7 @@ class NewMembersList extends CI_Controller {
 			$res = $leader_info->fetch_array( MYSQLI_ASSOC );
             if($res != null){
                 $id = $res[ 'id' ];
-                $request = $this->requests_model->leaderLastRequest( $id, 'leader_id', 'leader_request', '*' );
+                $request = $this->requestsModel->leaderLastRequest( $id, 'leader_id', 'leader_request', '*' );
                 if ( $request->num_rows > 0 ) {
                     $request_info = $request->fetch_array( MYSQLI_ASSOC );
                     $Rid = $request_info[ 'Rid' ];
@@ -28,7 +28,7 @@ class NewMembersList extends CI_Controller {
                     $arr[ 'uniqid' ] = $res[ 'uniqid' ];
                     $arr[ 'leader_name' ] = $res[ 'leader_name' ];
                     $arr[ 'team_link' ] = $res[ 'team_link' ];
-                    $arr[ 'ambassadors' ] = $this->requests_model->get_data($Rid, 'request_id', 'ambassador', '*', 'AND display = 1');
+                    $arr[ 'ambassadors' ] = $this->requestsModel->get_data($Rid, 'request_id', 'ambassador', '*', 'AND display = 1');
 
                     if ( $arr[ 'ambassadors' ]->num_rows == 0 ) {
                         $arr[ 'info' ] = 'لم يتم التوزيع لك بعد!';
@@ -67,14 +67,25 @@ class NewMembersList extends CI_Controller {
 
 	function saveProfileLink()
 		{
-			$profile=$this->input->post('profile_link');
-			$id=$this->input->post('amb_id');
-			$data['profile_link']=$profile;
-			if ($profile!=null)
-			{
+			$profile = $this->input->post('profile_link');
+			$id      = $this->input->post('amb_id');
+			$data['profile_link'] = $profile;
+        
+			if ($profile!=null){
 				$this->requestsModel->updateAmbassadorLink($id,$profile);
-			}
-			redirect(base_url().'newMembersList/index');
+                $msg = "<div class='alert alert-success'>
+                          تم الحفظ بنجاح
+                          </div>";
+                echo $msg;
+			}else{
+                $msg = "<div class='alert alert-danger'>
+                          حدث خطأ ما!
+                          </div>";
+                echo $msg;
+            }
+			//echo '<script type="text/javascript">
+			//	   location.reload();
+			//	   </script>';
 		}
 }
 ?>
