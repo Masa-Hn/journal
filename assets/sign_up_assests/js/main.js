@@ -71,13 +71,16 @@ function nextWithMsg(page,msg){
     document.body.removeChild(copyText);
 
     Swal.fire({
-      icon: 'success',
-      title: 'تم  النسخ ',
-      text:'لطفًا قم بارسال هذا الكود لقائد الفريق الخاص بك',
-      type: "success",
-      timer: 3000,
-      confirmButtonText: "استمرار ",
+      title: ' لقد قمنا بنسخ الكود لك',
+      text:'😉 فقط قُم بلصقه عندما يطلب منك ',
+      imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/copyMsg.png',
+      imageWidth: 300,
+      imageAlt: 'Custom image',
+      timer: 5000,
+      confirmButtonText: "شكرا لكم",
       confirmButtonColor:'#9ed16f'
+    }).then(function(){
+          next('team_info');
     });
 
   }

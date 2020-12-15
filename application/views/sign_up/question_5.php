@@ -5,6 +5,11 @@ include 'templates/navbar.php';
     $page_id = 13;
     $this->StatisticsModel->incrementVisitors($page_id);
 ?>
+<style type="text/css">
+	.form-group{
+		text-align: -webkit-center;
+	}
+</style>
 <!-- Start Banner Area -->
 <section class="banner-area relative bgImg2">
 	<div class="container">

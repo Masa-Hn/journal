@@ -117,6 +117,14 @@ nav{
 .bgImg2{
   background-image:none;
 }
+.character_fb{
+  margin-top: 0;
+}
+.regImg{
+  content:url("../img/reg2.png");
+}
+
+
 ul{
   list-style: none;
   font-size:30px;
@@ -246,9 +254,7 @@ hr{
   h4{
     margin-top: 10%
   }
-  .form-group{
-    text-align: -webkit-center;
-  }
+
   .form-control{
     width: 70%
   }
@@ -369,9 +375,15 @@ hr{
     top: 42%;
     left: 43%;
   }
+  .regImg{
+  content:url("../img/reg3.png");
+  }
 
     .story-content h3 br{display:none}
     .story-content h5 br{display:none}
+    .character_fb{
+      margin-top: 40px;
+    }
     .bgImg{
       background-image: url("../img/bg.png");
      background-repeat: no-repeat;
