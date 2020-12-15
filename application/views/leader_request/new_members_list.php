@@ -1,159 +1,6 @@
-<style>
-	.th,
-	tr,
-	td {
-		text-align: center;
-	}
-	
-	.link,
-	.fa {
-		color: #214761;
-		margin-left: 1%;
-	}
-	
-	.fa {
-		font-size: 12px;
-	}
-	
-	.link:hover,
-	.fa:hover {
-		color: #214761;
-		font-weight: bold;
-	}
-	
-	[type="checkbox"] {
-		width: 1.25em;
-		height: 1.25em;
-	}
-	.container-contact100 {
-  width: 100%;  
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  
-  
-}
 
-.wrap-contact100 {
-  width: 500px;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  padding: 42px 55px 45px 55px;
-  background-color: #FFF;
-    border-radius: 25px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    padding: 40px;
-    z-index: 0
-}
-.contact100-form-title {
-  display: block;
-  font-family: Poppins-Bold;
-  font-size: 25px;
-  color: #333333;
-  line-height: 1.2;
-  text-align: center;
-  padding-bottom: 44px;
-}
-.wrap-input100 {
-  width: 100%;
-  position: relative;
-  padding-bottom: 13px;
-  margin-bottom: 50px;
-  margin-top: 50px;
-}
-
-
-.input100 {
-  margin-top: 300px;
-	outline: none;
-	border: none;
-  display: block;
-  width: 100%;
-  background: transparent;
-  font-size: 18px;
-  color: #333333;
-  line-height: 1.2;
-  padding: 0 5px;
-  text-align: center;
-}
-
-.contact100-form-btn {
-  text-align: center;
-  padding: 0 20px;
-  width: 100%;
-  height: 50px;
-  font-size: 16px;
-  color: #fff;
-  line-height: 1.2;
-}
-.container-contact100-form-btn {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-top: 13px;
-}
-
-.wrap-contact100-form-btn {
-  width: 100%;
-  display: block;
-  position: relative;
-  z-index: 1;
-  border-radius: 25px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.contact100-form-bgbtn {
-  position: absolute;
-  z-index: -1;
-  width: 300%;
-  height: 100%;
-  background: #a64bf4;
-  background: -webkit-linear-gradient(left, #00dbde, #fc00ff, #00dbde, #fc00ff);
-  background: -o-linear-gradient(left, #00dbde, #fc00ff, #00dbde, #fc00ff);
-  background: -moz-linear-gradient(left, #00dbde, #fc00ff, #00dbde, #fc00ff);
-  background: linear-gradient(left, #00dbde, #fc00ff, #00dbde, #fc00ff);
-  top: 0;
-  left: -100%;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-}
-
-.contact100-form-btn {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
-  width: 100%;
-  height: 50px;
-
-  font-family: Poppins-Medium;
-  font-size: 20px;
-  color: red;
-  line-height: 1.2;
-}
-
-</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -279,9 +126,9 @@
                         <span class="contact100-form-title">
                             قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة 180, ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
                         </span>
-                        <div id="msg"></div>
+                        <div id="msg_<?php echo $id; ?>"></div>
                         <div class="wrap-input100">
-                            <img style="float: right;padding-right: 15%" src="<?php echo base_url()?>/assets/img/profile_link.jpg">
+                            <img style="float: right;padding-right: 15%" src="<?php echo base_url()?>/admin/img/profile_link.jpg">
                         </div>
                         
                         <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;">
@@ -371,7 +218,7 @@
                         data:"email=<?php echo $_GET['email'] ?>"+"&name="+name,
                         success: function(msg){
                             //alert("تم إضافة السفير");
-                            location.reload();
+                            //location.reload();
                         }
                     });
 				} else {
@@ -546,9 +393,8 @@
                 dataType: 'text',
                 success: function (msg) {
 
-                    $( '#msg' ).html( msg );
+                    $( '#msg_'+id ).html( msg );
                     //location.reload();
-                    //console.log( "hiiiiiiiiiiii" );
                 },
                 error: function ( error ) {
                     console.log( error );
