@@ -72,7 +72,9 @@ class NewMembersList extends CI_Controller {
 			{
 				$this->requestsModel->updateAmbassadorLink($id,$profile);
 			}
-			redirect(base_url().'newMembersList/index');
+			echo '<script type="text/javascript">
+				   location.reload();
+				   </script>';
 		}
 }
 ?>
