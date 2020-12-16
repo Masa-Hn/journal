@@ -302,7 +302,7 @@ class SignUp extends CI_Controller {
     $_SESSION['team_info']=$team_info;
 
 
-    $data = $this->load->view('sign_up/team_info');
+    $data = $this->load->view('sign_up/step_1');
     return $data;
   }//informambassador
 

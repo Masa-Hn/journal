@@ -278,17 +278,23 @@ class SignUpWithFB extends CI_Controller {
     $_SESSION['team_info']=$team_info;
 
 
-    $data = $this->load->view('sign_up/team_info');
+    $data = $this->load->view('sign_up/step_1');
     return $data;
   }//informambassador
 
   
   public function formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country)
   {         
-    
+    if (is_null($country)) {
+      $country='none';
+    }
+    else{
+      $country_t=$country;
+    }
+
     $ambassador = array(
                 'name' => $ambassador_info['name'],
-                'country'=>$country,
+                'country'=>$country_t,
                 'gender'=>$ambassador_gender,
                 'leader_gender'=>$leader_gender,
                 'request_id'=>$result->Rid,
@@ -300,9 +306,15 @@ class SignUpWithFB extends CI_Controller {
 
   public function ambassadorWithoutLeader($ambassador_info,$ambassador_gender,$leader_gender,$country)
   {
+          if (is_null($country)) {
+            $country_t='none';
+          }
+          else{
+            $country_t=$country;
+          }
     $ambassador = array(
                 'name' => $ambassador_info['name'],
-                'country'=>$country,
+                'country'=>$country_t,
                 'gender'=>$ambassador_gender,
                 'leader_gender'=>$leader_gender,
                 'profile_link'=>"https://www.facebook.com/",
