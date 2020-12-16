@@ -86,11 +86,10 @@ function nextWithMsg(page,msg){
   }
 function checkAnswer() {
     answer=document.getElementById('answer').value;
-    answer = answer.replace(/[٠١٢٣٤٥٦٧٨٩]/g, function (d) { return d.charCodeAt(0) - 1632; }).replace(/[۰۱۲۳۴۵۶۷۸۹]/g, function (d) { return d.charCodeAt(0) - 1776; });
     if (answer == 30){
       Swal.fire({
         title: 'رائـــع',
-        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
+        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية، وتذكر  بإمكانك دوما قراءة ما يناسبك ",
         imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
         imageWidth: 300,
         imageAlt: 'Custom image',
@@ -100,40 +99,7 @@ function checkAnswer() {
       }).then(function(){
           next('question_2');
       });
-    }//if
-    else if(answer == "30 صفحة" ){
-      Swal.fire({
-        title: 'رائـــع',
-        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
-        imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
-        imageWidth: 300,
-        imageAlt: 'Custom image',
-        timer: 4000,
-        confirmButtonText: "استمرار ",
-        confirmButtonColor:'#9ed16f'
-      }).then(function(){
-          next('question_2');
-      });
-    }
-    else if(
-      document.getElementById('answer').value == "ثلاثين" 
-      || document.getElementById('answer').value == "ثلاثون" 
-      || document.getElementById('answer').value == "ثلاثون صفحة" 
-      || document.getElementById('answer').value == "ثلاثين صفحة" 
-      ){
-      Swal.fire({
-        title: 'رائـــع',
-        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية",
-        imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
-        imageWidth: 300,
-        imageAlt: 'Custom image',
-        timer: 4000,
-        confirmButtonText: "استمرار ",
-        confirmButtonColor:'#9ed16f'
-      }).then(function(){
-        next('question_2');
-      });
-    }//elseif
+    }//if    
     else{
       if(count != 3){
         Swal.fire({
