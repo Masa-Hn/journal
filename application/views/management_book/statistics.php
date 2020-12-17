@@ -111,14 +111,8 @@
 						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1' )->num_rows();
 
 						//get new members
-						$daily = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'is_done = 0' )->row();
+						$members = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'is_done = 0' )->row();
 						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NOT NULL' )->num_rows();
-						$sum_daily = 0;
-						$daily_total = 0;
-						if ( $daily->members_num > 0 && $des > 0 ) {
-							$sum_daily = $daily->members_num;
-							$daily_total = $sum_daily - $des;
-						}
 						$total_req =  $this->StatisticsModel->get_data( 'leader_request', 'Rid', 'is_done = 0 or is_done = 1' )->num_rows();
 
 						$is_done = $this->StatisticsModel->get_data( 'leader_request', 'Rid', 'is_done = 1' )->num_rows();
@@ -148,8 +142,8 @@
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء غير الموزعين:
 								<b><?php echo $not_des_amb; ?></b>
 							</li>
-							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد المتاح لاستقبال أعضاء جدد:
-								<b><?php echo $daily_total; ?></b>
+							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد المتاح لاستقبال أعضاء جدد(تقريبي):
+								<b><?php echo $members->members_num; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد الكلي للقادة الذين طلبوا أعضاء:
 								<b><?php echo $total_req; ?></b>
@@ -177,12 +171,12 @@
 					<div class="card">
 						<h2 class="card-title">  إحصائيات الأزرار اليومية </h2>
 						<?php
-						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND  date = DATE(CURDATE())' )->num_rows();
-						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND  date = DATE(CURDATE())' )->num_rows();
-						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND  date = DATE(CURDATE())' )->num_rows();
-						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (created_at = DATE(CURDATE()))' )->num_rows();
-						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (created_at = DATE(CURDATE()))' )->num_rows();
-						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (created_at = DATE(CURDATE()))' )->num_rows();
+						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND  DATE_FORMAT(date, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();
+						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND  DATE_FORMAT(date, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();
+						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND  DATE_FORMAT(date, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();
+						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))' )->num_rows();
+						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))' )->num_rows();
+						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))' )->num_rows();
 
 						?>
 						<ul class="list-group">
@@ -222,12 +216,12 @@
 					<div class="card ">
 						<h2 class="card-title"> إحصائيات الأزرار الأسبوعية</h2>
 						<?php
-						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
-						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
-						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
-						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (YEARWEEK(`created_at`, 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
-						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (YEARWEEK(`created_at`, 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
-						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (YEARWEEK(`created_at`, 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
+						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND YEARWEEK(DATE_FORMAT(date, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
+						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND YEARWEEK(DATE_FORMAT(date, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
+						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND YEARWEEK(DATE_FORMAT(date, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
+						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
+						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
+						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
 						?>
 						<ul class="list-group">
 
@@ -264,12 +258,12 @@
 					<div class="card ">
 						<h2 class="card-title">إحصائيات الأزرار الشهرية</h2>
 						<?php
-						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE())' )->num_rows();
-						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE())' )->num_rows();
-						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE())' )->num_rows();
-						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE()))' )->num_rows();
-						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE()))' )->num_rows();
-						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE()))' )->num_rows();
+						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND YEAR(DATE_FORMAT(date, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(date, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();
+						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND YEAR(DATE_FORMAT(date, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(date, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();
+						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND YEAR(DATE_FORMAT(date, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(date, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();
+						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))' )->num_rows();
+						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))' )->num_rows();
+						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))' )->num_rows();
 						?>
 						<ul class="list-group">
 

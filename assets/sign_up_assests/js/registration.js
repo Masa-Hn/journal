@@ -11,17 +11,17 @@ $(document).ready(function () {
         $(this).siblings('label').addClass('active');
     });
 
-    // form switch
-    $('a.switch').click(function (e) {
-        $(this).toggleClass('active');
-        e.preventDefault();
-
-        if ($('a.switch').hasClass('active')) {
-            $(this).parents('.form-peice').addClass('switched').siblings('.form-peice').removeClass('switched');
-        } else {
-            $(this).parents('.form-peice').removeClass('switched').siblings('.form-peice').addClass('switched');
-        }
+   // switch to login
+    $('#signUpswitch').click(function () {
+        $('#login_form').show();
+        $('#signup_form').hide();
     });
+    // switch to signUp
+    $('#loginswitch').click(function () {
+        $('#login_form').hide();
+        $('#signup_form').show();
+    });
+
 });
 
 function checkLoginEmail(){

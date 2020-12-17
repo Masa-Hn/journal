@@ -8,11 +8,13 @@
       exit();
   }
 
-    $page_id = 13;
+    $page_id = 14;
     $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">
+
 <input type="hidden" id="team_code" value="<?php echo $_SESSION['team_info']['leader_info']->uniqid .$_SESSION['team_info']['leader_info']->id ; ?>">
+
 <!--Start Banner Area -->
     <section class="banner-area relative bgImg2">
       <div class="container">
@@ -34,14 +36,16 @@
             </a>
           </div>
         </div>
-        <div class="row align-items-center justify-content-center">
+        <!-- <div class="row align-items-center justify-content-center">
           <div class="col-lg-12 col-sm-12 text-center icon-bar-right" dir="rtl">
+
               <a href="javascript:next('step_1')" class="final-page genric-btn circle next-info" id="leader_info" style="margin: 1.5%;font-size: 100%">
+
                 الخطوة السابقة
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </a>
           </div>
-        </div>
+        </div> -->
          <div class="icon-bar-left">
             <div class="container_centered" style="text-align: left; margin-left: 0" id="help">
                 <a href="https://www.facebook.com/taheelofosboha/" target="_blank">

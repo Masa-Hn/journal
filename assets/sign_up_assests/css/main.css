@@ -121,6 +121,7 @@ nav{
 .character_fb{
   margin-top: 0;
 }
+
 ul{
   list-style: none;
   font-size:30px;
@@ -250,9 +251,7 @@ hr{
   h4{
     margin-top: 10%
   }
-  .form-group{
-    text-align: -webkit-center;
-  }
+
   .form-control{
     width: 70%
   }
@@ -373,11 +372,15 @@ hr{
     top: 42%;
     left: 43%;
   }
+
   .character_fb{
     margin-top: 40%;
   }
     .story-content h3 br{display:none}
     .story-content h5 br{display:none}
+    .character_fb{
+      margin-top: 40px;
+    }
     .bgImg{
       background-image: url("../img/bg.png");
      background-repeat: no-repeat;
@@ -387,6 +390,9 @@ hr{
       background-image: url("../img/bg3.png");
      background-repeat: no-repeat;
      background-size: 100% 100%;
+    }
+    #answer{
+      margin: 0;
     }
     #res{
       display: none;

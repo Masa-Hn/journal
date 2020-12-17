@@ -18,7 +18,7 @@ class StatisticsModel extends CI_Model {
 public function incrementVisitors($page_id)
   {
     $this->db->set('visitors', 'visitors +1', FALSE);
-	$where = "page_id = " . $page_id . " AND date = CURDATE()";
+	$where = "page_id = " . $page_id . " AND DATE_FORMAT(date, '%y-%m-%d') = CURDATE()";
     $this->db->where($where);
     $this->db->update('statistics');
 
@@ -59,7 +59,7 @@ public function incrementVisitors($page_id)
 	function selectStatisticsPerDay( $id ) {
 		$this->db->select( 'visitors' );
 		$this->db->from( 'statistics' );
-		$where = 'page_id = "' . $id . '" AND date = DATE(CURDATE())';
+		$where = 'page_id = "' . $id . '" AND DATE_FORMAT(date, "%y-%m-%d") = DATE(CURDATE())';
 		$this->db->where( $where );
 		return $this->db->get();
 	}
@@ -68,7 +68,7 @@ public function incrementVisitors($page_id)
 	function selectStatisticsPerWeek( $id ) {
 		$this->db->select_sum( 'visitors' );
 		$this->db->from( 'statistics' );
-		$where = 'page_id = "' . $id . '" AND YEARWEEK(`date`, 6) = YEARWEEK( CURDATE(), 6)';
+		$where = 'page_id = "' . $id . '" AND YEARWEEK(DATE_FORMAT(date, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)';
 		$this->db->where( $where );
 		return $this->db->get();
 	}
@@ -76,7 +76,7 @@ public function incrementVisitors($page_id)
 	function selectStatisticsPerMonth( $id ) {
 		$this->db->select_sum( 'visitors' );
 		$this->db->from( 'statistics' );
-		$where = 'page_id = "' . $id . '" AND YEAR( date ) = YEAR( CURDATE() )AND MONTH( date ) = MONTH( CURDATE() )';
+		$where = 'page_id = "' . $id . '" AND YEAR( DATE_FORMAT(date, "%y-%m-%d") ) = YEAR( CURDATE() )AND MONTH( DATE_FORMAT(date, "%y-%m-%d") ) = MONTH( CURDATE() )';
 		$this->db->where( $where );
 		return $this->db->get();
 	}

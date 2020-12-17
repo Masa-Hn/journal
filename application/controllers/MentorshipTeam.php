@@ -11,6 +11,10 @@ class MentorshipTeam extends CI_Controller {
 
 		$this->load->model( 'GeneralModel' );
 		$this->load->model( 'requestsModel' );
+        
+        if(!$this->session->userdata('logged_in')){
+            redirect(base_url("login"));
+        }
 
 	} //end construct()
 

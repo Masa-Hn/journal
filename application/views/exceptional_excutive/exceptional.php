@@ -27,7 +27,7 @@ $rank = 22;
 
 </style>
 <body>
-	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#excModal" id="excModalBtn">
+	<button type="button" class="btn btn-lg" data-toggle="modal" data-target="#excModal" id="excModalBtn" style="margin-right:-0px; margin-top:-0px;">
 		<i class="fa fa-user"></i>
 		عرض القادة الاستثنائيين
 </button>
