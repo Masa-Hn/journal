@@ -82,7 +82,6 @@
 			var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
 
 			$( '#code' ).click( function () {
-
         var Code =document.getElementById('code');
         var copyText = document.createElement('textarea');
         copyText.value=code.innerHTML;
@@ -103,7 +102,6 @@
           confirmButtonText: "استمرار ",
           confirmButtonColor:'#9ed16f'
         });
-
 				$.ajax( {
 					type: "POST",
 					url: base_url + "Statistics/code_button",

@@ -12,17 +12,51 @@ if (isset($_GET['hub_verify_token'])) {
 /* receive and send messages */
 $input = json_decode(file_get_contents('php://input'), true);
 if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
+    if ($input['entry'][0]['id']='100360891928932') {
+        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBAMNQyUiRS7CQlEyMslpg4leReYY8qIzgTPNFQUMpMNu2sezWyMWTlWAy2w50IIDnTof0gcvdMZBxNbEXnER3mehouK8T0oFPO7B630QFZCswKgsrsSJdb8YjqpQGuICuSldBGvfZBY2JNxZAu42BFVUsE8ftEAZDZD';
+        
+        $sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
+        $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
+        $response="مرحبًا، كيف يمكنني مساعدتك؟"
+        $ch = curl_init($url);
+            /*prepare response*/
+            $jsonData = '{
+            "recipient":{
+                "id":"' . $sender . '"
+                },
+                "message":{
+                    "text":"' . $response . '"
+                }
+            }';
+            /* curl setting to send a json post data */
+            //Tell cURL that we want to send a POST request.
+            curl_setopt($ch, CURLOPT_POST, 1);
+
+            //Attach the encoded JSON string to the POST fields.
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            //Set the content type to application/json
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            
+            //Execute the request if the message is not empty.
+            if (!empty($message)) {
+                $result = curl_exec($ch); // user will get the message
+            }//if
+
+    }//if
+    else{
 
     $sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
     $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
     $email = test_input($message);
     // check if e-mail address is well-formed
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $response = "هذه الصفحة مخصصة لقادة أصبوحة 180، إن كنت قائدًا وتواجه مشكلة أرسل سكرين شوت لمراقبك لنُساعدك في حلها ".'\n'."طبت وطابت أوقاتك";
+      //$response = "هذه الصفحة مخصصة لقادة أصبوحة 180، إن كنت قائدًا وتواجه مشكلة أرسل سكرين شوت لمراقبك لنُساعدك في حلها ".'\n'."طبت وطابت أوقاتك";
     }
     else{
         $newLeader = new requestsModel();
-
         $result=$newLeader->get_data($sender, 'messenger_id', "leader_info");
 
         if($result->num_rows == 0){
@@ -60,18 +94,15 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
             //Execute the request if the message is not empty.
             if (!empty($message)) {
                 $result = curl_exec($ch); // user will get the message
-            }     
-        }
-        else{
-            $response = "هذه الصفحة مخصصة لقادة أصبوحة 180، إن كنت قائدًا وتواجه مشكلة أرسل سكرين شوت لمراقبك لنُساعدك في حلها ".'\n'."طبت وطابت أوقاتك";
-
-        }
-
-       
-  
+            }//if     
+        }//if
+        // else{
+        //     $response = "هذه الصفحة مخصصة لقادة أصبوحة 180، إن كنت قائدًا وتواجه مشكلة أرسل سكرين شوت لمراقبك لنُساعدك في حلها ".'\n'."طبت وطابت أوقاتك";
+        // }//else
+    }//else
     }
 
-}
+}//if
 
 function test_input($data) {
   $data = trim($data);
