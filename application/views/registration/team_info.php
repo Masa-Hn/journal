@@ -37,36 +37,14 @@
                فريق القراءة الخاص بك
             </h1>
             <hr>
-            <h1>استخدم رمز التحقق هذا للانضمام لمجموعتنا الخاصة </h1> <h5>Osb180acfcaa509</h5>
+            <h5>استخدم رمز التحقق هذا للانضمام لمجموعتنا الخاصة </h5> 
+            <strong style="font-size: 25px;" ><span>Osb180acfcaa509</span></strong>
             <h6>
               للانضمام لفريق القراءة الخاص بك : <a class="genric-btn primary circle " href="https://www.facebook.com/groups/1518939228167551/" target="_blank" style="font-size: 100%"> اضغط هنا </a>
             </h6>
            <h1 class="sp-1">
               أهلًا بك معنا            
             </h1>
-            <!-- Load Facebook SDK for JavaScript -->
-                  <div id="fb-root"></div>
-                  <script>
-                    window.fbAsyncInit = function() {
-                      FB.init({
-                        xfbml            : true,
-                        version          : 'v9.0'
-                      });
-                    };
-
-                    (function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
-                    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-                    fjs.parentNode.insertBefore(js, fjs);
-                  }(document, 'script', 'facebook-jssdk'));</script>
-
-                  <!-- Your Chat Plugin code -->
-                  <div class="fb-customerchat"
-                    attribution=setup_tool
-                    page_id="100360891928932">
-                  </div>
             <div style="text-align: left;"><a class="genric-btn primary circle" style=" background: #1d509f;font-size: 100%" href="<?php echo base_url()?>Registration">تسجيل الخروج</a></div>
 
           </div>
