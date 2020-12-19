@@ -4,7 +4,7 @@ class Requests extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->model( 'requests_model' );
+		$this->load->model( 'requestsModel' );
 		//*$this->load->model( 'GeneralModel' );
 		$this->load->library( 'form_validation' );
 	} //end construct()
@@ -12,10 +12,10 @@ class Requests extends CI_Controller {
 	public function index() {
 
 		$this->load->view( 'leader_request/header' );
-		$regBefore = $this->requests_model->check_email( $_GET[ 'email' ] );
+		$regBefore = $this->requestsModel->check_email( $_GET[ 'email' ] );
 
 		if ( $regBefore->num_rows > 0 ) {
-			$info = $this->requests_model->check_email( $_GET[ 'email' ] )->fetch_array( MYSQLI_ASSOC );
+			$info = $this->requestsModel->check_email( $_GET[ 'email' ] )->fetch_array( MYSQLI_ASSOC );
 			if ( $info[ 'leader_link' ] == null && $info[ 'leader_gender' ] == null ) {
 				$this->load->view( 'leader_request/full_request' );
 			} else {
@@ -30,7 +30,7 @@ class Requests extends CI_Controller {
 
 	public function check( $id ) {
 
-		$getLastRecord = $this->requests_model->leaderLastRequest( $id );
+		$getLastRecord = $this->requestsModel->leaderLastRequest( $id );
 		if ( $getLastRecord->num_rows > 0 ) {
 			$result = $getLastRecord->fetch_assoc();
 			$date = $result[ 'date' ];
@@ -54,7 +54,7 @@ class Requests extends CI_Controller {
 		$this->form_validation->set_message( 'required', 'يجب عليك تعبئة حقل %s' );
 
 		if ( $this->form_validation->run() ) {
-			$info = $this->requests_model->check_email( $_GET[ 'email' ] )->fetch_array( MYSQLI_ASSOC );
+			$info = $this->requestsModel->check_email( $_GET[ 'email' ] )->fetch_array( MYSQLI_ASSOC );
 			// data of the leader
 			$leader[ 'leader_id' ] = $info[ 'id' ];
 			$leader[ 'leader_name' ] = $_GET[ 'name' ];
@@ -81,9 +81,9 @@ class Requests extends CI_Controller {
 
 				$val = $this->check( $leader[ 'leader_id' ] );
 				if ( $val == 1 || $val == 3 ) {
-					$this->requests_model->updateFullRequest( $leader );
+					$this->requestsModel->updateFullRequest( $leader );
 
-					$requestID = $this->requests_model->addRequest( $request );
+					$requestID = $this->requestsModel->addRequest( $request );
 
                     $msg = "<div class='alert alert-success'>
                           تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
@@ -111,7 +111,7 @@ class Requests extends CI_Controller {
 		$request[ 'gender' ] = $_POST[ 'gender' ];
 		$request[ 'current_team_count' ] = $_POST[ 'currentTeamCount' ];
 
-		$qry = $this->requests_model->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id' )->fetch_assoc();
+		$qry = $this->requestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id' )->fetch_assoc();
 		$request[ 'leader_id' ] = $qry[ 'id' ];
 
 		$val = $this->check( $request[ 'leader_id' ] );
@@ -131,10 +131,10 @@ class Requests extends CI_Controller {
 				           $r
 					       </div>";
 				//echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
-                $rid = $this->requests_model->addRequest( $request );
+                $rid = $this->requestsModel->addRequest( $request );
 				$this->distributeAmbassadors( $rid );
 			}else{
-    			$rid = $this->requests_model->addRequest( $request );
+    			$rid = $this->requestsModel->addRequest( $request );
     			
     			$msg = "<div class='alert alert-success'>
     					تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
@@ -164,7 +164,7 @@ class Requests extends CI_Controller {
 			$data[ 'leader_name' ] = $_POST[ 'leaderName' ];
 			$data[ 'leader_link' ] = $_POST[ 'leaderLink' ];
 			$data[ 'team_link' ] = $_POST[ 'teamLink' ];
-			$this->requests_model->updateLeaderInfo( $data );
+			$this->requestsModel->updateLeaderInfo( $data );
 			$msg = "<div class='alert alert-success'>
                 تم تعديل بياناتك بنجاح
                 </div>";
@@ -177,8 +177,8 @@ class Requests extends CI_Controller {
 	public function distributeAmbassadors( $requestID ) {
 
 		$noneDistributedAmbassadors = $this->requests_model->getNoneDistributedAmbassadors();
-		$request = $this->requests_model->getRequest( $requestID )->fetch_array( MYSQLI_ASSOC );
-		$leader = $this->requests_model->getLeaderInfo( $request[ 'leader_id' ] )->fetch_array( MYSQLI_ASSOC );
+		$request = $this->requestsModel->getRequest( $requestID )->fetch_array( MYSQLI_ASSOC );
+		$leader = $this->requestsModel->getLeaderInfo( $request[ 'leader_id' ] )->fetch_array( MYSQLI_ASSOC );
 
 		$num_of_members = $request[ 'members_num' ];
 		
@@ -189,7 +189,7 @@ class Requests extends CI_Controller {
 
 					if ( ( $request[ 'gender' ] == $amb[ 'gender' ] || $request[ 'gender' ] == 'any' ) && ( $leader[ 'leader_gender' ] == $amb[ 'leader_gender' ] || $leader[ 'leader_gender' ] == 'any' ) ) {
 
-						$this->requests_model->updateAmbassador( $amb[ 'id' ], $requestID );
+						$this->requestsModel->updateAmbassador( $amb[ 'id' ], $requestID );
 						$num_of_members--;
 					}
 				}
@@ -198,7 +198,7 @@ class Requests extends CI_Controller {
 		echo $num_of_members;
 		$distributedAmbassadors = $this->requests_model->getDistributedAmbassadors( $requestID );
 		if ( $distributedAmbassadors->num_rows == $request[ 'members_num' ] ) {
-			$this->requests_model->updateReq( $requestID );
+			$this->requestsModel->updateReq( $requestID );
 		}
 	}
 
@@ -226,7 +226,7 @@ class Requests extends CI_Controller {
 	
 	public function informLeader($leader_id,$request_id){
       //1- update request to DONE
-        $this->RequestsModel->updateRequest($request_id);
+        $this->requestsModel->updateRequest($request_id);
         //2- get all associated requests
         $allAmbassadors=$this->AmbassadorModel->getByRequestId($request_id);
         $ambassadors="";
