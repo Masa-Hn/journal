@@ -26,7 +26,7 @@
 
 					<form method="post" enctype="multipart/form-data">
 						<?php
-						$info = $this->requests_model->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id, leader_name, leader_link, team_link' )->fetch_assoc();
+						$info = $this->RequestsModel->get_data( $_GET[ 'email' ], 'leader_email', 'leader_info', 'id, leader_name, leader_link, team_link' )->fetch_assoc();
 
 						$id = $info['id'];
 						$leaderName = $info['leader_name'];
