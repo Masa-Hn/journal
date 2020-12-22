@@ -58,12 +58,14 @@ class Requests extends CI_Controller {
 		if ( $this->form_validation->run() ) {
 			$info = $this->requests_model->check_email( $_GET[ 'email' ] )->fetch_array( MYSQLI_ASSOC );
 			// data of the leader
-			$leader[ 'leader_id' ] = $info[ 'id' ];
+			$leader[ 'leader_id' ]   = $info[ 'id' ];
 			$leader[ 'leader_name' ] = $_GET[ 'name' ];
-			$leader[ 'team_name' ] = $_POST[ 'teamName' ];
+			$leader[ 'team_name' ]   = $_POST[ 'teamName' ];
 			$leader[ 'leader_link' ] = $_POST[ 'leaderLink' ];
-			$leader[ 'team_link' ] = $_POST[ 'teamLink' ];
+			$leader[ 'team_link' ]   = $_POST[ 'teamLink' ];
 			$leader[ 'leader_gender' ] = $_POST[ 'leaderGender' ];
+            $leader[ 'leaders_team_name' ] = $_POST[ 'leadersTeamName' ];
+            $leader[ 'leader_rank' ] = $_POST[ 'leaderRank' ];
 			//data of the request
 			$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
 			$request[ 'gender' ] = $_POST[ 'gender' ];
@@ -96,14 +98,14 @@ class Requests extends CI_Controller {
 					
 				} else if ( $val == 2 ) {
 					$msg = "<div class='alert alert-danger'>
-                          لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
+                          لا يمكنك طلب أعضاء قبل مضي يوم على آخر طلب لك, يرجى المحاولة لاحقاً!
                           </div>";
 				}
 			}
 		} else {
 			$msg = "<div class='alert alert-danger'>" . validation_errors() . "</div>";
 		}
-		echo $msg;
+		//echo $msg;
 	}
 
 	public function addRequest() {
@@ -148,8 +150,8 @@ class Requests extends CI_Controller {
 			
 		} else if ( $val == 2 ) {
 			$msg = "<div class='alert alert-danger'>
-                     لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
-                     </div>";
+                      لا يمكنك طلب أعضاء قبل مضي يوم على آخر طلب لك, يرجى المحاولة لاحقاً!
+                      </div>";
 		}
 		echo $msg;
 	}

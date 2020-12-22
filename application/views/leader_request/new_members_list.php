@@ -122,30 +122,34 @@
 					<h3 class="modal-title">إضافة رابط السفير </h3>
 				</div>
                 <div class="modal-body">
+                    <?php
+					if(empty($info) == true){
+						if(isset($ambassadors)){ ?>
                     <div class="contact100-form validate-form" >
                         <span class="contact100-form-title">
-                            قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة 180, ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
+                            قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة 180، ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
                         </span>
                         <div id="msg_<?php echo $id; ?>"></div>
-                        <div class="wrap-input100">
-                            <img style="float: right;padding-right: 15%" src="<?php echo base_url()?>/admin/img/profile_link.jpg">
+                        <div align="center" style="display: none" id="copy_link">
+                            <img style="align-items: center" src="<?php echo base_url()?>/admin/img/profile_link.jpg">
                         </div>
                         
+                        <a class="" onclick="showImg()" id="img-btn">كيفية نسخ الرابط؟</a>
+                        <br>
+                        <!--
                         <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;">
                             <input class="input100" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
                             <input style="display: none;" type="text" id="amb_id" name="amb_id" value="<?php echo $id; ?>">
                             <span class="focus-input100"></span>
-                        </div>           	
-                        <div class="container-contact100-form-btn">
-                            <div class="wrap-contact100-form-btn">
-                                <div class=""></div>
-                                <button class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;" onclick="addProfileLink(<?php echo $id; ?>)">
-                                    حفظ
-                                </button>
-                            </div>
-                        </div>
-                        <div id="msg"></div>
-                    </div>
+                        </div> -->
+                        <div class="form-group">
+							<input class="form-control" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
+						</div>          	
+                        
+                        <button class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;" onclick="addProfileLink(<?php echo $id; ?>)">
+                            حفظ
+                        </button>
+                    </div><?php }} ?>
                 </div>
             </div>
         </div>
@@ -402,6 +406,9 @@
 
             });
 		}
+        
+        function showImg(){
+            $("#copy_link").css("display","block");
+            $("#img-btn").css("display","none");
+        }
 	</script>
-</body>
-</html>

@@ -286,7 +286,7 @@ class SignUpWithFB extends CI_Controller {
   public function formatAmbassador($ambassador_info,$ambassador_gender,$leader_gender,$result,$country)
   {         
     if (is_null($country)) {
-      $country='none';
+      $country_t='none';
     }
     else{
       $country_t=$country;
