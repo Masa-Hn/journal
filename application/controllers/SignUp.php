@@ -86,60 +86,76 @@ class SignUp extends CI_Controller {
   public function checkAmbassador()
   {
     $reallocate=false;
-    if(!empty($_POST['email'])){
-      $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);
-      
-      if (count((array)$result) == 0 ){
-      //New Ambassador
+    if (isset($_POST["captcha"]) && ! empty($_POST["captcha"]) ) {
+      $verifyCaptcha=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=6Lf89f8ZAAAAAG-cvacpllaDEC8eV-uZUWDKX5Fe&response=".$_POST["captcha"]);
+      $responseDate= json_decode($verifyCaptcha);
+      if ($responseDate->success) {
+          if(!empty($_POST['email'])){
+            $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);
+            
+            if (count((array)$result) == 0 ){
+            //New Ambassador
 
-        if(!empty($_POST['ambassador_name']) && !empty($_POST['ambassador_gender']) && !empty($_POST['leader_gender']) )
-        {
-          
-          if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $errorMsg = "أدخل بريدًا صحيحًا"; 
-            $this->load->view('sign_up/registration_form',$errorMsg);
-          }// if for email validation
-          else{
-            $this->allocateAmbassador($_POST['ambassador_name'],$_POST['ambassador_gender'],$_POST['leader_gender'],$_POST['email']);  
-          }//allocateAmbassador
+              if(!empty($_POST['ambassador_name']) && !empty($_POST['ambassador_gender']) && !empty($_POST['leader_gender']) )
+              {
+                
+                if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                  $errorMsg = "أدخل بريدًا صحيحًا"; 
+                  $this->load->view('sign_up/registration_form',$errorMsg);
+                }// if for email validation
+                else{
+                  $this->allocateAmbassador($_POST['ambassador_name'],$_POST['ambassador_gender'],$_POST['leader_gender'],$_POST['email']);  
+                }//allocateAmbassador
 
-        }//if for required field
-        else{
-          $errorMsg = "أدخل الحقول المطلوبة"; 
-          $this->load->view('sign_up/registration_form',$errorMsg);
+              }//if for required field
+              else{
+                $errorMsg = "أدخل الحقول المطلوبة"; 
+                $this->load->view('sign_up/registration_form',$errorMsg);
 
-        }//else for required field
-      }//if for not exist
+              }//else for required field
+            }//if for not exist
 
-      else{
-        //Inform Ambassador
-        if($result->request_id == null){
-          // Still No Leader
-          $this->noLeaderFound();
-        }
-        else{
-          $request=$this->SignUpModel->getRequestInfo($result->request_id);
-          $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
-          $created_at=date_create($created_at->format("Y-m-d"));
-          $current=date_create(date("Y-m-d",time()));
-          $diff=date_diff($created_at,$current);
+            else{
+              //Inform Ambassador
+              if($result->request_id == null){
+                // Still No Leader
+                $this->noLeaderFound();
+              }
+              else{
+                $request=$this->SignUpModel->getRequestInfo($result->request_id);
+                $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
+                $created_at=date_create($created_at->format("Y-m-d"));
+                $current=date_create(date("Y-m-d",time()));
+                $diff=date_diff($created_at,$current);
 
-          if($diff->format("%a") > 2){ 
-            $reallocate=true;
+                if($diff->format("%a") > 2){ 
+                  $reallocate=true;
+                }//if
+                $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
+                $informLeader=false;
+                $ambassador=$this->AmbassadorModel->getByFBId($_POST['email']);
+                $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
+              }
+            }
           }//if
-          $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
-          $informLeader=false;
-          $ambassador=$this->AmbassadorModel->getByFBId($_POST['email']);
-          $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
-        }
+          else{
+            //return to reg page
+            $errorMsg = "أدخل معلوماتك"; 
+
+            $this->load->view('sign_up/registration_form');
+          }//check email and other user data
+      }//if
+      else{
+        $errorMsg = "اثبت انك لست روبوت"; 
+        $this->load->view('sign_up/registration_form',$errorMsg);
       }
-    }
+    }//check captcha
     else{
       //return to reg page
-      $errorMsg = "أدخل معلوماتك"; 
-
-      $this->load->view('sign_up/registration_form');
+      $errorMsg = "تحقق من ادخال جميع الحقول"; 
+      $this->load->view('sign_up/registration_form',$errorMsg);
     }
+
   }//checkAmbassador
 
 
