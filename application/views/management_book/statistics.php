@@ -121,6 +121,7 @@
 						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NOT NULL or request_id IS NULL' )->num_rows();
 						
 						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NULL' )->num_rows();
+						$male_amb = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'gender = "male"' )->row();
 
 						?>
 						<ul class="list-group">
@@ -141,6 +142,9 @@
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء غير الموزعين:
 								<b><?php echo $not_des_amb; ?></b>
+							</li>
+							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء المطلوبين من الذكور:
+								<b><?php echo $male_amb->members_num; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد المتاح لاستقبال أعضاء جدد(تقريبي):
 								<b><?php echo $members->members_num; ?></b>
