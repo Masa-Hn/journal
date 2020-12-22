@@ -1,6 +1,6 @@
 window.fbAsyncInit = function() {
     FB.init({
-      appId      : '423417075295764',
+      appId      : '1186653575034058',
       cookie     : true,                     // Enable cookies to allow the server to access the session.
       xfbml      : true,                     // Parse social plugins on this webpage.
       version    : 'v8.0' 
@@ -20,9 +20,9 @@ function fb_login(){
             FB.api(
               '/me',
               'GET',
-              {"fields":"id,name,email,gender,link"},
+              {"fields":"id,name,email,gender"},
               function(response) {
-                ambassador = {name:response.name, email:response.email,gender:response.gender,profile_link:response.link,fb_id:response.id};
+                ambassador = {name:response.name, email:response.email,gender:response.gender,profile_link:'noLink',fb_id:response.id};
                 sessionStorage.setItem("ambassador_info", JSON.stringify(ambassador));
                 window.location.replace(document.getElementById("base_url").value+"SignUpWithFB/checkAmbassador?fb_id="+response.id);
               }

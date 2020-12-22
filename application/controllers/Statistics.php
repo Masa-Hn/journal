@@ -6,6 +6,10 @@ class Statistics extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model( 'StatisticsModel' );
+        
+        if(!$this->session->userdata('logged_in')){
+            redirect(base_url("login"));
+        }
 	} //end construct()
 
 	public
