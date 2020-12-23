@@ -16,6 +16,8 @@ class Send extends CI_Controller {
 
   public function index(){
 
+  $this->load->view( 'leader_request/msg_after_requesting_members' );
+
 $this->load->helper('captcha');
 $vals = array(
 'img_path' => 'captcha/', /* The path where the captcha images will be stored(required) */
