@@ -38,7 +38,7 @@ class AmbassadorModel extends CI_Model {
 
 	public function getByFBId($fb_id)
 	{
-		$this->db->select('name,profile_link,request_id,gender,fb_id');
+		$this->db->select('id,name,profile_link,request_id,gender,fb_id');
     	$this->db->from('ambassador');
     	$this->db->where('fb_id =',$fb_id);
     	return $this->db->get()->result();
