@@ -2,6 +2,10 @@
 include 'templates/header.php';
 include 'templates/navbar.php';
 
+if(isset($_SESSION['team_info'])){
+ $id =  $_SESSION['team_info']['ambassador'][0]->id; 
+  }
+
 //$page_id = 13;
 //$this->StatisticsModel->incrementVisitors( $page_id );
 ?>
@@ -105,7 +109,7 @@ include 'templates/navbar.php';
           <div class=" col-lg-12 col-sm-12">
             <div class="modalDiv" dir="rtl" style="text-align: center;">
             <h3>
-              قم بالضغط على الكود أدناه لنسخه، سوف يطلب منك إدخاله لقبولك ضمن مجموعة القراءة الخاصة بك.
+              قم بالضغط على الكود أدناه لنسخه، سوف يطلب منك إدخاله لقبولك ضمن مجموعة القراءة الخاصة بك.
 
             </h3>
             <div class="container_centered">
@@ -158,15 +162,17 @@ include 'templates/navbar.php';
 	<script type="text/javascript">
 		$( document ).ready( function () {
 			var base_url = "<?php echo base_url()?>";
-			var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
-
+			//var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
+			var id = <?php echo $id;?>;
+			
 			$( '#code' ).click( function () {
 
 				$.ajax( {
 					type: "POST",
 					url: base_url + "Statistics/code_button",
 					data: {
-						ip_address: ip_address
+						//ip_address: ip_address,
+						id:id
 					},
 					success: function ( data ) {
 
@@ -185,7 +191,8 @@ include 'templates/navbar.php';
 					type: "POST",
 					url: base_url + "Statistics/leader_link_button",
 					data: {
-						ip_address: ip_address
+						//ip_address: ip_address,
+						id:id
 					},
 					success: function ( data ) {
 
@@ -204,7 +211,8 @@ include 'templates/navbar.php';
 					type: "POST",
 					url: base_url + "Statistics/team_link_button",
 					data: {
-						ip_address: ip_address
+						//ip_address: ip_address,
+						id:id
 					},
 					success: function ( data ) {
 

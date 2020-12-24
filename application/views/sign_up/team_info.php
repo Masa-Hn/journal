@@ -7,6 +7,9 @@
       header('Location: '.$url);
       exit();
   }
+if(isset($_SESSION['team_info'])){
+ $id =  $_SESSION['team_info']['ambassador'][0]->id; 
+  }
 
     $page_id = 14;
     $this->StatisticsModel->incrementVisitors($page_id);
@@ -26,7 +29,12 @@
         <div class="row banner-center align-items-center justify-content-center">
           <div class="col-lg-12 col-sm-12 text-center" style="margin-bottom: 5%">
             <h5>
+<<<<<<< Updated upstream
               قم بعمل انضمام لمجموعة الفيسبوك ليصل طلبك لمُشرف القراءة الخاص بك
+=======
+              قم بالضغط على الكود أدناه لنسخه، سوف يطلب منك إدخاله لقبولك ضمن مجموعة القراءة الخاصة بك
+
+>>>>>>> Stashed changes
             </h5>
             <h5>
               سوف يتواصل المشرف معك لمساعدتك خطوة بخطوة ومنحك الكُتب، احرص على تفقد رسائل الفيسبوك الخاصة بك
@@ -65,7 +73,51 @@
 <script type="text/javascript">
 		$( document ).ready( function () {
 			var base_url = "<?php echo base_url()?>";
+<<<<<<< Updated upstream
 			var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
+=======
+			//var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
+			var id = <?php echo $id;?>;
+			
+			$( '#code' ).click( function () {
+        var Code =document.getElementById('code');
+        var copyText = document.createElement('textarea');
+        copyText.value=code.innerHTML;
+        copyText.setAttribute('readonly', '');
+        copyText.style = {position: 'absolute', left: '-9999px'};
+        document.body.appendChild(copyText);
+        copyText.select();
+        document.execCommand('copy');
+        // Remove temporary textarea
+        document.body.removeChild(copyText);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'تم  النسخ ',
+          text:'لطفًا قم بارسال هذا الكود لقائد الفريق الخاص بك',
+          type: "success",
+          timer: 3000,
+          confirmButtonText: "استمرار ",
+          confirmButtonColor:'#9ed16f'
+        });
+				$.ajax( {
+					type: "POST",
+					url: base_url + "Statistics/code_button",
+					data: {
+						//ip_address: ip_address,
+						id: id
+					},
+					success: function ( data ) {
+
+						console.log( data );
+					},
+					error: function ( error ) {
+						console.log( error );
+					}
+				} );
+				return false;
+			} );
+>>>>>>> Stashed changes
 
 			$( '#team' ).click( function () {
         var team_code =document.getElementById("team_code").value; 
@@ -96,6 +148,7 @@
               error: function ( error ) {
                 window.open(document.getElementById('team').getAttribute("href"), "_blank");
 
+<<<<<<< Updated upstream
                 console.log( error );
               }
             });
@@ -105,6 +158,16 @@
           }				
 			   });
       return false;
+=======
+				$.ajax( {
+					type: "POST",
+					url: base_url + "Statistics/team_link_button",
+					data: {
+					//	ip_address: ip_address,
+						id:id
+					},
+					success: function ( data ) {
+>>>>>>> Stashed changes
 
 	 });
     });
