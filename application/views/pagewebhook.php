@@ -16,11 +16,11 @@ $input = json_decode(file_get_contents('php://input'), true);
 if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
 
 	if ($input['entry'][0]['id']=='100360891928932') {
-		$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAKzEjIBpjzXZCGEiw8FS7ZAhJhqodPVjl4RuTFHsamYE0WiOF7m1VYpNAfZBnyzIYcTZABfp2ZBEu8Dh9o5mjZB1p80yCrFfJt0X5gweZBpAw3O2lrEsGQIROEbH4RThI20L7EL47j91t3ZAUTULHs1ZAgTaQxGAFx9xZBXqeKHsov';
+		$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBANJzrUveRDyOhZCJQ1yHetlvPQY7IHgTbs0V3iGGu0g9XDWCaMTFI8hko2dZBJUXJwwzHwORt5Oz7yvMDUg9qyZCZCvoPk818vJZCKMkNcTtympZAcB7dD15isQ1yfvDXp3Hivh6Rvy5OEO3kc8uNdx098ptQdwQZDZD';
 		
 		$sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
 	    $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
-/*
+
 		$str=$message;
 		$str=str_replace(" ","",$str);
 		$start=strpos($str,"(");
@@ -32,7 +32,7 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
 
         $result=$ambassador->getById($requestNo);
 
-        if(count((array)$result) > 0){
+        if(count((array)$result) > 0){ 
         	$ambassador->updateMessengerId($requestNo,$sender);
         	if (! is_null($result->request_id)) {
         		$requestInfo = new SignUpModel();
@@ -44,12 +44,12 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
           else{
             $response="شكرا لك 🌸 ".'\n'." . ".'\n'."تم تسجيل طلبك للحصول على فريق متابعة قراءة، سوف تصلك معلومات الفريق خلال أقل من ٢٤ ساعة".'\n'." . ".'\n'." نعمل لأجلكم. ";    
           }
-*/
+
         }//if registered
         else{
           $response="شكرا لرسالتك، هناك خطأ في الإرسال. حيث أن رقم الطلب الذي قمت بإرساله غير موجود. " .'\n'. "لطفا قم بمراسلتنا يدويا هنا".'\n'. "https://www.facebook.com/taheelofosboha";
         }
-
+//$response = $requestNo;
 		/*initialize curl*/
 	    $ch = curl_init($url);
 	    /*prepare response*/
@@ -82,9 +82,9 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
 		$sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
 	    $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
 	    $entryID=$input['entry'][0]['id'];
-	    //$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBAFFi0yMQidptQyKTdoOc4ZAqSyj295bkGT9i35bTpdS4UIxCB1UYBSdibNF6QoJIM17H01zJZAog75ucBhyby46tAqhSNAtvAW9WZBXHxCjqiI2bHq0Ph1FXdu5hgBSeMOKxEkMP56RtWp9ZA6dlwJm8FFVIegZDZD';
+	    $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBAFFi0yMQidptQyKTdoOc4ZAqSyj295bkGT9i35bTpdS4UIxCB1UYBSdibNF6QoJIM17H01zJZAog75ucBhyby46tAqhSNAtvAW9WZBXHxCjqiI2bHq0Ph1FXdu5hgBSeMOKxEkMP56RtWp9ZA6dlwJm8FFVIegZDZD';
 
-        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAKzEjIBpjzXZCGEiw8FS7ZAhJhqodPVjl4RuTFHsamYE0WiOF7m1VYpNAfZBnyzIYcTZABfp2ZBEu8Dh9o5mjZB1p80yCrFfJt0X5gweZBpAw3O2lrEsGQIROEbH4RThI20L7EL47j91t3ZAUTULHs1ZAgTaQxGAFx9xZBXqeKHsov';
+        //$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBANJzrUveRDyOhZCJQ1yHetlvPQY7IHgTbs0V3iGGu0g9XDWCaMTFI8hko2dZBJUXJwwzHwORt5Oz7yvMDUg9qyZCZCvoPk818vJZCKMkNcTtympZAcB7dD15isQ1yfvDXp3Hivh6Rvy5OEO3kc8uNdx098ptQdwQZDZD';
         
 	    /*initialize curl*/
 	    $ch = curl_init($url);

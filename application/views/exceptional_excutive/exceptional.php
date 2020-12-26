@@ -3,9 +3,6 @@ $supervisor = "leaders of osboha 1";
 $rank = 22;
 ?>
 <style>
-	* {
-		direction: rtl;
-	}
 	
 	#excModalBtn {
 		color: #214761;
