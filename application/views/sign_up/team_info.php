@@ -29,7 +29,9 @@
               قم بعمل انضمام لمجموعة الفيسبوك ليصل طلبك لمُشرف القراءة الخاص بك
             </h5>
             <h5>
-              سوف يتواصل المشرف معك لمساعدتك خطوة بخطوة ومنحك الكُتب، احرص على تفقد رسائل الفيسبوك الخاصة بك
+              سوف يتواصل المشرف معك لمساعدتك خطوة بخطوة ومنحك الكُتب، احرص على تفقد
+                <span style="color: #197439; font-weight: 700;">رسائل الفيسبوك  </span>
+                الخاصة بك
             </h5>
             <a href="<?php echo $_SESSION['team_info']['leader_info']->team_link; ?>" class="final-page genric-btn primary circle arrow" id="team" style="margin: 1.5%; font-size: 1.5em"  target="_blank">
               انضم للمجموعة من هنا
@@ -45,8 +47,8 @@
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </a>
           </div>
-        </div> -->
-         <div class="icon-bar-left">
+        </div>
+         --> <div class="icon-bar-left">
             <div class="container_centered" style="text-align: left; margin-left: 0" id="help">
                 <a href="https://www.facebook.com/taheelofosboha/" target="_blank">
                   <img class="helpimg" src="<?php echo base_url()?>assets/sign_up_assests/img/point4.png" alt="">

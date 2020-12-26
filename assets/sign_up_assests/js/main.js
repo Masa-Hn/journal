@@ -84,6 +84,36 @@ function nextWithMsg(page,msg){
     });
 
   }
+
+
+ function copyMsg(link) {
+    var msg =document.getElementById('msg');
+    var copyText = document.createElement('textarea');
+    copyText.value=msg.innerHTML;
+    copyText.setAttribute('readonly', '');
+    copyText.style = {position: 'absolute', left: '-9999px'};
+    document.body.appendChild(copyText);
+    copyText.select();
+    document.execCommand('copy');
+    // Remove temporary textarea
+    document.body.removeChild(copyText);
+
+    Swal.fire({
+      title: 'لقد قمنا بنسخ الرسالة لك',
+      text:'😉 فقط قُم بلصقها وإرسالها',
+      imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/copyMsg.png',
+      imageWidth: 300,
+      imageAlt: 'Custom image',
+      timer: 5000,
+      confirmButtonText: "شكرا لكم",
+      confirmButtonColor:'#9ed16f'
+    }).then(function(){
+
+      window.open(link, "_blank");
+
+    });
+
+  }
 function checkAnswer() {
     answer=document.getElementById('answer').value;
     if (answer == 30){
@@ -101,7 +131,7 @@ function checkAnswer() {
       });
     }//if    
     else{
-      if(count != 3){
+      if(count != 2){
         Swal.fire({
           title: 'للأسف',
           text:"إجابة غير صحيحة، حاول مرةً أخرى",

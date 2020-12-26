@@ -40,7 +40,7 @@ function checkLoginEmail(){
     $.ajax({
       type: "POST",
       url:document.getElementById("base_url").value+"SignUp/checkAmbassador",
-      data: {'email': email },
+      data: {'email': email,captcha: grecaptcha.getResponse() },
       success: function(data){
         $("body").html(data);
 

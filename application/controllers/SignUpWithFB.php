@@ -94,7 +94,7 @@ class SignUpWithFB extends CI_Controller {
       //Inform Ambassador
       if($result->request_id == null){
         // Still No Leader
-        $this->noLeaderFound();
+        $this->noLeaderFound($_GET['fb_id']);
       }
       else{
         $request=$this->SignUpModel->getRequestInfo($result->request_id);
@@ -151,7 +151,7 @@ class SignUpWithFB extends CI_Controller {
                 if (count((array)$result) == 0 ){
                   $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_info,$ambassadorGender,$leaderGender,$result,$country);
                   $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
-                  $this->noLeaderFound();
+                  $this->noLeaderFound($_GET['fb_id']);
                   $exit=true;
                 }//if
                 else{
@@ -323,14 +323,14 @@ class SignUpWithFB extends CI_Controller {
     return $ambassador;
   }//ambassadorWithoutLeader
 
-  public function noLeaderFound()
-  {
+  public function noLeaderFound($fb_id)
+  { 
+    $data['ambassador']=$this->AmbassadorModel->getByFBId($fb_id);
     $this->load->view('sign_up/templates/header');
     $this->load->view('sign_up/templates/navbar' );
-    $this->load->view('sign_up/no_leader_found');
+    $this->load->view('sign_up/no_leader_found',$data);
     $this->load->view('sign_up/templates/footer');
   }//noLeaderFound
-
 
  public function jsonData($id,$msg)
   {

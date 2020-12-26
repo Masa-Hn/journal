@@ -36,9 +36,10 @@
                     <label for="loginemail">أدخل بريدك الالكتروني</label>
                     <input type="email" name="loginemail" id="loginemail" required onblur="loginEmailValidation( this.value)">
                     <span class="error" id="loginemailError">لطفًا أدخل بريدك الالكتروني</span>
-                    <span class="error" id="loginemailFormatError">أدخل بريدك بشكلٍ صحيح</span>       
-
+                    <span class="error" id="loginemailFormatError">أدخل بريدك بشكلٍ صحيح</span>
                   </div>
+                  <div class="g-recaptcha" data-sitekey="6Lf89f8ZAAAAAN7ad8J71y8dUgWOTdfs_Tefty27" id="gCapthca"></div>
+
                   <div class="CTA">
                     <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkLoginEmail()" style="color: #ffff;">
                       تسجيل الدخول
@@ -66,15 +67,11 @@
                 </p>
                 <span style="color: darkred"> * معلومات مطلوبة</span>
               </div>
-              <div class="form-group" id="errorMsg">
-                <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
-                <span id="loadingMsg" style="color: #197439;"></span>
-              </div>
               <div class="signup form-peice" dir="rtl">
                 <form class="signup-form" id="form" method="POST">
                   <div class="form-group" id="errorMsg">
-                      <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
-                      <span id="loadingMsg" style="color: #197439;"></span>
+                 <!--      <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
+                      <span id="loadingMsg" style="color: #197439;"></span> -->
                     <span id="errorMsgP">
                       <?php 
                         if(!empty($errorMsg)){
@@ -85,7 +82,7 @@
                     </span>
                   </div>
                   <div class="form-group">
-                    <span style="color: darkred"> * </span>
+                    <span style="color: darkred"> * اسمك كما هو مسجل في الفيسبوك </span>
                     <input type="text" name="username" id="username" class="name" placeholder="اسمك الكامل " onblur="checkUserName(this.value)">
                     <br>
                     <br>
@@ -143,6 +140,10 @@
                   <span style="color: darkred"> * </span>
                   <label>أنا لست روبوت</label>
                   <div class="g-recaptcha" data-sitekey="6Lf89f8ZAAAAAN7ad8J71y8dUgWOTdfs_Tefty27" id="gCapthca"></div>
+                  <div class="form-group" id="errorMsg">
+                    <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
+                    <span id="loadingMsg" style="color: #197439;"></span>
+                  </div>
                   <div class="CTA">
                     <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkData()" style="color: #ffff;">
                       تسجيل
