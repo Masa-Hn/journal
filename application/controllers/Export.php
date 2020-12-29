@@ -41,7 +41,7 @@ class Export extends CI_Controller {
         // set Header
         $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Id');
         $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Book Name');
-        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Writer');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'publisher');
         $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Brief');
         $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Type'); 
         $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Found');       
@@ -52,7 +52,7 @@ class Export extends CI_Controller {
         foreach ($SuggestionBooks as $element) {
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['id']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['book_name']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['writer']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['publisher']);
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['brief']);
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['type']);
             $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['found']);
