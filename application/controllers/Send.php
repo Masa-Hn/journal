@@ -8,20 +8,19 @@ class Send extends CI_Controller {
 		parent::__construct();
     $this->load->model('SignUpModel');    	
     $this->load->model('AmbassadorModel');      
-    $this->load->model('RequestsModel');  
     $this->load->model('books');  
       
 	}//end construct()
 
 
   public function index(){
-    $newLeader = new requestsModel();
-    $sender='3197321007062062';
-    $result=$newLeader->get_data($sender, 'messenger_id', "leader_info");
-    print_r($result->num_rows);
+    // $newLeader = new RequestsModel();
+    // $sender='3197321007062062';
+    // $result=$newLeader->get_data($sender, 'messenger_id', "leader_info");
+    // print_r($result->num_rows);
 
 
-//   $this->load->view( 'leader_request/msg_after_requesting_members' );
+  $this->load->view( 'webhook' );
 
 // $this->load->helper('captcha');
 // $vals = array(

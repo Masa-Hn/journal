@@ -38,8 +38,6 @@
                     <span class="error" id="loginemailError">لطفًا أدخل بريدك الالكتروني</span>
                     <span class="error" id="loginemailFormatError">أدخل بريدك بشكلٍ صحيح</span>
                   </div>
-                  <div class="g-recaptcha" data-sitekey="6Lf89f8ZAAAAAN7ad8J71y8dUgWOTdfs_Tefty27" id="gCapthca"></div>
-
                   <div class="CTA">
                     <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkLoginEmail()" style="color: #ffff;">
                       تسجيل الدخول
@@ -137,9 +135,6 @@
                       </label>
                     </div>
                   </div>
-                  <span style="color: darkred"> * </span>
-                  <label>أنا لست روبوت</label>
-                  <div class="g-recaptcha" data-sitekey="6Lf89f8ZAAAAAN7ad8J71y8dUgWOTdfs_Tefty27" id="gCapthca"></div>
                   <div class="form-group" id="errorMsg">
                     <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
                     <span id="loadingMsg" style="color: #197439;"></span>
