@@ -19,7 +19,7 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
         
         $sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
         $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
-if (is_numeric($message)) {
+        if (is_numeric($message)) {
             $requestNo=$message;
             $ambassador = new AmbassadorModel();
 

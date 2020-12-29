@@ -40,7 +40,7 @@
                   <img class="d-flex mx-auto img-fluid code-img" src="<?php echo base_url()?>assets/sign_up_assests/img/code.png" alt="">
                   <div class="centered">
                     <h4 style="  font-weight: bold;">
-                      <span class="team-code">
+                      <span class="team-code" id="code">
                         <?php echo $_SESSION['team_info']['leader_info']->uniqid .$_SESSION['team_info']['leader_info']->id ; ?>
                       </span>
                     </h4>
@@ -58,7 +58,7 @@
             </h5>
           </div>
         <div class="col-lg-12 col-sm-12 text-center btn-left container_centered icon-bar-left" dir="rtl" style="top: 90%">
-          <a href="javascript:next('team_info')" class="genric-btn circle next-info" id="leader_info" style=" font-size: 100%">
+          <a href="javascript:copyCode()" class="genric-btn circle next-info" id="leader_info" style=" font-size: 100%">
                 مستعد للانضمام للفريق
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
           </a>
