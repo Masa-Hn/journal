@@ -106,9 +106,9 @@
 					<div class="card">
 						<h2 class="card-title"> عرض إحصائيات الأزرار والأعضاء المطلوبين</h2>
 						<?php
-						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1' )->num_rows();
-						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1' )->num_rows();
-						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1' )->num_rows();
+						$code_clicks = $this->StatisticsModel->get_data( 'ambassador', 'code_button', 'code_button = 1' )->num_rows();
+						/*$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1' )->num_rows();*/
+						$team_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'team_link_button', 'team_link_button = 1' )->num_rows();
 
 						//get new members
 						$members = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'is_done = 0' )->row();
@@ -121,16 +121,16 @@
 						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NOT NULL or request_id IS NULL' )->num_rows();
 						
 						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NULL' )->num_rows();
-						$male_amb = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'gender = "male"' )->row();
+						$male_amb = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'gender = "male" AND is_done=0' )->row();
 
 						?>
 						<ul class="list-group">
 							<li class="list-group-item"><i class="fa fa-code"></i>عدد مرات الضغط على زر الكود:
 								<b><?php echo $code_clicks; ?></b>
 							</li>
-							<li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
+							<!-- <li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
 								<b><?php echo $leader_link_clicks; ?></b>
-							</li>
+							</li>-->
 							<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
 								<b><?php echo $team_link_clicks; ?></b>
 							</li>
@@ -175,9 +175,9 @@
 					<div class="card">
 						<h2 class="card-title">  إحصائيات الأزرار اليومية </h2>
 						<?php
-						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND  DATE_FORMAT(date, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();
-						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND  DATE_FORMAT(date, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();
-						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND  DATE_FORMAT(date, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();
+						$code_clicks = $this->StatisticsModel->get_data( 'ambassador', 'code_button', 'code_button = 1 AND  DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();
+						/*$leader_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'leader_link_button', 'leader_link_button = 1 AND  DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();*/
+						$team_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'team_link_button', 'team_link_button = 1 AND  DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();
 						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))' )->num_rows();
 						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))' )->num_rows();
 						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))' )->num_rows();
@@ -188,9 +188,9 @@
 							<li class="list-group-item"><i class="fa fa-code"></i>عدد مرات الضغط على زر الكود:
 								<b><?php echo $code_clicks; ?></b>
 							</li>
-							<li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
+							<!-- <li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
 								<b><?php echo $leader_link_clicks; ?></b>
-							</li>
+							</li> -->
 							<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
 								<b><?php echo $team_link_clicks; ?></b>
 							</li>
@@ -220,9 +220,9 @@
 					<div class="card ">
 						<h2 class="card-title"> إحصائيات الأزرار الأسبوعية</h2>
 						<?php
-						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND YEARWEEK(DATE_FORMAT(date, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
-						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND YEARWEEK(DATE_FORMAT(date, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
-						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND YEARWEEK(DATE_FORMAT(date, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
+						$code_clicks = $this->StatisticsModel->get_data( 'ambassador', 'code_button', 'code_button = 1 AND YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
+						/*$leader_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'leader_link_button', 'leader_link_button = 1 AND YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();*/
+						$team_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'team_link_button', 'team_link_button = 1 AND YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
 						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
 						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
 						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
@@ -231,8 +231,8 @@
 
 							<li class="list-group-item"><i class="fa fa-code"></i>عدد مرات الضغط على زر الكود:
 								<b><?php echo $code_clicks; ?></b> </li>
-							<li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
-								<b><?php echo $leader_link_clicks; ?></b> </li>
+							<!-- <li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
+								<b><?php echo $leader_link_clicks; ?></b> </li> -->
 							<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
 								<b><?php echo $team_link_clicks; ?></b>
 							</li>
@@ -262,9 +262,9 @@
 					<div class="card ">
 						<h2 class="card-title">إحصائيات الأزرار الشهرية</h2>
 						<?php
-						$code_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'code_button', 'code_button = 1 AND YEAR(DATE_FORMAT(date, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(date, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();
-						$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1 AND YEAR(DATE_FORMAT(date, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(date, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();
-						$team_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'team_link_button', 'team_link_button = 1 AND YEAR(DATE_FORMAT(date, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(date, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();
+						$code_clicks = $this->StatisticsModel->get_data( 'ambassador', 'code_button', 'code_button = 1 AND YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();
+						/*$leader_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'leader_link_button', 'leader_link_button = 1 AND YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();*/
+						$team_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'team_link_button', 'team_link_button = 1 AND YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();
 						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))' )->num_rows();
 						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))' )->num_rows();
 						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))' )->num_rows();
@@ -273,8 +273,10 @@
 
 							<li class="list-group-item"><i class="fa fa-code"></i>عدد مرات الضغط على زر الكود:
 								<b><?php echo $code_clicks; ?></b> </li>
+<!--
 							<li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
 								<b><?php echo $leader_link_clicks; ?></b> </li>
+-->
 							<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
 								<b><?php echo $team_link_clicks; ?></b>
 							</li>
