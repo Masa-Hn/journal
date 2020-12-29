@@ -15,40 +15,45 @@ class Send extends CI_Controller {
 
 
   public function index(){
-
-  $this->load->view( 'leader_request/msg_after_requesting_members' );
-
-$this->load->helper('captcha');
-$vals = array(
-'img_path' => 'captcha/', /* The path where the captcha images will be stored(required) */
-'img_url' => './assets/sign_up_assests/img/captcha/', /* The URL of captcha images (required) */
-'img_width' => '150', /* Width of captcha images */
-'img_height' => 80, /* Height of captcha images */
-'word_length' => 4, /* Number of chracter in captcha images */
-'font_size' => 40,/* Font size of chracter in captcha images */
-/*'pool' => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', */
-/* White background and border, black text and red grid */
-'colors' => array(
-'background' => array(255, 255, 255),
-'border' => array(255, 255, 255),
-'text' => array(0, 0, 0),
-'grid' => array(255, 40, 255)
-)
-);
-$cap = create_captcha($vals);
+    $newLeader = new requestsModel();
+    $sender='3197321007062062';
+    $result=$newLeader->get_data($sender, 'messenger_id', "leader_info");
+    print_r($result->num_rows);
 
 
+//   $this->load->view( 'leader_request/msg_after_requesting_members' );
+
+// $this->load->helper('captcha');
 // $vals = array(
-//     'img_path'    => base_url().'assets/sign_up_assests/img/captcha/1.JPG',
-//     'img_url'    => base_url().'assets/sign_up_assests/img/captcha/1.JPG',
-//     'img_width' => '150',
-//     'img_height' => 30
-//     );
+// 'img_path' => 'captcha/', /* The path where the captcha images will be stored(required) */
+// 'img_url' => './assets/sign_up_assests/img/captcha/', /* The URL of captcha images (required) */
+// 'img_width' => '150', /* Width of captcha images */
+// 'img_height' => 80, /* Height of captcha images */
+// 'word_length' => 4, /* Number of chracter in captcha images */
+// 'font_size' => 40,/* Font size of chracter in captcha images */
+// 'pool' => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 
+// /* White background and border, black text and red grid */
+// 'colors' => array(
+// 'background' => array(255, 255, 255),
+// 'border' => array(255, 255, 255),
+// 'text' => array(0, 0, 0),
+// 'grid' => array(255, 40, 255)
+// )
+// );
+// $cap = create_captcha($vals);
 
-//$cap = create_captcha($vals);
-var_dump($cap);
-echo $cap['image'];
-    // $str="مرحبا
+
+// // $vals = array(
+// //     'img_path'    => base_url().'assets/sign_up_assests/img/captcha/1.JPG',
+// //     'img_url'    => base_url().'assets/sign_up_assests/img/captcha/1.JPG',
+// //     'img_width' => '150',
+// //     'img_height' => 30
+// //     );
+
+// //$cap = create_captcha($vals);
+// var_dump($cap);
+// echo $cap['image'];
+//     // $str="مرحبا
     //     أنا SARA  TEST ، صاحب طلب الانضمام لمشروع صناعة القُراء رقم (78987)
     //     أسعد بالانضمام إليكم.
     //     ";
