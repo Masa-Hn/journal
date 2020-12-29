@@ -19,34 +19,32 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
         
         $sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
         $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
+if (is_numeric($message)) {
+            $requestNo=$message;
+            $ambassador = new AmbassadorModel();
 
-        $str=$message;
-        $str=str_replace(" ","",$str);
-        $start=strpos($str,"(");
-        $end=strpos($str,")");
-        $length= $end-$start;
-        $requestNo=substr($str,$start+1,$length-1);
+            $result=$ambassador->getById($requestNo);
 
-        $ambassador = new AmbassadorModel();
+            if(count((array)$result) > 0){ 
+                $ambassador->updateMessengerId($requestNo,$sender);
+                if (! is_null($result->request_id)) {
+                    $requestInfo = new SignUpModel();
+                    $request=$requestInfo->getRequestInfo($result->request_id);
+                    $leader_info=$requestInfo->getLeaderInfo($request->leader_id);
+                    
+                    $response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader_info->team_link."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader_info->uniqid.$leader_info->id."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
+                }
+                else{
+                    $response="شكرا لك 🌸 ".'\n'." . ".'\n'."تم تسجيل طلبك للحصول على فريق متابعة قراءة، سوف تصلك معلومات الفريق خلال أقل من ٢٤ ساعة".'\n'." . ".'\n'." نعمل لأجلكم. ";    
+                }
 
-        $result=$ambassador->getById($requestNo);
-
-        if(count((array)$result) > 0){ 
-            $ambassador->updateMessengerId($requestNo,$sender);
-            if (! is_null($result->request_id)) {
-                $requestInfo = new SignUpModel();
-                $request=$requestInfo->getRequestInfo($result->request_id);
-                $leader_info=$requestInfo->getLeaderInfo($request->leader_id);
-                
-                $response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader_info->team_link."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader_info->uniqid.$leader_info->id."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
-          }
-          else{
-            $response="شكرا لك 🌸 ".'\n'." . ".'\n'."تم تسجيل طلبك للحصول على فريق متابعة قراءة، سوف تصلك معلومات الفريق خلال أقل من ٢٤ ساعة".'\n'." . ".'\n'." نعمل لأجلكم. ";    
-          }
-
-        }//if registered
+            }//if registered
+            else{
+              $response="شكرا لرسالتك، هناك خطأ في الإرسال. حيث أن رقم الطلب الذي قمت بإرساله غير موجود. " .'\n'. "لطفا قم بمراسلتنا يدويا هنا".'\n'. "https://www.facebook.com/taheelofosboha";
+            }//if nor registered
+        }//if numeric
         else{
-          $response="شكرا لرسالتك، هناك خطأ في الإرسال. حيث أن رقم الطلب الذي قمت بإرساله غير موجود. " .'\n'. "لطفا قم بمراسلتنا يدويا هنا".'\n'. "https://www.facebook.com/taheelofosboha";
+            $response="شكرا لرسالتك، هناك خطأ في الإرسال. رسالتك لا تحتوي على رقم الطلب. " .'\n'. "لطفًا تأكد من رقم الطلب وأرساله برسالة منفصلة" .'\n'. "أو قم بالتسجيل من هنا".'\n'. "https://www.osboha180.com/rack/SignUp";
         }
         
         /*initialize curl*/

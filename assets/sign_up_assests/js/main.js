@@ -99,8 +99,8 @@ function nextWithMsg(page,msg){
     document.body.removeChild(copyText);
 
     Swal.fire({
-      title: 'لقد قمنا بنسخ الرسالة لك',
-      text:'😉 فقط قُم بلصقها وإرسالها',
+      title: 'لقد قمنا بنسخ رقم الطلب لك',
+      text:'😉 فقط قُم بلصقه وإرساله',
       imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/copyMsg.png',
       imageWidth: 300,
       imageAlt: 'Custom image',
