@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 04, 2020 at 05:00 AM
--- Server version: 5.7.32-cll-lve
--- PHP Version: 7.3.6
+-- Host: 127.0.0.1
+-- Generation Time: Dec 29, 2020 at 10:56 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -38,10 +37,12 @@ CREATE TABLE `ambassador` (
   `profile_link` varchar(255) NOT NULL,
   `fb_id` varchar(255) NOT NULL,
   `messenger_id` varchar(255) NOT NULL DEFAULT '0',
-  `is_joined` tinyint(1) NOT NULL DEFAULT '0',
-  `join_following_team` int(11) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `display` tinyint(2) NOT NULL DEFAULT '1'
+  `is_joined` tinyint(1) NOT NULL DEFAULT 0,
+  `join_following_team` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `display` tinyint(2) NOT NULL DEFAULT 1,
+  `code_button` tinyint(1) NOT NULL DEFAULT 0,
+  `team_link_button` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -63,7 +64,7 @@ ALTER TABLE `ambassador`
 -- AUTO_INCREMENT for table `ambassador`
 --
 ALTER TABLE `ambassador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
