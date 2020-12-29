@@ -7,8 +7,8 @@
       header('Location: '.$url);
       exit();
   }
-if(isset($_SESSION['team_info'])){
- $id =  $_SESSION['team_info']['ambassador'][0]->id; 
+  if(isset($_SESSION['team_info'])){
+    $id =  $_SESSION['team_info']['ambassador'][0]->id; 
   }
 
     $page_id = 14;
@@ -29,12 +29,8 @@ if(isset($_SESSION['team_info'])){
         <div class="row banner-center align-items-center justify-content-center">
           <div class="col-lg-12 col-sm-12 text-center" style="margin-bottom: 5%">
             <h5>
-<<<<<<< Updated upstream
-              قم بعمل انضمام لمجموعة الفيسبوك ليصل طلبك لمُشرف القراءة الخاص بك
-=======
-              قم بالضغط على الكود أدناه لنسخه، سوف يطلب منك إدخاله لقبولك ضمن مجموعة القراءة الخاصة بك
 
->>>>>>> Stashed changes
+              قم بالضغط على الكود أدناه لنسخه، سوف يطلب منك إدخاله لقبولك ضمن مجموعة القراءة الخاصة بك
             </h5>
             <h5>
               سوف يتواصل المشرف معك لمساعدتك خطوة بخطوة ومنحك الكُتب، احرص على تفقد
@@ -75,9 +71,6 @@ if(isset($_SESSION['team_info'])){
 <script type="text/javascript">
 		$( document ).ready( function () {
 			var base_url = "<?php echo base_url()?>";
-<<<<<<< Updated upstream
-			var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
-=======
 			//var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
 			var id = <?php echo $id;?>;
 			
@@ -119,7 +112,6 @@ if(isset($_SESSION['team_info'])){
 				} );
 				return false;
 			} );
->>>>>>> Stashed changes
 
 			$( '#team' ).click( function () {
         var team_code =document.getElementById("team_code").value; 
@@ -139,18 +131,18 @@ if(isset($_SESSION['team_info'])){
         .then((result) => {
           if (result.value) {
             $.ajax( {
-              type: "POST",
-              url: base_url + "Statistics/team_link_button",
-              data: {
-                ip_address: ip_address
-              },
+                type: "POST",
+                url: base_url + "Statistics/team_link_button",
+                data: {
+                //	ip_address: ip_address,
+                    id:id
+                },
               success: function ( data ) {
                 window.open(document.getElementById('team').getAttribute("href"), "_blank");
               },
               error: function ( error ) {
                 window.open(document.getElementById('team').getAttribute("href"), "_blank");
 
-<<<<<<< Updated upstream
                 console.log( error );
               }
             });
@@ -159,18 +151,6 @@ if(isset($_SESSION['team_info'])){
             next('step_1');
           }				
 			   });
-      return false;
-=======
-				$.ajax( {
-					type: "POST",
-					url: base_url + "Statistics/team_link_button",
-					data: {
-					//	ip_address: ip_address,
-						id:id
-					},
-					success: function ( data ) {
->>>>>>> Stashed changes
-
 	 });
     });
 	</script>
