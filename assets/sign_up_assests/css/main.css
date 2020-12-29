@@ -122,6 +122,10 @@ nav{
   margin-top: 0;
 }
 
+.regImg{
+  content:url("../img/reg2.png");
+}
+
 #gCapthca{
   text-align: -webkit-center;
 
@@ -373,6 +377,11 @@ hr{
 
 }
 @media only screen and (min-width: 992px) {
+  
+  .regImg{
+    content:url("../img/reg3.png");
+  }
+
   .centered {
     top: 42%;
     left: 43%;
