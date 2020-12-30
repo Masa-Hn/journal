@@ -99,10 +99,9 @@ function checkData(){
       $.ajax({
       type: "POST",
       url:document.getElementById("base_url").value+"SignUp/checkAmbassador",
-      data: {'ambassador_name':username,'ambassador_gender':ambassadorGender,'leader_gender': leaderGender,'email': email },
+      data: {'ambassador_name':username,'ambassador_gender':ambassadorGender,'leader_gender': leaderGender,'email': email},
       success: function(data){
         $("body").html(data);
-        console.log('hello');
       }//success
     });
       

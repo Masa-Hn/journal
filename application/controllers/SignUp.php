@@ -87,59 +87,57 @@ class SignUp extends CI_Controller {
   {
     $reallocate=false;
     if(!empty($_POST['email'])){
-      $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);
-      
-      if (count((array)$result) == 0 ){
-      //New Ambassador
+      $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);      
+        if (count((array)$result) == 0 ){
+         //New Ambassador
 
-        if(!empty($_POST['ambassador_name']) && !empty($_POST['ambassador_gender']) && !empty($_POST['leader_gender']) )
-        {
-          
-          if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            $errorMsg = "أدخل بريدًا صحيحًا"; 
-            $this->load->view('sign_up/registration_form',$errorMsg);
-          }// if for email validation
+          if(!empty($_POST['ambassador_name']) && !empty($_POST['ambassador_gender']) && !empty($_POST['leader_gender']) )
+          {
+                
+            if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+              $errorMsg = "أدخل بريدًا صحيحًا"; 
+              $this->load->view('sign_up/registration_form',$errorMsg);
+            }// if for email validation
+            else{
+              $this->allocateAmbassador($_POST['ambassador_name'],$_POST['ambassador_gender'],$_POST['leader_gender'],$_POST['email']);  
+            }//allocateAmbassador
+
+          }//if for required field
           else{
-            $this->allocateAmbassador($_POST['ambassador_name'],$_POST['ambassador_gender'],$_POST['leader_gender'],$_POST['email']);  
-          }//allocateAmbassador
+            $errorMsg = "أدخل الحقول المطلوبة"; 
+            $this->load->view('sign_up/registration_form',$errorMsg);
 
-        }//if for required field
+          }//else for required field
+        }//if for not exist
+
         else{
-          $errorMsg = "أدخل الحقول المطلوبة"; 
-          $this->load->view('sign_up/registration_form',$errorMsg);
-
-        }//else for required field
-      }//if for not exist
-
-      else{
-        //Inform Ambassador
-        if($result->request_id == null){
-          // Still No Leader
-          $this->noLeaderFound();
-        }
-        else{
-          $request=$this->SignUpModel->getRequestInfo($result->request_id);
-          $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
-          $created_at=date_create($created_at->format("Y-m-d"));
-          $current=date_create(date("Y-m-d",time()));
-          $diff=date_diff($created_at,$current);
-
-          if($diff->format("%a") > 2){ 
-            $reallocate=true;
+          //Inform Ambassador
+          if($result->request_id == null){
+            // Still No Leader
+            $this->noLeaderFound($_POST['email']);
           }//if
-          $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
-          $informLeader=false;
-          $ambassador=$this->AmbassadorModel->getByFBId($_POST['email']);
-          $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
-        }
-      }
-    }
+          else{
+            $request=$this->SignUpModel->getRequestInfo($result->request_id);
+            $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
+            $created_at=date_create($created_at->format("Y-m-d"));
+            $current=date_create(date("Y-m-d",time()));
+            $diff=date_diff($created_at,$current);
+
+            if($diff->format("%a") > 2){ 
+              $reallocate=true;
+            }//if
+            $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
+            $informLeader=false;
+            $ambassador=$this->AmbassadorModel->getByFBId($_POST['email']);
+            $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
+          }//else
+        }//else
+    }//if
     else{
       //return to reg page
       $errorMsg = "أدخل معلوماتك"; 
-
       $this->load->view('sign_up/registration_form');
-    }
+    }//check email and other user data
   }//checkAmbassador
 
 
@@ -177,7 +175,7 @@ class SignUp extends CI_Controller {
               if (count((array)$result) == 0 ){
                 $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_name,$ambassadorGender,$leaderGender,$country,$ambassador_email);
                 $this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
-                $this->noLeaderFound();
+                $this->noLeaderFound($_POST['email']);
                 $exit=true;
               }//if
               else{
@@ -407,11 +405,12 @@ class SignUp extends CI_Controller {
     return $ambassador;
   }//ambassadorWithoutLeader
 
-  public function noLeaderFound()
-  {
+  public function noLeaderFound($email)
+  { 
+    $data['ambassador']=$this->AmbassadorModel->getByFBId($email);
     $this->load->view('sign_up/templates/header');
     $this->load->view('sign_up/templates/navbar' );
-    $this->load->view('sign_up/no_leader_found');
+    $this->load->view('sign_up/no_leader_found',$data);
     $this->load->view('sign_up/templates/footer');
   }//noLeaderFound
 

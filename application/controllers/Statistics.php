@@ -15,12 +15,7 @@ class Statistics extends CI_Controller {
 	public
 	function index() {
 
-		$data[ 'title' ] = 'الإحصائيات';
-		
-		//$page_id = 6;
-
-		//$this->StatisticsModel->addVisitor($page_id);
-
+		$data[ 'title' ] = 'الإحصائيات';	
 		$this->load->view( 'management_book/templates/header', $data );
 		$this->load->view( 'management_book/templates/navbar' );
 		$this->load->view( 'management_book/statistics', $data );
@@ -30,41 +25,45 @@ class Statistics extends CI_Controller {
 
 	public
 	function code_button() {
-		$ip_address = $_POST[ 'ip_address' ];
-
-		$clicks = $this->StatisticsModel->button_clicks( $ip_address, 'buttons_statistics', 'code_button' );
-
+	//	$ip_address = $_POST[ 'ip_address' ];
+		$amb_id = $_POST['id'];
+		$clicks = $this->StatisticsModel->button_clicks( $amb_id, 'ambassador', 'code_button' );
+		
 		if ( $clicks->num_rows() > 0 ) {
 			$res = $clicks->row();
-			$id = $res->id;
-			$this->StatisticsModel->update_data( $id, 'code_button', 1, 'buttons_statistics' );
-		} else {
+			if($res->code_button == 0){
+			$this->StatisticsModel->update_data( $amb_id, 'code_button', 1, 'ambassador' );
+			}
+		} /*else {
 			$data[ 'ip_address' ] = $ip_address;
 			$data[ 'code_button' ] = 1;
 			$this->StatisticsModel->insert_data( $data, 'buttons_statistics' );
 
-		}
+		}*/
 	}
 
 	public
 	function team_link_button() {
-		$ip_address = $_POST[ 'ip_address' ];
-
-		$clicks = $this->StatisticsModel->button_clicks( $ip_address, 'buttons_statistics', 'team_link_button' );
+		//$ip_address = $_POST[ 'ip_address' ];
+		$amb_id = $_POST['id'];
+		
+		$clicks = $this->StatisticsModel->button_clicks( $amb_id, 'ambassador', 'team_link_button' );
 
 		if ( $clicks->num_rows() > 0 ) {
 			$res = $clicks->row();
-			$id = $res->id;
-			$this->StatisticsModel->update_data( $id, 'team_link_button', 1, 'buttons_statistics' );
-		} else {
+			if($res->team_link_button == 0){
+			$this->StatisticsModel->update_data( $amb_id, 'team_link_button', 1, 'ambassador' );
+			}
+			
+		}/* else {
 			$data[ 'ip_address' ] = $ip_address;
 			$data[ 'team_link_button' ] = 1;
 			$this->StatisticsModel->insert_data( $data, 'buttons_statistics' );
 
-		}
+		}*/
 	}
 
-	public
+	/* public
 	function leader_link_button() {
 		$ip_address = $_POST[ 'ip_address' ];
 
@@ -72,15 +71,18 @@ class Statistics extends CI_Controller {
 
 		if ( $clicks->num_rows() > 0 ) {
 			$res = $clicks->row();
-			$id = $res->id;
+			if($res->code_button == 0){
+				$id = $res->id;
 			$this->StatisticsModel->update_data( $id, 'leader_link_button', 1, 'buttons_statistics' );
+			}
+			
 		} else {
 			$data[ 'ip_address' ] = $ip_address;
 			$data[ 'leader_link_button' ] = 1;
 			$this->StatisticsModel->insert_data( $data, 'buttons_statistics' );
 
 		}
-	}
+	}*/
 }
 
 ?>

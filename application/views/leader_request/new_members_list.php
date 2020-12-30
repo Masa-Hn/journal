@@ -4,34 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-		$( document ).ready( function () {
-		
-			
-			var lst = document.querySelectorAll( ".joined" );
-			var flag = false;
-			var i;
-			var info = "<?php echo (empty($info) == false)? $info : '';?>";
-			for ( i = 0; i < lst.length; i += 2 ) {
-				if ( lst[ i ].checked == true || lst[ i + 1 ].checked == true ) {
-					flag = true;
-				} else {
-					flag = false;
-					break;
-				}	
-			}
-			if(info == ""){
-				if ( !flag ) {
-				$( "#newReqModal" ).modal( "show" );
-					
-			}else{
-				$( "#newReqModal" ).modal( "hide" );
-			}
-			}else{
-				$( "#newReqModal" ).modal( "hide" );
-			}
-			
-			console.log( flag );
-		} );
+
 	</script>
 
 	<a href="#" data-toggle="modal" data-target="#newReqModal" id="reqModalBtn"><img src="<?php echo base_url() ?>admin/img/newmembers.png" width="30px">  قائمة الأعضاء الجدد</a>
@@ -72,8 +45,18 @@
 						</thead>
 						<tbody>
 							<?php
+							$rid = 0;
+
 							while ( $amb = $ambassadors->fetch_array( MYSQLI_ASSOC ) ) {
 								$id = $amb[ 'id' ];
+
+								//to counte how many members left
+								$rid = $amb['request_id'];
+								$leavers = $this->requestsModel->get_leavers($rid)->num_rows;
+								$teamCount = 20; //to be retrieved from the base Database
+								$leader = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'leader_id')->fetch_assoc();
+								$leader_id = $leader['leader_id'];
+								//end process
 								?>
 							<tr style="text-align: center; color:#214761 ">
 								<td>
@@ -90,9 +73,7 @@
 
 							</tr>
 							<?php
-
 							}
-
 							?>
 						</tbody>
 					</table>
@@ -120,36 +101,106 @@
                 <div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h3 class="modal-title">إضافة رابط السفير </h3>
+<<<<<<< Updated upstream
 				</div>
                 <div class="modal-body">
+                    <?php
+					if(empty($info) == true){
+						if(isset($ambassadors)){ ?>
                     <div class="contact100-form validate-form" >
                         <span class="contact100-form-title">
-                            قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة 180, ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
+                            قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة 180، ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
                         </span>
                         <div id="msg_<?php echo $id; ?>"></div>
-                        <div class="wrap-input100">
-                            <img style="float: right;padding-right: 15%" src="<?php echo base_url()?>/admin/img/profile_link.jpg">
+                        <div align="center" style="display: none" id="copy_link">
+                            <img style="align-items: center" src="<?php echo base_url()?>/admin/img/profile_link.jpg">
                         </div>
                         
+                        <a class="" onclick="showImg()" id="img-btn">كيفية نسخ الرابط؟</a>
+                        <br>
+                        <!--
                         <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;">
                             <input class="input100" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
                             <input style="display: none;" type="text" id="amb_id" name="amb_id" value="<?php echo $id; ?>">
                             <span class="focus-input100"></span>
-                        </div>           	
-                        <div class="container-contact100-form-btn">
-                            <div class="wrap-contact100-form-btn">
-                                <div class=""></div>
-                                <button class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;" onclick="addProfileLink(<?php echo $id; ?>)">
-                                    حفظ
-                                </button>
-                            </div>
-                        </div>
-                        <div id="msg"></div>
-                    </div>
+                        </div> -->
+                        <div class="form-group">
+							<input class="form-control" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
+						</div>          	
+                        
+                        <button class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;" onclick="addProfileLink(<?php echo $id; ?>)">
+                            حفظ
+                        </button>
+                    </div><?php }} ?>
                 </div>
             </div>
         </div>
     </div>
+=======
+				</div>
+                <div class="modal-body">
+                    <?php
+					if(empty($info) == true){
+						if(isset($ambassadors)){ ?>
+                    <div class="contact100-form validate-form" >
+                        <span class="contact100-form-title">
+                            قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة 180، ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
+                        </span>
+                        <div id="msg_<?php echo $id; ?>"></div>
+                        <div align="center" style="display: none" id="copy_link">
+                            <img style="align-items: center" src="<?php echo base_url()?>/admin/img/profile_link.jpg">
+                        </div>
+
+                        <a class="" onclick="showImg()" id="img-btn">كيفية نسخ الرابط؟</a>
+                        <br>
+                        <!--
+                        <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;">
+                            <input class="input100" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
+                            <input style="display: none;" type="text" id="amb_id" name="amb_id" value="<?php echo $id; ?>">
+                            <span class="focus-input100"></span>
+                        </div> -->
+                        <div class="form-group">
+							<input class="form-control" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
+						</div>
+
+                        <button class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;" onclick="addProfileLink(<?php echo $id; ?>)">
+                            حفظ
+                        </button>
+                    </div><?php }} ?>
+                </div>
+            </div>
+        </div>
+    </div>
+		<div class="modal fade" role="dialog" id="fill_back" >
+		<div class="modal-dialog">
+						<div class="modal-content">
+								<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title">تعويض مكان المنسحبين</h3>
+				</div>
+								<div class="modal-body">
+										<div class="contact100-form validate-form" >
+												<span class="contact100-form-title">
+													إذا كنت تريد طلب أعضاء جدد عوضاً عن السفراء الذين لم يدخلوا الفريق/المنسحبين, حدد جنس الأعضاء ثم اضغط موافق.. سيتم إرسال أعضاء جدد لك
+												</span>
+												<div id="msg_leavers"></div>
+												<div class="form-group">
+													<label for="gender" class="form-label">اختر جنس الأعضاء: </label>
+													<select name="gender" id="gender" class="form-control">
+														<option value="female" class="gender">إناث</option>
+														<option value="male" class="gender">ذكور</option>
+														<option value="any" class="gender">لا فرق</option>
+													</select>
+												</div>
+												<button class="btn btn-block regular" id="sub-btn-l" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;" onclick="fill_back()">
+														حفظ
+												</button>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
+>>>>>>> Stashed changes
 
 	<script type="text/javascript">
 		$( document ).ready( function () {
@@ -190,7 +241,11 @@
 
 				if ( success == true ) {
 					document.getElementById( "notJoined" + id ).checked = false;
+<<<<<<< Updated upstream
                     
+=======
+
+>>>>>>> Stashed changes
 					$("#profile_link_save").modal("show");
 					$.ajax( {
 						url: base_url + 'NewMembersList/joined_ambassador',
@@ -209,8 +264,13 @@
 						}
 
 					} );
+<<<<<<< Updated upstream
 					
 					// add ambassador to marks 
+=======
+
+					// add ambassador to marks
+>>>>>>> Stashed changes
                     var name = document.getElementById("ambassador_"+id).textContent;
                     $.ajax({
                         type: "POST",
@@ -268,21 +328,23 @@
 						},
 						dataType: 'text',
 						success: function () {
-
-							/*	window.setTimeout( function () {}, 3000 );
-								location.reload();*/
+								window.setTimeout( function () {}, 3000 );
+								location.reload();
 						},
 						error: function ( error ) {
 							console.log( error );
 						}
 					} );
+<<<<<<< Updated upstream
 					
+=======
+>>>>>>> Stashed changes
 					// add & edit ambassador status
                     var name = document.getElementById("ambassador_"+id).textContent;
                     //var msg  = 'هل انت متأكد من ان '+name+' لم ينضم للفريق؟';
 
                     //if (confirm(msg)){
-                         // add ambassador to marks 
+                         // add ambassador to marks
                          $.ajax({
                             type: "POST",
                             url: base_url+"users/addambassador",
@@ -333,6 +395,39 @@
 			}
 		}
 
+		$( document ).ready( function () {
+			var counter = <?php echo $leavers;?>;
+			var lst = document.querySelectorAll( ".joined" );
+			var flag = false;
+			var i;
+			var info = "<?php echo (empty($info) == false)? $info : '';?>";
+			for ( i = 0; i < lst.length; i += 2 ) {
+				if ( lst[ i ].checked == true || lst[ i + 1 ].checked == true ) {
+					flag = true;
+				} else {
+					flag = false;
+					break;
+				}
+			}
+			if(info == ""){
+				if ( !flag ) {
+				$( "#newReqModal" ).modal( "show" );
+				$( "#fill_back" ).modal( "hide" );
+			}else{
+				$( "#newReqModal" ).modal( "hide" );
+				console.log(counter);
+				if(counter>0){
+						$( "#fill_back" ).modal( "show" );
+				}
+			}
+			}else{
+				$( "#newReqModal" ).modal( "hide" );
+				$( "#fill_back" ).modal( "hide" );
+			}
+
+			console.log( flag );
+		} );
+
 		function copyMsg( ambName, leaderName, uniqid ) {
 
 			var x = "";
@@ -355,14 +450,19 @@
 			confirm( 'لقد تم نسخ الرسالة, بإمكانك إرسالها إلى السفير!' )
 			console.log( x );
 		}
+<<<<<<< Updated upstream
 		
 		// add ambassador to marks 
+=======
+
+		// add ambassador to marks
+>>>>>>> Stashed changes
 		/*
         function addmem(){
-            
+
             var name = document.getElementById("ambassador").textContent;
             var base_url = "<?php echo base_url()?>";
-            
+
             if(name == '' || name == ' '){
                 alert("اسم السفير مطلوب...");
             }else{
@@ -377,9 +477,15 @@
                 });
             }
         }*/
+<<<<<<< Updated upstream
         
         function addProfileLink(id){
             
+=======
+
+        function addProfileLink(id){
+
+>>>>>>> Stashed changes
             var profile_url = document.getElementById("profile_link_"+id).value;
             var base_url = "<?php echo base_url()?>";
 
@@ -402,6 +508,47 @@
 
             });
 		}
+<<<<<<< Updated upstream
+        
+=======
+
+>>>>>>> Stashed changes
+        function showImg(){
+            $("#copy_link").css("display","block");
+            $("#img-btn").css("display","none");
+        }
+<<<<<<< Updated upstream
 	</script>
-</body>
-</html>
+=======
+
+function fill_back(){
+	var base_url = "<?php echo base_url();?>";
+	var counter = <?php echo $leavers;?>;
+	var gender = document.getElementById('gender').value;
+	var leader_id = <?php echo $leader_id;?>;
+	var teamCount = <?php echo $teamCount;?>;
+
+	$.ajax({
+			url: base_url + 'NewMembersList/newRequest',
+			type: 'POST',
+			data: {
+					gender: gender,
+					num: counter,
+					leader_id: leader_id,
+					teamCount: teamCount
+			},
+			dataType: 'text',
+			success: function (msg) {
+
+					$( '#msg_leavers' ).html( msg );
+					//location.reload();
+			},
+			error: function ( error ) {
+					console.log( error );
+			}
+
+	});
+}
+
+	</script>
+>>>>>>> Stashed changes

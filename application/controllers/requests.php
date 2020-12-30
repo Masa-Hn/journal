@@ -4,6 +4,7 @@ class Requests extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
+    
 		$this->load->model( 'RequestsModel' );
 		//*$this->load->model( 'GeneralModel' );
 		$this->load->library( 'form_validation' );
@@ -18,6 +19,7 @@ class Requests extends CI_Controller {
 
 		if ( $regBefore->num_rows > 0 ) {
 			$info = $this->RequestsModel->check_email( $_GET[ 'email' ] )->fetch_array( MYSQLI_ASSOC );
+
 			if ( $info[ 'leader_link' ] == null && $info[ 'leader_gender' ] == null ) {
 				$this->load->view( 'leader_request/full_request' );
 			} else {
@@ -33,6 +35,7 @@ class Requests extends CI_Controller {
 	public function check( $id ) {
 
 		$getLastRecord = $this->RequestsModel->leaderLastRequest( $id );
+
 		if ( $getLastRecord->num_rows > 0 ) {
 			$result = $getLastRecord->fetch_assoc();
 			$date = $result[ 'date' ];
@@ -57,13 +60,16 @@ class Requests extends CI_Controller {
 
 		if ( $this->form_validation->run() ) {
 			$info = $this->RequestsModel->check_email( $_GET[ 'email' ] )->fetch_array( MYSQLI_ASSOC );
+
 			// data of the leader
-			$leader[ 'leader_id' ] = $info[ 'id' ];
+			$leader[ 'leader_id' ]   = $info[ 'id' ];
 			$leader[ 'leader_name' ] = $_GET[ 'name' ];
-			$leader[ 'team_name' ] = $_POST[ 'teamName' ];
+			$leader[ 'team_name' ]   = $_POST[ 'teamName' ];
 			$leader[ 'leader_link' ] = $_POST[ 'leaderLink' ];
-			$leader[ 'team_link' ] = $_POST[ 'teamLink' ];
+			$leader[ 'team_link' ]   = $_POST[ 'teamLink' ];
 			$leader[ 'leader_gender' ] = $_POST[ 'leaderGender' ];
+            $leader[ 'leaders_team_name' ] = $_POST[ 'leadersTeamName' ];
+            $leader[ 'leader_rank' ] = $_POST[ 'leaderRank' ];
 			//data of the request
 			$request[ 'members_num' ] = $_POST[ 'numOfMembers' ];
 			$request[ 'gender' ] = $_POST[ 'gender' ];
@@ -83,6 +89,7 @@ class Requests extends CI_Controller {
 
 				$val = $this->check( $leader[ 'leader_id' ] );
 				if ( $val == 1 || $val == 3 ) {
+
 					$this->RequestsModel->updateFullRequest( $leader );
 
 					$requestID = $this->RequestsModel->addRequest( $request );
@@ -96,14 +103,14 @@ class Requests extends CI_Controller {
 					
 				} else if ( $val == 2 ) {
 					$msg = "<div class='alert alert-danger'>
-                          لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
+                          لا يمكنك طلب أعضاء قبل مضي يوم على آخر طلب لك, يرجى المحاولة لاحقاً!
                           </div>";
 				}
 			}
 		} else {
 			$msg = "<div class='alert alert-danger'>" . validation_errors() . "</div>";
 		}
-		echo $msg;
+		//echo $msg;
 	}
 
 	public function addRequest() {
@@ -133,6 +140,7 @@ class Requests extends CI_Controller {
 				           $r
 					       </div>";
 				//echo "<script> window.location.href = '" . base_url() . "requests'; </script>";
+
                 $rid = $this->RequestsModel->addRequest( $request );
 				$this->distributeAmbassadors( $rid );
 			}else{
@@ -148,8 +156,8 @@ class Requests extends CI_Controller {
 			
 		} else if ( $val == 2 ) {
 			$msg = "<div class='alert alert-danger'>
-                     لا يمكنك طلب أعضاء قبل مضي ثلاث أيام على آخر طلب لك, يرجى المحاولة لاحقاً!
-                     </div>";
+                      لا يمكنك طلب أعضاء قبل مضي يوم على آخر طلب لك, يرجى المحاولة لاحقاً!
+                      </div>";
 		}
 		echo $msg;
 	}
@@ -166,7 +174,9 @@ class Requests extends CI_Controller {
 			$data[ 'leader_name' ] = $_POST[ 'leaderName' ];
 			$data[ 'leader_link' ] = $_POST[ 'leaderLink' ];
 			$data[ 'team_link' ] = $_POST[ 'teamLink' ];
+
 			$this->RequestsModel->updateLeaderInfo( $data );
+
 			$msg = "<div class='alert alert-success'>
                 تم تعديل بياناتك بنجاح
                 </div>";
@@ -194,6 +204,7 @@ class Requests extends CI_Controller {
 						if ($amb['messenger_id'] != 0) {
 							
 							$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAMnL65BxDAazaJg24ZCdVKWMtjd2TpdBUfI8wwPkScrurtsXKujqb0h1NZBZBvOCIJHg9oc6rHSz5iaa9l1eNHi4g4H1EQMmPHt16OS0ecWDUXI3ZBTTE9C0MDxvQiH0J7QkkqlFghWsOm3q81ZBQ6ZCoylt7faxM3ZAHzehtQZC';
+              
 		      				/*initialize curl*/
 		      				$ch = curl_init($url);
 							$response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader['team_link']."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader['uniqid'].$leader['id']."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
@@ -244,6 +255,7 @@ class Requests extends CI_Controller {
       		/* curl setting to send a json post data */
       		$this->curlSetting($ch,$jsonData);
 		}//if
+
 	}
 
 	public function deleteLeaderRequest() {
@@ -267,7 +279,6 @@ class Requests extends CI_Controller {
 		$this->GeneralModel->remove( $id, 'leader_request', 'Rid' );
 		redirect( base_url() . 'requests/deleteLeaderRequest' );
 	}
-	
 
  	public function jsonData($id,$msg)
 	{

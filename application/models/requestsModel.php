@@ -131,7 +131,7 @@ class RequestsModel extends CI_Model {
 			return $conn->error;
 		}
 	} //addRequest
-	
+
 	public function updateRequest( $id ) {
 
 		$this->db->set( 'is_done', 1, FALSE );
@@ -161,6 +161,18 @@ class RequestsModel extends CI_Model {
 			return $conn->error;
 		}
 	} //get_data
+
+	public function get_leavers($request_id) {
+		$query = "SELECT join_following_team FROM ambassador WHERE join_following_team = 2 AND request_id = ".$request_id;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$conn->close();
+			return $done;
+		} else {
+			return $conn->error;
+		}
+	}
 
 
 	public function update_data( $val, $id ) {
@@ -197,15 +209,15 @@ class RequestsModel extends CI_Model {
 
 	public function updateFullRequest( $leader ) {
 
-		$query = "UPDATE leader_info SET 
-            leader_name='"          . $leader[ 'leader_name' ] . "' , 
-            leader_link='"          . $leader[ 'leader_link' ] . "', 
+		$query = "UPDATE leader_info SET
+            leader_name='"          . $leader[ 'leader_name' ] . "' ,
+            leader_link='"          . $leader[ 'leader_link' ] . "',
             leader_gender='"        . $leader[ 'leader_gender' ] . "',
-            team_name='"            . $leader[ 'team_name' ] . "', 
-            team_link='"            . $leader[ 'team_link' ] . "', 
-            uniqid='"               . $leader[ 'uniqid' ] . "', 
-            leaders_team_name = '"  . $leader['leaders_team_name']."', 
-            leader_rank = '"        . $leader['leader_rank']."' 
+            team_name='"            . $leader[ 'team_name' ] . "',
+            team_link='"            . $leader[ 'team_link' ] . "',
+            uniqid='"               . $leader[ 'uniqid' ] . "',
+            leaders_team_name = '"  . $leader['leaders_team_name']."',
+            leader_rank = '"        . $leader['leader_rank']."'
         WHERE id=" . $leader[ 'leader_id' ];
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );

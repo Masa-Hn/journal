@@ -1,5 +1,6 @@
-<? $this->load->model( 'AmbassadorModel' );
-$this->load->model( 'SignUpModel' );
+<? 
+$this->load->model('AmbassadorModel');
+$this->load->model('SignUpModel');
 if (isset($_GET['hub_verify_token'])) { 
     if ($_GET['hub_verify_token'] === 'SARA') {
         echo $_GET['hub_challenge'];
@@ -14,8 +15,8 @@ if (isset($_GET['hub_verify_token'])) {
 $input = json_decode(file_get_contents('php://input'), true);
 if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
 
-	//if ($input['entry'][0]['id']='100360891928932') {
-		$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBAMNQyUiRS7CQlEyMslpg4leReYY8qIzgTPNFQUMpMNu2sezWyMWTlWAy2w50IIDnTof0gcvdMZBxNbEXnER3mehouK8T0oFPO7B630QFZCswKgsrsSJdb8YjqpQGuICuSldBGvfZBY2JNxZAu42BFVUsE8ftEAZDZD';
+	if ($input['entry'][0]['id']=='100360891928932') {
+		$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBANJzrUveRDyOhZCJQ1yHetlvPQY7IHgTbs0V3iGGu0g9XDWCaMTFI8hko2dZBJUXJwwzHwORt5Oz7yvMDUg9qyZCZCvoPk818vJZCKMkNcTtympZAcB7dD15isQ1yfvDXp3Hivh6Rvy5OEO3kc8uNdx098ptQdwQZDZD';
 		
 		$sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
 	    $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
@@ -31,9 +32,9 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
 
         $result=$ambassador->getById($requestNo);
 
-        if($result->num_rows > 0){
+        if(count((array)$result) > 0){ 
         	$ambassador->updateMessengerId($requestNo,$sender);
-        	if (($result->request_id) != 0) {
+        	if (! is_null($result->request_id)) {
         		$requestInfo = new SignUpModel();
         		$request=$requestInfo->getRequestInfo($result->request_id);
         		$leader_info=$requestInfo->getLeaderInfo($request->leader_id);
@@ -48,7 +49,7 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
         else{
           $response="شكرا لرسالتك، هناك خطأ في الإرسال. حيث أن رقم الطلب الذي قمت بإرساله غير موجود. " .'\n'. "لطفا قم بمراسلتنا يدويا هنا".'\n'. "https://www.facebook.com/taheelofosboha";
         }
-
+//$response = $requestNo;
 		/*initialize curl*/
 	    $ch = curl_init($url);
 	    /*prepare response*/
@@ -76,13 +77,15 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
 	    }
 
 
-	//}//if Ambassador
+	}//if Ambassador
 	else{
 		$sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
 	    $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
 	    $entryID=$input['entry'][0]['id'];
 	    $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBAFFi0yMQidptQyKTdoOc4ZAqSyj295bkGT9i35bTpdS4UIxCB1UYBSdibNF6QoJIM17H01zJZAog75ucBhyby46tAqhSNAtvAW9WZBXHxCjqiI2bHq0Ph1FXdu5hgBSeMOKxEkMP56RtWp9ZA6dlwJm8FFVIegZDZD';
 
+        //$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAQ3QVDPtMoBANJzrUveRDyOhZCJQ1yHetlvPQY7IHgTbs0V3iGGu0g9XDWCaMTFI8hko2dZBJUXJwwzHwORt5Oz7yvMDUg9qyZCZCvoPk818vJZCKMkNcTtympZAcB7dD15isQ1yfvDXp3Hivh6Rvy5OEO3kc8uNdx098ptQdwQZDZD';
+        
 	    /*initialize curl*/
 	    $ch = curl_init($url);
 	    /*prepare response*/

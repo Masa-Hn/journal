@@ -23,31 +23,42 @@
             </h1>  
             <br>
             <h5>
-              مشروع صناعة القُراء أصبوحة 180، ينشط حاليًا عبر منصة الفيسبوك عن طريق مجموعات خاصة تُسمى أفرقة المتابعة يُشرف عليها قائدٌ مٌدرب ليتابع قراءتك ويُشجعك.
+              مشروعنا أصبوحة ١٨٠ ينشط حاليا عبر منصة الفيسبوك فقط. حيث هناك 
+              <span style="color: #197439; font-weight: 700;"> مشرف للقراءة </span>
+              تم تدريبه ليتابع ويشجع كل قارئ جديد وذلك عن طريقة مجموعة على منصة الفيسبوك 
+
+              <span style="color: #197439; font-weight: 700;"> (Facebook Group) </span>
             </h5>
             <h5>
-              للدخول للمجموعة سوف يطلب منك 
-                <strong>الكود</strong>
-               التالي              
+              للدخول إلى مجموعة الفيسبوك سوف يطلب منك 
+             <span style="color: #197439; font-weight: 700;">  الكود </span>
+                التالي 
+
             </h5>
             <div class="col-lg-12 col-sm-12 text-center" dir="rtl">
-
-              <button class="genric-btn primary circle arrow" onclick="copyCode()"  id="code">
+                <div class="container_centered">
+                  <img class="d-flex mx-auto img-fluid code-img" src="<?php echo base_url()?>assets/sign_up_assests/img/code.png" alt="">
+                  <div class="centered">
+                    <h4 style="  font-weight: bold;">
+                      <span class="team-code" id="code">
+                        <?php echo $_SESSION['team_info']['leader_info']->uniqid .$_SESSION['team_info']['leader_info']->id ; ?>
+                      </span>
+                    </h4>
+                  </div>
+              </div>
+              <!-- <button class="genric-btn primary circle arrow" onclick="copyCode()"  id="code">
                   <?php echo $_SESSION['team_info']['leader_info']->uniqid .$_SESSION['team_info']['leader_info']->id ; ?>
               </button>
-            </div>
+             --></div>
             <h5>
-              لحفظ الكود قم بكتابته على ورقة
+              احفظ الكود عن طريق كتابته على ورقة
               <br>
                <strong> أو   </strong>
                تصوير الشاشة
-              <br>
-               <strong> أو   </strong>
-               <strong> <span class="sp-green">انقر على الكود لنسخه </span></strong>
             </h5>
           </div>
         <div class="col-lg-12 col-sm-12 text-center btn-left container_centered icon-bar-left" dir="rtl" style="top: 90%">
-          <a href="javascript:next('team_info')" class="genric-btn circle next-info" id="leader_info" style=" font-size: 100%">
+          <a href="javascript:copyCode()" class="genric-btn circle next-info" id="leader_info" style=" font-size: 100%">
                 مستعد للانضمام للفريق
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
           </a>

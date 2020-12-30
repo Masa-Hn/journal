@@ -36,8 +36,7 @@
                     <label for="loginemail">أدخل بريدك الالكتروني</label>
                     <input type="email" name="loginemail" id="loginemail" required onblur="loginEmailValidation( this.value)">
                     <span class="error" id="loginemailError">لطفًا أدخل بريدك الالكتروني</span>
-                    <span class="error" id="loginemailFormatError">أدخل بريدك بشكلٍ صحيح</span>       
-
+                    <span class="error" id="loginemailFormatError">أدخل بريدك بشكلٍ صحيح</span>
                   </div>
                   <div class="CTA">
                     <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkLoginEmail()" style="color: #ffff;">
@@ -64,16 +63,13 @@
                 <p>
                   هذا سوف يساعدنا على ترصيد قراءتك الأسبوعية و تكريم المتميزين
                 </p>
-              </div>
-              <div class="form-group" id="errorMsg">
-                <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
-                <span id="loadingMsg" style="color: #197439;"></span>
+                <span style="color: darkred"> * معلومات مطلوبة</span>
               </div>
               <div class="signup form-peice" dir="rtl">
-                <form class="signup-form" >
+                <form class="signup-form" id="form" method="POST">
                   <div class="form-group" id="errorMsg">
-                      <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
-                      <span id="loadingMsg" style="color: #197439;"></span>
+                 <!--      <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
+                      <span id="loadingMsg" style="color: #197439;"></span> -->
                     <span id="errorMsgP">
                       <?php 
                         if(!empty($errorMsg)){
@@ -84,13 +80,14 @@
                     </span>
                   </div>
                   <div class="form-group">
+                    <span style="color: darkred"> * اسمك كما هو مسجل في الفيسبوك </span>
                     <input type="text" name="username" id="username" class="name" placeholder="اسمك الكامل " onblur="checkUserName(this.value)">
                     <br>
                     <br>
                     <span class="error" id="usernameError"> لطفًا أدخل اسمك الكامل</span>
                   </div>
                   <div class="form-group">
-                    <label for="email"></label>
+                    <span style="color: darkred"> * </span>
                     <input type="email" name="email" id="email" class="email" oninvalid="this.setCustomValidity('لطفًا أدخل بريدك الالكتروني بشكلٍ صحيح')"
                             oninput="this.setCustomValidity('')" 
                             placeholder="بريدك الالكتروني" 
@@ -101,7 +98,11 @@
                     <span class="error" id="emailFormatError">أدخل بريدك بشكلٍ صحيح</span>       
                   </div>
                   <div class="form-group"> 
-                    <label>ما هو جنسك </label>
+                    <label>
+                      <span style="color: darkred"> * </span>
+                  
+                      ما هو جنسك 
+                    </label>
                     <div class="form-group"> 
                       <label class="radio-label"> 
                         أنثى
@@ -115,6 +116,7 @@
                   </div>
                   <div class="form-group">
                     <label >
+                       <span style="color: darkred"> * </span>
                       قمنا بتجهيز قائد لك تم تدريبه لمتابعتك
                             وتشجيعك، ماذا تفضل أن يكون جنس القائد؟
                     </label>
@@ -132,6 +134,10 @@
                         <input type="radio" value="any" name="leader_gender"id="leader_any">
                       </label>
                     </div>
+                  </div>
+                  <div class="form-group" id="errorMsg">
+                    <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
+                    <span id="loadingMsg" style="color: #197439;"></span>
                   </div>
                   <div class="CTA">
                     <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkData()" style="color: #ffff;">
@@ -151,7 +157,7 @@
       </div>
     </section>
     <!-- End Banner Area -->
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/registration.js"></script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/fbLogin.js"></script>

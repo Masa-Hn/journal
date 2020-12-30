@@ -33,6 +33,7 @@
               </select>
             <br>
             <a href="javascript:checkAnswer()" class="genric-btn primary circle ">التالي <span class="lnr lnr-arrow-right"></span></a>
+            <a href="javascript:next('page_4')" class="genric-btn primary circle ">السابق <span class="lnr lnr-arrow-right"></span></a>
           </div>
           <div class="col-lg-4 col-sm-12">
               <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/wonder.png" alt="" alt="" style="width: 80%">

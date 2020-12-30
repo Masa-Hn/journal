@@ -41,22 +41,24 @@ class Export extends CI_Controller {
         // set Header
         $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Id');
         $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Book Name');
-        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Writer');
+        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'publisher');
         $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Brief');
         $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Type'); 
-        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Found');       
-        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Link');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Publisher'); 
+        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Found');       
+        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Link');       
 
         // set Row
         $rowCount = 2;
         foreach ($SuggestionBooks as $element) {
             $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['id']);
             $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['book_name']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['writer']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['publisher']);
             $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['brief']);
             $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['type']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['found']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['link']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['publisher']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['found']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['link']);
 
             $rowCount++;
         }
