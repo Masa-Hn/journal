@@ -1,11 +1,7 @@
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-	</script>
 
 	<a href="#" data-toggle="modal" data-target="#newReqModal" id="reqModalBtn"><img src="<?php echo base_url() ?>admin/img/newmembers.png" width="30px">  قائمة الأعضاء الجدد</a>
 	<br>
@@ -53,8 +49,9 @@
 								//to counte how many members left
 								$rid = $amb['request_id'];
 								$leavers = $this->requestsModel->get_leavers($rid)->num_rows;
-								$teamCount = 20; //to be retrieved from the base Database
-								$leader = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'leader_id')->fetch_assoc();
+                                $leader = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'leader_id, current_team_count')->fetch_assoc();
+								$teamCount = $leader['current_team_count']; //to be retrieved from the base Database
+								
 								$leader_id = $leader['leader_id'];
 								//end process
 								?>
@@ -101,42 +98,7 @@
                 <div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h3 class="modal-title">إضافة رابط السفير </h3>
-<<<<<<< Updated upstream
-				</div>
-                <div class="modal-body">
-                    <?php
-					if(empty($info) == true){
-						if(isset($ambassadors)){ ?>
-                    <div class="contact100-form validate-form" >
-                        <span class="contact100-form-title">
-                            قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة 180، ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
-                        </span>
-                        <div id="msg_<?php echo $id; ?>"></div>
-                        <div align="center" style="display: none" id="copy_link">
-                            <img style="align-items: center" src="<?php echo base_url()?>/admin/img/profile_link.jpg">
-                        </div>
-                        
-                        <a class="" onclick="showImg()" id="img-btn">كيفية نسخ الرابط؟</a>
-                        <br>
-                        <!--
-                        <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;">
-                            <input class="input100" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
-                            <input style="display: none;" type="text" id="amb_id" name="amb_id" value="<?php echo $id; ?>">
-                            <span class="focus-input100"></span>
-                        </div> -->
-                        <div class="form-group">
-							<input class="form-control" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
-						</div>          	
-                        
-                        <button class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;" onclick="addProfileLink(<?php echo $id; ?>)">
-                            حفظ
-                        </button>
-                    </div><?php }} ?>
-                </div>
-            </div>
-        </div>
-    </div>
-=======
+
 				</div>
                 <div class="modal-body">
                     <?php
@@ -200,7 +162,6 @@
 						</div>
 				</div>
 		</div>
->>>>>>> Stashed changes
 
 	<script type="text/javascript">
 		$( document ).ready( function () {
@@ -241,11 +202,6 @@
 
 				if ( success == true ) {
 					document.getElementById( "notJoined" + id ).checked = false;
-<<<<<<< Updated upstream
-                    
-=======
-
->>>>>>> Stashed changes
 					$("#profile_link_save").modal("show");
 					$.ajax( {
 						url: base_url + 'NewMembersList/joined_ambassador',
@@ -264,13 +220,8 @@
 						}
 
 					} );
-<<<<<<< Updated upstream
 					
 					// add ambassador to marks 
-=======
-
-					// add ambassador to marks
->>>>>>> Stashed changes
                     var name = document.getElementById("ambassador_"+id).textContent;
                     $.ajax({
                         type: "POST",
@@ -335,10 +286,7 @@
 							console.log( error );
 						}
 					} );
-<<<<<<< Updated upstream
-					
-=======
->>>>>>> Stashed changes
+
 					// add & edit ambassador status
                     var name = document.getElementById("ambassador_"+id).textContent;
                     //var msg  = 'هل انت متأكد من ان '+name+' لم ينضم للفريق؟';
@@ -450,13 +398,8 @@
 			confirm( 'لقد تم نسخ الرسالة, بإمكانك إرسالها إلى السفير!' )
 			console.log( x );
 		}
-<<<<<<< Updated upstream
 		
 		// add ambassador to marks 
-=======
-
-		// add ambassador to marks
->>>>>>> Stashed changes
 		/*
         function addmem(){
 
@@ -477,15 +420,9 @@
                 });
             }
         }*/
-<<<<<<< Updated upstream
         
         function addProfileLink(id){
             
-=======
-
-        function addProfileLink(id){
-
->>>>>>> Stashed changes
             var profile_url = document.getElementById("profile_link_"+id).value;
             var base_url = "<?php echo base_url()?>";
 
@@ -508,47 +445,39 @@
 
             });
 		}
-<<<<<<< Updated upstream
-        
-=======
 
->>>>>>> Stashed changes
         function showImg(){
             $("#copy_link").css("display","block");
             $("#img-btn").css("display","none");
         }
-<<<<<<< Updated upstream
+
+
+        function fill_back(){
+            var base_url = "<?php echo base_url();?>";
+            var counter = <?php echo $leavers;?>;
+            var gender = document.getElementById('gender').value;
+            var leader_id = <?php echo $leader_id;?>;
+            var teamCount = <?php echo $teamCount;?>;
+
+            $.ajax({
+                    url: base_url + 'NewMembersList/newRequest',
+                    type: 'POST',
+                    data: {
+                            gender: gender,
+                            num: counter,
+                            leader_id: leader_id,
+                            teamCount: teamCount
+                    },
+                    dataType: 'text',
+                    success: function (msg) {
+
+                            $( '#msg_leavers' ).html( msg );
+                            //location.reload();
+                    },
+                    error: function ( error ) {
+                            console.log( error );
+                    }
+
+            });
+        }
 	</script>
-=======
-
-function fill_back(){
-	var base_url = "<?php echo base_url();?>";
-	var counter = <?php echo $leavers;?>;
-	var gender = document.getElementById('gender').value;
-	var leader_id = <?php echo $leader_id;?>;
-	var teamCount = <?php echo $teamCount;?>;
-
-	$.ajax({
-			url: base_url + 'NewMembersList/newRequest',
-			type: 'POST',
-			data: {
-					gender: gender,
-					num: counter,
-					leader_id: leader_id,
-					teamCount: teamCount
-			},
-			dataType: 'text',
-			success: function (msg) {
-
-					$( '#msg_leavers' ).html( msg );
-					//location.reload();
-			},
-			error: function ( error ) {
-					console.log( error );
-			}
-
-	});
-}
-
-	</script>
->>>>>>> Stashed changes
