@@ -78,7 +78,6 @@
 	}
 </style>
 <body>
-	<button id="team_btn">Team</button>
 	<?php
 	//$this->StatisticsModel->incrementVisitors( 1 );
 
