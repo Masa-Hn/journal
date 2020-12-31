@@ -14,8 +14,8 @@ class AmbassadorModel extends CI_Model {
 
 	public function insertAmbassador($ambassador)
 	{
-		return $this->db->insert('ambassador',$ambassador);
-
+		$this->db->insert('ambassador',$ambassador);
+		return  $this->db->insert_id();
 	}//checkAvailableRequests
 
 	public function countRequests($request_id)
@@ -48,7 +48,7 @@ class AmbassadorModel extends CI_Model {
 	public function checkAmbassador($fb_id)
 	{
 		$where = "fb_id = '".$fb_id."'";
-		$this->db->select('request_id, created_at');
+		$this->db->select('id, request_id, created_at');
 		$this->db->where($where);
     	$this->db->from('ambassador');
 	    $this->db->limit(1);

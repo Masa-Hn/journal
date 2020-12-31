@@ -38,7 +38,7 @@
                 </p>
                 <h5> رقمك طلبك هو</h5>
                 <h1><span id="msg" class="pm sp-1" style="color: #289506">                  
-                  <?php echo $ambassador[0]->id;?>
+                  <?php echo $ambassadorID;?>
                 </span></h1>
                 <p class="pm">
                   حتى نتمكن من التواصل معك مباشرة فور تجهيز فريق القراءة الخاص بك.
