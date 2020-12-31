@@ -70,11 +70,7 @@ class NewMembersList extends CI_Controller {
 			$profile = $this->input->post('profile_link');
 			$id      = $this->input->post('amb_id');
 			$data['profile_link'] = $profile;
-<<<<<<< Updated upstream
-        
-=======
 
->>>>>>> Stashed changes
 			if ($profile!=null){
 				$this->requestsModel->updateAmbassadorLink($id,$profile);
                 $msg = "<div class='alert alert-success'>
@@ -90,8 +86,7 @@ class NewMembersList extends CI_Controller {
 			//echo '<script type="text/javascript">
 			//	   location.reload();
 			//	   </script>';
-<<<<<<< Updated upstream
-=======
+
 		}
 
 		function newRequest(){
@@ -105,7 +100,6 @@ class NewMembersList extends CI_Controller {
 			if(isset($id)){
 				echo "<div class='alert alert-success'> سيتم إرسال ". $data['members_num'] . " أعضاء لك قريباً </div>";
 			}
->>>>>>> Stashed changes
 		}
 }
 ?>
