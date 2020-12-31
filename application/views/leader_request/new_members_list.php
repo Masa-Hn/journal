@@ -96,47 +96,11 @@
 	</div>
 
     <div class="modal fade" role="dialog" id="profile_link_save" >
-		<div class="modal-dialog">
+			<div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h3 class="modal-title">إضافة رابط السفير </h3>
-<<<<<<< Updated upstream
-				</div>
-                <div class="modal-body">
-                    <?php
-					if(empty($info) == true){
-						if(isset($ambassadors)){ ?>
-                    <div class="contact100-form validate-form" >
-                        <span class="contact100-form-title">
-                            قائدنا .. ساعد القارئ الجديد لينضم لمجموعة سفراء أصبوحة 180، ثم قم بإدخال رابط صفحته على الفيسبوك ليتم قبوله في مجموعة سفراء أصبوحة
-                        </span>
-                        <div id="msg_<?php echo $id; ?>"></div>
-                        <div align="center" style="display: none" id="copy_link">
-                            <img style="align-items: center" src="<?php echo base_url()?>/admin/img/profile_link.jpg">
-                        </div>
-                        
-                        <a class="" onclick="showImg()" id="img-btn">كيفية نسخ الرابط؟</a>
-                        <br>
-                        <!--
-                        <div class="wrap-input100" style="  border-bottom: 2px solid #d9d9d9;">
-                            <input class="input100" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
-                            <input style="display: none;" type="text" id="amb_id" name="amb_id" value="<?php echo $id; ?>">
-                            <span class="focus-input100"></span>
-                        </div> -->
-                        <div class="form-group">
-							<input class="form-control" type="url" id="profile_link_<?php echo $id; ?>" name="profile_link" placeholder="الرجاء إدخال رابط صفحة السفير">
-						</div>          	
-                        
-                        <button class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;" onclick="addProfileLink(<?php echo $id; ?>)">
-                            حفظ
-                        </button>
-                    </div><?php }} ?>
-                </div>
-            </div>
-        </div>
-    </div>
-=======
 				</div>
                 <div class="modal-body">
                     <?php
@@ -200,40 +164,8 @@
 						</div>
 				</div>
 		</div>
->>>>>>> Stashed changes
 
 	<script type="text/javascript">
-		$( document ).ready( function () {
-			$('#newReqModal').modal({
-    backdrop: 'static',
-    keyboard: false
-})
-			var lst = document.querySelectorAll( ".joined" );
-			var flag = false;
-			var i;
-			var info = "<?php echo (empty($info) == false)? $info : '';?>";
-			for ( i = 0; i < lst.length; i += 2 ) {
-				if ( lst[ i ].checked == true || lst[ i + 1 ].checked == true ) {
-					flag = true;
-					console.log(flag);
-				} else {
-					flag = false;
-					break;
-				}	
-			}
-			if(info == ""){
-				if ( !flag ) {
-				$( "#newReqModal" ).modal( "show" );
-			}else{
-				$( "#newReqModal" ).modal( "hide" );
-			}
-			}else{
-				$( "#newReqModal" ).modal( "hide" );
-			}
-			
-			console.log( flag );
-		} );
-
 		function joined( id ) {
 			if ( document.getElementById( "joined" + id ).checked == true ) {
 				var success = confirm( "هل أنت متأكد من أن العضو تم استقباله؟" );
@@ -241,11 +173,6 @@
 
 				if ( success == true ) {
 					document.getElementById( "notJoined" + id ).checked = false;
-<<<<<<< Updated upstream
-                    
-=======
-
->>>>>>> Stashed changes
 					$("#profile_link_save").modal("show");
 					$.ajax( {
 						url: base_url + 'NewMembersList/joined_ambassador',
@@ -264,13 +191,9 @@
 						}
 
 					} );
-<<<<<<< Updated upstream
-					
-					// add ambassador to marks 
-=======
 
 					// add ambassador to marks
->>>>>>> Stashed changes
+
                     var name = document.getElementById("ambassador_"+id).textContent;
                     $.ajax({
                         type: "POST",
@@ -335,10 +258,6 @@
 							console.log( error );
 						}
 					} );
-<<<<<<< Updated upstream
-					
-=======
->>>>>>> Stashed changes
 					// add & edit ambassador status
                     var name = document.getElementById("ambassador_"+id).textContent;
                     //var msg  = 'هل انت متأكد من ان '+name+' لم ينضم للفريق؟';
@@ -396,7 +315,7 @@
 		}
 
 		$( document ).ready( function () {
-			var counter = <?php echo $leavers;?>;
+			var counter = <?php echo (isset($leavers))? $leavers : 0;?>;
 			var lst = document.querySelectorAll( ".joined" );
 			var flag = false;
 			var i;
@@ -450,13 +369,7 @@
 			confirm( 'لقد تم نسخ الرسالة, بإمكانك إرسالها إلى السفير!' )
 			console.log( x );
 		}
-<<<<<<< Updated upstream
-		
-		// add ambassador to marks 
-=======
 
-		// add ambassador to marks
->>>>>>> Stashed changes
 		/*
         function addmem(){
 
@@ -477,15 +390,8 @@
                 });
             }
         }*/
-<<<<<<< Updated upstream
-        
-        function addProfileLink(id){
-            
-=======
 
         function addProfileLink(id){
-
->>>>>>> Stashed changes
             var profile_url = document.getElementById("profile_link_"+id).value;
             var base_url = "<?php echo base_url()?>";
 
@@ -508,18 +414,10 @@
 
             });
 		}
-<<<<<<< Updated upstream
-        
-=======
-
->>>>>>> Stashed changes
         function showImg(){
             $("#copy_link").css("display","block");
             $("#img-btn").css("display","none");
         }
-<<<<<<< Updated upstream
-	</script>
-=======
 
 function fill_back(){
 	var base_url = "<?php echo base_url();?>";
@@ -551,4 +449,3 @@ function fill_back(){
 }
 
 	</script>
->>>>>>> Stashed changes

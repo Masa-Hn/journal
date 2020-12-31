@@ -6,7 +6,7 @@ class Statistics extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model( 'StatisticsModel' );
-        
+
         if(!$this->session->userdata('logged_in')){
             redirect(base_url("login"));
         }
@@ -15,7 +15,7 @@ class Statistics extends CI_Controller {
 	public
 	function index() {
 
-		$data[ 'title' ] = 'الإحصائيات';	
+		$data[ 'title' ] = 'الإحصائيات';
 		$this->load->view( 'management_book/templates/header', $data );
 		$this->load->view( 'management_book/templates/navbar' );
 		$this->load->view( 'management_book/statistics', $data );
@@ -28,7 +28,7 @@ class Statistics extends CI_Controller {
 	//	$ip_address = $_POST[ 'ip_address' ];
 		$amb_id = $_POST['id'];
 		$clicks = $this->StatisticsModel->button_clicks( $amb_id, 'ambassador', 'code_button' );
-		
+
 		if ( $clicks->num_rows() > 0 ) {
 			$res = $clicks->row();
 			if($res->code_button == 0){
@@ -45,8 +45,9 @@ class Statistics extends CI_Controller {
 	public
 	function team_link_button() {
 		//$ip_address = $_POST[ 'ip_address' ];
+		$msg = "";
 		$amb_id = $_POST['id'];
-		
+
 		$clicks = $this->StatisticsModel->button_clicks( $amb_id, 'ambassador', 'team_link_button' );
 
 		if ( $clicks->num_rows() > 0 ) {
@@ -54,8 +55,9 @@ class Statistics extends CI_Controller {
 			if($res->team_link_button == 0){
 			$this->StatisticsModel->update_data( $amb_id, 'team_link_button', 1, 'ambassador' );
 			}
-			
-		}/* else {
+
+		}
+		/* else {
 			$data[ 'ip_address' ] = $ip_address;
 			$data[ 'team_link_button' ] = 1;
 			$this->StatisticsModel->insert_data( $data, 'buttons_statistics' );
@@ -75,7 +77,7 @@ class Statistics extends CI_Controller {
 				$id = $res->id;
 			$this->StatisticsModel->update_data( $id, 'leader_link_button', 1, 'buttons_statistics' );
 			}
-			
+
 		} else {
 			$data[ 'ip_address' ] = $ip_address;
 			$data[ 'leader_link_button' ] = 1;
