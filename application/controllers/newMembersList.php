@@ -65,40 +65,40 @@ class NewMembersList extends CI_Controller {
 		}
 	}
 
-	function saveProfileLink()
-		{
-			$profile = $this->input->post('profile_link');
-			$id      = $this->input->post('amb_id');
-			$data['profile_link'] = $profile;
+	function saveProfileLink(){
+        
+        $profile = $this->input->post('profile_link');
+        $id      = $this->input->post('amb_id');
+        $data['profile_link'] = $profile;
 
-			if ($profile!=null){
-				$this->requestsModel->updateAmbassadorLink($id,$profile);
-                $msg = "<div class='alert alert-success'>
-                          تم الحفظ بنجاح
-                          </div>";
-                echo $msg;
-			}else{
-                $msg = "<div class='alert alert-danger'>
-                          حدث خطأ ما!
-                          </div>";
-                echo $msg;
-            }
-			//echo '<script type="text/javascript">
-			//	   location.reload();
-			//	   </script>';
-		}
+        if ($profile!=null){
+            $this->requestsModel->updateAmbassadorLink($id,$profile);
+            $msg = "<div class='alert alert-success'>
+                      تم الحفظ بنجاح
+                      </div>";
+            echo $msg;
+        }else{
+            $msg = "<div class='alert alert-danger'>
+                      حدث خطأ ما!
+                      </div>";
+            echo $msg;
+        }
+        //echo '<script type="text/javascript">
+        //	   location.reload();
+        //	   </script>';
+    }
 
-		function newRequest(){
-			$data['gender'] = $_POST['gender'];
-			$data['leader_id'] = $_POST['leader_id'];
-			$data['members_num'] = $_POST['num'];
-			$data['current_team_count'] = $_POST['teamCount'];
+    function newRequest(){
+        $data['gender'] = $_POST['gender'];
+        $data['leader_id'] = $_POST['leader_id'];
+        $data['members_num'] = $_POST['num'];
+        $data['current_team_count'] = $_POST['teamCount'];
 
-			$id = $this->requestsModel->addRequest($data);
+        $id = $this->requestsModel->addRequest($data);
 
-			if(isset($id)){
-				echo "<div class='alert alert-success'> سيتم إرسال ". $data['members_num'] . " أعضاء لك قريباً </div>";
-			}
-		}
+        if(isset($id)){
+            echo "<div class='alert alert-success'> سيتم إرسال ". $data['members_num'] . " أعضاء لك قريباً </div>";
+        }
+    }
 }
 ?>

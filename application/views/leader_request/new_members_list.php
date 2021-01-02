@@ -93,12 +93,11 @@
 	</div>
 
     <div class="modal fade" role="dialog" id="profile_link_save" >
-		<div class="modal-dialog">
+			<div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h3 class="modal-title">إضافة رابط السفير </h3>
-
 				</div>
                 <div class="modal-body">
                     <?php
@@ -164,37 +163,6 @@
 		</div>
 
 	<script type="text/javascript">
-		$( document ).ready( function () {
-			$('#newReqModal').modal({
-    backdrop: 'static',
-    keyboard: false
-})
-			var lst = document.querySelectorAll( ".joined" );
-			var flag = false;
-			var i;
-			var info = "<?php echo (empty($info) == false)? $info : '';?>";
-			for ( i = 0; i < lst.length; i += 2 ) {
-				if ( lst[ i ].checked == true || lst[ i + 1 ].checked == true ) {
-					flag = true;
-					console.log(flag);
-				} else {
-					flag = false;
-					break;
-				}	
-			}
-			if(info == ""){
-				if ( !flag ) {
-				$( "#newReqModal" ).modal( "show" );
-			}else{
-				$( "#newReqModal" ).modal( "hide" );
-			}
-			}else{
-				$( "#newReqModal" ).modal( "hide" );
-			}
-			
-			console.log( flag );
-		} );
-
 		function joined( id ) {
 			if ( document.getElementById( "joined" + id ).checked == true ) {
 				var success = confirm( "هل أنت متأكد من أن العضو تم استقباله؟" );
@@ -344,7 +312,7 @@
 		}
 
 		$( document ).ready( function () {
-			var counter = <?php echo $leavers;?>;
+			var counter = <?php echo (isset($leavers))? $leavers : 0;?>;
 			var lst = document.querySelectorAll( ".joined" );
 			var flag = false;
 			var i;
@@ -420,7 +388,7 @@
                 });
             }
         }*/
-        
+
         function addProfileLink(id){
             
             var profile_url = document.getElementById("profile_link_"+id).value;
@@ -451,7 +419,6 @@
             $("#img-btn").css("display","none");
         }
 
-
         function fill_back(){
             var base_url = "<?php echo base_url();?>";
             var counter = <?php echo $leavers;?>;
@@ -477,7 +444,6 @@
                     error: function ( error ) {
                             console.log( error );
                     }
-
             });
         }
 	</script>

@@ -4,7 +4,7 @@
 	.card {
 		text-align: center;
 	}
-	
+
 	.card ul {
 		display: inline-block;
 		margin: 0;
@@ -15,39 +15,39 @@
 		list-style: none;
 		margin-top: 3%;
 	}
-	
+
 	.card ul h1 {
 		text-align: center;
 	}
-	
+
 	ul {
 		direction: rtl;
 	}
-	
+
 	.fa,
 	.list-group-item {
 		font-size: 1rem;
 	}
-	
+
 	.viewers,
 	.fa-eye,
 	.viewers:hover,
 	.fa-eye:hover {
 		color: #064500;
 	}
-	
+
 	.leavers,
 	.fa-sign-out,
 	.leavers:hover,
 	.fa-sign-out:hover {
 		color: #B40306;
 	}
-	
+
 	.title {
 		margin-bottom: 2%;
 		text-align: center;
 	}
-	
+
 	.fa-code,
 	.fa-user,
 	.fa-users,
@@ -61,13 +61,13 @@
 	.fa-external-link:hover {
 		color: #205d67;
 	}
-	
+
 	.modalBtn {
 		text-align: center;
 		font-size: 1 rem;
 		color: #205d67;
 	}
-	
+
 	.modalBtn:hover {
 		color: #205d67;
 		font-weight: bold
@@ -117,9 +117,9 @@
 
 						$is_done = $this->StatisticsModel->get_data( 'leader_request', 'Rid', 'is_done = 1' )->num_rows();
 						$not_done = $this->StatisticsModel->get_data( 'leader_request', 'Rid', 'is_done = 0' )->num_rows();
-						
+
 						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NOT NULL or request_id IS NULL' )->num_rows();
-						
+
 						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NULL' )->num_rows();
 						$male_amb = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'gender = "male" AND is_done=0' )->row();
 
