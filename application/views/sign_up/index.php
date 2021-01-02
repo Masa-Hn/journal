@@ -22,7 +22,7 @@
                 حقق هذا بانضمامك لمشروع صناعة القراء
                 الأكبر في الوطن العربي
               </h1>
-              <a href="javascript:next('page_2')" class="genric-btn primary circle arrow">انضم الآن  </a>
+              <a href="javascript:next('page_2')" class="genric-btn primary circle arrow">انضم الأن مجانًا </a>
             </div>
           </div>
         </div>
