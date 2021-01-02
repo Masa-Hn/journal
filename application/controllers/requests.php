@@ -188,39 +188,44 @@ class Requests extends CI_Controller {
 
 	public function distributeAmbassadors( $requestID ) {
 
-		$noneDistributedAmbassadors = $this->RequestsModel->getNoneDistributedAmbassadors();
 		$request = $this->RequestsModel->getRequest( $requestID )->fetch_array( MYSQLI_ASSOC );
 		$leader = $this->RequestsModel->getLeaderInfo( $request[ 'leader_id' ] )->fetch_array( MYSQLI_ASSOC );
 
-		$num_of_members = $request[ 'members_num' ];
+
+		if ($request[ 'gender' ] == 'any') {
+	      $ambassador_gender_condition="(gender = 'female' OR gender = 'male' OR gender = 'any')";
+	    }
+	    else{
+	      $ambassador_gender_condition="gender = '". $request[ 'gender' ] ."'";
+	    }
+
+	    $leader_gender_condition = "(leader_gender= '".$leader[ 'leader_gender' ] ."' OR leader_gender ='any')";
+
+	    $num_of_members = $request[ 'members_num' ];
 		
+		$noneDistributedAmbassadors = $this->RequestsModel->getNoneDistributedAmbassadors( $ambassador_gender_condition,$leader_gender_condition,$num_of_members);
+
 		if ( $noneDistributedAmbassadors->num_rows > 0 ) {
-
 			while ( $amb = $noneDistributedAmbassadors->fetch_array( MYSQLI_ASSOC ) ) {
-				if ( $num_of_members != 0 ) {
-					if ( ( $request[ 'gender' ] == $amb[ 'gender' ] || $request[ 'gender' ] == 'any' ) && ( $leader[ 'leader_gender' ] == $amb[ 'leader_gender' ] || $leader[ 'leader_gender' ] == 'any' ) ) {
+				//update request ID
+				$this->RequestsModel->updateAmbassador( $amb[ 'id' ], $requestID );
+				if ($amb['messenger_id'] != 0) {
+					//text amb			
+					$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBALGumgB9m4ZBo8gEOUHAJdHnzc7RBij6Alo1vDW4zdDkJFJBfNtn5saisV7ZCZAR09ARZBKPNzsdaVpGSB3zDbJP33gf3OKFnfDbw57IpghEZBg7zWWFtMTGILS0bEkSZByyYpL2N2iDzDgFM1IKT0opaNbZCS8jgZDZD';
+	              
+			      	/*initialize curl*/
+			      	$ch = curl_init($url);
+					$response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader['team_link']."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader['uniqid'].$leader['id']."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
+	        					/*prepare response*/
+					$jsonData =  $this->jsonData($amb['messenger_id'],$response);
+					/* curl setting to send a json post data */
+					$this->curlSetting($ch,$jsonData);
 
-						$this->RequestsModel->updateAmbassador( $amb[ 'id' ], $requestID );
-						if ($amb['messenger_id'] != 0) {
-							
-							$url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAMnL65BxDAazaJg24ZCdVKWMtjd2TpdBUfI8wwPkScrurtsXKujqb0h1NZBZBvOCIJHg9oc6rHSz5iaa9l1eNHi4g4H1EQMmPHt16OS0ecWDUXI3ZBTTE9C0MDxvQiH0J7QkkqlFghWsOm3q81ZBQ6ZCoylt7faxM3ZAHzehtQZC';
-              
-		      				/*initialize curl*/
-		      				$ch = curl_init($url);
-							$response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader['team_link']."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader['uniqid'].$leader['id']."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
-        					/*prepare response*/
-					     	$jsonData =  $this->jsonData($amb['messenger_id'],$response);
-					      	/* curl setting to send a json post data */
-					      	$this->curlSetting($ch,$jsonData);
-
-						}//if 
-            
-						$num_of_members--;
-					}
-				}
-			}
+				}//check messenger id 
+				
+			}//while
 		}
-		echo $num_of_members;
+		//echo $num_of_members;
 		$distributedAmbassadors = $this->RequestsModel->getDistributedAmbassadors( $requestID );
 		if ( $distributedAmbassadors->num_rows == $request[ 'members_num' ] ) {
 
