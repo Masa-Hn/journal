@@ -8,7 +8,7 @@
       exit();
   }
   if(isset($_SESSION['team_info'])){
-    $id =  $_SESSION['team_info']['ambassador'][0]->id; 
+ $id =  $_SESSION['team_info']['ambassador'][count( $_SESSION['team_info']['ambassador']) - 1]->id; 
   }
 
     $page_id = 14;

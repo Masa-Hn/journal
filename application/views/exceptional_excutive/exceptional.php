@@ -38,18 +38,20 @@ $rank = 22;
 				</div>
 				<div class="modal-body">
 					<?php
-					$leaders = $this->Exceptionalexcutivemodel->retrieve_leaders_exc( $supervisor, $rank );
+					$leaders = $this->ExceptionalExcutiveModel->retrieve_leaders_exc( $supervisor, $rank );
 					?>
 					<table class="table">
 						<thead>
 							<th>اسم القائد</th>
 							<th>تعديل البيانات</th>
 							<th>طلب أعضاء</th>
+							<th>آخر طلب</th>
 						</thead>
 						<tbody>
 							<?php
 							while ( $leader = $leaders->fetch_assoc() ) {
 								$id = $leader[ 'id' ];
+								$query = $this->ExceptionalExcutiveModel->leaderLastRequest($id)->fetch_assoc();
 								?>
 							<tr>
 								<td><a href="<?php echo $leader['leader_link'];?>" target="_blank" style="color:#214761"><i class="fa fa-external-link"></i> <?php echo $leader['leader_name'];?></a>
@@ -58,19 +60,24 @@ $rank = 22;
 								</td>
 								<td><a data-toggle="collapse" data-target="#add<?php echo $id;?>" style="color: #214761"><i class="fa fa-user-plus"></i></a>
 								</td>
+								<td>
+								<span><?php echo $query['date'];?></span>
+								<span>|</span>
+								<span><?php echo $query['members_num']; echo " "; echo ($query['members_num'] == 1 || $query['members_num'] == 2)? "عضو":"أعضاء";?> </span>
+								</td>
 							</tr>
 							<?php
 							if ( $leader[ 'leader_link' ] == null && $leader[ 'leader_gender' ] == null ) {
 								?>
 							<tr class="collapse" id="edit<?php echo $id;?>">
-								<td colspan="3">
+								<td colspan="4">
 									<div class="alert alert-warning" style="text-align: center">
 										لا يمكنك التعديل, لم يتم تسجيل بيانات القائد بعد..!
 									</div>
 								</td>
 							</tr>
 							<tr class="collapse edit" id="add<?php echo $id;?>">
-								<td colspan="3">
+								<td colspan="4">
 									<h3 style="text-align: center">طلب أعضاء جدد</h3>
 									<p id="msgAdd<?php echo $id;?>"></p>
 									<form enctype="multipart/form-data" method="post">
@@ -126,7 +133,7 @@ $rank = 22;
 							} else {
 								?>
 							<tr class="collapse edit" id="edit<?php echo $id;?>">
-								<td colspan="3">
+								<td colspan="4">
 									<h3 style="text-align: center">تعديل بيانات القائد</h3>
 									<p id="msgEdit<?php echo $id;?>"></p>
 									<form enctype="multipart/form-data" method="post">
@@ -172,7 +179,7 @@ $rank = 22;
 								</td>
 							</tr>
 							<tr class="collapse edit" id="add<?php echo $id;?>">
-								<td colspan="3">
+								<td colspan="4">
 
 									<h3 style="text-align: center">طلب أعضاء جدد</h3>
 									<p id="msgAdd2<?php echo $id;?>"></p>
