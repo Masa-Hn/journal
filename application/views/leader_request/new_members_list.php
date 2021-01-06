@@ -41,18 +41,15 @@
 						</thead>
 						<tbody>
 							<?php
-							$rid = 0;
-
 							while ( $amb = $ambassadors->fetch_array( MYSQLI_ASSOC ) ) {
 								$id = $amb[ 'id' ];
 
 								//to counte how many members left
 								$rid = $amb['request_id'];
-								$leavers = $this->requestsModel->get_leavers($rid)->num_rows;
-                                $leader = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'leader_id, current_team_count')->fetch_assoc();
-								$teamCount = $leader['current_team_count']; //to be retrieved from the base Database
-								
-								$leader_id = $leader['leader_id'];
+								if(!isset($_SESSION['Rid'])){
+									$_SESSION['Rid'] = $rid;
+								}
+								//$var = "<script>document.write(localStorage.setItem('Rid', '".$rid."'))</script>";
 								//end process
 								?>
 							<tr style="text-align: center; color:#214761 ">
@@ -132,6 +129,18 @@
             </div>
         </div>
     </div>
+
+<?php
+if(isset($_SESSION['Rid'])){
+$rid = $_SESSION['Rid'];
+//echo $rid;
+
+$leavers = $this->requestsModel->get_leavers($rid)->num_rows;
+$teamCount = 20; //to be retrieved from the base Database
+$leader = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'leader_id')->fetch_assoc();
+$leader_id = $leader['leader_id'];	
+}
+?>
 		<div class="modal fade" role="dialog" id="fill_back" >
 		<div class="modal-dialog">
 						<div class="modal-content">
