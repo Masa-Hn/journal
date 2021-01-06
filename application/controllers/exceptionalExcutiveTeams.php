@@ -15,7 +15,7 @@ class ExceptionalExcutiveTeams extends CI_Controller {
 		$exc[ 'title' ] = 'طلبات القادة التنفيذين';
 		$this->load->view( 'exceptional_excutive/header', $exc );
         
-		$pri = '+1+21'
+		$pri = '+1+21';
         $p = explode('+', $pri); 
 
         if(in_array(21, $p)){
@@ -28,7 +28,7 @@ class ExceptionalExcutiveTeams extends CI_Controller {
 	function exceptional() {
 		$exc[ 'title' ] = 'طلبات القادة الاستثنائيين';
 		$this->load->view( 'exceptional_excutive/header', $exc );
-		$pri = '+1+23'
+		$pri = '+1+23';
         $p = explode('+', $pri); 
 
         if(in_array(23, $p)){

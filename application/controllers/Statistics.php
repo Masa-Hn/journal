@@ -55,7 +55,6 @@ class Statistics extends CI_Controller {
 			if($res->team_link_button == 0){
 			$this->StatisticsModel->update_data( $amb_id, 'team_link_button', 1, 'ambassador' );
 			}
-
 		}
 		/* else {
 			$data[ 'ip_address' ] = $ip_address;

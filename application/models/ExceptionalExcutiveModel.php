@@ -88,6 +88,19 @@ class ExceptionalExcutiveModel extends CI_Model {
 		$conn = new mysqli( $servername, $username, $password, $dbname );
 		return $conn;
 	}
+	
+	public function leaderLastRequest( $id ) {
+
+		$query = "SELECT date,members_num FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$conn->close();
+			return$done;
+		} else {
+			return $conn->error;
+		}
+	}
 }
 
 ?>
