@@ -17,7 +17,7 @@ class RequestsModel extends CI_Model {
 
 	//get the none distributed ambassadors
 	public function getNoneDistributedAmbassadors($ambassador_gender,$leader_gender,$num_of_members) {
-		$query = "SELECT * FROM ambassador WHERE request_id is NULL AND ".$ambassador_gender." AND ".$leader_gender." ORDER BY created_at ASC LIMIT ".$num_of_members;
+		$query = "SELECT * FROM ambassador WHERE messenger_id <> 0 AND request_id is NULL AND ".$ambassador_gender." AND ".$leader_gender." ORDER BY created_at ASC LIMIT ".$num_of_members;
 
 		// $query = "SELECT * FROM ambassador WHERE request_id IS NULL";
 		$conn = $this->connectToDB();
