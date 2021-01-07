@@ -1,6 +1,8 @@
 <? 
 $this->load->model('requestsModel');
 $this->load->model('AmbassadorModel');
+$this->load->model('SignUpModel');
+
 if (isset($_GET['hub_verify_token'])) { 
     if ($_GET['hub_verify_token'] === 'OSBOHA180') {
         echo $_GET['hub_challenge'];
@@ -14,70 +16,62 @@ if (isset($_GET['hub_verify_token'])) {
 /* receive and send messages */
 $input = json_decode(file_get_contents('php://input'), true);
 if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
-        if ($input['entry'][0]['id']=='100360891928932') {
-        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAPK8WLuNIlmxZBkc1ogc1QHiM4nauGNrmnWT375PCJ1xEEyspT9wqGhBwzJZCVx2Y4cYXoXjcubDPydobOFzcvPK67W1UNxzLDE43Lp7ZCiAYW3G6Jn5RitCs4hSNQwTABMr2Pdd9NJTmwtmCsx5BdsDlfGQga2uAPZBejJX';
-        
-        $sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
-        $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
+	if ($input['entry'][0]['id']=='100360891928932') {
+        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBALGumgB9m4ZBo8gEOUHAJdHnzc7RBij6Alo1vDW4zdDkJFJBfNtn5saisV7ZCZAR09ARZBKPNzsdaVpGSB3zDbJP33gf3OKFnfDbw57IpghEZBg7zWWFtMTGILS0bEkSZByyYpL2N2iDzDgFM1IKT0opaNbZCS8jgZDZD';
+	    $sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
+	    $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
         if (is_numeric($message)) {
             $requestNo=$message;
-            $ambassador = new AmbassadorModel();
-
+    		$ambassador = new AmbassadorModel();
             $result=$ambassador->getById($requestNo);
-
+    
             if(count((array)$result) > 0){ 
-                
                 if ($result->messenger_id  == 0 ) {
                     $ambassador->updateMessengerId($requestNo,$sender);
                 }
-                if (! is_null($result->request_id)) {
-                    $requestInfo = new SignUpModel();
-                    $request=$requestInfo->getRequestInfo($result->request_id);
-                    $leader_info=$requestInfo->getLeaderInfo($request->leader_id);
-                    
-                    $response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader_info->team_link."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader_info->uniqid.$leader_info->id."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
+            	if (! is_null($result->request_id)) {
+            		$requestInfo = new SignUpModel();
+            		$request=$requestInfo->getRequestInfo($result->request_id);
+            		$leader_info=$requestInfo->getLeaderInfo($request->leader_id);
+            		
+            		$response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader_info->team_link."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader_info->uniqid.$leader_info->id."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
                 }
                 else{
                     $response="شكرا لك 🌸 ".'\n'." . ".'\n'."تم تسجيل طلبك للحصول على فريق متابعة قراءة، سوف تصلك معلومات الفريق خلال أقل من ٢٤ ساعة".'\n'." . ".'\n'." نعمل لأجلكم. ";    
                 }
-
             }//if registered
             else{
               $response="شكرا لرسالتك، هناك خطأ في الإرسال. حيث أن رقم الطلب الذي قمت بإرساله غير موجود. " .'\n'. "لطفا قم بمراسلتنا يدويا هنا".'\n'. "https://www.facebook.com/taheelofosboha";
-            }//if nor registered
-        }//if numeric
-        // else{
-        //     $response="شكرا لرسالتك، هناك خطأ في الإرسال. رسالتك لا تحتوي على رقم الطلب. " .'\n'. "لطفًا تأكد من رقم الطلب وأرساله برسالة منفصلة" .'\n'. "أو قم بالتسجيل من هنا".'\n'. "https://www.osboha180.com/rack/SignUp";
-        // }
-        
-        /*initialize curl*/
-        $ch = curl_init($url);
-        /*prepare response*/
-        $jsonData = '{
-        "recipient":{
-            "id":"' . $sender . '"
-            },
-            "message":{
-                "text":"'. $response . '"
             }
-        }';
-        /* curl setting to send a json post data */
-        //Tell cURL that we want to send a POST request.
-        curl_setopt($ch, CURLOPT_POST, 1);
+         }
+        //$response = $requestNo;
+		/*initialize curl*/
+	    $ch = curl_init($url);
+	    /*prepare response*/
+	    $jsonData = '{
+	    "recipient":{
+	        "id":"' . $sender . '"
+	        },
+	        "message":{
+	            "text":"'. $response . '"
+	        }
+	    }';
+	    /* curl setting to send a json post data */
+	    //Tell cURL that we want to send a POST request.
+	    curl_setopt($ch, CURLOPT_POST, 1);
 
-        //Attach the encoded JSON string to the POST fields.
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+	    //Attach the encoded JSON string to the POST fields.
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
 
-        //Set the content type to application/json
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        
-        //Execute the request if the message is not empty.
-        if (!empty($message)) {
-            $result = curl_exec($ch); // user will get the message
-        }
+	    //Set the content type to application/json
+	    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+	    
+	    //Execute the request if the message is not empty.
+	    if (!empty($message)) {
+	        $result = curl_exec($ch); // user will get the message
+	    }
 
-
-}//if Ambassador
+	}//if Ambassador
     else{
         $sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
         $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
@@ -144,4 +138,5 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
+
 ?>

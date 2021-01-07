@@ -1,5 +1,5 @@
 <?php
-$supervisor = "leaders of osboha 1";
+$supervisor = NULL;
 $rank = 20;
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -334,5 +334,3 @@ $rank = 20;
 			};
 		}
 	</script>
-</body>
-</html>

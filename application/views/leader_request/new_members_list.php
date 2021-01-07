@@ -136,8 +136,8 @@ $rid = $_SESSION['Rid'];
 //echo $rid;
 
 $leavers = $this->requestsModel->get_leavers($rid)->num_rows;
-$teamCount = 20; //to be retrieved from the base Database
-$leader = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'leader_id')->fetch_assoc();
+$leader = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'leader_id, current_team_count')->fetch_assoc();
+$teamCount = $leader['current_team_count']; //to be retrieved from the base Database
 $leader_id = $leader['leader_id'];	
 }
 ?>
