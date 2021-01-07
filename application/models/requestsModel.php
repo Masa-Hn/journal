@@ -210,19 +210,15 @@ class RequestsModel extends CI_Model {
 
 	public function updateFullRequest( $leader ) {
 
-		$query = "UPDATE leader_info SET
-            leader_name='"          . $leader[ 'leader_name' ] . "' ,
-            leader_link='"          . $leader[ 'leader_link' ] . "',
-            leader_gender='"        . $leader[ 'leader_gender' ] . "',
-            team_name='"            . $leader[ 'team_name' ] . "',
-            team_link='"            . $leader[ 'team_link' ] . "',
-            uniqid='"               . $leader[ 'uniqid' ] . "',
-            leaders_team_name = '"  . $leader['leaders_team_name']."',
-            leader_rank = '"        . $leader['leader_rank']."'
-        WHERE id=" . $leader[ 'leader_id' ];
+		$query = "UPDATE leader_info SET leader_name='". $leader[ 'leader_name' ] . "', leader_link='". $leader[ 'leader_link' ] . "', leader_gender='". $leader[ 'leader_gender' ] . "', team_name='". $leader[ 'team_name' ] . "', team_link='". $leader[ 'team_link' ] . "', uniqid='" . $leader[ 'uniqid' ] . "', leaders_team_name = '". $leader['leaders_team_name']."', leader_rank = '". $leader['leader_rank']."' WHERE id=" . $leader[ 'leader_id' ];
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
-		$conn->close();
+		if ( $done ) {
+			$conn->close();
+			return $done;
+		} else {
+			return $conn->error;
+		}
 	} //updatetLeaderInfo
 
 	public function leaderLastRequest( $id ) {

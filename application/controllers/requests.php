@@ -62,8 +62,10 @@ class Requests extends CI_Controller {
 			$info = $this->RequestsModel->check_email( $_GET[ 'email' ] )->fetch_array( MYSQLI_ASSOC );
 
 			// data of the leader
+			$name = str_replace("'", "", $_GET[ 'name' ]); 
+			
 			$leader[ 'leader_id' ]   = $info[ 'id' ];
-			$leader[ 'leader_name' ] = $_GET[ 'name' ];
+			$leader[ 'leader_name' ] = $name;
 			$leader[ 'team_name' ]   = $_POST[ 'teamName' ];
 			$leader[ 'leader_link' ] = $_POST[ 'leaderLink' ];
 			$leader[ 'team_link' ]   = $_POST[ 'teamLink' ];
@@ -171,7 +173,10 @@ class Requests extends CI_Controller {
 
 		if ( $this->form_validation->run() ) {
 			$data[ 'id' ] = $_POST[ 'id' ];
-			$data[ 'leader_name' ] = $_POST[ 'leaderName' ];
+            
+            $name = str_replace("'", "", $_POST[ 'leaderName' ]); 
+            
+			$data[ 'leader_name' ] = $name;
 			$data[ 'leader_link' ] = $_POST[ 'leaderLink' ];
 			$data[ 'team_link' ] = $_POST[ 'teamLink' ];
 
