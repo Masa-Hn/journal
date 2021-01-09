@@ -43,6 +43,19 @@
 								</select>
 							</div>
 
+							<h5 style="text-align: center;">
+								بسبب سياسة الفيسبوك ، نضطر هنا أن نطلب منك مراسلة صفحة (الادخال والاهتمام) برسالة تكتب بها النص التالي
+						
+								<br>.<br> 
+								<strong>"أنا انتظر الأعضاء"</strong>
+								<br>.<br>
+							قواك الله قائدنا  ❤️
+
+							</h5>
+
+							<div class="form-group">
+								<button type="button" class="btn btn-block regular" style="background-color:#3c763d; color: #fff; font-size: 1.7rem;font-weight: bold;" onclick="toMessenger()">صفحة الادخال والاهتمام</button>
+							</div>
 							<div class="form-group">
 								<button type="submit" name="submit" class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">رفع الطلب</button>
 							</div>
@@ -53,6 +66,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default close-btn" data-dismiss="modal">إغلاق</button>
+
 					</div>
 
 				</div>
@@ -96,4 +110,11 @@
 					return false;
 				} );
 			} );
+
+			function toMessenger(){
+			    
+			    window.open('https://www.messenger.com/t/103862297776303', '_blank');
+
+			}
+	        
 		</script>

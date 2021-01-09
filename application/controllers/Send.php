@@ -9,38 +9,42 @@ class Send extends CI_Controller {
     $this->load->model('SignUpModel');    	
     $this->load->model('AmbassadorModel');      
     $this->load->model('books');  
+    $this->load->model('RequestsModel');
       
 	}//end construct()
 
 
-  public function index(){
-         $ambassador = new AmbassadorModel();
-          $requestNo=10835;
-            $result=$ambassador->getById($requestNo);
+   public function index(){
+    $newLeader = new requestsModel();
+    $sender=3197321007062062;
+    $email="email@email.com";
+    $result=$newLeader->get_data($sender, 'messenger_id', "leader_info");
 
-            if(count((array)$result) > 0){ 
-                
-                if ($result->messenger_id  == 0 ) {
-                    $ambassador->updateMessengerId($requestNo,$sender);
-                }
-                if (! is_null($result->request_id)) {
-                    $requestInfo = new SignUpModel();
-                    $request=$requestInfo->getRequestInfo($result->request_id);
-                    $leader_info=$requestInfo->getLeaderInfo($request->leader_id);
-                    
-                    $response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader_info->team_link."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader_info->uniqid.$leader_info->id."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
-                }
-                else{
-                    $response="شكرا لك 🌸 ".'\n'." . ".'\n'."تم تسجيل طلبك للحصول على فريق متابعة قراءة، سوف تصلك معلومات الفريق خلال أقل من ٢٤ ساعة".'\n'." . ".'\n'." نعمل لأجلكم. ";    
-                }
+    if($result->num_rows == 0){
+      $leader[ 'leader_email' ] = $email;
+      $leader[ 'messenger_id' ] = $sender;
+      $newLeader->insertLeaderInfo($leader);
 
-            }//if registered
-            else{
-              $response="شكرا لرسالتك، هناك خطأ في الإرسال. حيث أن رقم الطلب الذي قمت بإرساله غير موجود. " .'\n'. "لطفا قم بمراسلتنا يدويا هنا".'\n'. "https://www.facebook.com/taheelofosboha";
-            }//if nor registered
+      $response="not reg before";
+    }
+    else if($result->num_rows <2){
+      $result=$result->fetch_array(MYSQLI_ASSOC);
+      if(! in_array( $email ,$result) ){
+        $leader[ 'leader_email' ] = $email;
+        $leader[ 'messenger_id' ] = $sender;
+        $newLeader->insertLeaderInfo($leader);
+        echo "inserted";
+      }
+      else{
+        echo "NOT";
 
-    echo $response;
-  }
+      }
+    }
+    else{
+      echo "no case";
+ 
+    }
+ }
   public function OwlyApi(){
     require_once('OwlyApi.php');
     $owly = OwlyApi::factory( array('key' => '{c4pah0tpw68kcwc4sswks4cg03ij385nihn}') );
@@ -94,7 +98,9 @@ class Send extends CI_Controller {
           },
           "message":{
               "text":"' . $msg . '"
-          }
+          },
+          "messaging_type": "MESSAGE_TAG",
+          "tag": "ACCOUNT_UPDATE"
       }';
 
     return $data;
