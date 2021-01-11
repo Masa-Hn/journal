@@ -78,8 +78,8 @@
 	}
 </style>
 <body>
-	<button id = "team">Team</button>
 	<?php
+	
 	//$this->StatisticsModel->incrementVisitors( 1 );
 
 	$find = array( "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri" );
@@ -587,29 +587,3 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-		$( document ).ready( function () {
-			var base_url = "<?php echo base_url()?>";
-			//var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
-			var id = <?php echo "7";?>;
-
-			$( '#team' ).click( function () {
-            $.ajax( {
-                type: "POST",
-                url: base_url + "Statistics/team_link_button",
-                data: {
-                //	ip_address: ip_address,
-                    id:id
-                },
-              success: function ( data ) {
-               alert(data);
-              },
-              error: function ( error ) {
-               
-                console.log( error );
-              }
-            });
-      
-	 });
-    });
-	</script>

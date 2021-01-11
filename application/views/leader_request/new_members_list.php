@@ -43,14 +43,7 @@
 							<?php
 							while ( $amb = $ambassadors->fetch_array( MYSQLI_ASSOC ) ) {
 								$id = $amb[ 'id' ];
-
-								//to counte how many members left
 								$rid = $amb['request_id'];
-								if(!isset($_SESSION['Rid'])){
-									$_SESSION['Rid'] = $rid;
-								}
-								//$var = "<script>document.write(localStorage.setItem('Rid', '".$rid."'))</script>";
-								//end process
 								?>
 							<tr style="text-align: center; color:#214761 ">
 								<td>
@@ -131,15 +124,8 @@
     </div>
 
 <?php
-if(isset($_SESSION['Rid'])){
-$rid = $_SESSION['Rid'];
-//echo $rid;
-
-$leavers = $this->requestsModel->get_leavers($rid)->num_rows;
+$leavers = $this->requestsModel->get_leavers($Rid)->num_rows;
 $teamCount = 20; //to be retrieved from the base Database
-$leader = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'leader_id')->fetch_assoc();
-$leader_id = $leader['leader_id'];	
-}
 ?>
 		<div class="modal fade" role="dialog" id="fill_back" >
 		<div class="modal-dialog">
@@ -197,8 +183,8 @@ $leader_id = $leader['leader_id'];
 						}
 
 					} );
-					
-					// add ambassador to marks 
+
+					// add ambassador to marks
                     var name = document.getElementById("ambassador_"+id).textContent;
                     $.ajax({
                         type: "POST",
@@ -241,7 +227,7 @@ $leader_id = $leader['leader_id'];
 			}
 		}
 
-		function notJoined( id ) {
+		function notJoined( id) {
 			if ( document.getElementById( "notJoined" + id ).checked == true ) {
 				var success = confirm( "هل أنت متأكد من أن العضو لم يتم استقباله؟" );
 				var base_url = "<?php echo base_url()?>";
@@ -375,8 +361,8 @@ $leader_id = $leader['leader_id'];
 			confirm( 'لقد تم نسخ الرسالة, بإمكانك إرسالها إلى السفير!' )
 			console.log( x );
 		}
-		
-		// add ambassador to marks 
+
+		// add ambassador to marks
 		/*
         function addmem(){
 
@@ -399,7 +385,7 @@ $leader_id = $leader['leader_id'];
         }*/
 
         function addProfileLink(id){
-            
+
             var profile_url = document.getElementById("profile_link_"+id).value;
             var base_url = "<?php echo base_url()?>";
 
