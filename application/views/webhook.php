@@ -17,7 +17,7 @@ if (isset($_GET['hub_verify_token'])) {
 $input = json_decode(file_get_contents('php://input'), true);
 if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
 	if ($input['entry'][0]['id']=='100360891928932') {
-        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBALGumgB9m4ZBo8gEOUHAJdHnzc7RBij6Alo1vDW4zdDkJFJBfNtn5saisV7ZCZAR09ARZBKPNzsdaVpGSB3zDbJP33gf3OKFnfDbw57IpghEZBg7zWWFtMTGILS0bEkSZByyYpL2N2iDzDgFM1IKT0opaNbZCS8jgZDZD';
+        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAFNjQpRNZCbFQZAcI9eKmpsFhu8ABKzbGiYZCpvPRSYAbMbh4i56o766ZB05oca2105usAsBEcljGWi0oGrKoBEGOcCwQNbYCPaaZAVbb7aMxSixKSc3RlW3ZAkxzBnieg9C7D2q2N939XZAOFdHmwSFpajFTHufAZDZD';
 	    $sender = $input['entry'][0]['messaging'][0]['sender']['id']; //sender facebook id
 	    $message = $input['entry'][0]['messaging'][0]['message']['text']; //text that user sent
         if (is_numeric($message)) {
@@ -92,7 +92,7 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
 
                 $response=" تم تأكيد حسابك." .'\n'." . ".'\n'. "سوف يصلك قارئ جديد قريبًا، نوصيك أن تعتني به فهو خطوةٌ في مستقبلنا جميعا ♥️";
                 
-                $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAFn0RZCp9IwZAiDqgARdyAHsuTGmaSi0O6IXxXyQ4fqUxIm56e9J5JroaYNDKC7VFjUDCn6YKTR66ZBldkAYopouWAZB1BDsWsZA0LIZBNr40lfa0t0UMjgnQJeXlN6E3Bec85QVMNfSU8CgBg3R9H7Yrgl6n4VAZDZD';
+                $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAIq0ZAi1cbhpvuL0SFoHlQe4SsYfr5ipWUmaSxtArUy0noKdaCWqN0JpZC3hfAeURKZBJkpBZAx3f3hcKQnuOjW0WDcMkOUqifB0Na2kG1FXGjoYVsp43hulareizWWiZAFhZAujcJC73X1ZBhxfRUgkfZARNyiRHQZDZD';
 
                 /*initialize curl*/
                 $ch = curl_init($url);
@@ -122,10 +122,46 @@ if (isset($input['entry'][0]['messaging'][0]['sender']['id'])) {
                     $result = curl_exec($ch); // user will get the message
                 }     
             }
-            else{
-                $response = "هذه الصفحة مخصصة لقادة أصبوحة 180، إن كنت قائدًا وتواجه مشكلة أرسل سكرين شوت لمراقبك لنُساعدك في حلها ".'\n'."طبت وطابت أوقاتك";
+            else if($result->num_rows <2){
+                $result=$result->fetch_array(MYSQLI_ASSOC);
+                if(! in_array( $email ,$result) ){
+                    $leader[ 'leader_email' ] = $message;
+                    $leader[ 'messenger_id' ] = $sender;
+                    $newLeader->insertLeaderInfo($leader);
 
-            }
+                    $response=" تم تأكيد حسابك." .'\n'." . ".'\n'. "سوف يصلك قارئ جديد قريبًا، نوصيك أن تعتني به فهو خطوةٌ في مستقبلنا جميعا ♥️";
+                    
+                    $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAIq0ZAi1cbhpvuL0SFoHlQe4SsYfr5ipWUmaSxtArUy0noKdaCWqN0JpZC3hfAeURKZBJkpBZAx3f3hcKQnuOjW0WDcMkOUqifB0Na2kG1FXGjoYVsp43hulareizWWiZAFhZAujcJC73X1ZBhxfRUgkfZARNyiRHQZDZD';
+
+                    /*initialize curl*/
+                    $ch = curl_init($url);
+                    /*prepare response*/
+                    $jsonData = '{
+                    "recipient":{
+                        "id":"' . $sender . '"
+                        },
+                        "message":{
+                            "text":"' . $response . '"
+                        }
+                    }';
+                    /* curl setting to send a json post data */
+                    //Tell cURL that we want to send a POST request.
+                    curl_setopt($ch, CURLOPT_POST, 1);
+
+                    //Attach the encoded JSON string to the POST fields.
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                    //Set the content type to application/json
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                    
+                    //Execute the request if the message is not empty.
+                    if (!empty($message)) {
+                        $result = curl_exec($ch); // user will get the message
+                    }     
+                }//if
+            }//else if
 
         }//else
     }//if leader
