@@ -20,7 +20,7 @@ class SignUp extends CI_Controller {
 
 	}//end construct()
 
- 	public function index()
+  public function index()
   {
 
     if (!empty($_SESSION['question_5'])) {
@@ -37,6 +37,27 @@ class SignUp extends CI_Controller {
     }
 
   }//index
+
+  public function team_link_button() {
+    //$ip_address = $_POST[ 'ip_address' ];
+    $msg = "";
+    $amb_id = $_POST['id'];
+
+    $clicks = $this->StatisticsModel->button_clicks( $amb_id, 'ambassador', 'team_link_button' );
+
+    if ( $clicks->num_rows() > 0 ) {
+        $res = $clicks->row();
+        if($res->team_link_button == 0){
+        $this->StatisticsModel->update_data( $amb_id, 'team_link_button', 1, 'ambassador' );
+        }
+    }
+    /* else {
+        $data[ 'ip_address' ] = $ip_address;
+        $data[ 'team_link_button' ] = 1;
+        $this->StatisticsModel->insert_data( $data, 'buttons_statistics' );
+
+    }*/
+  }
 
   public function trial()
   {

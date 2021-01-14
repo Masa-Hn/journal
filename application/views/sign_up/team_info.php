@@ -8,11 +8,11 @@
       exit();
   }
   if(isset($_SESSION['team_info'])){
- $id =  $_SESSION['team_info']['ambassador'][count( $_SESSION['team_info']['ambassador']) - 1]->id; 
+    $id =  $_SESSION['team_info']['ambassador'][count( $_SESSION['team_info']['ambassador']) - 1]->id; 
   }
 
-    $page_id = 14;
-    $this->StatisticsModel->incrementVisitors($page_id);
+  $page_id = 14;
+  $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">
 
@@ -37,9 +37,11 @@
                 <span style="color: #197439; font-weight: 700;">رسائل الفيسبوك  </span>
                 الخاصة بك
             </h5>
-            <a href="<?php echo $_SESSION['team_info']['leader_info']->team_link; ?>" class="final-page genric-btn primary circle arrow" id="team" style="margin: 1.5%; font-size: 1.5em"  target="_blank">
+            <button class="final-page genric-btn primary circle arrow" id="team" style="margin: 1.5%; font-size: 1.5em">
               انضم للمجموعة من هنا
-            </a>
+            </button>
+            
+            <a href="<?php echo $_SESSION['team_info']['leader_info']->team_link; ?>" id="team_link" style="display: none;" target="_blank"></a>
           </div>
         </div>
         <!-- <div class="row align-items-center justify-content-center">
@@ -61,7 +63,6 @@
             </div>
           </div>
       </div>
-      </div>
 
     </section>
    
@@ -69,88 +70,79 @@
 
 <?php include 'templates/footer.php';?>
 <script type="text/javascript">
-		$( document ).ready( function () {
-			var base_url = "<?php echo base_url()?>";
-			//var ip_address = "<?php echo $_SERVER['REMOTE_ADDR'];?>";
-			var id = <?php echo $id;?>;
-			
-			$( '#code' ).click( function () {
-        var Code =document.getElementById('code');
-        var copyText = document.createElement('textarea');
-        copyText.value=code.innerHTML;
-        copyText.setAttribute('readonly', '');
-        copyText.style = {position: 'absolute', left: '-9999px'};
-        document.body.appendChild(copyText);
-        copyText.select();
-        document.execCommand('copy');
-        // Remove temporary textarea
-        document.body.removeChild(copyText);
+    $( document ).ready(function(){
+        /* ============================================================== */
+        /* vars define */
+        /* ============================================================== */
+        var base_url = "<?php echo base_url()?>";
+        var id = <?php echo $id;?>;
+        
+        /* ============================================================== */
+        /* copy code */
+        /* ============================================================== */
+        $('#code').click(function(){
+            var Code =document.getElementById('code');
+            var copyText = document.createElement('textarea');
+            copyText.value=code.innerHTML;
+            copyText.setAttribute('readonly', '');
+            copyText.style = {position: 'absolute', left: '-9999px'};
+            document.body.appendChild(copyText);
+            copyText.select();
+            document.execCommand('copy');
+            // Remove temporary textarea
+            document.body.removeChild(copyText);
 
-        Swal.fire({
-          icon: 'success',
-          title: 'تم  النسخ ',
-          text:'لطفًا قم بارسال هذا الكود لقائد الفريق الخاص بك',
-          type: "success",
-          timer: 3000,
-          confirmButtonText: "استمرار ",
-          confirmButtonColor:'#9ed16f'
-        });
-				$.ajax( {
-					type: "POST",
-					url: base_url + "Statistics/code_button",
-					data: {
-						//ip_address: ip_address,
-						id: id
-					},
-					success: function ( data ) {
-
-						console.log( data );
-					},
-					error: function ( error ) {
-						console.log( error );
-					}
-				} );
-				return false;
-			} );
-
-			$( '#team' ).click( function () {
-        var team_code =document.getElementById("team_code").value; 
-        Swal.fire({
-          title: 'هل قمت بالاحتفاظ بالكود التالي؟',
-          text:team_code,
-          imageUrl:document.getElementById("base_url").value+'assets/sign_up_assests/img/wonderCode.png',
-          imageWidth: 100,
-          imageAlt: 'Custom image',
-          cancelButtonText: 'لا',
-          confirmButtonText: "نعم ",
-          confirmButtonColor:'#9ed16f',
-          cancelButtonColor: 'darkred',
-          showCancelButton: true,
-          showCloseButton: true
-        })
-        .then((result) => {
-          if (result.value) {
-            $.ajax( {
-                type: "POST",
-                url: base_url + "Statistics/team_link_button",
-                data: {
-                //	ip_address: ip_address,
-                    id:id
-                },
-              success: function ( data ) {
-                window.open(document.getElementById('team').getAttribute("href"), "_blank");
-              },
-              error: function ( error ) {
-                window.open(document.getElementById('team').getAttribute("href"), "_blank");
-
-                console.log( error );
-              }
+            Swal.fire({
+              icon: 'success',
+              title: 'تم  النسخ ',
+              text:'لطفًا قم بارسال هذا الكود لقائد الفريق الخاص بك',
+              type: "success",
+              timer: 3000,
+              confirmButtonText: "استمرار ",
+              confirmButtonColor:'#9ed16f'
             });
-          }//if
-          else{
-            next('step_1');
-          }				
-			   });
-	 });
+        });
+        
+        /* ============================================================== */
+        /* go to team */
+        /* ============================================================== */
+        $('#team').click( function () {
+            var team_code = document.getElementById("team_code").value; 
+            Swal.fire({
+                title: 'هل قمت بالاحتفاظ بالكود التالي؟',
+                text:team_code,
+                imageUrl:document.getElementById("base_url").value+'assets/sign_up_assests/img/wonderCode.png',
+                imageWidth: 100,
+                imageAlt: 'Custom image',
+                cancelButtonText: 'لا',
+                confirmButtonText: "نعم ",
+                confirmButtonColor:'#9ed16f',
+                cancelButtonColor: 'darkred',
+                showCancelButton: true,
+                showCloseButton: true
+            })
+            .then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: base_url + "signUp/team_link_button",
+                        data:{ //	ip_address: ip_address,
+                            id:id
+                        },
+                        success: function(data){
+                            //window.open(document.getElementById('team_link').value, "_blank");
+                            document.getElementById('team_link').click();
+                        },
+                        error: function(error) {
+                            //window.open(document.getElementById('team_link').value, "_blank");
+                            document.getElementById('team_link').click();
+                            console.log( error );
+                        }
+                    });
+                }else{
+                    next('step_1');
+                }				
+            });
+        });
     });
-	</script>
+</script>
