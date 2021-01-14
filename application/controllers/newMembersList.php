@@ -24,6 +24,7 @@ class NewMembersList extends CI_Controller {
                 if ( $request->num_rows > 0 ) {
                     $request_info = $request->fetch_array( MYSQLI_ASSOC );
                     $Rid = $request_info[ 'Rid' ];
+										$arr['Rid'] = $Rid;
                     $arr[ 'leader_id' ] = $id;
                     $arr[ 'uniqid' ] = $res[ 'uniqid' ];
                     $arr[ 'leader_name' ] = $res[ 'leader_name' ];
@@ -46,8 +47,8 @@ class NewMembersList extends CI_Controller {
 	function joined_ambassador() {
 		if ( isset( $_POST[ 'Checked' ] ) ) {
 			$id = $_POST[ 'Checked' ];
+			$rid = $_POST['Rid'];
 			$this->requestsModel->update_data( 1, $id );
-
 		} else if ( isset( $_POST[ 'notChecked' ] ) ) {
 			$id = $_POST[ 'notChecked' ];
 			$this->requestsModel->update_data( 0, $id );
@@ -57,8 +58,8 @@ class NewMembersList extends CI_Controller {
 	function notJoined_ambassador() {
 		if ( isset( $_POST[ 'Checked' ] ) ) {
 			$id = $_POST[ 'Checked' ];
+			$rid = $_POST['Rid'];
 			$this->requestsModel->update_data( 2, $id );
-
 		} else if ( isset( $_POST[ 'notChecked' ] ) ) {
 			$id = $_POST[ 'notChecked' ];
 			$this->requestsModel->update_data( 0, $id );
@@ -66,7 +67,7 @@ class NewMembersList extends CI_Controller {
 	}
 
 	function saveProfileLink(){
-        
+
         $profile = $this->input->post('profile_link');
         $id      = $this->input->post('amb_id');
         $data['profile_link'] = $profile;
