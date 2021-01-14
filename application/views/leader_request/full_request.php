@@ -35,7 +35,7 @@
 						$leader_rank = 5;
 						?>
 						<input type="hidden" name="leaderName" id="leaderName" value="<?php echo $leaderName ;?>">
-						<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">
+						<!--<input type="hidden" name="teamLink" id="teamLink" value="<?php echo $teamLink ;?>">-->
 						<input type="hidden" name="teamName" id="teamName" value="<?php echo $teamName ;?>">
 						<input type="hidden" name="currentTeamCount" id="currentTeamCount" value="<?php echo $currentTeamCount ;?>">
 						<input type="hidden" name="leaders_team_name" id="leaders_team_name" value="<?php echo $leaders_team_name ;?>">
@@ -46,8 +46,14 @@
 							<input type="text" name="leaderLink" id="leaderLink" placeholder="مثال: https://www.facebook.com/example" class="form-control" required="required">
 
 						</div>
-						<label name="msg-ch" id="msg-ch" style="display: none; color: red"> الرجاء كتابة الرابط </label>
+						<label name="msg-ch" id="msg-ch" style="display: none; color: red"> الرجاء كتابة رابط صفحتك </label>
 
+                        <div class="form-group">
+							<label for="teamLink">رابط فريق المتابعة الخاص بك: </label>
+							<input type="text" name="teamLink" id="teamLink" value="<?php echo $teamLink;?>" class="form-control" required="required">
+						</div>
+						<label name="msg-ch2" id="msg-ch2" style="display: none; color: red"> الرجاء كتابة رابط فريقك </label>
+						
 						<div class="form-group">
 							<label for="leaderGender" class="form-label"> جنسك: </label>
 							<select name="leaderGender" id="leaderGender" class="form-control">
@@ -75,13 +81,23 @@
 							</select>
 						</div>
 					</form>
-					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار الرابط</button>
+					<button name="check-btn" class="btn btn-block" id="check-btn" onclick="check()" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">اختبار رابط صفحتك الشخصية</button>
 
 					<div id="check_div" style="margin-top: 3%; margin-bottom: 3%;">
 						<input type="checkbox" id="check">
 						<label>  تم التأكد من صحة الرابط</label>
 					</div>
-					<label name="check-msg" id="check-msg" style="display: none; color: red"> الرجاء تأكيد اختبار الرابط! </label>
+					
+					<div class="form-group">
+						<button name="check-btn2" id="check-btn2" class="btn btn-block" onclick="check2()" style=" background-color:#214761; color: #fff; font-size: 1.7rem;font-weight: bold;"><i class="fa fa-external-link" aria-hidden="true"></i>اختبار رابط فريقك</button>
+
+						<div id="check_div2" style="margin-top: 3%; margin-bottom: 3%;">
+							<input type="checkbox" id="check2">
+							<label>  تم التأكد من صحة رابط فريقك</label>
+						</div>
+					</div>
+					<label name="check-msg" id="check-msg" style="display: none; color: red"> الرجاء تأكيد اختبار الروابط! </label>
+					
 					<button type="submit" name="submit" class="btn btn-block regular" id="sub-btn" style="background-color: #214761; color: #fff; font-size: 1.7rem;font-weight: bold;">رفع الطلب</button>
 				</div>
 
@@ -105,6 +121,17 @@
 
 			}
 		}
+        
+        function check2() {
+			var teamURL = document.getElementById( 'teamLink' ).value;
+			if ( teamURL == "" ) {
+				document.getElementById( 'msg-ch2' ).style.display = "block";
+			} else {
+				document.getElementById( 'msg-ch2' ).style.display = "none";
+				window.open( teamURL );
+			}
+		}
+        
 		var base_url = "<?php echo base_url()?>";
 		$( document ).ready( function () {
 			$( "#sub-btn" ).click( function () {

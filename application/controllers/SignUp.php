@@ -254,7 +254,7 @@ class SignUp extends CI_Controller {
       if ($members_num < $numberOfRequests->totalRequests) {
         //1- update request to DONE
         $this->RequestsModel->updateRequest($request_id);
-        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAMnL65BxDAazaJg24ZCdVKWMtjd2TpdBUfI8wwPkScrurtsXKujqb0h1NZBZBvOCIJHg9oc6rHSz5iaa9l1eNHi4g4H1EQMmPHt16OS0ecWDUXI3ZBTTE9C0MDxvQiH0J7QkkqlFghWsOm3q81ZBQ6ZCoylt7faxM3ZAHzehtQZC';
+        $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAIq0ZAi1cbhpvuL0SFoHlQe4SsYfr5ipWUmaSxtArUy0noKdaCWqN0JpZC3hfAeURKZBJkpBZAx3f3hcKQnuOjW0WDcMkOUqifB0Na2kG1FXGjoYVsp43hulareizWWiZAFhZAujcJC73X1ZBhxfRUgkfZARNyiRHQZDZD';
 
         /*initialize curl*/
         $ch = curl_init($url);
@@ -353,7 +353,9 @@ class SignUp extends CI_Controller {
           },
           "message":{
               "text":"' . $msg . '"
-          }
+          },
+          "messaging_type": "MESSAGE_TAG",
+          "tag": "ACCOUNT_UPDATE"
       }';
 
     return $data;

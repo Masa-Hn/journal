@@ -1,5 +1,5 @@
 <?php
-$supervisor = "leaders of osboha 1";
+$supervisor = NULL;
 $rank = 22;
 ?>
 <style>
@@ -116,7 +116,7 @@ $rank = 22;
 											<label for="numOfMembers<?php echo $id;?>"> عدد الأعضاء المطلوب: </label>
 											<select name="numOfMembers<?php echo $id;?>" id="numOfMembers<?php echo $id;?>" class="form-control" required="required">
 												<?php
-												for ( $i = 15; $i <= 30; $i += 5 ) {
+												for ( $i = 0; $i <= 60; $i += 1 ) {
 													echo "<option value='$i'>$i</option>";
 												}
 												?>
@@ -198,7 +198,7 @@ $rank = 22;
 											<label for="numOfMembers<?php echo $id;?>"> عدد الأعضاء المطلوب: </label>
 											<select name="numOfMembers<?php echo $id;?>" id="numOfMembers<?php echo $id;?>" class="form-control" required="required">
 												<?php
-												for ( $i = 15; $i <= 30; $i += 5 ) {
+												for ( $i = 0; $i <= 60; $i += 1 ) {
 													echo "<option value='$i'>$i</option>";
 												}
 												?>
@@ -332,5 +332,3 @@ $rank = 22;
 			};
 		}
 	</script>
-</body>
-</html>

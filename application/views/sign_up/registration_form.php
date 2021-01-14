@@ -60,10 +60,12 @@
                 <h3>
                   لطفا نحتاج منك تسجيل معلوماتك
                 </h3>
-                <p>
+                <p style="margin-bottom: 0">
                   هذا سوف يساعدنا على ترصيد قراءتك الأسبوعية و تكريم المتميزين
                 </p>
-                <span style="color: darkred"> * معلومات مطلوبة</span>
+                <span style="color: darkred">
+                  نحيطكم علمًا أن كافة الخدمات المقدمة والمسابقات تقدم بشكل مجاني، و نتعهد بعدم الاحتفاظ بأي معلومات شخصية أبدا.
+                </span>
               </div>
               <div class="signup form-peice" dir="rtl">
                 <form class="signup-form" id="form" method="POST">

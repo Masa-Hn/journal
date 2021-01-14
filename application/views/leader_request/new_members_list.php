@@ -124,8 +124,12 @@
     </div>
 
 <?php
+
 $leavers = $this->requestsModel->get_leavers($Rid)->num_rows;
-$teamCount = 20; //to be retrieved from the base Database
+$leader = $this->requestsModel->get_data($Rid, 'Rid', 'leader_request', 'leader_id, current_team_count')->fetch_assoc();
+$teamCount = $leader['current_team_count']; //to be retrieved from the base Database
+$leader_id = $leader['leader_id'];	
+
 ?>
 		<div class="modal fade" role="dialog" id="fill_back" >
 		<div class="modal-dialog">

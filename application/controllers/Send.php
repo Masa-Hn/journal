@@ -9,14 +9,42 @@ class Send extends CI_Controller {
     $this->load->model('SignUpModel');    	
     $this->load->model('AmbassadorModel');      
     $this->load->model('books');  
+    $this->load->model('RequestsModel');
       
 	}//end construct()
 
 
-  public function index(){
+   public function index(){
+    $newLeader = new requestsModel();
+    $sender=3197321007062062;
+    $email="email@email.com";
+    $result=$newLeader->get_data($sender, 'messenger_id', "leader_info");
 
+    if($result->num_rows == 0){
+      $leader[ 'leader_email' ] = $email;
+      $leader[ 'messenger_id' ] = $sender;
+      $newLeader->insertLeaderInfo($leader);
 
-  }
+      $response="not reg before";
+    }
+    else if($result->num_rows <2){
+      $result=$result->fetch_array(MYSQLI_ASSOC);
+      if(! in_array( $email ,$result) ){
+        $leader[ 'leader_email' ] = $email;
+        $leader[ 'messenger_id' ] = $sender;
+        $newLeader->insertLeaderInfo($leader);
+        echo "inserted";
+      }
+      else{
+        echo "NOT";
+
+      }
+    }
+    else{
+      echo "no case";
+ 
+    }
+ }
   public function OwlyApi(){
     require_once('OwlyApi.php');
     $owly = OwlyApi::factory( array('key' => '{c4pah0tpw68kcwc4sswks4cg03ij385nihn}') );
@@ -70,7 +98,9 @@ class Send extends CI_Controller {
           },
           "message":{
               "text":"' . $msg . '"
-          }
+          },
+          "messaging_type": "MESSAGE_TAG",
+          "tag": "ACCOUNT_UPDATE"
       }';
 
     return $data;

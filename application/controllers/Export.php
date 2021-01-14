@@ -28,46 +28,49 @@ class Export extends CI_Controller {
         $this->load->view('management_book/templates/footer');
     }
     
-
-  public function GetSuggestions()
-    {
-          // create file name
-        $fileName = 'data-'.time().'.xlsx';  
-    // load excel library
+    public function GetSuggestions(){
+    
         $this->load->library('excel');
-        $SuggestionBooks = $this->ManageBooks->getallbooks();
-        $objPHPExcel = new PHPExcel();
-        $objPHPExcel->setActiveSheetIndex(0);
-        // set Header
-        $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Id');
-        $objPHPExcel->getActiveSheet()->SetCellValue('B1', 'Book Name');
-        $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'publisher');
-        $objPHPExcel->getActiveSheet()->SetCellValue('D1', 'Brief');
-        $objPHPExcel->getActiveSheet()->SetCellValue('E1', 'Type'); 
-        $objPHPExcel->getActiveSheet()->SetCellValue('F1', 'Publisher'); 
-        $objPHPExcel->getActiveSheet()->SetCellValue('G1', 'Found');       
-        $objPHPExcel->getActiveSheet()->SetCellValue('H1', 'Link');       
+        $object = new PHPExcel();
+        $object->setActiveSheetIndex(0);
 
-        // set Row
-        $rowCount = 2;
-        foreach ($SuggestionBooks as $element) {
-            $objPHPExcel->getActiveSheet()->SetCellValue('A' . $rowCount, $element['id']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('B' . $rowCount, $element['book_name']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('C' . $rowCount, $element['publisher']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('D' . $rowCount, $element['brief']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('E' . $rowCount, $element['type']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('F' . $rowCount, $element['publisher']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('G' . $rowCount, $element['found']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('H' . $rowCount, $element['link']);
+        $table_columns = array(
+            
+            "-", 
+            "اسم الكتاب",
+            "النبذة", 
+            "النوع", 
+            "دار النشر", 
+            "موجود إلكترونيًا؟", 
+            "رابط الكتاب"
+        );
 
-            $rowCount++;
+        $column = 0;
+        foreach($table_columns as $field){
+            
+            $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
+            $column++;
         }
-                $filename = "suggestion_books". date("Y-m-d-H-i-s").".xlsx";
-    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="'.$filename.'"');
-        header('Cache-Control: max-age=0'); 
-            ob_end_clean();
-        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');  
-        $objWriter->save('php://output'); 
+        $books = $this->ManageBooks->getallbooks();
+
+        $excel_row = 2;
+        foreach($books->result() as $row){
+            
+            $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $row->id);
+            $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->book_name);
+            $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->brief);
+            $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $row->type);
+            $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->publisher);
+            $object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, $row->found);
+            $object->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row, $row->link);
+            $excel_row++;
+        }
+        
+        $filename = "suggestion books ". date("Y-m-d H:i:s");
+        
+        $object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename=" '. $filename .'.xls"');
+        $object_writer->save('php://output');
     }
 }
