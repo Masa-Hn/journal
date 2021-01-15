@@ -58,8 +58,9 @@ class NewMembersList extends CI_Controller {
 	function notJoined_ambassador() {
 		if ( isset( $_POST[ 'Checked' ] ) ) {
 			$id = $_POST[ 'Checked' ];
-			$rid = $_POST['Rid'];
+			$rid = $_POST['rid'];
 			$this->requestsModel->update_data( 2, $id );
+			$this->requestsModel->counterIncrement( $rid );
 		} else if ( isset( $_POST[ 'notChecked' ] ) ) {
 			$id = $_POST[ 'notChecked' ];
 			$this->requestsModel->update_data( 0, $id );
