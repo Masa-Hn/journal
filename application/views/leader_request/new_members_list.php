@@ -53,7 +53,7 @@
 									<?php echo ($amb['gender'] == 'female' || $amb['gender'] == 'Female') ? "أنثى" :  "ذكر"; ?>
 								</td>
 								<td><input type="checkbox" name="joined" class="joined" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="<?php echo "joined".$id;?>" onclick="joined('<?php echo $id;?>');"></td>
-								<td><input type="checkbox" name="notJoined" class="joined" <?php if ($amb[ 'join_following_team']==2) echo "checked";?> id="<?php echo "notJoined".$id;?>" onclick="notJoined('<?php echo $id;?>');"></td>
+								<td><input type="checkbox" name="notJoined" class="joined" <?php if ($amb[ 'join_following_team']==2) echo "checked";?> id="<?php echo "notJoined".$id;?>" onclick="notJoined('<?php echo $id;?>', '<?php echo $rid;?>');"></td>
 								<td>
 									<a class="link" name="copyMsg" id="<?php echo $id; ?>" onClick="copyMsg('<?php echo $amb['name']; ?>' , '<?php echo $leader_name; ?>', '<?php echo $uniqid.$leader_id;?>')" style="color: #214761;"><i class="fas fa-copy"></i></a>
 								</td>
@@ -125,10 +125,21 @@
 
 <?php
 
-$leavers = $this->requestsModel->get_leavers($Rid)->num_rows;
+/*$leavers = $this->requestsModel->get_leavers($Rid)->num_rows;
 $leader = $this->requestsModel->get_data($Rid, 'Rid', 'leader_request', 'leader_id, current_team_count')->fetch_assoc();
 $teamCount = $leader['current_team_count']; //to be retrieved from the base Database
-$leader_id = $leader['leader_id'];	
+$leader_id = $leader['leader_id'];	*/
+$email = $_GET['email'];
+
+$leader = $this->requestsModel->get_data($email, 'leader_email', 'leader_info', 'id')->fetch_assoc();
+$leader_id = $leader['id'];
+
+$request = $this->requestsModel->leaderLastRequest($leader_id)->fetch_assoc();
+$rid = $request['Rid'];
+$leavers = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'counter')->fetch_assoc();
+$counter = $leavers['counter'];
+
+$teamCount = $request['current_team_count'];
 
 ?>
 		<div class="modal fade" role="dialog" id="fill_back" >
@@ -231,7 +242,7 @@ $leader_id = $leader['leader_id'];
 			}
 		}
 
-		function notJoined( id) {
+		function notJoined( id, rid) {
 			if ( document.getElementById( "notJoined" + id ).checked == true ) {
 				var success = confirm( "هل أنت متأكد من أن العضو لم يتم استقباله؟" );
 				var base_url = "<?php echo base_url()?>";
@@ -242,7 +253,8 @@ $leader_id = $leader['leader_id'];
 						url: base_url + 'NewMembersList/notJoined_ambassador',
 						type: 'POST',
 						data: {
-							Checked: id
+							Checked: id,
+							rid: rid
 						},
 						dataType: 'text',
 						success: function () {
@@ -311,7 +323,7 @@ $leader_id = $leader['leader_id'];
 		}
 
 		$( document ).ready( function () {
-			var counter = <?php echo (isset($leavers))? $leavers : 0;?>;
+			var counter = <?php echo (!empty($counter))? $counter : 0;?>;
 			var lst = document.querySelectorAll( ".joined" );
 			var flag = false;
 			var i;
@@ -420,7 +432,7 @@ $leader_id = $leader['leader_id'];
 
         function fill_back(){
             var base_url = "<?php echo base_url();?>";
-            var counter = <?php echo $leavers;?>;
+            var counter = <?php echo $counter;?>;
             var gender = document.getElementById('gender').value;
             var leader_id = <?php echo $leader_id;?>;
             var teamCount = <?php echo $teamCount;?>;

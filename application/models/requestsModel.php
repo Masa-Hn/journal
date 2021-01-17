@@ -223,7 +223,7 @@ class RequestsModel extends CI_Model {
 
 	public function leaderLastRequest( $id ) {
 
-		$query = "SELECT date,is_done, Rid FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
+		$query = "SELECT date,is_done, Rid, current_team_count FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {
@@ -254,6 +254,15 @@ class RequestsModel extends CI_Model {
 		$done = $conn->query( $query );
 		$conn->close();
 	} //updateLeaderInfo
+	
+		public function counterIncrement( $rid ) {
+
+		$query = "UPDATE leader_request SET counter = counter +1 WHERE Rid =" . $rid;
+
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		$conn->close();
+	}
 
 	public function connectToDB() {
 
