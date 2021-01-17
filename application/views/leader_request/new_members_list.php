@@ -323,7 +323,7 @@ $teamCount = $request['current_team_count'];
 		}
 
 		$( document ).ready( function () {
-			var counter = <?php echo (!empty($counter))? $counter : 0;?>;
+			var counter = <?php echo (!empty($counter))? $counter : 0;?>;/*
 			var lst = document.querySelectorAll( ".joined" );
 			var flag = false;
 			var i;
@@ -352,7 +352,10 @@ $teamCount = $request['current_team_count'];
 				$( "#fill_back" ).modal( "hide" );
 			}
 
-			console.log( flag );
+			console.log( flag );*/
+            if(counter>0){
+                    $( "#fill_back" ).modal( "show" );
+            }
 		} );
 
 		function copyMsg( ambName, leaderName, uniqid ) {
