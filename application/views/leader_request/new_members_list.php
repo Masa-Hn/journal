@@ -141,6 +141,15 @@ $counter = $leavers['counter'];
 
 $teamCount = $request['current_team_count'];
 
+$ifJoinAmb = $this->requests_model->get_data($rid, 'request_id', 'ambassador', 'join_following_team');
+
+while ( $test = $ifJoinAmb->fetch_array( MYSQLI_ASSOC ) ) {
+    if($test['join_following_team'] == 0){
+        $registeredAllAmb = 0;
+    }else{
+        $registeredAllAmb = 1;
+    } 
+}
 ?>
 		<div class="modal fade" role="dialog" id="fill_back" >
 		<div class="modal-dialog">
@@ -323,7 +332,17 @@ $teamCount = $request['current_team_count'];
 		}
 
 		$( document ).ready( function () {
-			var counter = <?php echo (!empty($counter))? $counter : 0;?>;/*
+			var counter = <?php echo (!empty($counter))? $counter : 0;?>;
+            var registeredAllAmb = <?php echo $registeredAllAmb ?>;
+            if(registeredAllAmb == 1){
+                if(counter>0){
+                    $( "#fill_back" ).modal( "show" );
+                }
+            }else{
+                $( "#newReqModal" ).modal( "show" );
+            }
+		});
+            /*
 			var lst = document.querySelectorAll( ".joined" );
 			var flag = false;
 			var i;
@@ -353,10 +372,7 @@ $teamCount = $request['current_team_count'];
 			}
 
 			console.log( flag );*/
-            if(counter>0){
-                    $( "#fill_back" ).modal( "show" );
-            }
-		} );
+            
 
 		function copyMsg( ambName, leaderName, uniqid ) {
 
