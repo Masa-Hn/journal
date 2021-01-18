@@ -130,16 +130,24 @@ $leader = $this->requestsModel->get_data($Rid, 'Rid', 'leader_request', 'leader_
 $teamCount = $leader['current_team_count']; //to be retrieved from the base Database
 $leader_id = $leader['leader_id'];	*/
 $email = $_GET['email'];
+$teamCount = 29;
 
 $leader = $this->requestsModel->get_data($email, 'leader_email', 'leader_info', 'id')->fetch_assoc();
 $leader_id = $leader['id'];
 
 $request = $this->requestsModel->leaderLastRequest($leader_id)->fetch_assoc();
 $rid = $request['Rid'];
+
 $leavers = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'counter')->fetch_assoc();
 $counter = $leavers['counter'];
 
-$teamCount = $request['current_team_count'];
+if(($counter + $teamCount) <=30){
+	$counter = $leavers['counter'];
+}else{
+	$counter = 30 - $teamCount;
+	$this->requestsModel->update_counter($counter, $rid);
+}
+
 
 ?>
 		<div class="modal fade" role="dialog" id="fill_back" >
