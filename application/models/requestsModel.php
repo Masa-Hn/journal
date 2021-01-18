@@ -183,6 +183,13 @@ class RequestsModel extends CI_Model {
 		$conn->close();
 	} //update data
 
+		public function update_counter( $counter , $rid) {
+		$query = "UPDATE leader_request SET counter = " . $counter . " WHERE Rid = " . $rid;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		$conn->close();
+	} 
+	
 	public function selectWithJoin( $table1, $table2, $ON, $whereCondition, $select = '*' ) {
 
 		$this->db->select( $select );
