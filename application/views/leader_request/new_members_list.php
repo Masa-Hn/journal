@@ -124,31 +124,30 @@
     </div>
 
 <?php
-
-/*$leavers = $this->requestsModel->get_leavers($Rid)->num_rows;
-$leader = $this->requestsModel->get_data($Rid, 'Rid', 'leader_request', 'leader_id, current_team_count')->fetch_assoc();
-$teamCount = $leader['current_team_count']; //to be retrieved from the base Database
-$leader_id = $leader['leader_id'];	*/
 $email = $_GET['email'];
 
-$leader = $this->requestsModel->get_data($email, 'leader_email', 'leader_info', 'id')->fetch_assoc();
+$leader = $this->requests_model->get_data($email, 'leader_email', 'leader_info', 'id')->fetch_assoc();
 $leader_id = $leader['id'];
 
-$request = $this->requestsModel->leaderLastRequest($leader_id)->fetch_assoc();
-$rid = $request['Rid'];
-$leavers = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'counter')->fetch_assoc();
-$counter = $leavers['counter'];
-
-$teamCount = $request['current_team_count'];
-
-$ifJoinAmb = $this->requests_model->get_data($rid, 'request_id', 'ambassador', 'join_following_team');
-
-while ( $test = $ifJoinAmb->fetch_array( MYSQLI_ASSOC ) ) {
-    if($test['join_following_team'] == 0){
-        $registeredAllAmb = 0;
-    }else{
-        $registeredAllAmb = 1;
-    } 
+$request = $this->requests_model->leaderLastRequest($leader_id)->fetch_assoc();
+if($request != null){
+    $rid = $request['Rid'];
+    $leavers = $this->requests_model->get_data($rid, 'Rid', 'leader_request', 'counter')->fetch_assoc();
+    $counter = $leavers['counter'];
+    
+    $teamCount = $request['current_team_count'];
+    
+    $ifJoinAmb = $this->requests_model->get_data($rid, 'request_id', 'ambassador', 'join_following_team');
+    
+    if($ifJoinAmb != null){
+        while ( $test = $ifJoinAmb->fetch_array( MYSQLI_ASSOC ) ) {
+            if($test['join_following_team'] == 0){
+                $registeredAllAmb = 0;
+            }else{
+                $registeredAllAmb = 1;
+            } 
+        }
+    }
 }
 ?>
 		<div class="modal fade" role="dialog" id="fill_back" >
