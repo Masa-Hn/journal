@@ -124,18 +124,27 @@
     </div>
 
 <?php
+
 $email = $_GET['email'];
+$teamCount = $teamCount; // from leader view
 
 $leader = $this->requests_model->get_data($email, 'leader_email', 'leader_info', 'id')->fetch_assoc();
 $leader_id = $leader['id'];
 
 $request = $this->requests_model->leaderLastRequest($leader_id)->fetch_assoc();
+
 if($request != null){
     $rid = $request['Rid'];
     $leavers = $this->requests_model->get_data($rid, 'Rid', 'leader_request', 'counter')->fetch_assoc();
+    
     $counter = $leavers['counter'];
     
-    $teamCount = $request['current_team_count'];
+    if(($counter + $teamCount) <=30){
+        $counter = $leavers['counter'];
+    }else{
+        $counter = 30 - $teamCount;
+        $this->requests_model->update_counter($counter, $rid);
+    }
     
     $ifJoinAmb = $this->requests_model->get_data($rid, 'request_id', 'ambassador', 'join_following_team');
     
@@ -143,6 +152,7 @@ if($request != null){
         while ( $test = $ifJoinAmb->fetch_array( MYSQLI_ASSOC ) ) {
             if($test['join_following_team'] == 0){
                 $registeredAllAmb = 0;
+                break;
             }else{
                 $registeredAllAmb = 1;
             } 
@@ -376,14 +386,14 @@ if($request != null){
 		function copyMsg( ambName, leaderName, uniqid ) {
 
 			var x = "";
-			x += "مرحباً " + ambName + "\n.\n";
+			x += "مرحبًا " + ambName + "\n.\n";
 			x += "أنا " + "( " + leaderName + " )" + "\n.\n";
 			x += "سأكون مشرف القراءة الخاص بك داخل أصبوحة ١٨٠." + "\n.\n.\n";
-			x += "سعيد جدا بانضمامك معنا ك قارئ جديد في مشروع صناعة القُراء.\n\n";
-			x += "بداية ما رايك أن تعرفني بنفسك اكثر؟" + " 🌸🌸" + "\n.\n";
-			x += "وأرجو منك الدخول هنا للمجموعة العامة لكل القراء (مهمة جداً)\n.\n";
+			x += "سعيد جدًا بانضمامك معنا ك قارئ جديد في مشروع صناعة القُراء.\n\n";
+			x += "بداية ما رأيك أن تعرفني بنفسك أكثر؟" + " 🌸🌸" + "\n.\n";
+			x += "وأرجو منك الدخول هنا للمجموعة العامة لكل القراء (مهمة جدًا)\n.\n";
 			x += "https://www.facebook.com/groups/667884100014005" + "\n.\n";
-			x += "رمزالدخول للمجموعة, بها كل الأنشطة الأسبوعية لكل القرّاء:\n.\n" + uniqid + "\n\n";
+			x += "رمز الدخول للمجموعة، بها كل الأنشطة الأسبوعية لكل القرّاء:\n.\n" + uniqid + "\n\n";
 
 			var copyText = document.createElement( 'textarea' );
 			copyText.value = x;

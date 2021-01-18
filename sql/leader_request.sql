@@ -35,7 +35,8 @@ CREATE TABLE `leader_request` (
   `leader_id` int(11) NOT NULL,
   `is_done` tinyint(1) NOT NULL DEFAULT 0,
   `send_to_leader` tinyint(1) NOT NULL DEFAULT 0,
-  `current_team_count` int(11) NOT NULL
+  `current_team_count` int(11) NOT NULL,
+`counter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
