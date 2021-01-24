@@ -56,7 +56,7 @@
         </div>
          --> <div class="icon-bar-left">
             <div class="container_centered" style="text-align: left; margin-left: 0" id="help">
-                <a href="https://www.facebook.com/taheelofosboha/" target="_blank">
+                <a href="https://www.messenger.com/t/100360891928932/" target="_blank">
                   <img class="helpimg" src="<?php echo base_url()?>assets/sign_up_assests/img/point4.png" alt="">
                 </a>
                 
