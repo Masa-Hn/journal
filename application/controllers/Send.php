@@ -17,13 +17,17 @@ class Send extends CI_Controller {
    public function index(){
     $newLeader = new requestsModel();
     $sender=3197321007062062;
-    $email="email@email.com";
+    $email="TEST@email.com";
+      $leader[ 'leader_email' ] = $email;
+      $leader[ 'messenger_id' ] = $sender;
+          $newLeader->insertLeaderInfo($leader);
+echo "pass";
+die();
     $result=$newLeader->get_data($sender, 'messenger_id', "leader_info");
 
     if($result->num_rows == 0){
       $leader[ 'leader_email' ] = $email;
       $leader[ 'messenger_id' ] = $sender;
-      $newLeader->insertLeaderInfo($leader);
 
       $response="not reg before";
     }
