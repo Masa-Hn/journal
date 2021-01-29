@@ -169,5 +169,9 @@ class ExceptionalExcutiveTeams extends CI_Controller {
 
 		echo $msg;
 	}
+	public function deleteLeader(){
+		$id = $_POST['id'];
+		$this->ExceptionalExcutiveModel->deleteLeader($id);
+	}
 }
 ?>

@@ -130,7 +130,7 @@ $leader = $this->requestsModel->get_data($Rid, 'Rid', 'leader_request', 'leader_
 $teamCount = $leader['current_team_count']; //to be retrieved from the base Database
 $leader_id = $leader['leader_id'];	*/
 $email = $_GET['email'];
-$teamCount = 29;
+$teamCount = 20;
 
 $leader = $this->requestsModel->get_data($email, 'leader_email', 'leader_info', 'id')->fetch_assoc();
 $leader_id = $leader['id'];

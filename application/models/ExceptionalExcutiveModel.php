@@ -29,7 +29,7 @@ class ExceptionalExcutiveModel extends CI_Model {
 
 	public
 	function retrieve_leaders_exc( $supervisor, $rank ) {
-		$query = "SELECT * FROM leader_info WHERE leaders_team_name='" . $supervisor . "' AND leader_rank LIKE '%" . $rank . "%'";
+		$query = "SELECT * FROM leader_info WHERE leaders_team_name='" . $supervisor . "' AND leader_rank LIKE '%" . $rank . "%' AND messenger_id != 0 AND leader_gender IS NOT NULL";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {
@@ -49,6 +49,14 @@ class ExceptionalExcutiveModel extends CI_Model {
 		$conn->close();
 	}
 
+	public
+	function deleteLeader( $id ) {
+		$query = "UPDATE leader_info SET leader_gender=NULL , messenger_id = 0 WHERE id = $id";
+
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		$conn->close();
+	}
 	public
 	function updateFullRequest( $leader ) {
 
