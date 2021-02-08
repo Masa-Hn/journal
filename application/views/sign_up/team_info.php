@@ -41,7 +41,7 @@
               انضم للمجموعة من هنا
             </button>
             
-            <a href="<?php echo $_SESSION['team_info']['leader_info']->team_link; ?>" id="team_link" style="display: none;" target="_blank"></a>
+            <input value="<?php echo $_SESSION['team_info']['leader_info']->team_link; ?>" id="team_link" style="display: none;">
           </div>
         </div>
         <!-- <div class="row align-items-center justify-content-center">
@@ -130,13 +130,12 @@
                             id:id
                         },
                         success: function(data){
-                            //window.open(document.getElementById('team_link').value, "_blank");
-                            document.getElementById('team_link').click();
+                            window.open(document.getElementById('team_link').value, "_blank");
+                            //document.getElementById('team_link').click();
                         },
                         error: function(error) {
-                            //window.open(document.getElementById('team_link').value, "_blank");
-                            document.getElementById('team_link').click();
-                            console.log( error );
+                            window.open(document.getElementById('team_link').value, "_blank");
+                                console.log( error );
                         }
                     });
                 }else{
