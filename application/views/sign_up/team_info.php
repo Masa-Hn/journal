@@ -11,11 +11,10 @@
     $id =  $_SESSION['team_info']['ambassador'][count( $_SESSION['team_info']['ambassador']) - 1]->id; 
   }
 
-  $page_id = 14;
-  $this->StatisticsModel->incrementVisitors($page_id);
+    $page_id = 14;
+    $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">
-
 <input type="hidden" id="team_code" value="<?php echo $_SESSION['team_info']['leader_info']->uniqid .$_SESSION['team_info']['leader_info']->id ; ?>">
 
 <!--Start Banner Area -->
@@ -41,14 +40,12 @@
               انضم للمجموعة من هنا
             </button>
             
-            <a href="<?php echo $_SESSION['team_info']['leader_info']->team_link; ?>" id="team_link" style="display: none;" target="_blank"></a>
+            <input value="<?php echo $_SESSION['team_info']['leader_info']->team_link; ?>" id="team_link" style="display: none;">
           </div>
         </div>
         <!-- <div class="row align-items-center justify-content-center">
           <div class="col-lg-12 col-sm-12 text-center icon-bar-right" dir="rtl">
-
               <a href="javascript:next('step_1')" class="final-page genric-btn circle next-info" id="leader_info" style="margin: 1.5%;font-size: 100%">
-
                 الخطوة السابقة
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </a>
@@ -130,13 +127,12 @@
                             id:id
                         },
                         success: function(data){
-                            //window.open(document.getElementById('team_link').value, "_blank");
-                            document.getElementById('team_link').click();
+                            window.location.replace(document.getElementById('team_link').value, "_blank");
+                            //document.getElementById('team_link').click();
                         },
                         error: function(error) {
-                            //window.open(document.getElementById('team_link').value, "_blank");
-                            document.getElementById('team_link').click();
-                            console.log( error );
+                            window.location.replace(document.getElementById('team_link').value, "_blank");
+                                console.log( error );
                         }
                     });
                 }else{
