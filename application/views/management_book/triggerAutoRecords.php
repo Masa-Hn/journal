@@ -8,33 +8,61 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<style>
 		.btn{
-			background-color:#205d67;
+			background-color:#0c5460;
 			color: #fff;
-			padding: 2%;
+			padding: 1%;
+			margin: 1%;
 		}
 		.btn:hover{
 			font-weight: bold;
-			opacity: 0.9;
 			color: #fff;
+			background-color: #0c5460;
 		}
-		.row{
+		
+		.container{
 			direction: rtl;
-			margin-top: 5%;
-			margin-left: 2%;
-			margin-right: 2%;
+			width: 50%;
+			border: 2px solid #0b2e13;
+			margin: 5% auto 0;
+			padding: 5%;
+			border-radius: 15px;
+			text-align: center;
 		}
-		
-		
+		h1{
+			margin-top: 1%;
+			color: #0c5460;
+			text-align: center;
+		}
+	span{
+		font-weight: bold;
+	}
+	a{
+		font-weight: bold;
+		font-size: 12pt;
+	}
 	</style>
 </head>
 
 <body>
-	<div class="row" style="text-align: center;">
-	<div id="msg" class="alert alert-success" style="display: none; width: 100%;"></div>
+<?php
+$records = $this->StatisticsModel->getRecords();
+$res = $records->last_row();
+$date = date('y-m-d' , strtotime( $res->date ));
+?>
+<div class="container">
+	<h1>إضافة الأيام الخاصة بالإحصائيات</h1>
+		<div class="form-group" id="errorMsg">
+			<img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
+			<span id="loadingMsg" style="color: #197439;"></span>
 		</div>
-	<div class="row" style="text-align: center;">
-	<button class="btn btn-block" id="trigBtn">إضافة أسبوع إضافي</button>
-	</div>
+		<div id="msg" class="alert alert-success" style="display: none; width: 100%;"></div>
+		<button class="btn" id="trigBtn">إضافة 30 يوم إضافي</button>
+	<hr />
+	<span>آخر تاريخ مسجل: <?php echo $date;?> </span>
+	<a href="javascript:window.location.href=window.location.href"> تحديث </a>
+</div>
+
+
 	
 </body>
 </html>
@@ -43,17 +71,34 @@
 	$( document ).ready( function () {
 		var base_url = "<?php echo base_url()?>";
 		$( "#trigBtn" ).click( function () {
+			var x = 10;
+			var counter = setInterval(function(){
+				$("#loading").show();
+				document.getElementById('loadingMsg').innerHTML=
+						"   "+
+						' يتم الأن إضافة الأيام' +
+						" "+ x;
+				x--;
+				if (x<0) {
+					clearInterval(counter);
+				}
+			},1000);
+
+			setTimeout(function () {
+				clearInterval(counter);
 			$.ajax( {
 				url: base_url + "autoRecords/addRecords",
 				success: function ( data ) {
 					document.getElementById('msg').style.display = "block";
 					$('#msg').html(data);
+					$("#errorMsg").hide();
 					console.log( data );
 				},
 				error: function ( error ) {
 					console.log( error );
 				}
 			} );
+			}, 5000);
 		} );
 	} );
 </script>

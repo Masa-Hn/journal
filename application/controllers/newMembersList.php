@@ -91,16 +91,30 @@ class NewMembersList extends CI_Controller {
     }
 
     function newRequest(){
+		$done = "";
         $data['gender'] = $_POST['gender'];
         $data['leader_id'] = $_POST['leader_id'];
         $data['members_num'] = $_POST['num'];
         $data['current_team_count'] = $_POST['teamCount'];
 
-        $id = $this->requestsModel->addRequest($data);
+		$request = $this->requestsModel->leaderLastRequest($data['leader_id']);
 
-        if(isset($id)){
+		if($request->num_rows == 0){
+			$done = $this->requestsModel->addRequest($data);
+		}else{
+			$res = $request->fetch_assoc();
+			$date = $res['date'];
+			if ( ( date( 'Y-m-d' ) >= date( 'Y-m-d', strtotime( $date . ' + 1 days' ) ) ) ) {
+				$done = $this->requestsModel->addRequest($data);
+			}else{
+				$done = "";
+			}
+		}
+        if(!empty($done)){
             echo "<div class='alert alert-success'> سيتم إرسال ". $data['members_num'] . " أعضاء لك قريباً </div>";
-        }
+        }else{
+			echo "<div class='alert alert-danger'> لقد تم تسجيل طلبك!</div>";
+		}
     }
 }
 ?>

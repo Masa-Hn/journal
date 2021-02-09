@@ -126,6 +126,7 @@
 <?php
 
 $email = $_GET['email'];
+$teamCount = 20;
 $teamCount = $teamCount; // from leader view
 
 $leader = $this->requests_model->get_data($email, 'leader_email', 'leader_info', 'id')->fetch_assoc();
