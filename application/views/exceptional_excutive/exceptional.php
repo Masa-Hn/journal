@@ -1,5 +1,5 @@
 <?php
-$supervisor = NULL;
+$supervisor = "leaders of osboha 1";
 $rank = 22;
 ?>
 <style>
@@ -45,6 +45,7 @@ $rank = 22;
 							<th>اسم القائد</th>
 							<th>تعديل البيانات</th>
 							<th>طلب أعضاء</th>
+							<th>حذف القائد</th>
 							<th>آخر طلب</th>
 						</thead>
 						<tbody>
@@ -61,6 +62,11 @@ $rank = 22;
 								<td><a data-toggle="collapse" data-target="#add<?php echo $id;?>" style="color: #214761"><i class="fa fa-user-plus"></i></a>
 								</td>
 								<td>
+									<a onclick="deleteLeader('<?php echo $id?>')" style="color:#214761;">
+										<i class="fa fa-trash" aria-hidden="true"></i>
+									</a>
+								</td>
+								<td>
 								<span><?php echo $query['date'];?></span>
 								<span>|</span>
 								<span><?php echo $query['members_num']; echo " "; echo ($query['members_num'] == 1 || $query['members_num'] == 2)? "عضو":"أعضاء";?> </span>
@@ -70,14 +76,14 @@ $rank = 22;
 							if ( $leader[ 'leader_link' ] == null && $leader[ 'leader_gender' ] == null ) {
 								?>
 							<tr class="collapse" id="edit<?php echo $id;?>">
-								<td colspan="4">
+								<td colspan="5">
 									<div class="alert alert-warning" style="text-align: center">
 										لا يمكنك التعديل, لم يتم تسجيل بيانات القائد بعد..!
 									</div>
 								</td>
 							</tr>
 							<tr class="collapse edit" id="add<?php echo $id;?>">
-								<td colspan="4">
+								<td colspan="5">
 									<h3 style="text-align: center">طلب أعضاء جدد</h3>
 									<p id="msgAdd<?php echo $id;?>"></p>
 									<form enctype="multipart/form-data" method="post">
@@ -133,7 +139,7 @@ $rank = 22;
 							} else {
 								?>
 							<tr class="collapse edit" id="edit<?php echo $id;?>">
-								<td colspan="4">
+								<td colspan="5">
 									<h3 style="text-align: center">تعديل بيانات القائد</h3>
 									<p id="msgEdit<?php echo $id;?>"></p>
 									<form enctype="multipart/form-data" method="post">
@@ -179,7 +185,7 @@ $rank = 22;
 								</td>
 							</tr>
 							<tr class="collapse edit" id="add<?php echo $id;?>">
-								<td colspan="4">
+								<td colspan="5">
 
 									<h3 style="text-align: center">طلب أعضاء جدد</h3>
 									<p id="msgAdd2<?php echo $id;?>"></p>
@@ -330,5 +336,24 @@ $rank = 22;
 					}
 				} );
 			};
+		}
+
+		function deleteLeader(id){
+			var base_url = "<?php echo base_url()?>";
+				$.ajax( {
+					type: "POST",
+					url: base_url + "exceptionalExcutiveTeams/deleteLeader",
+					data: {
+						id: id
+					},
+					beforeSend: function () {
+						return confirm( "هل أنت متأكد من حذف القائد؟" );
+					},
+					success: function ( data ) {
+						window.setTimeout( function () {}, 3000 );
+						location.reload();
+						//console.log(data);
+					}
+				} );
 		}
 	</script>

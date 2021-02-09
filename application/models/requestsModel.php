@@ -200,20 +200,21 @@ class RequestsModel extends CI_Model {
 	} //selectWithJoin
 
 
-	public function insertLeaderInfo( $leader ) {
+	public function insertLeaderInfo($leader){
 
-		$query = "INSERT INTO leader_info (`leader_name`, `leader_link`, `leader_gender`, `team_name`,`team_link`, `leader_email`, `uniqid`) VALUES ('" . $leader[ 'leader_name' ] . "','" . $leader[ 'leader_link' ] . "','" . $leader[ 'leader_gender' ] . "','" . $leader[ 'team_name' ] . "','" . $leader[ 'team_link' ] . "','" . $leader[ 'leader_email' ] . "','" . $leader[ 'uniqid' ] . "')";
-		$conn = $this->connectToDB();
-		$done = $conn->query( $query );
+        $query ="INSERT INTO leader_info (leader_email, messenger_id,uniqid) VALUES ('".$leader[ 'leader_email' ]."','".$leader[ 'messenger_id' ]."',0)";
+		$conn= $this->connectToDB();
+		$done=$conn->query($query);
 
-		if ( $done ) {
-			$last_id = $conn->insert_id;
+        if($done){
+        	$last_id = $conn->insert_id;
 			$conn->close();
 			return $last_id;
-		} else {
+		}
+		else{
 			return $conn->error;
 		}
-	} //insertLeaderInfo
+	}//insertLeaderInfo
 
 	public function updateFullRequest( $leader ) {
 
