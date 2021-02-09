@@ -52,8 +52,8 @@ class Orm_Books extends Orm {
         
         
         
-        if(isset(self::$instances[$])) {
-            return self::$instances[$];
+        if(isset(self::$instances[$row])) {
+            return self::$instances[$row];
         }
         
         return null;
@@ -66,12 +66,12 @@ class Orm_Books extends Orm {
     * @param int $
     * @return Orm_Books
     */
-    public static function get_instance($) {
+    public static function get_instance($id) {
         
         
         
-        if(isset(self::$instances[$])) {
-            return self::$instances[$];
+        if(isset(self::$instances[$id])) {
+            return self::$instances[$id];
         }
         
         return self::get_one(array());
