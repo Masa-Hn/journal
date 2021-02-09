@@ -13,12 +13,19 @@ class AddUsers extends CI_Controller {
 	} //end construct()
 
     public function index() {
-		$this->load->helper('url');
+		//$this->load->helper('url');
+        $this->load->helper('orm_autoload');
 		$this->load->library("pagination");
 
 		$config = array();
 		$config["base_url"] = base_url() . "AddUsers";
 		$config["total_rows"] = $this->GeneralModel->get_data(0,'regstatus','users')->num_rows();
+        $filters["regstatus"] = 0;
+        //$teat = new Orm_users;
+        //echo '<pre>';
+        //print_r (Orm_Users::get_count($filters));die;
+        $config["total_rows"] = Orm_Users::get_count($filters);
+        
 		$config["per_page"] = 5;
 		$config["uri_segment"] = 2;
 		$config['full_tag_open'] = '<ul class="pagination justify-content-center" >';
