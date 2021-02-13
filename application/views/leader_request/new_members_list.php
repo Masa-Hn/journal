@@ -21,8 +21,7 @@
 
 					<?php
 					if ( empty( $info ) == true ) {
-						if ( isset( $ambassadors ) ) {
-							if ( $ambassadors->num_rows > 0 ) {
+							if ( isset($requests) && isset($uniqid) && isset($leader_id) && isset($leader_name) && isset($team_link)) {
 								?>
 					<div style="text-align: center; margin-bottom: 5%;">
 						<h4>كلمة السر الخاصة (كود) بدخول فريق المتابعة: </h4>
@@ -38,35 +37,55 @@
 							<th style="text-align:center">تم الاستقبال</th>
 							<th style="text-align:center">لم يتم الاستقبال</th>
 							<th style="text-align:center">رسالة التعريف</th>
+							<th style="text-align:center">تاريخ الطلب</th>
 						</thead>
 						<tbody>
 							<?php
-							while ( $amb = $ambassadors->fetch_array( MYSQLI_ASSOC ) ) {
-								$id = $amb[ 'id' ];
-								$rid = $amb['request_id'];
-								?>
-							<tr style="text-align: center; color:#214761 ">
-								<td>
-									<span class="link" id="ambassador_<?php echo $id;?>"><?php echo $amb['name']; ?></span>
-								</td>
-								<td>
-									<?php echo ($amb['gender'] == 'female' || $amb['gender'] == 'Female') ? "أنثى" :  "ذكر"; ?>
-								</td>
-								<td><input type="checkbox" name="joined" class="joined" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="<?php echo "joined".$id;?>" onclick="joined('<?php echo $id;?>');"></td>
-								<td><input type="checkbox" name="notJoined" class="joined" <?php if ($amb[ 'join_following_team']==2) echo "checked";?> id="<?php echo "notJoined".$id;?>" onclick="notJoined('<?php echo $id;?>', '<?php echo $rid;?>');"></td>
-								<td>
-									<a class="link" name="copyMsg" id="<?php echo $id; ?>" onClick="copyMsg('<?php echo $amb['name']; ?>' , '<?php echo $leader_name; ?>', '<?php echo $uniqid.$leader_id;?>')" style="color: #214761;"><i class="fas fa-copy"></i></a>
-								</td>
-
-							</tr>
-							<?php
+							$flag_counter_zero = 0;
+							$flag_counter_not_zero = 0;
+							while ( $req = $requests->fetch_array( MYSQLI_ASSOC )){
+								$rid = $req['Rid'];
+								$ambassadors = $this->requestsModel->get_info("request_id = $rid AND display = 1 AND join_following_team = 0", "ambassador", '*');
+								if($ambassadors->num_rows != 0){
+									while ( $amb = $ambassadors->fetch_array( MYSQLI_ASSOC )){
+										$id = $amb['id'];
+										?>
+										<tr style="text-align: center; color:#214761 ">
+											<td>
+												<span class="link" id="ambassador_<?php echo $id;?>"><?php echo $amb['name']; ?></span>
+											</td>
+											<td>
+												<?php echo ($amb['gender'] == 'female' || $amb['gender'] == 'Female') ? "أنثى" :  "ذكر"; ?>
+											</td>
+											<td><input type="checkbox" name="joined" class="joined" <?php if ($amb[ 'join_following_team']==1) echo "checked";?> id="<?php echo "joined".$id;?>" onclick="joined('<?php echo $id;?>');"></td>
+											<td><input type="checkbox" name="notJoined" class="joined" <?php if ($amb[ 'join_following_team']==2) echo "checked";?> id="<?php echo "notJoined".$id;?>" onclick="notJoined('<?php echo $id;?>', '<?php echo $rid;?>');"></td>
+											<td>
+												<a class="link" name="copyMsg" id="<?php echo $id; ?>" onClick="copyMsg('<?php echo $amb['name']; ?>' , '<?php echo $leader_name; ?>', '<?php echo $uniqid.$leader_id;?>')" style="color: #214761;"><i class="fas fa-copy"></i></a>
+											</td>
+											<td>
+												<?php echo date('y-m-d', strtotime($req['date']));?>
+											</td>
+										</tr>
+										<?php
+									}
+									$flag_counter_not_zero++;
+								}else{
+									$flag_counter_zero++;
+								}
 							}
-							?>
+							if($requests->num_rows == $flag_counter_zero || $flag_counter_not_zero = 0){
+								?>
+								<tr style="text-align: center; color:#214761 ">
+									<td colspan="6">
+										<div style='font-size:1.7rem; font-weight:bold; text-align:center;color: #C50407;'>لا يوجد لديك أعضاء جدد</div>
+									</td>
+								</tr>
+								<?php
+							}
+								?>
 						</tbody>
 					</table>
-					<?php }
-					} else {
-						echo "<div class='alert alert-danger' style='font-size:1.7rem; font-weight:bold; text-align:center;'>" . "لا يوجد أعضاء جدد لديك" . "</div>";
+					<?php
 					}
 					} else {
 						echo "<div class='alert alert-danger' style='font-size:1.7rem; font-weight:bold; text-align:center;'>" . $info . "</div>";
@@ -81,7 +100,6 @@
 			</div>
 		</div>
 	</div>
-
     <div class="modal fade" role="dialog" id="profile_link_save" >
 			<div class="modal-dialog">
             <div class="modal-content">
@@ -129,14 +147,14 @@ $email = $_GET['email'];
 $teamCount = 20;
 $teamCount = $teamCount; // from leader view
 
-$leader = $this->requests_model->get_data($email, 'leader_email', 'leader_info', 'id')->fetch_assoc();
+$leader = $this->requestsModel->get_data($email, 'leader_email', 'leader_info', 'id')->fetch_assoc();
 $leader_id = $leader['id'];
 
-$request = $this->requests_model->leaderLastRequest($leader_id)->fetch_assoc();
+$request = $this->requestsModel->leaderLastRequest($leader_id)->fetch_assoc();
 
 if($request != null){
     $rid = $request['Rid'];
-    $leavers = $this->requests_model->get_data($rid, 'Rid', 'leader_request', 'counter')->fetch_assoc();
+    $leavers = $this->requestsModel->get_data($rid, 'Rid', 'leader_request', 'counter')->fetch_assoc();
     
     $counter = $leavers['counter'];
     
@@ -144,10 +162,10 @@ if($request != null){
         $counter = $leavers['counter'];
     }else{
         $counter = 30 - $teamCount;
-        $this->requests_model->update_counter($counter, $rid);
+        $this->requestsModel->update_counter($counter, $rid);
     }
     
-    $ifJoinAmb = $this->requests_model->get_data($rid, 'request_id', 'ambassador', 'join_following_team');
+    $ifJoinAmb = $this->requestsModel->get_data($rid, 'request_id', 'ambassador', 'join_following_team');
     
     if($ifJoinAmb != null){
         while ( $test = $ifJoinAmb->fetch_array( MYSQLI_ASSOC ) ) {
@@ -192,6 +210,7 @@ if($request != null){
 		</div>
 
 	<script type="text/javascript">
+		var ambid = 0;
 		function joined( id ) {
 			if ( document.getElementById( "joined" + id ).checked == true ) {
 				var success = confirm( "هل أنت متأكد من أن العضو تم استقباله؟" );
@@ -200,6 +219,7 @@ if($request != null){
 				if ( success == true ) {
 					document.getElementById( "notJoined" + id ).checked = false;
 					$("#profile_link_save").modal("show");
+					ambid = id;
 					$.ajax( {
 						url: base_url + 'NewMembersList/joined_ambassador',
 						type: 'POST',
@@ -439,7 +459,7 @@ if($request != null){
                 type: 'POST',
                 data: {
                     profile_link: profile_url,
-                    amb_id: id
+                    amb_id: ambid
                 },
                 dataType: 'text',
                 success: function (msg) {

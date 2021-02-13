@@ -163,6 +163,18 @@ class RequestsModel extends CI_Model {
 		}
 	} //get_data
 
+	public function get_info($where, $table, $select = '*' ) {
+		$query = "SELECT " . $select . " FROM " . $table . " WHERE " . $where;
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$conn->close();
+			return $done;
+		} else {
+			return $conn->error;
+		}
+	}
+
 	public function get_leavers($request_id) {
 		$query = "SELECT join_following_team FROM ambassador WHERE join_following_team = 2 AND request_id = ".$request_id;
 		$conn = $this->connectToDB();

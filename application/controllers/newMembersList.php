@@ -20,18 +20,30 @@ class NewMembersList extends CI_Controller {
 			$res = $leader_info->fetch_array( MYSQLI_ASSOC );
             if($res != null){
                 $id = $res[ 'id' ];
-                $request = $this->requestsModel->leaderLastRequest( $id, 'leader_id', 'leader_request', '*' );
-                if ( $request->num_rows > 0 ) {
-                    $request_info = $request->fetch_array( MYSQLI_ASSOC );
-                    $Rid = $request_info[ 'Rid' ];
-										$arr['Rid'] = $Rid;
+                $requests = $this->requestsModel->get_data($id, 'leader_id', 'leader_request');
+                $requests_temp = $this->requestsModel->get_data($id, 'leader_id', 'leader_request');
+                if ( $requests->num_rows > 0 ) {
+					$last_request = $this->requestsModel->leaderLastRequest( $id, 'leader_id', 'leader_request', '*' );
+					$last_request_res = $last_request->fetch_assoc();
+                  //  $request_info = $request->fetch_array( MYSQLI_ASSOC );
+                   // $Rid = $request_info[ 'Rid' ];
+					//$arr['Rid'] = $Rid;
                     $arr[ 'leader_id' ] = $id;
                     $arr[ 'uniqid' ] = $res[ 'uniqid' ];
                     $arr[ 'leader_name' ] = $res[ 'leader_name' ];
                     $arr[ 'team_link' ] = $res[ 'team_link' ];
-                    $arr[ 'ambassadors' ] = $this->requestsModel->get_data($Rid, 'request_id', 'ambassador', '*', 'AND display = 1');
-
-                    if ( $arr[ 'ambassadors' ]->num_rows == 0 ) {
+                    $arr['requests'] = $requests;
+                    $arr['ambassadors'] = $this->requestsModel->get_info("request_id =". $last_request_res['Rid']. " AND display = 1", 'ambassador', '*');
+                    $flag = true;
+                    while ($req = $requests_temp->fetch_array( MYSQLI_ASSOC )){
+                    	$Rid = $req['Rid'];
+						$sql = $this->requestsModel->get_info("request_id = $Rid AND display = 1", 'ambassador', '*');
+						 if ( $sql->num_rows != 0 ) {
+						 	$flag = false;
+						 	break;
+						 }
+					}
+                    if ( $flag ) {
                         $arr[ 'info' ] = 'لم يتم التوزيع لك بعد!';
                     }
                     $this->load->view( 'leader_request/new_members_list', $arr );
