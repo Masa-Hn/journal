@@ -53,12 +53,12 @@ class Orm_Visitors extends Orm {
     * @param int $
     * @return Orm_Visitors
     */
-    public static function get_instance($) {
+    public static function get_instance($id) {
         
         
         
-        if(isset(self::$instances[$])) {
-            return self::$instances[$];
+        if(isset(self::$instances[$id])) {
+            return self::$instances[$id];
         }
         
         return self::get_one(array());

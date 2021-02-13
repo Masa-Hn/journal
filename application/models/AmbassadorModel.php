@@ -48,7 +48,7 @@ class AmbassadorModel extends CI_Model {
 	public function checkAmbassador($fb_id)
 	{
 		$where = "fb_id = '".$fb_id."'";
-		$this->db->select('id, request_id, created_at');
+		$this->db->select('id, request_id, created_at,messenger_id');
 		$this->db->where($where);
     	$this->db->from('ambassador');
 	    $this->db->limit(1);

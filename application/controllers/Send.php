@@ -10,45 +10,44 @@ class Send extends CI_Controller {
     $this->load->model('AmbassadorModel');      
     $this->load->model('books');  
     $this->load->model('RequestsModel');
-      
+    //    $sender=3197321007062062;
+
 	}//end construct()
 
 
    public function index(){
-    $newLeader = new requestsModel();
-    $sender=3197321007062062;
-    $email="TEST@email.com";
-      $leader[ 'leader_email' ] = $email;
-      $leader[ 'messenger_id' ] = $sender;
-          $newLeader->insertLeaderInfo($leader);
-echo "pass";
-die();
-    $result=$newLeader->get_data($sender, 'messenger_id', "leader_info");
+        $email = "saraismails9e@gmail";
+        $sender=3197321007062062;
+        // check if e-mail address is well-formed
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $ambassador = new AmbassadorModel();
+           $result=$ambassador->checkAmbassador($email);
+           if(count((array)$result) > 0){ 
+            if ($result->messenger_id  == 0 ) {
+                    $ambassador->updateMessengerId($result->id,$sender);
+                }
+                if (! is_null($result->request_id)) {
+                    $requestInfo = new SignUpModel();
+                    $request=$requestInfo->getRequestInfo($result->request_id);
+                    $leader_info=$requestInfo->getLeaderInfo($request->leader_id);
+                    
+                    $response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader_info->team_link."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader_info->uniqid.$leader_info->id."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
+                }
+                else{
+                    $response="شكرا لك 🌸 ".'\n'." . ".'\n'."تم تسجيل طلبك للحصول على فريق متابعة قراءة، سوف تصلك معلومات الفريق خلال أقل من ٢٤ ساعة".'\n'." . ".'\n'." نعمل لأجلكم. ";    
+                }
+              echo $response;
+          }
+          else
+            echo "99";
+        }
+        else{
+          echo "string";
+        }
 
-    if($result->num_rows == 0){
-      $leader[ 'leader_email' ] = $email;
-      $leader[ 'messenger_id' ] = $sender;
 
-      $response="not reg before";
+      //var_dump(orm_infographic::get_all());
     }
-    else if($result->num_rows <2){
-      $result=$result->fetch_array(MYSQLI_ASSOC);
-      if(! in_array( $email ,$result) ){
-        $leader[ 'leader_email' ] = $email;
-        $leader[ 'messenger_id' ] = $sender;
-        $newLeader->insertLeaderInfo($leader);
-        echo "inserted";
-      }
-      else{
-        echo "NOT";
-
-      }
-    }
-    else{
-      echo "no case";
- 
-    }
- }
   public function OwlyApi(){
     require_once('OwlyApi.php');
     $owly = OwlyApi::factory( array('key' => '{c4pah0tpw68kcwc4sswks4cg03ij385nihn}') );
