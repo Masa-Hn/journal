@@ -14,7 +14,6 @@ class AddUsers extends CI_Controller {
 
     public function index() {
 		//$this->load->helper('url');
-        $this->load->helper('orm_autoload');
 		$this->load->library("pagination");
 
 		$config = array();
@@ -24,7 +23,7 @@ class AddUsers extends CI_Controller {
         //$teat = new Orm_users;
         //echo '<pre>';
         //print_r (Orm_Users::get_count($filters));die;
-        $config["total_rows"] = Orm_Users::get_count($filters);
+        $config["total_rows"] = Orm_users::get_count($filters);
         
 		$config["per_page"] = 5;
 		$config["uri_segment"] = 2;

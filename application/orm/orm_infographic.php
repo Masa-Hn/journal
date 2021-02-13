@@ -25,47 +25,20 @@ class Orm_Infographic extends Orm {
     public static function get_model() {
         return Orm::get_ci_model('Infographic_Model');
     }
-    
-    /**
-    * push instance
-    */
-    protected function push_instance() {
-        
-    }
-    
-    /**
-    * pull_instance
-    *
-    * @param array $row
-    * @return array
-    */
-    protected static function pull_instance($row) {
-        
-        
-        
-        if(isset(self::$instances[$row])) {
-            return self::$instances[$row];
-        }
-        
-        return null;
-    }
-    
-    
+     
     /**
     * get instance
     *
     * @param int $
     * @return Orm_Infographic
     */
-    public static function get_instance($id) {
-        
-        
+    public static function get_instance($id) { 
         
         if(isset(self::$instances[$id])) {
             return self::$instances[$id];
         }
         
-        return self::get_one(array());
+        return self::get_one(array('id' => $id));
     }
     
     /**
@@ -93,7 +66,7 @@ class Orm_Infographic extends Orm {
         
         $result = self::get_model()->get_all($filters, 1, 1, $orders, Orm::FETCH_OBJECT);
         
-        if ($result && ) {
+        if ($result && $result->get_id()) {
             return $result;
         }
         
