@@ -81,8 +81,8 @@ class Visitors_Model extends CI_Model {
     * @param array $params
     * @return boolean
     */
-    public function update($, $params = array()) {
-        return $this->db->update(Orm_Visitors::get_table_name(), $params, array());
+    public function update($id, $params = array()) {
+        return $this->db->update(Orm_Visitors::get_table_name(), $params, array('id' => $id));
     }
     
     /**
@@ -91,8 +91,8 @@ class Visitors_Model extends CI_Model {
     * @param int $
     * @return boolean
     */
-    public function delete($) {
-        return $this->db->delete(Orm_Visitors::get_table_name(), array());
+    public function delete($id) {
+        return $this->db->delete(Orm_Visitors::get_table_name(), array('id' => $id));
     }
     
 }
