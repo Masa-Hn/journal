@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 /* Base */
-
+#redirectAgain{
+  display: none;
+}
 .header_margin{
   margin: 10% auto;
 }
@@ -211,7 +213,12 @@ h1, h2, h3, h4, h5,
 
 .site-footer {
   padding: 1em 0;
-  background: #1A2E35; }
+  background: #1A2E35; 
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+}
   @media (min-width: 768px) {
     .site-footer {
       padding: 2em 0; } }

@@ -73,6 +73,15 @@
         </h2>
       </div>
     </div>
+    <div class="row justify-content-center mb-5" id="redirectAgain">
+      <div class="col-md-7 text-center">
+        <h2 style="color: darkred">
+          اذا لم يقم الموقع بتحويلك لفريق القراءة الخاص بك راسلنا 
+          <strong class="strong_green" ><a  href="https://www.messenger.com/t/100360891928932/" target="_blank"> هنا  </a></strong>
+            لنُساعدك 
+        </h2>
+          </div>
+        </div>
     <div class="col-12 text-center mt-4">
       <a id="team" class="btn btn-primary rounded py-2 px-4 text-white">
         انضم للمجموعة من هنا
@@ -156,10 +165,17 @@ $( document ).ready(function(){
         success: function(data){
 
           window.location.replace(team_link, "_blank");
+          setInterval(function(){
+            document.getElementById('redirectAgain').style.display='block';
+          }, 3000);
+
           //document.getElementById('team_link').click();
         },
         error: function(error) {
           window.location.replace(team_link, "_blank");
+          setInterval(function(){
+            document.getElementById('redirectAgain').style.display='block';
+          }, 3000);
           console.log( error );
         }
         });
