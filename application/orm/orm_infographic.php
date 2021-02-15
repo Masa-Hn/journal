@@ -99,7 +99,7 @@ class Orm_Infographic extends Orm {
         if ($this->get_object_status() == 'new') {
             self::get_model()->insert($this->to_array());
         } elseif($this->get_object_fields()) {
-            self::get_model()->update(, $this->get_object_fields());
+            self::get_model()->update($this->get_id(), $this->get_object_fields());
         }
         
         $this->set_object_status('saved');

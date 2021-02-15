@@ -1,10 +1,5 @@
 
 $(document).ready(function () {
-    // Detect browser for css purpose
-    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-        $('.form form label').addClass('fontSwitch');
-    }
-
     // Label effect
     $('input').focus(function () {
 

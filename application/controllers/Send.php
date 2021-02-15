@@ -16,37 +16,7 @@ class Send extends CI_Controller {
 
 
    public function index(){
-        $email = "saraismails9e@gmail";
-        $sender=3197321007062062;
-        // check if e-mail address is well-formed
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $ambassador = new AmbassadorModel();
-           $result=$ambassador->checkAmbassador($email);
-           if(count((array)$result) > 0){ 
-            if ($result->messenger_id  == 0 ) {
-                    $ambassador->updateMessengerId($result->id,$sender);
-                }
-                if (! is_null($result->request_id)) {
-                    $requestInfo = new SignUpModel();
-                    $request=$requestInfo->getRequestInfo($result->request_id);
-                    $leader_info=$requestInfo->getLeaderInfo($request->leader_id);
-                    
-                    $response="مرحبا بك 🌹 ".'\n'." . ".'\n'."فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك." .'\n'." . ".'\n'." تفضل بعمل انضمام هنا 👇🏻 " .'\n'."'".$leader_info->team_link."'".'\n'. " سوف تواجه سؤال عن الكود الخاص بالدخول، قم بتزويدهم بهذا الكود 👇🏻 " .'\n'."'".$leader_info->uniqid.$leader_info->id."'".'\n'. " ننتظرك بيننا" .'\n'." سعداء جدا بك 🌹";
-                }
-                else{
-                    $response="شكرا لك 🌸 ".'\n'." . ".'\n'."تم تسجيل طلبك للحصول على فريق متابعة قراءة، سوف تصلك معلومات الفريق خلال أقل من ٢٤ ساعة".'\n'." . ".'\n'." نعمل لأجلكم. ";    
-                }
-              echo $response;
-          }
-          else
-            echo "99";
-        }
-        else{
-          echo "string";
-        }
-
-
-      //var_dump(orm_infographic::get_all());
+      var_dump(orm_infographic::get_all());
     }
   public function OwlyApi(){
     require_once('OwlyApi.php');

@@ -5,30 +5,45 @@
     $page_id = 4;
     $this->StatisticsModel->incrementVisitors($page_id);
 ?>
-<!-- Start Banner Area -->
-    <section class="banner-area relative bgImg2">
+
+    <div class="overlay bg-light header_padding" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
-        <div class="row fullscreen align-items-center justify-content-center">
-          <div class="banner-left col-lg-6 col-sm-12 page-img">
-            <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/character_4.png" alt="">
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            <div class="story-content" dir="rtl">
-              <h1><span class="sp-1" style="font-size: 50px">كيف تنال علامة </span></h1>
-              <br>
-              <h1><span class="sp-1" style="font-size: 50px">القراءة الكاملة ؟</span></h1>
-              <br>
-              <h1>
-                بكل بساطة تقرأ <span class="sp-2">30</span>
-                صفحة أسبوعياً   
-                 بإمكانك قراءتها كاملة خلال يوم واحد
-                أو تقوم بتقسيمها على أيام الأسبوع
-              </h1>
-              <a href="javascript:next('question_1')" class="genric-btn primary circle arrow">التالي </a>
+        <div class="row align-items-center justify-content-center text-center">
+
+          <div class="col-md-12">
+                        
+            <div class="row justify-content-center mb-4">
+              <div class="col-lg-8 col-sm-12 text-center">
+                <h1 class="header_margin" data-aos="fade-up" dir="rtl">
+                كيف تنال علامة القراءة الكاملة ؟
+                </h1>
+              </div>
+              <div class="col-lg-4 col-sm-12 text-center">
+                <img src="<?php echo base_url()?>assets/sign_up_assests/img/character_5.png" alt="Image" class="img-fluid">
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- End Banner Area -->
+    </div>  
+    <div class="site-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center">
+            <h2>
+              بكل بساطة تقرأ
+                
+               <strong style="color:#278036 "> 30 </strong> 
+                صفحة أسبوعياً بإمكانك قراءتها كاملة خلال يوم واحد أو تقوم بتقسيمها على أيام الأسبوع
+            </h2>
+          </div>
+        </div>
+          <div class="col-12 text-center mt-4">
+            <a href="javascript:next('question_1')" class="btn btn-primary rounded py-2 px-4 text-white">
+            التــالي
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 <?php include_once 'templates/footer.php';?>
