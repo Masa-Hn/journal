@@ -15,9 +15,9 @@ class Orm_Infographic extends Orm {
     protected $id = 0;
     protected $title = '';
     protected $pic = '';
+    protected $date = CURRENT_TIMESTAMP;
     protected $section = '';
     protected $series_id = 0;
-    protected $date = CURRENT_TIMESTAMP;
     
     /**
     * @return Infographic_Model
@@ -25,14 +25,16 @@ class Orm_Infographic extends Orm {
     public static function get_model() {
         return Orm::get_ci_model('Infographic_Model');
     }
-     
+    
     /**
     * get instance
     *
-    * @param int $
+    * @param int $id
     * @return Orm_Infographic
     */
-    public static function get_instance($id) { 
+    public static function get_instance($id) {
+        
+        $id = intval($id);
         
         if(isset(self::$instances[$id])) {
             return self::$instances[$id];
@@ -85,35 +87,40 @@ class Orm_Infographic extends Orm {
     
     public function to_array() {
         $db_params = array();
-        $db_params['id'] = $this->get_id();
+        if (Orm::is_integration_mode() && $this->get_id()) {
+            $db_params['id'] = $this->get_id();
+        }
         $db_params['title'] = $this->get_title();
         $db_params['pic'] = $this->get_pic();
+        $db_params['date'] = $this->get_date();
         $db_params['section'] = $this->get_section();
         $db_params['series_id'] = $this->get_series_id();
-        $db_params['date'] = $this->get_date();
         
         return $db_params;
     }
     
     public function save() {
         if ($this->get_object_status() == 'new') {
-            self::get_model()->insert($this->to_array());
+            $insert_id = self::get_model()->insert($this->to_array());
+            $this->set_id($insert_id);
         } elseif($this->get_object_fields()) {
-            self::get_model()->update(, $this->get_object_fields());
+            self::get_model()->update($this->get_id(), $this->get_object_fields());
         }
         
         $this->set_object_status('saved');
         $this->reset_object_fields();
-        return $this;
+        return $this->get_id();
     }
     
     public function delete() {
-        return self::get_model()->delete();
+        return self::get_model()->delete($this->get_id());
     }
     
     public function set_id($value) {
         $this->add_object_field('id', $value);
         $this->id = $value;
+        
+        $this->push_instance();
     }
     
     public function get_id() {
@@ -138,6 +145,15 @@ class Orm_Infographic extends Orm {
         return $this->pic;
     }
     
+    public function set_date($value) {
+        $this->add_object_field('date', $value);
+        $this->date = $value;
+    }
+    
+    public function get_date() {
+        return $this->date;
+    }
+    
     public function set_section($value) {
         $this->add_object_field('section', $value);
         $this->section = $value;
@@ -154,15 +170,6 @@ class Orm_Infographic extends Orm {
     
     public function get_series_id() {
         return $this->series_id;
-    }
-    
-    public function set_date($value) {
-        $this->add_object_field('date', $value);
-        $this->date = $value;
-    }
-    
-    public function get_date() {
-        return $this->date;
     }
     
     

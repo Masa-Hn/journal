@@ -14,7 +14,7 @@ class Orm_Activities extends Orm {
     */
     protected $id = 0;
     protected $name = '';
-    protected $copy = 0;
+    protected $copy = '';
     
     /**
     * @return Activities_Model
@@ -84,7 +84,9 @@ class Orm_Activities extends Orm {
     
     public function to_array() {
         $db_params = array();
-        $db_params['id'] = $this->get_id();
+        if (Orm::is_integration_mode() && $this->get_id()) {
+            $db_params['id'] = $this->get_id();
+        }
         $db_params['name'] = $this->get_name();
         $db_params['copy'] = $this->get_copy();
         
@@ -93,14 +95,15 @@ class Orm_Activities extends Orm {
     
     public function save() {
         if ($this->get_object_status() == 'new') {
-            self::get_model()->insert($this->to_array());
+            $insert_id = self::get_model()->insert($this->to_array());
+            $this->set_id($insert_id);
         } elseif($this->get_object_fields()) {
             self::get_model()->update($this->get_id(), $this->get_object_fields());
         }
         
         $this->set_object_status('saved');
         $this->reset_object_fields();
-        return $this;
+        return $this->get_id();
     }
     
     public function delete() {
@@ -134,6 +137,18 @@ class Orm_Activities extends Orm {
     
     public function get_copy() {
         return $this->copy;
+    }
+    
+    private $all_certificate = null;
+    
+    /**
+    * @return Orm_Certificate[]
+    */
+    public function related_all_certificate() {
+        if(is_null($this->all_certificate)) {
+            $this->all_certificate = Orm_Certificate::get_all(array('activity_id' => $this->get_id()));
+        }
+        return $this->all_certificate;
     }
     
     

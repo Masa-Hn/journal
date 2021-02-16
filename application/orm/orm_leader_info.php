@@ -15,12 +15,12 @@ class Orm_Leader_Info extends Orm {
     protected $id = 0;
     protected $leader_name = '';
     protected $leader_link = '';
+    protected $messenger_id = '';
     protected $team_link = '';
     protected $leader_email = '';
     protected $team_name = '';
     protected $leader_gender = '';
     protected $uniqid = '';
-    protected $messenger_id = '0';
     protected $leaders_team_name = '';
     protected $leader_rank = '5';
     
@@ -97,12 +97,12 @@ class Orm_Leader_Info extends Orm {
         }
         $db_params['leader_name'] = $this->get_leader_name();
         $db_params['leader_link'] = $this->get_leader_link();
+        $db_params['messenger_id'] = $this->get_messenger_id();
         $db_params['team_link'] = $this->get_team_link();
         $db_params['leader_email'] = $this->get_leader_email();
         $db_params['team_name'] = $this->get_team_name();
         $db_params['leader_gender'] = $this->get_leader_gender();
         $db_params['uniqid'] = $this->get_uniqid();
-        $db_params['messenger_id'] = $this->get_messenger_id();
         $db_params['leaders_team_name'] = $this->get_leaders_team_name();
         $db_params['leader_rank'] = $this->get_leader_rank();
         
@@ -155,6 +155,15 @@ class Orm_Leader_Info extends Orm {
         return $this->leader_link;
     }
     
+    public function set_messenger_id($value) {
+        $this->add_object_field('messenger_id', $value);
+        $this->messenger_id = $value;
+    }
+    
+    public function get_messenger_id() {
+        return $this->messenger_id;
+    }
+    
     public function set_team_link($value) {
         $this->add_object_field('team_link', $value);
         $this->team_link = $value;
@@ -198,15 +207,6 @@ class Orm_Leader_Info extends Orm {
     
     public function get_uniqid() {
         return $this->uniqid;
-    }
-    
-    public function set_messenger_id($value) {
-        $this->add_object_field('messenger_id', $value);
-        $this->messenger_id = $value;
-    }
-    
-    public function get_messenger_id() {
-        return $this->messenger_id;
     }
     
     public function set_leaders_team_name($value) {

@@ -17,6 +17,7 @@ class Orm_Suggestion_Book extends Orm {
     protected $writer = '';
     protected $brief = '';
     protected $type = '';
+    protected $publisher = '';
     protected $found = 0;
     protected $link = '';
     
@@ -95,6 +96,7 @@ class Orm_Suggestion_Book extends Orm {
         $db_params['writer'] = $this->get_writer();
         $db_params['brief'] = $this->get_brief();
         $db_params['type'] = $this->get_type();
+        $db_params['publisher'] = $this->get_publisher();
         $db_params['found'] = $this->get_found();
         $db_params['link'] = $this->get_link();
         
@@ -163,6 +165,15 @@ class Orm_Suggestion_Book extends Orm {
     
     public function get_type() {
         return $this->type;
+    }
+    
+    public function set_publisher($value) {
+        $this->add_object_field('publisher', $value);
+        $this->publisher = $value;
+    }
+    
+    public function get_publisher() {
+        return $this->publisher;
     }
     
     public function set_found($value) {

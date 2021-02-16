@@ -150,6 +150,14 @@ class Orm_Statistics extends Orm {
         return $this->date;
     }
     
+    /**
+    * @return Orm_Pages
+    */
+    public function related_pages()
+    {
+        return Orm_Pages::get_instance($this->get_page_id());
+    }
+    
     
 }
 

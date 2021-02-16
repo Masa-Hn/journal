@@ -12,7 +12,7 @@ class Orm_Visitors extends Orm {
     /**
     * class attributes
     */
-    protected $user_IP = '';
+    protected $id = 0;
     protected $visit_times = 0;
     
     /**
@@ -23,45 +23,20 @@ class Orm_Visitors extends Orm {
     }
     
     /**
-    * push instance
-    */
-    protected function push_instance() {
-        
-    }
-    
-    /**
-    * pull_instance
-    *
-    * @param array $row
-    * @return array
-    */
-    protected static function pull_instance($row) {
-        
-        
-        
-        if(isset(self::$instances[$])) {
-            return self::$instances[$];
-        }
-        
-        return null;
-    }
-    
-    
-    /**
     * get instance
     *
-    * @param int $
+    * @param int $id
     * @return Orm_Visitors
     */
     public static function get_instance($id) {
         
-        
+        $id = intval($id);
         
         if(isset(self::$instances[$id])) {
             return self::$instances[$id];
         }
         
-        return self::get_one(array());
+        return self::get_one(array('id' => $id));
     }
     
     /**
@@ -89,7 +64,7 @@ class Orm_Visitors extends Orm {
         
         $result = self::get_model()->get_all($filters, 1, 1, $orders, Orm::FETCH_OBJECT);
         
-        if ($result && ) {
+        if ($result && $result->get_id()) {
             return $result;
         }
         
@@ -108,7 +83,9 @@ class Orm_Visitors extends Orm {
     
     public function to_array() {
         $db_params = array();
-        $db_params['user_IP'] = $this->get_user_IP();
+        if (Orm::is_integration_mode() && $this->get_id()) {
+            $db_params['id'] = $this->get_id();
+        }
         $db_params['visit_times'] = $this->get_visit_times();
         
         return $db_params;
@@ -116,27 +93,30 @@ class Orm_Visitors extends Orm {
     
     public function save() {
         if ($this->get_object_status() == 'new') {
-            self::get_model()->insert($this->to_array());
+            $insert_id = self::get_model()->insert($this->to_array());
+            $this->set_id($insert_id);
         } elseif($this->get_object_fields()) {
-            self::get_model()->update(, $this->get_object_fields());
+            self::get_model()->update($this->get_id(), $this->get_object_fields());
         }
         
         $this->set_object_status('saved');
         $this->reset_object_fields();
-        return $this;
+        return $this->get_id();
     }
     
     public function delete() {
-        return self::get_model()->delete();
+        return self::get_model()->delete($this->get_id());
     }
     
-    public function set_user_IP($value) {
-        $this->add_object_field('user_IP', $value);
-        $this->user_IP = $value;
+    public function set_id($value) {
+        $this->add_object_field('id', $value);
+        $this->id = $value;
+        
+        $this->push_instance();
     }
     
-    public function get_user_IP() {
-        return $this->user_IP;
+    public function get_id() {
+        return $this->id;
     }
     
     public function set_visit_times($value) {

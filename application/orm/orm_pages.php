@@ -150,6 +150,18 @@ class Orm_Pages extends Orm {
         return $this->page_order;
     }
     
+    private $all_statistics = null;
+    
+    /**
+    * @return Orm_Statistics[]
+    */
+    public function related_all_statistics() {
+        if(is_null($this->all_statistics)) {
+            $this->all_statistics = Orm_Statistics::get_all(array('page_id' => $this->get_id()));
+        }
+        return $this->all_statistics;
+    }
+    
     
 }
 

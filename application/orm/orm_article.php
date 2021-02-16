@@ -87,7 +87,9 @@ class Orm_Article extends Orm {
     
     public function to_array() {
         $db_params = array();
-        $db_params['id'] = $this->get_id();
+        if (Orm::is_integration_mode() && $this->get_id()) {
+            $db_params['id'] = $this->get_id();
+        }
         $db_params['title'] = $this->get_title();
         $db_params['article'] = $this->get_article();
         $db_params['writer'] = $this->get_writer();
@@ -99,14 +101,15 @@ class Orm_Article extends Orm {
     
     public function save() {
         if ($this->get_object_status() == 'new') {
-            self::get_model()->insert($this->to_array());
+            $insert_id = self::get_model()->insert($this->to_array());
+            $this->set_id($insert_id);
         } elseif($this->get_object_fields()) {
             self::get_model()->update($this->get_id(), $this->get_object_fields());
         }
         
         $this->set_object_status('saved');
         $this->reset_object_fields();
-        return $this;
+        return $this->get_id();
     }
     
     public function delete() {
