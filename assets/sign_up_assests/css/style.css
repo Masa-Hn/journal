@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 /* Base */
+.next_btn{
+  font-size: 8vw
+}
 #redirectAgain{
   display: none;
 }
@@ -54,6 +57,10 @@ color: darkred;
   .code_font_size{
     font-size: 2.5rem;
   }
+  .next_btn{
+    font-size: 3vw;
+  }
+
 }
 @media only screen and (min-device-width: 481px) and (max-device-width: 992px) and (orientation:portrait) {
   .code_font_size{
@@ -65,6 +72,12 @@ color: darkred;
     font-size: 1rem;
   }
 }
+@media only screen and (max-width: 481px) {
+  .help_img{
+    width: 75%;
+  }
+}
+
 body {
   line-height: 1.7;
   color: #030059;

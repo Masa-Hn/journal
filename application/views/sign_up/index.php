@@ -63,7 +63,7 @@
           </div>
         </div>
           <div class="col-12 text-center mt-4">
-            <a href="javascript:next('page_2')" class="btn btn-primary rounded py-2 px-4 text-white">
+            <a href="javascript:next('reg_steps')" class="next_btn btn btn-primary rounded py-2 px-4 text-white">
               ابدأ الأن 
             </a>
           </div>

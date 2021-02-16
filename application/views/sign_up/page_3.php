@@ -39,7 +39,7 @@
           </div>
         </div>
           <div class="col-12 text-center mt-4">
-            <a href="javascript:next('page_4')" class="btn btn-primary rounded py-2 px-4 text-white">
+            <a href="javascript:next('page_4')" class="next_btn btn btn-primary rounded py-2 px-4 text-white">
             التــالي
             </a>
           </div>

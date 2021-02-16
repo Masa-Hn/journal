@@ -16,7 +16,7 @@
             </h1>
           </div>
           <div class="col-lg-4 col-sm-12 text-center">
-            <img src="images/question_character.png" alt="Image" class="img-fluid">
+            <img src="<?php echo base_url()?>assets/sign_up_assests/img/question_character.png" alt="Image" class="img-fluid">
           </div>
         </div>
       </div>

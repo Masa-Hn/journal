@@ -72,6 +72,11 @@
         </div>
       </div>
     </div>
+    <div class="col-12 text-center mt-4">
+      <a href="javascript:next('page_2')" class="next_btn btn btn-primary rounded py-2 px-4 text-white">
+        ابدأ الأن 
+      </a>
+    </div>
   </div>
 </div>
 <?php include 'templates/footer.php';?>
