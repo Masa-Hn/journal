@@ -57,7 +57,9 @@ class Activities extends CI_Controller {
   }//certificateDisplay
 
   public function deleteActivity(){
-    return $this->ActivitiesModel->deleteActivity($_POST['id']);
+      $deleted=Orm_Activities::get_instance($_POST['id']);
+        return $deleted->delete();
+    //return $this->ActivitiesModel->deleteActivity($_POST['id']);
 
   }//deleteActivity
       

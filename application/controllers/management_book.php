@@ -37,14 +37,18 @@ class Management_book extends CI_Controller {
 
        if(isset($_POST['delete'])){
             $id=$this->input->post('id');
-           $this->management->delete_article($id);
- $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف المقال بنجاح</div>");
+            $deleted= Orm_Article::get_instance($id);
+            $deleted->delete();
+           //$this->management->delete_article($id);
+    $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف المقال بنجاح</div>");
             redirect(base_url().'Management_book/show_article');
 
                     }
          $data['title'] = 'Show Article';
-         $articles=$this->management->get_articles();
-         $num=$articles->num_rows();
+         $articles=Orm_Article::get_all();
+         //$this->management->get_articles();
+         $num=Orm_Article::get_count($articles);
+         //$articles->num_rows();
          $data['num_rows']=$num;
          $data['articles']=$articles;
         $this->load->view('management_book/templates/header', $data);
@@ -58,8 +62,10 @@ class Management_book extends CI_Controller {
     {
         $this->load->helper('form');
         $data['title'] = 'Show Activites';
-        $activites=$this->ActivitiesModel->getActivities();
-        $data['num_rows']=count($activites);
+        $activites=Orm_Activities::get_all();
+        //$this->ActivitiesModel->getActivities();
+        $data['num_rows']=Orm_Activities::get_count($activites);
+        //count($activites);
         $data['activites']=$activites;
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
@@ -73,9 +79,11 @@ class Management_book extends CI_Controller {
         $data['title'] = 'Show Certificates';
 
        if(isset($_GET['id'])){
-            $data['certificates']=$this->CertificateModel->getAllCertificates($_GET['id']);
-            if (count($data) != 0 ) {
-            $data['activity']=$this->ActivitiesModel->getActivityById($_GET['id']);
+            $data['certificates']=Orm_Certificate::get_all(array('activity_id' => $_GET['id']));
+            //$this->CertificateModel->getAllCertificates($_GET['id']);
+            if (Orm_Certificate::get_count($data['certificates']) != 0 ) {
+            $data['activity']=Orm_Activities::get_all(array('id' => $_GET['id']));
+            //$this->ActivitiesModel->getActivityById($_GET['id']);
             $data['exist']=true;
             }//if
         }//if
@@ -88,7 +96,9 @@ class Management_book extends CI_Controller {
 
     public function delete_certificate(){
 
-       return $this->CertificateModel->deleteCertificate($_POST['id']);
+        $deleted=Orm_Certificate::get_instance($_POST['id']);
+        return $deleted->delete();
+       //return $this->CertificateModel->deleteCertificate($_POST['id']);
     }//delete_certificate
 
         public function add_infographic()
