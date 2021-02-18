@@ -15,7 +15,7 @@ class Orm_Infographic extends Orm {
     protected $id = 0;
     protected $title = '';
     protected $pic = '';
-    protected $date = CURRENT_TIMESTAMP;
+    protected $date = 'CURRENT_TIMESTAMP';
     protected $section = '';
     protected $series_id = 0;
     
