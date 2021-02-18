@@ -46,11 +46,16 @@ class Infographic_Model extends CI_Model {
         if (isset($filters['date'])) {
             $this->db->where('i.date', $filters['date']);
         }
-        
+        if (isset($filters['group_by'])) {
+            $this->db->group_by($filters['group_by']);
+        }
+        // if (isset($filters['count'])) {
+        //     $this->db->select_count($filters['count']);
+        // }
         if ($orders) {
             $this->db->order_by(implode(',', $orders));
         }
-        
+ 
         if ($page) {
             $offset = ($page - 1) * $per_page;
             $this->db->limit($per_page, $offset);

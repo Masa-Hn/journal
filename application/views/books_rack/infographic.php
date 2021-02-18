@@ -101,7 +101,7 @@
                 echo'
                 <div class="row filterRow">
                   <div class="col-sm-3">
-                    <span class="no-of-books">'.$num_of_series->num_of_series.'</span>
+                    <span class="no-of-books">'.$num_of_series.'</span>
                   </div>
                   <div class="col-sm-6">
                     <span>عرض السلاسل </span>
@@ -139,7 +139,7 @@
                 echo '<div class="masonryholder" id="masonryholder">';
                 foreach ($infographic as $row) {
                   echo
-                    '<div class="masonryblocks"><img src="'. base_url().'assets/img/infographic/'.$row->pic .'" class="my-masonry-grid-item gallaryImg fade-in" id="'.$row->id.'" onClick="show(this.id)"></div>';
+                    '<div class="masonryblocks"><img src="'. base_url().'assets/img/infographic/'.$row->get_pic() .'" class="my-masonry-grid-item gallaryImg fade-in" id="'.$row->get_id().'" onClick="show(this.id)"></div>';
                 }//foreach
                 echo "</div>";
               }//if

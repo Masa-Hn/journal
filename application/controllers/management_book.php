@@ -116,7 +116,8 @@ class Management_book extends CI_Controller {
  $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف الانفوجرافيك بنجاح</div>");
             redirect(base_url().'Management_book/show_infographic');
         }
-        $data['imgs'] = $this->management->getimgs();
+        $data['imgs'] = orm_infographic::get_all();
+        $data['num_rows']=orm_infographic::get_count();
         $data['title'] = 'Show Infographic';
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
