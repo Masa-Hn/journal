@@ -13,10 +13,10 @@ class Infographic extends CI_Controller {
 	public function index()
 	{	
     $result['exist']=false;
-   	$result['infographic']=$this->InfographicModel->getPhoto()->result();
+   	$result['infographic']=orm_infographic::get_all(array(),0,10,array('id DESC'));
     $result['sections']=$this->InfographicModel->getSections();
-    $result['num_of_series']=$this->SeriesModel->countSseries();
-    $rowNum=$this->InfographicModel->getPhoto()->num_rows();
+    $result['num_of_series']=orm_series::get_count();
+    $rowNum=orm_infographic::get_count();
 
     
     if($rowNum > 0){
