@@ -37,25 +37,20 @@ function nextWithMsg(page,msg){
   else if(msg == 4){
     fullMsg= " حتى أنا أقوم بتقسيمها ";
   }
-
   Swal.fire({
-    title: 'رائـــع',
-    text:fullMsg,
-    imageUrl:document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
-    imageWidth: 300,
-    imageAlt: 'Custom image',
-    confirmButtonText: "استمرار ",
-    confirmButtonColor:'#9ed16f'
-  })
-  .then((result) => {
-  if (result.isConfirmed) {
-    next(page);
-  }
-  else {
-    next(page);
-  }
-});
+          title: "أحسنت",
+          text:fullMsg,
+          imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/right.png',
+          imageWidth: 300,
+          imageAlt: 'Custom image',
+          confirmButtonText: "استمرار ",
+          confirmButtonColor:'#87d69a'
+    }).then((result) => {
+      setTimeout(function() {
+        next(page);
+      },400);
 
+    });
 }//nextWithMsg
 
   function copyCode() {
@@ -76,13 +71,14 @@ function nextWithMsg(page,msg){
       imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/copyMsg.png',
       imageWidth: 300,
       imageAlt: 'Custom image',
-      timer: 5000,
       confirmButtonText: "شكرا لكم",
-      confirmButtonColor:'#9ed16f'
-    }).then(function(){
-          next('team_info');
-    });
+      confirmButtonColor:'#87d69a'
+    }).then((result) => {
+      setTimeout(function() {
+        next('team_info');
+      },400);
 
+    });
   }
 
 
@@ -97,83 +93,70 @@ function nextWithMsg(page,msg){
     document.execCommand('copy');
     // Remove temporary textarea
     document.body.removeChild(copyText);
-
     Swal.fire({
       title: 'لقد قمنا بنسخ رقم الطلب لك',
       text:'😉 فقط قُم بلصقه وإرساله',
       imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/copyMsg.png',
       imageWidth: 300,
       imageAlt: 'Custom image',
-      timer: 5000,
       confirmButtonText: "شكرا لكم",
-      confirmButtonColor:'#9ed16f'
-    }).then(function(){
-
-      window.open(link, "_blank");
+      confirmButtonColor:'#87d69a'
+    }).then((result) => {
+      setTimeout(function() {
+        window.open(link, "_blak");
+      },400);
 
     });
-
   }
 function checkAnswer() {
-    answer=document.getElementById('answer').value;
-    if (answer == 30){
-      Swal.fire({
-        title: 'رائـــع',
-        text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية، وتذكر  بإمكانك دوما قراءة ما يناسبك ",
-        imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/msg.png',
-        imageWidth: 300,
-        imageAlt: 'Custom image',
-        timer: 4000,
-        confirmButtonText: "استمرار ",
-        confirmButtonColor:'#9ed16f'
-      }).then(function(){
-          next('question_2');
-      });
-    }//if    
-    else{
-      if(count != 2){
-        Swal.fire({
-          title: 'للأسف',
-          text:"إجابة غير صحيحة، حاول مرةً أخرى",
-          imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/error_msg.png',
+  answer=document.getElementById('answer').value;
+  if (answer == 30){
+    Swal.fire({
+          title: "أحسنت",
+          text:"الآن صرت تعرف كيف تحصل على علامة (100/100)  في قراءتك الأسبوعية، وتذكر  بإمكانك دوما قراءة ما يناسبك ",
+          imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/right.png',
           imageWidth: 300,
           imageAlt: 'Custom image',
-          timer: 4000,
-          confirmButtonText: "حسنًا ",
-          confirmButtonColor:'#9ed16f'
-        });
-        count++;
-        document.getElementById('error_msg').style.display="block";
-      }//if
-      else{
-        Swal.fire({
-          title: 'للأسف',
-          text:"إجابة غير صحيحة، ما رأيك أن نُراجع هذا الجزء معًا؟",
-          imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/error_msg.png',
-          imageWidth: 300,
-          imageAlt: 'Custom image',
-          timer: 6000,
-          confirmButtonText: "لنُراجع هذا الجزء معًا ",
-          confirmButtonColor:'#9ed16f'
-        }).then(function(){
-          next('page_4');
-        });
-      }
+          confirmButtonText: "استمرار ",
+          confirmButtonColor:'#87d69a'
+    }).then((result) => {
+      setTimeout(function() {
+        next('question_2');
+      },400);
 
-    }//else
+    });
+  }//if    
+  else if(count != 2){
+    Swal.fire({
+            title: 'هل أنت متأكد؟',
+            text:"إجابتك غير صحيحة، حاول مرةً أخرى",
+            imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/wrong.png',
+            imageWidth: 300,
+            imageAlt: 'Custom image',
+            confirmButtonText: "حسنًا ",
+            confirmButtonColor:'#87d69a'
+    });
+    count++;
+  }//else if
+  else{
+    Swal.fire({
+            title: 'للأسف',
+            text:"إجابة غير صحيحة، ما رأيك أن نُراجع هذا الجزء معًا؟",
+            imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/wrong.png',
+            imageWidth: 300,
+            imageAlt: 'Custom image',
+            confirmButtonText: "لنُراجع هذا الجزء معًا ",
+            confirmButtonColor:'#87d69a'
+    }).then((result) => {
+      setTimeout(function() {
+        next('page_4');
+      },400);
+
+    });
+  }//else
 
   }//checkAnswer
 
-
-function question2(msg) {
-  if(msg == 3){
-    fullMsg=" حتى أنا أقوم بقرائتها دفعةً واحدة ";
-  }
-  else{
-    fullMsg= " حتى أنا أقوم بتقسيمها ";
-  }
-
-}
 function allocateAmbassador(){
   leader_gender =document.getElementById('leader_gender').value;
   country =document.getElementById('country').value;
@@ -197,15 +180,15 @@ function allocateAmbassador(){
     else{
       msg="يجب اختيار بلد الاقامة";
     }
-    Swal.fire({
+    swal({
       title: 'انتبه',
       text:msg,
-      imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/error_msg.png',
+      imageUrl: document.getElementById("base_url").value+'assets/sign_up_assests/img/wrong.png',
       imageWidth: 300,
       imageAlt: 'Custom image',
       timer: 4000,
       confirmButtonText: "حسنًا ",
-      confirmButtonColor:'#9ed16f'
+      confirmButtonColor:'#87d69a'
     });
   }
 }//allocateAmbassador

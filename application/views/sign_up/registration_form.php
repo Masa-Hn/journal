@@ -1,166 +1,162 @@
-<?php 
-  include 'templates/header.php';
-  include 'templates/navbar.php';
-  $page_id = 12;
-  $this->StatisticsModel->incrementVisitors($page_id);
-
+<?php
+include 'templates/header.php';
+include 'templates/navbar.php';
+$page_id = 12;
+$this->StatisticsModel->incrementVisitors($page_id);
 ?>
-<link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/registtration.css">
-<style type="text/css">
-  .genric-btn{
-    font-size: unset;
-  }  
-
-</style>
- <!-- Start Banner Area -->
-    <section class="banner-area relative bgImg2">
-       <div class="container">
-        <div class="row fullscreen align-items-center justify-content-center">
-          <div class="banner-left col-lg-6 col-sm-12 page-img">
-            <img class="d-flex mx-auto img-fluid regImg"  alt="" style="width: 80%">
+<div class="overlay bg-light header_padding" data-aos="fade" data-stellar-background-ratio="0.5">
+  <div class="container">
+    <div class="row align-items-center justify-content-center text-center">
+      <div class="col-md-12">
+        
+        <div class="row justify-content-center mb-4">
+          <div class="col-lg-8 col-sm-12 text-center" dir="rtl">
+            <h1 class="" data-aos="fade-up">
+            لطفا نحتاج منك تسجيل معلوماتك
+            هذا سوف يساعدنا على ترصيد قراءتك الأسبوعية و تكريم المتميزين
+            </h1>
           </div>
-          <!-- Login Form -->
-          <div class="col-lg-6 col-sm-12" id="login_form">
-            <div class="story-content" dir="rtl">
-              <div class="login form-peice switched" dir="rtl">
-                <form class="login-form">
-                  <div style="text-align: center;">
-                   <img class="d-flex mx-auto img-fluid" src="<?php echo base_url()?>assets/sign_up_assests/img/reg_img.png" alt="">
-                  </div>
-                  <div class="form-group" id="errorMsg">
-                    <span id="errorMsgLogin">
-                    
-                    </span>
-                  </div>
-                  <div class="form-group">
-                    <label for="loginemail">أدخل بريدك الالكتروني</label>
-                    <input type="email" name="loginemail" id="loginemail" required onblur="loginEmailValidation( this.value)">
-                    <span class="error" id="loginemailError">لطفًا أدخل بريدك الالكتروني</span>
-                    <span class="error" id="loginemailFormatError">أدخل بريدك بشكلٍ صحيح</span>
-                  </div>
-                  <div class="CTA">
-                    <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkLoginEmail()" style="color: #ffff;">
-                      تسجيل الدخول
-                    </a>
-                    <a  class="genric-btn primary circle arrow reg-btn"style="background:#45258f;    color: white;" onclick="fb_login();">
-                      دخول باستخدام الفيسبوك
-                    </a>
-
-                    <a href="#" class="switch" id="loginswitch">قارئ جديد</a>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <!-- End Login Form -->
-
-          <div class="col-lg-6 col-sm-12" id="signup_form">
-            <div class="story-content" dir="rtl">
-              <div class="heading">
-                <h3>
-                  لطفا نحتاج منك تسجيل معلوماتك
-                </h3>
-                <p style="margin-bottom: 0">
-                  هذا سوف يساعدنا على ترصيد قراءتك الأسبوعية و تكريم المتميزين
-                </p>
-                <span style="color: darkred">
-                  نحيطكم علمًا أن كافة الخدمات المقدمة والمسابقات تقدم بشكل مجاني، و نتعهد بعدم الاحتفاظ بأي معلومات شخصية أبدا.
-                </span>
-              </div>
-              <div class="signup form-peice" dir="rtl">
-                <form class="signup-form" id="form" method="POST">
-                  <div class="form-group" id="errorMsg">
-                 <!--      <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
-                      <span id="loadingMsg" style="color: #197439;"></span> -->
-                    <span id="errorMsgP">
-                      <?php 
-                        if(!empty($errorMsg)){
-                          echo $errorMsg; 
-                        }
-
-                      ?>
-                    </span>
-                  </div>
-                  <div class="form-group">
-                    <span style="color: darkred"> * اسمك كما هو مسجل في الفيسبوك </span>
-                    <input type="text" name="username" id="username" class="name" placeholder="اسمك الكامل " onblur="checkUserName(this.value)">
-                    <br>
-                    <br>
-                    <span class="error" id="usernameError"> لطفًا أدخل اسمك الكامل</span>
-                  </div>
-                  <div class="form-group">
-                    <span style="color: darkred"> * </span>
-                    <input type="email" name="email" id="email" class="email" oninvalid="this.setCustomValidity('لطفًا أدخل بريدك الالكتروني بشكلٍ صحيح')"
-                            oninput="this.setCustomValidity('')" 
-                            placeholder="بريدك الالكتروني" 
-                            onblur="checkEmail(this.value)" />
-                    <br>
-                    <br>
-                    <span class="error" id="emailError">لطفًا أدخل بريدك الالكتروني</span>
-                    <span class="error" id="emailFormatError">أدخل بريدك بشكلٍ صحيح</span>       
-                  </div>
-                  <div class="form-group"> 
-                    <label>
-                      <span style="color: darkred"> * </span>
-                  
-                      ما هو جنسك 
-                    </label>
-                    <div class="form-group"> 
-                      <label class="radio-label"> 
-                        أنثى
-                        <input type="radio" value="female" name="amb_gender" id="female">
-                      </label>
-                      <label class="radio-label"> 
-                        ذكر
-                        <input type="radio" value="male" name="amb_gender" id="male">
-                      </label>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label >
-                       <span style="color: darkred"> * </span>
-                      قمنا بتجهيز قائد لك تم تدريبه لمتابعتك
-                            وتشجيعك، ماذا تفضل أن يكون جنس القائد؟
-                    </label>
-                    <div class="form-group"> 
-                      <label class="radio-label"> 
-                        أنثى
-                        <input type="radio" value="female" name="leader_gender" id="leader_female">
-                      </label>
-                      <label class="radio-label"> 
-                          ذكر
-                        <input type="radio" value="male" name="leader_gender"id="leader_male" >
-                      </label>
-                      <label class="radio-label"> 
-                        لا فرق
-                        <input type="radio" value="any" name="leader_gender"id="leader_any">
-                      </label>
-                    </div>
-                  </div>
-                  <div class="form-group" id="errorMsg">
-                    <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
-                    <span id="loadingMsg" style="color: #197439;"></span>
-                  </div>
-                  <div class="CTA">
-                    <a  class="genric-btn primary circle arrow reg-btn" href="javascript:checkData()" style="color: #ffff;">
-                      تسجيل
-                    </a>
-                    <a  class="genric-btn primary circle arrow reg-btn"style="background:#45258f;    color: white;" onclick="fb_login();">
-                      تسجيل باستخدام الفيسبوك
-                    </a>
-
-                    <a href="#" class="switch" id="signUpswitch"> قارئ سابق </a>
-                  </div>
-                </form>
-              </div>
-            </div>
+          <div class="col-lg-4 col-sm-12 text-center">
+            <img src="<?php echo base_url()?>assets/sign_up_assests/img/register.png" alt="Image" class="img-fluid">
           </div>
         </div>
       </div>
-    </section>
-    <!-- End Banner Area -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </div>
+  </div>
+</div>
+<!-- LOGIN FORM-->
+<div class="site-section" dir="rtl" id="login_form">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-7 mb-5"  data-aos="fade">
+        <form id="form" method="POST" class="p-5 bg-white text-right">
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="loginemail">
+                أدخل بريدك الالكتروني
+              </label>
+              <input type="email" class="form-control"name="loginemail" id="loginemail" required onblur="loginEmailValidation( this.value)">
+              <span class="error" id="loginemailError">لطفًا أدخل بريدك الالكتروني</span>
+              <span class="error" id="loginemailFormatError">أدخل بريدك بشكلٍ صحيح</span>
+            </div>
+          </div>
+          <div class="row form-group">
+            <span calss="errorMsg" id="errorMsgLogin">
+              <?php
+              if(!empty($errorMsg)){
+              echo $errorMsg;
+              }
+              ?>
+            </span>
+          </div>
+          <div class="row form-group">
+            <div class="col-12">
+              <a href="javascript:checkLoginEmail()" class="btn btn-primary rounded py-2 px-4 text-white">
+                دخول
+              </a>
+              <a class="cursor_display" id="loginswitch">
+                قارئ جديد
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END LOGIN FORM -->
+<!-- SIGNUP FORM -->
+<div class="site-section" dir="rtl" id="signup_form">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-9 text-right">
+        <h5 data-aos="fade-up" data-aos-delay="100" style="color: darkred">
+        نحيطكم علمًا أن كافة الخدمات المقدمة والمسابقات تقدم بشكل مجاني، و نتعهد بعدم الاحتفاظ بأي معلومات شخصية أبدا.
+        </h5>
+      </div>
+      <div class="col-md-7 mb-5"  data-aos="fade">
+        
+        <form id="form" method="POST" class="p-5 bg-white text-right">
+          
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="email">
+                اسمك كما هو مسجل في الفيسبوك
+              </label>
+              <input id="username" name="username" class="form-control" onblur="checkUserName(this.value)">
+              <span class="error" id="usernameError"> لطفًا أدخل اسمك الكامل</span>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="email">
+                بريدك الالكتروني
+              </label>
+              <input type="email" name="email" id="email" class="form-control" oninvalid="this.setCustomValidity('لطفًا أدخل بريدك الالكتروني بشكلٍ صحيح')"
+              oninput="this.setCustomValidity('')"
+              onblur="checkEmail(this.value)">
+              <span class="error" id="emailError">لطفًا أدخل بريدك الالكتروني</span>
+              <span class="error" id="emailFormatError">أدخل بريدك بشكلٍ صحيح</span>
+            </div>
+          </div>
+          <div class="row form-group" >
+            <div class="col-md-12">
+              <label class="text-black">جنسك </label>
+              
+            </div>
+            <div class="col-md-12" style="display: inherit;">
+              <input type="radio" value="female" name="amb_gender" id="female" class="radio_width_margin form-control">
+              <label class="text-black radio_btn" for="male">ذكر </label><br>
+              <input type="radio" value="female" name="amb_gender" id="female" class="radio_width_margin form-control">
+              <label class="text-black" for="female" style="margin-top: 2%">أنثى</label><br>
+            </div>
+          </div>
+          <div class="row form-group" >
+            <div class="col-md-12">
+              <label class="text-black">
+                قمنا بتجهيز قائد لك تم تدريبه لمتابعتك
+                وتشجيعك، ماذا تفضل أن يكون جنس القائد؟
+                
+              </label>
+            </div>
+            <div class="col-md-12" style="display: inherit;">
+              <input type="radio" value="male" name="leader_gender"id="leader_male" class="radio_width_margin form-control">
+              <label class="text-black radio_btn" for="male">ذكر </label><br>
+              <input type="radio" value="female" name="leader_gender" id="leader_female" class="radio_width_margin form-control">
+              <label class="text-black radio_btn" for="female">أنثى</label><br>
+              <input type="radio"  value="any" name="leader_gender"id="leader_any" class="radio_width_margin form-control">
+              <label class="text-black" for="any" style="margin-top: 2%">لا فرق </label><br>
+            </div>
+          </div>
+          <div class="row form-group">
+            <span calss="errorMsg" id="errorMsgP">
+              <?php
+              if(!empty($errorMsg)){
+              echo $errorMsg;
+              }
+              ?>
+            </span>
+          </div>
+          <div class="row form-group" id="errorMsg">
+            <img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
+            <span id="loadingMsg" style="color: #197439;"></span>
+          </div>
+          <div class="row form-group">
+            <div class="col-12">
+              <a href="javascript:checkData()" class="btn btn-primary rounded py-2 px-4 text-white">
+                تسجيل
+              </a>
+              <a class="cursor_display" id="signUpswitch">
+                قارئ سابق؟
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- END SIGNUP FORM -->
 <script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/registration.js"></script>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>assets/sign_up_assests/js/fbLogin.js"></script>
 <?php include 'templates/footer.php';?>
