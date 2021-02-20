@@ -138,9 +138,9 @@ $( document ).ready(function(){
   $('#team').click( function () {
     var team_code = document.getElementById("team_code").value;
     var team_link = document.getElementById('team_link').value; 
-    if (!team_link.match(/^http?:\/\//i) || !team_link.match(/^https?:\/\//i)) {
-        team_link = 'https://' + team_link;
-    }
+    // if (!team_link.match(/^http?:\/\//i) || !team_link.match(/^https?:\/\//i)) {
+    //     team_link = 'https://' + team_link;
+    // }
     Swal.fire({
       title: 'هل قمت بالاحتفاظ بالكود التالي؟',
       text:team_code,
