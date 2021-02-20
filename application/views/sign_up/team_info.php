@@ -62,7 +62,9 @@
         </div>
       </div>
       <p style="color: darkred">
-        (لطفا قم بتصوير الشاشة، هذه المعلومات سوف تهمك لاحقا ❤️)
+        لطفا قم بتصوير الشاشة
+          <br>
+          هذه المعلومات سوف تهمك لاحقا ❤️
       </p>
     </div>
     <div class="row justify-content-center mb-5">
@@ -73,15 +75,38 @@
         </h2>
       </div>
     </div>
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-7 text-center">
+        <p style="color: darkred">
+           قد يستغرق قبولك في المجموعة (٢٤) ساعة. وذلك لأننا نحتاج تجهيز كافة ما تحتاجه. ♥️
+        </p>
+      </div>
+    </div>
     <div class="row justify-content-center mb-5" id="redirectAgain">
       <div class="col-md-7 text-center">
-        <h2 style="color: darkred">
-          اذا لم يقم الموقع بتحويلك لفريق القراءة الخاص بك راسلنا 
-          <strong class="strong_green" ><a  href="https://www.messenger.com/t/100360891928932/" target="_blank"> هنا  </a></strong>
-            لنُساعدك 
-        </h2>
+          <div class="container_center cent_warning">
+          <img class="d-flex mx-auto img-fluid " src="<?php echo base_url()?>assets/sign_up_assests/img/warning_2.png" alt="">
+          <div class="centered_warning">
+            <p style="font-weight: 800;color: #212529;">
+          تواجهك مشكلة؟!
+
+          <br>
+          أرسل (البريد الإلكتروني) برسالة لصفحتنا وسوف نجيبك بمعلومات فريق القراءة الخاص بك.
+
+          <br>
+            👇🏻
+ 
+          <br>         
+          <strong class="strong_green">
+            <a href="https://www.messenger.com/t/100360891928932/" target="_blank">
+              M.me/newreaders180
+            </a>
+          </strong>
+          </p>
           </div>
         </div>
+      </div>
+    </div>
     <div class="col-12 text-center mt-4">
       <a id="team" class="btn btn-primary rounded py-2 px-4 text-white">
         انضم للمجموعة من هنا
