@@ -27,12 +27,12 @@
                       </script>'
                       .$this->session->flashdata('msg').  
                       '<div class="numbertext" style="color: black">'.$i .'/'.$n .' </div>
-                        <h4 class="heading" style="text-align:right;"> '. $series->title .'</h4>
-                        <p>عدد الصور '. $series->num_of_photos .'</p>
+                        <h4 class="heading" style="text-align:right;"> '. $series->get_title() .'</h4>
+                        <p>عدد الصور '. $series->get_num_of_photos() .'</p>
                         <div style="padding-bottom: 5em;padding-top: 5em;">   
-                          <input type="number" name="id" id="id" value="'.$series->id .'" style="display: none;"   >  
-                          <button id="'.$series->id .'"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A; margin-right:23px;" onclick="deleteAlert(this.id)" >حذف  </button>
-                          <button id="'.$series->id .'" name="more" class="mybutton more" style="width: 150px;background-color: #A52A2A;"  onclick="more(this.id)">المزيد </button>
+                          <input type="number" name="id" id="id" value="'.$series->get_id() .'" style="display: none;"   >  
+                          <button id="'.$series->get_id() .'"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A; margin-right:23px;" onclick="deleteAlert(this.id)" >حذف  </button>
+                          <button id="'.$series->get_id() .'" name="more" class="mybutton more" style="width: 150px;background-color: #A52A2A;"  onclick="more(this.id)">المزيد </button>
                           
                         </div>
                       </div>';

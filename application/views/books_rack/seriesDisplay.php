@@ -15,14 +15,14 @@
                       echo '<input type="hidden" id="exist" value="1">';
                       foreach ($series as $series) {
                         echo '
-                        <div class="col-md-3 col-sm-12  articleDiv fade-in" id="'.$series->id .'">  
+                        <div class="col-md-3 col-sm-12  articleDiv fade-in" id="'.$series->get_id() .'">  
                 
-                            <a href="javascript:showPhotos('.$series->id .')" id="'.$series->id.'" >
+                            <a href="javascript:showPhotos('.$series->get_id() .')" id="'.$series->get_id().'" >
                               <div class="card">
-                                <img  class="card-img-top" src="'. base_url() .'assets/img/infographic/'.$series->pic .'">
+                                <img  class="card-img-top" src="'. base_url() .'assets/img/infographic/'.$series->get_pic() .'">
                                 <div class="card-body">
-                                  <h1 class="artical-title-small">'.$series->title .' </h1>
-                                  <p class="card-text artical-description">عدد الصور '. $series->num_of_photos.'</p>
+                                  <h1 class="artical-title-small">'.$series->get_title() .' </h1>
+                                  <p class="card-text artical-description">عدد الصور '. $series->get_num_of_photos().'</p>
                                 </div>
                               </div> 
                             </a>

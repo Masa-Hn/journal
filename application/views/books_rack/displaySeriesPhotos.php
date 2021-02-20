@@ -40,11 +40,11 @@
             <div class="carousel-container w3-display-container " id="seriesPhotos">
               <?php 
                 foreach ($series_info as $info) {
-                  echo '<img class="mySlides carousel-slide first_slide" src="'. base_url() .'/assets/img/infographic/'.$info->pic.'" id="'.$info->id.'">
+                  echo '<img class="mySlides carousel-slide first_slide" src="'. base_url() .'/assets/img/infographic/'.$info->get_pic().'" id="'.$info->get_id().'">
                    ';
                 }
                  foreach ($photos as $photo) {
-                  echo '<img class="mySlides carousel-slide" src="'. base_url() .'assets/img/infographic/'.$photo->pic.'" id="'.$photo->id.'">
+                  echo '<img class="mySlides carousel-slide" src="'. base_url() .'assets/img/infographic/'.$photo->get_pic().'" id="'.$photo->get_id().'">
                    ';
                 }//foreach
                 echo ' <div class="middle">

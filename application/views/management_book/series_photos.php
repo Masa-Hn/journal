@@ -8,8 +8,8 @@
                 <h3 class="heading" style="color:#008080;" >عرض  الصور</h3>
                 <fieldset class="show">
                     <div class="form-card">
-                        <h5 class="sub-heading"><?php echo $series_info[0]->title . ' - ' . $series_info[0]->num_of_photos ?></h5>
-                        <input type="hidden" name="id" id="series_id" value="<?php echo $series_info[0]->id?>">
+                        <h5 class="sub-heading"><?php echo $series_info[0]->get_title() . ' - ' . $series_info[0]->get_num_of_photos() ?></h5>
+                        <input type="hidden" name="id" id="series_id" value="<?php echo $series_info[0]->get_id()?>">
                         <ul class="row px-1 radio-group">
                             <?php
                                 
@@ -17,8 +17,8 @@
                                 foreach ($photos as $photo) {
                                     echo '
                                         <li class="card-block text-center radio " >
-                                            <img style="width:100%" src="'.base_url().'assets/img/infographic/'.$photo->pic.'" id="'.$photo->id.'" onClick="show(this.id)">
-                                             <input type="hidden" name="img_id" id="img_id" value="'.$photo->id.'">
+                                            <img style="width:100%" src="'.base_url().'assets/img/infographic/'.$photo->get_pic().'" id="'.$photo->get_id().'" onClick="show(this.id)">
+                                             <input type="hidden" name="img_id" id="img_id" value="'.$photo->get_id().'">
 
                                             <h5 style="margin-top:10%; text-align:center" class="sub-desc"  onclick="deleteAlert()">حذف</h5>
                                         </li>

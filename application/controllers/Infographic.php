@@ -31,7 +31,7 @@ class Infographic extends CI_Controller {
   
 
   public function seriesDisplay(){
-    $result['series']=$this->SeriesModel->getSeries();
+    $result['series']=orm_series::get_all(array(),0,0,array('id DESC'));
 
     $this->load->view('books_rack/templates/header');
     $this->load->view('books_rack/templates/navbar');
@@ -41,8 +41,8 @@ class Infographic extends CI_Controller {
   
   public function seriesPhotos(){
     if(!empty($_GET['series_id'])){
-      $arr['series_info']=$this->SeriesModel->getById($_GET['series_id']);
-      $arr['photos']=$this->InfographicModel->getBySeries($_GET['series_id']);
+      $arr['series_info']=orm_series::get_all(array('id' => $_GET['series_id']));
+      $arr['photos']=orm_infographic::get_all(array('series_id' => $_GET['series_id']));
       $arr['series_id']=$_GET['series_id'];
       $this->load->view('books_rack/templates/header');
       $this->load->view('books_rack/templates/navbar');

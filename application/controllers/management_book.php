@@ -127,8 +127,8 @@ class Management_book extends CI_Controller {
     public function show_series(){
         $this->load->helper('form');
         $data['title'] = 'Show Series';
-        $series=$this->SeriesModel->getSeries();
-        $data['num_rows']=count($series);
+        $series=orm_series::get_all(array(),0,0,array('id DESC'));
+        $data['num_rows']=orm_series::get_count();
         $data['series']=$series;
 
         $this->load->view('management_book/templates/header', $data);
@@ -142,10 +142,11 @@ class Management_book extends CI_Controller {
         $data['title'] = 'Show Detailed Series';
 
        if(isset($_GET['id'])){
-            $data['photos']=$this->InfographicModel->getBySeries($_GET['id']);
+        
+            $data['photos']=orm_infographic::get_all(array('series_id' => $_GET['id']));
             $data['series_id']=$_GET['id'];
             if (count($data) != 0 ) {
-            $data['series_info']=$this->SeriesModel->getById($_GET['id']);
+            $data['series_info']=orm_series::get_all(array('id' => $_GET['id']));
             $data['exist']=true;
             }//if
         }//if

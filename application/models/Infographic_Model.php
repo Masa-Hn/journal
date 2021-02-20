@@ -19,7 +19,7 @@ class Infographic_Model extends CI_Model {
     *
     * @return Orm_Infographic | Orm_Infographic[] | array | int
     */
-    public function get_all($filters = array(), $page = 0, $per_page = 10, $orders = array(), $fetch_as = Orm::FETCH_OBJECTS) {
+    public function get_all($filters = array(), $page = 0, $per_page = 10, $orders = array(), $fetch_as = Orm::FETCH_OBJECTS ,$specialWhere =array()) {
         
         $page = (int) $page;
         $per_page = (int) $per_page;
@@ -79,6 +79,10 @@ class Infographic_Model extends CI_Model {
             return $this->db->count_all_results();
             break;
         }
+
+        // if ($specialWhere) {
+        //     $this->db->where(implode(',', $orders));
+        // }
     }
     
     /**
