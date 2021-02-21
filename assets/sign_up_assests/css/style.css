@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
 /* Base */
+
+.show_in_small{
+  display: none;
+}
 .next_btn{
   font-size: 8vw
 }
@@ -49,6 +53,13 @@ color: darkred;
   left: 40% !important;
   transform: translate(-50%, -50%);
 }
+.centered_warning {
+  position: absolute;
+  top: 61% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
 .code_font_size{
   font-size: 1.5rem;
   font-weight: bold;
@@ -60,9 +71,15 @@ color: darkred;
   .next_btn{
     font-size: 3vw;
   }
-
+  .show_in_small{
+    display: block;
+  }
+  .cent_warning{
+    width: 65%;
+    margin: 0 auto;
+  }
 }
-@media only screen and (min-device-width: 481px) and (max-device-width: 992px) and (orientation:portrait) {
+@media only screen and (min-device-width: 481px) and (max-device-width: 992px){
   .code_font_size{
     font-size: 2rem;
   }
@@ -75,6 +92,13 @@ color: darkred;
 @media only screen and (max-width: 481px) {
   .help_img{
     width: 75%;
+  }
+  #answer{
+    width: 100%
+  }
+  .img_with_txt{
+    display: table;
+    text-align: center;
   }
 }
 

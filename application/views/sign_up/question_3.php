@@ -35,7 +35,7 @@
     </div>
     <div class="row justify-content-center text-right">
       <div class="col-12 cursor_display">
-        <div class="border p-3 rounded mb-2 select_with_img" onclick="nextWithMsg('page_6',0)">
+        <div class="img_with_txt border p-3 rounded mb-2 select_with_img" onclick="nextWithMsg('page_6',0)">
           <img src="<?php echo base_url()?>assets/sign_up_assests/img/creative.png" alt="Image" class="img-fluid">
           <p class="accordion-item d-block mb-0" style="font-weight: 700">
             أن تكتب رأيك الشخصي فيما قرأت (أطروحة)
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="col-12 cursor_display">
-        <div class="border p-3 rounded mb-2 select_with_img" onclick="nextWithMsg('page_6',0)">
+        <div class="img_with_txt border p-3 rounded mb-2 select_with_img" onclick="nextWithMsg('page_6',0)">
           <img src="<?php echo base_url()?>assets/sign_up_assests/img/quotes.png" alt="Image" class="img-fluid">
           <p class="accordion-item d-block mb-0" style="font-weight: 700">
             أن تكتب اقتباس أعجبك مما قرأت (اقتباس)
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="col-12 cursor_display">
-        <div class="border p-3 rounded mb-2 select_with_img" onclick="nextWithMsg('page_6',0)">
+        <div class="img_with_txt border p-3 rounded mb-2 select_with_img" onclick="nextWithMsg('page_6',0)">
           <img src="<?php echo base_url()?>assets/sign_up_assests/img/screenshot.png" alt="Image" class="img-fluid">
           <p class="accordion-item d-block mb-0" style="font-weight: 700">
             أن تقوم بعمل سكرين شوت للاقتباسات التي أعجبتك (سكرين شوت)
