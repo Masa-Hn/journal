@@ -58,13 +58,13 @@
 	.fa-user:hover,
 	.fa-users:hover,
 	.fa-sort-numeric-asc:hover,
-	.fa-external-link:hover {
+	.fa-external-link:hover{
 		color: #205d67;
 	}
 
 	.modalBtn {
 		text-align: center;
-		font-size: 1 rem;
+		font-size: 1rem;
 		color: #205d67;
 	}
 
@@ -75,6 +75,20 @@
 
 	.list-group-item{
 		text-align:right;
+	}
+	.date, .date:hover, .fa-refresh, .fa-refresh:hover{
+		color: #064500;
+	}
+	.fa-refresh{
+		font-size: 15px;
+	}
+	.date{
+		font-size: 18px;
+	}
+	#trigBtn{
+		background-color: #0c5460;
+		color: #fff;
+		border-radius: 20px;
 	}
 </style>
 <body>
@@ -96,6 +110,11 @@
 			$ar_month = $ar;
 		}
 	}
+	?>
+	<?php
+	$records = $this->StatisticsModel->getRecords();
+	$res = $records->last_row();
+	$date = date('y-m-d' , strtotime( $res->date ));
 	?>
 	<div id="disModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -299,6 +318,18 @@
 
 	<div class="container-fluid px-1 py-5 mx-auto" dir="rtl">
 		<div class="row d-flex justify-content-center">
+			<div class="card b-0 mb-1 mr-1 col-md-9">
+				<h2 class="title">إضافة الأيام</h2>
+				<div class="form-group" id="errorMsg">
+					<img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
+					<span id="loadingMsg" style="color: #197439;"></span>
+				</div>
+			<!--<div id="msg" class="alert alert-success" style="display: none; width: 100%; border-radius: 20px;"></div>-->
+				<button class="btn btn-block" id="trigBtn">إضافة 30 يوم إضافي</button>
+				<hr />
+				<span>آخر تاريخ مسجل: <?php echo $date;?> </span>
+				<button onclick="javascript:window.location.href=window.location.href" class="btn btn-block date"><i class="fa fa-refresh"></i>تحديث</button>
+			</div>
 			<div class="card b-0 mb-1 mr-1 col-md-9">
 				<h2 class="title">إحصائيات تراكمية</h2>
 				<table class="table">
@@ -587,3 +618,39 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	$( document ).ready( function () {
+		var base_url = "<?php echo base_url()?>";
+		$( "#trigBtn" ).click( function () {
+			var x = 10;
+			var counter = setInterval(function(){
+				$("#loading").show();
+				document.getElementById('loadingMsg').innerHTML=
+						"   "+
+						' يتم الأن إضافة الأيام' +
+						" "+ x;
+				x--;
+				if (x<0) {
+					clearInterval(counter);
+				}
+			},1000);
+
+			setTimeout(function () {
+				clearInterval(counter);
+				$.ajax( {
+					url: base_url + "autoRecords/addRecords",
+					success: function ( data ) {
+					//	document.getElementById('msg').style.display = "block";
+						$("#loading").hide();
+						$('#loadingMsg').html(data);
+					//	$("#errorMsg").hide();
+						console.log( data );
+					},
+					error: function ( error ) {
+						console.log( error );
+					}
+				} );
+			}, 5000);
+		} );
+	} );
+</script>

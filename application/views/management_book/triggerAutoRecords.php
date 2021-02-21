@@ -1,4 +1,4 @@
-<!doctype html>
+<!--<!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -18,7 +18,7 @@
 			color: #fff;
 			background-color: #0c5460;
 		}
-		
+
 		.container{
 			direction: rtl;
 			width: 50%;
@@ -45,31 +45,31 @@
 
 <body>
 <?php
-$records = $this->StatisticsModel->getRecords();
+/*$records = $this->StatisticsModel->getRecords();
 $res = $records->last_row();
 $date = date('y-m-d' , strtotime( $res->date ));
-?>
+*/?>
 <div class="container">
 	<h1>إضافة الأيام الخاصة بالإحصائيات</h1>
 		<div class="form-group" id="errorMsg">
-			<img id="loading" src="<?php echo base_url()?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
+			<img id="loading" src="<?php /*echo base_url()*/?>assets/sign_up_assests/img/loading.png" alt="" style="width: 20px; display: none; ">
 			<span id="loadingMsg" style="color: #197439;"></span>
 		</div>
 		<div id="msg" class="alert alert-success" style="display: none; width: 100%;"></div>
 		<button class="btn" id="trigBtn">إضافة 30 يوم إضافي</button>
 	<hr />
-	<span>آخر تاريخ مسجل: <?php echo $date;?> </span>
+	<span>آخر تاريخ مسجل: <?php /*echo $date;*/?> </span>
 	<a href="javascript:window.location.href=window.location.href"> تحديث </a>
 </div>
 
 
-	
+
 </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$( document ).ready( function () {
-		var base_url = "<?php echo base_url()?>";
+		var base_url = "<?php /*echo base_url()*/?>";
 		$( "#trigBtn" ).click( function () {
 			var x = 10;
 			var counter = setInterval(function(){
@@ -102,3 +102,4 @@ $date = date('y-m-d' , strtotime( $res->date ));
 		} );
 	} );
 </script>
+-->
