@@ -61,11 +61,10 @@
           <div  id="filters" class=" collapse custom-control custom-checkbox ">
               <h3 style="margin-bottom: 10%; text-align: right;"> سلاسل الانفوجرافيك </h3>
             <?php
-               foreach ($num_of_series as $num_of_series ) {
                 echo'
                 <div class="row filterRow">
                   <div class="col-sm-3">
-                    <span class="no-of-books">'.$num_of_series->num_of_series .'</span>
+                    <span class="no-of-books">'.$num_of_series.'</span>
                   </div>
                   <div class="col-sm-6">
                     <span>عرض السلاسل </span>
@@ -74,7 +73,6 @@
                     <input type="checkbox" class="section_checkbox" id="series_2" value="series">
                   </div>
                 </div>';
-              }//foreach
 
               echo '</br><h3 style="margin-bottom: 10%; text-align: right; clear:both"> فئة الانفوجرافيك</h3>';
               foreach ($sections as $section ) {
@@ -84,10 +82,10 @@
                       <span class="no-of-books">'.$section->num_of_infographics .'</span>
                     </div>
                     <div class="col-sm-6">
-                      <span> '.$section->section .' </span>
+                      <span> '.$section->get_section() .' </span>
                     </div>
                     <div class="col-sm-3">
-                      <input type="checkbox" class="section_checkbox" name="section" value="'.$section->section .'">
+                      <input type="checkbox" class="section_checkbox" name="section" value="'.$section->get_section() .'">
                     </div>
                   </div>';
               }//foreach
@@ -116,13 +114,13 @@
                 echo'
                 <div class="row filterRow">
                   <div class="col-sm-3">
-                    <span class="no-of-books">'.$section->num_of_infographics .'</span>
+                    <span class="no-of-books">'.$section->num_of_infographics.'</span>
                   </div>
                   <div class="col-sm-6">
-                    <span> '.$section->section .' </span>
+                    <span> '.$section->get_section() .' </span>
                   </div>
                   <div class="col-sm-3">
-                    <input type="checkbox" class="section_checkbox" name="section" value="'.$section->section .'">
+                    <input type="checkbox" class="section_checkbox" name="section" value="'.$section->get_section() .'">
                   </div>
                 </div>';
               }//foreach

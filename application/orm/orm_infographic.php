@@ -57,6 +57,22 @@ class Orm_Infographic extends Orm {
         return self::get_model()->get_all($filters, $page, $per_page, $orders, Orm::FETCH_OBJECTS);
     }
     
+
+    /**
+    * Find rows whith select constrains as Objects
+    *
+    * @param array $constrain
+    * @param array $condition
+    * @param array $orders
+    * @param array $groupBy
+    *
+    * @return Orm_Infographic[] | int
+    */
+    public static function find($constrain = array(), $condition = array() , $orders = array(), $groupBy = array()) {
+        return self::get_model()->find($constrain, $condition, $orders, $groupBy, Orm::FETCH_OBJECTS);
+    }
+    
+
     /**
     * get one row as Object
     *
@@ -81,8 +97,8 @@ class Orm_Infographic extends Orm {
     * @param array $filters
     * @return int
     */
-    public static function get_count($filters = array()) {
-        return self::get_model()->get_all($filters, 0, 0, array(), Orm::FETCH_COUNT);
+    public static function get_count($filters = array(), $groupBy =array()) {
+        return self::get_model()->get_all($filters, 0, 0, array(), Orm::FETCH_COUNT,$groupBy);
     }
     
     public function to_array() {

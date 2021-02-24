@@ -29,15 +29,12 @@ class AddInfographic extends CI_Controller {
     public function index()
     {
         $data['title'] = 'Add Infographic';
-        $data['sections']=$this->InfographicModel->getSections();
+        $data['sections']=orm_infographic::find(array('section','COUNT(section) as num_of_infographics'),array(),array(),array('section'));
 
         $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/add_infographic');
         $this->load->view('management_book/templates/footer');
-       
-       
-    
 
     }//index
     
@@ -58,9 +55,12 @@ class AddInfographic extends CI_Controller {
         
         $this->upload->do_upload('info_pic');
         $image_data = $this->upload->data();  
-        $i=$image_data['file_name'];
-        $this->management->save_infographic($a,$section,$d,$i);  
-        
+        $infographic = new orm_infographic();   
+        $infographic->set_title($a);
+        $infographic->set_section($section);
+        $infographic->set_pic($image_data['file_name']);
+        $infographic->set_date($d);
+        $infographic->save();
         $data['title'] = 'تمت الاضافة  بنجاح';  
         $data['info'] = 'تم إضافة صورة انفوجرافيك بنجاح';
         $this->load->view('management_book/templates/header', $data);

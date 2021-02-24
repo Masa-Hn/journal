@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style type="text/css">
 .active, .dot:hover {
 background-color: #717171;
@@ -17,14 +18,14 @@ background-color: #717171;
                     <!-- ============================================================== -->
                     <div id="content" >
                         <?php
-                            $num=$num_rows;
-                            $img=$imgs;
-                            if ($num % 26!=0)
-                                $slides_num=((int) ($num/26)+1);
-                            else
-                                $slides_num=$num/26;
-                            $s=26;
-                            $h=0;
+                        $num=$num_rows;
+                        $img=$imgs;
+                        if ($num % 26!=0)
+                        $slides_num=((int) ($num/26)+1);
+                        else
+                        $slides_num=$num/26;
+                        $s=26;
+                        $h=0;
                         ?>
                         <?php echo $this->session->flashdata('msg')?>
                         <div class="slideshow-container">
@@ -35,8 +36,8 @@ background-color: #717171;
                                 var slideIndex = 1;
                                 showSlides(slideIndex);
                                 </script>
-                                <div class="numbertext" style="color: black; "> 
-                                    <?php echo $j ?> / <?php echo $slides_num ?> 
+                                <div class="numbertext" style="color: black; ">
+                                    <?php echo $j ?> / <?php echo $slides_num ?>
                                 </div>
                                 <!-- Full-width images with number and caption text -->
                                 <div style="padding-top: 30px;">
@@ -46,7 +47,8 @@ background-color: #717171;
                                         ?>
                                         <tr style="background-color: #f2f2f2;">
                                             
-                                            <td  ><button class="book" style="text-align: center;"
+                                            <td >
+                                                <button class="book" style="text-align: center;"
                                                 onclick="show_detailes_graphic(
                                                 '<?php  if(isset($img[$i]) && $img[$i]!=null) echo $img[$i]->get_id(); ?> ',
                                                 '<?php  if(isset($img[$i]) && $img[$i]!=null) echo $img[$i]->get_pic(); ?> ',
@@ -108,10 +110,7 @@ background-color: #717171;
                     <!-- Book details -->
                     <!-- ============================================================== -->
                     
-                    <div id="content2" style="display: none; ">
-                        
-                        
-                        
+                    <div id="content2" style="display: none; "> 
                         <li style="direction: rtl; text-align: right;">عنوان الانفوجرافيك : <br>
                             <input   name="title" id="title"> </li>
                             <li style="direction: rtl; text-align: right;">فئة الانفوجرافيك: <br>
@@ -122,14 +121,14 @@ background-color: #717171;
                                     <img name="pic" id="pic" style=" height:100px;width: 100px" onclick="window.open(this.src)" >
                                 </li>
                                 <br><br>
-                                <div style="float: right;">
+                                <div style="float: right;" onclick="deleteAlert()">
                                     <a id="delete" class="mybutton" style="width: 170px;float: right;background-color: #A52A2A" >
                                         <label style=" text-align: center; outline: none; color: #fff;">حذف الانفوجرافيك
                                         </label> </a>
-                                    </div>
+                                </div>
                                     <div style="float: right; margin-bottom: 45px">
                                         <input   name="info_id" id="info_id" hidden>
-                                        <a id="delete" class="mybutton" style="width: 170px;float: right;background-color: #34944a" >
+                                        <a id="edit" class="mybutton" style="width: 170px;float: right;background-color: #34944a" >
                                             <label style=" text-align: center; outline: none; color: #fff;" onclick="edit()">تعديل</label> </a>
                                         </div>
                                         <button style="float: left; width: 100px;" class="mybutton" onclick="back()" > رجوع </button>
@@ -138,13 +137,55 @@ background-color: #717171;
                             </div>
                         </div>
                     </div>
-                </body>
-                <script type="text/javascript">
-                function edit(){
-                
-                id=document.getElementById('info_id').value;
-                title=document.getElementById('title').value;
-                section=document.getElementById('section').value;
-                window.location.replace("<?php echo base_url();?>Infographic/updateInfograpgic?id="+id+"&title="+title+"&section="+section);
-                }//edit
-                </script>
+
+</body>
+<script type="text/javascript">                
+    
+    function deleteAlert(){
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+          title: 'هل أنت متأكد؟',
+          text: '! لن تتمكن من التراجع عن الحذف', 
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'حذف',
+          cancelButtonText: 'تراجع',
+          reverseButtons: true
+            }).then((result) => {
+            if (result.value) {
+              var url="<?php echo base_url();?>management_book/delete_Infographic";
+                $.ajax({
+                    type: "POST",
+                    url:url,
+                    data: {'id':id=document.getElementById('info_id').value},
+                    success: function(data){
+                        swalWithBootstrapButtons.fire(
+                            'تم',
+                            'تم الحذف بنجاح',
+                            'success'
+                        )
+                        location.reload();
+
+                    }
+            });
+
+        }
+
+    })
+     }//deleteAlert
+
+    function edit(){
+            
+        id=document.getElementById('info_id').value;
+        title=document.getElementById('title').value;
+        section=document.getElementById('section').value;
+        window.location.replace("<?php echo base_url();?>Infographic/updateInfograpgic?id="+id+"&title="+title+"&section="+section);
+    }//edit
+</script>

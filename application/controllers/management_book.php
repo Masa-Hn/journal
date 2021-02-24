@@ -91,31 +91,29 @@ class Management_book extends CI_Controller {
        return $this->CertificateModel->deleteCertificate($_POST['id']);
     }//delete_certificate
 
-        public function add_infographic()
-    {
-        $data['title'] = 'Add Infographic';
-		$this->load->view('management_book/templates/header', $data);
-        $this->load->view('management_book/templates/navbar');
-        $this->load->view('management_book/add_infographic');
-        $this->load->view('management_book/templates/footer');
+  //   public function add_infographic()
+  //   {
+  //       $data['title'] = 'Add Infographic';
+		// $this->load->view('management_book/templates/header', $data);
+  //       $this->load->view('management_book/templates/navbar');
+  //       $this->load->view('management_book/add_infographic');
+  //       $this->load->view('management_book/templates/footer');
 
-    }
+  //   }
+
+    
     public function delete_Infographic(){
     
-        $series_info=$this->SeriesModel->getById($_POST['id']);
-        $newCount=$series_info[0]->num_of_photos - 1;
-        $this->management->delete_infographic($_POST['id']);
-        $this->SeriesModel->updateNumberOfPhotos($_POST['id'],$newCount);   
+        $infographic=orm_infographic::get_one($_POST['id']);
+        $series_info=orm_series::get_one($infographic->get_series_id());
+        $newCount=$series_info->get_num_of_photos() - 1;
+        $infographic->delete();
+        $series_info->set_num_of_photos($newCount);
+        $series_info->save();
     }//delete_Infographic
 
      public function show_infographic(){
-        if ($this->uri->segment(3))
-        {
-              $id=$this->uri->segment(3);
-           $this->management->delete_infographic($id);
- $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف الانفوجرافيك بنجاح</div>");
-            redirect(base_url().'Management_book/show_infographic');
-        }
+ 
         $data['imgs'] = orm_infographic::get_all();
         $data['num_rows']=orm_infographic::get_count();
         $data['title'] = 'Show Infographic';

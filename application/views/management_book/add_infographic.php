@@ -32,13 +32,18 @@
                                                     <option value="0" selected=""> اختر الفئة</option>
                                         ';
                                         foreach ($sections as $section) {
-                                            echo'<option value="'.$section->section.'">'.$section->section .'</option>';
+                                            echo'<option value="'.$section->get_section().'">'.$section->get_section() .'</option>';
                                         }//foreach
                                         echo '
                                             <option value="-1">غير موجود</option>
                                             </select>
                                         ';
                                     }//if
+                                    else{
+                                        echo ' 
+                                            <input type="hidden" id="show_new_section" value="1">
+                                        ';
+                                    }
                                 ?>
                                     <li id="section_label" style="text-align: right; direction: rtl;display:none">أدخل الفئة الجديدة: * </li>
                                     <input type="text" id="new_section" name="new_section" placeholder="" class="form-control" onblur="validate(1,'section')" style="text-align: right; direction: rtl;display:none">
@@ -81,6 +86,15 @@
 </div>
 
 <script type="text/javascript">
+
+    $('document').ready(function(){
+        if( document.getElementById('show_new_section').value == 1){
+            document.getElementById('section_label').style.display = "block";
+            document.getElementById('new_section').style.display = "block";
+        }
+    });
+
+    
     function addNew(that) {
         if (that.value == -1) {
             document.getElementById('section_label').style.display = "block";

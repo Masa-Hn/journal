@@ -14,11 +14,11 @@ class Infographic extends CI_Controller {
 	{	
     $result['exist']=false;
    	$result['infographic']=orm_infographic::get_all(array(),0,10,array('id DESC'));
-    $result['sections']=$this->InfographicModel->getSections();
+    $result['sections']=orm_infographic::find(array('section','COUNT(section) as num_of_infographics'),array(),array(),array('section'));
     $result['num_of_series']=orm_series::get_count();
     $rowNum=orm_infographic::get_count();
 
-    
+  
     if($rowNum > 0){
       $result['exist']=true;
     }//if    

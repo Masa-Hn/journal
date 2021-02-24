@@ -202,7 +202,7 @@ function show_detailes_graphic(id,pic,date,section,title) {
  
   
 b = document.getElementById('delete');
-b.setAttribute("href", "<?php echo base_url()?>Management_book/show_infographic/"+id);
+// b.setAttribute("href", "<?php echo base_url()?>Management_book/show_infographic/"+id);
   
 }
 
