@@ -19,10 +19,11 @@ class Evaluation_Model extends CI_Model {
     *
     * @return Orm_Evaluation | Orm_Evaluation[] | array | int
     */
-    public function get_all($filters = array(), $page = 0, $per_page = 10, $orders = array(), $fetch_as = Orm::FETCH_OBJECTS) {
+    public function get_all( $filters = array(), $page = 0, $per_page = 10, $orders = array(), $fetch_as = Orm::FETCH_OBJECTS) {
         
         $page = (int) $page;
         $per_page = (int) $per_page;
+        
         
         $this->db->select('e.*');
         $this->db->distinct();
@@ -30,6 +31,9 @@ class Evaluation_Model extends CI_Model {
         
         if (isset($filters['id'])) {
             $this->db->where('e.id', $filters['id']);
+        }
+         if (isset($filters['id_not_in'])) {
+            $this->db->where_not_in('e.id', $filters['id_not_in']);
         }
         if (!empty($filters['title'])) {
             $this->db->where('e.title', $filters['title']);
@@ -41,7 +45,9 @@ class Evaluation_Model extends CI_Model {
         if ($orders) {
             $this->db->order_by(implode(',', $orders));
         }
-        
+        if (!empty($filters['limit'])) {
+            $this->db->limit($filters['limit']);
+        }
         if ($page) {
             $offset = ($page - 1) * $per_page;
             $this->db->limit($per_page, $offset);
