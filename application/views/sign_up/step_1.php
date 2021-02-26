@@ -44,7 +44,7 @@
           <img class="d-flex mx-auto img-fluid " src="<?php echo base_url()?>assets/sign_up_assests/img/codeImg.png" alt="">
           <div class="centered">
             <span class="code_font_size team-code" id="code">
-              <?php echo $_SESSION['team_info']['leader_info']->uniqid .$_SESSION['team_info']['leader_info']->id ; ?>
+              <?php echo $_SESSION['team_info']['leader_info']->get_uniqid() .$_SESSION['team_info']['leader_info']->get_id() ; ?>
             </span>
           </div>
         </div>

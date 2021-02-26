@@ -27,7 +27,8 @@ class Leader_Request_Model extends CI_Model {
         $this->db->select('lr.*');
         $this->db->distinct();
         $this->db->from(Orm_Leader_Request::get_table_name() . ' AS lr');
-        
+        //$this->db->join(Orm_Leader_Info::get_table_name() . ' AS li','li.id = lr.leader_id');
+       
         if (isset($filters['Rid'])) {
             $this->db->where('lr.Rid', $filters['Rid']);
         }
@@ -93,6 +94,16 @@ class Leader_Request_Model extends CI_Model {
             break;
         }
     }
+
+
+    public function selectTeam($leader_gender,$ambassador_gender,$logical_operator = "=0"){
+        $sql = "SELECT leader_request.Rid,leader_request.members_num, leader_request.date, leader_request.is_done, leader_request.leader_id, leader_request.gender, leader_info.leader_gender FROM leader_request INNER JOIN leader_info ON leader_request.leader_id = leader_info.id WHERE leader_request.current_team_count ".$logical_operator ." AND ".$leader_gender." AND ".$ambassador_gender." AND leader_request.is_done = 0 ORDER BY leader_request.date ASC LIMIT 1";
+
+        $query = $this->db->query($sql);
+        return $query->row();
+
+    }
+
     
     /**
     * insert new row to the table

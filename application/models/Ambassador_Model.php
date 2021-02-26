@@ -111,6 +111,62 @@ class Ambassador_Model extends CI_Model {
             break;
         }
     }
+
+        /**
+    * Find rows whith select constrains as Objects
+    *
+    * @param array $constrain
+    * @param array $condition
+    * @param array $orders
+    * @param array $groupBy
+    * @param int $fetch_as
+    *
+    * @return Orm_Ambassador | Orm_Ambassador[] | array | int
+    */
+    public function find($constrain = array(), $condition = array() , $orders = array(), $group_by =array(),$fetch_as = Orm::FETCH_OBJECTS) {
+
+
+        if (!empty($constrain)) {
+            $this->db->select(implode(',',$constrain));
+            $this->db->distinct();
+            $this->db->from(Orm_Ambassador::get_table_name());
+        }
+        else{
+            $this->db->select('*');
+            $this->db->distinct();
+            $this->db->from(Orm_Ambassador::get_table_name());       
+        }
+         if (!empty($condition)){
+            $this->db->where($condition);
+         }
+        
+        if ($group_by) {
+            $this->db->group_by(implode(',', $group_by));
+        }
+
+        if ($orders) {
+            $this->db->order_by(implode(',', $orders));
+        }
+        switch($fetch_as) {
+            case Orm::FETCH_OBJECT:
+            return Orm_Ambassador::to_object($this->db->get()->row_array());
+            break;
+            case Orm::FETCH_OBJECTS:
+            $objects = array();
+            foreach($this->db->get()->result_array() as $row) {
+                $objects[] = Orm_Ambassador::to_object($row);
+            }
+            return $objects;
+            break;
+            case Orm::FETCH_ARRAY:
+            return $this->db->get()->result_array();
+            break;
+            case Orm::FETCH_COUNT:
+            return $this->db->count_all_results();
+            break;
+        }
+    }
+
     
     /**
     * insert new row to the table

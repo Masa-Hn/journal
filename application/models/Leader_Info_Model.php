@@ -27,6 +27,7 @@ class Leader_Info_Model extends CI_Model {
         $this->db->select('li.*');
         $this->db->distinct();
         $this->db->from(Orm_Leader_Info::get_table_name() . ' AS li');
+        $this->db->join(orm_leader_request::get_table_name() . ' AS req','li.id = req.leader_id');
         
         if (isset($filters['id'])) {
             $this->db->where('li.id', $filters['id']);

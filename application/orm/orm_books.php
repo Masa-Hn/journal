@@ -26,7 +26,7 @@ class Orm_Books extends Orm {
     protected $section = '';
     protected $type = '';
     protected $uploadname = '';
-    protected $date = CURRENT_TIMESTAMP;
+    protected $date = 'CURRENT_TIMESTAMP';
     
     /**
     * @return Books_Model
@@ -62,9 +62,23 @@ class Orm_Books extends Orm {
     *
     * @return Orm_Books[] | int
     */
-    public static function get_all($filters = array(), $page = 0, $per_page = 0, $orders = array()) {
-        return self::get_model()->get_all($filters, $page, $per_page, $orders, Orm::FETCH_OBJECTS);
+    public static function get_all($constrain = array(),$filters = array(), $page = 0, $per_page = 0, $orders = array(),$groupBy = array()) {
+        return self::get_model()->get_all($constrain,$filters, $page, $per_page, $orders,$groupBy, Orm::FETCH_OBJECTS);
     }
+     /**
+    * Find rows whith select constrains as Objects
+    *
+    * @param array $constrain
+    * @param array $condition
+    * @param array $orders
+    * @param array $groupBy
+    *
+    * @return Orm_Books
+    */
+    public static function find($constrain = array(), $condition = array() , $orders = array(), $groupBy = array()) {
+        return self::get_model()->find($constrain, $condition, $orders, $groupBy, Orm::FETCH_OBJECTS);
+    }
+
     
     /**
     * get one row as Object

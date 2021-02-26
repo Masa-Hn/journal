@@ -19,15 +19,21 @@ class Books_Model extends CI_Model {
     *
     * @return Orm_Books | Orm_Books[] | array | int
     */
-    public function get_all($filters = array(), $page = 0, $per_page = 10, $orders = array(), $fetch_as = Orm::FETCH_OBJECTS) {
+    public function get_all($constrain=array(), $filters = array(), $page = 0, $per_page = 10, $orders = array(), $group_by =array(), $fetch_as = Orm::FETCH_OBJECTS) {
         
         $page = (int) $page;
         $per_page = (int) $per_page;
         
-        $this->db->select('b.*');
-        $this->db->distinct();
-        $this->db->from(Orm_Books::get_table_name() . ' AS b');
-        
+        if (!empty($constrain)) {
+            $this->db->select(implode(',',$constrain));
+            $this->db->distinct();
+            $this->db->from(Orm_Books::get_table_name(). ' AS b');
+        }
+        else{
+            $this->db->select('b.*');
+            $this->db->distinct();
+            $this->db->from(Orm_Books::get_table_name(). ' AS b');       
+        }
         if (isset($filters['id'])) {
             $this->db->where('b.id', $filters['id']);
         }
@@ -82,7 +88,10 @@ class Books_Model extends CI_Model {
             $offset = ($page - 1) * $per_page;
             $this->db->limit($per_page, $offset);
         }
-        
+        if ($group_by) {
+            $this->db->group_by(implode(',', $group_by));
+        }
+
         switch($fetch_as) {
             case Orm::FETCH_OBJECT:
             return Orm_Books::to_object($this->db->get()->row_array());
@@ -102,6 +111,7 @@ class Books_Model extends CI_Model {
             break;
         }
     }
+
     
     /**
     * insert new row to the table

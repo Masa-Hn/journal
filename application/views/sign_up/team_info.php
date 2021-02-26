@@ -7,13 +7,13 @@
     exit();
   }
   if(isset($_SESSION['team_info'])){
-    $id =  $_SESSION['team_info']['ambassador'][count( $_SESSION['team_info']['ambassador']) - 1]->id;
+    $id =  $_SESSION['team_info']['ambassador']->get_id();
   }
   $page_id = 14;
   $this->StatisticsModel->incrementVisitors($page_id);
 ?>
 <link rel="stylesheet" href="<?php echo base_url()?>assets/sign_up_assests/css/info.css">
-<input type="hidden" id="team_code" value="<?php echo $_SESSION['team_info']['leader_info']->uniqid .$_SESSION['team_info']['leader_info']->id ; ?>">
+<input type="hidden" id="team_code" value="<?php echo $_SESSION['team_info']['leader_info']->get_uniqid() .$_SESSION['team_info']['leader_info']->get_id() ; ?>">
 <div class="overlay bg-light" style="padding: 8rem 0 1rem 0;" data-aos="fade" data-stellar-background-ratio="0.5">
   <div class="container">
     <div class="row align-items-center justify-content-center text-center">
@@ -41,7 +41,7 @@
           
           <p class="accordion-item d-block mb-0" style="font-weight: 700">
             اسم فريق المتابعة :
-            <?php echo $_SESSION['team_info']['leader_info']->team_name; ?>
+            <?php echo $_SESSION['team_info']['leader_info']->get_team_name(); ?>
           </p>
         </div>
       </div>
@@ -49,7 +49,7 @@
         <div class="border p-3 rounded mb-2" style="display: -webkit-inline-box; width: 100%">
           <p class="accordion-item d-block mb-0" style="font-weight: 700">
             كود الدخول :
-            <?php echo $_SESSION['team_info']['leader_info']->uniqid .$_SESSION['team_info']['leader_info']->id ; ?>
+            <?php echo $_SESSION['team_info']['leader_info']->get_uniqid() .$_SESSION['team_info']['leader_info']->get_id() ; ?>
           </p>
         </div>
       </div>
@@ -57,7 +57,7 @@
         <div class="border p-3 rounded mb-2" style="display: -webkit-inline-box; width: 100%">
           <p class="accordion-item d-block mb-0" style="font-weight: 700">
             اسم قائد فريقك :
-            <?php echo $_SESSION['team_info']['leader_info']->leader_name; ?>
+            <?php echo $_SESSION['team_info']['leader_info']->get_leader_name(); ?>
           </p>
         </div>
       </div>
@@ -111,7 +111,7 @@
       <a id="team" class="btn btn-primary rounded py-2 px-4 text-white">
         انضم للمجموعة من هنا
       </a>
-      <input value="<?php echo $_SESSION['team_info']['leader_info']->team_link; ?>" id="team_link" style="display: none;">
+      <input value="<?php echo $_SESSION['team_info']['leader_info']->get_team_link(); ?>" id="team_link" style="display: none;">
     </div>
     <!-- <div class="icon-bar-left">
       <div class="container_centered" style="text-align: left; margin-left: 0" id="help">
