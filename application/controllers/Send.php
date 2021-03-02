@@ -15,53 +15,64 @@ class Send extends CI_Controller {
 	}//end construct()
 
 
-   public function index(){
-      var_dump(orm_infographic::get_all());
-    }
-  public function OwlyApi(){
-    require_once('OwlyApi.php');
-    $owly = OwlyApi::factory( array('key' => '{c4pah0tpw68kcwc4sswks4cg03ij385nihn}') );
-    $sourceUrl = 'http://invokemedia.com/';
-    
-    try {
-      $shortenedUrl = $owly->shorten($sourceUrl);
-    } catch(Exception $e) {
-      echo 'Error found in API:' . $e->getMessage() . "<br />/n";
-      $shortenedUrl = "";
-    }
-    echo 'Shortened URL:' . $shortenedUrl . "<br />/n";
+  public function index(){
+        $leader_info=orm_leader_info::get_instance(1);
 
+      //SEND TO MESSENGER
+      $recipient=$leader_info->get_messenger_id();
+      $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAMnL65BxDAazaJg24ZCdVKWMtjd2TpdBUfI8wwPkScrurtsXKujqb0h1NZBZBvOCIJHg9oc6rHSz5iaa9l1eNHi4g4H1EQMmPHt16OS0ecWDUXI3ZBTTE9C0MDxvQiH0J7QkkqlFghWsOm3q81ZBQ6ZCoylt7faxM3ZAHzehtQZC';
+
+      $ch = curl_init($url);
+
+     $firstMsg="السلام عليكم ورحمة الله وبركاته ".'\n'." أرجو أن تكون بخير 🌸 ".'\n'." . ".'\n'."  لقد قام موقع الإرشاد الإلكتروني بتوزيع بعض المشتركين الجدد لفريقك حسب طلبك.".'\n'." . ".'\n'." . ".'\n'." ⚠️ تذكر، بعض المشتركين الجدد قد يغير رأيه و يمتنع عن الانضمام لفريق المتابعة أو لمشروعنا لأسباب شخصية مختلفة.  لا تقلق أبدًا لأن هدفنا هو الاستمرار بالمحاولة وتغيير نظرة المجتمع والتزامه اتجاه التعلم بالقراءة المنهجية، في حال لم يقم المشترك الجديد بالانضمام لمجموعة المتابعة الخاص بك، فإن بإمكانك طلب عدد جديد وسوف نقوم بتوفيره لك سريعًا ♥️.".'\n'." . ".'\n'." ".'\n'." ✅ حفظًا على جهودكم وجهود فريقكم، في حال ⛔ لم يظهر المشترك الجديد أي ردة فعل أو رغبة في القراءة بإمكانك ضغط على زر (انسحاب⛔) في موقع العلامات بعد نهاية الأسبوع الأول له.".'\n'." ".'\n'." قواكم الله وبارك همتكم قائدنا.";    
+      /*prepare response*/
+      $jsonData =  $this->jsonData($recipient,$firstMsg);
+      print_r($jsonData); echo "</br>";
+      /* curl setting to send a json post data */
+      print_r($this->curlSetting($ch,$jsonData));
+
+  
 }
 
   public function test()
   {
-    $recipient="3197321007062062";
-    $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBABe9vJc3OdVVrFaKT0EOWR5eZAS9ZAjHjvD97M5zuCH2xWfhoaLK7R2qCQOUAsDuc9yKvgMF5HWeTxa5hk9Lc1hQajU45p9ZCZAlkqAgwTw7ijfG0NEEiEmZAsnaJiPGc82ykaTsZC65kVWY59zT4krNdusVZCSfwZDZD';
+    $sender="3197321007062062";
+    $response="TEST";
+                
+                $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAIq0ZAi1cbhpvuL0SFoHlQe4SsYfr5ipWUmaSxtArUy0noKdaCWqN0JpZC3hfAeURKZBJkpBZAx3f3hcKQnuOjW0WDcMkOUqifB0Na2kG1FXGjoYVsp43hulareizWWiZAFhZAujcJC73X1ZBhxfRUgkfZARNyiRHQZDZD';
 
-    // /*initialize curl*/
-    $ch = curl_init($url);
-    
-    $allAmbassadors=$this->AmbassadorModel->getByRequestId(5);
-        $ambassadors="";
-        $bitlyClient = new BitlyClient('d4528ad236dbe8ff010e571c22880d9d1aec93cf');
-        $i=1;
-        foreach ($allAmbassadors as $ambassador) {
-            $options = [
-                'longUrl' => $ambassador->profile_link,
-                'format' => 'json' // pass json, xml or txt
-            ];
-            $response = $bitlyClient->shorten($options);
-            $shortenLink=$response->data->url;
+                /*initialize curl*/
+                $ch = curl_init($url);
+                /*prepare response*/
+                $jsonData = '{
+                "recipient":{
+                    "id":"' . $sender . '"
+                    },
+                    "message":{
+                        "text":"' . $response . '"
+                    }
+                }';
+                /* curl setting to send a json post data */
+                //Tell cURL that we want to send a POST request.
+                curl_setopt($ch, CURLOPT_POST, 1);
 
-          $ambassadors=$ambassadors. "[".$i."] ".$ambassador->name. '\n'. $shortenLink.'\n';
-          $i++;
-        }
-    // /*prepare response*/
-    $jsonData =  $this->jsonData($recipient,$ambassadors);
-    /* curl setting to send a json post data */
-    $this->curlSetting($ch,$jsonData);   
+                //Attach the encoded JSON string to the POST fields.
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
 
-  }//informLeader
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                //Set the content type to application/json
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+                
+                //Execute the request if the message is not empty.
+                    $result = curl_exec($ch); // user will get the message
+
+                    print_r(curl_errno($ch));
+                    //echo $result;
+                  }//informLeader
 
  public function jsonData($id,$msg)
   {
@@ -93,8 +104,8 @@ class Send extends CI_Controller {
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     
     //Execute the request if the message is not empty.
-    curl_exec($ch); // user will get the message
-  
+    $result=curl_exec($ch); // user will get the message
+  return $result;
   }//curlSetting
 
 

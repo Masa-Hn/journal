@@ -23,7 +23,7 @@ class Orm_Ambassador extends Orm {
     protected $messenger_id = '0';
     protected $is_joined = 0;
     protected $join_following_team = 0;
-    protected $created_at = CURRENT_TIMESTAMP;
+    protected $created_at = 'CURRENT_TIMESTAMP';
     protected $display = 1;
     protected $code_button = 0;
     protected $team_link_button = 0;
@@ -66,6 +66,18 @@ class Orm_Ambassador extends Orm {
         return self::get_model()->get_all($filters, $page, $per_page, $orders, Orm::FETCH_OBJECTS);
     }
     
+
+    /**
+    * Find rows whith select constrains as Objects
+    *
+    * @param array $constrain
+    * @param array $condition
+    * @param array $orders
+    * @param array $groupBy
+    *
+    * @return Orm_Ambassador
+    */
+
     /**
     * get one row as Object
     *

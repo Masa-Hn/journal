@@ -15,7 +15,7 @@ class Orm_Leader_Request extends Orm {
     protected $Rid = 0;
     protected $members_num = 0;
     protected $gender = '';
-    protected $date = CURRENT_TIMESTAMP;
+    protected $date = 'CURRENT_TIMESTAMP';
     protected $leader_id = 0;
     protected $is_done = 0;
     protected $send_to_leader = 0;
@@ -85,6 +85,10 @@ class Orm_Leader_Request extends Orm {
     */
     public static function get_all($filters = array(), $page = 0, $per_page = 0, $orders = array()) {
         return self::get_model()->get_all($filters, $page, $per_page, $orders, Orm::FETCH_OBJECTS);
+    }
+   
+    public static function selectTeam($leader_gender,$ambassador_gender,$logical_operator = "=0") {
+        return self::get_model()->selectTeam($leader_gender,$ambassador_gender,$logical_operator);
     }
     
     /**

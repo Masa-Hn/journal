@@ -76,10 +76,11 @@ class SignUp extends CI_Controller {
       $page="sign_up/".$_POST['next'];
 
       if($_POST['next'] == "question_4"){
-        $sections['sections']=$this->books->getSections(1);
+        $sections['sections']=orm_books::get_all(array('type,section','COUNT(section) as num_of_books'),array("type"=>1),0,10,array(),array('section'));
+        //$sections['sections']=$this->books->getSections(1);
 
-          $data = $this->load->view($page,$sections);
-          return $data;
+        $data = $this->load->view($page,$sections);
+        return $data;
 
       }//if
       else{
@@ -108,8 +109,9 @@ class SignUp extends CI_Controller {
   {
     $reallocate=false;
     if(!empty($_POST['email'])){
-      $result=$this->AmbassadorModel->checkAmbassador($_POST['email']);      
-        if (count((array)$result) == 0 ){
+      //$result=$this->AmbassadorModel->checkAmbassador($_POST['email']); 
+      $result=orm_ambassador::get_one(array('fb_id' => $_POST['email']));     
+        if ($result->get_fb_id()==''){
          //New Ambassador
 
           if(!empty($_POST['ambassador_name']) && !empty($_POST['ambassador_gender']) && !empty($_POST['leader_gender']) )
@@ -133,13 +135,13 @@ class SignUp extends CI_Controller {
 
         else{
           //Inform Ambassador
-          if($result->request_id == null){
+          if($result->get_request_id() == null){
             // Still No Leader
-            $this->noLeaderFound($result->id);
+            $this->noLeaderFound($result->get_id());
           }//if
           else{
-            $request=$this->SignUpModel->getRequestInfo($result->request_id);
-            $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->created_at );
+            $request=orm_leader_request::get_instance($result->get_request_id());
+            $created_at =DateTime::createFromFormat ( "Y-m-d H:i:s",$result->get_created_at() );
             $created_at=date_create($created_at->format("Y-m-d"));
             $current=date_create(date("Y-m-d",time()));
             $diff=date_diff($created_at,$current);
@@ -147,10 +149,10 @@ class SignUp extends CI_Controller {
             if($diff->format("%a") > 2){ 
               $reallocate=true;
             }//if
-            $leader_info=$this->SignUpModel->getLeaderInfo($request->leader_id);
+            $leader_info=orm_leader_info::get_instance($request->get_leader_id());
             $informLeader=false;
-            $ambassador=$this->AmbassadorModel->getByFBId($_POST['email']);
-            $this->informambassador($reallocate,$ambassador,$leader_info,$result->request_id,$informLeader,$request->leader_id);
+            $ambassador=orm_ambassador::get_one(array('fb_id' => $_POST['email']));
+            $this->informambassador($reallocate,$ambassador,$leader_info,$result->get_request_id(),$informLeader,$request->get_leader_id());
           }//else
         }//else
     }//if
@@ -186,74 +188,123 @@ class SignUp extends CI_Controller {
     $exit=false;
     while (! $exit ) {
       //Check New Teams
-      $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition);
-      if (count((array)$result) == 0 ){
+      $result=orm_Leader_Request::selectTeam($leader_condition,$ambassador_condition);
+      if (count((array)$result) == 0){
         //Check Teams With Less Than 12 Members
-        $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition,"BETWEEN  1 AND 12");
-          if (count((array)$result) == 0 ){
+        $result=orm_Leader_Request::selectTeam($leader_condition,$ambassador_condition,"BETWEEN  1 AND 12");
+          if (count((array)$result) == 0){
             //Check Teams With More Than 12 Members
-            $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition," > 12");
-              if (count((array)$result) == 0 ){
-                $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_name,$ambassadorGender,$leaderGender,$country,$ambassador_email);
-                $insert_id=$this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
+            $result=orm_Leader_Request::selectTeam($leader_condition,$ambassador_condition," > 12");
+              if (count((array)$result) == 0){
+
+                $ambassadorWithoutLeader= new orm_ambassador();
+                $ambassadorWithoutLeader->set_name($ambassador_name);
+                $ambassadorWithoutLeader->set_request_id(null);
+                $ambassadorWithoutLeader->set_country('none');
+                $ambassadorWithoutLeader->set_gender($ambassadorGender);
+                $ambassadorWithoutLeader->set_leader_gender($leaderGender);
+                $ambassadorWithoutLeader->set_profile_link('https://www.facebook.com/');
+                $ambassadorWithoutLeader->set_fb_id($ambassador_email);
+                $insert_id=$ambassadorWithoutLeader->save();
+                // $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_name,$ambassadorGender,$leaderGender,$country,$ambassador_email);
+                // $insert_id=$this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
+                
                 $this->noLeaderFound($insert_id);
                 $exit=true;
               }//if
               else{
-                $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+                $ambassador= new orm_ambassador();
+                $ambassador->set_name($ambassador_name);
+                $ambassador->set_request_id($result->Rid);
+                $ambassador->set_country('none');
+                $ambassador->set_gender($ambassadorGender);
+                $ambassador->set_leader_gender($leaderGender);
+                $ambassador->set_profile_link('https://www.facebook.com/');
+                $ambassador->set_fb_id($ambassador_email);
+               
+                // $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+
                   // Check Leader Request
                   //1- chekc associated requests
-                  $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                  $numberOfRequests=orm_ambassador::get_count( array("request_id" => $result->Rid));
                   //2- compare to the requested number
                     //If available, insert   
-                    if ($result->members_num > $numberOfRequests->totalRequests) {
-                      $this->AmbassadorModel->insertAmbassador($ambassador);
+                    if ($result->members_num > $numberOfRequests) {
+                      $insert_id=$ambassador->save();
+                      // $this->AmbassadorModel->insertAmbassador($ambassador);
                       $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
                       $exit=true;
                     }//if
                     //Else update request to done
                     else{
-                      $this->RequestsModel->updateRequest( $result->Rid);
+                      $req = orm_Leader_Request::get_instance($result->Rid);
+                      $req->set_is_done(1);
+                      $req->save();
+                      // $this->RequestsModel->updateRequest( $result->Rid);
                       continue;
                     }//else      
               }//else
           }//if
           else{
-            $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
-            // Check Leader Request
-                  //1- chekc associated requests
-                  $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
-                  //2- compare to the requested number
-                    //If available, insert   
-                    if ($result->members_num > $numberOfRequests->totalRequests) {
-                      $this->AmbassadorModel->insertAmbassador($ambassador);
-                      $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
-                      $exit=true;
-                    }//if
-                    //Else update request to done
-                    else{
-                      $this->RequestsModel->updateRequest( $result->Rid);
-                      continue;
-                    }//else      
+              $ambassador= new orm_ambassador();
+              $ambassador->set_name($ambassador_name);
+              $ambassador->set_request_id($result->Rid);
+              $ambassador->set_country('none');
+              $ambassador->set_gender($ambassadorGender);
+              $ambassador->set_leader_gender($leaderGender);
+              $ambassador->set_profile_link('https://www.facebook.com/');
+              $ambassador->set_fb_id($ambassador_email);
+              // $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+              // Check Leader Request
+              //1- chekc associated requests
+              $numberOfRequests=orm_ambassador::get_count( array("request_id" => $result->Rid));
+              //2- compare to the requested number
+              //If available, insert   
+              if ($result->members_num > $numberOfRequests) {
+                $insert_id=$ambassador->save();
+                // $this->AmbassadorModel->insertAmbassador($ambassador);
+                $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                $exit=true;
+              }//if
+              //Else update request to done
+              else{
+                $req = orm_Leader_Request::get_instance($result->Rid);
+                $req->set_is_done(1);
+                $req->save();
+                //$this->RequestsModel->updateRequest( $result->Rid);
+                continue;
+              }//else      
           }//else
       }//if
       else{
-        $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
-        // Check Leader Request
-                  //1- chekc associated requests
-                  $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
-                  //2- compare to the requested number
-                    //If available, insert   
-                    if ($result->members_num > $numberOfRequests->totalRequests) {
-                      $this->AmbassadorModel->insertAmbassador($ambassador);
-                      $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
-                      $exit=true;
-                    }//if
-                    //Else update request to done
-                    else{
-                      $this->RequestsModel->updateRequest( $result->Rid);
-                      continue;
-                    }//else             
+            $ambassador= new orm_ambassador();
+            $ambassador->set_name($ambassador_name);
+            $ambassador->set_request_id($result->Rid);
+            $ambassador->set_country('none');
+            $ambassador->set_gender($ambassadorGender);
+            $ambassador->set_leader_gender($leaderGender);
+            $ambassador->set_profile_link('https://www.facebook.com/');
+            $ambassador->set_fb_id($ambassador_email);
+            // $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+            // Check Leader Request
+            //1- chekc associated requests
+            $numberOfRequests=orm_ambassador::get_count(array("request_id" => $result->Rid));
+            //2- compare to the requested number
+            //If available, insert   
+            if ($result->members_num > $numberOfRequests) {
+              $insert_id=$ambassador->save();
+              // $this->AmbassadorModel->insertAmbassador($ambassador);
+              $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+              $exit=true;
+            }//if
+            //Else update request to done
+            else{
+              $req = orm_Leader_Request::get_instance($result->Rid);
+              $req->set_is_done(1);
+              $req->save();
+              // $this->RequestsModel->updateRequest( $result->Rid);
+              continue;
+            }//else             
         }//else
     }//while
  
@@ -264,17 +315,20 @@ class SignUp extends CI_Controller {
     $informLeader=false;
     // 1- Inform Ambassador
       //1- get leader Information
-        $leader_info=$this->SignUpModel->getLeaderInfo($leader_id);
+      $leader_info=orm_leader_info::get_instance($leader_id);
 
     // 2- Check Leader Requests
       //1- chekc associated requests
-      $numberOfRequests=$this->AmbassadorModel->countRequests($request_id);
+      $numberOfRequests=orm_ambassador::get_count(array("request_id" => $request_id));
       //print_r($numberOfRequests); die();
       //2- compare to the requested number
         //If match, update is_done to 1
-      if ($members_num < $numberOfRequests->totalRequests) {
+      if ($members_num < $numberOfRequests) {
         //1- update request to DONE
-        $this->RequestsModel->updateRequest($request_id);
+        $req = orm_Leader_Request::get_instance($request_id);
+        $req->set_is_done(1);
+        $req->save();
+        //$this->RequestsModel->updateRequest($request_id);
         $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAIq0ZAi1cbhpvuL0SFoHlQe4SsYfr5ipWUmaSxtArUy0noKdaCWqN0JpZC3hfAeURKZBJkpBZAx3f3hcKQnuOjW0WDcMkOUqifB0Na2kG1FXGjoYVsp43hulareizWWiZAFhZAujcJC73X1ZBhxfRUgkfZARNyiRHQZDZD';
 
         /*initialize curl*/
@@ -295,13 +349,16 @@ class SignUp extends CI_Controller {
         $this->curlSetting($ch,$jsonData);
 
       }//if
-      if ($members_num == $numberOfRequests->totalRequests) {
+      if ($members_num == $numberOfRequests) {
+        $req = orm_Leader_Request::get_instance($request_id);
+        $req->set_is_done('1');
+        $req->save();
         $informLeader = true;
       }//if
 
 
     //3- load view to inform ambassador [FINAL STEP]
-      $ambassadorInfo=$this->AmbassadorModel->getByRequestId($request_id);
+      $ambassadorInfo=$ambassador;
       $reallocate=false;
       $this->informambassador($reallocate,$ambassadorInfo,$leader_info,$request_id,$informLeader,$leader_id);
   }//checkout
@@ -329,19 +386,23 @@ class SignUp extends CI_Controller {
   {
     if (!empty($_POST['leader_id']) && !empty($_POST['request_id']) ) {
       //1- update request to DONE
-        $this->RequestsModel->updateRequest($_POST['request_id']);
+        //$this->RequestsModel->updateRequest($_POST['request_id']);
+        $req = orm_Leader_Request::get_instance($_POST['request_id']);
+        $req->set_is_done(1);
+        $req->save();
         //2- get all associated requests
-        $allAmbassadors=$this->AmbassadorModel->getByRequestId($_POST['request_id']);
+        $allAmbassadors=orm_ambassador::get_all(array('request_id'=>$_POST['request_id']));
         $ambassadors="";
         $i=1;
         foreach ($allAmbassadors as $ambassador) {
-          $ambassadors=$ambassadors. "[".$i."] ".$ambassador->name. '\n';
+          $ambassadors=$ambassadors. "[".$i."] ".$ambassador->get_name(). '\n';
           $i++;
         }//foreach
       //3-Inform Leader
-        $leader_info=$this->SignUpModel->getLeaderInfo($_POST['leader_id']);
+        $leader_info=orm_leader_info::get_instance($_POST['leader_id']);
+
       //SEND TO MESSENGER
-      $recipient=$leader_info->messenger_id;
+      $recipient=$leader_info->get_messenger_id();
       $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAMnL65BxDAazaJg24ZCdVKWMtjd2TpdBUfI8wwPkScrurtsXKujqb0h1NZBZBvOCIJHg9oc6rHSz5iaa9l1eNHi4g4H1EQMmPHt16OS0ecWDUXI3ZBTTE9C0MDxvQiH0J7QkkqlFghWsOm3q81ZBQ6ZCoylt7faxM3ZAHzehtQZC';
 
       /*initialize curl*/
@@ -390,7 +451,7 @@ class SignUp extends CI_Controller {
 
     //Attach the encoded JSON string to the POST fields.
     curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     //Set the content type to application/json
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));

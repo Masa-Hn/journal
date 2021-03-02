@@ -37,11 +37,11 @@
         <div class="row">
           <?php
             foreach ($sections as $section ) {
-              if ($section->section == "سير الصحابة") {
+              if ($section->get_section() == "سير الصحابة") {
                 $img = "24";
               }
               else{
-                $img=$section->section;
+                $img=$section->get_section();
               }
               echo
               ' <div class="col-lg-3 cursor_display">
@@ -53,7 +53,7 @@
               ;
               echo 
                 '   <div class="lh-content text-center">
-                      <h3>'. $section->section.' </h3>
+                      <h3>'. $section->get_section().' </h3>
                     </div>
                   </div>
                 </div>
