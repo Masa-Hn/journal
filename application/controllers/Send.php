@@ -37,7 +37,7 @@ class Send extends CI_Controller {
   public function test()
   {
     $sender="3197321007062062";
-    $response=" تم تأكيد حسابك." .'\n'." . ".'\n'. "سوف يصلك قارئ جديد قريبًا، نوصيك أن تعتني به فهو خطوةٌ في مستقبلنا جميعا ♥️";
+    $response="TEST";
                 
                 $url = 'https://graph.facebook.com/v8.0/me/messages?access_token=EAAGBGHhdZAhQBAIq0ZAi1cbhpvuL0SFoHlQe4SsYfr5ipWUmaSxtArUy0noKdaCWqN0JpZC3hfAeURKZBJkpBZAx3f3hcKQnuOjW0WDcMkOUqifB0Na2kG1FXGjoYVsp43hulareizWWiZAFhZAujcJC73X1ZBhxfRUgkfZARNyiRHQZDZD';
 
@@ -63,10 +63,15 @@ class Send extends CI_Controller {
 
                 //Set the content type to application/json
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
                 
                 //Execute the request if the message is not empty.
                     $result = curl_exec($ch); // user will get the message
-                    echo $result;
+
+                    print_r(curl_errno($ch));
+                    //echo $result;
                   }//informLeader
 
  public function jsonData($id,$msg)
