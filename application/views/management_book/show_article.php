@@ -16,7 +16,7 @@
  <?php 
 $n=$num_rows;
  for ($i=0; $i <$n ; $i++) {
-  $row=$articles->row($i);   ?>
+  $row=$articles[$i];   ?>
     
   <div class="mySlides" style="padding-right: 10%">
     
@@ -27,12 +27,12 @@ showSlides(slideIndex);
  <?php echo $this->session->flashdata('msg')?>  
     <div class="numbertext" style="color: black" > <?php echo $i+1 ?> / <?php echo $n ?></div>
     <h5 class="heading">: اسم المقال </h5>
-      <p><?php echo $row->title ?></p>
+      <p><?php echo $row->get_title() ?></p>
      <h5 class="heading">: كاتب المقال</h5>
-      <p><?php echo $row->writer ?></p>
+      <p><?php echo $row->get_writer() ?></p>
 
       <h5 class="heading"> : تم كتابة المقال بتاريخ</h5>
-      <p><?php echo $row->date ?></p>
+      <p><?php echo $row->get_date() ?></p>
 
       <h5 class="heading"> : المقال</h5>
       <script type="text/javascript">
@@ -65,9 +65,9 @@ $(function(){ /* to make sure the script runs after page load */
 
 </script>
 
-      <p class="item"> <?php echo $row->article ?></p>
+      <p class="item"> <?php echo $row->get_article() ?></p>
  <form  enctype="multipart/form-data" method="post" style="padding-bottom: 5em;padding-top: 5em;padding-left: 47%" action="<?=base_url()?>Management_book/show_article">   
-<input type="number" name="id" id="id" value="<?php echo $row->id ?>" style="display: none;"   >  
+<input type="number" name="id" id="id" value="<?php echo $row->get_id() ?>" style="display: none;"   >  
 <button  id="delete"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A;" >حذف المقال</button>
 </form>
 

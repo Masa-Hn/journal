@@ -51,18 +51,19 @@ class Export extends CI_Controller {
             $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
             $column++;
         }
-        $books = $this->ManageBooks->getallbooks();
+        $books = Orm_suggestion_book::get_all();
+        //$this->ManageBooks->getallbooks();
 
         $excel_row = 2;
-        foreach($books->result() as $row){
+        foreach($books as $row){
             
-            $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $row->id);
-            $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->book_name);
-            $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->brief);
-            $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $row->type);
-            $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->publisher);
-            $object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, $row->found);
-            $object->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row, $row->link);
+            $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $row->get_id());
+            $object->getActiveSheet()->setCellValueByColumnAndRow(1, $excel_row, $row->get_book_name());
+            $object->getActiveSheet()->setCellValueByColumnAndRow(2, $excel_row, $row->get_brief());
+            $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $row->get_type());
+            $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $row->get_publisher());
+            $object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, $row->get_found());
+            $object->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row, $row->get_link());
             $excel_row++;
         }
         

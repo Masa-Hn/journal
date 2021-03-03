@@ -130,8 +130,8 @@ float: right;
 $arr= Array();
 $arr2= Array();
  foreach ($pages as $m) { 
-array_push($arr,$m->id);
-array_push($arr2,$m->title);
+array_push($arr,$m->get_id());
+array_push($arr2,$m->get_title());
 }
 ?>
 <script type="text/javascript">

@@ -160,7 +160,7 @@
                 <!-- End Form Add Book  -->
                 <!-- ============================================================== --><?php 
                 if(isset($book)){  
-                    foreach($book as $row){ ?>
+ ?>
                     
                 <!-- ============================================================== -->
                 <!-- Start Form Edit Book  -->
@@ -178,21 +178,21 @@
                                     <label class="form-control-label" style="float: right;">
                                         <li style="direction: rtl;">اسم الكتاب : *</li>
                                     </label> 
-                                    <input type="text" id="book_name" name="name" value="<?php echo $row->name?>" class="form-control" onblur="validate(1,'book_name')"> 
+                                    <input type="text" id="book_name" name="name" value="<?php echo $book->get_name()?>" class="form-control" onblur="validate(1,'book_name')"> 
                                 </div>
                                 
                                 <div class="form-group"> 
                                     <label class="form-control-label" style="float: right;">
                                         <li style="direction: rtl;">اسم الكاتب : *</li>
                                     </label> 
-                                    <input type="text" id="writer" name="writer" value="<?php echo $row->writer?>" class="form-control" onblur="validate(2,'writer')"> 
+                                    <input type="text" id="writer" name="writer" value="<?php echo $book->get_writer()?>" class="form-control" onblur="validate(2,'writer')"> 
                                 </div>
                                 
                                 <div class="form-group"> 
                                     <label class="form-control-label" style="float:  right;">
                                         <li style="direction: rtl;">نبذة عن الكتاب : *</li> 
                                     </label>
-                                    <textarea id="story" name="brief" class="form-control"onblur="validate(3,'story')" rows="8"><?php echo $row->brief?></textarea>
+                                    <textarea id="story" name="brief" class="form-control"onblur="validate(3,'story')" rows="8"><?php echo $book->get_brief()?></textarea>
                                 </div>
                                 
                                 <button id="next2" class="mybutton" onclick="next1();" type="button">التالي</button> 
@@ -212,9 +212,9 @@
                                     <li style="direction: rtl;">مستوى الكتاب : *</li> 
                                 </label>
                                 <select style="text-align: right;" name="level" id="level" class="form-control" onblur="validate(1,'level')">
-                                    <option value="1" <?php if($row->level == 1) echo 'selected';?>>بسيط</option>
-                                    <option value="2" <?php if($row->level == 2) echo 'selected';?>>متوسط</option>
-                                    <option value="3" <?php if($row->level == 3) echo 'selected';?>>عميق</option>
+                                    <option value="1" <?php if($book->get_level() == 1) echo 'selected';?>>بسيط</option>
+                                    <option value="2" <?php if($book->get_level() == 2) echo 'selected';?>>متوسط</option>
+                                    <option value="3" <?php if($book->get_level() == 3) echo 'selected';?>>عميق</option>
                                 </select>
                             </div>
 
@@ -223,21 +223,21 @@
                                     <li style="direction: rtl;">نوع الكتاب : *</li>
                                 </label>
                                 <select style="text-align: right;" name="section" id="class" class="form-control" onblur="validate(2,'class')">
-                                    <option <?php if($row->section == 'تاريخي') echo 'selected';?> value="تاريخي">تاريخي</option>
-                                    <option <?php if($row->section == 'ديني') echo 'selected';?> value="ديني">ديني</option>
-                                    <option <?php if($row->section == 'إقتصادي') echo 'selected';?> value="إقتصادي">إقتصادي</option>
-                                    <option <?php if($row->section == 'أدبي') echo 'selected';?> value="أدبي">أدبي</option>
-                                    <option <?php if($row->section == 'اجتماعي') echo 'selected';?> value="اجتماعي">اجتماعي</option>
-                                    <option <?php if($row->section == 'تنمية') echo 'selected';?> value="تنمية">تنمية</option>
-                                    <option <?php if($row->section == 'تربية') echo 'selected';?> value="تربية">تربية</option>
-                                    <option <?php if($row->section == 'سير الصحابة') echo 'selected';?> value="سير الصحابة">سير الصحابة</option>
-                                    <option <?php if($row->section == 'سياسي') echo 'selected';?> value="سياسي">سياسي</option>
-                                    <option <?php if($row->section == 'فكري') echo 'selected';?> value="فكري">فكري</option>
-                                    <option <?php if($row->section == 'علمي') echo 'selected';?> value="علمي">علمي</option>
-                                    <option <?php if($row->section == 'عسكري') echo 'selected';?> value="عسكري">عسكري</option>
-                                    <option <?php if($row->section == 'خيال علمي/ أطفال') echo 'selected';?> value="خيال علمي/ أطفال">خيال علمي/ أطفال</option>
-                                    <option <?php if($row->section == '>قصص صحابة/ أطفال') echo 'selected';?> value="قصص صحابة/ أطفال">قصص صحابة/ أطفال</option>
-                                    <option <?php if($row->section == 'انجليزي') echo 'selected';?> value="انجليزي">انجليزي</option>
+                                    <option <?php if($book->get_section() == 'تاريخي') echo 'selected';?> value="تاريخي">تاريخي</option>
+                                    <option <?php if($book->get_section() == 'ديني') echo 'selected';?> value="ديني">ديني</option>
+                                    <option <?php if($book->get_section() == 'إقتصادي') echo 'selected';?> value="إقتصادي">إقتصادي</option>
+                                    <option <?php if($book->get_section() == 'أدبي') echo 'selected';?> value="أدبي">أدبي</option>
+                                    <option <?php if($book->get_section() == 'اجتماعي') echo 'selected';?> value="اجتماعي">اجتماعي</option>
+                                    <option <?php if($book->get_section() == 'تنمية') echo 'selected';?> value="تنمية">تنمية</option>
+                                    <option <?php if($book->get_section() == 'تربية') echo 'selected';?> value="تربية">تربية</option>
+                                    <option <?php if($book->get_section() == 'سير الصحابة') echo 'selected';?> value="سير الصحابة">سير الصحابة</option>
+                                    <option <?php if($book->get_section() == 'سياسي') echo 'selected';?> value="سياسي">سياسي</option>
+                                    <option <?php if($book->get_section() == 'فكري') echo 'selected';?> value="فكري">فكري</option>
+                                    <option <?php if($book->get_section() == 'علمي') echo 'selected';?> value="علمي">علمي</option>
+                                    <option <?php if($book->get_section() == 'عسكري') echo 'selected';?> value="عسكري">عسكري</option>
+                                    <option <?php if($book->get_section() == 'خيال علمي/ أطفال') echo 'selected';?> value="خيال علمي/ أطفال">خيال علمي/ أطفال</option>
+                                    <option <?php if($book->get_section() == '>قصص صحابة/ أطفال') echo 'selected';?> value="قصص صحابة/ أطفال">قصص صحابة/ أطفال</option>
+                                    <option <?php if($book->get_section() == 'انجليزي') echo 'selected';?> value="انجليزي">انجليزي</option>
                                 </select>
                             </div>
 
@@ -246,11 +246,11 @@
                                     <li style="direction: rtl;">تصنيف الكتاب : *</li>
                                 </label>
                                 <select style="text-align: right;" name="type" id="type" class="form-control" onblur="validate(3,'type')">
-                                    <option value="1" <?php if($row->type == 1) echo 'selected';?>>كتاب منهج</option>
-                                    <option value="2" <?php if($row->type == 2) echo 'selected';?>>المرحلة التحضيرية</option>
-                                    <option value="3" <?php if($row->type == 3) echo 'selected';?>>الأطفال</option>
-                                    <option value="4" <?php if($row->type == 4) echo 'selected';?>>رمضان</option>
-                                    <option value="5" <?php if($row->type == 5) echo 'selected';?>>اليافعين</option>
+                                    <option value="1" <?php if($book->get_type() == 1) echo 'selected';?>>كتاب منهج</option>
+                                    <option value="2" <?php if($book->get_type() == 2) echo 'selected';?>>المرحلة التحضيرية</option>
+                                    <option value="3" <?php if($book->get_type() == 3) echo 'selected';?>>الأطفال</option>
+                                    <option value="4" <?php if($book->get_type() == 4) echo 'selected';?>>رمضان</option>
+                                    <option value="5" <?php if($book->get_type() == 5) echo 'selected';?>>اليافعين</option>
                                 </select>
                             </div>
 
@@ -269,21 +269,21 @@
                                     <label class="form-control-label" style="float: right;"> 
                                         <li style="direction: rtl;">رابط منشور الكتاب :</li>
                                     </label> 
-                                    <input type="text" id="post_link" name="post_link" value="<?php echo $row->post?>" class="form-control" > 
+                                    <input type="text" id="post_link" name="post_link" value="<?php echo $book->get_post()?>" class="form-control" > 
                                 </div>
 
                                 <div class="form-group"> 
                                     <label class="form-control-label" style="float: right;">
                                     <li style="direction: rtl;">رابط تحميل الكتاب :</li> 
                                     </label> 
-                                    <input type="text" id="download_link" name="download_link" value="<?php echo $row->link?>" class="form-control"> 
+                                    <input type="text" id="download_link" name="download_link" value="<?php echo $book->get_link()?>" class="form-control"> 
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-control-label" style="float: right;">
                                         <li style="direction: rtl;">رابط صورة الكتاب :</li> 
                                     </label>
-                                    <input type="text" id="img_link" name="img_link" value="<?php echo $row->pic?>" class="form-control"> 
+                                    <input type="text" id="img_link" name="img_link" value="<?php echo $book->get_pic()?>" class="form-control"> 
                                 </div>  
                                 <!--
                                 <div class="form-group">
@@ -296,7 +296,7 @@
                                         <img id="myimage" height="200">
                                     </div>
                                 </div> -->
-                                <input type="hidden" name="bid" value="<?php echo $row->id?>">
+                                <input type="hidden" name="bid" value="<?php echo $book->get_id()?>">
                                 <input type="hidden" name="update">
                                 <button id="save" class="mybutton" >حفظ</button> 
                             </div>
@@ -306,7 +306,7 @@
                 <!-- ============================================================== -->
                 <!-- End Form Add Book  -->
                 <!-- ============================================================== -->   
-                <?php }}?>    
+                <?php }?>    
                     
                 <fieldset id="success">
                     <div class="form-card">
