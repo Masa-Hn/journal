@@ -39,24 +39,17 @@ class SignUp extends CI_Controller {
   }//index
 
   public function team_link_button() {
-    //$ip_address = $_POST[ 'ip_address' ];
-    $msg = "";
     $amb_id = $_POST['id'];
-
-    $clicks = $this->StatisticsModel->button_clicks( $amb_id, 'ambassador', 'team_link_button' );
-
-    if ( $clicks->num_rows() > 0 ) {
-        $res = $clicks->row();
-        if($res->team_link_button == 0){
-        $this->StatisticsModel->update_data( $amb_id, 'team_link_button', 1, 'ambassador' );
-        }
+	  $msg = "";
+    if (Orm_Ambassador::get_count(array("id"=>$amb_id)) > 0) {
+        $data = Orm_Ambassador::get_instance($amb_id);
+        	if($data->get_team_link_button() == 0){
+        		$data->set_team_link_button(1);
+        		$data->save();
+        		$msg = "Record Updated Successfully";
+			}
     }
-    /* else {
-        $data[ 'ip_address' ] = $ip_address;
-        $data[ 'team_link_button' ] = 1;
-        $this->StatisticsModel->insert_data( $data, 'buttons_statistics' );
-
-    }*/
+    echo $msg;
   }
 
   public function trial()

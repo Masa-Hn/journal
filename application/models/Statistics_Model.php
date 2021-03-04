@@ -61,6 +61,10 @@ class Statistics_Model extends CI_Model {
             $this->db->where('s.date <=', $filters['to_date']);
             $this->db->group_end();
         }
+        if (isset($filters['conditions'])) {
+            $where = $filters['conditions'];
+            $this->db->where($where);
+        }
         
         if ($orders) {
             $this->db->order_by(implode(',', $orders));

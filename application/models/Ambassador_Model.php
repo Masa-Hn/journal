@@ -82,7 +82,9 @@ class Ambassador_Model extends CI_Model {
         if (isset($filters['team_link_button'])) {
             $this->db->where('a.team_link_button', $filters['team_link_button']);
         }
-        
+		if (isset($filters['conditions'])) {
+			$this->db->where($filters['conditions']);
+		}
         if ($orders) {
             $this->db->order_by(implode(',', $orders));
         }
@@ -143,6 +145,6 @@ class Ambassador_Model extends CI_Model {
     public function delete($id) {
         return $this->db->delete(Orm_Ambassador::get_table_name(), array('id' => $id));
     }
-    
+
 }
 

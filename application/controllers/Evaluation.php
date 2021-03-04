@@ -28,11 +28,11 @@ class Evaluation extends CI_Controller {
      public function add_evaluation()
     {
          
-
          $config['upload_path'] = './assets/img/evaluation';
          $config['allowed_types']='jpg|jpeg|gif|png';
          $config['max_size'] = 2000;
          $config['encrypt_name'] = TRUE;
+
         $this->load->helper('form');
         
         $this->load->library('upload', $config);
@@ -43,6 +43,9 @@ class Evaluation extends CI_Controller {
         $this->upload->do_upload('pic');
         $image_data = $this->upload->data();  
         $i=$image_data['file_name'];
+
+        if($this->EvaluationModel->saveEval($w,$i)){
+
         //if($this->EvaluationModel->saveEval($w,$i)){
             $all=Orm_Evaluation::get_all();
              $inserted=new Orm_Evaluation;
@@ -71,7 +74,6 @@ class Evaluation extends CI_Controller {
                    }  
                 }
                 if ($b){
-                   
             $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم إضافة التقييم بنجاح</div>");
             redirect(base_url().'Evaluation/index');
         }else{
@@ -86,6 +88,7 @@ class Evaluation extends CI_Controller {
         $this->load->view('management_book/success',$data);
         $this->load->view('management_book/templates/footer');
     }
+
 
      /*  public function show_evaluation()
     {
@@ -109,6 +112,9 @@ class Evaluation extends CI_Controller {
         $this->load->view('management_book/templates/navbar');
         $this->load->view('show_evaluation',$data);
         $this->load->view('management_book/templates/footer');
+
+    }
+}
     }*/
 	public function show_evaluation()
 	{

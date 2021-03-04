@@ -3,12 +3,23 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/mentorshipTeam.css">
+<style type="text/css">
+  tr { 
+  border-bottom: 1px solid #ccc;
+}
+td{
+  vertical-align: middle;
+}
+.fa{
+  font-size: 70%;
+}
+</style>
 <body>
 <div class="container-fluid px-1 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
         <div class="col-xl-10 col-lg-10 col-md-10">
             <div class="card b-0" style="overflow-x: auto;">
-              <form class="s-form" enctype="multipart/form-data" method="post" action="<?php echo base_url();?>/MentorshipTeam2/searchRequest">
+              <form class="s-form" enctype="multipart/form-data" method="post" action="<?php echo base_url();?>/DistributionArchive/searchRequest">
                 <div class="row">
                   <div class="col-md-7">
                     <input class="form-control" name="s-text" id="s-text" type="text" placeholder="ابحث عن طريق اسم القائد/السفير أو التاريخ">
@@ -35,17 +46,21 @@
                 </thead>
                 <tbody>
                   <?php
-                  if($requests->num_rows()>0){
-                    foreach ($requests->result() as $request) {
-                      $id = $request->Rid;
-                      $ambassadors = $this->GeneralModel->get_data($request->Rid, 'request_id', 'ambassador', 'name, gender, profile_link, is_joined');
-                      $newMembers = $ambassadors->num_rows();
+                  //check if there are results
+                  if(isset($requests)){
+                    //display the results
+                    foreach ($requests as $request) {
+                      $id = $request->get_Rid();
+                      //get the ambassadors of a request
+                      $ambassadors = Orm_Ambassador::get_all(array('request_id'=>$id));
+                      //get the number of distributed ambassadors
+                      $newMembers = Orm_Ambassador::get_count(array('request_id'=>$id));
 
                   ?>
                   <tr class="list-item">
-                    <td rowspan="<?php echo $newMembers;?>" id="lblMSb" ><a class="link" href="<?php echo $request->team_link;?>"><i class="fa fa-external-link"></i><?php echo $request->team_name; ?></a></td>
-                    <td rowspan="<?php echo $newMembers;?>" ><a class="link" href="<?php echo $request->leader_link;?>"><i class="fa fa-external-link"></i><?php echo $request->leader_name; ?></a></td>
-                    <td rowspan="<?php echo $newMembers;?>" ><?php
+                    <td id="lblMSb" ><a class="link" href="<?php echo $request->team_link;?>"><i class="fa fa-external-link"></i><?php echo $request->team_name; ?></a></td>
+                    <td ><a class="link" href="<?php echo $request->leader_link;?>"><i class="fa fa-external-link"></i><?php echo $request->leader_name; ?></a></td>
+                    <td ><?php
                       if($request->leader_gender == 'Female' || $request->leader_gender == 'female'){
                         echo "أنثى";
                       }else{
@@ -55,13 +70,14 @@
 
                     <td>
                       <?php
-                        foreach ($ambassadors->result() as $ambassador) {
+                      //display ambassadors
+                        foreach ($ambassadors as $ambassador) {
                       ?>
                         <p style="text-align:center;">
-                          <a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link"></i><?php echo $ambassador->name;?></a>
+                          <a class="link" href="<?php echo $ambassador->get_profile_link();?>"><i class="fa fa-external-link"></i><?php echo $ambassador->get_name();?></a>
                           <i class="fa fa-minus"></i>
                           <?php
-                        if($ambassador->gender == 'Female' || $ambassador->gender == 'female'){
+                        if($ambassador->get_gender() == 'Female' || $ambassador->get_gender() == 'female'){
                           echo  "أنثى";
                         }else{
                           echo  "ذكر";
@@ -70,7 +86,7 @@
                         ?>
                       <i class="fa fa-minus"></i>
                       <?php
-                        if($ambassador->is_joined){
+                        if($ambassador->get_is_joined()){
                           echo "انضم";
                         }else{
                           echo "لم ينضم";
@@ -79,8 +95,8 @@
                     </p>
                       <?php } ?>
                     </td>
-                    <td rowspan="<?php echo $newMembers;?>"><?php echo $newMembers;?></td>
-                    <td rowspan="<?php echo $newMembers;?>"><?php echo date('Y-m-d', strtotime($request->date));?></td>
+                    <td><?php echo $newMembers;?></td>
+                    <td><?php echo date('Y-m-d', strtotime($request->get_date()));?></td>
                   </tr>
                     <?php
                       }
@@ -88,7 +104,7 @@
                       ?>
                       <tr>
                         <td colspan="6" style="text-align: center;vertical-align: middle;">
-                          لا يوجد نتائج
+                          <?php echo $empty_data;?>
                         </td>
                       </tr>
                       <?php

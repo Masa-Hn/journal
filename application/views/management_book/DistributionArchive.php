@@ -35,10 +35,16 @@
                 </thead>
                 <tbody>
                   <?php
-                    foreach ($requests->result() as $request) {
-                      $id = $request->Rid;
-                      $ambassadors = $this->GeneralModel->get_data($request->Rid, 'request_id', 'ambassador', 'name, gender,profile_link, is_joined');
-                      $newMembers = $ambassadors->num_rows();
+                  //display the done and sent-to-leader requests
+                    foreach ($requests as $request) {
+                     //get the request id
+                      $id = $request->get_Rid();
+                      //orm object from orm_ambassador class
+                      $amb_orm = new Orm_Ambassador();
+                      //get the ambassadors of a specific request
+                      $ambassadors = $amb_orm::get_all(array('request_id' => $id));
+                      //get the number of distributed ambassadors to a specific request  
+                      $newMembers = $amb_orm::get_count(array('request_id' => $id));
 
                   ?>
                   <tr class="list-item">
@@ -58,17 +64,18 @@
                     ?></td>
 
                     <td><?php echo $newMembers;?></td>
-                    <td><?php echo date('Y-m-d', strtotime($request->date));?></td>
+                    <td><?php echo date('Y-m-d', strtotime($request->get_date()));?></td>
                   </tr>
                     <?php
-                      foreach ($ambassadors->result() as $ambassador) {
+                    //display the ambassadors of a request
+                      foreach ($ambassadors as $ambassador) {
                     ?>
                   <tr id="<?php echo 'MS01b'.$id;?>" class="hidden">
                     <td></td>
                     <td></td>
-                     <td class="<?php echo 'MS02b'.$id;?>"><a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $ambassador->name;?></a></td>
+                     <td class="<?php echo 'MS02b'.$id;?>"><a class="link" href="<?php echo $ambassador->get_profile_link();?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $ambassador->get_name();?></a></td>
                     <td><?php
-                    if($ambassador->gender == 'Female' || $ambassador->gender == 'female'){
+                    if($ambassador->get_gender() == 'Female' || $ambassador->get_gender() == 'female'){
                       echo "أنثى";
                     }else{
                       echo "ذكر";
@@ -76,7 +83,7 @@
                     ?></td>
                     <td>
                       <?php
-                        if($ambassador->is_joined){
+                        if($ambassador->get_is_joined()){
                           ?>
                           <i class="fa fa-check-circle"></i>
                           <?php

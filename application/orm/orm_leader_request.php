@@ -15,7 +15,7 @@ class Orm_Leader_Request extends Orm {
     protected $Rid = 0;
     protected $members_num = 0;
     protected $gender = '';
-    protected $date = CURRENT_TIMESTAMP;
+    protected $date = "CURRENT_TIMESTAMP";
     protected $leader_id = 0;
     protected $is_done = 0;
     protected $send_to_leader = 0;
@@ -83,10 +83,9 @@ class Orm_Leader_Request extends Orm {
     *
     * @return Orm_Leader_Request[] | int
     */
-    public static function get_all($filters = array(), $page = 0, $per_page = 0, $orders = array()) {
-        return self::get_model()->get_all($filters, $page, $per_page, $orders, Orm::FETCH_OBJECTS);
+    public static function get_all($filters = array(), $page = 0, $per_page = 0, $orders = array(), $select = array(), $join_leader_info = false, $join_ambassador = false) {
+        return self::get_model()->get_all($filters, $page, $per_page, $orders, Orm::FETCH_OBJECTS, $select, $join_leader_info, $join_ambassador);
     }
-    
     /**
     * get one row as Object
     *
@@ -94,9 +93,9 @@ class Orm_Leader_Request extends Orm {
     * @param array $orders
     * @return Orm_Leader_Request
     */
-    public static function get_one($filters = array(), $orders = array()) {
+    public static function get_one($filters = array(),$select = array(), $orders = array()) {
         
-        $result = self::get_model()->get_all($filters, 1, 1, $orders, Orm::FETCH_OBJECT);
+        $result = self::get_model()->get_all($filters, 1, 1, $orders, Orm::FETCH_OBJECT, $select, false, false);
         
         if ($result && $result->get_Rid()) {
             return $result;
@@ -111,8 +110,8 @@ class Orm_Leader_Request extends Orm {
     * @param array $filters
     * @return int
     */
-    public static function get_count($filters = array()) {
-        return self::get_model()->get_all($filters, 0, 0, array(), Orm::FETCH_COUNT);
+    public static function get_count($filters = array(), $select = array(), $join_leader_info = false, $join_ambassador = false) {
+        return self::get_model()->get_all($filters, 0, 0, array(), Orm::FETCH_COUNT, $select, $join_leader_info, $join_ambassador);
     }
     
     public function to_array() {
