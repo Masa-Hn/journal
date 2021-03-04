@@ -64,7 +64,7 @@ class Management_book extends CI_Controller {
         $data['title'] = 'Show Activites';
         $activites=Orm_Activities::get_all();
         //$this->ActivitiesModel->getActivities();
-        $data['num_rows']=Orm_Activities::get_count($activites);
+        $data['num_rows']=Orm_Activities::get_count();
         //count($activites);
         $data['activites']=$activites;
         $this->load->view('management_book/templates/header', $data);
@@ -81,8 +81,8 @@ class Management_book extends CI_Controller {
        if(isset($_GET['id'])){
             $data['certificates']=Orm_Certificate::get_all(array('activity_id' => $_GET['id']));
             //$this->CertificateModel->getAllCertificates($_GET['id']);
-            if (Orm_Certificate::get_count($data['certificates']) != 0 ) {
-            $data['activity']=Orm_Activities::get_all(array('id' => $_GET['id']));
+             $data['activity']=Orm_Activities::get_all(array('id' => $_GET['id']));
+            if (!empty($data['certificates'])) {
             //$this->ActivitiesModel->getActivityById($_GET['id']);
             $data['exist']=true;
             }//if

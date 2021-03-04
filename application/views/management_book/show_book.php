@@ -54,7 +54,7 @@
                   <div id="content" >
 
 <?php 
- $num=Orm_Books::get_count($books);
+ $num=Orm_Books::get_count();
  $book=$books;
 if ($num % 26!=0)
 $slides_num=((int) ($num/26)+1);
