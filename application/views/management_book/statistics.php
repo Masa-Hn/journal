@@ -47,15 +47,10 @@
 		margin-bottom: 2%;
 		text-align: center;
 	}
-
-	.fa-code,
-	.fa-user,
 	.fa-users,
 	.fa-external-link,
 	.fa-sort-numeric-asc,
 	.fa-external-link,
-	.fa-code:hover,
-	.fa-user:hover,
 	.fa-users:hover,
 	.fa-sort-numeric-asc:hover,
 	.fa-external-link:hover {
@@ -78,10 +73,45 @@
 	}
 </style>
 <body>
+<!--<button id="team_link">Link</button>-->
 	<?php
-	
-	//$this->StatisticsModel->incrementVisitors( 1 );
+	//function to get the week of a date starting from sunday
+	function get_week($date)
+ {
+	 $week_days = array();
+	 $date_format = date('y-m-d', strtotime($date));
+	 $ts = strtotime($date_format);
+	 // calculate the number of days since Sunday
+	 $dow = date('w', $ts);
+	 $offset = $dow;
+	 if ($offset < 0) {
+	 	$offset = 6;
+	 }
+	 // calculate timestamp for the Sunday
+	 $ts = $ts - $offset * 86400;
+	 // loop from Sunday till Saturday
+	 for ($i = 0; $i < 7; $i++, $ts += 86400) {
+			 $week_days[$i] =  date("Y-m-d", $ts);
+	 }
+	 return $week_days;
+ }
 
+//function to check if 2 dates are in the same month of a same year
+ function get_month($first_date, $second_date){
+	 $flag = false;
+	 $first_month = date('m', strtotime($first_date));
+	 $first_year = date('Y', strtotime($first_date));
+
+	 $second_month = date('m', strtotime($second_date));
+	 $second_year = date('Y', strtotime($second_date));
+
+	 if($first_year == $second_year && $first_month == $second_month){
+		 $flag = true;
+	 }
+	 return $flag;
+ }
+
+ //transform the day into arabic meaning
 	$find = array( "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri" );
 	$replace = array( "السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة" );
 	$ar_day_format = date( 'D' );
@@ -107,31 +137,40 @@
 					<div class="card">
 						<h2 class="card-title"> عرض إحصائيات الأزرار والأعضاء المطلوبين</h2>
 						<?php
-						/*$code_clicks = $this->StatisticsModel->get_data( 'ambassador', 'code_button', 'code_button = 1' )->num_rows();*/
-						/*$leader_link_clicks = $this->StatisticsModel->get_data( 'buttons_statistics', 'leader_link_button', 'leader_link_button = 1' )->num_rows();*/
-						$team_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'team_link_button', 'team_link_button = 1' )->num_rows();
+						//variables
+						$members = 0;
+						$male_amb = 0;
 
-						//get new members
-						$members = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'is_done = 0' )->row();
-						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NOT NULL' )->num_rows();
-						$total_req =  $this->StatisticsModel->get_data( 'leader_request', 'Rid', 'is_done = 0 or is_done = 1' )->num_rows();
+						//ambassadors counting
+						$total_amb = Orm_Ambassador::get_count();
+						//team link button clicks counting
+						$team_link_clicks = Orm_Ambassador::get_count(array("team_link_button"=>1));
+						//distributed members counting
+						$filters['conditions'] = "request_id IS NOT NULL";
+						$des = Orm_Ambassador::get_count($filters);
+						//none-distributed ambassadors counting
+						$filters['conditions'] = "request_id IS NULL";
+						$not_des_amb = Orm_Ambassador::get_count($filters);
+						//total requests counting
+						$total_req = Orm_Leader_Request::get_count();
+						//done requests counting
+						$is_done = Orm_Leader_Request::get_count(array("is_done"=>1));
+						//none-done requests counting
+						$not_done = Orm_Leader_Request::get_count(array("is_done"=>0));
 
-						$is_done = $this->StatisticsModel->get_data( 'leader_request', 'Rid', 'is_done = 1' )->num_rows();
-						$not_done = $this->StatisticsModel->get_data( 'leader_request', 'Rid', 'is_done = 0' )->num_rows();
-
-						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NOT NULL or request_id IS NULL' )->num_rows();
-
-						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', 'request_id IS NULL' )->num_rows();
-						$male_amb = $this->StatisticsModel->get_sum_data( 'leader_request', 'members_num', 'gender = "male" AND is_done=0' )->row();
-
+						$req_qry = Orm_Leader_Request::get_all();
+						foreach ($req_qry as $key) {
+							//new members counting
+							if($key->get_is_done() == 0){
+									$members += $key->get_members_num();
+							}
+							//male ambassadors counting
+							if(($key->get_gender() == 'Male' || $key->get_gender() == 'male') && ($key->get_is_done() == 0)){
+									$male_amb += $key->get_members_num();
+							}
+						}
 						?>
 						<ul class="list-group">
-							<!--<li class="list-group-item"><i class="fa fa-code"></i>عدد مرات الضغط على زر الكود:
-								<b><?php echo $code_clicks; ?></b>
-							</li>-->
-							<!-- <li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
-								<b><?php echo $leader_link_clicks; ?></b>
-							</li>-->
 							<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
 								<b><?php echo $team_link_clicks; ?></b>
 							</li>
@@ -145,12 +184,12 @@
 								<b><?php echo $not_des_amb; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء المطلوبين من الذكور:
-								<b><?php echo $male_amb->members_num; ?></b>
+								<b><?php echo $male_amb; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد المتاح لاستقبال أعضاء جدد(تقريبي):
-								<b><?php echo $members->members_num; ?></b>
+								<b><?php echo $members; ?></b>
 							</li>
-							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد الكلي للقادة الذين طلبوا أعضاء:
+							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد الكلي للطلبات:
 								<b><?php echo $total_req; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد القادة الموزع لهم أعضاء:
@@ -176,33 +215,32 @@
 					<div class="card">
 						<h2 class="card-title">  إحصائيات الأزرار اليومية </h2>
 						<?php
-						/*$code_clicks = $this->StatisticsModel->get_data( 'ambassador', 'code_button', 'code_button = 1 AND  DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();*/
-						/*$leader_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'leader_link_button', 'leader_link_button = 1 AND  DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();*/
-						$team_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'team_link_button', 'team_link_button = 1 AND  DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE())' )->num_rows();
-						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))' )->num_rows();
-						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))' )->num_rows();
-						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))' )->num_rows();
+						//team link clicks of today counting
+						$filters['conditions'] = 'team_link_button = 1 AND  DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE())';
+						$team_link_clicks_daily = Orm_Ambassador::get_count($filters);
+						//total ambassadors of today counting
+						$filters['conditions'] = 'DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE())';
+						$total_amb_daily = Orm_Ambassador::get_count($filters);
+						//total distributed ambassadors of today
+						$filters['conditions'] = '(request_id IS NOT NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))';
+						$des_daily =  Orm_Ambassador::get_count($filters);
+						//total none distributed ambassadors of today
+						$filters['conditions'] = '(request_id IS NULL) AND (DATE_FORMAT(created_at, "%y-%m-%d") = DATE(CURDATE()))';
+						$not_des_amb_daily =  Orm_Ambassador::get_count($filters);
 
 						?>
 						<ul class="list-group">
-
-							<!--<li class="list-group-item"><i class="fa fa-code"></i>عدد مرات الضغط على زر الكود:
-								<b><?php echo $code_clicks; ?></b>
-							</li>-->
-							<!-- <li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
-								<b><?php echo $leader_link_clicks; ?></b>
-							</li> -->
 							<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
-								<b><?php echo $team_link_clicks; ?></b>
+								<b><?php echo $team_link_clicks_daily; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد الكلي للسفراء المسجلين:
-								<b><?php echo $total_amb; ?></b>
+								<b><?php echo $total_amb_daily; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء الموزعين:
-								<b><?php echo $des; ?></b>
+								<b><?php echo $des_daily; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء غير الموزعين:
-								<b><?php echo $not_des_amb; ?></b>
+								<b><?php echo $not_des_amb_daily; ?></b>
 							</li>
 						</ul>
 					</div>
@@ -221,30 +259,50 @@
 					<div class="card ">
 						<h2 class="card-title"> إحصائيات الأزرار الأسبوعية</h2>
 						<?php
-						/*$code_clicks = $this->StatisticsModel->get_data( 'ambassador', 'code_button', 'code_button = 1 AND YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();*/
-						/*$leader_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'leader_link_button', 'leader_link_button = 1 AND YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();*/
-						$team_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'team_link_button', 'team_link_button = 1 AND YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)' )->num_rows();
-						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
-						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
-						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))' )->num_rows();
+						//team link clicks of a week counting
+						$filters['conditions'] = 'team_link_button = 1 AND YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)';
+						$team_link_clicks_weekly = Orm_Ambassador::get_count($filters);
+						//total ambassadors of week counting
+						$filters['conditions'] = 'YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)';
+						$total_amb_weekly = Orm_Ambassador::get_count($filters);
+						//total distributed ambassadors of week
+						$filters['conditions'] = '(request_id IS NOT NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))';
+						$des_weekly = Orm_Ambassador::get_count($filters);
+						//total none distributed ambassadors of week
+						$filters['conditions'] = '(request_id IS NULL) AND (YEARWEEK(DATE_FORMAT(created_at, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6))';
+						$not_des_amb_weekly = Orm_Ambassador::get_count($filters);
+
+						/*foreach ($amb_qry as $row){
+							//team link clicks of a week counting
+							if($row->get_team_link_button() == 1 && get_week($row->get_created_at()) == get_week(date('y-m-d'))){
+								$team_link_clicks_weekly++;
+							}
+							//total ambassadors of week counting
+							if(get_week($row->get_created_at()) == get_week(date('y-m-d'))){
+								$total_amb_weekly++;
+							}
+							//total distributed ambassadors of week
+							if(get_week($row->get_created_at()) == get_week(date('y-m-d')) && !is_null($row->get_request_id())){
+								$des_weekly++;
+							}
+							//total none distributed ambassadors of week
+							if(get_week($row->get_created_at()) == get_week(date('y-m-d')) && is_null($row->get_request_id())){
+								$not_des_amb_weekly++;
+							}
+						}*/
 						?>
 						<ul class="list-group">
-
-							<!--<li class="list-group-item"><i class="fa fa-code"></i>عدد مرات الضغط على زر الكود:
-								<b><?php echo $code_clicks; ?></b> </li>-->
-							<!-- <li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
-								<b><?php echo $leader_link_clicks; ?></b> </li> -->
 							<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
-								<b><?php echo $team_link_clicks; ?></b>
+								<b><?php echo $team_link_clicks_weekly; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد الكلي للسفراء المسجلين:
-								<b><?php echo $total_amb; ?></b>
+								<b><?php echo $total_amb_weekly; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء الموزعين:
-								<b><?php echo $des; ?></b>
+								<b><?php echo $des_weekly; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء غير الموزعين:
-								<b><?php echo $not_des_amb; ?></b>
+								<b><?php echo $not_des_amb_weekly; ?></b>
 							</li>
 						</ul>
 					</div>
@@ -263,32 +321,31 @@
 					<div class="card ">
 						<h2 class="card-title">إحصائيات الأزرار الشهرية</h2>
 						<?php
-						/*$code_clicks = $this->StatisticsModel->get_data( 'ambassador', 'code_button', 'code_button = 1 AND YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();*/
-						/*$leader_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'leader_link_button', 'leader_link_button = 1 AND YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();*/
-						$team_link_clicks = $this->StatisticsModel->get_data( 'ambassador', 'team_link_button', 'team_link_button = 1 AND YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE())' )->num_rows();
-						$total_amb = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL or request_id IS NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))' )->num_rows();
-						$des = $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NOT NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))' )->num_rows();
-						$not_des_amb =  $this->StatisticsModel->get_data( 'ambassador', 'request_id', '(request_id IS NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))' )->num_rows();
+						//team link clicks of a month counting
+						$filters['conditions'] = 'team_link_button = 1 AND YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE())';
+						$team_link_clicks_monthly = Orm_Ambassador::get_count($filters);
+						//total ambassadors of month counting
+						$filters['conditions'] = 'YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE())';
+						$total_amb_monthly = Orm_Ambassador::get_count($filters);
+						//total distributed ambassadors of month
+						$filters['conditions'] = '(request_id IS NOT NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))';
+						$des_monthly = Orm_Ambassador::get_count($filters);
+						//total none distributed ambassadors of month
+						$filters['conditions'] = '(request_id IS NULL) AND (YEAR(DATE_FORMAT(created_at, "%y-%m-%d")) = YEAR(CURDATE()) AND MONTH(DATE_FORMAT(created_at, "%y-%m-%d")) = MONTH(CURDATE()))';
+						$not_des_amb_monthly = Orm_Ambassador::get_count($filters);
 						?>
 						<ul class="list-group">
-
-							<!--<li class="list-group-item"><i class="fa fa-code"></i>عدد مرات الضغط على زر الكود:
-								<b><?php echo $code_clicks; ?></b> </li>-->
-<!--
-							<li class="list-group-item"><i class="fa fa-user"></i>عدد مرات الضغط على زر رابط القائد:
-								<b><?php echo $leader_link_clicks; ?></b> </li>
--->
 							<li class="list-group-item"><i class="fa fa-users"></i>عدد مرات الضغط على زر رابط الفريق:
-								<b><?php echo $team_link_clicks; ?></b>
+								<b><?php echo $team_link_clicks_monthly; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>العدد الكلي للسفراء المسجلين:
-								<b><?php echo $total_amb; ?></b>
+								<b><?php echo $total_amb_monthly; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء الموزعين:
-								<b><?php echo $des; ?></b>
+								<b><?php echo $des_monthly; ?></b>
 							</li>
 							<li class="list-group-item"><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>عدد السفراء غير الموزعين:
-								<b><?php echo $not_des_amb; ?></b>
+								<b><?php echo $not_des_amb_monthly; ?></b>
 							</li>
 						</ul>
 					</div>
@@ -309,52 +366,43 @@
 					</thead>
 					<tbody>
 						<?php
-						$ids = $this->StatisticsModel->selectPages();
+						$page_numbers = Orm_pages::get_count();
+						$page_qry = Orm_pages::get_all();
 
-						if ( $ids->num_rows() > 0 ) {
+						if ($page_numbers > 0 ) {
 
-							foreach ( $ids->result() as $id ) {
-								$page_id = $id->id;
-
-								$a_viewers = 0;
-								$a_2_viewers = 0;
-								$a_leavers = 0;
-								$a_q_2_res = "";
-								$a_q_res = "";
-
-								$query = $this->StatisticsModel->get_sum_data( 'statistics', 'visitors', 'page_id = "' . $page_id . '"' );
-								if ( $query->num_rows() > 0 ) {
-									$a_q_res = $query->row();
-									$a_viewers = $a_q_res->visitors;
-								}
-
+							foreach ($page_qry as $row ) {
+								$page_id = $row->get_id();
 								$next_page_id = $page_id + 1;
+								$sum_visitors_1  = 0;
+								$sum_visitors_2  = 0;
+								$leavers = 0;
 
-								$query2 = $this->StatisticsModel->get_sum_data( 'statistics', 'visitors', 'page_id = "' . $next_page_id . '"' );
-								if ( $query2->num_rows() > 0 ) {
-									$a_q_2_res = $query2->row();
-									$a_2_viewers = $a_q_2_res->visitors;
+								//cumulative statistics counting
+								$qry = Orm_Statistics::get_all(array('page_id' => $page_id));
+								foreach ($qry as $key) {
+									$sum_visitors_1 += $key->get_visitors();
 								}
-
-								$query3 = $ids->last_row();
-
-								if ( $a_viewers != 0 ) {
-									if ( $page_id < $query3->id ) {
-
-										$a_leavers = $a_viewers - $a_2_viewers;
+								$qry2 = Orm_Statistics::get_all(array('page_id' => $next_page_id));
+								foreach ($qry2 as $key) {
+									$sum_visitors_2 += $key->get_visitors();
+								}
+								if ( $sum_visitors_1 != 0 ) {
+									if ( $page_id < $page_numbers ) {
+										$leavers = $sum_visitors_1 - $sum_visitors_2;
 									} else
-										$a_leavers = $a_viewers;
+										$leavers = $sum_visitors_1;
 								}
 								?>
 						<tr>
 							<td>
-								<?php echo $id->title;?>
+								<?php echo $row->get_title();?>
 							</td>
 							<td class="viewers"><i class="fa fa-eye"></i>
-								<?php echo $a_viewers;?>
+								<?php echo $sum_visitors_1;?>
 							</td>
 							<td class="leavers"><i class="fa fa-sign-out"></i>
-								<?php echo $a_leavers;?>
+								<?php echo $leavers;?>
 							</td>
 						</tr>
 						<?php
@@ -383,47 +431,48 @@
 					</thead>
 					<tbody>
 						<?php
-						$ids = $this->StatisticsModel->selectPages();
+						if ($page_numbers > 0 ) {
 
-						if ( $ids->num_rows() > 0 ) {
+							foreach ($page_qry as $row ) {
+								$page_id = $row->get_id();
+								$next_page_id = $page_id + 1;
+								$sum_visitors_1_daily  = 0;
+								$sum_visitors_2_daily  = 0;
+								$leavers_daily = 0;
 
-							foreach ( $ids->result() as $id ) {
-								$page_id = $id->id;
+								//daily statistics counting
+								$filters_daily['conditions'] = "DATE_FORMAT(date, '%y-%m-%d') = DATE(CURDATE())";
+								$filters_daily['page_id'] = $page_id;
+								$qry_daily = Orm_Statistics::get_all($filters_daily);
 
-								$d_viewers = 0;
-								$d_2_viewers = 0;
-								$d_leavers = 0;
-								$d_q_2_res = "";
-								$d_q_res = "";
-								$query = $this->StatisticsModel->selectStatisticsPerDay( $page_id );
-								if ( $query->num_rows() > 0 ) {
-									$d_q_res = $query->row();
-									$d_viewers = $d_q_res->visitors;
-								}
-								$query2 = $this->StatisticsModel->selectStatisticsPerDay( $page_id + 1 );
-								if ( $query2->num_rows() > 0 ) {
-									$d_q_2_res = $query2->row();
-									$d_2_viewers = $d_q_2_res->visitors;
-								}
-								$query3 = $ids->last_row();
+								foreach ($qry_daily as $key) {
+										$sum_visitors_1_daily += $key->get_visitors();
+									}
 
-								if ( $d_viewers != 0 ) {
-									if ( $page_id < $query3->id ) {
+									$filters_daily['page_id'] = $next_page_id;
 
-										$d_leavers = $d_viewers - $d_2_viewers;
+								$qry2_daily = Orm_Statistics::get_all($filters_daily);
+
+								foreach ($qry2_daily as $key) {
+									$sum_visitors_2_daily += $key->get_visitors();
+									}
+									
+								if ( $sum_visitors_1_daily != 0 ) {
+									if ( $page_id < $page_numbers ) {
+										$leavers_daily = $sum_visitors_1_daily - $sum_visitors_2_daily;
 									} else
-										$d_leavers = $d_viewers;
+										$leavers_daily = $sum_visitors_1_daily;
 								}
 								?>
 						<tr>
 							<td>
-								<?php echo $id->title;?>
+								<?php echo $row->get_title();?>
 							</td>
 							<td class="viewers"><i class="fa fa-eye"></i>
-								<?php echo $d_viewers;?>
+								<?php echo $sum_visitors_1_daily;?>
 							</td>
 							<td class="leavers"><i class="fa fa-sign-out"></i>
-								<?php echo $d_leavers;?>
+								<?php echo $leavers_daily;?>
 							</td>
 						</tr>
 						<?php
@@ -452,47 +501,47 @@
 					</thead>
 					<tbody>
 						<?php
-						$ids = $this->StatisticsModel->selectPages();
+						if ($page_numbers > 0 ) {
 
-						if ( $ids->num_rows() > 0 ) {
+							foreach ($page_qry as $row ) {
+								$page_id = $row->get_id();
+								$next_page_id = $page_id + 1;
+								$sum_visitors_1_weekly  = 0;
+								$sum_visitors_2_weekly  = 0;
+								$leavers_weekly = 0;
 
-							foreach ( $ids->result() as $id ) {
-								$page_id = $id->id;
+								//weekly statistics counting
+								$filters_weekly['conditions'] = 'YEARWEEK(DATE_FORMAT(date, "%y-%m-%d"), 6) = YEARWEEK( CURDATE(), 6)';
+								$filters_weekly['page_id'] = $page_id;
+								$qry_weekly = Orm_Statistics::get_all($filters_weekly);
 
-								$w_viewers = 0;
-								$w_2_viewers = 0;
-								$w_leavers = 0;
-								$w_q_2_res = "";
-								$w_q_res = "";
-								$query = $this->StatisticsModel->selectStatisticsPerWeek( $page_id );
-								if ( $query->num_rows() > 0 ) {
-									$w_q_res = $query->row();
-									$w_viewers = $w_q_res->visitors;
-								}
-								$query2 = $this->StatisticsModel->selectStatisticsPerWeek( $page_id + 1 );
-								if ( $query2->num_rows() > 0 ) {
-									$w_q_2_res = $query2->row();
-									$w_2_viewers = $w_q_2_res->visitors;
-								}
-								$query3 = $ids->last_row();
+								foreach ($qry_weekly as $key) {
+										$sum_visitors_1_weekly += $key->get_visitors();
+									}
 
-								if ( $w_viewers != 0 ) {
-									if ( $page_id < $query3->id ) {
+									$filters_weekly['page_id'] = $next_page_id;
 
-										$w_leavers = $w_viewers - $w_2_viewers;
+								$qry2_weekly = Orm_Statistics::get_all($filters_weekly);
+
+								foreach ($qry2_weekly as $key) {
+									$sum_visitors_2_weekly += $key->get_visitors();
+									}
+								if ( $sum_visitors_1_weekly != 0 ) {
+									if ( $page_id < $page_numbers ) {
+										$leavers_weekly = $sum_visitors_1_weekly - $sum_visitors_2_weekly;
 									} else
-										$w_leavers = $w_viewers;
+										$leavers_weekly = $sum_visitors_1_weekly;
 								}
 								?>
 						<tr>
 							<td>
-								<?php echo $id->title;?>
+								<?php echo $row->get_title();?>
 							</td>
 							<td class="viewers"><i class="fa fa-eye"></i>
-								<?php echo $w_viewers;?>
+								<?php echo $sum_visitors_1_weekly;?>
 							</td>
 							<td class="leavers"><i class="fa fa-sign-out"></i>
-								<?php echo $w_leavers;?>
+								<?php echo $leavers_weekly;?>
 							</td>
 						</tr>
 						<?php
@@ -523,50 +572,47 @@
 					</thead>
 					<tbody>
 						<?php
-						$ids = $this->StatisticsModel->selectPages();
+						if ($page_numbers > 0 ) {
 
-						if ( $ids->num_rows() > 0 ) {
+							foreach ($page_qry as $row ) {
+								$page_id = $row->get_id();
+								$next_page_id = $page_id + 1;
+								$sum_visitors_1_monthly  = 0;
+								$sum_visitors_2_monthly  = 0;
+								$leavers_monthly = 0;
 
-							foreach ( $ids->result() as $id ) {
-								$page_id = $id->id;
+								//daily statistics counting
+								$filters_monthly['conditions'] = 'YEAR( DATE_FORMAT(date, "%y-%m-%d") ) = YEAR( CURDATE() )AND MONTH( DATE_FORMAT(date, "%y-%m-%d") ) = MONTH( CURDATE() )';
+								$filters_monthly['page_id'] = $page_id;
+								$qry_monthly = Orm_Statistics::get_all($filters_monthly);
 
-								$m_viewers = 0;
-								$m_2_viewers = 0;
-								$m_leavers = 0;
-								$m_q_2_res = "";
-								$m_q_res = "";
+								foreach ($qry_monthly as $key) {
+										$sum_visitors_1_monthly += $key->get_visitors();
+									}
 
-								$query = $this->StatisticsModel->selectStatisticsPerMonth( $page_id );
-								if ( $query->num_rows() > 0 ) {
-									$m_q_res = $query->row();
-									$m_viewers = $m_q_res->visitors;
-								}
+									$filters_monthly['page_id'] = $next_page_id;
 
-								$query2 = $this->StatisticsModel->selectStatisticsPerMonth( $page_id + 1 );
-								if ( $query2->num_rows() > 0 ) {
-									$m_q_2_res = $query2->row();
-									$m_2_viewers = $m_q_2_res->visitors;;
-								}
+								$qry2_monthly = Orm_Statistics::get_all($filters_monthly);
 
-								$query3 = $ids->last_row();
-
-								if ( $m_viewers != 0 ) {
-									if ( $page_id < $query3->id ) {
-
-										$m_leavers = $m_viewers - $m_2_viewers;
+								foreach ($qry2_monthly as $key) {
+									$sum_visitors_2_monthly += $key->get_visitors();
+									}
+								if ( $sum_visitors_1_monthly != 0 ) {
+									if ( $page_id < $page_numbers ) {
+										$leavers_monthly = $sum_visitors_1_monthly - $sum_visitors_2_monthly;
 									} else
-										$m_leavers = $m_viewers;
+										$leavers_monthly = $sum_visitors_1_monthly;
 								}
 								?>
 						<tr>
 							<td>
-								<?php echo $id->title;?>
+								<?php echo $row->get_title();?>
 							</td>
 							<td class="viewers"><i class="fa fa-eye"></i>
-								<?php echo $m_viewers;?>
+								<?php echo $sum_visitors_1_monthly;?>
 							</td>
 							<td class="leavers"><i class="fa fa-sign-out"></i>
-								<?php echo $m_leavers;?>
+								<?php echo $leavers_monthly;?>
 							</td>
 						</tr>
 						<?php
@@ -583,7 +629,27 @@
 					</tbody>
 				</table>
 			</div>
-
 		</div>
 	</div>
 </body>
+<!--<script type="text/javascript">
+	$(document).ready(function (){
+		var base_url = "<?php /*echo base_url();*/?>";
+		$("#team_link").click(function (){
+			$.ajax({
+				type: "POST",
+				url: base_url + "signUp/team_link_button",
+				data:{
+					id:41715
+				},
+				success: function(data){
+					console.log(data);
+				},
+				error: function(error) {
+					//window.location.replace(document.getElementById('team_link').value, "_blank");
+					console.log( error );
+				}
+			});
+		});
+	});
+</script>-->

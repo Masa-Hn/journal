@@ -19,14 +19,26 @@ class Leader_Request_Model extends CI_Model {
     *
     * @return Orm_Leader_Request | Orm_Leader_Request[] | array | int
     */
-    public function get_all($filters = array(), $page = 0, $per_page = 10, $orders = array(), $fetch_as = Orm::FETCH_OBJECTS) {
+    public function get_all($filters = array(), $page = 0, $per_page = 10, $orders = array(), $fetch_as = Orm::FETCH_OBJECTS, $select = array(), $join_leader_info = false, $join_ambassador = false) {
         
         $page = (int) $page;
         $per_page = (int) $per_page;
         
-        $this->db->select('lr.*');
+        if($select){
+            $this->db->select(implode(',', $select));
+        }else{
+          $this->db->select('*');  
+        }
+        
         $this->db->distinct();
         $this->db->from(Orm_Leader_Request::get_table_name() . ' AS lr');
+
+        if($join_leader_info){
+          $this->db->join(Orm_Leader_Info::get_table_name() . ' AS li' , 'lr.leader_id = li.id');   
+        }
+       if($join_ambassador){
+          $this->db->join(Orm_Ambassador::get_table_name() . ' AS a' , 'a.request_id = lr.Rid');   
+        }
         
         if (isset($filters['Rid'])) {
             $this->db->where('lr.Rid', $filters['Rid']);
@@ -64,7 +76,10 @@ class Leader_Request_Model extends CI_Model {
         if (isset($filters['counter'])) {
             $this->db->where('lr.counter', $filters['counter']);
         }
-        
+        if (isset($filters['conditions'])) {
+            $where = $filters['conditions'];
+            $this->db->where($where);
+        }
         if ($orders) {
             $this->db->order_by(implode(',', $orders));
         }
@@ -130,6 +145,5 @@ class Leader_Request_Model extends CI_Model {
         }
         return false;
     }
-    
 }
 

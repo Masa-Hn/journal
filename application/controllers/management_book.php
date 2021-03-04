@@ -37,8 +37,9 @@ class Management_book extends CI_Controller {
 
        if(isset($_POST['delete'])){
             $id=$this->input->post('id');
-           $this->management->delete_article($id);
- $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف المقال بنجاح</div>");
+            Orm_Article::get_instance($id)->delete();
+
+            $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف المقال بنجاح</div>");
             redirect(base_url().'Management_book/show_article');
 
                     }

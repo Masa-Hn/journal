@@ -4,7 +4,10 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/pagination.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/css/mentorshipTeam.css">
 <style>
-
+	tr, td{
+		margin: 0;
+		padding: 0;
+	}
 	.fa{
 		margin: 0;
 		padding: 0;
@@ -31,27 +34,33 @@
               <table id="dataTable" class="table cell list-wrapper" dir="rtl">
                 <thead>
                   <tr>
-                    <th style="text-align: center;">السفير</th>
-                    <th style="text-align: center;">الجنس</th>
-                    <th style="text-align: center;">رابط الصفحة</th>
-                    <th style="text-align: center;">تأكيد الانضمام</th>
+                    <th style="text-align: center; vertical-align: middle;">السفير</th>
+                    <th style="text-align: center;vertical-align: middle;">الجنس</th>
+                    <th style="text-align: center;vertical-align: middle;">رابط الصفحة/الإيميل</th>
+                    <th style="text-align: center;vertical-align: middle;">تأكيد الانضمام</th>
+                    <th style="text-align: center;vertical-align: middle;">تاريخ الانضمام</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                    if($ambassadors->num_rows() > 0)
+                  //check if there are ambassadors
+                    if($num_rows > 0)
                     {
-                      foreach ($ambassadors->result() as $ambassador) {
-                        $id = $ambassador->id;
+                      //display ambassadors
+                      foreach ($ambassadors as $ambassador) {
+                        $id = $ambassador->get_id();
 
                         ?>
                   <tr class="list-item">
-                    <td id="lblMSb" ><a class="link" href="<?php echo $ambassador->profile_link;?>"><i class="fa fa-external-link" aria-hidden="true"></i><?php echo $ambassador->name; ?></a></td>
-                    <td><?php echo ($ambassador->gender == 'Male' || $ambassador->gender == 'male')? 'ذكر':'أنثى';?></td>
-                    <td>
-                      <a class="link" href="<?php echo $ambassador->profile_link;?>" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
+                    <td id="lblMSb" style="vertical-align: middle"><a class="link" href="<?php echo $ambassador->get_profile_link();?>"><i class="fa fa-external-link" aria-hidden="true"><?php echo $ambassador->get_name(); ?></i></a></td>
+                    <td style="vertical-align: middle"><?php echo ($ambassador->get_gender() == 'Male' || $ambassador->get_gender() == 'male')? 'ذكر':'أنثى';?></td>
+                    <td style="vertical-align: middle">
+                      <a class="link" href="<?php echo $ambassador->get_profile_link();?>" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a>
                     </td>
-                    <td style="text-align:center;"><input type="checkbox" class="confirmbtn" name="confirm" <?php if ($ambassador->is_joined == 1) echo "checked='checked'"; ?>  id="<?php echo $id;?>" onchange="cTrig('<?php echo $id;?>');"></td>
+                    <td style="text-align:center;"><input style="margin:0;vertical-align: middle" type="checkbox" class="confirmbtn" name="confirm" <?php if ($ambassador->get_is_joined() == 1) echo "checked='checked'"; ?>  id="<?php echo $id;?>" onchange="cTrig('<?php echo $id;?>');"></td>
+                    <td>
+                      <?php echo date('Y-m-d', strtotime($ambassador->get_created_at()));?>
+                    </td>
                   </tr>
                   <?php
                 }

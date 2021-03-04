@@ -16,7 +16,7 @@ class Orm_Article extends Orm {
     protected $title = '';
     protected $article = '';
     protected $writer = '';
-    protected $date = CURRENT_TIMESTAMP;
+    protected $date = "CURRENT_TIMESTAMP";
     protected $pic = '';
     
     /**
