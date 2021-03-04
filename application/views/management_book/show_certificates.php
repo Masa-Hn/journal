@@ -8,7 +8,7 @@
                 <h3 class="heading" style="color:#008080;" >عرض الشهادات</h3>
                 <fieldset class="show">
                     <div class="form-card">
-                        <h5 class="sub-heading"><?php echo $activity[0]->name . ' - ' . $activity[0]->copy ?></h5>
+                        <h5 class="sub-heading"><?php echo $activity[0]->get_name() . ' - ' . $activity[0]->get_copy() ?></h5>
                         <ul class="row px-1 radio-group">
                             <?php
                                 
@@ -16,8 +16,8 @@
                                 foreach ($certificates as $certificate) {
                                     echo '
                                         <li class="card-block text-center radio " >
-                                            <img style="width:100%" src="'.base_url().'assets/img/certificate/'.$certificate->pic.'" id="'.$certificate->id.'" onClick="show(this.id)">
-                                             <input type="hidden" name="img_id" id="img_id" value="'.$certificate->id.'">
+                                            <img style="width:100%" src="'.base_url().'assets/img/certificate/'.$certificate->get_pic().'" id="'.$certificate->get_id().'" onClick="show(this.id)">
+                                             <input type="hidden" name="img_id" id="img_id" value="'.$certificate->get_id().'">
 
                                             <h5 style="margin-top:10%; text-align:center" class="sub-desc"  onclick="deleteAlert()">حذف</h5>
                                         </li>

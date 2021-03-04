@@ -14,14 +14,15 @@
             <div class="row justify-content-center mb-4">
               <div class="col-lg-8 col-sm-12 text-center">
                 <h1 class="" data-aos="fade-up" dir="rtl">
-                  8 دقائق في اليوم تجعلك ضمن الـ 15% من الأكثر قراءة في العالم
+                  لأن التعليم المدرسي/الجامعي ليس كافيًا لصناعة إنسان مختلف، نقدم لك أفضل تعليم عبر القراءة المنهجية التي تعطيك أفضل نسخة من نفسك خلال أشهر.
+
                 </h1>
-                <h5 data-aos="fade-up" data-aos-delay="100">
-                  حقق هذا بانضمامك لمشروع صناعة القراء الأكبر في الوطن العربي
+                <h5 data-aos="fade-up" data-aos-delay="100" style="color: darkred">
+                  لن تدفع أي أموال مقابل خدماتنا، نفعل ذلك مقابل صناعة مجتمع أفضل لنا جميعا
                 </h5>
                 <br>
                 <span class="bg-primary text-white rounded btn" data-aos="fade-up" style="font-size: 2rem" onclick="next('reg_steps')">
-                  انضم الأن مجانًا
+                    انضم الآن مجانًا
                 </span>
 
               </div>
@@ -64,7 +65,7 @@
         </div>
           <div class="col-12 text-center mt-4">
             <a href="javascript:next('reg_steps')" class="next_btn btn btn-primary rounded py-2 px-4 text-white">
-              ابدأ الأن 
+               ابدأ الآن 
             </a>
           </div>
         </div>

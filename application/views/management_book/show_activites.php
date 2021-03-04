@@ -27,12 +27,12 @@
                       </script>'
                       .$this->session->flashdata('msg').  
                       '<div class="numbertext" style="color: black">'.$i .'/'.$n .' </div>
-                        <h4 class="heading" style="text-align:right;"> '. $activity->name .'</h4>
-                        <p> نسخة '. $activity->copy .'</p>
+                        <h4 class="heading" style="text-align:right;"> '. $activity->get_name() .'</h4>
+                        <p> نسخة '. $activity->get_copy() .'</p>
                         <div style="padding-bottom: 5em;padding-top: 5em;">   
-                          <input type="number" name="id" id="id" value="'.$activity->id .'" style="display: none;"   >  
-                          <button id="'.$activity->id .'"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A; margin-right:23px;" onclick="deleteAlert(this.id)" >حذف  </button>
-                          <button id="'.$activity->id .'" name="more" class="mybutton more" style="width: 150px;background-color: #A52A2A;"  onclick="more(this.id)">المزيد </button>
+                          <input type="number" name="id" id="id" value="'.$activity->get_id() .'" style="display: none;"   >  
+                          <button id="'.$activity->get_id() .'"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A; margin-right:23px;" onclick="deleteAlert(this.id)" >حذف  </button>
+                          <button id="'.$activity->get_id() .'" name="more" class="mybutton more" style="width: 150px;background-color: #A52A2A;"  onclick="more(this.id)">المزيد </button>
                           
                         </div>
                       </div>';

@@ -26,7 +26,7 @@ class Orm_Books extends Orm {
     protected $section = '';
     protected $type = '';
     protected $uploadname = '';
-    protected $date = CURRENT_TIMESTAMP;
+    protected $date = "CURRENT_TIMESTAMP";
     
     /**
     * @return Books_Model

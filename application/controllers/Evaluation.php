@@ -46,6 +46,34 @@ class Evaluation extends CI_Controller {
 
         if($this->EvaluationModel->saveEval($w,$i)){
 
+        //if($this->EvaluationModel->saveEval($w,$i)){
+            $all=Orm_Evaluation::get_all();
+             $inserted=new Orm_Evaluation;
+             $b;
+            if (Orm_Evaluation::get_count($all)<4)
+                {
+                    $inserted=new Orm_Evaluation;
+                    $inserted->set_title($w);
+                    $inserted->set_pic($i);
+                    $b=$inserted->save();
+                }
+                else
+                {
+                    $inserted=new Orm_Evaluation;
+                    $inserted->set_title($w);
+                    $inserted->set_pic($i);
+                    $b=$inserted->save();
+                  $last4=Orm_Evaluation::get_all(array('limit'=>4),0,0,array('orders'=>"id DESC"));
+                   $all_to_delete = array_udiff($all, $last4,
+                      function ($obj_a, $obj_b) {
+                        return strcmp($obj_a->get_id(), $obj_b->get_id());
+                      }
+                    );
+                 foreach ($all_to_delete as $d) {
+                      $d->delete();
+                   }  
+                }
+                if ($b){
             $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم إضافة التقييم بنجاح</div>");
             redirect(base_url().'Evaluation/index');
         }else{
@@ -60,15 +88,17 @@ class Evaluation extends CI_Controller {
         $this->load->view('management_book/success',$data);
         $this->load->view('management_book/templates/footer');
     }
-<<<<<<< Updated upstream
 
-        public function show_evaluation()
+
+     /*  public function show_evaluation()
     {
                 $this->load->helper('form');
 
        if(isset($_POST['delete'])){
             $id=$this->input->post('id');
-           $this->EvaluationModel->delete_evaluation($id);
+           $deleted=Orm_Evaluation::get_instance($id);
+           $deleted->delete();
+           //$this->EvaluationModel->delete_evaluation($id);
  $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف التقييم بنجاح</div>");
             redirect(base_url().'Evaluation/show_evaluation');
 
@@ -82,10 +112,10 @@ class Evaluation extends CI_Controller {
         $this->load->view('management_book/templates/navbar');
         $this->load->view('show_evaluation',$data);
         $this->load->view('management_book/templates/footer');
+
     }
 }
-=======
-    
+    }*/
 	public function show_evaluation()
 	{
 		$this->load->helper('form');
@@ -113,4 +143,3 @@ class Evaluation extends CI_Controller {
 		$this->load->view('management_book/templates/footer');
 	}
 }
->>>>>>> Stashed changes
