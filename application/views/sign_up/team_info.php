@@ -7,7 +7,7 @@
     exit();
   }
   if(isset($_SESSION['team_info'])){
-    $id =  $_SESSION['team_info']['ambassador'][count( $_SESSION['team_info']['ambassador']) - 1]->id;
+    $id =  $_SESSION['team_info']['ambassador'][0]->id;
   }
   $page_id = 14;
   $this->StatisticsModel->incrementVisitors($page_id);
@@ -66,6 +66,11 @@
           <br>
           هذه المعلومات سوف تهمك لاحقا ❤️
       </p>
+      <?php
+      if(! empty($this->session->flashdata('msg'))){
+        echo $this->session->flashdata('msg');
+      } 
+      ?>
     </div>
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 text-center">
