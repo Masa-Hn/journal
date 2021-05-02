@@ -17,13 +17,19 @@ class SignUpModel extends CI_Model {
 	}
 
 
+	public function selectSpecialCare($leader_gender,$ambassador_gender){
+		$sql = "SELECT leader_request.Rid,leader_request.members_num, leader_request.date, leader_request.is_done, leader_request.leader_id, leader_request.gender, leader_info.leader_gender FROM leader_request INNER JOIN leader_info ON leader_request.leader_id = leader_info.id WHERE leader_info.leader_rank = 23  AND ".$leader_gender." AND ".$ambassador_gender." AND leader_request.is_done = 0 ORDER BY leader_request.date ASC LIMIT 1";
 
+		$query = $this->db->query($sql);
+	    return $query->row();
+
+	}//selectSpecialCare
 	public function selectTeam($leader_gender,$ambassador_gender,$logical_operator = "=0"){
 		$sql = "SELECT leader_request.Rid,leader_request.members_num, leader_request.date, leader_request.is_done, leader_request.leader_id, leader_request.gender, leader_info.leader_gender FROM leader_request INNER JOIN leader_info ON leader_request.leader_id = leader_info.id WHERE leader_request.current_team_count ".$logical_operator ." AND ".$leader_gender." AND ".$ambassador_gender." AND leader_request.is_done = 0 ORDER BY leader_request.date ASC LIMIT 1";
 
 		$query = $this->db->query($sql);
 	    return $query->row();
-	}
+	}//selectTeam
 
 	public function getRequestInfo($request_id){
 		$this->db->where('Rid',$request_id);
