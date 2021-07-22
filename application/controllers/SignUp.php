@@ -185,44 +185,85 @@ class SignUp extends CI_Controller {
 
     $exit=false;
     while (! $exit ) {
-      // Check for SpecialCare
-      $result = $this->SignUpModel->selectSpecialCare($leader_condition,$ambassador_condition);
+      // Check for High Priority Requests
+      $result = $this->SignUpModel->selectHighPriority($leader_condition,$ambassador_condition);
       if (count((array)$result) == 0 ){
-        //Check New Teams
-        $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition);
+        // Check for SpecialCare
+        $result = $this->SignUpModel->selectSpecialCare($leader_condition,$ambassador_condition);
         if (count((array)$result) == 0 ){
-          //Check Teams With Less Than 12 Members
-          $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition,"BETWEEN  1 AND 12");
-            if (count((array)$result) == 0 ){
-              //Check Teams With More Than 12 Members
-              $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition," > 12");
-                if (count((array)$result) == 0 ){
-                  $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_name,$ambassadorGender,$leaderGender,$country,$ambassador_email);
-                  $insert_id=$this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
-                  $this->noLeaderFound($insert_id);
-                  $exit=true;
-                }//if
-                else{
-                  $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
-                    // Check Leader Request
-                    //1- chekc associated requests
-                    $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
-                    //2- compare to the requested number
-                      //If available, insert   
-                      if ($result->members_num > $numberOfRequests->totalRequests) {
-                        $this->AmbassadorModel->insertAmbassador($ambassador);
-                        $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
-                        $exit=true;
-                      }//if
-                      //Else update request to done
-                      else{
-                        $this->RequestsModel->updateRequest( $result->Rid);
-                        continue;
-                      }//else      
-                }//else
-            }//if
-            else{
-              $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+          //Check New Teams
+          $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition);
+          if (count((array)$result) == 0 ){
+            //Check Teams With Less Than 12 Members
+            $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition,"BETWEEN  1 AND 12");
+              if (count((array)$result) == 0 ){
+                //Check Teams With More Than 12 Members
+                $result=$this->SignUpModel->selectTeam($leader_condition,$ambassador_condition," > 12");
+                  if (count((array)$result) == 0 ){
+                    $ambassadorWithoutLeader=$this->ambassadorWithoutLeader($ambassador_name,$ambassadorGender,$leaderGender,$country,$ambassador_email);
+                    $insert_id=$this->AmbassadorModel->insertAmbassador($ambassadorWithoutLeader);
+                    $this->noLeaderFound($insert_id);
+                    $exit=true;
+                  }//if
+                  else{
+                    $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+                      // Check Leader Request
+                      //1- chekc associated requests
+                      $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                      //2- compare to the requested number
+                        //If available, insert   
+                        if ($result->members_num > $numberOfRequests->totalRequests) {
+                          $this->AmbassadorModel->insertAmbassador($ambassador);
+                          $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                          $exit=true;
+                        }//if
+                        //Else update request to done
+                        else{
+                          $this->RequestsModel->updateRequest( $result->Rid);
+                          continue;
+                        }//else      
+                  }//else
+              }//if
+              else{
+                $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+                // Check Leader Request
+                      //1- chekc associated requests
+                      $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                      //2- compare to the requested number
+                        //If available, insert   
+                        if ($result->members_num > $numberOfRequests->totalRequests) {
+                          $this->AmbassadorModel->insertAmbassador($ambassador);
+                          $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                          $exit=true;
+                        }//if
+                        //Else update request to done
+                        else{
+                          $this->RequestsModel->updateRequest( $result->Rid);
+                          continue;
+                        }//else      
+              }//else
+          }//if
+          else{
+            $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
+            // Check Leader Request
+                      //1- chekc associated requests
+                      $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
+                      //2- compare to the requested number
+                        //If available, insert   
+                        if ($result->members_num > $numberOfRequests->totalRequests) {
+                          $this->AmbassadorModel->insertAmbassador($ambassador);
+                          $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
+                          $exit=true;
+                        }//if
+                        //Else update request to done
+                        else{
+                          $this->RequestsModel->updateRequest( $result->Rid);
+                          continue;
+                        }//else             
+          }//else
+        }//if
+        else{
+          $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
               // Check Leader Request
                     //1- chekc associated requests
                     $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
@@ -238,25 +279,6 @@ class SignUp extends CI_Controller {
                         $this->RequestsModel->updateRequest( $result->Rid);
                         continue;
                       }//else      
-            }//else
-        }//if
-        else{
-          $ambassador=$this->formatAmbassador($ambassador_name,$ambassadorGender,$leaderGender,$result,$country,$ambassador_email);
-          // Check Leader Request
-                    //1- chekc associated requests
-                    $numberOfRequests=$this->AmbassadorModel->countRequests( $result->Rid);
-                    //2- compare to the requested number
-                      //If available, insert   
-                      if ($result->members_num > $numberOfRequests->totalRequests) {
-                        $this->AmbassadorModel->insertAmbassador($ambassador);
-                        $this->checkout($ambassador, $result->Rid,$result->leader_id,$result->members_num);
-                        $exit=true;
-                      }//if
-                      //Else update request to done
-                      else{
-                        $this->RequestsModel->updateRequest( $result->Rid);
-                        continue;
-                      }//else             
         }//else
       }//if
       else{
