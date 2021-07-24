@@ -151,6 +151,8 @@
 							document.getElementById("reqDate").innerHTML =dateTimeParts[0] + " - " +dateTimeParts[1] + " - " +dateTimeParts[2] ;
 							if (response.lastRequest.is_done==1) {
 								document.getElementById("reqStatuse").innerHTML ="مكتمل"; 
+								document.getElementById("addBtn").style.display ="none";
+
 							}
 							else{
 								document.getElementById("reqStatuse").innerHTML ="غير مكتمل"; 
