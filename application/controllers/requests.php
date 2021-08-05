@@ -28,6 +28,10 @@ class Requests extends CI_Controller {
 					$lastRequest=$lastRequest->fetch_array( MYSQLI_ASSOC);
 				}
 				$data['lastRequest']=$lastRequest;
+				if ($lastRequest['is_done'] == 0) {
+						$count_is_done=$this->RequestsModel->countIsDone()->fetch_array( MYSQLI_ASSOC );
+    				$data['requestNum']=$count_is_done['isDone'];
+				}
 				$this->load->view( 'leader_request/request',$data );
 				$this->load->view( 'leader_request/edit_info' );
 			}
@@ -158,7 +162,7 @@ class Requests extends CI_Controller {
     						<br>
     						";
     			$count_is_done=$this->RequestsModel->countIsDone()->fetch_array( MYSQLI_ASSOC );
-    				$msg=$msg. "رقم طلبك:  "  . $count_is_done['isDone']."</div>";
+    				$msg=$msg. "ترتيبك بين الطلبات الحالية  "  . $count_is_done['isDone']."</div>";
     			//echo $msg;
     			$this->distributeAmbassadors( $rid );
 			}

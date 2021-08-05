@@ -23,11 +23,12 @@
 							echo '
 								<table class="table" id="infoTable">
 									<thead>
-										<th colspan="2" style="background:#eef2f5">معلومات الطلب الأخير</th>
+										<th colspan="3" style="background:#eef2f5">معلومات الطلب الأخير</th>
 									</thead>
 									<thead>
 										<th class="th">تاريخ الطلب</th>
 										<th class="th">حالة الطلب</th>
+										<th class="th">عدد الاعضاء </th>
 									</thead>
 									<tbody>
 										<tr>
@@ -46,7 +47,23 @@
 											}
 											echo '
 											</td>
-										</tr>
+											<td id="membersNum">
+											';
+											echo $lastRequest['members_num'];
+											echo '
+											</td>
+										</tr>';
+										if (isset($requestNum)) {
+											echo '
+												<th colspan="3">
+												ترتيب طلبك بين الطلبات الحالية
+												';
+												echo $requestNum;
+												echo '
+												</th>';
+											
+										}
+									echo '	
 									</tbody>
 								</table>
 							';
