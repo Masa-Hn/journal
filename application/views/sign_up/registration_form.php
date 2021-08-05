@@ -105,7 +105,7 @@ $this->StatisticsModel->incrementVisitors($page_id);
               
             </div>
             <div class="col-md-12" style="display: inherit;">
-              <input type="radio" value="female" name="amb_gender" id="female" class="radio_width_margin form-control">
+              <input type="radio" value="male" name="amb_gender" id="male" class="radio_width_margin form-control">
               <label class="text-black radio_btn" for="male">ذكر </label><br>
               <input type="radio" value="female" name="amb_gender" id="female" class="radio_width_margin form-control">
               <label class="text-black" for="female" style="margin-top: 2%">أنثى</label><br>

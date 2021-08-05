@@ -23,7 +23,16 @@ class Requests extends CI_Controller {
 			if ( $info[ 'leader_link' ] == null && $info[ 'leader_gender' ] == null ) {
 				$this->load->view( 'leader_request/full_request' );
 			} else {
-				$this->load->view( 'leader_request/request' );
+				$lastRequest = $this->RequestsModel->leaderLastRequest($info[ 'id' ]);
+				if ($lastRequest->num_rows>0) {
+					$lastRequest=$lastRequest->fetch_array( MYSQLI_ASSOC);
+				}
+				$data['lastRequest']=$lastRequest;
+				if ($lastRequest['is_done'] == 0) {
+						$count_is_done=$this->RequestsModel->countIsDone()->fetch_array( MYSQLI_ASSOC );
+    				$data['requestNum']=$count_is_done['isDone'];
+				}
+				$this->load->view( 'leader_request/request',$data );
 				$this->load->view( 'leader_request/edit_info' );
 			}
 		} else {
@@ -150,9 +159,11 @@ class Requests extends CI_Controller {
     			
     			$msg = "<div class='alert alert-success'>
     					تم إرسال طلبك بنجاح, سيتم تزويدك بالأعضاء قريباً
-    					</div>";
+    						<br>
+    						";
+    			$count_is_done=$this->RequestsModel->countIsDone()->fetch_array( MYSQLI_ASSOC );
+    				$msg=$msg. "ترتيبك بين الطلبات الحالية  "  . $count_is_done['isDone']."</div>";
     			//echo $msg;
-    			
     			$this->distributeAmbassadors( $rid );
 			}
 			
