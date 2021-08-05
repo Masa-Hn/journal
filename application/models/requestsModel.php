@@ -1,6 +1,19 @@
 <?php
 class RequestsModel extends CI_Model {
 
+	//count is_done 0
+	public function countIsDone() {
+		$query = "SELECT count(Rid) as isDone FROM leader_request WHERE is_done= 0";
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$conn->close();
+			return $done;
+		} else {
+			return $conn->error;
+		}
+	}//countIsDone
+
 	//check leader email
 	public function check_email( $email ) {
 		$query = "SELECT * FROM leader_info WHERE leader_email='" . $email . "'";
