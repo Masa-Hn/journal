@@ -25,13 +25,16 @@ class Requests extends CI_Controller {
 			} else {
 				$lastRequest = $this->RequestsModel->leaderLastRequest($info[ 'id' ]);
 				if ($lastRequest->num_rows>0) {
+					
 					$lastRequest=$lastRequest->fetch_array( MYSQLI_ASSOC);
-				}
-				$data['lastRequest']=$lastRequest;
+					$data['lastRequest']=$lastRequest;
 				if ($lastRequest['is_done'] == 0) {
 						$count_is_done=$this->RequestsModel->countIsDone()->fetch_array( MYSQLI_ASSOC );
     				$data['requestNum']=$count_is_done['isDone'];
 				}
+				}
+			
+
 				$this->load->view( 'leader_request/request',$data );
 				$this->load->view( 'leader_request/edit_info' );
 			}
