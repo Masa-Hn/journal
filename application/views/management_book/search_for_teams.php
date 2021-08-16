@@ -154,7 +154,14 @@
 	});
 	function append_json(data){
             var table = document.getElementById('infoTable');
-            $("#infoTable tr").remove(); 
+            $("#infoTable tr").remove();
+            $("#infoTable th").remove(); 
+            var th1 = document.createElement('th');
+            var th2 = document.createElement('th');
+            th1.innerHTML='القـــائد';
+            th2.innerHTML='فريق المتابعة';
+            table.appendChild(th1);
+            table.appendChild(th2);
             data.forEach(function(object) {
                 var tr = document.createElement('tr');
                 tr.innerHTML = '<td><a target="_blank" href="'+object.leader_link+'">' + object.leader_name + '</a></td>' +
