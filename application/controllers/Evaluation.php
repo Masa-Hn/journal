@@ -87,7 +87,7 @@ class Evaluation extends CI_Controller {
         $this->load->view('management_book/templates/footer');
     }
 
-        public function show_evaluation()
+     /*  public function show_evaluation()
     {
                 $this->load->helper('form');
 
@@ -109,5 +109,31 @@ class Evaluation extends CI_Controller {
         $this->load->view('management_book/templates/navbar');
         $this->load->view('show_evaluation',$data);
         $this->load->view('management_book/templates/footer');
-    }
+    }*/
+	public function show_evaluation()
+	{
+		$this->load->helper('form');
+
+		if(isset($_POST['delete'])){
+			$id=$this->input->post('id');
+			Orm_Evaluation::get_instance($id)->delete();
+			$this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف التقييم بنجاح</div>");
+			redirect(base_url().'Evaluation/show_evaluation');
+
+		}
+		$data['title'] = 'استعراض التقييمات';
+		$orm_obj = new Orm_Evaluation();
+		if($orm_obj::get_count() >= 4){
+			$evals = $orm_obj::get_all(array(),1,4,array("id"));
+			$data['num_rows']=4;
+		}else{
+			$evals = $orm_obj::get_all();
+			$data['num_rows']=$orm_obj::get_count();
+		}
+		$data['Evals'] = $evals;
+		$this->load->view('management_book/templates/header', $data);
+		$this->load->view('management_book/templates/navbar');
+		$this->load->view('show_evaluation',$data);
+		$this->load->view('management_book/templates/footer');
+	}
 }
