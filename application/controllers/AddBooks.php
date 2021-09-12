@@ -120,6 +120,7 @@ public function delete()
 }
     public function show_book(){
         
+        
       $type=$this->uri->segment(3);
         $data['books'] = Orm_Books::get_all(array('type'=>$type));
         //$this->ManageBooks->getbooks($type);
@@ -129,11 +130,54 @@ public function delete()
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/show_book',$data);
         $this->load->view('management_book/templates/footer');
-
-       
+  
     }
 
-    
+public function book_detailes()
+{
+    if ($this->uri->segment(3))
+    {
+    $id=$this->uri->segment(3);
+        $data['book'] = Orm_Books::get_one(array('id'=>$id));
+        $data['id'] = $id;
+    $data['title'] = 'Show Book Detailes';
+      $this->load->view('management_book/templates/header', $data);
+        $this->load->view('management_book/templates/navbar');
+        $this->load->view('management_book/book_detailes',$data);
+        $this->load->view('management_book/templates/footer');
+    }
+       
+}
+    public function searchByName(){
+        $arr=[];
+        $d=[]; 
+        if(!empty($_POST['bookName'])){
+            //echo $_POST['bookName'];
+            $arr=$this->books->getbookByName($_POST['bookName'],$_POST['type']);
+            if (count($arr) != 0 ) {
+                foreach ($arr as $row){
+                
+                
+               echo "<a class='book' style='font-size: 25px;' href='".base_url()."AddBooks/book_detailes/".$row->id ."'><li id='".$row->id ."'>".$row->name."</li></a>
+                <hr style='width: 70%;display: block;border-top: 1px solid rgb(32, 93, 103) !important;'>
+                ";
+              
+                }//foreach
+            }//if
+            else{
+                echo "<li> لا يوجد نتائج لعرضها </li>";
+            }
+
+            // print_r($d);
+        
+        } 
+        else {
+            $arr['data']="";
+            print_r($arr['data']);
+        }
+            
+
+    }//searchByName
 
    
 
