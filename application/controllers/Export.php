@@ -69,9 +69,9 @@ class Export extends CI_Controller {
         
         $filename = "suggestion books ". date("Y-m-d H:i:s");
         
-        $object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel5');
+        $object_writer = PHPExcel_IOFactory::createWriter($object, 'Excel2007');
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename=" '. $filename .'.xls"');
+        header('Content-Disposition: attachment;filename=" '. $filename .'.xlsx"');
         $object_writer->save('php://output');
     }
 }
