@@ -35,42 +35,22 @@ showSlides(slideIndex);
       <p><?php echo $row->get_date() ?></p>
 
       <h5 class="heading"> : المقال</h5>
-      <script type="text/javascript">
-$(function(){ /* to make sure the script runs after page load */
+     
 
-  $('.item').each(function(event){ /* select all divs with the item class */
-  
-    var max_length = 150; /* set the max content length before a read more link will be added */
-    
-    if($(this).html().length > max_length){ /* check for content length */
-      
-      var short_content   = $(this).html().substr(0,max_length); /* split the content in two parts */
-      var long_content  = $(this).html().substr(max_length);
-      
-      $(this).html(short_content+
-             '<a href="#" id="rm" class="read_more"><br/>قراءة المزيد</a>'+
-             '<span class="more_text" style="display:none;">'+long_content+'</span>'); /* Alter the html to allow the read more functionality */
-             
-      $(this).find('a.read_more').click(function(event){ /* find the a.read_more element within the new html and bind the following code to it */
- 
-        event.preventDefault(); /* prevent the a from changing the url */
-        $('.read_more').hide(); /* hide the read more button */
+      <p style="text-align: justify;padding-left: 30px;"> <?php echo $row->get_article() ?></p>
+      <h5 class="heading"> : رابط صورة المقال <br>
 
-
-        $(this).parents('.item').find('.more_text').show(); /* show the .more_text span */
-      });
-    }
-  });
-});
-
-</script>
-
-      <p class="item"> <?php echo $row->get_article() ?></p>
- <form  enctype="multipart/form-data" method="post" style="padding-bottom: 5em;padding-top: 5em;padding-left: 47%" action="<?=base_url()?>Management_book/show_article">   
+          <a id="image" name="image" href="<?php echo base_url()?>assets/img/article/<?php echo $row->get_pic()?> " style="padding-right: 2em; color: #A52A2A" > اضغط هنا</a><br><br> </h5>
+ <div style="padding-bottom: 8em;padding-top: 1em;">
+ <form  enctype="multipart/form-data" method="post" style="float: right;" action="<?=base_url()?>Management_book/show_article">   
 <input type="number" name="id" id="id" value="<?php echo $row->get_id() ?>" style="display: none;"   >  
 <button  id="delete"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A;" >حذف المقال</button>
 </form>
-
+<form  enctype="multipart/form-data" method="post" style="float: left;" action="<?=base_url()?>AddArticle/index/<?php echo $row->get_id()?>">   
+<input type="number" name="id" id="id" value="<?php echo $row->get_id() ?>" style="display: none;"   >  
+<button  id="update"  name="update" class="mybutton" style="width: 175px;background-color: #A52A2A;" >تعديل المقال</button>
+</form>
+</div>
 </div>
 <?php } ?>
   <!-- Next and previous buttons -->
