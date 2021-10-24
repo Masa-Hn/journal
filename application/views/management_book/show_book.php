@@ -65,8 +65,8 @@
                   <div id="content" >
 
 <?php 
- $num=Orm_Books::get_count();
- $book=$books;
+ $num=$books->num_rows();
+ $book=$books->result();
 if ($num % 26!=0)
 $slides_num=((int) ($num/26)+1);
 else
@@ -158,16 +158,16 @@ $slides_num=$num/26;
                                     
                                     <td  ><button class="book" style="text-align: center;" 
                                         onclick="show_detailes(
-                                           '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->get_id(); ?> ',
-                                           '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->get_name(); ?> ',
-                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->get_writer(); ?>',
-                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->get_type(); ?>',
-                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->get_level(); ?>',
-                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->get_section(); ?>',
-                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->get_post(); ?>',
-                                             '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->get_pic(); ?>'
+                                           '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->id; ?> ',
+                                           '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->name; ?> ',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->writer; ?>',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->type; ?>',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->level; ?>',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->section; ?>',
+                                            '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->post; ?>',
+                                             '<?php  if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->pic; ?>'
                                             )">
-                                   <?php if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->get_name();?></button></td>
+                                   <?php if(isset($book[$i]) && $book[$i]!=null) echo $book[$i]->name;?></button></td>
                                     
                                     <td ><button class="book"  >&nbsp; </button></td>
                                     <td ><button class="book"  >&nbsp; </button></td>
@@ -175,16 +175,16 @@ $slides_num=$num/26;
 
                                     <td ><button class="book"  style="text-align: center;" 
                                         onclick="show_detailes(
-                                        '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->get_id() ?>',
-                                        '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->get_name() ?>',
-                            ' <?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->get_writer() ?>',
-                            '<?php  if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->get_type() ?>',
-                            '<?php  if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->get_level() ?>',
-                            '<?php  if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->get_section() ?>',
-                            '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->get_post() ?>',
-                            '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->get_pic() ?>'
+                                        '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->id ?>',
+                                        '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->name ?>',
+                            ' <?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->writer ?>',
+                            '<?php  if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->type ?>',
+                            '<?php  if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->level ?>',
+                            '<?php  if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->section ?>',
+                            '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->post ?>',
+                            '<?php   if(isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->pic ?>'
                             )">      
-                            <?php if (isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->get_name();  ?></button></td>
+                            <?php if (isset($book[$i+1]) && $book[$i+1]!=null) echo $book[$i+1]->name;  ?></button></td>
                                     
 
                                 </tr>

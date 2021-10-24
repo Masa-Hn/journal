@@ -64,9 +64,9 @@
                             <div><label style="padding-bottom: 4em;" class="text-danger mb-3">* مطلوب</label></div>
                             <?php echo $this->session->flashdata('msg')?>   
                             
-                              <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم المقال : * </li></label> <input type="text" id="article_name" name="article_name"  class="form-control" value="<?php echo $article->get_title()?>" onblur="validate(1,'article_name')"> </div>
-                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم كاتب المقال : * </li></label> <input type="text" id="writer" name="writer" value="<?php echo $article->get_writer()?>" class="form-control" onblur="validate(2,'writer')"> </div>
-                        <div class="form-group"> <label class="form-control-label" style="float:  right;"><li style="direction: rtl;">التاريخ : *</li> </label> <input type="date" id="date" name="date" value="<?php echo  date('Y-m-d',strtotime($article->get_date()))?>" class="form-control" onblur="validate(3,'date')" > </div>
+                              <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم المقال : * </li></label> <input type="text" id="article_name" name="article_name"  class="form-control" value="<?php echo $article[0]->title?>" onblur="validate(1,'article_name')"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">اسم كاتب المقال : * </li></label> <input type="text" id="writer" name="writer" value="<?php echo $article[0]->writer?>" class="form-control" onblur="validate(2,'writer')"> </div>
+                        <div class="form-group"> <label class="form-control-label" style="float:  right;"><li style="direction: rtl;">التاريخ : *</li> </label> <input type="date" id="date" name="date"              value="<?php echo  date('Y-m-d',strtotime($article[0]->date))?>" class="form-control" onblur="validate(3,'date')" > </div>
                        
                                 
                             <button id="next" class="mybutton" onclick="nextarticle();" type="button">التالي</button> 
@@ -80,11 +80,11 @@
                         <div class="form-card">
                             <h5 class="sub-heading mb-4" style="padding-bottom: 4em;">الرجاء إدخال بيانات المقال</h5>
                             <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">المقال :  </li> </label> 
-                            <textarea id="article" name="article"  class="form-control" style="padding-bottom: 200px;" onblur="validate(1,'article')"><?php echo $article->get_article()?></textarea></div>
+                            <textarea id="article" name="article"  class="form-control" style="padding-bottom: 200px;" onblur="validate(1,'article')"><?php echo $article[0]->article?></textarea></div>
                         
                         <div class="form-group"> <label class="form-control-label" style="float: right;"><li style="direction: rtl;">صورة المقال :  </li> </label>
 
-                            <img id="myimage" height="200" src="<?php echo base_url()?>assets/img/article/<?php echo $article->get_pic()?>">
+                            <img id="myimage" height="200" src="<?php echo base_url()?>assets/img/article/<?php echo $article[0]->pic?>">
                         <input type="file" id="article_img" name="article_img"  onChange="onFileSelected(event)">
                         
 
@@ -95,7 +95,7 @@
                          </div>  
 
                                 
-                                <input type="hidden" name="aid" value="<?php echo $article->get_id()?>">
+                                <input type="hidden" name="aid" value="<?php echo $article[0]->id?>">
                                 <input type="hidden" name="update">
                                 <button id="save" class="mybutton"  >حفظ</button> 
                         </div>

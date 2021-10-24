@@ -1,14 +1,14 @@
 <?php
 $type="";
-if ($book->get_type()==1) $type="كتاب منهج";
-if ($book->get_type()==2) $type="كتاب مرحلة تحضيرية";
-if ($book->get_type()==3) $type="كتاب أطفال";
-if ($book->get_type()==4) $type="كناب رمضان";
-if ($book->get_type()==5) $type="كتاب يافعين";
+if ($book[0]->type==1) $type="كتاب منهج";
+if ($book[0]->type==2) $type="كتاب مرحلة تحضيرية";
+if ($book[0]->type==3) $type="كتاب أطفال";
+if ($book[0]->type==4) $type="كناب رمضان";
+if ($book[0]->type==5) $type="كتاب يافعين";
 $level="";
-if ($book->get_level()==1) $level="بسيط";
-if ($book->get_level()==2) $level="متوسط";
-if ($book->get_level()==3) $level="عميق";
+if ($book[0]->level==1) $level="بسيط";
+if ($book[0]->level==2) $level="متوسط";
+if ($book[0]->level==3) $level="عميق";
 
 
 
@@ -25,21 +25,21 @@ if ($book->get_level()==3) $level="عميق";
 
                          
                     <li style="direction: rtl; text-align: right;">اسم الكتاب : <br>
-                        <input  value="<?php echo $book->get_name(); ?>" name="name" id="name" readonly style="border: none;background-color: white; "> </li>
+                        <input  value="<?php echo $book[0]->name; ?>" name="name" id="name" readonly style="border: none;background-color: white; "> </li>
                     
                     <li style="direction: rtl; text-align: right;"> اسم الكاتب :<br>
-                     <input value="<?php  echo $book->get_writer();?>" style="border: none;background-color: white;"  name="writer" id="writer" readonly></li>
+                     <input value="<?php  echo $book[0]->writer;?>" style="border: none;background-color: white;"  name="writer" id="writer" readonly></li>
                     <li style="direction: rtl; text-align: right;"> نوع الكتاب : <br>  <input value="<?php  echo $type;?>" style="border: none;background-color: white;"  name="type" id="type" readonly></li>
                     <li style="direction: rtl; text-align: right;"> مستوى الكتاب : <br>  <input value="<?php  echo $level; ?>" style="border: none;background-color: white;"  name="level" id="level" readonly></li>
-                    <li style="direction: rtl; text-align: right;"> صنف الكتاب : <br> <input value="<?php  echo $book->get_section();?>" style="border: none;background-color: white;"  name="section" id="section" readonly></li>
+                    <li style="direction: rtl; text-align: right;"> صنف الكتاب : <br> <input value="<?php  echo $book[0]->section;?>" style="border: none;background-color: white;"  name="section" id="section" readonly></li>
                     
                     <li style="direction: rtl; text-align: right;"> رابط منشور الكتاب : <br>
-                     <a href="<?php  echo $book->get_post();?>" name="post" id="post" style="padding-right: 2em; color: #A52A2A" > اضغط هنا<a></li>  <br><br>
+                     <a href="<?php  echo $book[0]->post;?>" name="post" id="post" style="padding-right: 2em; color: #A52A2A" > اضغط هنا<a></li>  <br><br>
 
 
                     <li style="direction: rtl; text-align: right;"> رابط صورة الكتاب : <br>
 
-                        <a href="<?php  echo $book->get_pic();?>" id="image" name="image" style="padding-right: 2em; color: #A52A2A" > اضغط هنا</a></li><br><br>
+                        <a href="<?php  echo $book[0]->pic;?>" id="image" name="image" style="padding-right: 2em; color: #A52A2A" > اضغط هنا</a></li><br><br>
                          
                          <div style="float: right;">
                          <a href="<?php echo base_url()?>AddBooks/index/<?php echo $id?>" id="update" class="mybutton" style="width: 190px;float: right;background-color: #A52A2A" >
@@ -47,7 +47,7 @@ if ($book->get_level()==3) $level="عميق";
                          </label> </a></div>
 
                           <div style="float: right; padding-right: 10px">
-                         <a href="<?php echo base_url()?>AddBooks/delete/<?php echo $book->get_type()?>/<?php echo $id?>" id="delete" class="mybutton" style="width: 150px;float: right;background-color: #A52A2A" >
+                         <a href="<?php echo base_url()?>AddBooks/delete/<?php echo $book[0]->type?>/<?php echo $id?>" id="delete" class="mybutton" style="width: 150px;float: right;background-color: #A52A2A" >
                          <label style=" text-align: center; outline: none; color: #fff;">حذف الكتاب
                          </label> </a></div>
 

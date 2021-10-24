@@ -10,8 +10,34 @@ public function savearticle($n,$w,$d,$a,$i)
 		$data['pic']=$i;
 		
 
-		$this->db->insert('article',$data);
+		return $this->db->insert('article',$data);
 }
+
+public function editarticle($n,$w,$d,$a,$i,$id){
+
+       $data['title']=$n;
+		$data['article']=$a;
+		$data['date']=$d;
+		$data['writer']=$w;
+		$data['pic']=$i;
+		
+
+        $this->db->where('id', $id);
+        return $this->db->update('article',$data); 
+    }
+
+    public function editarticle1($n,$w,$d,$a,$id){
+
+       $data['title']=$n;
+		$data['article']=$a;
+		$data['date']=$d;
+		$data['writer']=$w;
+		
+
+        $this->db->where('id', $id);
+        return $this->db->update('article',$data); 
+    }
+
 
 public function saveactivity($a,$n)
 {
@@ -47,6 +73,14 @@ public function get_articles()
 
    return $query;
 }
+
+  public function get_article($id){
+      $this->db->select('*');
+    $this->db->from('article');
+    $this->db->where('id',$id);
+    return $this->db->get();
+  }
+
 
 public function getimgs()
 {

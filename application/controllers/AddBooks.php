@@ -20,12 +20,12 @@ class AddBooks extends CI_Controller {
     public function index(){
         
         if($this->uri->segment(3)){
+            
             $id = $this->uri->segment(3);
-            $data['book']  = Orm_Books::get_instance($id);
-            //$this->books->getbook($id);
+            $data['book']  = $this->books->getbook($id);
         } 
-		$data['title'] = 'Add Book';
-		$this->load->view('management_book/templates/header', $data);
+        $data['title'] = 'Add Book';
+        $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/add_book',$data);
         $this->load->view('management_book/templates/footer');
@@ -44,20 +44,8 @@ class AddBooks extends CI_Controller {
         $link    = $this->input->post('download_link');
         $pic     = $this->input->post('img_link');
 
-            $inserted=new Orm_Books;
-            $inserted->set_name($name);
-            $inserted->set_writer($writer);
-            $inserted->set_brief($brief);
-            $inserted->set_level($level);
-            $inserted->set_section($section);
-            $inserted->set_type($type);
-            $inserted->set_post($post);
-            $inserted->set_link($link);
-            $inserted->set_pic($pic);
-            $inserted->set_date(date("Y-m-d H:i:s", time()));
+            if($this->insertbook->addbook($name,$writer,$brief,$level,$section,$type,$post,$link,$pic)){
 
-       // if($this->insertbook->addbook($name,$writer,$brief,$level,$section,$type,$post,$link,$pic)){
-            if ($inserted->save()){
             $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم إضافة الكتاب بنجاح</div>");
             redirect(base_url().'AddBooks/index');
         }else{
@@ -82,19 +70,8 @@ class AddBooks extends CI_Controller {
 
         $id      =  $this->input->post('bid');   
             
-        //if($this->insertbook->editbook($name,$writer,$brief,$level,$section,$type,$post,$link,$pic,$id)){
-        $updated=Orm_Books::get_instance($id);
-             $updated->set_name($name);
-            $updated->set_writer($writer);
-            $updated->set_brief($brief);
-            $updated->set_level($level);
-            $updated->set_section($section);
-            $updated->set_type($type);
-            $updated->set_post($post);
-            $updated->set_link($link);
-            $updated->set_pic($pic);
-            $updated->set_date(date("Y-m-d H:i:s", time()));
-            if ($updated->save()){
+        if($this->insertbook->editbook($name,$writer,$brief,$level,$section,$type,$post,$link,$pic,$id)){
+
             $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم تعديل الكتاب بنجاح</div>");
             redirect(base_url().'AddBooks/index/'.$id);
         }else{
@@ -111,9 +88,7 @@ public function delete()
      if ($this->uri->segment(4))
         {
             $id=$this->uri->segment(4);
-            $deleted=Orm_Books::get_instance($id);
-            $deleted->delete();
-            //$this->ManageBooks->delete_book($id);
+            $this->ManageBooks->delete_book($id);
             $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف الكتاب بنجاح</div>");
             redirect(base_url().'AddBooks/show_book/'.$type);
         }
@@ -122,15 +97,14 @@ public function delete()
         
         
       $type=$this->uri->segment(3);
-        $data['books'] = Orm_Books::get_all(array('type'=>$type));
-        //$this->ManageBooks->getbooks($type);
+        $data['books'] = $this->ManageBooks->getbooks($type);
         $data['title'] = 'Show Book';
         $data['type'] = $type;
-		$this->load->view('management_book/templates/header', $data);
+        $this->load->view('management_book/templates/header', $data);
         $this->load->view('management_book/templates/navbar');
         $this->load->view('management_book/show_book',$data);
         $this->load->view('management_book/templates/footer');
-  
+
     }
 
 public function book_detailes()
@@ -138,7 +112,7 @@ public function book_detailes()
     if ($this->uri->segment(3))
     {
     $id=$this->uri->segment(3);
-        $data['book'] = Orm_Books::get_one(array('id'=>$id));
+        $data['book'] = $this->ManageBooks->getbook($id)->result();
         $data['id'] = $id;
     $data['title'] = 'Show Book Detailes';
       $this->load->view('management_book/templates/header', $data);
