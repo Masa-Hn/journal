@@ -47,7 +47,7 @@ class Evaluation extends CI_Controller {
             $all=Orm_Evaluation::get_all();
              $inserted=new Orm_Evaluation;
              $b;
-            if (Orm_Evaluation::get_count($all)<4)
+            if (Orm_Evaluation::get_count()<4)
                 {
                     $inserted=new Orm_Evaluation;
                     $inserted->set_title($w);
@@ -60,7 +60,7 @@ class Evaluation extends CI_Controller {
                     $inserted->set_title($w);
                     $inserted->set_pic($i);
                     $b=$inserted->save();
-                  $last4=Orm_Evaluation::get_all(array('limit'=>4),0,0,array('orders'=>"id DESC"));
+                  $last4=Orm_Evaluation::get_all(array(),1,4,array('orders'=>"id DESC"));
                    $all_to_delete = array_udiff($all, $last4,
                       function ($obj_a, $obj_b) {
                         return strcmp($obj_a->get_id(), $obj_b->get_id());

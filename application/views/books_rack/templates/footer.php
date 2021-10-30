@@ -20,7 +20,7 @@
       
       <div class="col-sm-4">
         <h4> تصميم: سارة اسماعيل </h4>
-        <h4> الخدمة التقنية :فنجان هوست </h4>
+        <a style="color: white" href="https://www.finjanhost.com/ar/"><h4> الخدمة التقنية :فنجان هوست </h4></a>
       </div>
     </div>
     <div class="row">
