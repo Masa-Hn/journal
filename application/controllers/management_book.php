@@ -31,24 +31,23 @@ class Management_book extends CI_Controller {
     
    
     
-    public function show_article()
+   
+         public function show_article()
     {
                 $this->load->helper('form');
 
        if(isset($_POST['delete'])){
             $id=$this->input->post('id');
-            $deleted= Orm_Article::get_instance($id);
-            $deleted->delete();
-           //$this->management->delete_article($id);
+           // $deleted= Orm_Article::get_instance($id);
+           // $deleted->delete();
+           $this->management->delete_article($id);
     $this->session->set_flashdata('msg',"<div class='alert alert-success' style='text-align:right'>تم حذف المقال بنجاح</div>");
             redirect(base_url().'Management_book/show_article');
 
                     }
          $data['title'] = 'Show Article';
-         $articles=Orm_Article::get_all();
-         //$this->management->get_articles();
-         $num=Orm_Article::get_count($articles);
-         //$articles->num_rows();
+         $articles= $this->management->get_articles()->result();
+         $num=$this->management->get_articles()->num_rows();
          $data['num_rows']=$num;
          $data['articles']=$articles;
         $this->load->view('management_book/templates/header', $data);
@@ -56,6 +55,7 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/show_article',$data);
         $this->load->view('management_book/templates/footer');
     }
+    
     
    
     public function show_activities()

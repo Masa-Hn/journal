@@ -27,27 +27,27 @@ showSlides(slideIndex);
  <?php echo $this->session->flashdata('msg')?>  
     <div class="numbertext" style="color: black" > <?php echo $i+1 ?> / <?php echo $n ?></div>
     <h5 class="heading">: اسم المقال </h5>
-      <p><?php echo $row->get_title() ?></p>
+      <p><?php echo $row->title?></p>
      <h5 class="heading">: كاتب المقال</h5>
-      <p><?php echo $row->get_writer() ?></p>
+      <p><?php echo $row->writer ?></p>
 
       <h5 class="heading"> : تم كتابة المقال بتاريخ</h5>
-      <p><?php echo $row->get_date() ?></p>
+      <p><?php echo $row->date?></p>
 
       <h5 class="heading"> : المقال</h5>
      
 
-      <p style="text-align: justify;padding-left: 30px;"> <?php echo $row->get_article() ?></p>
+      <p style="text-align: justify;padding-left: 30px;"> <?php echo $row->article ?></p>
       <h5 class="heading"> : رابط صورة المقال <br>
 
-          <a id="image" name="image" href="<?php echo base_url()?>assets/img/article/<?php echo $row->get_pic()?> " style="padding-right: 2em; color: #A52A2A" > اضغط هنا</a><br><br> </h5>
+          <a id="image" name="image" href="<?php echo base_url()?>assets/img/article/<?php echo $row->pic?> " style="padding-right: 2em; color: #A52A2A" > اضغط هنا</a><br><br> </h5>
  <div style="padding-bottom: 8em;padding-top: 1em;">
  <form  enctype="multipart/form-data" method="post" style="float: right;" action="<?=base_url()?>Management_book/show_article">   
-<input type="number" name="id" id="id" value="<?php echo $row->get_id() ?>" style="display: none;"   >  
+<input type="number" name="id" id="id" value="<?php echo $row->id ?>" style="display: none;"   >  
 <button  id="delete"  name="delete" class="mybutton" style="width: 150px;background-color: #A52A2A;" >حذف المقال</button>
 </form>
-<form  enctype="multipart/form-data" method="post" style="float: left;" action="<?=base_url()?>AddArticle/index/<?php echo $row->get_id()?>">   
-<input type="number" name="id" id="id" value="<?php echo $row->get_id() ?>" style="display: none;"   >  
+<form  enctype="multipart/form-data" method="post" style="float: left;" action="<?=base_url()?>AddArticle/index/<?php echo $row->id?>">   
+<input type="number" name="id" id="id" value="<?php echo $row->id ?>" style="display: none;"   >  
 <button  id="update"  name="update" class="mybutton" style="width: 175px;background-color: #A52A2A;" >تعديل المقال</button>
 </form>
 </div>
