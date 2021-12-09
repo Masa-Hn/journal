@@ -33,11 +33,10 @@ $this->StatisticsModel->incrementVisitors($page_id);
           <div class="row form-group">
             <div class="col-md-12">
               <label class="text-black" for="loginemail">
-                أدخل بريدك الالكتروني
+                أدخل بريدك الالكتروني أو رقم الهاتف
               </label>
               <input type="email" class="form-control"name="loginemail" id="loginemail" required onblur="loginEmailValidation( this.value)">
-              <span class="error" id="loginemailError">لطفًا أدخل بريدك الالكتروني</span>
-              <span class="error" id="loginemailFormatError">أدخل بريدك بشكلٍ صحيح</span>
+              <span class="error" id="loginemailError">لطفًا أدخل بريدك الالكتروني أو رقم الهاتف</span>
             </div>
           </div>
           <div class="row form-group">
@@ -90,13 +89,12 @@ $this->StatisticsModel->incrementVisitors($page_id);
           <div class="row form-group">
             <div class="col-md-12">
               <label class="text-black" for="email">
-                بريدك الالكتروني
+                أدخل بريدك الالكتروني أو رقم الهاتف
               </label>
               <input type="email" name="email" id="email" class="form-control" oninvalid="this.setCustomValidity('لطفًا أدخل بريدك الالكتروني بشكلٍ صحيح')"
               oninput="this.setCustomValidity('')"
               onblur="checkEmail(this.value)">
-              <span class="error" id="emailError">لطفًا أدخل بريدك الالكتروني</span>
-              <span class="error" id="emailFormatError">أدخل بريدك بشكلٍ صحيح</span>
+              <span class="error" id="emailError">لطفًا أدخل بريدك الالكتروني أو رقم الهاتف</span>
             </div>
           </div>
           <div class="row form-group" >
