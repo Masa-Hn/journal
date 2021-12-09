@@ -115,35 +115,24 @@ function checkUserName(val){
   }
 }
 function checkEmail(val){
-  var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if (val.length == 0) {
     $("#emailError").show();
     return true;
   } 
-  else if(! (val.match(mailformat))){
-    $("#emailFormatError").show();
-    return true;
-  }
+  
   else {
     $("#emailError").hide();
-    $("#emailFormatError").hide();
     return false;
   }
 }
 
 function loginEmailValidation(val){
-  var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if (val.length == 0) {
     $("#loginemailError").show();
     return true;
   } 
-  else if(! (val.match(mailformat))){
-    $("#loginemailFormatError").show();
-    return true;
-  }
   else {
     $("#loginemailError").hide();
-    $("#loginemailFormatError").hide();
     return false;
   }
 }

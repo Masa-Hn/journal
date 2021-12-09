@@ -114,15 +114,8 @@ class SignUp extends CI_Controller {
 
           if(!empty($_POST['ambassador_name']) && !empty($_POST['ambassador_gender']) && !empty($_POST['leader_gender']) )
           {
-                
-            if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-              $errorMsg = "أدخل بريدًا صحيحًا"; 
-              $this->load->view('sign_up/registration_form',$errorMsg);
-            }// if for email validation
-            else{
+ 
               $this->allocateAmbassador($_POST['ambassador_name'],$_POST['ambassador_gender'],$_POST['leader_gender'],$_POST['email']);  
-            }//allocateAmbassador
-
           }//if for required field
           else{
             $errorMsg = "أدخل الحقول المطلوبة"; 
