@@ -1,6 +1,19 @@
 <?php
 class RequestsModel extends CI_Model {
 
+	//count is_done 0
+	public function countIsDone() {
+		$query = "SELECT count(Rid) as isDone FROM leader_request WHERE is_done= 0";
+		$conn = $this->connectToDB();
+		$done = $conn->query( $query );
+		if ( $done ) {
+			$conn->close();
+			return $done;
+		} else {
+			return $conn->error;
+		}
+	}//countIsDone
+
 	//check leader email
 	public function check_email( $email ) {
 		$query = "SELECT * FROM leader_info WHERE leader_email='" . $email . "'";
@@ -231,7 +244,7 @@ class RequestsModel extends CI_Model {
 
 	public function leaderLastRequest( $id ) {
 
-		$query = "SELECT date,is_done, Rid, current_team_count FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
+		$query = "SELECT members_num,date,is_done, Rid, current_team_count FROM leader_request WHERE leader_id =" . $id . " ORDER BY date DESC LIMIT 1";
 		$conn = $this->connectToDB();
 		$done = $conn->query( $query );
 		if ( $done ) {
