@@ -109,6 +109,13 @@
 								
 									<p class="sub-desc" style="text-align: center;">عرض الإحصائيات</p>
 								</li>
+								<li class="card-block text-center radio ">
+									<a class="image-icon" href="<?php echo base_url()?>management_book/ambassador_code">
+                                 <img class="icon icon1 " src="<?php echo base_url()?>assets/img/verified-user.png"> </a>
+								
+									<p class="sub-desc" style="text-align: center;">كود السفراء</p>
+								</li>
+								
 								<?php
 								}
 								if ( in_array( "2", $teamSplitted ) ) {

@@ -205,6 +205,18 @@ function checkLogin(id) {
   }
 }//checkLogin
 
+function checkReallocateCode(){
+  code=document.getElementById('code').value;
+  $.ajax({
+    type: "POST",
+    url:document.getElementById("base_url").value+"ReallocateAmbassador/checkReallocateCode",
+    data: {'code':code},
+    success: function(data){
+      $("body").html(data);
+
+    }//success
+  });
+}
 function reallocateAmbassador(leader_gender) {
 
   leader_gender =leader_gender;
