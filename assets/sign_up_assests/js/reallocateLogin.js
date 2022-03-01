@@ -1,77 +1,75 @@
-function reallocateLogin(){
-  let email = document.getElementById("loginemail").value;
-  let getDataUrl=document.getElementById("base_url").value+"ReallocateAmbassador/getAmbassadorData";
-  $.ajax( {
-            type: "POST",
-            url:getDataUrl,
-            data: {
-                email: email
-            },
-            success: function ( data ) {
-              console.log(data)
-              if (data === 'unregistered') {
-                //window.location.replace(document.getElementById("base_url").value+"SignUp");
-              }
-              else{
-                response = JSON.parse(data);
-                ambassador = {name:response[0].name,gender:response[0].gender,profile_link:response[0].link,fb_id:response[0].fb_id};
-                sessionStorage.setItem("ambassador_info", JSON.stringify(ambassador));  
-                window.location.replace(document.getElementById("base_url").value+"ReallocateAmbassador/checkAmbassador?fb_id="+response[0].fb_id);
 
-              }
-              
-            },
-            error: function ( error ) {
-                console.log( error );
-            }
-        } );
+$(document).ready(function () {
+  // Label effect
+  $('input').focus(function () {
 
- // window.location.replace(document.getElementById("base_url").value+"ReallocateAmbassador/checkAmbassador?fb_id="+response.id);
+    $(this).siblings('label').addClass('active');
+  });
 
+});
+
+
+function checkData() {
+
+  email = document.getElementById("email").value,
+    leaderGender = document.getElementsByName('leader_gender');
+  var valid = true;
+  var req = 'لطفًا أدخل المعلومات التالية ';
+  if (!(leaderGender[0].checked || leaderGender[1].checked || leaderGender[2].checked)) {
+    req = req + "," + "جنس قائدك ";
+    valid = false;
+  }
+  if (checkEmail(email)) {
+    req = req + "," + "بريدك الالكتروني";
+    valid = false;
+  }
+
+  if (!valid) {
+    document.getElementById('errorMsgP').innerHTML = req;
+  }
+  else {
+    leaderGender = $('input[name="leader_gender"]:checked').val();
+    var x = 10;
+    var counter = setInterval(function () {
+      $("#loading").show();
+      document.getElementById('loadingMsg').innerHTML =
+        "   " +
+        ' يتم الأن تجهيز طلبك' +
+        " " + x;
+      x--;
+      if (x < 0) {
+        clearInterval(counter);
+      }
+    }, 1000);
+
+    setTimeout(function () {
+      clearInterval(counter);
+      $.ajax({
+        type: "POST",
+        url: document.getElementById("base_url").value + "ReallocateAmbassador/checkAmbassador",
+        data: { 'leader_gender': leaderGender, 'email': email },
+        success: function (data) {
+          document.body.innerHTML = '';
+          $("body").html(data);
+        }//success
+      });
+
+    }, 5000);
+  }
 }
-
-window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '423417075295764',
-      cookie     : true,                     // Enable cookies to allow the server to access the session.
-      xfbml      : true,                     // Parse social plugins on this webpage.
-      version    : 'v8.0' 
-    });
-
-  };
-
-function fb_login(){
-    FB.login(function(response) {
-
-        if (response.authResponse) {
-            console.log('Welcome!  Fetching your information.... ');
-            //console.log(response); // dump complete info
-            access_token = response.authResponse.accessToken; //get access token
-            user_id = response.authResponse.userID; //get FB UID
-
-            FB.api(
-              '/me',
-              'GET',
-              {"fields":"id,name,email,gender,link"},
-              function(response) {
-                ambassador = {name:response.name, email:response.email,gender:response.gender,profile_link:response.link,fb_id:response.id};
-                sessionStorage.setItem("ambassador_info", JSON.stringify(ambassador));
-                window.location.replace(document.getElementById("base_url").value+"ReallocateAmbassador/checkAmbassador?fb_id="+response.id);
-              }
-            );
-
-        } else {
-            //user hit cancel button
-            console.log('User cancelled login or did not fully authorize.');
-
-        }
-    }, {
-        scope: 'public_profile,email,user_gender,user_link'
-    });
+function checkEmail(val) {
+  var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (val.length == 0) {
+    $("#emailError").show();
+    return true;
+  }
+  else if (!(val.match(mailformat))) {
+    $("#emailFormatError").show();
+    return true;
+  }
+  else {
+    $("#emailError").hide();
+    $("#emailFormatError").hide();
+    return false;
+  }
 }
-(function() {
-    // var e = document.createElement('script');
-    // e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-    // e.async = true;
-    // document.getElementById('fb-root').appendChild(e);
-}());

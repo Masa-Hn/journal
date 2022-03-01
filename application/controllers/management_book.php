@@ -10,6 +10,7 @@ class Management_book extends CI_Controller {
         $this->load->database();
         $this->load->model('management');
         $this->load->model('ActivitiesModel');
+        $this->load->model('AmbassadorModel');
         $this->load->model('CertificateModel');
         $this->load->model('InfographicModel');
         $this->load->model('SeriesModel');
@@ -29,7 +30,16 @@ class Management_book extends CI_Controller {
         $this->load->view('management_book/templates/footer');
 	}
     
-   
+    public function ambassador_code(){
+        $data['title'] = 'Ambassadors Code';
+        $code=$this->AmbassadorModel->ambassadorCode();
+        $data['code']=$code->code;
+        $this->load->view('management_book/templates/header', $data);
+        $this->load->view('management_book/templates/navbar');
+        $this->load->view('management_book/ambassador_code',$data);
+        $this->load->view('management_book/templates/footer');
+    }//show_series
+
     
     public function show_article()
     {

@@ -3,6 +3,7 @@
     $this->StatisticsModel->incrementVisitors($page_id);
 ?>
     <div class="overlay" style="padding: 8rem 0 4rem 0;
+    border-bottom-right-radius: 50%;
     background: 0% 0px #E8F1EC;
     overflow: hidden;" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
@@ -13,14 +14,15 @@
             <div class="row justify-content-center mb-4">
               <div class="col-lg-8 col-sm-12 text-center">
                 <h1 class="" data-aos="fade-up" dir="rtl">
-                أنت الأن في الصفحة الأساسية للمشروع الأكبر عربيًا لصناعة القراء، حيث القراءة المنهجية والدورات التطويرية والأنشطة الترفيهية مجاناً
+                  لأن التعليم المدرسي/الجامعي ليس كافيًا لصناعة إنسان مختلف، نقدم لك أفضل تعليم عبر القراءة المنهجية التي تعطيك أفضل نسخة من نفسك خلال أشهر.
+
                 </h1>
+                <h5 data-aos="fade-up" data-aos-delay="100" style="color: darkred">
+                  لن تدفع أي أموال مقابل خدماتنا، نفعل ذلك مقابل صناعة مجتمع أفضل لنا جميعا
+                </h5>
                 <br>
-                <span class="text-white rounded btn" data-aos="fade-up" style="font-size: 2rem; background:#030059;margin-top:1%" onclick="next('osboha_info')">
-                تصفح فكرة المشروع
-                </span>
-                <span class="bg-primary text-white rounded btn" data-aos="fade-up" style="font-size: 2rem; margin-top:1%" onclick="next('reg_steps')">
-                التسجيل السريع
+                <span class="bg-primary text-white rounded btn" data-aos="fade-up" style="font-size: 2rem" onclick="next('reg_steps')">
+                    انضم الآن مجانًا
                 </span>
 
               </div>
@@ -32,7 +34,7 @@
         </div>
       </div>
     </div>  
-<!-- 
+
      <div class="site-section" data-aos="fade">
       <div class="container">
         <div class="row align-items-center">
@@ -68,4 +70,4 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>

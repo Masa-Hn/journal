@@ -11,6 +11,13 @@ class AmbassadorModel extends CI_Model {
 
 	}
 
+	public function ambassadorCode()
+	{
+		$this->db->select('code');
+    	$this->db->from('ambassador_code');
+    	return $this->db->get()->row();
+
+	}
 
 	public function insertAmbassador($ambassador)
 	{
@@ -48,7 +55,7 @@ class AmbassadorModel extends CI_Model {
 	public function checkAmbassador($fb_id)
 	{
 		$where = "fb_id = '".$fb_id."'";
-		$this->db->select('id, request_id, created_at,messenger_id');
+		$this->db->select('id, name, fb_id, gender, request_id, created_at,messenger_id');
 		$this->db->where($where);
     	$this->db->from('ambassador');
 	    $this->db->limit(1);
