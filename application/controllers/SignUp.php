@@ -323,13 +323,110 @@ class SignUp extends CI_Controller {
 
 
     //3- load view to inform ambassador [FINAL STEP]
-      $ambassadorInfo=$this->AmbassadorModel->getByRequestId($request_id);
+      $ambassadorInfo=$this->AmbassadorModel->getByFBId($ambassador['fb_id']);
       $reallocate=false;
       $this->informambassador($reallocate,$ambassadorInfo,$leader_info,$request_id,$informLeader,$leader_id);
   }//checkout
 
   public function informambassador($reallocate,$ambassador,$leader_info,$request_id,$informLeader,$leader_id)
   {
+    $email=$ambassador[0]->fb_id;
+    $subject='معلوماتك فريقك';
+    $message='
+      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        </head>
+        <style type="text/css">
+        body{
+        text-align:center;
+        font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; direction: rtl; background-color: #f5f8fa; color: #74787E; height: 100%; hyphens: auto; line-height: 1.4; margin: 0; -moz-hyphens: auto; -ms-word-break: break-all; width: 100% !important; -webkit-hyphens: auto; -webkit-text-size-adjust: none; word-break: break-word;
+        }
+        tr{
+        text-align:center
+        }
+        .button{
+        }
+        table{
+        width:"100%";
+        font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; direction: rtl; background-color: #f5f8fa; margin: 0; padding: 0; width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%;
+        }
+        @media  only screen and (max-width: 600px) {
+        .inner-body {
+        width: 100% !important;
+        text-align:center
+        }
+        
+        .footer {
+        width: 100% !important;
+        }
+        }
+        @media  only screen and (max-width: 500px) {
+        .button {
+        width: 100% !important;
+        }
+        }
+        </style>
+        <body>
+            <h1>
+              أصبوحة 180
+            </h1>
+          <h3>
+            مرحبا بك 🌹
+            </h3>
+          <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; direction: rtl; color: #74787E; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: center;">
+                فريق القراءة الخاص بك أصبح مستعدًا لاستقبالك.
+            </p>
+            <p>
+                تفضل بعمل انضمام هنا 👇🏻
+            </p>
+            <p>
+              كود الانضمام للمجموعة
+            </p>
+            <p><strong>'.$leader_info->uniqid.$leader_info->id.'</strong></p>
+            <a href="'.$leader_info->team_link.'" class="button button-blue" target="_blank" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; direction: rtl; border-radius: 3px; box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16); color: #FFF; display: inline-block; text-decoration: none; -webkit-text-size-adjust: none; background-color: #278036; border-top: 10px solid #278036; border-right: 18px solid #278036; border-bottom: 10px solid #278036; border-left: 18px solid #278036;">انضم     للمجموعة من هنا
+            </a>
+            
+            <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; direction: rtl; color: #74787E; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: center;">
+                ننتظرك بيننا
+                <br>
+                سعداء جدا بك 🌹
+            </p>
+            <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; direction: rtl; line-height: 1.5em; margin-top: 0; color: darkred; font-size: 12px; text-align: center;">
+                تواجهك مشكلة؟!
+                <br>
+                أرسل (البريد الإلكتروني) برسالة لصفحتنا وسوف نجيبك بمعلومات فريق القراءة الخاص بك.
+                <br>
+                <a href="https://www.messenger.com/t/100360891928932/" target="_blank"> M.me/newreaders180</a>
+            </p>
+
+        </body>
+      </html>
+    ';
+
+      $config = array(
+                    'protocol'  => 'mail',
+                    'smtp_host' => 'smtpout.secureserver.net',
+                    'smtp_port' => 80,
+                    'smtp_user' => '', // my email
+                    'smtp_pass' => '', // my mail pass
+                    'mailtype'  => 'html',
+                    'charset'   => 'utf-8', //utf-8
+                    'wordwrap'  => TRUE
+                );
+                $this->load->library('email', $config);
+                $this->email->set_newline("\r\n");
+                $this->email->from('test@gmail.com', 'أصبوحة 180');
+                $this->email->to($email);
+                $this->email->subject($subject);
+                $this->email->message($message);
+                 $this->email->set_mailtype("html");
+
+                if($this->email->send()){
+                  $this->session->set_flashdata('msg','تم إرسال معلومات فريقك إلى بريدك الإلكتروني');
+                }
 
     $team_info = array(
         'leader_info'  => $leader_info,

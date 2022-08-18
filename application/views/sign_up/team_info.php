@@ -7,7 +7,7 @@
     exit();
   }
   if(isset($_SESSION['team_info'])){
-    $id =  $_SESSION['team_info']['ambassador'][count( $_SESSION['team_info']['ambassador']) - 1]->id;
+    $id =  $_SESSION['team_info']['ambassador'][0]->id;
   }
   $page_id = 14;
   $this->StatisticsModel->incrementVisitors($page_id);
@@ -66,6 +66,11 @@
           <br>
           هذه المعلومات سوف تهمك لاحقا ❤️
       </p>
+      <?php
+      if(! empty($this->session->flashdata('msg'))){
+        echo $this->session->flashdata('msg');
+      } 
+      ?>
     </div>
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 text-center">
@@ -163,6 +168,12 @@ $( document ).ready(function(){
   $('#team').click( function () {
     var team_code = document.getElementById("team_code").value;
     var team_link = document.getElementById('team_link').value; 
+     if (team_link.indexOf("http://") == 0 || team_link.indexOf("https://") == 0) {
+          team_link = team_link;
+    }
+    else{
+          team_link = 'https://' + team_link;
+    }
     // if (!team_link.match(/^http?:\/\//i) || !team_link.match(/^https?:\/\//i)) {
     //     team_link = 'https://' + team_link;
     // }
